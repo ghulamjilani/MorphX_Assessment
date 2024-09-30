@@ -1,0 +1,148 @@
+- content_for(:page_title, I18n.t('views.dashboards.company.company'))
+- content_for(:extra_body_classes, 'header-top')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    .col-md-12.padding-left-0
+      = render 'dashboards/navigation/company_and_business_plan_tabs'
+    .col-md-12.main-content-section.padding-bottom-20
+      - if @company.present?
+        %h2.section-title-dashboard.margin-top-20
+          = I18n.t('views.dashboards.company.my_company')
+        %section.CRsession.clearfix
+          .CRsessionWrapper.clearfix
+            .col-md-2.CRIMGblock.clearfix.text-center
+              .avatarImg-XXl.border-radius-0
+                %a{href: @company.relative_path}
+                  %img{src: @company.logo_url}/
+            .col-md-10.CRINFOblock.clearfix
+              .CRINFOblockDescription.row
+                .col-md-12
+                  .CRsessionTitle
+                    %p= link_to @company.name, @company.relative_path
+                    - if can?(:edit, @company)
+                      .dropdown.dropdown-list.pull-right.NoMinWidth.clearfix
+                        %a.btn-grey-small.More-dropdown.dropdown-toggle.NoMinWidth{'data-toggle': "dropdown", role: "button"}
+                          %i.VideoClientIcon-dots-horizontal-triple
+                        %ul.dropdown-menu.full-width.dropdown-menu-withIcons
+                          %li
+                            %i.VideoClientIcon-editF
+                            = link_to I18n.t('views.dashboards.company.edit'), edit_organization_path(@company.id)
+                          -#%li
+                          -#  %i.icon-user
+                          -#  = link_to "Edit Members", edit_organization_path(@company.id) + "#members"
+                    .clearfix
+                .col-md-12
+                  - if @company.website_url.present?
+                    %p.CRcompanyWebsiteUrl
+                      %strong
+                        = I18n.t('views.dashboards.company.website')
+                      = link_to @company.website_url, @company.website_url
+                  %p.CRsessionStartat
+                    %strong #{t('views.dashboard.coming', service_name: Rails.application.credentials.global[:service_name])}
+                    = time_with_tz_in_chosen_format @company.created_at
+                  %p
+                    %strong
+                      = I18n.t('views.dashboards.company.owner')
+                    = link_to @company.user.public_display_name, spa_user_path(@company.user.slug)
+                  - if @company.tagline.present?
+                    %p
+                      %strong
+                        = I18n.t('views.dashboards.company.tagline')
+                      = @company.tagline
+              .CRsessionDescription
+                = sanitize(simple_format(@company.description, {}, sanitize: false))
+            -#- if @members_data
+              .col-md-12.mb20
+                %hr
+                %h3 Members
+                - @members_data.each do |md|
+                  .row
+                    .col-md-4
+                      = link_to md[:full_name], md[:relative_path]
+                    .col-md-4
+                      = md[:role].capitalize
+            -#- if @channels
+              .col-md-12.mb20
+                %hr
+                %h3 Channels
+                - @channels.each do |ch|
+                  .row
+                    .col-md-4
+                      = link_to ch.title, ch.relative_path
+                    .col-md-4
+                      = ch.status.capitalize
+
+      - if @invited_companies.present?
+        %h2.section-title-dashboard.margin-top-20
+          = I18n.t('views.dashboards.company.member_of')
+        - @invited_companies.each do |company|
+          %section.CRsession.clearfix
+            .CRsessionWrapper.clearfix
+              .col-md-2.CRIMGblock.clearfix.text-center
+                .avatarImg-XXl.border-radius-0
+                  %a{href: company.relative_path}
+                    %img{src: company.logo_url}/
+              .col-md-10.CRINFOblock.clearfix
+                .CRINFOblockDescription.row
+                  .col-md-12
+                    .CRsessionTitle.no-padding
+                      %p= link_to company.name, company.relative_path
+                      - if can?(:edit, company)
+                        .dropdown.dropdown-list.pull-right.NoMinWidth.clearfix
+                          %a.btn-grey-small.More-dropdown.dropdown-toggle.NoMinWidth{'data-toggle': "dropdown", role: "button"}
+                            %i.VideoClientIcon-dots-horizontal-triple
+                          %ul.dropdown-menu.full-width.dropdown-menu-withIcons
+                            %li
+                              %i.VideoClientIcon-editF
+                              = link_to I18n.t('views.dashboards.company.edit'), edit_organization_path(company.id)
+                            -#%li
+                            -#  %i.icon-user
+                            -#  = link_to "Edit Members", edit_organization_path(@company.id) + "#members"
+                      .clearfix
+                  .col-md-12
+                    - if company.website_url.present?
+                      %p.CRcompanyWebsiteUrl
+                        %strong
+                          = I18n.t('views.dashboards.company.website')
+                        = link_to company.website_url, company.website_url
+                    %p.CRsessionStartat
+                      %strong #{t('views.dashboard.coming', service_name: Rails.application.credentials.global[:service_name])}
+                      = time_with_tz_in_chosen_format company.created_at
+                    %p
+                      %strong
+                        = I18n.t('views.dashboards.company.owner')
+                      = link_to company.user.public_display_name, spa_user_path(company.user.slug)
+                    - if company.tagline.present?
+                      %p
+                        %strong
+                          = I18n.t('views.dashboards.company.tagline')
+                        = company.tagline
+                .CRsessionDescription
+                  = sanitize(simple_format(company.description, {}, sanitize: false))
+              -#- if @members_data
+                .col-md-12.mb20
+                  %hr
+                  %h3 Members
+                  - @members_data.each do |md|
+                    .row
+                      .col-md-4
+                        = link_to md[:full_name], md[:relative_path]
+                      .col-md-4
+                        = md[:role].capitalize
+              -#- if @channels
+                .col-md-12.mb20
+                  %hr
+                  %h3 Channels
+                  - @channels.each do |ch|
+                    .row
+                      .col-md-4
+                        = link_to ch.title, ch.relative_path
+                      .col-md-4
+                        = ch.status.capitalize
+
+      -# - if can?(:become_a_creator, current_user)
+      -#  = link_to work_with_us_title, work_with_us_link
+      -# - elsif can?(:create_company, current_user)
+      -#  = link_to 'Create company', new_organization_path, class: 'btn btn-m'

@@ -1,0 +1,84 @@
+@import "mixin";
+
+.HW{
+  h3{
+    padding: 3vh 0;
+  }
+  &__selectList{
+    display: flex;
+    flex-direction: row;
+    transition: transform 200ms ease;
+    transform: translateY(10vh);
+    &_wrapp{
+      min-height: 125px;
+      position: relative;
+    }
+    a{
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: inherit;
+      transition: all 200ms ease;
+      cursor: pointer;
+
+      i{
+        opacity: 0;
+        font-size: 40px;
+        transition: all 200ms ease;
+        transform: translateY(-25px);
+        display: inline-block;
+      }
+      img{
+        transition: all 0ms ease;
+        transform: scale(0.8);
+      }
+      span{
+        display: inline-block;
+        width: 100%;
+        transition: all 200ms ease;
+      }
+      &:hover, &.active{
+        i{
+          opacity: 1;
+          transform: translateY(-10px);
+        }
+        img{
+          transition: all 200ms ease;
+          transform: scale(1);
+        }
+      }
+    }
+    @include media(phone){
+      flex-wrap: wrap;
+      a{
+        width: 50%;
+      }
+    };
+  }
+  &__content{
+    font-size: 23px;
+    padding: 70px 0 ;
+    transition: transform 400ms ease;
+    transform: translateY(15vh);
+    opacity: 0;
+    li{
+      padding-bottom: 15px;
+    }
+    &>div{
+      &:not(.active){
+        display: none;
+      }
+    }
+  }
+  &.active{
+    .HW{
+      &__selectList{
+        transform: translateY(0);
+      }
+      &__content{
+        transform: translateY(0vh);
+        opacity: 1;
+      }
+    }
+  }
+}

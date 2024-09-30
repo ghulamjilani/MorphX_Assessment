@@ -1,0 +1,11 @@
+en:
+  frontend:
+    app:
+      components:
+        main_page:
+          feed:
+            feed_channels:
+              part_of: "Part of :"
+              subscribe_started: "Subscribe started:"
+              subscribe_ended: "Subscribe ended:"
+              content_type: "Content type included:"

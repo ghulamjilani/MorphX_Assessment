@@ -1,0 +1,11 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          template:
+            guest_template:
+              enter_as_guest: Enter as guest
+              log_in: Log In
+              or: Or
+              welcome: "Welcome to %{service_name}"

@@ -1,0 +1,198 @@
+.cs {
+  position: relative;
+  width: auto;
+  overflow: visible;
+  min-height: 11rem;
+  height: 100%;
+  max-width: 100%;
+  background: $client__bg__content__secondary;
+  margin-top: 0.5rem;
+  // @include media(tablet){
+  //   position: fixed;
+  //   left: 0;
+  //   bottom: 5rem;
+  //   height: 15rem;
+  //   min-width: 100%;
+  //   width: 100%;
+  // }
+  // @include media(phone){
+  //   height: 11rem;
+  // }
+
+  //REDO
+  &__fullHeight {
+    @include media(tablet) {
+      background: none;
+      position: fixed;
+      top: 0rem;
+      width: 100%;
+      height: calc(100% - 4rem);
+      z-index: 102;
+    }
+
+    .inviteParticipant__wrapper {
+      @include media(tablet) {
+        position: fixed;
+        top: 4rem;
+        width: 100%;
+        height: calc(100% - 4rem);
+        z-index: 101;
+      }
+      @include media(p-phone) {
+        top: 5rem;
+        height: calc(100% - 5rem);
+        font-size: 1.3vh;
+      }
+    }
+  }
+
+  &__wrapper {
+    @include flex(flex, false, flex-end);
+    margin-left: 0.5rem;
+    margin-top: -0.2rem;
+    // @include media(tablet){
+    //   position: fixed;
+    //   bottom: 7.5rem;
+    //   width: 100%;
+    //   z-index: 102;
+    // }
+  }
+
+  &__drag {
+    position: absolute;
+    background: white;
+    height: 4rem;
+    width: .5rem;
+    top: 50%;
+    left: -1rem !important;
+    border-radius: .5rem;
+    cursor: col-resize;
+  }
+
+  &__participants {
+    max-width: 100%;
+    min-width: 23rem;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    height: 100%;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar, ::-webkit-scrollbar {
+      border-radius: .5rem;
+    }
+
+    // @include media(tablet){
+    //   padding: 0;
+    //   width: 100%!important;
+    // }
+    .cm__pinned__pin {
+      top: 2rem;
+      left: 2.5rem;
+    }
+
+    &__header {
+      @include flex(flex, false, false);
+      flex-direction: column;
+      color: $client__tp__main;
+      font-size: 1.6rem;
+      font-weight: bold;
+      // @include media(tablet){
+      //   position: fixed;
+      //   top: 5.4rem;
+      //   right: 0.5rem;
+      //   font-size: 1.4rem;
+      //   padding:1rem;
+      //   background: rgba(0,0,0,.3);
+      //   backdrop-filter: blur(3px);
+      //   border-radius: .3rem;
+      //   color:#fff;
+      // }
+      &__title {
+        @include text__ellipsis();
+      }
+
+      span {
+        color: $client__tp__secondary; //white in responsive
+        font-weight: normal;
+        font-size: 1.4rem;
+      }
+    }
+
+    &__users {
+      width: 100%;
+      @include flex(flex, flex-start, flex-start);
+      flex-wrap: wrap;
+      overflow-y: auto;
+      max-height: 100%;
+      padding-bottom: 10rem;
+      // @include media(tablet){
+      //   overflow-y: hidden;
+      //   overflow-x: auto;
+      //   flex-wrap: nowrap;
+      // }
+    }
+
+    &__users.sharing {
+      padding-bottom: 0;
+    }
+
+    &__count {
+      color: $client__tp__secondary;
+      font-size: 1.4rem;
+      padding: 1.3rem 0 .3rem;
+
+      .cm__tools__select {
+        left: -7rem;
+        transform: translateY(100%) translateY(-6rem);
+      }
+
+      .cm__tools__select__icon {
+        margin-left: 1rem;
+        cursor: pointer;
+      }
+
+      &__pinIcon {
+        padding: 1rem;
+        border-radius: 100%;
+        color: #FFF;
+        font-size: 2rem;
+        margin-right: 1rem;
+        background: $client__btn__bgLabel;
+      }
+
+      // @include media(tablet){
+      //   position: absolute;
+      //   top: -4.5rem;
+      //   right: 2rem;
+      //   display:none;
+      // }
+    }
+
+    &__count.sharing {
+      padding-left: 2rem;
+      width: 100%;
+    }
+  }
+
+  &__participants.sharing {
+    padding: 0 0 1.5rem 0;
+
+    .cs__participants__users {
+      .vertical__tile__presenter {
+        padding: 0 1.5rem;
+
+        .cs__participants__header span {
+          padding: 1.5rem 0 1rem 0;
+          color: $client__tp__main;
+        }
+
+        .cs__participants__count {
+          color: $client__tp__main;
+        }
+      }
+
+      .participantsTile {
+        padding: 1rem 1.5rem 1rem 1.5rem;
+      }
+    }
+  }
+}

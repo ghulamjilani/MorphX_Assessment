@@ -1,0 +1,72 @@
+-# #REMOVEME unused functional
+.step1
+  %p.mb20.fs20.font-bold Looks like the Plugin is not installed!
+  %div.mb20
+    - if browser.platform.mac?
+      = link_to 'INSTALL', download_client_profile_path(client: :web_mac), class: 'mainButton bigBtn', onclick: 'window.clicked_by_install=true'
+    - if browser.platform.windows? || browser.platform.windows_x64?
+      = link_to 'INSTALL', download_client_profile_path(client: :web_win), class: 'mainButton bigBtn', onclick: 'window.clicked_by_install=true'
+  %div
+    Click Above to install the Web Plugin.
+    %br
+    By installing you are accepting the
+    %a{href: Rails.application.class.routes.url_helpers.page_path(ContentPages::TERMS_CONDITIONS.parameterize(separator: '-'))} terms and conditions.
+.step2
+  - if browser.safari?
+    .position_s-e
+      %div
+        Please install the plugin by
+        %br
+        running the installer after the
+        %br
+        download.
+      .GO_LINE.GO_LINE_DOWN.mb20.mt50
+        %i.VideoClientIcon-navigate-down-arrow
+        %i.VideoClientIcon-navigate-down-arrow
+        %i.VideoClientIcon-navigate-down-arrow
+
+  - elsif browser.firefox?
+    .position_n-e
+      .GO_LINE.GO_LINE_UP.mb50
+        %i.VideoClientIcon-navigate-up-arrow
+        %i.VideoClientIcon-navigate-up-arrow
+        %i.VideoClientIcon-navigate-up-arrow
+      %div
+        Please install the plugin by
+        %br
+        running the installer after the
+        %br
+        download.
+  - else
+    .position_s-w
+      %div
+        Please install the plugin by
+        %br
+        running the installer after the
+        %br
+        download.
+      .GO_LINE.GO_LINE_DOWN.mb20.mt50
+        %i.VideoClientIcon-navigate-down-arrow
+        %i.VideoClientIcon-navigate-down-arrow
+        %i.VideoClientIcon-navigate-down-arrow
+
+.step3
+  %aside.position_n-w.margin-top-10
+    .row
+      .col-md-3
+        .GO_LINE.GO_LINE_UP
+          %i.VideoClientIcon-navigate-up-arrow
+          %i.VideoClientIcon-navigate-up-arrow
+          %i.VideoClientIcon-navigate-up-arrow
+      .col-md-9.text-left.nowrap
+        Please allow Web Plugin to access this page.
+
+.step4.active
+  .font-bold.fs18
+    Welcome
+  .mb20
+  .font-bold.fs18 Please wait...
+  .loadSpin#circleG
+    %span.circleG#circleG_1
+    %span.circleG#circleG_2
+    %span.circleG#circleG_3

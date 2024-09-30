@@ -1,0 +1,19 @@
+%p Dear #{@booking.user.public_display_name},
+
+%p We are thrilled to inform you that your booking for the upcoming session on #{@booking.session.channel.title} channel with #{@booking.session.organizer.public_display_name} has been successfully created. We have reserved a spot for you on #{@booking.start_at.in_time_zone(@booking.user.timezone).strftime('%d %b %I:%M %p (timezone %Z)')} until #{@booking.end_at.in_time_zone(@booking.user.timezone).strftime('%d %b %I:%M %p (timezone %Z)')} and it is now ready in your dashboard!
+
+%p To ensure a seamless experience, please join the session promptly at #{@booking.session.start_at.in_time_zone(@booking.user.timezone).strftime('%I:%M %p')} on #{@booking.session.start_at.in_time_zone(@booking.user.timezone).strftime('%e %b')}.
+%p We have included a direct links for easy access:
+%p
+  %a{href: @booking.session.absolute_path} Link to Session page
+%p
+  %a{href: sessions_participates_dashboard_url} Link to Dashboard/Participate
+
+%p If you have any questions or need assistance, please don't hesitate to reach out to our support team. We are here to help!
+
+%p Thank you for being a valued member of our platform. We look forward to seeing you at the session and witnessing the incredible experience unfold.
+
+%p
+  Best regards,
+  %br/
+  #{Rails.application.credentials.global[:service_name].capitalize} Team

@@ -1,0 +1,42 @@
+.site-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9990;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/*styles for pushing content when user toggle header responsive menu*/
+.footer {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+}
+
+.pageComponent {
+  // transform: translate3d(0, 0, 0);
+  transition: transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+}
+
+@include media(p-tablet) {
+  .pushLeft {
+    transform: translate3d(-28rem, 0, 0);
+    transition: transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+  }
+  .pushContentLeft {
+    transform: translate3d(-24rem, 0, 0);
+    transition: transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+  }
+  .site-overlay.active {
+    display: block;
+    transform: translate3d(-28rem, 0, 0);
+  }
+  .header.active {
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+  }
+}
+
+/* ///////// */

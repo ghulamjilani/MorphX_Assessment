@@ -1,0 +1,63 @@
+@import "mixin";
+
+.technicalPage{
+  padding: 25px 20px;
+  @include media(tablet){
+    width: calc(100% - 30px);
+    margin: 0 auto;
+  }
+  &__label{
+    font-size: 22px;
+    line-height: 26px;
+    color: var(--tp__h1);
+    padding-bottom: 20px;
+    font-weight: bold;
+  }
+  &__desc{
+    color: var(--tp__main);
+    padding-bottom: 25px;
+    font-size: 16px;
+  }
+  table{
+    border-collapse: collapse;
+    margin-bottom: 40px;
+  }
+  table{}
+  thead{
+    color: var(--tp__main);
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: bold;
+    td{
+      padding-bottom: 12px;
+      line-height: 19px;
+      font-size: 16px;
+    }
+  }
+  tbody{
+    tr{
+      border-bottom: 1px solid var(--border__separator);
+      &:first-child{
+        border-top: 1px solid var(--border__separator);
+      }
+    }
+    td{
+      font-size: 14px;
+      line-height: 47px;
+    }
+
+  }
+}
+
+.payouts-payout_methods .technicalPage .modal-content{
+  tbody td {
+    line-height: 1.6;
+    min-width: 250px;
+    padding: 20px 10px 20px 0;
+  }
+  thead th {
+    line-height: 1.6;
+    min-width: 250px;
+    padding: 10px 10px 10px 0;
+  }
+}

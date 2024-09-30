@@ -1,0 +1,88 @@
+@import "active_admin/mixins";
+@import "active_admin/base";
+$skinMainFirstColor: #202020!default;
+$skinMainSecondColor: #000000!default;
+$skinBorderWindowColor: #FFF!default;
+$menu-arrow-dark-icon-url: 'active_admin/nested_menu_arrow_dark.gif' !default;
+
+@import "wigu/active_admin_theme";
+
+#edit_system_theme {
+  .theme-variable ol {
+    display: flex;
+    align-items: center;
+
+    li {
+      margin-bottom: 10px;
+      margin-right: 20px;
+      input {
+        width: 100%;
+      }
+
+      input[type="color"] {
+        min-width: 23px;
+      }
+    }
+  }
+  // .ui-sortable-handle {
+  //   display: none;
+  // }
+}
+
+#service_default_config_editor,
+  #service_overridden_config_editor,
+  #service_current_config_editor {
+  width: 100% !important;
+  height: 600px !important;
+}
+
+#wrapper{
+  .flash_success{
+    background-color: green;
+  }
+}
+
+.panel_contents table thead th,.panel_contents table td {
+  text-align: center;
+  &.dark{
+    background: rgb(243, 243, 249);
+  }
+}
+
+.filter_form{
+  label {
+    width: 70px;
+    padding-bottom: 3px;
+
+  }
+  ol {
+    padding-left: 0px !important;
+  }
+  .select_org{
+    padding: 20px 0px 0px 10px;
+  }
+}
+
+.status_tag{
+  &.green{
+    background-color: green;
+  }
+  &.red, &.error{
+    background-color: red;
+  }
+  a{
+    color: white;
+  }
+}
+
+.flash {
+  color: #000000 !important;
+}
+.flash_alert {
+  background-color: #ebcb2d !important;
+}
+.logged_out .flash_alert {
+  height: 30px;
+  padding: 15px 0 0 15px !important;
+}
+

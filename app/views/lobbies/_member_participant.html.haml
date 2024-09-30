@@ -1,0 +1,40 @@
+%li{class: (user.current_role == 'participant' && user.has_questions?(@abstract_session.id)) ? "has-question" : ""}
+  .member{id: "member-#{user.id}", data: {id: user.id}}
+    %div{class: "img-circle status offline_#{user.id} role_#{user.current_role}"}
+      offline
+    .panel-group{id: "accordion-#{user.id}"}
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            - member = @room_members.find_by(abstract_user: user)
+            %a{class: "#{"disabled" if !has_control? or is_myself?(user)} user-control btn collapsed V-user-icon V-role_#{user.current_role}", href: "#collapseOne-#{user.id}",
+               data:{tipName: user.public_display_name.truncate(15),
+                     user: (user.current_role == 'presenter' ? 'Presenter' : user.public_display_name ),
+                     user_id: user.id,
+                     user_role: user.current_role,
+                     has_control:     (!!member.try(:has_control)).to_s,
+                     mic_disabled:    (!!member.try(:mic_disabled)).to_s,
+                     video_disabled:  (!!member.try(:video_disabled)).to_s,
+                     backstage:       (!!member.try(:backstage)).to_s,
+                     toggle: "collapse", parent: "#accordion-#{user.id}"}}
+              = image_tag user.avatar_url, alt: user.public_display_name
+            - if !is_myself?(user)
+              = link_to '#', class: 'btn control chaaat member-list-chat-button', style: 'display:none', data: {name: user.public_display_name } do
+                %span{class: 'VideoClientIcon-q1'}
+        - if !is_participant? and ( is_owner? or !is_myself?(user) )
+          .panel-collapse.collapse.control-list{id: "collapseOne-#{user.id}", style: visible?(has_control?)}
+            .panel-body
+              %i.VideoClientIcon-angle-downF
+
+              = link_to "#", class: "btn control microphone-off", data: {:'unmute-tip' => 'Mute', tip: 'Mute', url: mute_lobby_path(@room.id, member_id: user.id), dontenable: true}, style: visible?(!member.try(:mic_disabled)) do
+                %span{class: "icon-headphones"}
+              = link_to "#", class: "btn control microphone-on", data: {:'unmute-tip' => 'Mute', tip: 'Unmute', url: unmute_lobby_path(@room.id, member_id: user.id), dontenable: true}, style: visible?(member.try(:mic_disabled)) do
+                %span{class: "icon-headphones"}
+              = link_to "#", class: "btn control video-on", data: {:'unmute-tip' => 'Camera on', tip: 'Camera on', url: start_video_lobby_path(@room.id, member_id: user.id), dontenable: true}, style: visible?(member.try(:video_disabled)) do
+                %span{class: "icon-eye"}
+              = link_to "#", class: "btn control video-off", data: {:'unmute-tip' => 'Camera off', tip: 'Camera off', url: stop_video_lobby_path(@room.id, member_id: user.id), dontenable: true}, style: visible?(!member.try(:video_disabled)) do
+                %span{class: "icon-eye"}
+              = link_to "#", class: "btn ban_kick", id: "inCallButtonBan", data: {tip: 'Ban',url: ban_kick_lobby_path(@room.id, banned_id: user.id)} do
+                %span{class: "VideoClientIcon-q4"}
+              = link_to "#", class: "btn control  answer-the-question-user", data: {url: "#{answer_lobby_path(@room.id, member_id: user.id)}"} do
+                %span.VideoClientIcon-stop

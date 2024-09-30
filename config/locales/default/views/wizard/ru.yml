@@ -1,0 +1,47 @@
+ru:
+  wizard:
+    sign_up: Регистрация
+    my_business: Мой бизнес
+    first_channel: Первый канал
+    set_up_your_business: Создать бизнес
+    set_up_your_channel: Настройте свой первый канал
+    logo: Логотип
+    busines_logo: бизнес лого
+    drag_n_drop: или перенесите ваше изображение сюда
+    size: 'Рекомендуемый размер:'
+    recomend: Мы рекомендуем использовать изображение с высоким разрешением.
+    business_name: Название бизнеса
+    about: О бизнесе
+    minimum_charecters: Минимум 24 символа
+    business_website: Веб-сайт бизнеса
+    business_sm: Социальные сети бизнеса
+    my_page: /моястраница
+    business_cover: Обложка бизнеса
+    edit: Изменить
+    upload: Загрузить
+    next: Далее
+    set_up_first_channel: Создать первый канал
+    channel_name: Название канала
+    desc: Описание
+    category: Категория*
+    choose_category: Выбрать категорию
+    tags: Теги
+    channel_cover: Обложка канала
+    view_channel: посмотреть канал
+    success_complited_wizard: Вы успешно заполнили информацию о своей компании.
+    welcome_to: Добро пожаловать в
+    thnx_for_joining: ' Спасибо, что присоединились к нам!'
+    lets_create_content: Давайте создавать потрясающий контент вместе!
+    helpers: 'Для начала вот несколько полезных постов в блоге:'
+    how_create_first_session: Как создать свою первую сессию?
+    what_replays: Что такое реплеи?
+    what_uploads: Что такое аплоады?
+  channel_category:
+    arts_and_crafts: Искусства и ремесла
+    cooking: Готовка
+    music: Музыка
+    workshops: Мастерские
+    panels: Панели
+    demonstration: Демонстрация
+    promo: реклама
+    master_class: Мастер класс

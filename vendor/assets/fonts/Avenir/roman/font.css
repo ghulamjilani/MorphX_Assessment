@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Avenir LT Std 55 Roman';
+  src: url('AvenirLTStd-Roman.eot'); /* IE9 Compat Modes */
+  src: url('AvenirLTStd-Roman.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('AvenirLTStd-Roman.woff') format('woff'), /* Modern Browsers */
+       url('AvenirLTStd-Roman.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('AvenirLTStd-Roman.svg#1297092b477b7e1dcddfcf3bbb416185') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  400;
+}
+

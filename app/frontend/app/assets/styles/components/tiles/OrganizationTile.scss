@@ -1,0 +1,117 @@
+.OrganizationTile {
+  background: var(--bg__content);
+  box-shadow: 0px 1px 4px var(--sh__main);
+  border-radius: 1rem;
+  padding-bottom: 1.5rem;
+  position: relative;
+  width: calc(25% - 3rem);
+  min-height: 29rem;
+  //margin: 0 1.5rem 1.5rem;
+  @include media(tablet){
+    width: calc(50% - 3rem);
+  }
+  @include media(phone){
+    width: 100%;
+  }
+
+  &__img {
+    display: block;
+    position: relative;
+    margin-bottom: 2rem;
+
+    &__container {
+      background-image: url("https://itc.ua/wp-content/uploads/2020/09/the-mandalorian-season-two.jpg");
+      padding-top: 56.25%;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+
+    &__organization {
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYOflEkVJ-d0r4RJGicF1srOUGfd_RuYSTJA&usqp=CAU");
+      width: 10rem;
+      height: 10rem;
+      border-radius: 0.5rem;
+      background-size: cover;
+      background-position: top center;
+      border: 2px solid #FFF;
+      @include center(vh);
+      z-index: 10;
+      @include media(desktop){
+        width: 8rem;
+        height: 8rem;
+      }
+    }
+  }
+
+  &__body {
+    padding: 0 1rem 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &__name {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--tp__h1);
+      @include text__ellipsis(1);
+      word-break: break-word;
+    }
+
+    &__owner {
+      font-size: 1.4rem;
+      color: var(--tp__secondary);
+      padding-bottom: 1.2rem;
+      text-align: center;
+      @include text__ellipsis(2);
+      height: 4.4rem;
+      a {
+        color: var(--tp__secondary);
+      }
+    }
+
+    &__since {
+      font-size: 1.4rem;
+      color: var(--tp__secondary);
+      @include flex(flex, center, center);
+      padding-top: 1.5rem;
+
+      &__dot {
+        background: var(--bg__label);
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        margin: 0 1.5rem;
+      }
+    }
+  }
+}
+.container.organizationTiles{
+  //.homePage__title__wrapper{
+  //  margin-bottom: 3rem;
+  //}
+  .TileSlider{
+    @include flex(flex, center, flex-start);
+    flex-wrap: wrap;
+  }
+  .OrganizationTile, .vue-horizontal-list{
+    width: 100%;
+  }
+}
+
+.container.organizationTiles .RUWS__container {
+  .OrganizationTile, .cardMK2{
+    margin: 0.5rem 1.5rem;
+    margin-bottom: 4.7rem;
+    box-sizing: content-box;
+    width: 100%;
+    @include media(reverso-phone) {
+      width: calc(50% - 3rem);
+    }
+    @include media(reverso-tablet) {
+      width: calc(25% - 3rem);
+    }
+  }
+}

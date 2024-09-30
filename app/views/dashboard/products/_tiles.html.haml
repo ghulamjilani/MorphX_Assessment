@@ -1,0 +1,27 @@
+.row
+  .col-md-6.total_count
+    Added Products (#{list.products.count})
+  .col-md-6.text-right.fs-12
+    Sort by
+    %a.btn.btn-s.btn-borderred-grey.fs-12.dropdown-toggle{'data-toggle': :dropdown, href: '#'}= order == 'desc' ? 'Newest' : 'Oldest'
+    %ul.dropdown-menu
+      %li= link_to 'Newest', dashboard_list_products_path(list, order: :desc), remote: true, style: 'visibility: visible;'
+      %li= link_to 'Oldest', dashboard_list_products_path(list, order: :asc), remote: true, style: 'visibility: visible;'
+#productsArea.row.productsArea
+  - products.each do |product|
+    .col-xs-6.col-sm-4.col-md-4.productTileContainer{id: "product_tile_#{product.id}"}
+      .productTile
+        .productTile_image_wrapp
+          = link_to dashboard_list_product_path(list, product), remote: true, class: 'productTile_remove', method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove product' do
+            %i.VideoClientIcon-iPlus.rotateIcon
+          %img.productTile_image{src: product.image_url, alt: ''}
+          - if product.affiliate_url.present?
+            .afiliateMarker{title: 'Congrats! This cool product is ready to make money'} $
+        .productTile_name= product.title
+        .productTile_footer.clearfix
+          .fs-12.text-ellipsis.text-color-LightGrey.padding-bottom-5= product.description
+          = link_to 'Edit Product', edit_dashboard_list_product_path(list, product), class: 'productTile_edit text-color-Blue fs-12 pull-left'
+          .productTile_cost.btn.btn-s.pull-right= product.price.format
+        .productTile_footer.clearfix.full-width{rel:'tipsy', title: product.short_url(product.organization&.user)}
+          %input.productTile_url.text-ellipsis.pull-left{type: :text, value: product.short_url(product.organization&.user), readonly: true}
+          %a.productTile_copy.btn.btn-s.pull-right.btn-grey-solid{href: '#', onclick: 'copyToClipboard(this); return false'} Copy

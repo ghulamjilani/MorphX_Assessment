@@ -1,0 +1,13 @@
+- if @featured_vod.present?
+  .col-md-12
+    .headline
+      %h2
+        Featured
+    .TileSliderWrapp.owlSlider
+      .spinnerSlider
+        .bounceS1
+        .bounceS2
+        .bounceS3
+      .TileSlider.owl-carousel
+        - @featured_vod.each do |video|
+          = render_shared_model_with_live_views_counter('shared/tiles/video', video: video, session: video.session)

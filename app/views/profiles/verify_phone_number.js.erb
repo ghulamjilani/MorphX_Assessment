@@ -1,0 +1,8 @@
+<% if @success %>
+    $('a[href*=preview_phone_number_verification]').hide();
+    $('.modal:visible').modal('hide');
+    $('.SendCodeToPhoneBTN').hide();
+    setTimeout(function() {
+      $.showFlashMessage("<%= @success_message %>", {type: 'success', timeout: 3000});
+    }, 200);
+<% end %>

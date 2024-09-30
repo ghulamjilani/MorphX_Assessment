@@ -1,0 +1,8 @@
+- if can?(:subscribe, subscription) && cannot?(:unsubscribe, subscription)
+  = render partial: 'shared/subscription/plans', locals: {subscription: subscription}
+  - image_url = subscription.channel.image_mobile_preview_url
+  - subscription.plans.order("stripe_plans.id ASC").each do |plan|
+    = render partial: 'shared/subscription/purchase', locals: {plan: plan, image_url: image_url}
+    - content_for(:after_include_javascripts) do
+      :javascript
+        new window.PaymentModalView({el: '#plan-payment-modal-#{plan.id}', stripe_key: '#{ Rails.application.credentials.global.dig(:stripe, :public_key) }', amount: '#{ plan.amount }'})

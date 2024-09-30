@@ -1,0 +1,65 @@
+- content_for(:page_title, 'Forgot your password?')
+
+= semantic_form_for(resource, as:  resource_name, url: password_path(resource_name), method: :put, html: {id: :reset_password_form}) do |f|
+  = f.inputs do
+    = f.input :reset_password_token, as: :hidden
+    .borderedInput.relative.form-group{data: {trigger: :manual, toggle: :popover, placement: :right, content: ''}}
+  .row
+    .col-md-8.col-sm-8
+      .borderedInput.signUpPass.position-relative.required
+        = f.input :password,
+                  as: :password,
+                  label: false,
+                  input_html: {id: 'user_password', name: 'user[password]', placeholder: 'New password', class: 'form-control inputUp passInput strength-password user_password', autocomplete: 'new-password'},
+                  wrapper_html: false
+        .password-Strength-2-tooltip
+          Use at least 
+          %b
+            6 characters, 
+          including one 
+          %b
+            uppercase 
+          letter, one 
+          %b
+            lowercase 
+          letter, and one 
+          %b
+            numeric 
+          character
+        - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+          .new-pass-controllers.new-mac-pass-controllers
+            .eye.showEditMacPassword
+            .caps.showEditMacCaps
+          .passStrength-2-Wrap
+            .passStrength-2-indicator
+              %div.indicator-item
+              %div.indicator-item
+              %div.indicator-item
+            .passStrength-2-Message Weak Password
+        - else
+          .new-pass-controllers
+            .eye.showEditPassword
+            .caps.showEditCaps
+          .passStrength-2-Wrap
+            .passStrength-2-indicator
+              %div.indicator-item
+              %div.indicator-item
+              %div.indicator-item
+            .passStrength-2-Message Weak Password
+      
+      .borderedInput.signUpPass.required.position-relative
+        = f.input :password,
+                  as: :password,
+                  label: false,
+                  input_html: {id: 'user_password_confirmation', name: 'user[password_confirmation]', placeholder: 'Confirm new password', class: 'form-control inputUp passInput profile_current_password', autocomplete: 'new-password'},
+                  wrapper_html: false
+        .new-pass-controllers.new-mac-pass-controllers
+          - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+            .eye.showEditConfirmMacPassword
+            .caps.showEditConfirmMacCaps
+          - else
+            .eye.showEditConfirmPassword
+            .caps.showEditConfirmCaps
+        .errorContainerWrapp
+  %div{style: 'margin-top: 10px'}
+    = f.action :submit, label: 'Change my password', button_html: { class: 'mainButton bigBtn btn text-color-red resetPasswordButton', disabled: :disabled }

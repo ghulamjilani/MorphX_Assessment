@@ -1,0 +1,60 @@
+.upload_video_modal.modal.fade{id: "upload_video_modal_id_#{channel.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .unobtrusive-flash-container
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        %h4.groupTitle.clearfix
+          = I18n.t('views.dashboards.uploads.upload_modal.upload_videos')
+        .statica.margin-bottom-20
+          .text
+            %span.text-color-black.bold
+              %span= I18n.t('views.dashboards.uploads.upload_modal.available_storage', used_percent: 80, available: '5GB', limit: '100GB')
+          .btn.btn-l.btn-lightGrey-solid= I18n.t('views.dashboards.uploads.upload_modal.expand_storage')
+        %section.crop-wrapp
+          .upload-area
+            .row
+              .upload-info.padding-top-80.padding-bottom-80
+                .dotsWrapp
+                  .dot1
+                  .dot2
+                  .dot3
+                  .dot4
+                  .dot5
+                  .dot6
+                  .dot7
+                  .dot8
+                .LoadingCover.hidden
+                  .spinnerSlider
+                    .bounceS1
+                    .bounceS2
+                    .bounceS3
+                %span
+                  = form_for(Recording.new, url: dashboard_uploads_path(channel.id), method: :post, remote: true) do |f|
+                    = f.file_field :file, multiple: true, direct_upload: true, accept: '.mov, .mpeg, .mp4, .avi, .wmv, .mpegps, .flv, .webM, .3GPP, .mkv', class: 'file_input', id: "recording_file_#{channel.id}"
+                    = f.submit style: 'display:none;', class: 'file_submit'
+                  %label.btn.btn-s{for: "recording_file_#{channel.id}", class: 'file_label'}= I18n.t('views.dashboards.uploads.upload_modal.select_file_to_upload')
+                  %div.fs-12
+                    = I18n.t('views.dashboards.uploads.upload_modal.drag_drop_videos')
+                    %br
+                    %small.subtext
+                      = I18n.t('views.dashboards.uploads.upload_modal.can_select_several_videos')
+          .crop-container
+          .fs-12
+            %br
+            = I18n.t('views.dashboards.uploads.upload_modal.accepted_video_formats', formats: '.mov, .mpeg, .mp4, .avi, .wmv, .mpegps, .flv, .webM, .3GPP, .mkv')
+            %br
+            = I18n.t('views.dashboards.uploads.upload_modal.accepted_video_dimensions', dimensions: '360p (640 x 360), 480p (854 x 480), 720p (1280 x 720), 1080p (1920 x 1080)')
+            %br
+            = I18n.t('views.dashboards.uploads.upload_modal.the_correct_aspect_ratio', ratio: '16:9')
+            %br
+            = I18n.t('views.dashboards.uploads.upload_modal.maximum_file_size', max_size: '80gb')
+            %br
+            = I18n.t('views.dashboards.uploads.upload_modal.maximum_video_length', hour: 8)
+          .loudThumbnailsList
+          .Votes-b#file_place
+          %span.error_upload_video_modal{"data-dismiss":"modal", style:'display:none; color: red;'}
+            = I18n.t('views.dashboards.uploads.upload_modal.error_please_try_again')
+    .text-right.padding-top-10
+      %a.btn.btn-m.close_upload_video_modal{"data-dismiss":"modal", href:"#" , style:'display:none'}
+        = I18n.t('views.dashboards.uploads.upload_modal.done')

@@ -1,0 +1,137 @@
+- main_image ||= {}
+- img = channel.organization ? channel.organization.logo_url : channel.organizer.medium_avatar_url
+.WSliderBlock
+-#  - if materials.size > 1
+-#    .container.showBannerGallery-wrapp.bannerCollapsedBlockHide
+-#      %a.btn.btn-m.btn-borderred-grey.showBannerGallery{href: '#', data: {target: '#sessionsModalGallery', toggle: :modal, title: 'Open gallery'}} Open gallery
+-#  .container
+-#    .row
+-#      .col-md-6.bannerCollapsedBlockHide
+-#        .channel-info.clearfix
+-#          .chanel-ownerAvatar
+-#            %a.avatarImg-XXl{href: channel.organization ? channel.organization.absolute_path : channel.organizer.relative_path, style: "background-image: url('#{img}');"}
+-#
+-#          .chanel-name
+-#            = link_to channel.title, channel.relative_path
+-#
+-#          .chanel-actionsGroup.bannerCollapsedBlockHide
+-#            %ul.channel-subButtons.padding-left-0.margin-bottom-0.clearfix
+-#              %li.text-center.fs-12.display-inline-block.margin-bottom-10-p-tablet.padding-left-0{class: like_class(channel)}
+-#                = degradable_link_to channel.toggle_like_relative_path, method: :post, remote: true, class:'margin-right-10 btn btn-m btn-borderred-grey full-width-p-tablet' do
+-#                  %i.icon-heart
+-#                  %span{class: "likes-counter-channel-#{channel.id}"}= channel.likes_count
+-#              %li.text-center.fs-12.display-inline-block.margin-bottom-10-p-tablet.padding-left-0{class: can?(:share, channel) ? '' : 'selected not-toggle'}
+-#                - if can?(:share, channel)
+-#                  = link_to channel.preview_share_relative_path, rel: 'nofollow', method: :get, remote: true, class:'btn btn-m btn-borderred-grey full-width-p-tablet' do
+-#                    %i.icon-share
+-#                    %span.counter= channel.shares_count
+-#                - else
+-#                  = link_to '#', class: 'disabled btn btn-m btn-borderred-grey full-width-p-tablet' do
+-#                    %i.icon-share
+-#                    %span.counter= channel.shares_count
+-#
+-#              .rating-ver2-wrap.display-inline-block.vertical-midle
+-#                = raw ver2_star_rating numeric_rating_for(channel)
+-#                %span.display-inline-block.vertical-midle
+-#                  = "#{rates_quantity channel}"
+-#
+-#            - if @instagram_social_link.present? || @facebook_social_link.present? || @twitter_social_link.present? || @gplus_social_link.present? || @linkedin_social_link.present? || @youtube_social_link.present? || @website_url.present?
+-#              .socialMK2.page-bannersocial.margin-bottom-20
+-#                %span.padding-right-10 Also on
+-#                - if @instagram_social_link.present?
+-#                  %a{href: @instagram_social_link.link_as_url, target: '_blank'}
+-#                    %span
+-#                      %i.VideoClientIcon-instagram.fs-14
+-#
+-#                - if @facebook_social_link.present?
+-#                  %a{href: @facebook_social_link.link_as_url, target: '_blank'}
+-#                    %span
+-#                      %i.icon-facebook-2.fs-14
+-#
+-#                - if @twitter_social_link.present?
+-#                  %a{href: @twitter_social_link.link_as_url, target: '_blank'}
+-#                    %span
+-#                      %i.icon-twitter-2.fs-14
+-#
+-#                - if @gplus_social_link.present?
+-#                  %a{href: @gplus_social_link.link_as_url, target: '_blank'}
+-#                    %span
+-#                      %i.VideoClientIcon-google-plus.fs-14
+-#
+-#                - if @linkedin_social_link.present?
+-#                  %a{href: @linkedin_social_link.link_as_url, target: '_blank'}
+-#                    %span
+-#                      %i.icon-linkedin-1.fs-14
+-#
+-#                - if @youtube_social_link.present?
+-#                  %a{href: @youtube_social_link.link_as_url, target: '_blank'}
+-#                    %span
+-#                      %i.icon-youtube-1.fs-14
+-#
+-#                - if @website_url.present?
+-#                  %a.siteLink{href: @website_url, target: '_blank'}= @website_url
+-#
+-#          .SubscribeBTN.margin-top-20
+-#            .btns-group.full-width-p-tablet
+-#              - if current_user == channel.organizer
+-#                = link_to 'Subscribers', '#', onclick: 'return false;', class: 'btn btn-l btn-borderred-grey', style: 'background: transparent; cursor: auto;'
+-#              - elsif !user_signed_in? || !current_user.fast_following?(channel)
+-#                = degradable_link_to channel.toggle_subscribe_relative_path, method: :post, remote: true, class: "channel-subscribe-#{channel.id} btn btn-l bg_transperant btn-borderred-grey", style: 'visibility: visible;' do
+-#                  Subscribe to channel
+-#              - else
+-#                = degradable_link_to channel.toggle_subscribe_relative_path, method: :post, remote: true, class: "channel-subscribe-#{channel.id} btn btn-l btn-red", style: 'visibility: visible;' do
+-#                  Subscribed
+-#              .subscribers_count.btn.btn-l.btn-borderred-grey= channel.count_user_followers
+-#          .session-about-Description.bannerCollapsedBlockHide.margin-bottom-10-p-tablet
+-#            %p= channel.description_text[0...250]
+-#          - if channel.description_text_length > 250
+-#            .session-about-Description-readMoreBox.bannerCollapsedBlockHide.margin-top-10-p-tablet
+-#              %a.btn.btn-m.btn-grey-solid.btn-hover-Blue.readMoreBox.full-width-p-tablet Read more
+-#              .text.full-width-p-tablet
+-#                .title
+-#                  %a.closeReadMoreBox.pull-right{href: '#'} x
+-#                  About the Channel
+-#                .textSection
+-#                  %p= channel.description_text
+-#      .col-md-6
+-#        .channel-edit-info
+-#          - if can?(:share, channel)
+-#            - if can?(:be_notified_about_1st_published_session, channel)
+-#              = dropdown_with_icons do
+-#                - #NOTE - if you plan to change it review channels/notify_me.js.erb first
+-#                %li
+-#                  %i.icon-bell-alt
+-#                  = link_to notify_me_channel_path(channel.id), method: :put, remote: true do
+-#                    Notify Me
+-#            - elsif can?(:edit, channel) || can?(:clone, channel)
+-#              = render 'shared/channel_dropdown_options', channel: channel
+-#            - if channel.archived?
+-#              %font{style: 'font-size: 16px'}
+-#                Archived
+-#  .sessionsBanerBlock
+-#    = main_image[:embedded] || content_tag(:div, image_tag(main_image[:img_src]), class: 'overlayImg')
+-#
+-#- if materials.size > 1
+-#  #sessionsModalGallery.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+-#    .modal-dialog
+-#      .modal-content
+-#        .modal-body
+-#          %a.closeModal{'data-dismiss': :modal, href: '#'}
+-#            = image_tag('landingPage/signup_images/popup_close.png', alt: '')
+-#          %section.carouselWrapp
+-#            #slideshow-1
+-#              .direction-nav
+-#              .slideshow.slider-for
+-#                - materials.each do |ci_data |
+-#                  .slide
+-#                    %div
+-#                      - if ci_data[:embedded]
+-#                        = ci_data[:embedded]
+-#                      - else
+-#                        %div.containSlide{style: "background-image: url(#{ci_data[:img_src]})"}
+-#
+-#            #slideshow-2{'data-itemCount': materials.size}
+-#              .slideshow.slider-nav
+-#                - materials.each.with_index do |ci_data, index|
+-#                  .slide{'data-slide-number': index}
+-#                    %div{style: "background-image: url(#{ci_data[:img_src]});width:90px"}

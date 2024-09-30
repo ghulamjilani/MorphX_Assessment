@@ -1,0 +1,48 @@
+- content_for(:extra_body_classes, "about-page hidePageHeader header-top")
+
+.banerWrapp
+  = image_tag 'about/About-page-Bg.png'
+  %span.lighter Connecting Talent
+  %strong.Boldier with Audience - Live
+  .text-center
+    - unless user_signed_in?
+      = degradable_link_to("#{Rails.application.credentials.global[:service_name]} Me",
+                           work_with_us_link,
+                           class: 'margin-top-20 mainButton')
+
+  .text-Block
+    .container
+      %h3.blueHeader About #{Rails.application.credentials.global[:service_name]}
+      %p The world is full of talent and our mission is to bring it to you live.
+      %p #{Rails.application.credentials.global[:service_name]} is a global online marketplace, designed to help discover a variety of talent and to deliver the best in live instructions and performance experiences.
+      %p
+        It is an interactive video platform that empowers you to engage an audience as a
+        = succeed ',' do
+          - if !user_signed_in? || (user_signed_in? && can?(:create_1st_channel, current_user))
+            = link_to 'presenter', business_home_path
+          - else
+            presenter
+        or #{Rails.application.credentials.global[:service_name]} yourself, as a consumer, by connecting with the world’s most gifted individuals.
+      %p Whether you want to take an Interactive lesson from a tango instructor in Buenos Aires, guitar teacher in Madrid, yogi in Mumbai, make-up artist in Hollywood, or enjoy a black-box theatre performance in New York—the possibilities are truly endless!
+      %p.margin-top-20 #{Rails.application.credentials.global[:service_name]} is your gateway to a new online experience. Feed your passion and curiosity by exploring a global pool of creative intelligence. Watch, learn, engage and enjoy something new.  #{Rails.application.credentials.global[:service_name]} in live and Interactive experience deeper than ever before.
+      %strong #{Rails.application.credentials.global[:service_name]} in learning. #{Rails.application.credentials.global[:service_name]} in joy. #{Rails.application.credentials.global[:service_name]} in fun.
+
+.aft-c
+  %div.container
+    %h5.text-center Topics
+    .slderWrap
+      .sliderAboutPage
+        .slides.owlSlider
+          = image_tag 'coming_soon/slider/sl1-small.jpg'
+
+          = image_tag 'coming_soon/slider/sl2-small.jpg'
+
+          = image_tag 'coming_soon/slider/sl3-small.jpg'
+
+          = image_tag 'coming_soon/slider/sl4-small.jpg'
+
+          = image_tag 'coming_soon/slider/sl5-small.jpg'
+
+          = image_tag 'coming_soon/slider/sl6-small.jpg'
+
+          = image_tag 'coming_soon/slider/sl7-small.jpg'

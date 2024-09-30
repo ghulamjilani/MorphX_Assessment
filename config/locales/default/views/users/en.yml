@@ -1,0 +1,5 @@
+en:
+  views:
+    users:
+      show:
+        you_need_follow_creator_first: "You need to follow %{creator} first"

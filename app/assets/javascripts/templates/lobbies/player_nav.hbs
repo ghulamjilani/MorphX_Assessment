@@ -1,0 +1,18 @@
+<a class="MeD-prev prev-track ensure-link-style">
+    <i class="icon-fast-bw"></i>
+</a>
+{{#if isPausable}}
+    {{#if canPlay}}
+        <a class="MeD-play play-pause" style="display: none;">
+            <i class="icon-play"></i>
+        </a>
+        <a class="MeD-pause play-pause" style="display: none;">
+            <i class="icon-pause"></i>
+        </a>
+    {{/if}}
+{{else}}
+    <div style="display: inline-block; width: 80px;"></div>
+{{/if}}
+<a class="MeD-next next-track ensure-link-style">
+  <i class="icon-fast-fw"></i>
+</a>

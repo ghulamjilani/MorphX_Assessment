@@ -1,0 +1,43 @@
+<div class="col-md-12">
+    {{#if wa_ipcam.sandbox}}
+        <div class="btn btn-square btn-borderred-red">SANDBOX MODE</div>
+    {{/if}}
+    <div class="input-block state-clear">
+        <div class="row">
+            <div class="col-xs-11 showEdit">
+                <input type="text" id="IpCamera_url_read" class="blurInput no-border" readonly="readonly" value="{{wa_ipcam.source_url}}" placeholder="Enter the source URL of your IP camera">
+
+            </div>
+            <div class="col-xs-1 no-padding">
+                <a href="#" class="show_IpCamera_url Views_btn bluriInput_btn">
+                    <i class="VideoClientIcon-Views"></i>
+                </a>
+            </div>
+        </div>
+        <a href="#" id="Edit_Url_modalShow" class="btn btn-m btn-grey-solid margin-top-10">Edit Url</a>
+    </div>
+</div>
+<!--<div class="col-md-5 text-center">-->
+    <!--<div class="responsive-video">-->
+        <!--<div class="thoplayer_ipcam_off" style="display: none;">-->
+            <!--<div class="streamSettings">-->
+                <!--<div class="step1">-->
+                    <!--<p>PREVIEW</p>-->
+                <!--</div>-->
+                <!--<div class="step2" style="display: none;">-->
+                    <!--<p>Please wait. it make take up to 30 seconds to start the stream</p>-->
+                <!--</div>-->
+                <!--<div class="notDetected hide">-->
+                    <!--<p>Webcam not detected</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="thoplayer_ipcam_on" style="display: none;">-->
+            <!--<div id="theo_player_ipcam" class="video-js theoplayer-skin theo-seekbar-above-controls" ></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<a href="#" id="start_ipcam_stream" class="btn btn-s thoplayer_ipcam_off" style="display: none;">Test stream</a>-->
+    <!--<a href="#" id="stop_ipcam_stream" class="btn btn-s thoplayer_ipcam_on" style="display: none;">Stop stream</a>-->
+<!--</div>-->
+
+

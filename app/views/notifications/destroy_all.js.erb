@@ -1,0 +1,14 @@
+var container = $('p:contains(Latest Notifications)');
+
+if (container.length == 1) {
+  $(container).find('span').html('0');
+  $('.notification_count').removeClass('blink_me');
+
+  $('#notificationsPopup ul').html('<li class="clearfix fallback text-center"><%= I18n.t("no_results.no_notifications") %></li>');
+
+  $('a:contains(Clear all)').parent('div').remove();
+
+  $('#notificationsPopup div.lastDb').remove();
+} else {
+  throw new Error("can not find *latest notifications* container");
+}

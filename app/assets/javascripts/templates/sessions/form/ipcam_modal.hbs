@@ -1,0 +1,38 @@
+<div id="Change_IP_Camera_url_modal" class="modal fade" aria-hidden="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a class="closeModal" data-dismiss="modal">
+                <i class="VideoClientIcon-iPlus"></i>
+            </a>
+            <div class="modal-body">
+                <div class="block_1">
+                    <div>
+                        {{i18n_ipcam_modal}}
+                    </div>
+                </div>
+                <div class="block_2 hide">
+                    <div>
+                        <div class="input-block">
+                            <label for="IP_Camera_url">Source URL of your IP camera</label>
+                            <div class="link_Share_block">
+                             <input type="text" id="IP_Camera_url" value="{{wa_ipcam.source_url}}">
+                             <a class="btn-s btn btn-borderred-grey mt20 IP_Camera_btn" href="#" onclick="copyToClipboard(this)" return="false">copy</a>
+                            </div>
+                            <div class="errorContainerWrapp"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-right padding-top-10 proceed_btns">
+            <div class="block_1_btns">
+                <a href="#" class="btn btn-m" id="proceed_to_step_2">Yes, proceed</a>
+                <a href="#" class="btn btn-m btn-lightGrey-solid" data-dismiss="modal">Cancel</a>
+            </div>
+            <div class="block_2_btns hide">
+                <a href="#" class="btn btn-m" id="saveUrl_enable_ipcam">Save</a>
+                <a href="#" class="btn btn-m btn-lightGrey-solid" data-dismiss="modal">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>

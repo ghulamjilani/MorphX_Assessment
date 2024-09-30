@@ -1,0 +1,12 @@
+en:
+  frontend:
+    app:
+      components:
+        pageparts:
+          header:
+            sign_up: Sign Up
+            sessions_create:
+              go_live: "Go Live Setup"
+              fast_interactive: "Easy Conference"
+              fast_interactive_tooltip: "Quick setup for conference (like zoom)"
+              upload: "Upload"

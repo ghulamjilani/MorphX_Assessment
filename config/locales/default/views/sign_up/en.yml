@@ -1,0 +1,39 @@
+en:
+  sign_up:
+    welcome_to: Welcome to
+    with_facedook: Sign Up with Facebook
+    with_google: Sign Up with Google
+    with_apple: Sign Up with Apple
+    with_instagram: Sign Up with Instagram
+    with_twitter: Sign Up with Twitter
+    with_linkedin: Sign Up with LinkedIn
+    with_email: Sign Up with Email
+    agree_to: I agree to
+    have_acc: Already have an account?
+    guest: Or Enter Like a Guest
+    and: and
+    first_n: First Name
+    last_n: Last Name
+    birthday: Birthday
+    confirm13: I confirm that I am 13 years old or over
+    gender: Gender
+    male: Male
+    female: Female
+    private: Private
+    email: Email
+    password: Password
+    weak: Weak Password
+    sign_up: Sign Up
+    more_sign_up: More Sign Up Options
+    skip_for_now: Skip For Now
+    log_in: Log In
+    use: Use at least
+    character: character
+    characters: 6 characters
+    including: including one
+    uppercase: uppercase
+    letter: letter
+    one: one
+    and_one: and one
+    lowercase: lowercase
+    numeric: numeric

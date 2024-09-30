@@ -1,0 +1,65 @@
+- content_for(:page_title, 'Channels')
+- content_for(:extra_body_classes, 'header-top')
+
+-#- content_for(:system_credit_info) do
+  - if current_user.system_credit_balance > 0
+    = %(System Credit: <strong style="margin-right: 0px; padding-right: 7px; border-right: 1px solid #000">#{as_currency(current_user.system_credit_balance)}</strong>).html_safe
+  - if current_user.has_owned_channels?
+    = %(Presenter Balance: <strong>#{as_currency(current_user.presenter_credit_balance)}</strong>).html_safe
+
+    - if current_user.presenter_credit_balance < 0
+      %a.btn.xs{'data-toggle': :modal, 'data-target': '#replenishBalanceModal', role: :button} Replenish Balance
+
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9.main-content-section
+    = render 'dashboards/navigation/session_tabs'
+
+    - if can?(:create_channel, current_user.current_organization)
+      %div.dashTitle.clearfix
+        %a.btn.btn-m.pull-right.margin-bottom-10.full-width-p-tablet{href: new_channel_path}
+          %i.VideoClientIcon-plusF.vertical-midle
+          Channel
+    - if @channels.present?
+      - content_for(:after_include_javascripts) do
+        :javascript
+          loadSessions = function(el){
+            var data = $(el).data();
+            $.ajax({
+              type: 'GET',
+              dataType: 'script',
+              url: Routes.sessions_dashboard_channel_path(data.channelId, {limit: data.limit, offset: data.offset, type: data.type})
+            })
+          };
+          $('.filterList a').one('shown.bs.tab', function(){ loadSessions($(this).data('target')); });
+          $(document).ready(function(){
+            _.each($('li.upcoming.active a'), function(el){$(el).trigger('shown.bs.tab');})
+          });
+      - @channels.each_with_index do |channel, index|
+        = render({ partial: 'channel', locals: { channel: channel, index: index } })
+= render 'shared/modal_live_participants_portal'
+
+-##replenishBalanceModal.modal.fade{'aria-hidden': 'true', role: :dialog, tabindex: -1, class: modal_additional_class(ProfilesHelper::REPLENISH_MODAL)}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+        %h1.heading
+          Replenish Presenter Balance
+
+        %form#new_replenishment.form-horizontal.well{method: :GET, 'accept-charset': 'UTF-8', action: new_replenishment_path, style: 'background: none; border: 0; margin: 0;'}
+          .control-group.custom-input.string.input.required.stringish{style: 'padding: 0'}
+            %label.control-label{style: 'text-align: left'} Enter Amount
+          .controls
+            %input{name: :amount, type: :text, class: 'input-xxlarge', size: 9}
+
+          .row-buttons{style: 'padding: 0; margin: 0'}
+            %button.btn.btn-l{'data-disable-with': 'Please wait…', name: :button, type: :submit, value: 'Replenish', style: 'margin: 10px 0 0 0'}
+              Replenish
+
+= render 'shared/on_demand_modal'
+
+%script(type="application/xml" id="sessionTmpl")
+  != render 'dashboards/session'

@@ -1,0 +1,47 @@
+::-webkit-scrollbar {
+  background-color: #e2e7ea;
+  width: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #baccdb;
+  border-radius: 0.4rem;
+
+  &:hover {
+    background-color: #abbdcc;
+  }
+}
+
+.customScroll {
+  &::-webkit-scrollbar, ::-webkit-scrollbar {
+    width: 0.6rem;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    height: 6rem;
+  }
+}
+
+.smallScrolls {
+  &::-webkit-scrollbar, ::-webkit-scrollbar {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+
+  &::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb {
+    border-radius: 0.2rem;
+  }
+}
+
+.smallScrollsH {
+  &::-webkit-scrollbar, ::-webkit-scrollbar {
+    height: 0.6rem;
+
+  }
+
+  &::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb {
+    border-radius: 0.2rem;
+  }
+}

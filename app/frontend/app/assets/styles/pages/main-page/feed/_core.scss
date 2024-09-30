@@ -1,0 +1,14 @@
+@import "./feedChannel";
+
+.feedContainer {
+  width: 100%;
+  margin: 0 auto;
+
+  .mChannel__tiles__items {
+    flex-wrap: nowrap;
+  }
+
+  .mChannel__tiles__items .cardMK2 {
+    width: 100%;
+  }
+}

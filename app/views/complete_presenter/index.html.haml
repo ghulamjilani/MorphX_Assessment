@@ -1,0 +1,146 @@
+- content_for(:extra_body_classes, "hidePageHeader")
+
+.WelcomeSection
+  %h2.text-center.fs-xl.fc-main-dark.margin-bottom-20.padding-top-50= I18n.t('complete_presenter.title')
+  %h4.text-center.fs-l.margin-bottom-10
+    = I18n.t('complete_presenter.welcome', service_name: Rails.application.credentials.global[:service_name])
+  %h4.text-center.fs-l.margin-top-0.padding-bottom-30
+    = I18n.t('complete_presenter.description')
+  %h4.text-center.fs-l.margin-top-0
+    = I18n.t('complete_presenter.fill_form')
+
+- user_account = current_user.user_account || current_user.build_user_account
+#presenter_info.wizard_profile.padding-top-10
+  .sectionBlock_wrapp
+    .user_avatar_block.avatar_block{title: 'Avatar'}
+      .LoadingCover.profile_next_cover{style: 'display:none'}
+      = image_tag current_user.large_avatar_url, class: 'avatar'
+      = link_to '#userLogoModal', data: {toggle: :modal, target: '#userLogoModal', 'hover-text': 'Add Image', backdrop: :static, keyboard: false}, class: :user_logo do
+        .LoadingCover.profile_next_cover{style:'display:none'}
+        %i.VideoClientIcon-pencilF
+    = form_for(user_account, url: '#', remote: true, html: {class: 'form_V2', autocomplete: :off, id: :user_account, style: 'visibility: visible'}) do |f|
+      .formWrapp
+        .LoadingCover.profile_next_cover{style: 'display:none'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        %section.sectionBlock
+          .input-block.required{class: user_account.bio.present? ? 'valid' : '',
+                           'data-BAP-preview': 'true', 'data-BAP-preview-title': 'About You',
+                           'data-BAP-preview-content': I18n.t('wizard.modals.user_info.bio_tooltip', count: 24)}
+            = f.label :bio, 'About You'
+            = f.text_area :bio, 'data-autoresize': "", rows: 4, 'max-length': 2000, placeholder: 'You have 2000 characters for your description', required: true
+            .counter_block 0/2000
+            .infoContainerWrapp= I18n.t("forms.info.min_description_length")
+            .errorContainerWrapp
+          = f.hidden_field :available_by_request_for_live_vod, value: true
+          -#.mb50
+          -#.text-right
+            = f.label :available_by_request_for_live_vod, class: 'checkbox choice' do
+              I'm also available on-Demand
+              = f.check_box :available_by_request_for_live_vod, checked: true
+              %span.margin-left-10.vertical-midle
+            .errorContainerWrapp
+
+          -#-#%section.sectionBlock
+          -#  = f.fields_for :social_links do |s|
+          -#    - if s.object.provider == 'explicit'
+          -#      .input-block{class: ('state-clear' if s.object.link.blank?)}
+          -#        = s.label :link, 'Your website URL'
+          -#        = s.text_field :link
+          -#        = s.hidden_field :provider
+          -#  .row
+          -#    .col-md-12.padding-bottom-10.padding-top-10.text-color-Darkgrey.fs-14
+          -#      Link and authorize your social media profiles
+          -#  .socialList
+          -#    = f.fields_for :social_links do |s|
+          -#      - if s.object.provider == 'facebook'
+          -#        .socialList-item.clearfix
+          -#          %a.socialIcon.faceBook{href: '#', onclick: 'void(0);'}
+          -#            %i.icon-facebook
+          -#          = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+          -#          = s.hidden_field :provider
+          -#          - if current_user.facebook_identity.present?
+          -#            = link_to 'Disconnect', disconnect_social_account_path(provider: :facebook), method: :post, class: 'btn btn-s btn-borderred-grey pull-right margin-top-5'
+          -#          - else
+          -#            = link_to 'Connect', user_omniauth_authorize_path(:facebook), class: 'btn btn-s pull-right margin-top-5'
+          -#      - elsif s.object.provider == 'twitter'
+          -#        .socialList-item.clearfix
+          -#          %a.socialIcon.twitter{href: '#', onclick: 'void(0);'}
+          -#            %i.icon-twitter
+          -#          = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+          -#          = s.hidden_field :provider
+          -#          - if current_user.twitter_identity.present?
+          -#            = link_to 'Disconnect', disconnect_social_account_path(provider: :twitter), method: :post, class: 'btn btn-s btn-borderred-grey pull-right margin-top-5'
+          -#          - else
+          -#            = link_to 'Connect', user_omniauth_authorize_path(:twitter), class: 'btn btn-s pull-right margin-top-5'
+          -#      - elsif s.object.provider == 'google+'
+          -#        .socialList-item.clearfix
+          -#          %a.socialIcon.Google{href: '#', onclick: 'void(0);'}
+          -#            %i.VideoClientIcon-google-plus
+          -#          = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+          -#          = s.hidden_field :provider
+          -#          - if current_user.gplus_identity.present?
+          -#            = link_to 'Disconnect', disconnect_social_account_path(provider: :gplus), method: :post, class: 'btn btn-s btn-borderred-grey pull-right margin-top-5'
+          -#          - else
+          -#            = link_to 'Connect', user_omniauth_authorize_path(:gplus), class: 'btn btn-s pull-right margin-top-5'
+          -#      - elsif s.object.provider == 'linkedin'
+          -#        .socialList-item.clearfix
+          -#          %a.socialIcon.LinkedIn{href: '#', onclick: 'void(0);'}
+          -#            %i.icon-linkedin
+          -#          = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+          -#          = s.hidden_field :provider
+          -#          - if current_user.linkedin_identity.present?
+          -#            = link_to 'Disconnect', disconnect_social_account_path(provider: :linkedin), method: :post, class: 'btn btn-s btn-borderred-grey pull-right margin-top-5'
+          -#          - else
+          -#            = link_to 'Connect', user_omniauth_authorize_path(:linkedin), class: 'btn btn-s pull-right margin-top-5'
+          -#      - elsif s.object.provider == 'instagram' && instagram_omniauth_enabled?
+          -#        .socialList-item.clearfix
+          -#          %a.socialIcon.Instagram{href: '#', onclick: 'void(0);'}
+          -#            %i.VideoClientIcon-instagram
+          -#          = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+          -#          = s.hidden_field :provider
+          -#          - if current_user.instagram_identity.present?
+          -#            = link_to 'Disconnect', disconnect_social_account_path(provider: :instagram), method: :post, class: 'btn btn-s btn-borderred-grey pull-right margin-top-5'
+          -#          - else
+          -#            = link_to 'Connect', user_omniauth_authorize_path(:instagram), class: 'btn btn-s pull-right margin-top-5'
+          -#            -#- elsif s.object.provider == 'youtube'
+          -#              .socialList-item.clearfix
+          -#                %a.socialIcon.youtube{href: '#', onclick: 'void(0);'}
+          -#                  %i.icon-youtube
+          -#                = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+          -#                = s.hidden_field :provider
+
+        .clearfix.btnarea
+          %button.submitButton.btn.btn-m.pull-right{type: :submit} Save
+
+#userLogoModal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        %h4.groupTitle.clearfix
+          Upload Logo
+        %section.crop-wrapp
+          .unobtrusive-flash-container
+          .upload-area
+            .row
+              .upload-info
+                = render partial: 'become_presenter_steps/loading_cover'
+                %span
+                  Drag-n-drop photos here or
+                  %input#user-logo.inputfile{name: "user-logo", type: :file}
+                  %label{for: 'user-logo'}
+                    Select files to upload
+          .loudThumbnailsList
+          .crop-container
+          %div.fs-13.sugSize
+            %span Suggested size:
+            280x280 px
+            %br
+            Choose high resolution images in order to create an awesome avatar or logo!
+
+- content_for(:after_include_javascripts) do
+  %script
+    $(document).ready(function(){ Forms.Presenters.start(); });

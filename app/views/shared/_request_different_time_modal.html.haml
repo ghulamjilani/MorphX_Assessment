@@ -1,0 +1,39 @@
+#RequestDifferentTimeModal.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+  .modal-dialog
+    - @object = RequestAnotherTime.new
+    = form_for @object, as: :session, url: request_another_time_channel_session_path(@channel.id, @session.id), method: :post, remote: true, html: {class: 'form_V2', id: :request_different_time} do |f|
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          .unobtrusive-flash-container
+          %h4.groupTitle.clearfix.margin-bottom-10 Request Different Time
+          %section
+            .row.select-block.required.padding-bottom-0
+              .col-xs-6.text-color-Darkgrey
+                = label_tag :requested_at_date, 'Date'
+              .col-xs-6.text-right.DatepickerWtrapp
+                %input#start_at_1i{type: :hidden, name: 'session[requested_at(1i)]'}
+                %input#start_at_2i{type: :hidden, name: 'session[requested_at(2i)]'}
+                %input#start_at_3i{type: :hidden, name: 'session[requested_at(3i)]'}
+                %input#datepicker.styled-datepicker.no-border.text-right{type: :text, readonly: true, name: :requested_at_date}
+                %i.VideoClientIcon-calendar-icon.text-color-main.margin-right-5.margin-left-5
+              .col-xs-12.errorContainerWrapp
+            .row.select-block.required
+              .col-xs-5.text-color-Darkgrey
+                = f.label :requested_at, 'Start Time'
+              .col-xs-7.text-right.pull-right
+                = f.time_select :requested_at, {minute_step: 15, ampm: current_user.try(:am_format?), time_separator: ''}, include_blank: false, class: 'styled-select styled-select_withCss padding-left-20 text-right select-rightAlign padding-right-0'
+              .col-xs-12.errorContainerWrapp
+            .row.select-block.required
+              .col-xs-5.text-color-Darkgrey
+                = f.label :delivery_method, 'Delivery method'
+              .col-xs-7.text-right
+                = f.select :delivery_method, options_for_select([['With Viewers', 'Livestream'], ['With Guests', 'Interactive']]), {include_blank: false}, {class: 'styled-select styled-select_withCss padding-left-20 pull-right text-right select-rightAlign full-width padding-right-0'}
+              .col-xs-12.errorContainerWrapp
+            .input-block.margin-bottom-10.required.state-clear
+              = f.label :comment, 'Add a note'
+              = f.text_area :comment
+              .errorContainerWrapp
+      .text-right.overContentSubmit
+        %input.btn.btn-m{type: :submit, 'data-disable-with': 'Please wait…', value: 'Send'}
+

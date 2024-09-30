@@ -1,0 +1,47 @@
+en:
+  wizard:
+    sign_up: Sign Up
+    my_business: My Business
+    first_channel: First Channel
+    set_up_your_business: Set Up Your Business
+    set_up_your_channel: Set Up Your First Channel
+    logo: Logo
+    busines_logo: Business Logo
+    drag_n_drop: or drag-n-drop your image here
+    size: 'Suggested size:'
+    recomend: We recommend using high resolution image.
+    business_name: Business Name
+    about: About
+    minimum_charecters: Minimum 24 characters
+    business_website: Business Website URL
+    business_sm: Business Social Media
+    my_page: /mypage
+    business_cover: Business Cover
+    edit: Edit
+    upload: Upload
+    next: NEXT
+    set_up_first_channel: Set Up Your First Channel
+    channel_name: Channel Name
+    desc: Description
+    category: Category*
+    choose_category: Choose Category
+    tags: Tags
+    channel_cover: Channel Cover
+    view_channel: view channel
+    success_complited_wizard: You have successfully completed your company’s information.
+    welcome_to: Welcome to
+    thnx_for_joining: ' Thanks for joining us!'
+    lets_create_content: Let’s create some awesome content together!
+    helpers: 'Here are some helpful blog posts for you in order to get started:'
+    how_create_first_session: How to create your first session?
+    what_replays: What are replays?
+    what_uploads: What are uploads?
+  channel_category:
+    arts_and_crafts: Arts and Crafts
+    cooking: Cooking
+    music: Music
+    workshops: Workshops
+    panels: Panels
+    demonstration: Demonstration
+    promo: Promo
+    master_class: Master class

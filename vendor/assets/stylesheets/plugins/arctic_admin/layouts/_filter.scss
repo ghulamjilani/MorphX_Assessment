@@ -1,0 +1,78 @@
+#sidebar {
+  width: $lg-filter-width;
+  background: $sidebar-background;
+  border-radius: $border-radius;
+  @include box-shadow(0 0 4px 0 rgba(0, 0, 0, .04));
+  margin-bottom: 30px;
+  height: calc(100% - 60px);
+  top: 60px;
+  box-shadow: 0px 0px 2px 1px #e4eaec;
+  z-index: 11;
+
+  @media screen and (min-width: $x-lg-width) {
+    width: $lg-filter-width;
+  }
+
+  @media screen and (max-width: $sm-width) {
+    top: 65px;
+  }
+
+  .sidebar_section {
+    padding: 15px 20px;
+    height: 100%;
+    overflow-y: auto;
+    color: $text-color-alternative;
+
+    h3 {
+      margin: 0 0 10px 0;
+    }
+
+    .label {
+      display: block;
+      text-align: left;
+    }
+
+    .input {
+      margin-bottom: 10px;
+
+      input,
+      select {
+        height: 30px;
+        padding: 3px 5px;
+        font-size: 12px;
+      }
+    }
+
+    .select_and_search {
+
+      input,
+      select {
+        width: 45%;
+        display: inline-block;
+      }
+
+      input {
+        float: right;
+      }
+    }
+
+    .filter_select select {
+      width: 100%;
+    }
+
+    .filter_date_range input {
+      width: 45%;
+      display: inline-block;
+    }
+
+    input[type="submit"] {
+      width: auto;
+      line-height: 31px;
+      margin-right: 10px;
+    }
+  }
+
+  #search-status-_sidebar_section {
+    font-size: 14px;
+  }
+}

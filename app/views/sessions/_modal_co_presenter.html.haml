@@ -1,0 +1,33 @@
+%button.btn.btn-sm.pull-right.btn-invite{"data-target" => "#invite-co-presenter-modal", "data-toggle" => "modal", type:'button'}
+  %i.VideoClientIcon-paper-planeF
+  Invite
+
+#invite-co-presenter-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+        %h1.heading
+          Co-Presenters
+
+        %fieldset.inputs
+          .email.input.required.autofocus.stringish.form-group
+            %input.form-control{id: 'invited_co_presenters_new_input', autofocus: 'autofocus', maxlength: '255', placeholder: 'Email', type: 'email', data: {organizer: current_user.email}}
+
+          = link_to_has_many(:invited_co_presenters, 'Invite by email', f, :span, 'btn btn-success invite_btn')
+        %br
+        .clearfix
+        .invited_co_presenters_list.users_list.list-group
+          .invited
+            = f.semantic_fields_for(:invited_co_presenters) do |builder|
+              = render partial: 'invited_co_presenter_fields', locals: {f: builder, abstract_session: f.object}
+          .removable
+            .remHeadersection
+              %span Contacts
+              %input.contacts-search{placeholder: 'Search', type: 'text'}
+            .remWrapsection
+              = render 'shared/contacts', users: current_user.contact_users, target_input: :invited_co_presenters
+        %div.text-center
+          %a.btn.btn-primary{'data-dismiss' => 'modal', href: ''}
+            Done

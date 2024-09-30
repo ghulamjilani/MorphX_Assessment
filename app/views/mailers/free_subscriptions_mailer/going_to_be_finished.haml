@@ -1,0 +1,31 @@
+%a{href: @channel.absolute_path}
+  %img{src: image_url(@channel.image_gallery_url), style: 'width: 100%; border-radius: 10px;'}
+
+
+%p{style: "text-align: center;"}
+  Dear
+  = @invited_user.first_name
+  = @invited_user.last_name
+
+%p{style: "text-align: center;"}
+  Your Free
+  = pluralize(@free_subscription.duration_in_months, 'Month') unless @free_subscription.duration_in_months.nil?
+  membership finishes next week
+
+%p{style: "text-align: center;"}
+  %img{src: image_url(@user.avatar_url), style: 'border-radius: 25px; width: 30px; height: 30px; vertical-align: middle;'}
+  = @user.public_display_name
+  invited you to continue your
+  %a{href: @channel.absolute_path}= @channel.title
+  membership
+
+- if @channel.subscription.present?
+  %p{style: "text-align: center; padding-bottom: 30px;"}
+    Subscribe today from
+    = @channel.subscription.plans.active.order(amount: :asc).first&.formatted_price
+
+%p{style: "text-align: center;"}
+  = "#{link_to 'Accept Invitation', @channel.absolute_path, style: "text-decoration: none;padding: 10px; margin:0; font-style: normal; font-weight: 600; background-color: #{@btn_color};border-radius: 25px; font-size: 15px; line-height: 15px; color: #ffffff;"}".html_safe
+
+%p{class: "thank_you_message"}
+  = simple_format email_team_thank_you(@channel.title)

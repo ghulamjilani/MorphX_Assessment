@@ -1,0 +1,9 @@
+%p
+  = I18n.t('views.unsubscribes.confirm.confirmed')
+- if @email_type.present?
+  %p.margin-top-10
+    = "- \"#{@email_type}\""
+%p.margin-top-30
+  = link_to(I18n.t('views.unsubscribes.confirm.go_home'), root_path, class: 'btn btn-l')
+  - if @settings_link.present?
+    = link_to(I18n.t('views.unsubscribes.confirm.notification_settings'), @settings_link, class: 'btn btn-l btn-grey-solid margin-left-10')

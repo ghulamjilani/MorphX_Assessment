@@ -1,0 +1,242 @@
+.mb-schedule-item {
+  padding: 1rem .8rem;
+  text-align: left;
+  color: var(--tp__main);
+  margin-bottom: 0.1rem;
+  border-left: 0.2rem solid;
+  cursor: pointer;
+  @media screen and (max-width: 80rem) {
+    padding: 1vw;
+  }
+
+  &.month {
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+
+    .time {
+      display: none;
+    }
+
+    .organizers {
+      margin: 0;
+
+      .name {
+        display: none;
+      }
+    }
+  }
+
+  &.day {
+    position: absolute;
+    top: 0;
+  }
+
+  html .overlay &.month {
+    .time {
+      display: block;
+    }
+  }
+
+  &.c1 {
+    border-color: #37a67d;
+    background-color: rgba($color: #37a67d, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #37a67d;
+    }
+  }
+
+  &.c2 {
+    border-color: #993d3d;
+    background-color: rgba($color: #993d3d, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #993d3d;
+    }
+  }
+
+  &.c3 {
+    border-color: #ff530d;
+    background-color: rgba($color: #ff530d, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #ff530d;
+    }
+  }
+
+  &.c4 {
+    border-color: #ffa20d;
+    background-color: rgba($color: #ffa20d, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #ffa20d;
+    }
+  }
+
+  &.c5 {
+    border-color: #bcb32a;
+    background-color: rgba($color: #bcb32a, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #bcb32a;
+    }
+  }
+
+  &.c6 {
+    border-color: #758c46;
+    background-color: rgba($color: #758c46, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #758c46;
+    }
+  }
+
+  &.c7 {
+    border-color: #52b8cc;
+    background-color: rgba($color: #52b8cc, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #52b8cc;
+    }
+  }
+
+  &.c8 {
+    border-color: #3d82cc;
+    background-color: rgba($color: #3d82cc, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #3d82cc;
+    }
+  }
+
+  &.c9 {
+    border-color: #8f47b2;
+    background-color: rgba($color: #8f47b2, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #8f47b2;
+    }
+  }
+
+  &.c10 {
+    border-color: #cc2988;
+    background-color: rgba($color: #cc2988, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: #cc2988;
+    }
+  }
+
+  &.c11 {
+    border-color: var(--tp__main);
+    background-color: rgba($color: #6f7073, $alpha: 0.1);
+    @media screen and (max-width: 80rem) {
+      color: white;
+      background-color: var(--tp__main);
+    }
+  }
+
+  .organizers {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    html .mbs-user & {
+      display: none;
+    }
+
+    @media screen and (max-width: 80rem) {
+      display: none;
+    }
+
+    .photo {
+      width: 3rem;
+      height: 3rem;
+      min-width: 3rem;
+      border-radius: 100%;
+      margin-right: 1rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+
+      @media screen and (max-width: 120.3rem) and (min-width: 99.2rem) {
+        display: none;
+      }
+    }
+
+    .name {
+      font-weight: bold;
+      display: flex;
+      flex-wrap: wrap;
+
+      div:first-child {
+        padding-right: 0.5rem;
+      }
+    }
+  }
+
+  .time {
+    margin-bottom: 0.2rem;
+    @media screen and (max-width: 80rem) {
+      display: none;
+    }
+  }
+
+  .title {
+    @media screen and (max-width: 80rem) {
+      white-space: nowrap;
+    }
+  }
+}
+
+.mb-schedule-item-pop-up {
+  max-width: 25rem;
+  padding: 1rem;
+  color: var(--tp__main);
+  background-color: var(--bg__tooltip);
+  z-index: 199999 !important; //NEED IMPORTANT TO KILL
+  box-shadow: 0 1rem 1.5rem -.3rem rgba(0, 0, 0, 0.1), 0 .4rem .6rem -.2rem rgba(0, 0, 0, 0.05);
+
+  .organizers {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .photo {
+      width: 3rem;
+      height: 3rem;
+      min-width: 3rem;
+      border-radius: 100%;
+      margin-right: 1rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .name {
+      font-weight: bold;
+      display: flex;
+      flex-wrap: wrap;
+
+      div:first-child {
+        padding-right: 0.5rem;
+      }
+    }
+  }
+
+  .staff-bio {
+    margin-bottom: 1rem;
+  }
+
+  .class-description-name {
+    margin-bottom: 1rem;
+  }
+
+  .online-class-tag {
+    padding: .3rem;
+    display: inline-block;
+    border-radius: 100%;
+    border: 1px solid #F23535;
+  }
+}

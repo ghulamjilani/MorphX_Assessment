@@ -1,0 +1,35 @@
+- if replays.present?
+  .TileSliderWrapp.owlSlider
+    .spinnerSlider{style: 'display: none;'}
+      .bounceS1
+      .bounceS2
+      .bounceS3
+    .TileSlider.replaysSlider.owl-carousel.activeSlide{style: 'display: block;'}
+      - replays.each do |video|
+        - session = video.session
+        %section.tile-cake.margin-right-10.replay-tile{id: "replay_tile_#{video.id}", data: {type: :replay, id: video.id}}
+          .tile-img
+            .tile-imgContainer.owl-lazy{'data-src': video.poster_url || session.channel.image_preview_url}
+            %a.tile_link{href: video.relative_path}
+              %i.VideoClientIcon-play-icon1
+            - if can?(:share, session)
+              = link_to session.preview_share_relative_path(vod_id: video.id), method: :get, rel: :nofollow, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, remote: true, class: 'social-sharing', title: 'Share' do
+                %i.VideoClientIcon-share-mk4
+          .tile-body
+            %a.tile-name{href: video.relative_path}= session.title || session.always_present_title
+            = link_to "By #{session.organizer.public_display_name}", spa_user_path(session.organizer.slug), class: 'tile-owner text-ellipsis'
+            .padding-top-10.fs-14.star_ratingWrapper
+              = raw new_star_rating(numeric_rating_for(session.channel))
+              %span.display-inline-block.vertical-midle.margin-right-10 (#{session.channel.raters_count})
+              .display-inline-block.vertical-midle
+                .participants.text-ellipsis.display-inline-block.vertical-midle
+                  -#%i.VideoClientIcon-user-mk2
+                  %i.VideoClientIcon-Views
+                  = short_number(session.views_count).html_safe
+            -# %div
+              %span.ScheduledDate.text-ellipsis
+                Streamed
+                = time_with_tz_in_chosen_format(session.start_at)
+- else
+  .flash-message.flash-message-blue.text-center.margin-top-15
+    This channel does not have any replays.

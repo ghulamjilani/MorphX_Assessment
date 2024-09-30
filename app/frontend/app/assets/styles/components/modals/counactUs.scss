@@ -1,0 +1,57 @@
+.contactsUsModal {
+  padding: 0;
+
+  .MK2-modal__dialog {
+    overflow: visible;
+    padding: 0;
+  }
+
+  .MK2-modal__body {
+    padding: 0;
+  }
+
+  &__content {
+    display: flex;
+
+    &__leftSide {
+      min-width: 25rem;
+      min-height: 61rem;
+      position: relative;
+      background: rgba(178, 178, 178, 0.15);
+
+      svg {
+        @include center(vh);
+      }
+
+      @include media(p-tablet) {
+        display: none;
+      }
+    }
+
+    &__rightSide {
+      padding: 3rem;
+      @include media(p-tablet) {
+        width: 100%;
+      }
+      @include media(reverso-p-tablet) {
+        min-width: 40rem;
+      }
+
+      label {
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: var(--tp__h1);
+      }
+
+      button {
+        position: absolute;
+        bottom: -5rem;
+        right: 0;
+      }
+    }
+  }
+
+  .input__field__angle {
+    display: none;
+  }
+}

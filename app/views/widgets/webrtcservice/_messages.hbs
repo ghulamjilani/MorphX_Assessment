@@ -1,0 +1,29 @@
+<div class="loading" style="display: none;"><span>Connecting...</span></div>
+
+<div class="chatWrapp">
+    <ul class="messages smallScrolls"></ul>
+    <div class="emojiBox">
+        {{#each emojies}}
+            <img src="{{../emojiImgUrl}}#{{this}}">
+        {{/each}}
+    </div>
+    <div class="contenteditable_box">
+        <div contenteditable="true" class="new-message" tabindex="1" placeholder="Type your comment..."></div>
+        <div class="symbols-counter"><span class="current-length">0</span>/{{maxMessageLength}}</div>
+        <div class="messageRightContainer">
+            <a role="button" class="send-msg-btn">
+              {{#if isMac}}
+                <i class="embed_fontsend macIcon"></i>
+              {{else}}
+                <i class="embed_fontsend"></i>
+              {{/if}}
+            </a>
+        </div>
+        <div class="messageLeftContainer">
+            <a href="#" class="toggle-emoji-box">
+                <i class="embed_fonthappy-filled-face"></i>
+            </a>
+        </div>
+    </div>
+</div>
+

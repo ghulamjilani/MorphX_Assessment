@@ -1,0 +1,5 @@
+en:
+  views:
+    influencers:
+      index:
+        setup: "Set up your %{service_name} profile to partner with thousands of brands"

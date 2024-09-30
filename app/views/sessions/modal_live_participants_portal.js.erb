@@ -1,0 +1,13 @@
+models = _.map(<%= @users.to_json.html_safe %>, function(item) { return new InvitedUser(item) });
+users = new window.InvitedUserCollection(<%= @users.to_json.html_safe %>);
+contacts = new window.ContactUserCollection([]);
+window.sessionInviteUserModalView = new InviteModal({
+  url: <%= session_invited_users_portal_path(@session.id).to_json.html_safe %>,
+  contacts: contacts,
+  users: users,
+  immersive: <%= @session.immersive_delivery_method?.to_json.html_safe %>,
+  livestream: <%= @session.livestream_delivery_method?.to_json.html_safe %>,
+  co_hosts: true
+});
+window.sessionInviteUserModalView.render();
+window.sessionInviteUserModalView.showModal();

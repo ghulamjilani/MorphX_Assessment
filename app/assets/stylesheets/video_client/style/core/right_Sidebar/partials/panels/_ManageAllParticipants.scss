@@ -1,0 +1,101 @@
+#ManageAllParticipants{
+  .content-blockWrapp{
+    height: calc(100% - 4.5rem);
+  }
+  .btnMasivGroup{
+    background: #272727;
+    padding: 0 0.5rem;
+    position: relative;
+    a{
+      display: inline-block;
+      vertical-align: middle;
+      width: 20%;
+      color: #939393;
+      @include transition();
+      &:hover{
+        color: #dadada;
+      }
+      &.pull-right{
+        position: absolute;
+        right: 5px;
+        top: 0;
+        width: 1.5rem;
+        color: $video-volor-red;
+      }
+    }
+  }
+  .styledScroll{
+    height: calc(100% - 11.8rem);
+  }
+  .userWrapp{
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    .item{
+      overflow: hidden;
+    }
+    .btnMasivGroup{
+      display: none;
+    }
+    &.active{
+      .btnMasivGroup{
+        display: block;
+        margin-bottom: 1.2rem;
+      }
+      .VideoClientIcon-navigate-down-arrow{
+        display: none !important;
+      }
+      .VideoClientIcon-navigate-up-arrow{
+        display: block !important;
+      }
+    }
+    .VideoClientIcon-navigate-up-arrow{
+      display: none;
+    }
+    .col-md-10{
+      position: relative;
+      i{
+        position: absolute;
+        top: 0.7rem;
+        right: 2.2rem;
+        font-size: 0.9rem;
+        @include transition();
+      }
+    }
+    &:hover{
+      i{
+        transform: scale(1.8);
+        -webkit-transform: scale(1.8);
+      }
+    }
+  }
+  #groupSettings{
+    .userWrapp{
+      overflow-x: hidden;
+    }
+  }
+  .off, [class$="-off"], [class$="-off "] {
+    color: #10b0e6 !important;
+    i{
+      &:after{
+        display: none;
+      }
+    }
+  }
+  .on, [class$="-on"], [class$="-on "] {
+    color: $video-volor-red !important;
+    i{
+      position: relative;
+      &:after{
+        border-bottom: 1px solid $video-volor-red;
+        bottom: 35%;
+        content: "";
+        height: 100%;
+        left: -55%;
+        position: absolute;
+        transform: rotate(-35deg);
+        width: 150%;
+        display: block;
+      }
+    }
+  }
+}

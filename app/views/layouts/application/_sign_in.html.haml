@@ -1,0 +1,80 @@
+-# - redirect_url ||= request.original_url
+-# - hide_signup ||= false
+
+-# #loginPopup.modal.fade.loginOrSignUpModal{role: :dialog, data: {backdrop: "static",}, class: modal_additional_class(LandingHelper::SIGN_IN_MODAL)}
+-#   .modal-dialog
+-#     .unobtrusive-flash-container
+-#     .modal-content
+-#       - unless devise_invitation_token_in_signup_modal.present?
+-#         = render 'become_presenter_steps/close_modal'
+-#       .modal-body
+-#         = image_tag 'services/' + Rails.application.credentials.global[:project_name].to_s.downcase + '/logo_small.png', id: 'logo-modal', alt: Rails.application.credentials.global[:service_name], class: "img-responsive #{Rails.application.credentials.global[:project_name].to_s.downcase}"
+-#         .text-center
+
+-#           .user-avatar.new_user-wrappShow
+-#             = image_tag(image_url('gender/newMale.svg'), title: '', id: :login_default_avatar)
+-#             = image_tag('', title: '', id: :login_user_avatar, style: 'display: none;')
+
+-#           %form#loginForm.form-signin.form_V2{action: main_app.user_session_path, method: :post, data: {remote: true, format: :json}}
+-#             %div
+-#               %input{name: :utf8, type: :hidden, value: '✓'}/
+-#               %input{name: :authenticity_token, type: :hidden, value: form_authenticity_token}/
+-#               %input{name: :redirect_to, type: :hidden, value: redirect_url}/
+-#             - if browser.safari?
+-#               .safariDetected
+-#                 .borderedInput.userEmail.emps.marL.required
+-#                   %input{placeholder: 'E-mail', type: :text, name: 'user[email]', id: :userEmail}/
+-#                   .errorContainerWrapp
+-#             - else
+-#               .borderedInput.userEmail.emps.marL.required
+-#                 %input{placeholder: 'E-mail', type: :text, name: 'user[email]', id: :userEmail}/
+-#                 .errorContainerWrapp
+-#             .borderedInput.psem.marL.required
+-#               %input{placeholder: :Password, type: :password, name: 'user[password]', id: :userPassword}/
+-#               .errorContainerWrapp
+-#               - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+-#                 .eye.showSignInMacPassword
+-#                 .caps.showSignInMacCaps
+-#               - else
+-#                 .eye.showLoginPassword
+-#                 .caps.showSigninCaps
+-#             .text-center
+-#               %button.loginBtn.btn.btn-m.full-width{type: :submit} Fill the form to proceed
+
+-#           - if omniauth_enabled?
+-#             %a.toggle-modals.showSocialMedia.display-inline-block.padding-bottom-20{href:'#'} More Log In Options
+
+-#           #new_user-wrapp.opnBlock.login_user-wrapp{style: devise_invitation_token_in_signup_modal.present? ? 'display: block;' : 'display: none;'}
+-#             - _url = devise_invitation_token_in_signup_modal.present? ? main_app.user_invitation_path : '/users'
+-#             = semantic_form_for(resource, as: resource_name, url: _url, html: { id: 'new_user', class: 'form-signup formSize rf ', autocomplete: :off, novalidate: true, data: {remote: true, type: :json} }) do |f|
+-#               = f.hidden_field :tzinfo
+-#               - f.object.email_confirmation = f.object.email if controller_name == 'invitations' && action_name == 'edit'
+-#               %input{name: :redirect_to, type: :hidden, value: request.original_url}/
+
+-#               - if devise_invitation_token_in_signup_modal.present?
+-#                 = f.input :invitation_token, as: :hidden
+
+-#         %div.socWrap
+-#           .signUp-message
+-#             = I18n.t('views.layouts.application.sign_in.welcome', service_name: Rails.application.credentials.global[:service_name])
+-#             .sizeOfIcons
+-#               = render 'shared/row_social_signIn', devise_invitation_token: devise_invitation_token_in_signup_modal
+-#             %a.btn.btn-m.full-width.showLoginForm.showFormAgain Log In with Email
+
+
+-#         .row.ofsetModalTxt.signInTxt
+-#           - if display_signup? && !hide_signup
+-#             .col-xs-12.fs-14.dontHaveAnAccount
+-#               Don't have an account?
+-#               = link_to 'Sign Up', '#signupPopup', data: { toggle: :modal, target: '#signupPopup' },
+-#                 class: 'inline-block text-color-Blue',
+-#                 onclick: "$('#loginPopup').modal('hide');$('#signupPopup').modal('show');"
+-#           .col-xs-12.fs-14
+-#             = link_to 'Forgot password?', '#resetPasswordPopup', data: { toggle: :modal, target: '#resetPasswordPopup'}, class:'padForLogIn text-color-Blue'
+-# - content_for(:after_include_javascripts) do
+-#   :javascript
+-#     $(document).ready(function(){
+-#       if(window.location.hash.match(/#loginPopup/)){
+-#         $('#loginPopup').modal('show');
+-#       }
+-#     });

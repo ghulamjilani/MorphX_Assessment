@@ -1,0 +1,25 @@
+<div class="list_info" id="shop_info_{{id}}" style="display: none;">
+    <div class="redBG">
+        <div class="description">{{name}}</div>
+    </div>
+    <div class="sectionTitle">
+        <div class="text-color-white pt10">Products</div>
+    </div>
+    <div class="Products-wrapp">
+        <div class="prodctTileList">
+            {{#each products}}
+                <div class="productTile">
+                    <div class="productTile-img" style="background-image: url('{{image_url}}')"></div>
+                    <div class="productTile-short-description">
+                        <a style="cursor: pointer;" target="_blank" onclick="window.open('http://', '{{title}}', 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;" href="http://">{{title}}</a>
+                        <div class="mt15">
+                            <div class="productInfo inlile-block fs10">{{description}}</div>
+                        </div>
+                        <a href="#" onclick="jQuery(this).parents('.productTile').toggleClass('active')" style="cursor: pointer;">Read More...</a>
+                    </div>
+                    <div class="productTile-long-description">{{specifications}}</div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

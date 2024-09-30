@@ -1,0 +1,122 @@
+.btn {
+  //main btns styles
+  @include btn-mod();
+  @include transition();
+  //main btns hover styles
+  &:hover {
+    opacity: 0.95;
+  }
+
+  //main btns colored styles {name , backgroundColor, TextColor, HoverColor}
+  $btnProps:
+                  ("main" --btn__main --tp__btn__main --tp__btn__main__hover)
+                  ("secondary" --btn__secondary --tp__btn__secondary --tp__btn__secondary__hover)
+                  ("tetriary" --btn__tetriary --tp__btn__tetriary --tp__btn__tetriary__hover)
+                  ("bordered" --btn__bordered --tp__btn__bordered --tp__btn__bordered__hover)
+                  ("save" --btn__save --tp__btn__save --tp__btn__save__hover)
+                  ("cancel" --btn__cancel --tp__btn__cancel --tp__btn__cancel__hover)
+                  ("subscribe" --btn__subscribe --tp__btn__subscribe --tp__btn__subscribe__hover);
+
+  @each $btnName, $btnBackground, $btnColor, $btnColorHover, $btnProp in $btnProps {
+    &__#{$btnName} {
+      //only for bordered btn
+      color: var($btnColor);
+      @if $btnName == 'bordered' {
+        @include btn-mod-BG-and-borders(transparent, var($btnBackground));
+      } @else {
+        @include btn-mod-BG-and-borders(var($btnBackground), var($btnBackground));
+      }
+
+      &:hover {
+        color: var($btnColorHover);
+      }
+    }
+  }
+
+  //main btns sizes/forms styles
+  &__l {
+    min-width: 18rem;
+    min-height: 6rem;
+    line-height: 5.6rem;
+
+    .spinnerSlider {
+      top: 30%;
+    }
+  }
+
+  &__m {
+    min-width: 18rem;
+    max-width: 20rem;
+    min-height: 4rem;
+    border-radius: 4rem;
+    font-size: 1.4rem;
+    padding: 0;
+    .spinnerSlider{
+      top: 30%;
+    }
+  }
+
+  &__s {
+    min-width: 9rem;
+    min-height: 3rem;
+    line-height: 2.6rem;
+
+    .spinnerSlider {
+      div {
+        height: 1.4rem;
+        width: 1.4rem;
+      }
+    }
+  }
+
+  &__xs {
+    min-width: 8rem;
+    min-height: 2rem;
+    line-height: 1.6rem;
+
+    .spinnerSlider {
+      top: 70%;
+
+      div {
+        height: 1rem;
+        width: 1rem;
+      }
+    }
+  }
+
+  &__square {
+    border-radius: .2rem;
+  }
+
+  &__full {
+    width: 100%;
+  }
+
+  &__bordered {
+    &:hover {
+      background: var(--btn__bordered);
+    }
+  }
+
+  &__loading {
+    cursor: progress;
+
+    .btn__slot {
+      visibility: hidden;
+    }
+  }
+
+  //main btns disabled/ghost styles
+  &.disabled, &:disabled, &[disabled] {
+    opacity: 0.3;
+    cursor: no-drop;
+    pointer-events: none;
+  }
+
+  &__reset {
+    @include btn-mod-BG-and-borders(transparent, transparent);
+    color: inherit;
+    font-weight: 400;
+    padding: 0;
+  }
+}

@@ -1,0 +1,10 @@
+en:
+  assets:
+    javascripts:
+      templates:
+        sessions:
+          form:
+            fields:
+              viewers_are_not_supported_interactive_mode_only: Viewers are not supported. Conference mode only allowed with ZOOM streaming platform.
+              interactive: Conference
+              interactive_replay_layout: Conference Replay Layout

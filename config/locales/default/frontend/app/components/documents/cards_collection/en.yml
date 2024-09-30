@@ -1,0 +1,8 @@
+en:
+  frontend:
+    app:
+      components:
+        documents:
+          cards_collection:
+            have_not_documents_for_channel: Unfortunately you haven't added documents for this channel yet
+            show_more: Show more

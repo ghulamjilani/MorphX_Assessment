@@ -1,0 +1,17 @@
+- if model.is_a?(Session)
+  - display_googleplay_icon = nil unless defined?(display_googleplay_icon)
+  - display_session_link    = nil unless defined?(display_session_link)
+  - video                   = nil unless defined?(video)
+  - cache_key = (defined?(cache_key) && !cache_key.blank?) ? cache_key : "shared/session/#{model.cache_key}/#{current_user.try(:cache_key)}/#{display_googleplay_icon}/video_link-#{display_session_link}"
+
+  = render_shared_model_with_live_views_counter 'shared/session', session: model, display_googleplay_icon: display_googleplay_icon, video: video, cache_key: cache_key, display_session_link: display_session_link
+
+- elsif model.is_a?(Channel)
+  - display_googleplay_icon = nil unless defined?(display_googleplay_icon)
+  = render_shared_model_with_live_views_counter 'shared/channel', channel: model, display_googleplay_icon: display_googleplay_icon
+
+- elsif model.is_a?(User)
+  = render_shared_model_with_live_views_counter 'shared/user', user: model
+
+- else
+  - raise "can not interpret #{model.inspect} in shared/channel_or_session_or_user"

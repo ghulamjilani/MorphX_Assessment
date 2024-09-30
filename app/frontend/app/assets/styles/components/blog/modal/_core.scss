@@ -1,0 +1,29 @@
+.editPostModal {
+  .MK2-modal {
+    &__dialog {
+      // background: transparent;
+      width: 76rem;
+      @include media(phone) {
+        padding: 0;
+      }
+    }
+
+    &__close {
+      z-index: 120;
+      // top: 5rem;
+      // right: 3rem;
+      @include media(phone) {
+        top: 2rem;
+        right: 0;
+      }
+    }
+  }
+
+  .newPost {
+    max-width: 75rem;
+
+    &__info, &__image {
+      box-shadow: none;
+    }
+  }
+}

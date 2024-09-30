@@ -1,0 +1,101 @@
+//#chat{
+//  .message{
+//    padding-top: 1rem;
+//    padding-bottom: 2rem;
+//    .subject{
+//      position: relative;
+//      height: 2rem;
+//      padding: 0 0.5rem 0 2.5rem;
+//      border-radius:  2rem 0.6rem 0.6rem 2rem;
+//      background: #6c6c6c;
+//      margin-bottom: 0.6rem;
+//      display: inline-block;
+//      vertical-align: top;
+//      line-height: 2rem;
+//      font-size: 1.2rem;
+//      overflow: hidden;
+//      white-space: nowrap;
+//      text-overflow: ellipsis;
+//      max-width: 100%;
+//      .Avatar{
+//        width: 2rem;
+//        height: 2rem;
+//        position: absolute;
+//        left: 0;
+//        top: 0;
+//      }
+//    }
+//    .message-body{
+//      background: #327b94;
+//      padding: 0.5rem;
+//      border-radius: 0.6rem;
+//      line-height: 1.8rem;
+//      font-size: 1.4rem;
+//      @include clearfix();
+//      text-align: left !important;
+//    }
+//    &.owner{
+//      text-align: right;
+//      .subject{
+//        padding: 0 2.5rem 0 0.5rem;
+//        border-radius:  0.6rem 2rem 2rem 0.6rem;
+//      }
+//      .Avatar{
+//        width: 2rem;
+//        height: 2rem;
+//        position: absolute;
+//        left: auto;
+//        top: 0;
+//        right: 0;
+//      }
+//      .message-body{
+//        background: #35c084;
+//      }
+//    }
+//  }
+//  .newMessage{
+//    padding-top: 1rem;
+//    padding-bottom: 1rem;
+//    textarea{
+//      background: #272727;
+//      color: #fff;
+//      border: none;
+//      min-height: 6rem;
+//      max-height: 6rem;
+//      height: 6rem;
+//      width: 100%;
+//      max-width: 100%;
+//      min-width: 100%;
+//      &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+//        color: #6d6d6d;
+//      }
+//      &::-moz-placeholder { /* Firefox 19+ */
+//        color: #6d6d6d;
+//      }
+//      &:-ms-input-placeholder { /* IE 10+ */
+//        color: #6d6d6d;
+//      }
+//      &:-moz-placeholder { /* Firefox 18- */
+//        color: #6d6d6d;
+//      }
+//
+//    }
+//  }
+//  //.styledScroll{
+//  //  height:calc(100% - 20rem)
+//  //}
+//}
+//#tlkio{
+//  //min-height: 400px;
+//  height: 100% !important;
+//  iframe{
+//    height: 100%;
+//  }
+//}
+#chat{
+  iframe{
+    height:100%;
+    border:none;
+    width: 100%;
+  }
+}

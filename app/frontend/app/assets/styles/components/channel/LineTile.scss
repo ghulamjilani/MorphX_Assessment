@@ -1,0 +1,70 @@
+.ChannelLineTile {
+  min-height: 7rem;
+  box-shadow: 0 .4rem .7rem 0 var(--sh__main);
+  padding: 1rem 4rem 1rem 7rem;
+  position: relative;
+  background: rgba(9, 95, 115, 0.05);
+  border: 1px solid rgba(9, 95, 115, 0.2);
+  border-radius: 1rem;
+  cursor: pointer;
+
+  &__flex {
+    @include flex(flex, center, space-between);
+  }
+
+  &__logo {
+    height: 5rem;
+    width: 5rem;
+    background-color: #a6a6a6;
+    border-radius: .5rem;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__info {
+    width: 28rem;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    color: var(--tp__h1);
+    word-break: break-word;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 1.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: center;
+    z-index: 2;
+  }
+
+  &.is-opened .ChannelLineTile__icon {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  @include media(phone) {
+    padding-right: 3rem;
+    padding-left: 6rem;
+
+    &__flex {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    &__title,
+    &__date,
+    &__count {
+      margin-bottom: 1rem;
+    }
+
+  }
+
+}

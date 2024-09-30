@@ -1,0 +1,421 @@
+#Stub file for rails, do not add nothing here
+en:
+  activerecord:
+    attributes:
+      user:
+        email: Email
+      user_account:
+        bg_image: Public Cover image
+    errors:
+      messages:
+        one_role_at_the_same_time: '%{model}: <a href="%{link}" target="_blank">"%{name}"</a> is scheduled for this time period'
+        only_digests: should not contain only digests.
+        time_overlap: '%{model}: <a href="%{link}" target="_blank">"%{name}"</a> is scheduled for this time period. Please adjust the Start time or the duration.'
+      models:
+        room:
+          attributes:
+            container:
+              blank: Could not find available presenter time. Please change your session time.
+    models:
+      gettogether: Get-together
+      session: Session
+  blog:
+    no_create_permissions: You are not allowed to create posts in this channel
+    no_edit_permissions: You are not allowed to edit posts in this channel
+    no_delete_permissions: You are not allowed to delete posts in this channel
+  braintree:
+    credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code: Credit card number is required.
+    credit_card_type_is_not_accepted_by_this_merchant_account_credit_card_number_is_invalid: Credit card number is invalid.
+    ? credit_card_type_is_not_accepted_by_this_merchant_account_credit_card_number_is_invalid_addresses_must_have_at_least_one_field_filled_in_postal_code_is_required_street_address_is_required
+    : |-
+      Credit card type is not accepted by this merchant account.
+      Credit card number is invalid.
+      Addresses must have at least one field filled in.
+      Postal code is required.
+      Street address is required.
+    credit_card_type_is_not_accepted_by_this_merchant_account_credit_card_number_must_be_12-19_digits: |-
+      Credit card type is not accepted by this merchant account.
+      Credit card number must be 12-19 digits.
+    cvv_is_required: CVV is required.
+    cvv_is_required_credit_card_type_is_not_accepted_by_this_merchant_account_credit_card_number_is_invalid: |-
+      CVV is required.
+      Credit card type is not accepted by this merchant account.
+      Credit card number is invalid
+    ? cvv_is_required_expiration_date_is_invalid_credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code
+    : |-
+      CVV is required.
+      Expiration date is invalid.
+      Credit card number is required.
+    cvv_is_required_expiration_date_is_required: |-
+      CVV is required.
+      Expiration date is required.
+    ? cvv_is_required_expiration_date_is_required_credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code
+    : CVV is required. Expiration date is required. Credit card number is required.
+    ? cvv_is_required_expiration_date_is_required_credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code_postal_code_is_required_street_address_is_required
+    : |-
+      CVV is required.
+      Expiration date is required.
+      Credit card number is required.
+      Postal code is required.
+      Street address is required.
+    cvv_must_be_4_digits_for_american_express_and_3_digits_for_other_card_type: CVV must be 4 digits for American Express and 3 digits for other card types.
+    cvv_must_be_4_digits_for_american_express_and_3_digits_for_other_card_types: CVV must be 4 digits for American Express and 3 digits for other card types.
+    cvv_must_be_4_digits_for_american_express_and_3_digits_for_other_card_types_expiration_date_is_invalid: |-
+      CVV must be 4 digits for American Express and 3 digits for other card types.
+      Expiration date is invalid
+    declined: Declined.
+    do_not_honor: A generic bank response which indicates simply that they are not willing to accept the transaction. The transaction may be declined due to a high level of recent activity on a card, a lack of matching AVS information, a card being over its limit, or a range of other reasons which only the bank knows
+    expiration_date_is_invalid: Expiration date is invalid.
+    gateway_rejected_avs: Please check address fields
+    gateway_rejected_avs_and_cvv: Please check address and CVV fields
+    gateway_rejected_cvv: Please check CVV
+    postal_code_is_required_street_address_is_required: |-
+      Postal code is required.
+      Street address is required.
+    ui:
+      detach_cc_to_edit: Please remove existing card first to add another one.
+      remove_cc_confirmation_message: Are you sure you want to remove this card from your wallet? This card will no longer be available to use on Unite.
+  channels:
+    edit:
+      title: Edit Channel
+    new:
+      description: A Channel is an overview that describes what you will be offering to your Audience on Unite. Channels can be created for a single instance (one time event) or a series of sessions that range from instructional classes, entertainment events, and social broadcasting.
+      title: Create Your Channel
+    show:
+      archive_confirmation: Are you sure you want to archive the channel? This action is nonreversible
+      channel_is_being_reviewed: Your channel application is pending review. Please wait for some time and we will notify you.
+      list_confirmation: Are you sure you want to list the channel?
+      not_archivable_reason: Channel archiving is not possible if it has any upcoming sessions.
+      unlist_confirmation: Are you sure you want to unlist the channel?
+  comdined_notifications:
+    full_descr:
+      purchases_summary_for_organizer: "%{input} <span>time(s) a user purchases your session(<small>comma separated</small>).</span>"
+    labels:
+      purchases_summary_for_organizer: Send notification every
+    sendSettings:
+      purchases_summary_for_organizer: Send notification when a user purchases your session
+  companies:
+    form:
+      edit:
+        title: Edit Company
+      members:
+        title: Members
+      new:
+        title: New Company
+  complete_presenter:
+    description: Here, you can produce shoppable videos and monetize on affiliate links while sharing your passion and knowledge.
+    fill_form: Please fill out the form below to introduce yourself.
+    title: Create Your Profile
+    welcome: Welcome to Unite, where video meets commerce.
+  controllers:
+    changed_start_at_has_been_accepted_by_user: You have accepted the new Start Time
+    changed_start_at_has_been_declined_by_user: You have declined changed Start At
+    companies:
+      create_success: Company successfully created!
+      update_success: Company successfully updated!
+    contacts:
+      create_error: This user is already present in your list of contacts
+      create_success: Contact has been successfully added.
+      destroy_success: Contact has been deleted
+    dropbox:
+      link_failed: You have declined authorization from Dropbox
+      linked_succesfully: Your Dropbox account has been successfully connected
+      unlinked_succesfully: Your Dropbox account has been successfully detached
+    gettogethers:
+      cancel_error: Something went wrong while cancelling your Get-Together
+      cancel_success: Get-together has been cancelled
+      create_success: Get-together has been created
+      overlapped_modal_title: You have a conflict with another session. Please adjust the get-together by moving it to a different time or changing the duration.
+      reject_invitation_success: Invitation has been rejected.
+      update_success: Get-together has been succesfully updated
+    mark_invitation_as_accepted_success: Invitation has been accepted.
+    notifications:
+      multi_destroy_success: Notifications have been deleted
+      multi_marked_as_read: Notifications have been marked as read
+      single_destroy_success: Notification has been deleted
+    payment_method_removed: Payment method has been removed
+    pending_refunds:
+      invalid_or_outdated_request_message: This refund claiming request seems to be invalid or outdated. Please check your notifications.
+    profiles:
+      credit_card_added: Credit card has been added.
+      detached_credit_card: Credit card has been removed
+      update_success: Your profile has been successfully updated.
+      updated_notifications: Your notification settings have been updated.
+      updated_reminders: Your reminder settings have been updated.
+      update_passwor_error: 'Current password does not match.'
+    reviews:
+      session_has_been_reviewed: Session has been reviewed.
+    sessions:
+      max_immersive_participations_error: exceeds the number of slots (%{total_count}/%{max_count}).
+      cancel_error: Something went wrong while cancelling your session.
+      cancel_success: Session has been cancelled.
+      create_success: Session successfully created!
+      overlapped_modal_title: You have a conflict with another session. Please adjust the session by moving it to a different time or changing the duration.
+      published_success: Session has been published
+      rejected_invitation: Invitation has been rejected.
+      update_success: Session successfully updated!
+      business_plan_error: You can't create session because of your current Business plan limits
+      action_not_allowed: You are not allowed to perform this action
+      page_not_allowed: Sorry, you are not allowed to access this page.
+      booked_session_clone_error: You can't clone booked session.
+      booked_session_edit_error: You can't edit booked session.
+      booked_session_cancel_error: You can't cancel booked session.
+  dashboard:
+    mailing:
+      templates:
+        general:
+          title: 'Default template'
+        general2:
+          title: 'Default template 2'
+        general3:
+          title: 'Default template 3'
+        time_to_unite:
+          title: 'Welcome to Unite template'
+    channel:
+      dont_have_access: You don't have access to this channel
+      cannot_create_sessions: You are not allowed to create session in this channel.
+    can_not_create_session_until_channel_is_approved: You can't create sessions until your channel is approved
+    cannot_manipulate_video: You cannot manipulate the video "%{video_title}".
+    move_to_another_channel:
+      button:
+        title: Move to another channel
+        one_channel_title: You have no channels available to move videos
+        label: Move to...
+  dashboards:
+    channel:
+      add_new_session: Add new Session
+    edit_contacts:
+      invite_by_email_button_html: Add to contact list
+    edit_referral:
+      could_be_used_for_sharing_in_social_media: could be used for sharing in social media
+      referral_users: Referral users
+      your_referral_code: Your referral code
+    followers:
+      you_currently_have_no_followers: You currently have no followers
+    show:
+      add_new_channel: Add new Channel
+      new_get_together: Add new Get-together
+      you_have_no_upcoming_gettogethers_at_this_time: You have no upcoming get-togethers at this time
+      you_have_no_upcoming_sessions_at_this_time: You have no upcoming sessions at this time
+    wishlist:
+      no_items: There are no saved sessions/videos
+    replays:
+      no_items: There are no replays yet
+    uploads:
+      no_items: There are no uploads yet
+  errors:
+    messages:
+      something_went_wrong: Something went wrong. Please try again later.
+      rmagick_processing_error: Manipulation of uploaded file failed. Maybe it is not an image?
+  forms:
+    info:
+      description_placeholder: You have %{count} characters for your description
+      drop_image_here: Drag-n-drop photos here or
+      image_upload_tip: Choose high resolution images in order to create an awesome %{type}!
+      min_description_length: Minimum 24 characters
+      min_length: Minimum %{count} characters
+      min_tagline_length: Minimum 8 characters
+      min_tags_count: Minimum 1 tag
+      select_file: Select file to upload
+  formtastic:
+    hints:
+      user:
+        index:
+          email:
+          email_confirmation:
+          first_name:
+          last_name:
+          password:
+    labels:
+      user:
+        index:
+          email:
+    placeholders:
+      user:
+        index:
+          email:
+          email_confirmation:
+          first_name:
+          last_name:
+          password:
+    required: required
+  gettogethers:
+    opted_out_success:
+      when_participant: You are no longer in the list of participants of this get-together.
+      when_recorded_member: You no longer have On-Demand access.
+    preview_cancel_modal: |-
+      You are about to cancel your Get-Together: %{abstract_session_link} with %{total_users_count} registered users.
+      Please be aware that in compliance with our %{cancellation_policy_link}, cancelling this session now will not cause you to incur a penalty fee.
+      For more details please refer to our %{cancellation_policy_link}. If you have additional concerns, please contact our %{customer_support} for assistance.
+    preview_live_opt_out_modal:
+      could_be_full_sys_credit_refund: |-
+        You are about to cancel your participation in %{abstract_session_link} get-together. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this get-together, at this moment, will allow you to get full refund for the %{paid_amount} originally paid for the get-together. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      could_be_money_refund: |-
+        You are about to cancel your participation in %{abstract_session_link} get-together. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this get-together, at this moment, will allow you to choose type of refund(system credit or money) for the %{paid_amount} originally paid for the get-together. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      no_refund: |-
+        You are about to cancel your participation in %{abstract_session_link} get-together. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this get-together, at this moment, will not cause any refund. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      partial_refund: |-
+        You are about to cancel your participation in %{abstract_session_link} get-together. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this get-together, at this moment, will cause you to loose %{loose_amount} out of %{paid_amount} originally paid for the get-together. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+    preview_vod_opt_out_modal:
+      could_be_full_sys_credit_refund: |-
+        You are about to cancel your %{abstract_session_link} Video On-Demand purchase. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this get-together, at this moment, will allow you to get full refund for the %{paid_amount} originally paid for the get-together. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      could_be_money_refund: |-
+        You are about to cancel your On-Demand in %{abstract_session_link} get-together. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this get-together, at this moment, will allow you to choose type of refund(system credit or money) for the %{paid_amount} originally paid for the get-together. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      no_refund: |-
+        You are about to cancel your On-Demand in %{abstract_session_link} get-together. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this get-together, at this moment, will not cause any refund. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      partial_refund: |-
+        You are about to cancel your On-Demand in %{abstract_session_link} get-together. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this get-together, at this moment, will cause you to loose %{loose_amount} out of %{paid_amount} originally paid for the get-together. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+    show:
+      cancel_confirmation: Are you sure you want to cancel the get-together? This action is nonreversible
+  go_live:
+    section_1:
+      actionBtn: Get Started
+      block1:
+        text: More customers and new revenue through the power of live video
+        title: Monetization
+      block2:
+        text: Seamless injection of trusted influencers into your business
+        title: Influencing
+      block3:
+        text: Automatic distribution of your content to maximize engagement
+        title: Syndication
+    section_2_tabList:
+      tab_1:
+        btn: Retailers
+        list: |-
+          <li>Easily integrate live video merchandising and sales to maximize revenue</li>
+          <li>Enable your sales staff to go live from their mobile device to sell beyond the store walls</li>
+          <li>Engage with targeted influencers in a seamless and profitable way</li>
+          <li>Embed your content to any page you own or syndicate it through multiple destinations</li>
+        text: Your Retail location has a sales staff that knows your product, but is limited to customers that walk in the door.  Unite enables your sales associates to merchandise and sell product from their mobile device. With e-Commerce you’re missing the human touch that goes with an in-store purchase.  By adding the power of live video you are providing the missing human element to the buying experience.
+      tab_2:
+        btn: Brands
+        list: |-
+          <li>Your own branded online shopping channel</li>
+          <li>Integrated affiliate program for brand ambassador sales</li>
+          <li>Instantly make existing video content shoppable</li>
+        text: |-
+          Unite provides a clear path to better engagement with your online customers through live shoppable video.
+          Humanize e-Commerce by engaging your customers with an authentic and personalized online shopping experience.
+      tab_3:
+        btn: Influencers
+        list: |-
+          <li>Go live from any device and get paid.  It’s free and easy</li>
+          <li>Select a commissionable program we’ve established or work with your own existing relationships</li>
+          <li>Easily build a product gallery for your followers to browse and buy during the broadcast</li>
+          <li>Promote your broadcasts through your social channels to engage your followers</li>
+        text: The Unite platform was built for influencers and we’re here to help you easily transform your passion into a profitable business.  With Unite, you’re easily able to integrate your followers from social platforms and open yourself to a multitude of brands looking to engage with influencers like you who can get passionate about their product through live video.
+      tab_4:
+        btn: Agencies
+        list: |-
+          <li>Provide clients a live video platform to differentiate their campaigns and monetize their brands</li>
+          <li>Initiate commision-based influencer campaigns to mitigate your client’s ROI risk</li>
+          <li>Offer clients a unique shoppable video experience</li>
+          <li>Accurate reports and relevant metrics to track the success of client’s campaigns</li>
+        text: We get it. It’s tough out there.  You live in a world competing for marketing budgets against hundreds of other agencies.  Anything that can differentiate your offering will give you an edge when speaking with brands and influencers alike.  Offering your clients and influencers a seamless way to work with each other through the best-in-class Uniteive live video platform is a great way to engage both.
+      tab_5:
+        btn: Studios
+        list: |-
+          <li>Simple set-up with easy online class scheduling</li>
+          <li>Autonomous system allows you to focus on teaching</li>
+          <li>Unlock new revenue and quickly achieve profitability</li>
+        text: Imagine your yoga classes available anywhere, anytime, and to anyone.  Unite is the live streaming monetization platform purpose built for studios and instructors.  Earn more money from classes you already teach.
+      tab_6:
+        btn: Direct Sales
+        list: |
+          <li>Go live from any device at any time from any place</li>
+          <li>Easily build a product gallery for your customers to browse, click, and buy during the broadcast</li>
+          <li>Create scheduled interactive or streaming meetings and simulcast to multiple social platforms</li>
+          <li>Embed your content to any page you own or syndicate it through multiple destinations</li>
+        text: Nothing replaces a face-to-face meeting, but it is difficult to pin down a group of potential customers to one time and place.  The power of live video through social channels is huge, but sales associates are struggling because platforms like Facebook and Instagram were not built for it.  With Unite you can go live and hold engaging meetings with customers and add shoppable product galleries directly into your livestream.
+    section_3:
+      list: |-
+        <li>Easily merchandise and sell products in-stream</li>
+        <li>Generate revenue via PPV, subscription, or contributions</li>
+        <li>The unified marketplace benefiting both brands and influencers</li>
+      title: Monetize Your Way
+    section_4:
+      list: |-
+        <li>Build your own live interactive multi-channel network</li>
+        <li>Customized and embedded into your business</li>
+        <li>Purpose built for audience engagement and sales conversions</li>
+      title: Your Business Live with Limitless Depth
+    section_5:
+      list: |
+        <li>Seamlessly and transparently collaborate with influencers</li>
+          <li>Bring ambassadors to your channel to maximize reach and revenue</li>
+          <li>Proprietary platform to discover, engage, and execute campaigns</li>
+      title: Power Your Business with Influencers
+    section_6:
+      list: |-
+        <li>Embed your live stream and VOD anywhere with just a few clicks</li>
+          <li>Include integrated product gallery, chat, and playlist into an embeddable frame</li>
+          <li>Simulcast your stream to Facebook, YouTube, and Periscope</li>
+      title: " Distribute and Syndicate"
+    section_7:
+      list: |-
+        <li>Go live in seconds using a pc, phone, or professional equipment</li>
+         <li>Stream one-way or interactive, free or paid, publicly or privately</li>
+         <li>Interactive product merchandising, multi-audience chat, and dynamic polling</li>
+      title: Purpose-Built Proprietary Technology
+    section_8_footer:
+      text: |
+        Unite was purpose built for your business to drive
+          new revenue through the power of live.
+          <br />
+          <br />
+          Let's discuss how your business can benefit from
+          live video today.
+      title: Let’s Talk
+    title: Enable your business with live video
+    title_2: Your all-in-one live content monetization platform
+  helpers:
+    label:
+      user:
+        index:
+          email:
+  home:
+    live_guide_blank: No sessions are currently scheduled.
+    search:
+      placeholder:
+        categories: Search categories…
+        presenters: Search presenters…
+  interactors:
+    invited_copresenter_obtained_immersive_access: You have paid for your invited co-presenter slot.
+    invited_participant_obtained_immersive_access: You have paid for your invited participant slot.
+    obtained_livestream_access: You have obtained livestream access permission to the session.
+    obtained_vod_access: You have purchased access to On-Demand Video.
+    voluntary_participant_obtained_immersive_access: You have purchased Interactive access permission to the session.
+  log_transactions:
+    boo_boo_csr_refund: Received system credit refund from Unite
+    credit_replenishment_with_credit_card: System credit replenishment using %{credit_card_number} credit card.
+    credit_replenishment_with_paypal: System credit replenishment using %{paypal_payer_email} PayPal email.
+    live_opt_out_from_abstract_session_after_paying: Refund for opting out from the %{abstract_session_link}
+    money_csr_refund: 'Received money refund from Unite(original transaction amount was: %{original_transaction_amount}).'
+    money_refund_via_credit_card: 'Refund to credit card %{credit_card_number}. Transaction ID: %{transaction_id}, status: %{status}'
+    money_refund_via_paypal: 'Refund to %{paypal_email} PayPal email. Token ID: %{paypal_token}'
+    net_income: "%{session_link} - net income"
+    paid_for_co_presenter: Paying for co-presenter %{name} from system credit
+    purchased_immersive_abstract_session_with_credit_card: Purchased Interactive access to %{abstract_session_link} with %{credit_card_number}
+    purchased_immersive_abstract_session_with_paypal: Purchased Interactive access to %{abstract_session_link} with %{paypal_payer_email} PayPal email.
+    purchased_immersive_abstract_session_with_system_credit: Purchased Interactive access to %{abstract_session_link} with system credit.
+    purchased_livestream_session_with_credit_card: Purchased livestream access to %{session_link} with %{credit_card_number}
+    purchased_livestream_session_with_paypal: Purchased livestream access to %{session_link} with %{paypal_payer_email} PayPal email.
+    purchased_livestream_session_with_system_credit: Purchased livestream access to %{session_link} with system credit
+    purchased_recorded_session_with_credit_card: Purchased Video On-Demand for %{session_link} with %{credit_card_number}
+    purchased_recorded_session_with_paypal: Purchased Video On-Demand %{session_link} with %{paypal_payer_email} PayPal email.
+    purchased_recorded_session_with_system_credit: Purchased Video On-Demand for %{session_link} with system credit
+    referral_fee: "%{session_link} - referral fee. User's display name: %{display_name}"
+    session_cancellation_penalty: 'Penalty fee for %{session_link} being cancelled. Display names: %{display_names}'
+    session_immersive_fee: "%{session_link} - session fee"
+    system_credit_refund: System Credit Refund - was %{credit_was} became %{credit}
+    todo_completing: Completing all the steps in the to-do list.
+    vod_opt_out_from_session_after_paying: Refund for opting out from the %{abstract_session_link}

@@ -1,0 +1,19 @@
+<div class="bubble {{authorClasses}}">
+    {{#if canBan}}
+        {{#unless isPresenter}}
+            {{#unless isRegularUser}}
+                <a class="ban" title="Ban {{authorName}}" href="javascript:void(0);" style="position: absolute;left: 20px;width: 15px;height: 15px;line-height: 15px;border-radius: 15px;color: #fff;background: red;text-align: center;z-index: 10;top: 20px;">x</a>
+            {{/unless}}
+        {{/unless}}
+    {{/if}}
+    <a {{#if isRegularUser}}href="/users/{{authorId}}/home" target="_blank"{{else}}href="javascript:void(0);"{{/if}}>
+        <div class="authorAvatar" style="background-image: url({{authorAvatarUrl}})"></div>
+    </a>
+    <span class="messageTimestamp">{{timestamp}}</span>
+    <div class="messageBubble">
+        <div class="authorName">
+            {{authorName}}
+        </div>
+        <div class="Message">{{{messageBody}}}</div>
+    </div>
+</div>

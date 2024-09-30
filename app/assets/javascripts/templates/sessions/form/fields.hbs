@@ -1,0 +1,1134 @@
+<div class="sc-body">
+    <div class="sc-main_sections">
+        <div class="topLine_wrapp">
+            <div class="topLine clearfix">
+                {{#if false}}
+                <a href="#" class="text-uppercase fs-13 margin-right-10 active">{{i18n 'assets.javascripts.templates.sessions.form.fields.new_stream'}}</a>
+                <a href="#" class="text-uppercase fs-13">{{i18n 'assets.javascripts.templates.sessions.form.fields.use_template'}}</a>
+                {{/if}}
+                <span class="technicalPage__label">{{#if id}}{{i18n 'assets.javascripts.templates.sessions.form.fields.edit'}}{{else}}{{i18n 'assets.javascripts.templates.sessions.form.fields.new'}}{{/if}} {{i18n 'assets.javascripts.templates.sessions.form.fields.session'}}</span>
+                <button type="submit" class="pull-right btn btn-square btn-borderred-red">
+                    {{#if id}}
+                        {{i18n 'assets.javascripts.templates.sessions.form.fields.update'}}
+                    {{else if start_now}}
+                        {{i18n 'assets.javascripts.templates.sessions.form.fields.go_live'}}
+                    {{else}}
+                        {{i18n 'assets.javascripts.templates.sessions.form.fields.schedule_live_stream'}}
+                    {{/if}}
+                </button>
+            </div>
+        </div>
+        <div class="statica margin-bottom-20">
+          <div class="text">
+            <span class="text-color-black bold"><span>{{i18n 'assets.javascripts.templates.sessions.form.fields.storage_is' num=80}}</span>{{i18n 'assets.javascripts.templates.sessions.form.fields.available_storage' used=5 total=100}}</span>
+          </div>
+          <div class="btn btn-l btn-lightGrey-solid">{{i18n 'assets.javascripts.templates.sessions.form.fields.expand_storage'}}</div>
+        </div>
+        [% if (previous_sessions.length > 0 && organization && organization.is_sessions_templates_enabled) { %]
+        <section class="templateSettings">
+          <div class="templateSettingsWrapper">
+            <div>{{i18n 'assets.javascripts.templates.sessions.form.fields.use_previous_configured_session'}}</div>
+            <div class="templateSettingsDropdown">
+              <select id="session_template_id"
+                      class="styled-select_withCss full-height full-width text-left fs-16 text-color-Darkgrey select-leftAlign">
+                <option value="0" {{#if (eq '' ../original_session_id)}}selected{{/if}}>{{i18n 'assets.javascripts.templates.sessions.form.fields.default_template'}}</option>
+                {{#each previous_sessions}}
+                  <option value="{{this.id}}"
+                          data-start-at="{{this.start_at}}"
+                          data-duration="{{this.duration}}"
+                          data-channel-id="{{this.channel.id}}"
+                          data-channel-title="{{this.channel.title}}"
+                          data-presenter-id="{{this.presenter_user.id}}"
+                          data-presenter-name="{{this.presenter_user.public_display_name}}"
+                          title="Creator: {{this.presenter_user.public_display_name}}&#10;Started at: {{formatDate this.start_at}}"
+                          {{#if (eq this.id ../original_session_id)}}selected{{/if}}>
+                    {{this.duration}}-{{i18n 'assets.javascripts.templates.sessions.form.fields.min'}}. {{this.title}}
+                  </option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+        </section>
+        [% } %]
+        <section class="sc_line--1">
+          <div class="tips-vue-app">
+            <comp-wrapper data='{"component":"Tips","props":{"type":"main-info", "sessionPage":true}}' />
+          </div>
+          <div class="padding-bottom-15">
+            <div class="technicalPage__label tips__info__wrapper">
+              {{i18n 'assets.javascripts.templates.sessions.form.fields.main_info'}}
+              <div class="tips-vue-app">
+                <comp-wrapper data='{"component":"InfoIcon","props":{"type":"main-info"}}' />
+              </div>
+            </div>
+            <div class="mainInfo">
+              <div class="channelSelectWrapper margin-right-30">
+                <div class="fs-14 text-color-LightGrey">{{i18n 'assets.javascripts.templates.sessions.form.fields.channel'}}</div>
+                <div class="full-width full-height">
+                  [% if (channels.length > 1) { %]
+                  <select id="session_channel_id" name="session[channel_id]"
+                          class="styled-select_withCss full-height full-width text-left fs-16 text-color-Darkgrey select-leftAlign">
+                    {{#each channels}}
+                      <option value="{{this.id}}" {{#if (eq this.id ../selectedChannelId)}}selected{{/if}}>{{this.title}}</option>
+                    {{/each}}
+                  </select>
+                  [% } else { %]
+                  <div class="text-color-Darkgrey full-width ChannelSelect_if_canalOdinok text-ellipsis">
+                      [%= channels[0].title %]
+                  </div>
+                  <input type="hidden" id="session_channel_id" value="{{channel_id}}" name="session[channel_id]">
+                  [% } %]
+                </div>
+              </div>
+              <div class="host">
+                <div class="fs-14 text-color-LightGrey">{{i18n 'assets.javascripts.templates.sessions.form.fields.host'}}</div>
+                <div>
+                  <div class="ChanelPresenter">
+                    <div class="dropdown dropdown-list full-width margin-bottom-0">
+                      <a href="#" class="dropdown-toggle text-left" data-toggle="dropdown">
+                        <div id="selected_presenter_info"></div>
+                        <i class="VideoClientIcon-angle-down"></i>
+                      </a>
+                      <ul class="dropdown-menu hostSelect full-width">
+                        {{> PresentersOptions channel_presenters=channel_presenters channel_id=channel_id presenter_id=presenter_id}}
+                      </ul>
+                      <input type="hidden" id="session_presenter_id" value="{{presenter_id}}" name="session[presenter_id]">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="titleOfStream input-block margin-bottom-30">
+            <label for="session_title">{{i18n 'assets.javascripts.templates.sessions.form.fields.session_title'}}*</label>
+            <input id="session_title" name="session[title]" value="{{title}}" maxlength="70">
+            <div class="errorContainerWrapp">
+              <div class="errorContainer"></div>
+            </div>
+          </div>
+
+          {{#if (and zoom_enabled interactive_allowed)}}
+            <div class="streamingPlatform">
+              <div class="streamingPlatform__wrapper">
+                <div>
+                  <i class="GlobalIcon-tv-icon padding-right-10"></i>
+                  <span class="fs-16 text-color-Darkgrey bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.streaming_platform'}}</span>
+                </div>
+                <div class="streamingPlatform__wrapper__dropdown">
+                  <div class="dropdown dropdown-list full-width margin-bottom-0">
+                    <a href="#" class="dropdown-toggle text-left stream-option" data-toggle="dropdown">
+                      <div id="selected_streamingPlatform_info">
+                        <img src="{{#if (eq service_type 'zoom')}}{{zoom_logo_url}}{{else}}{{service_logo_url}}{{/if}}">
+                      </div>
+                      <i class="VideoClientIcon-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu full-width">
+                      <li {{#unless (eq service_type 'zoom')}}class="active"{{/unless}}>
+                        <a class="display-block stream-option" data-streaming-platform="main" href="#">
+                          <img src="{{service_logo_url}}">
+                        </a>
+                      </li>
+                      <li {{#if (eq service_type 'zoom')}}class="active"{{/if}}>
+                        {{#if zoom_connected}}
+                          {{#if zoom_paid}}
+                            <a class="stream-option" data-streaming-platform="zoom" href="#">
+                              <img src="{{zoom_logo_url}}">
+                            </a>
+                          {{else}}
+                            <a href="#" data-toggle="modal" data-target="#linkAccount">
+                              <img src="{{zoom_logo_url}}">
+                            </a>
+                          {{/if}}
+                        {{else}}
+                          <a data-streaming-platform="zoom" href="{{zoom_connect_url}}" data-method="post">
+                            <img src="{{zoom_logo_url}}">
+                            <div class="btn btn-s margin-top-10 btn-borderred-grey">
+                              {{i18n 'assets.javascripts.templates.sessions.form.fields.link_account'}}
+                            </div>
+                          </a>
+                        {{/if}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <i class="GlobalIcon-users padding-right-10"></i>
+              <span class="fs-16 text-color-Darkgrey bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.participants'}}:</span>
+            </div>
+          {{/if}}
+
+          <!-- second container
+          //////////////////////////
+          ///////////////////////////
+          -->
+
+          <div class="secondSection margin-bottom-30">
+            <div class="withViewer disabled-zoom-option {{#if (eq service_type 'zoom')}}disabledSection{{/if}}">
+              <div class="disabledSection__content {{#unless (eq service_type 'zoom')}}hidden{{/unless}}">
+                <i class="GlobalIcon-Warning fs-15 padding-right-10"></i>
+                <span class="fs-12">{{i18n 'assets.javascripts.templates.sessions.form.fields.viewers_are_not_supported_interactive_mode_only'}}</span>
+              </div>
+              <div class="controll-wrapper {{#if (eq service_type 'zoom')}}disabledSection__wrapper{{/if}}">
+                <div class="preChetWrapper">
+                  <label class="{{#if livestream}} active {{/if}} {{#unless can_change_livestream}} disabled {{/unless}} preChet checkbox checkbox-swith right-position margin-bottom-0 {{#if (eq service_type 'zoom')}}hidden{{/if}}"
+                    {{#unless can_change_livestream}} disabled onclick="return false" {{/unless}}>
+                    <i class="VideoClientIcon-eye fs-15 text-color-LightGrey padding-right-10"></i>
+                    <input id="session_livestream" name="session[livestream]" {{#if livestream}} checked {{/if}} type="checkbox"
+                      {{#unless can_change_livestream}} disabled onclick="return false"{{/unless}}>
+                    <span class="fs-16 text-color-Darkgrey bold ">{{i18n 'assets.javascripts.templates.sessions.form.fields.view_only'}}</span>
+                  </label>
+                </div>
+                <div class="btnsToggle">
+                  <div id="set_livestream_price_btns" href="#"
+                       class="{{#if (and (and immersive interactive_allowed) (or (not livestream) (not can_change_livestream_access_cost)))}} disabled {{/if}} switch-btns full-width transperantBg margin-bottom-5">
+                    <a id="session_livestream_free_set"
+                       class="{{#if (or livestream_free (eq livestream_access_cost null))}} active {{/if}}
+                      {{#if (and (and immersive interactive_allowed) (or (not livestream) (not can_change_livestream_access_cost)))}} disabled {{/if}} btn btn-s full-width btn-hover-secondary">
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.free'}}</a>
+                    <a id="session_livestream_paid_set"
+                       class="{{#if (and livestream (not livestream_free))}} active {{/if}}
+                      {{#if (or (and immersive interactive_allowed) (or (not livestream) (not can_change_livestream_access_cost)))}} disabled {{/if}} btn btn-s full-width btn-hover-secondary"
+                        data-tooltip-toggle="#LivestreamPricePopup" href="#">
+                      {{#if (or livestream_free (eq livestream_access_cost null))}}{{i18n 'assets.javascripts.templates.sessions.form.fields.set_price'}}{{else}}${{livestreamTotalPurchasePrice}}{{/if}}</a>
+                  </div>
+
+                  {{!- Immerss.errorLiveStreamAccessCost -}}
+                  {{#if can_change_livestream_access_cost}}
+                    <input type="hidden" value="{{livestream_free}}" name="session[livestream_free]">
+                  {{/if}}
+                  <div id="LivestreamPricePopup" class="tooltipBody setPrice text-left hide">
+                    <div class="stb-h">{{i18n 'assets.javascripts.templates.sessions.form.fields.price_breakdown'}}</div>
+                    <div class="stb-b text-center padding-top-10">
+                      <div class="stb-1">
+                        <label>
+                          <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                          {{#if (and can_change_livestream_access_cost (not livestream_free))}}
+                            <input type="hidden" name="session[livestream_access_cost]" value="{{livestream_access_cost}}">
+                            <input id="livestream_total_cost" step="0.01" type="text" class="price_number"
+                                    mincost="{{livestreamTotalMinCost}}" maxcost="{{livestreamTotalMaxCost}}"
+                                    value="{{livestreamTotalPurchasePrice}}">
+                          {{else}}
+                            <input disabled value="{{livestreamTotalPurchasePrice}}">
+                          {{/if}}
+                          <div title="min ${{livestreamTotalMinCost}}">{{i18n 'assets.javascripts.templates.sessions.form.fields.session_price'}}</div>
+                        </label>
+                      </div>
+                      {{!--
+                      <div class="stb-2">
+                          <span>
+                              <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                              <div id="livestream_service_fee">{{livestreamServiceFee}}</div>
+                          </span>
+                          Service Fee
+                      </div>
+                      --}}
+                      <div class="stb-sum">
+                        <label>
+                          <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                          {{#if (and can_change_livestream_access_cost (not livestream_free))}}
+                            <input id="livestream_revenue" step="0.01" type="text" class="price_number"
+                                    mincost="{{livestreamRevenueMin}}" maxcost="{{livestreamRevenueMax}}"
+                                    value="{{livestreamRevenue}}">
+                          {{else}}
+                            <input disabled value="{{livestreamRevenue}}">
+                          {{/if}}
+
+                          <div title="{{revenueSplitTitle}}">{{i18n 'assets.javascripts.templates.sessions.form.fields.your_earnings'}}</div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="withGuest">
+              <div class="preChetWrapper">
+                  <label {{#unless interactive_allowed}}title="Interactive is disabled for your plan"{{/unless}}
+                      class="{{#if immersive}} active {{/if}} {{#unless (or interactive_allowed can_change_immersive)}} disabled {{/unless}} checkbox checkbox-swith right-position preChet padding-left-20 margin-bottom-0"
+                    {{#if (or (not interactive_allowed) (not can_change_immersive))}} disabled onclick="return false"{{/if}}>
+                    <i class="VideoClientIcon-user-mk3 fs-15 text-color-LightGrey padding-right-10"></i>
+                    <input id="session_immersive" name="session[immersive]" {{#if (and immersive interactive_allowed)}} checked {{/if}} type="checkbox"
+                      {{#if (or (not interactive_allowed) (not can_change_immersive))}} disabled onclick="return false"{{/if}}>
+                    <span class="fs-16 text-color-Darkgrey bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.interactive'}}</span>
+                  </label>
+                  <!-- Immersive Participants -->
+                  <div class="numberOfSlots">
+                    <span class="padding-left-30 padding-right-20">{{i18n 'assets.javascripts.templates.sessions.form.fields.no_of_slots'}}</span>
+
+                    <div class="input-block number-input">
+                      <input {{#unless (and immersive interactive_allowed)}}disabled="disabled" readonly="readonly" onclick="return false"{{/unless}} class="margin-0" id="session_max_number_of_immersive_participants" value="{{max_number_of_immersive_participants}}" min="1" max="{{max_number_of_immersive_participants_with_sources}}" type="number" name="session[max_number_of_immersive_participants]">
+                      <div class="number-arrows">
+                        <i class="VideoClientIcon-angle-upF"></i>
+                        <i class="VideoClientIcon-angle-downF"></i>
+                      </div>
+                    </div>
+
+                    {{!-- <select id="session_max_number_of_immersive_participants" name="session[max_number_of_immersive_participants]"
+                            value="{{max_number_of_immersive_participants}}" class="slots styled-select margin-left-0 vertical-top padding-top-0 padding-right-0 padding-bottom-0 text-left"
+                            style="display: inline;" {{#if (and immersive can_change_max_number_of_immersive_participants)}}{{else}} onclick="return false" disabled readonly {{/if}}>
+                      [% for(var i = Math.max(min_number_of_immersive_and_livestream_participants, immersive_participants_count); i <= max_number_of_immersive_participants_with_sources; i++) { %]
+                      <option value="[%= i %]" [% if (max_number_of_immersive_participants == i) { %] selected [% } %] class="main_immersive_participants_count">[%= i %]</option>
+                      [% } %]
+                      {{#if zoom_enabled}}
+                        [% for(var i = max_number_of_immersive_participants_with_sources + 1; i <= 100; i++) { %]
+                        <option value="[%= i %]" class="zoom_immersive_participants_count hidden">[%= i %]</option>
+                        [% } %]
+                      {{/if}}
+                    </select> --}}
+
+                    {{!- Immerss.errorMaxNumberOfParticipantsChanged -}}
+                    {{!- Immerss.errorMaxNumberOfImmersiveParticipants -}}
+                  </div>
+                  <!-- Immersive Participants end-->
+
+              </div>
+              <div class="btnsToggle">
+                <div id="set_immersive_price_btns"
+                     class="{{#if (or (or (not interactive_allowed) (not immersive)) (not can_change_immersive_access_cost))}} disabled {{/if}} switch-btns full-width transperantBg margin-bottom-5">
+                  <a id="session_immersive_free_set" href="#" class="{{#if (or immersive_free (eq immersive_access_cost null))}} active {{/if}}
+                    {{#if (or (not interactive_allowed) (or (not immersive) (not can_change_immersive_access_cost)))}} disabled {{/if}} btn btn-s full-width btn-hover-secondary">
+                    {{i18n 'assets.javascripts.templates.sessions.form.fields.free'}}</a>
+                  <a id="session_immersive_paid_set" class="{{#if (and immersive (not immersive_free))}} active {{/if}}
+                    {{#if (or (or (not interactive_allowed) (not immersive)) (not can_change_immersive_access_cost))}} disabled {{/if}} btn btn-s full-width btn-hover-secondary"
+                      data-tooltip-toggle="#ImmersivePricePopup" href="#">
+                    {{#if (or immersive_free (eq immersive_access_cost null))}}{{i18n 'assets.javascripts.templates.sessions.form.fields.set_price'}}{{else}}${{immersiveTotalPurchasePrice}}{{/if}}</a>
+                </div>
+
+                {{!- Immerss.errorImmersiveAccessCost -}}
+                {{#if can_change_immersive_access_cost}}
+                  <input type="hidden" value="{{immersive_free}}" name="session[immersive_free]">
+                {{/if}}
+                <div id="ImmersivePricePopup" class="tooltipBody setPrice text-left hide">
+                  <div class="stb-h">{{i18n 'assets.javascripts.templates.sessions.form.fields.price_breakdown'}}</div>
+                  <div class="stb-b text-center padding-top-10">
+                    <div class="stb-1">
+                      <label>
+                        <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                        {{#if (and can_change_immersive_access_cost (not immersive_free))}}
+                          <input type="hidden" name="session[immersive_access_cost]" value="{{immersive_access_cost}}">
+                          <input id="immersive_total_cost" step="0.01" type="text" class="price_number"
+                                  mincost="{{immersiveTotalMinCost}}" maxcost="{{immersiveTotalMaxCost}}"
+                                  value="{{immersiveTotalPurchasePrice}}">
+                        {{else}}
+                          <input disabled value="{{immersiveTotalPurchasePrice}}">
+                        {{/if}}
+                        <div title="min ${{immersiveTotalMinCost}}">{{i18n 'assets.javascripts.templates.sessions.form.fields.session_price'}}</div>
+                      </label>
+                    </div>
+                    {{!--
+                    <div class="stb-2">
+                        <span>
+                            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                            <div id="immersive_service_fee">{{immersiveServiceFee}}</div>
+                        </span>
+                        Service Fee
+                    </div>
+                    --}}
+                    <div class="stb-sum">
+                      <label>
+                        <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                        {{#if (and can_change_immersive_access_cost (not immersive_free))}}
+                          <input id="immersive_revenue" step="0.01" type="text" class="price_number"
+                                  mincost="{{immersiveRevenueMin}}" maxcost="{{immersiveRevenueMax}}"
+                                  value="{{immersiveRevenue}}">
+                        {{else}}
+                          <input disabled value="{{immersiveRevenue}}">
+                        {{/if}}
+                        <div title="{{revenueSplitTitle}}">{{i18n 'assets.javascripts.templates.sessions.form.fields.your_earnings'}}</div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {{!--
+              <div class="withCoHost">
+                <div class="preChetWrapper">
+                  <div>
+                    <label class="preChet checkbox checkbox-swith right-position padding-left-20">
+                      <i class="VideoClientIcon-PeopleMK2 text-color-LightGrey fs-15 padding-right-10"></i>
+                      <input type="checkbox" name="session[co_hosts]" id="session_co_hosts" {{#if co_hosts}} checked {{/if}}>
+                      <span class="fs-16 text-color-Darkgrey bold">Co-Hosts</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            --}}
+            {{#if ppv_enabled}}
+                <div class="accessSettings">
+                  <div class="preChetWrapper">
+                    <div>
+                      <label class="preChet checkbox checkbox-swith right-position padding-left-20">
+                        <input type="checkbox" name="session[only_ppv]" id="session_only_ppv" {{#if only_ppv}} checked {{/if}}>
+                        <span class="fs-16 text-color-Darkgrey bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.only_ppv'}}</span>
+                      </label>
+                      <label class="margin-left-20 preChet checkbox checkbox-swith right-position padding-left-20">
+                        <input type="checkbox" name="session[only_subscription]" id="session_only_subscription" {{#if only_subscription}} checked {{/if}}>
+                        <span class="fs-16 text-color-Darkgrey bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.only_subscribers'}}</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+            {{/if}}
+
+            <div class="line"></div>
+            <div>
+              <div class="inviteSection">
+                <div class="text-color-LightGrey invite">
+                  <i class="VideoClientIcon-user-plus fs-20 padding-right-10"></i>
+                  <span class="text-color-Darkgrey bold fs-16">{{i18n 'assets.javascripts.templates.sessions.form.fields.invite'}}</span>
+                </div>
+                <div class="text-right display-flex">
+                  <input type="hidden" value="{{invited_users_attributes}}" name="session[invited_users_attributes]">
+
+                  <div class="memberList inlile-block  vertical-midle padding-bottom-15">
+                    {{#each users}}
+                      <a class="avatarImg-SD {{#if (gt @index 3)}}hide{{/if}}" href="#"
+                          style="background-image: url('{{this.avatar_url}}')" title="{{this.display_name}}"></a>
+                    {{/each}}
+                    {{#if (gt users_count 4)}}
+                      <a class="dottedCircle inlile-block vertical-midle" href="#" title="inviteSection">
+                        <i class="VideoClientIcon-dots-horizontal-triple"></i>
+                      </a>
+                    {{/if}}
+                  </div>
+                  <div class="padding-bottom-10 addNewMemberWrapp inlile-block vertical-top">
+                    <!--<a class="addNewMember" data-target="#InviteViewersAndCoHosts" data-blurMarker="addMembersACTIVE" data-toggle="modal" href="#">-->
+                    <a class="margin-left-20 addNewMember btn btn-l btn-hover-secondary btn-borderred-secondary" data-target="#InviteViewersAndCoHosts" data-toggle="modal" href="#InviteViewersAndCoHosts">
+                      <i class="VideoClientIcon-iPlus padding-right-10"></i>
+                      <span class="bold fs-14">{{i18n 'assets.javascripts.templates.sessions.form.fields.viewers'}}</span>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="line"></div>
+
+          <div class="AdditionalInfo margin-top-30">
+            <div class="AdditionalInfoHead margin-bottom-30">
+              <div class="technicalPage__label padding-bottom-40">
+                {{i18n 'assets.javascripts.templates.sessions.form.fields.additional_info'}}
+              </div>
+              <div class="position-relative">
+                <a href="#" class="toggle_section description btn-hover-secondary btn btn-m btn-borderred-secondary closed" data-target=".section_Description">
+                  {{i18n 'assets.javascripts.templates.sessions.form.fields.description'}}
+                </a>
+                <a href="#" class="toggle_section instructions btn-hover-secondary btn btn-m btn-borderred-secondary closed margin-left-10" data-target=".section_Instructions">
+                  {{i18n 'assets.javascripts.templates.sessions.form.fields.instructions'}}
+                </a>
+                <a href="#" class="toggle_section thumbnail btn-hover-secondary btn btn-m btn-borderred-secondary closed margin-left-10" data-target=".section_Thumbnail">
+                  {{i18n 'assets.javascripts.templates.sessions.form.fields.thumbnail'}}
+                </a>
+                <span class="additionalInfoToggle"></span>
+              </div>
+            </div>
+            <div class="AdditionalInfoBody" style="display: none">
+              <div class="section_Description toggleBlock">
+                <div class="input-block state-derty">
+                  <label for="session_description">{{i18n 'assets.javascripts.templates.sessions.form.fields.description'}}</label>
+                  <!--<a href="#" class="collaps"><i class="VideoClientIcon-angle-downF active"></i></a>-->
+                  <div id="descriptionToolbar">
+                    <span class="ql-formats">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-list" value="ordered"></button>
+                      <button class="ql-list" value="bullet"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-link"></button>
+                    </span>
+                  </div>
+                  <input type="hidden" name="session[description]">
+                  <div id="session_description">{{{description}}}</div>
+                  {{!-- <div class="counter_block">{{#if description }}[%= description.length %]{{else}}0{{/if}}/2000</div> --}}
+<!--                  <div class="errorContainerWrapp">-->
+<!--                    <div class="errorContainer"></div>-->
+<!--                  </div>-->
+                </div>
+                {{!--
+                <span>{{i18n 'assets.javascripts.templates.sessions.form.fields.description'}} <a href="#" class="collaps"><i class="VideoClientIcon-angle-downF"></i></a></span>
+                <textarea data-autoresize="true" name="" rows="1" id="session_description" name="session[description]">{{description}}</textarea>
+                --}}
+              </div>
+              <div class="section_Instructions toggleBlock">
+                <div class="input-block state-derty">
+                  <label for="session_instructions">{{i18n 'assets.javascripts.templates.sessions.form.fields.instructions'}}</label>
+                  <div id="instructionsToolbar">
+                    <span class="ql-formats">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-list" value="ordered"></button>
+                      <button class="ql-list" value="bullet"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-link"></button>
+                    </span>
+                  </div>
+                  <input type="hidden" name="session[custom_description_field_value]">
+                  <div id="session_instructions">{{{custom_description_field_value}}}</div>
+                </div>
+                {{!--
+                <span>{{i18n 'assets.javascripts.templates.sessions.form.fields.instructions'}} <a href="#" class="collaps"><i class="VideoClientIcon-angle-downF"></i></a></span>
+                <textarea data-autoresize="true" name="" rows="1" id="session_instructions" name="session[instructions]">{{instructions}}</textarea>
+                --}}
+              </div>
+              <div class="section_Thumbnail toggleBlock">
+                <!-- <a href="#" class="collaps"><i class="VideoClientIcon-angle-downF active"></i></a> -->
+                <a class="Thumbnail_load" href="#session_thumbnail_modal" data-toggle="modal"
+                    style="background-image: url({{medium_cover_url}});">
+                  <span>{{i18n 'assets.javascripts.templates.sessions.form.fields.change'}}</span>
+                </a>
+              </div>
+              {{#if false}}
+                <div class="section_Pre-roll toggleBlock">
+                  <span>{{i18n 'assets.javascripts.templates.sessions.form.fields.pre_roll'}} <a href="#" class="collaps"><i class="VideoClientIcon-angle-downF"></i></a></span>
+                  roberth [12:20]  Pre roll is not done... haven't received the content from Alex
+                </div>
+              {{/if}}
+            </div>
+          </div>
+        </section>
+        <section class="videoSettings">
+            <div class="tips-vue-app">
+              <comp-wrapper data='{"component":"Tips","props":{"type":"ip-cam", "sessionPage":true}}' />
+            </div>
+            <div class="technicalPage__label tips__info__wrapper">
+              {{i18n 'assets.javascripts.templates.sessions.form.fields.video_settings'}}
+              <div class="tips-vue-app">
+                <comp-wrapper data='{"component":"InfoIcon","props":{"type":"ip-cam"}}' />
+              </div>
+            </div>
+            <div class="videoSettingsWrapper padding-top-40">
+                <label class="{{#if record}} active {{/if}} {{#unless can_change_recorded_access_cost}} disabled {{/unless}} checkbox checkbox-swith right-position full-width-xs leftLAbel">
+                    <input id="session_record" name="session[record]" {{#if record}} checked {{/if}} type="checkbox"
+                        {{#unless can_change_recorded_access_cost}} disabled onclick="return false"{{/unless}}>
+                    <span class="text-color-Darkgrey bold fs-16"><i class="VideoClientIcon-voicemail padding-right-10 text-color-LightGrey"></i>{{i18n 'assets.javascripts.templates.sessions.form.fields.record'}}</span>
+                </label>
+                <div class="ReplayWrapp">
+                    <!--Replay-->
+                    <div class="pull-right full-width recordBtnWrapp position-relative tooltipWrapp">
+                        <div id="set_recorded_price_btns"
+                             class="{{#if (or (not record) (not can_change_recorded_access_cost))}} disabled {{/if}} switch-btns transperantBg no-margin">
+                            <a id="session_recorded_free_set" href="#" class="{{#if recorded_free}} active {{/if}}
+                                {{#if (or (not record) (not can_change_recorded_access_cost))}} disabled {{/if}} btn btn-s btn-borderred-light-grey light-gray-Active full-width btn-hover-secondary">
+                                {{i18n 'assets.javascripts.templates.sessions.form.fields.free'}}</a>
+                            <a id="session_recorded_paid_set" class="{{#unless recorded_free}} active {{/unless}}
+                                {{#if (or (not record) (not can_change_recorded_access_cost))}} disabled {{/if}} btn btn-s light-gray-Active full-width btn-hover-secondary"
+                               data-tooltip-toggle="#RecordedPricePopup" href="#">
+                                {{#if recorded_free}}{{i18n 'assets.javascripts.templates.sessions.form.fields.set_price'}}{{else}}${{recordedTotalPurchasePrice}}{{/if}}</a>
+                        </div>
+                        {{#if can_change_recorded_access_cost}}
+                            <input type="hidden" value="{{recorded_free}}" name="session[recorded_free]">
+                        {{/if}}
+                        <div id="RecordedPricePopup" class="tooltipBody setPrice text-left hide">
+                            <div class="stb-h">{{i18n 'assets.javascripts.templates.sessions.form.fields.price_breakdown'}}</div>
+                            <div class="stb-b text-center padding-top-10">
+                                <div class="stb-1">
+                                    <label>
+                                        <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                                        {{#if can_change_recorded_access_cost}}
+                                            <input type="hidden" name="session[recorded_access_cost]" value="{{recorded_access_cost}}">
+                                            <input id="recorded_total_cost" step="0.01" type="text" class="price_number"
+                                                   mincost="{{recordedTotalMinCost}}" maxcost="{{recordedTotalMaxCost}}"
+                                                   value="{{recordedTotalPurchasePrice}}">
+                                        {{else}}
+                                            <input disabled value="{{recordedTotalPurchasePrice}}">
+                                        {{/if}}
+                                        <div title="min ${{recordedTotalMinCost}}">{{i18n 'assets.javascripts.templates.sessions.form.fields.session_price'}}</div>
+                                    </label>
+                                </div>
+                                {{!--
+                                <div class="stb-2">
+                                    <span>
+                                        <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                                        <div id="recorded_service_fee">{{recordedServiceFee}}</div>
+                                    </span>
+                                    Service Fee
+                                </div>
+                                --}}
+                                <div class="stb-sum">
+                                    <label>
+                                        <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                                        {{#if can_change_recorded_access_cost}}
+                                            <input id="recorded_revenue" step="0.01" type="text" class="price_number"
+                                                   mincost="{{recordedRevenueMin}}" maxcost="{{recordedRevenueMax}}"
+                                                   value="{{recordedRevenue}}">
+                                        {{else}}
+                                            <input disabled value="{{recordedRevenue}}">
+                                        {{/if}}
+                                        <div title="{{revenueSplitTitle}}">{{i18n 'assets.javascripts.templates.sessions.form.fields.your_earnings'}}</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Rlayout Rlayout__monolit padding-top-20 padding-bottom-20">
+              <div class="Rlayout__title">
+                <i class="GlobalIcon-fullScreen padding-right-5 fs-14"/>
+                {{i18n 'assets.javascripts.templates.sessions.form.fields.interactive_replay_layout'}}
+              </div>
+              <div class="Rlayout__tiles">
+                <label class="radioMK2">
+                  <input type="radio" value="grid" name="layout" class="Rlayout__check" id="layout-grid-switch" checked>
+                  <span class="checkmark"></span>
+                </label>
+                <div class="Rlayout__tile Rlayout__monolit__tile">
+                  <div class="Rlayout__info">
+                    <div class="Rlayout__info__title">
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.grid'}}
+                    </div>
+                    <div>
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.video'}}: {{i18n 'assets.javascripts.templates.sessions.form.fields.all_participants'}}
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.audio'}}: {{i18n 'assets.javascripts.templates.sessions.form.fields.all_participants'}}
+                    </div>
+                  </div>
+                  <div class="Rlayout__image">
+                    <img src="/Rlayout/grid.svg" alt="layout_grid">
+                  </div>
+                </div>
+              </div>
+              <div class="Rlayout__tiles">
+                <label class="radioMK2">
+                  <input type="radio" value="presenter_focus" name="layout" class="Rlayout__check" id="layout-presenter_focus-switch">
+                  <span class="checkmark"></span>
+                </label>
+                <div class="Rlayout__tile Rlayout__monolit__tile">
+                  <div class="Rlayout__info">
+                    <div class="Rlayout__info__title">
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.presenter_focus'}}
+                    </div>
+                    <div>
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.video'}}: {{i18n 'assets.javascripts.templates.sessions.form.fields.presenter_focus'}}
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.audio'}}: {{i18n 'assets.javascripts.templates.sessions.form.fields.all_participants'}}
+                    </div>
+                  </div>
+                  <div class="Rlayout__image">
+                    <img src="/Rlayout/presenterFocus.svg" alt="layout_presenterFocus">
+                  </div>
+                </div>
+              </div>
+              <div class="Rlayout__tiles">
+                <label class="radioMK2">
+                  <input type="radio" value="presenter_only" name="layout" class="Rlayout__check" id="layout-presenter_only-switch">
+                  <span class="checkmark"></span>
+                </label>
+                <div class="Rlayout__tile Rlayout__monolit__tile">
+                  <div class="Rlayout__info">
+                    <div class="Rlayout__info__title">
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.presenter_only'}}
+                    </div>
+                    <div>
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.video'}}: {{i18n 'assets.javascripts.templates.sessions.form.fields.presenter_only'}}
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.audio'}}: {{i18n 'assets.javascripts.templates.sessions.form.fields.presenter_only'}}
+                    </div>
+                  </div>
+                  <div class="Rlayout__image">
+                    <img src="/Rlayout/presenterOnly.svg" alt="layout_presenterOnly">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="videoSettingsWrapper padding-bottom-30 disabled-zoom-option {{#if (eq service_type 'zoom')}}disabledSection{{/if}}">
+              <div class="disabledSection__content {{#unless (eq service_type 'zoom')}}hidden{{/unless}}">
+                <div>
+                  <i class="GlobalIcon-Warning fs-15 padding-right-5"></i>
+                  <span class="bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.chat'}}</span>
+                </div>
+                <span class="fs-12">{{i18n 'assets.javascripts.templates.sessions.form.fields.chat_enabled_zoom_platform'}}</span>
+              </div>
+              <div class="controll-wrapper {{#if (eq service_type 'zoom')}}disabledSection__wrapper{{/if}}">
+                <label class="checkbox checkbox-swith right-position leftLAbel full-width-xs {{#if (eq service_type 'zoom')}}hidden{{/if}}">
+                  <input name="session[allow_chat]" type="checkbox" {{#if allow_chat}}checked{{/if}}>
+                  <span class="text-color-Darkgrey bold fs-16"><i class="VideoClientIcon-message-square padding-right-10 text-color-LightGrey"></i>{{i18n 'assets.javascripts.templates.sessions.form.fields.chat'}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="privacyWrapperBlock">
+              <div class="PrivacyBlock clearfix padding-top-30">
+                <div class="privacySettings">
+                  <i class="VideoClientIcon-lock1 padding-right-10"></i>
+                  <div class="text-color-Darkgrey bold text-color-LightGrey">{{i18n 'assets.javascripts.templates.sessions.form.fields.privacy'}}</div>
+                </div>
+                <div class="privacyToggle">
+                  <div class="{{#if (and can_change_private private_allowed)}}{{else}} disabled {{/if}} switch-btns transperantBg">
+                    <a id="session_set_public" class="btn btn-s full-width btn-hover-secondary {{#unless private}} active {{/unless}} {{#if (and can_change_private private_allowed)}}{{else}} disabled {{/if}}"
+                       href="#" {{#if (and can_change_private private_allowed)}}{{else}} disabled onclick="return false" {{/if}}>
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.public'}}</a>
+                    <a id="session_set_private" class="btn btn-s btn-hover-secondary {{#if private}} active {{/if}} {{#if (and can_change_private private_allowed)}}{{else}} disabled {{/if}}"
+                       href="#" {{#if (and can_change_private private_allowed)}}{{else}} disabled onclick="return false" {{/if}}>
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.private'}}</a>
+                  </div>
+                  <input id="session_private" name="session[private]" value="{{private}}" type="hidden">
+                </div>
+              </div>
+              <div class="PrivacyBlock AgeRestrictionBlock padding-bottom-30 clearfix">
+                <div class="privacySettings">
+                  <i class="VideoClientIcon-smile padding-right-10"></i>
+                  <div class="text-color-Darkgrey bold agesTitle text-color-LightGrey">{{i18n 'assets.javascripts.templates.sessions.form.fields.age_restriction'}}</div>
+                </div>
+                <div class="privacyToggle">
+                  <div class="ages switch-btns transperantBg full-width-p-tablet full-width">
+                    <a id="session_set_13" class="btn btn-s btn-hover-secondary {{#if (eq age_restrictions 0)}} active {{/if}}" href="#">13 +</a>
+                    <a id="session_set_18" class="btn btn-s btn-hover-secondary {{#if (eq age_restrictions 1)}} active {{/if}}" href="#">18 +</a>
+                  </div>
+
+                  <input id="session_age_restrictions" name="session[age_restrictions]" value="{{age_restrictions}}" type="hidden">
+                </div>
+                <div class="text-right">
+                  <label class="checkbox choice right-position A" {{#if (eq age_restrictions 0)}}style="display: none;"{{/if}}>
+                    <input id="session_adult" name="session[adult]" type="checkbox" {{#if adult}}checked{{/if}}>
+                    <span><div class="text-color-LightGrey" style="white-space: nowrap; margin-left: 15px;">{{i18n 'assets.javascripts.templates.sessions.form.fields.sensitive_adult'}}</div></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+        </section>
+
+        <section class="streamSettings">
+          <div class="tips-vue-app">
+            <comp-wrapper class="tips__sessionPage__obs" data='{"component":"Tips","props":{"type":"obs", "sessionPage":true}}' />
+          </div>
+          <div class="disabled-zoom-option {{#if (eq service_type 'zoom')}}disabledSection{{/if}}">
+            <div class="disabledSection__content {{#unless (eq service_type 'zoom')}}hidden{{/unless}}">
+              <div>
+                <i class="GlobalIcon-Warning fs-15 padding-right-10"></i>
+                <span class="bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.stream_settings'}}</span>
+              </div>
+              <span class="fs-12">{{i18n 'assets.javascripts.templates.sessions.form.fields.settings_zoom_platform'}}</span>
+            </div>
+            <div class="controll-wrapper wide {{#if (eq service_type 'zoom')}}disabledSection__wrapper{{/if}}">
+              <div class="streamSettings__title {{#if (eq service_type 'zoom')}}hidden{{/if}}">
+                <div class="labelWrapper">
+                  <i class="VideoClientIcon-video1 fs-20 margin-right-10 text-color-LightGrey"></i>
+                  <span class="text-color-Darkgrey vertical-midle check bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.stream_settings'}}</span>
+                </div>
+                <div class="tips__info__wrapper">
+                  <label class="checkbox check choice right-position pull-right {{#if (eq service_type 'zoom')}}hidden{{/if}}">
+                    <input type="checkbox" name="remember_session_settings" checked="checked">
+                    <span>
+                      {{i18n 'assets.javascripts.templates.sessions.form.fields.remember'}}
+                    </span>
+                  </label>
+                  <div class="tips-vue-app margin-left-30">
+                    <comp-wrapper data='{"component":"InfoIcon","props":{"type":"obs"}}' />
+                  </div>
+                </div>
+              </div>
+              <div id="streamSettings__wrapper">
+                {{>stream_settings_template}}
+              </div>
+            </div>
+          </div>
+
+          <div class="line"></div>
+
+          <div class="padding-top-30">
+            <div class="StartSettings">
+              <div class="StartSettingsWrapper">
+                <i class="VideoClientIcon-power padding-right-10 text-color-LightGrey"></i>
+                <div class="bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.start'}}</div>
+              </div>
+              <div class="text-right btns">
+                <div class="switch-btns transperantBg full-width-p-tablet">
+                  <a id="session_autostart" href="#" class="btn btn-s btn-hover-secondary {{#if autostart}}active{{/if}} {{#if (eq service_type 'zoom')}}disabled{{/if}} {{#unless can_change_start_at}}disabled{{/unless}}">Auto</a>
+                  <a id="session_manual" href="#" class="btn btn-s btn-hover-secondary {{#unless autostart}}active{{/unless}} {{#if (eq service_type 'zoom')}}disabled{{/if}}  {{#unless can_change_start_at}}disabled{{/unless}}">Manual</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="StartSettings padding-top-10 padding-bottom-60">
+            <div class="StartSettingsWrapper">
+              <i class="VideoClientIcon-clock padding-right-10 text-color-LightGrey"></i>
+              <div class="bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.duration'}}</div>
+            </div>
+            <input type="hidden" name="session[duration]" value="{{duration}}">
+            <div class="Duration_sliderWrapp">
+              <div id="Duration_slider">
+                <div id="Duration_slider_handle" class="ui-slider-handle">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="line"></div>
+
+          <div class="liveTimeSettings padding-top-30">
+            <div class="display-flex liveTimeSettingsWrapper">
+              <div class="padding-right-0 fs-16">
+                <i class="VideoClientIcon-calendar-icon padding-right-10 text-color-LightGrey"></i>
+                <span class="bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.when_going_live'}}</span>
+              </div>
+              <div class="btns text-right padding-bottom-30">
+                <input id="session_start_now" name="session[start_now]" value="{{start_now}}" type="hidden">
+                <div class="{{#unless can_change_start_at}} disabled {{/unless}} switch-btns full-width margin-bottom-0 padding-bottom-0">
+                  <a id="session_set_start_now" {{#if (eq device_type 'mobile')}} disabled onclick="return false;" {{/if}}
+                    {{#unless can_change_start_at}} disabled {{/unless}} class="{{#if (eq device_type 'mobile')}} disabled {{/if}}
+                    {{#if start_now}} active {{/if}} {{#unless can_change_start_at}} disabled {{/unless}} btn btn-s btn-hover-secondary btn-transperant">
+                    {{i18n 'assets.javascripts.templates.sessions.form.fields.now'}}</a>
+                  <a id="session_set_start_at" {{#unless can_change_start_at}} disabled {{/unless}}
+                     class="{{#unless start_now}} active {{/unless}}
+                       {{#unless can_change_start_at}} disabled {{/unless}} btn btn-s btn-hover-secondary btn-transperant" href="#">
+                    {{i18n 'assets.javascripts.templates.sessions.form.fields.later'}}</a>
+                </div>
+              </div>
+            </div>
+            <div id="start_at_section" class="{{#if start_now}}hidden{{/if}} full-width inputs padding-top-20 padding-bottom-30">
+              <div class="DateSettings">
+                <div class="fs-14">{{i18n 'assets.javascripts.templates.sessions.form.fields.date'}}</div>
+                <div class="dateResp padding-left-0 text-right">
+                  {{#if can_change_start_at}}
+                    <input id="session_start_at_1i" name="session[start_at(1i)]" type="hidden" value="{{start_at_year}}">
+                    <input id="session_start_at_2i" name="session[start_at(2i)]" type="hidden" value="{{start_at_month}}">
+                    <input id="session_start_at_3i" name="session[start_at(3i)]" type="hidden" value="{{start_at_day}}">
+                  {{/if}}
+                  <a href="#" onclick="return false;" class="Date_trigger display-flex">
+                    <input id="session_start_at_datepicker" {{#unless can_change_start_at}} disabled {{/unless}}
+                           type="text" readonly style="color: var(--tp__main)!important; border-bottom: 1px solid #E5E5E5; background: transparent; text-align: left; padding: 0; font-size: 16px; text-decoration: none; z-index: 10; padding-right: 26px; position: relative;">
+                    <i class="VideoClientIcon-calendar-icon" style="top: 3px; margin-left: -20px; z-index: 5; position: relative;margin-right: 5px;"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="StartSettings">
+                <div class=" fs-14">
+                  {{i18n 'assets.javascripts.templates.sessions.form.fields.start_time'}}
+                </div>
+                <div class="text-left full-width">
+                  <select id="session_custom_start_at" name="session[custom_start_at]" {{#unless can_change_start_at}} disabled {{/unless}}
+                          class="{{#unless can_change_start_at}} disabled {{/unless}} styled-select_withCss full-width text-left select-leftAlign">
+                    [% momentStartAt = moment(start_at); momentStartAt.utcOffset(momentStartAt._tzm); %]
+                    [% formattedStartAt = momentStartAt.format(timeSelectFormat); %]
+                    [% time = moment(momentStartAt.startOf('day').format()).utcOffset(momentStartAt.utcOffset()); %]
+                    [% for(time ; ; time = moment(time).add(15, 'm') ) { %]
+                    <option value="[%= time.format() %]" [% if(formattedStartAt == time.format(timeSelectFormat)) { %]selected[% } %]>[%= time.format(timeSelectFormat) %]</option>
+                    [% if(time.hours() == 23 && time.minutes() == 45) break; %]
+                    [% } %]
+                  </select>
+                </div>
+              </div>
+              <div class="PrepareTime">
+                <div class="fs-14">
+                  {{i18n 'assets.javascripts.templates.sessions.form.fields.preparation_time'}}
+                </div>
+                <div class="text-left full-width">
+                  {{!--
+                  <select class="styled-select_withCss padding-left-10 text-right select-rightAlign">
+                      <option value="">15 min</option>
+                      <option value="">** min</option>
+                      <option value="">** min</option>
+                  </select>
+                  --}}
+                  <select id="session_pre_time" name="session[pre_time]" {{#unless can_change_start_at}} disabled {{/unless}}
+                          class="{{#unless can_change_start_at}} disabled {{/unless}} styled-select_withCss full-width pull-right text-left select-rightAlign">
+                    <option {{#if (eq pre_time 0)}}selected{{/if}} value="0">0 {{i18n 'assets.javascripts.templates.sessions.form.fields.minutes'}}</option>
+                    <option {{#if (eq pre_time 5)}}selected{{/if}} value="5">5 {{i18n 'assets.javascripts.templates.sessions.form.fields.minutes'}}</option>
+                    <option {{#if (eq pre_time 10)}}selected{{/if}} value="10">10 {{i18n 'assets.javascripts.templates.sessions.form.fields.minutes'}}</option>
+                    <option {{#if (eq pre_time 15)}}selected{{/if}} value="15">15 {{i18n 'assets.javascripts.templates.sessions.form.fields.minutes'}}</option>
+                    <option {{#if (eq pre_time 20)}}selected{{/if}} value="20">20 {{i18n 'assets.javascripts.templates.sessions.form.fields.minutes'}}</option>
+                    <option {{#if (eq pre_time 25)}}selected{{/if}} value="25">25 {{i18n 'assets.javascripts.templates.sessions.form.fields.minutes'}}</option>
+                    <option {{#if (eq pre_time 30)}}selected{{/if}} value="30">30 {{i18n 'assets.javascripts.templates.sessions.form.fields.minutes'}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="line"></div>
+
+          <div class="RecurrenceSection padding-top-30 padding-bottom-30">
+            <div class="tips-vue-app">
+              <comp-wrapper data='{"component":"Tips","props":{"type":"recurrence", "sessionPage":true}}' />
+            </div>
+            <div class="">
+              <div class="display-flex recurrenceWrapper">
+                <div class="fs-16">
+                  <i class="VideoClientIcon-clockwise-rotating-circular-arrow padding-right-10 text-color-LightGrey"></i>
+                  <span class="bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.recurrence'}}</span>
+                </div>
+                <div class="fs-0 padding-right-0 tips__info__wrapper">
+                  <div class="tips-vue-app">
+                    <comp-wrapper data='{"component":"InfoIcon","props":{"type":"recurrence"}}' />
+                  </div>
+                  <label class="checkbox checkbox-swith right-position full-width margin-bottom-0">
+                    <input name="session[recurring_settings][active]" id="recurring_settings-swith" type="checkbox" {{recurring_setting_active}}>
+                    <span class="full-width display-block"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div id="RecurrenceOptions" class="clearfix RecurrenceOptions" style="{{#unless recurring_setting_active}}display:none{{/unless}}">
+                <div class="display-flex daysWrapper padding-top-30 padding-bottom-30">
+                  <div class="text-color-Darkgrey">
+                    {{i18n 'assets.javascripts.templates.sessions.form.fields.repeat_on'}}:
+                  </div>
+                  <div class="RepeatOn">
+                    <label href="#" class="RepeatOn_Su">
+                      <input name="session[recurring_settings][days][]" value="sunday" type="checkbox" {{recurring_setting_day_sunday}}>
+                      <span class="btn btn-borderred-secondary">{{i18n 'assets.javascripts.templates.sessions.form.fields.sun'}}</span>
+                    </label>
+                    <label href="#" class="RepeatOn_Mo">
+                      <input name="session[recurring_settings][days][]" value="monday" type="checkbox" {{recurring_setting_day_monday}}>
+                      <span class="btn btn-borderred-secondary">{{i18n 'assets.javascripts.templates.sessions.form.fields.mon'}}</span>
+                    </label>
+                    <label href="#" class="RepeatOn_Tu">
+                      <input name="session[recurring_settings][days][]" value="tuesday" type="checkbox" {{recurring_setting_day_tuesday}}>
+                      <span class="btn btn-borderred-secondary">{{i18n 'assets.javascripts.templates.sessions.form.fields.tue'}}</span>
+                    </label>
+                    <label href="#" class="RepeatOn_We">
+                      <input name="session[recurring_settings][days][]" value="wednesday" type="checkbox" {{recurring_setting_day_wednesday}}>
+                      <span class="btn btn-borderred-secondary">{{i18n 'assets.javascripts.templates.sessions.form.fields.wed'}}</span>
+                    </label>
+                    <label href="#" class="RepeatOn_Th">
+                      <input name="session[recurring_settings][days][]" value="thursday" type="checkbox" {{recurring_setting_day_thursday}}>
+                      <span class="btn btn-borderred-secondary">{{i18n 'assets.javascripts.templates.sessions.form.fields.thu'}}</span>
+                    </label>
+                    <label href="#" class="RepeatOn_Fr">
+                      <input name="session[recurring_settings][days][]" value="friday" type="checkbox" {{recurring_setting_day_friday}}>
+                      <span class="btn btn-borderred-secondary">{{i18n 'assets.javascripts.templates.sessions.form.fields.fri'}}</span>
+                    </label>
+                    <label href="#" class="RepeatOn_Sa">
+                      <input name="session[recurring_settings][days][]" value="saturday" type="checkbox" {{recurring_setting_day_saturday}}>
+                      <span class="btn btn-borderred-secondary">{{i18n 'assets.javascripts.templates.sessions.form.fields.sat'}}</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="RecurrenceOptions_After">
+                  <div class="RecurrenceOptionsWrapper">
+                    <label class="radio choice">
+                      <input type="radio" id="RecurrenceOptions_After" name="session[recurring_settings][until]" value="occurrence" {{recurring_setting_until_occurrence}}>
+                      <span class="text-color-LightGrey">
+                        {{i18n 'assets.javascripts.templates.sessions.form.fields.ends_after'}}
+                      </span>
+                    </label>
+                    <div class="occurenceNumber">
+                      <label>
+                        <span class="padding-right-60">{{i18n 'assets.javascripts.templates.sessions.form.fields.occurence'}}</span>
+                        <input name="session[recurring_settings][occurrence]" id="occurenceNumber_input" {{#unless recurring_setting_until_occurrence}}disabled{{/unless}} value="{{recurring_setting_occurrence}}" max="89" size="2" min="1" type="number">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="RecurrenceOptions_On">
+                  <div class="RecurrenceOptionsWrapper">
+                    <label class="radio choice margin-bottom-0">
+                      <input type="radio" id="RecurrenceOptions_On" name="session[recurring_settings][until]" value="date" {{recurring_setting_until_date}}>
+                      <span class="text-color-LightGrey">
+                        {{i18n 'assets.javascripts.templates.sessions.form.fields.ends_on'}}
+                      </span>
+                    </label>
+                    <div class="RecurrenceOptions_datePicker_wrapp">
+                      <a href="#" onclick="return false;">
+                        <script>
+
+                        </script>
+                        <input id="" name="session[recurring_settings][date]" class="RecurrenceOptions_datePicker" {{#unless recurring_setting_until_date }}disabled{{/unless}} placeholder="Select date" value="{{recurring_setting_date}}" type="text" readonly >
+                        <i class="VideoClientIcon-calendar-icon text-color-Blue"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {{#if instream_shopping}}
+          <div class="line"></div>
+          <div class="AdditionalOptions padding-top-30 padding-bottom-30">
+            {{#if instream_shopping}}
+            <div class="AdditionalOptionsToggle display-flex">
+              <div>
+                <i class="VideoClientIcon-shopping-cart1 padding-right-10 fs__16 text-color-LightGrey"></i>
+                <span class="bold fs__16">{{i18n 'assets.javascripts.templates.sessions.form.fields.products'}}</span>
+              </div>
+              <div class="fs-0 padding-right-0">
+                <label class="checkbox checkbox-swith right-position full-width margin-bottom-0">
+                  <input name="ecommerce" id="Products-swith" type="checkbox" {{#if ecommerce}}checked{{/if}}>
+                  <span class="full-width display-block"></span>
+                </label>
+              </div>
+            </div>
+            <div id="ProductsOptions" class="padding-top-20" style="{{#unless ecommerce}}display: none;{{/unless}}">
+              <div class="productsWrapper">
+                <div class="text-left full-width">
+                  <select id="session_list" name="list_ids[]" class="selectPullRight full-width styled-select_withCss text-left select-rightAlign">
+                    <option label=" " value="">{{i18n 'assets.javascripts.templates.sessions.form.fields.select_product_list'}}</option>
+                    {{#each lists}}
+                      <option value="{{this.id}}" {{#if (inArray ../list_ids this.id)}}selected{{/if}}>{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
+            </div>
+            {{/if}}
+            {{#if false}}
+              <div class="STATIC_DATA">
+                <div class="row padding-right-30">
+                  <div class="col-md-7 fs-16">
+                    {{i18n 'assets.javascripts.templates.sessions.form.fields.contributions'}}
+                  </div>
+                  <div class="col-md-5 padding-right-0 fs-0">
+                    <label class="checkbox checkbox-swith right-position full-width margin-bottom-0">
+                      <input name="" id="Products-swith" type="checkbox">
+                      <span class="full-width display-block"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="row insideSection">
+                  <div class="col-md-5">{{i18n 'assets.javascripts.templates.sessions.form.fields.donations'}}</div>
+                  <div class="col-md-7">
+                    roberth [11:12] donations we will have what we do now in modal (old design)...
+                  </div>
+                </div>
+                <div class="row insideSection">
+                  <div class="col-md-5">Crypto Wallet</div>
+                  <div class="col-md-7">
+                    roberth [11:12] not done... don' know what goes into crypto and donations needs to be rethought probably
+                  </div>
+                </div>
+              </div>
+            {{/if}}
+            {{#if false}}{{i18n 'assets.javascripts.templates.sessions.form.fields.free'}}
+              <div class="STATIC_DATA">
+                <div class="row padding-right-30">
+                  <div class="col-md-7 fs-16">
+                    {{i18n 'assets.javascripts.templates.sessions.form.fields.polls'}}
+                  </div>
+                  <div class="col-md-5 padding-right-0 fs-0">
+                    <label class="checkbox checkbox-swith right-position full-width margin-bottom-0">
+                      <input name="" id="Products-swith" type="checkbox">
+                      <span class="full-width display-block"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5">{{i18n 'assets.javascripts.templates.sessions.form.fields.existing_poll'}}</div>
+                  <div class="col-md-7 text-right">
+                    <select class="selectPullRight styled-select_withCss padding-left-10 text-right select-rightAlign">
+                      <option value="">Select</option>
+                      <option value="">Select</option>
+                      <option value="">Select</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row insideSection">
+                  <div class="col-md-12">
+                    <div class="input-block state-clear">
+                      <label for="polls_question">{{i18n 'assets.javascripts.templates.sessions.form.fields.question'}}</label>
+                      <input type="text" id="polls_question">
+                    </div>
+                  </div>
+                </div>
+                <div class="row insideSection">
+                  <div class="col-md-12">
+                    <div class="input-block state-clear">
+                      <label for="polls_question">{{i18n 'assets.javascripts.templates.sessions.form.fields.answer'}} 1</label>
+                      <input type="text" id="polls_question">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            {{/if}}
+          </div>
+          {{#if false}}
+          {{! Show when template feature ready}}
+            <div class="padding-top-20"><a href="#" class="btn btn-m">{{i18n 'assets.javascripts.templates.sessions.form.fields.save_template'}}</a></div>
+          {{/if}}
+          {{/if}}
+        </section>
+
+        <section class="streamSettings hide">
+          <div class="streamSettings__title">
+            <div class="labelWrapper">
+              <i class="VideoClientIcon-video1 fs-20 margin-right-10"></i>
+              <span class="text-color-Darkgrey vertical-midle check bold">{{i18n 'assets.javascripts.templates.sessions.form.fields.stream_settings'}}</span>
+            </div>
+            <label class="checkbox check choice right-position pull-right">
+              <input type="checkbox" name="remember_session_settings" checked="checked">
+              <span>
+                {{i18n 'assets.javascripts.templates.sessions.form.fields.remember'}}
+              </span>
+            </label>
+          </div>
+          <div class="streamSettings__Body">
+            <div class="chooseSettings">
+              <div class="chooseSettings__Title">
+                - {{i18n 'assets.javascripts.templates.sessions.form.fields.please_select'}} -
+              </div>
+              <div class="chooseSettings__Body">
+                <ul>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.camera'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.mobile_app'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.something_else'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.something_else'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.something_else'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.something_else'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.something_else'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.something_else'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.something_else'}}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="chooseSettings">
+              <div class="chooseSettings__Title">
+                - {{i18n 'assets.javascripts.templates.sessions.form.fields.please_select'}} -
+              </div>
+              <div class="chooseSettings__Body">
+                <ul>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.room'}} 1</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.room'}} 2</li>
+                </ul>
+              </div>
+            </div>
+            <div class="chooseSettings">
+              <div class="chooseSettings__Title">
+                - {{i18n 'assets.javascripts.templates.sessions.form.fields.please_select'}} -
+              </div>
+              <div class="chooseSettings__Body">
+                <ul>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.ip_cam'}}</li>
+                  <li>{{i18n 'assets.javascripts.templates.sessions.form.fields.encoder'}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div>
+</div>
+
+<div id="IP_Camera_modal">
+    {{>ipcam_modal_template}}
+</div>
+
+<div id="linkAccount" class="modal fade" aria-hidden="true" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <a href="" class="closeModal" data-dismiss="modal">
+        <i class="VideoClientIcon-iPlus"></i>
+      </a>
+      <div class="modal-body">
+        <h4 class="groupTitle clearfix">{{i18n 'assets.javascripts.templates.sessions.form.fields.link_zoom_account'}}</h4>
+        <section>
+          {{i18n 'assets.javascripts.templates.sessions.form.fields.need_paid_use_zoom'}}
+        </section>
+      </div>
+    </div>
+    <div class="text-right padding-top-10">
+      <a href="" class="btn btn-l btn-borderred-light" data-dismiss="modal">{{i18n 'assets.javascripts.templates.sessions.form.fields.close'}}</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,2280 @@
+@import "mixin";
+@import "../widgets/mixins";
+
+.modal {
+  input.form-control {
+    /* resetting float: left */
+    float: none !important;
+    overflow: auto !important;
+    // width: 92% !important;
+  }
+  .BAP-formWrapp{
+    height: auto !important;
+    padding-top: 0;
+  }
+  .modal-dialog{
+    padding-bottom: 80px;
+  }
+}
+
+#loginPopup .row.social a.col-xs-6, .modal-social-block a.col-xs-6{
+  padding: 0;
+}
+div.modal-dialog.fulllWidthModal{
+  left: 15%;
+  top: 5%;
+  width: 70% !important;
+  position: fixed;
+  height: 80% !important;
+  background: none repeat scroll 0 0 #fff;
+  border-radius: 5px;
+  min-height: 350px;
+  margin: 0 !important;
+  overflow: hidden;
+  padding-bottom: 15px;
+  transform: translate(0px, 0px);
+  -webkit-transform: translate(0px, 0px);
+  -moz-transform: translate(0px, 0px);
+  max-width: 70% !important;
+  div.modal-content{
+    background: transparent;
+    height: 100%;
+    border: medium none;
+    box-shadow: none !important;
+    padding: 0;
+  }
+  .modal-header, .modal-body, .modal-footer{
+    background: var(--bg__content);
+  }
+  .modal-header{
+    border-bottom: none;
+    height: 50px;
+    color: $siteColorMain;
+    font-size: 16px;
+    font-weight: lighter;
+    h3{
+      color: $siteColorMain;
+      font-size: 16px;
+      font-weight: lighter;
+    }
+  }
+  .modal-body{
+    height: calc(100% - 50px);
+    overflow-y: auto;
+  }
+}
+
+
+.users-show {
+  .bluButton {
+    font-size: 10px;
+  }
+}
+
+.users-show .fulllWidthModal.modal{
+  left: 15%;
+  top: 5%;
+  width: 80% !important;
+  max-width: 70% !important;
+  height: 70% !important;
+  background: none repeat scroll 0 0 #fff;
+  border-radius: 5px;
+  min-height: 350px;
+  margin: 0 !important;
+  overflow: hidden;
+  position: fixed;
+  padding-bottom: 15px;
+  transform: translate(0px, 0px);
+  -webkit-transform: translate(0px, 0px);
+  -moz-transform: translate(0px, 0px);
+  div.modal-content{
+    background: transparent;
+    height: 100%;
+    border: medium none;
+    box-shadow: none !important;
+    padding: 0;
+  }
+  .modal-header, .modal-body, .modal-footer{
+    background: var(--bg__main);
+  }
+  .modal-header{
+    border-bottom: none;
+    height: 50px;
+    color: $siteColorMain;
+    font-size: 16px;
+    font-weight: lighter;
+    h3{
+      color: $siteColorMain;
+      font-size: 16px;
+      font-weight: lighter;
+    }
+  }
+  .modal-body{
+    height: calc(100% - 50px);
+    overflow-y: auto;
+  }
+}
+
+.material-upload-modal{
+  &.not-empty{
+    #upload-images{
+      height: calc(100% - 160px) !important;
+    }
+  }
+}
+
+.loudThumbnailsList{
+  margin-top: 20px;
+  max-height: 110px;
+  overflow: auto;
+  div {
+    height: 90px;
+    width: 90px;
+    margin: 10px 5px;
+    display: inline-block;
+    vertical-align: top;
+    div{
+      background-size: cover;
+      background-position: center center;
+      margin: 0;
+    }
+  }
+}
+
+#upload-materials-popup{
+  padding-top: 25px;
+  .heading.clearfix {
+    font-size: 16px;
+    line-height: 30px;
+  }
+  .modal-dialog{
+    z-index: 9;
+  }
+  .heading.clearfix img {
+    height: 30px;
+    line-height: normal;
+  }
+ .unobtrusive-flash-container{
+   z-index: 19;
+   position: relative;
+ }
+}
+
+div.modal-body {
+  h1.heading{
+    color: var(--tp__h1);
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 22px;
+    margin-top: 5px;
+    a {
+      float: right;
+      height: 20px;
+      img{
+        height: 100%;
+      }
+    }
+  }
+  & > .modal-tabs{
+    .nav > li > a{
+      padding: 0 15px;
+      font-size: 16px;
+      font-weight: normal;
+      color: #232323;
+      background: none !important;
+
+      &:first-child{
+        padding-left: 0;
+      }
+    }
+    .tab-content{
+      padding: 10px 0;
+    }
+    .nav > li {
+      &.active{
+        a{
+          color: $siteColorMain;
+        }
+      }
+      @include media(tablet){
+        width: 100% !important;
+        margin-bottom: 10px;
+        a{
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  .bottomPushContainer{
+    position: absolute;
+    top: 100%;
+    padding-top: 20px;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    a:not(.btn-grey-solid), .btn-borderred-grey{
+      span{
+        color: #fff;
+      }
+    }
+  }
+  .groupTitle {
+    margin-top: 0;
+    font-size: 1.6rem;
+  }
+}
+.email_share_form{
+  textarea{
+    height: 140px;
+    max-height: 140px;
+    max-width: 358px;
+    min-height: 140px;
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+.ofsetModalTxt{
+  font-size: 14px;
+  .col-xs-4{
+    padding-left: 0;
+  }
+}
+
+#user_gender_input{
+  span{
+    font-weight: normal;
+    color: #fff;
+    position: relative;
+    &:before{
+      background: rgba(255, 255, 255, 0.6) none repeat scroll 0 0;
+      content: "";
+      display: block;
+      height: 15px;
+      position: absolute;
+      right: -7px;
+      top: 1px;
+      width: 1px;
+    }
+  }
+  .radio, .checkbox{
+    margin-top: 5px !important;
+  }
+  .controls{
+    .choice.radio:last-child span{
+      &:before{
+        display: none;
+      }
+    }
+  }
+}
+
+#user_gender_input {
+  padding: 2px 0 7px;
+  white-space: nowrap;
+  text-align: center;
+  .choices-group{
+    label {
+      display: inline-block;
+      padding: 0;
+      margin: 0 15px 0 0 !important;
+      vertical-align: middle;
+      input[type="radio"]{
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    }
+  }
+  label.choice.radio{
+    padding: 0 7px 0 3px;
+    display: inline-block;
+  }
+  .radio.choice span{
+    padding: 0;
+    &:after{
+      display: none;
+    }
+  }
+  .radio.choice input:checked{
+    &+span{
+      color: $inputColor;
+    }
+  }
+}
+
+#invite-user-modal, #invite-user-modal, #invite-co-presenter-modal, #invite-modal-portal {
+  .modal-dialog{
+    width: 800px;
+    max-width: 800px;
+  }
+  .modal-body{
+    padding: 10px 0;
+  }
+  h1.heading {
+    color: var(--tp__h1);
+    font-size: 19px;
+    line-height: 24px;
+    padding: 0 20px 10px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  hr.full-width{
+    width: 100% !important;
+  }
+  .contentBlock{
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid #e0e0e0;
+    .list-group-item{
+      background-color: transparent;
+      .buttons{
+        a{
+          padding-top: 4px;
+        }
+      }
+    }
+    .RightBlock, .leftBlock{
+      display: table-cell;
+      height: 100%;
+      width: 50%;
+      padding: 0 20px;
+      @include media(p-tablet){
+        padding: 0 !important;
+        border:none !important;
+      }
+    }
+    .invited{
+      max-height: 361px;
+    }
+
+    .RightBlock {
+      .list-group-item {
+        & > strong{
+          width: calc(100% - 155px);
+        }
+        .buttons{
+          padding-right: 0;
+          .removable.multi-type-invite-icon-view{
+            padding-left:  0 !important;
+          }
+          span{
+            padding-right: 10px
+          }
+          a{
+            &:after{
+              //top:2px;
+            }
+          }
+         & + div{
+           .label.label-primary{
+             display: inline-block;
+             padding-top: 4px;
+           }
+         }
+        }
+        @include media(p-tablet) {
+          .label.label-primary {
+            padding-top: 5px;
+            display: inline-block;
+          }
+          & > strong{
+            width: 100%;
+          }
+        }
+      }
+    }
+    .RightBlock.users_list{
+      padding-left: 10px;
+      border-left: 1px solid #e0e0e0;
+      background-color: #fcfcfc;
+      padding-bottom: 10px;
+    }
+  }
+  .contentBlockHead{
+    margin-bottom: 2px;
+    &.firstLine{
+      padding-top: 18px;
+    }
+  }
+  .list-group-item{
+    padding: 7px 15px;
+  }
+  .contacts-search{
+    height: 50px;
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
+  .email.input{
+    input{
+      width: calc( 100% - 72px );
+      vertical-align: top;
+      border-bottom-color: #9aafbf;
+      color: #9aafbf;
+      display: inline-block;
+      margin-top: -3px !important;
+      max-width: 100%;
+      border: none;
+      border-bottom: 1px solid #c2c2c2;
+      background: transparent none repeat scroll 0 0;
+      border-radius: 0;
+      font-size: 16px;
+      height: 30px;
+      line-height: 26px;
+      padding: 2px 1px 2px;
+    }
+    a{
+      display: inline-block;
+      vertical-align: top;
+      width: 71px;
+      background-color: #c2c2c2;
+      text-align: center;
+      color: var(--tp__main);
+      font-size: 18px;
+      margin-left: -4px;
+      border-radius: 0 4px 4px 0;
+      -webkit-border-radius: 0 4px 4px 0;
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+  .DoneButton{
+    margin: 20px 20px 10px 0;
+  }
+}
+#invite-user-modal{
+  .remHeadersection{
+    margin-bottom: 30px;
+  }
+  .list-group-item{
+    padding-right: 0;
+  }
+}
+.restorePasswordForm{
+  color: var(--tp__main);
+  #user_email_input {
+    input[type="email"] {
+      box-shadow: none;
+      border-bottom: 1px solid $siteColorMainLightGrey;
+      border-radius: 0;
+      color: var(--tp__main);
+      padding: 0;
+      margin: 109px 0 1px 0;
+      height: 30px;
+      line-height: 26px;
+      text-align: left;
+      width: 100%;
+      font-size: 15px;
+      &::-webkit-input-placeholder {
+        color: var(--tp__main);
+        font-style: normal;
+      }
+      &:-moz-placeholder {
+        color: var(--tp__main);
+        font-style: normal;
+      }
+      &::-moz-placeholder {
+        color: var(--tp__main);
+        font-style: normal;
+      }
+      &:-ms-input-placeholder {
+        color: var(--tp__main);
+        font-style: normal;
+      }
+    }
+  }
+  .additionalPad{
+    padding-bottom: 4rem;
+    @include media(p-phone){
+      padding-bottom: 0;
+    }
+  }
+  .resetPasswordBtn{
+    font-size: 17px;
+    width: 92%;
+    margin-top: 29px;
+    height: 60px;
+    border-radius: 30px;
+  }
+  .back-message{
+    padding-top: 43px;
+    font-size: 15px;
+  }
+  .resetImg{
+    // width: 17%!important;
+    // padding: 63px 1px 0 6px!important;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  .resetPass-message{
+    color: var(--tp__main);
+    font-size: 20px;
+    padding-top: 110px;
+    line-height: 26px;
+    text-align: center;
+    padding-bottom: 15px;
+    @include transition200();
+    @include media(p-phone){
+      padding-top: 40px;
+      padding-bottom: 0;
+    }
+  }
+}
+.loginOrSignUpModal {
+  color: var(--tp__main);
+  div.modal-body {
+    background:var(--bg__content);
+    min-height: 462px;
+    text-align: center;
+  }
+  .unobtrusive-flash-container {
+    .alert {
+      text-align: left;
+      color: var(--tp__main);
+      position: relative;
+      top: -10px;
+      border-radius: 10px;
+      overflow: hidden;
+      .bodyFlashMessage{
+        padding: 15px 40px 15px 55px;
+      }
+      > button {
+        color: var(--tp__icons);
+        position: absolute;
+        font-size: 17px;
+        right: 15px;
+        top: 15px;
+        opacity: 0.6;
+      }
+    }
+  }
+  #logo-modal{
+    width: 35px;
+    height: 30px;
+    @include transition200();
+    &.unite{
+      height: 40px;
+    }
+  }
+  .signUp-message{
+    color:var(--tp__h2);
+    font-size: 28px;
+    padding: 60px 7px 0 0;
+    line-height: 32px;
+    text-align: center;
+    @include transition200();
+  }
+  .modal-content{
+    border-radius: 20px;
+    min-height: 462px;
+    background:  var(--bg__content);
+  }
+  .modal-body{
+    background: transparent;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-dialog{
+    width: 450px;
+  }
+  .email{margin-top: -7px;}
+  .GenderSelect{
+    padding-top: 0;
+    box-shadow: none;
+    &.styled-select_withCss {
+      background-position-x: 99.5%;
+      margin-bottom: 5px;
+    }
+  }
+  // input[type='password'], input[type='email']{
+  //   margin-top: -3px !important;
+  // }
+  input[type='text'], input[type='password'], input[type='email'], select{
+    border-bottom: 1px solid var(--border__separator);
+    border-radius: 0;
+    color: var(--tp__main);
+    padding:14px 0 10px 0;
+    padding: 14px 0 10px 0;
+    height: 30px;
+    line-height: 26px;
+    text-align: left;
+    width: 100%;
+    font-size: 16px;
+    &::-webkit-input-placeholder {
+      color:var(--tp__main);
+      font-style: normal;
+    }
+    &::-moz-placeholder {
+      color:var(--tp__main);
+      font-style: normal;
+    }
+    &:-ms-input-placeholder {
+      color:var(--tp__main);
+      font-style: normal;
+    }
+    &:-moz-placeholder {
+      color:var(--tp__main);
+      font-style: normal;
+    }
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px var(--bg__content) inset !important;
+      color: var(--tp__main)  !important;
+      -webkit-text-fill-color: var(--tp__main) !important;
+    }
+
+  }
+  .almostBirthInput{
+    margin-left: 0;
+  }
+  .borderedInput {
+    position: relative;
+    margin-top: 10px;
+  }
+  .borderedInput.error{
+    input[type='text'], input[type='password'], input[type='email'], select{
+      border-color: var(--tp__inputs__validation) !important;
+      color: var(--tp__inputs__validation) !important;
+      &::-webkit-input-placeholder {
+        color: var(--tp__inputs__validation);
+      }
+      &::-moz-placeholder {
+        color: var(--tp__inputs__validation);
+      }
+      &:-ms-input-placeholder {
+        color: var(--tp__inputs__validation);
+      }
+      &:-moz-placeholder {
+        color: var(--tp__inputs__validation);
+      }
+    }
+  }
+  .popover{
+    font-size: 11px;
+    width: intrinsic; /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content; /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+  }
+  .socialMK2{
+    margin-top: 27px;
+    a{
+      display: inline-block;
+      height: 40px;
+      margin: 13px 9px 0;
+      padding: 2px !important;
+      vertical-align: middle;
+      width: 40px;
+      span{
+        line-height: 39px;
+        border:none;
+        @include transition200();
+        i{
+          font-size: 16px;
+          color: #28426a;
+          &.VideoClientIcon-google {
+            font-size: 14px !important;
+            line-height: 39px !important;
+          }
+          &.VideoClientIcon-instagram{
+            line-height: 38px;
+            font-size: 17px;
+          }
+        }
+      }
+    }
+  }
+  .orBlock{
+    padding-top: 14px;
+    font-size: 13px;
+    padding-bottom: 12px;
+  }
+  .user-avatar{
+    img{
+      width: 150px;
+      height: 150px;
+      margin: 40px auto 8px;
+      display: block;
+      border-radius: 50%;
+      position: relative;
+      text-align: center;
+      line-height: 90px;
+    }
+  }
+  .ofsetModalTxt{
+    color: var(--tp__main);
+    font-size: 11px;
+    padding-top: 8px;
+    padding-bottom: 17px;
+    margin: -12px 0;
+    p{
+      margin: 0;
+      line-height: 17px;
+      color: var(--tp__secondary);
+      a{
+        line-height: 15px;
+      }
+      &:first-child{
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+  .borderSize{
+    margin-top: 16px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  .signInTxt{
+    color: var(--tp__secondary);
+  }
+  .padForLogIn{
+    margin-top: -2px;
+    padding-bottom: 2px;
+  }
+  .addPad{padding: 12px 0;}
+  #user_birthdate_input{
+    padding: 3px 0 1px;
+    .controls-row{
+      font-size: 0;
+    }
+    select{
+      &::-ms-expand{
+        display: none;
+      }
+    }
+  }
+  .text-color-Blue{
+    color: var(--tp__active);
+  }
+  .temsOf{
+    font-size: 9.4px;
+  }
+  .toggle-modals{
+    color: var(--tp__active);
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .customSelect.hasCustomSelect{
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    width: 33%;
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url(asset_path('brBg.png'));
+    background-position: 94% 34%;
+    background-color: transparent;
+  }
+  &.signUpWithEmail{
+    .signUp-message{
+      padding: 0;
+      display: none;
+    }
+    .new_user-wrappShow{
+      display: none !important;
+    }
+    #new_user-wrapp{
+      display: block !important;
+    }
+    .orBlock{
+     padding-top: 14px;
+      margin-bottom: -16px;
+      @include transition200();
+    }
+    .ofsetModalTxt p:first-child{
+      padding-top: 5px;
+      line-height: 1.8;
+    }
+  }
+  &.logInWithForm{
+    .text-center{
+      display: block;
+    }
+    .login_user-wrapp{
+      display: none;
+    }
+    .socWrap{
+      display: none;
+    }
+  }
+  &.logInWithMedia{
+    .text-center{
+      display: none;
+    }
+    .login_user-wrapp{
+      display: block;
+    }
+    .socWrap{
+      display: block;
+      padding-bottom: 24px;
+    }
+    .showLoginForm{
+      border-radius: 30px;
+      margin-top: 20px;
+      width: 100%;
+      line-height: 3.8;
+      margin-bottom: 18px;
+      font-size: 16px;
+      height: 60px;
+    }
+  }
+  /**/
+  &.signUpWithMedia{
+    .signUp-message{
+     display: block;
+     padding: 62px 7px 0 0;
+    }
+    .new_user-wrappShow{
+      display: inline-block;
+    }
+    .form-signup{
+      display: none;
+    }
+    .modal-dialog{
+      .popover{
+        display: none !important;
+      }
+    }
+    .new_user-wrapp {
+      display: none;
+    }
+  }
+  .socWrap{display: none;}
+  .user_birthdate_inputWrapp{
+    position: relative;
+    i{
+      color:var(--tp__icons);
+      position: absolute;
+      transform: translateY(-50%);
+      right: 0;
+      top:20px;
+      font-size: 15px;
+    }
+  }
+  .signupBtn{
+    height: 59px;
+    width: 92%;
+    margin-bottom: 30px;
+    font-size: 16px;
+    border-radius: 30px;
+  }
+  .signupBtn[disabled]{
+    color: var(--tp__btn__main);
+    background: var(--btn__main);
+  }
+  .socMargin{
+    margin-top: 6px!important;
+  }
+  /**/
+  .socialBtn{
+    color: var(--tp__btn__bordered__social);
+    padding: 1px 15px 0;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+    max-width: 100%;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+    background: var(--bg__content);
+    border: 1px solid var(--btn__social);
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    &:hover, &:focus{
+      color: var(--tp__btn__bordered__social);
+    }
+  }
+  .social_inputs{
+    margin-top: 20px;
+    margin-bottom: 2px;
+    min-height: 60px;
+    width: 100%;
+    border-radius: 30px;
+    line-height: 58px;
+    font-size: 16px;
+    &__disable{
+      cursor: not-allowed;
+    }
+  }
+  .loginBtn{
+    border-radius: 30px;
+    margin-top: 30px;
+    width: 92%;
+    margin-bottom: 25px;
+    font-size: 15px;
+    height: 60px;
+  }
+  .loginBtn[disabled], .resetPasswordBtn[disabled]{
+    background: var(--btn__main);
+    color: var(--tp__btn__main);
+  }
+  &#loginPopup{
+    // #logo-modal{
+    //   padding: 63px 15px 0 8px;
+    //   width: 20%!important;
+    // }
+    .socialMK2{
+      margin-top: 0;
+    }
+  }
+  &#almostDoneModal{
+    input::-webkit-calendar-picker-indicator{
+      display: none;
+    }
+    .borderedInput{
+      padding-bottom: 7px;
+      margin-top: 0;
+    }
+    .GenderSelect{
+      margin-bottom: 0;
+      padding-bottom: 0;
+      height: 38px;
+    }
+    .user_birthdate_inputWrapp{
+      text-align: left;
+      margin-left: 0;
+      width: 100%;
+      padding-bottom: 0;
+      margin-bottom: 11px;
+      border-bottom: 1px solid #e2e7ea;
+      input{
+        margin-left: 0;
+      }
+      i {
+        top: 50%;
+      }
+    }
+    .user_birthdate_inputWrapp, .user_gender_inputWrapp{
+      input{
+        padding-bottom: 0;
+        padding-top: 0;
+        height: 38px;
+      }
+    }
+    .ofsetModalTxt{
+      .col-xs-12{
+        padding-top: 44px;
+      }
+    }
+    .inputsWrapp{
+      min-height:95px;
+      margin-left: 17px;
+      & > .borderedInput{
+        position: relative;
+        margin-top: 10px;
+      }
+    }
+    .submitBtn{
+      height: 60px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 30px;
+    }
+    @include media(p-phone){
+      overflow-y: auto;
+      .modal-dialog{
+        width: 98%;
+        /*по одному проценту отступа по краям*/
+      }
+    }
+  }
+  .soclogBlock{
+    margin-top: 24px;
+    height: 42px;
+    width: 118%;
+    border-radius: 20px;
+    line-height: 39px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    margin: 0 -30px;
+  }
+  .soclogBlockk{
+    margin-top: 24px!important;
+    height: 42px!important;
+    width: 110%!important;
+    border-radius: 20px!important;
+    line-height: 39px!important;
+    font-size: 12px!important;
+    margin-bottom: 15px!important;
+    margin: 0 -30px!important;
+  }
+  .form-group{
+    margin-bottom: 0;
+  }
+}
+#outdatedModal{
+  .modal-dialog{
+    width: 650px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    margin: 0!important;
+    .modal-content{
+      max-height: 300px;
+      min-height: unset;
+      .modal-body{
+        display: flex;
+        flex-direction: row;
+        padding: 0 30px 0 0;
+        min-height: unset;
+        .outdated-modal img{
+          width: 100%;
+          height: 100%;
+        }
+        .outdated-modal{
+          width: 45%;
+          padding-right: 20px;
+        }
+        .outdated-body{
+          width: 55%;
+          .confirmOutdated{
+            position: absolute;
+            bottom: -50px;
+            right: 0;
+          }
+        }
+        span{
+          font-weight: 400;
+          font-style: normal;
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}
+.user_gender_inputWrapp{
+  @-moz-document url-prefix() {
+   position: relative;
+    select{
+      border:0;
+      width: 100%;
+      position: relative;
+    }
+    &:before{
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #e2e7ea;
+    }
+  }
+  select{
+    color:var(--tp__main);
+  }
+  &.valid{
+    select{
+      color: var(--tp__main);
+    }
+  }
+}
+.signUpWithEmail{
+  .signUpPass{
+    padding-bottom: 10px;
+    input{
+      padding-right: 70px;
+    }
+  }
+  .form_V2 .signUpPass .errorContainerWrapp .errorContainer{
+    width: 100%;
+    text-align: left;
+    overflow: visible;
+    bottom: auto;
+    top: calc(100% - 8px);
+    white-space: normal;
+  }
+  @-moz-document url-prefix(){
+    .signupGenderInput{
+      padding-bottom: 0!important;
+      margin-bottom: 30px;
+      select{
+        text-indent: -2px;
+        margin-bottom: 0!important;
+      }
+      .errorContainerWrapp{
+        span{
+          bottom: -20px!important;
+        }
+      }
+    }
+  }
+  .signupGenderInput{
+    &.valid{
+      select{
+        color: var(--tp__main);
+      }
+    }
+  }
+}
+.sessions-edit-create-form{
+  .controls-row{
+    .span1{
+      min-width: 95px;
+    }
+  }
+}
+.socialMK2 a {
+  span{
+    i{
+      &.VideoClientIcon-google{
+        font-size: 28px;
+        line-height: 38px;
+      }
+    }
+  }
+}
+
+#signupPopup{
+  .socialMK2{
+    margin-top: 3px;
+  }
+  input.form-control {
+    margin-top: 6px;
+  }
+  .nameInput{margin-top: 13px!important;}
+  .lastNameInput{margin-top: -2px!important;}
+  .birthDayInput{margin-top: 3px!important;}
+  .genderInput{margin-top: 11px!important;}
+  .emailInput{margin-top: 10px!important;}
+  input.formSize{
+    font-size: 12px;
+  }
+  .customSelectFocus{
+    position: relative;
+    &:after{
+      content: '';
+      background: rgba(255,255,255,0.03);
+      position: absolute;
+      left: 7px;
+      top: 1px;
+      right: 0;
+      bottom: 6px;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+    }
+  }
+  #user_gender_input{
+    .choice.radio{
+      input:focus{
+        & + span{
+          position: relative;
+          &:after{
+            content: '';
+            background: rgba(255,255,255,0.03);
+            position: absolute;
+            left: -8px;
+            top: -2px;
+            right: 0px;
+            bottom: -2px;
+            display: block !important;
+            border-radius: 4px !important ;
+            -webkit-border-radius: 4px !important;
+            box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            width: calc(100% + 10px) !important;
+            height: calc(100% + 10px) !important;
+          }
+        }
+      }
+    }
+  }
+  .ofsetModalTxt{
+    color: var(--tp__main);
+    padding: 40px 0 14px 0;
+  }
+}
+.emps{margin-top: 22px;}
+.psem{
+  margin-top: 25px;
+  position: relative;
+}
+/*STRENGTH PASSWORD STYLES AND PASSWORD ICONS*/
+.pass-controllers{
+  width: 435px!important;
+  max-width: calc(100% - 435px);
+  position: relative;
+  left: 186px;
+  top: -28px;
+}
+.eye {
+  position: absolute;
+  width: 18px;
+  height: 22px;
+  right: 0;
+  cursor: pointer;
+  background: url(asset_path('eye.png'));
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 100;
+  &.showWizardPassword {
+    top: 27px;
+    bottom: 0;
+  }
+  &.off {
+    background: url(asset_path('eye-off.png'));
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+.caps {
+  position: absolute;
+  width: 18px;
+  height: 22px;
+  right: 30px;
+  top: 30px;
+  background: url(asset_path('caps-lock-icon.png'));
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: none;
+  &.showWizardCaps {
+    top: 27px;
+    bottom: 0;
+  }
+  &::after {
+    content: 'Caps Lock is On';
+    text-align: center;
+    font-size: 14px;
+    width: 130px;
+    font-family: $font-Regular;
+    display: block;
+    padding: 12px 0;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    background: #FFFFFF;
+    position: relative;
+    top: 28px;
+    right: 60px;
+    z-index: 101;
+  }
+  &.show {
+    display: block;
+  }
+}
+.passStrengthWrap {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  display: none;
+  &.wizardPassStrength {
+    bottom: -15px;
+    .passMessage {
+      font-size: 12px;
+    }
+  }
+  .passStrength {
+    height: 3px;
+    background: #E6E6E6;
+  }
+
+  &.show {
+    display: block;
+  }
+
+  .passMessage {
+    padding-top: 5px;
+    font-family: $font-Regular;
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    &.weak {
+      color: #F33535;
+    }
+    &.medium {
+      color: #BCB32A;
+    }
+    &.strong {
+      color: #37A67D;
+    }
+  }
+  .level {
+    height: 4px;
+    transition: width 0.3s ease;
+    &.weak {
+      width: 33%;
+      background: #F33535;
+    }
+    &.medium {
+      width: 66%;
+      background: #BCB32A;
+    }
+    &.strong {
+      width: 100%;
+      background: #37A67D;
+    }
+  }
+}
+.error-message{
+  padding-top: 5px;
+}
+/*EDIT PASSWORD STYLES*/
+.profiles-edit_application{
+  .passStrengthWrap{
+    position: relative;
+  }
+  .pass-controllers{
+    @media (max-width: 690px){
+      left: -4px;
+    }
+    @include media(p-tablet){
+      max-width: 100%;
+    }
+  }
+  .editPasswordArea input{
+    padding-right: 5rem;
+  }
+}
+.profiles-update_application{
+  .password-Strength-2-tooltip{
+    bottom: 12.5rem;
+  }
+}
+/*RESET PASSWORD STYLES*/
+.users-passwords-edit{
+  .passStrengthWrap{
+    position: relative;
+  }
+  .form-wrapper{
+    input{
+      padding-right: 5rem;
+    }
+    @media (min-width: 651px) and (max-width: 767px){
+      width: 100%!important;
+    }
+    @media (max-width: 650px) {
+      width: 100%!important;
+    }
+  }
+  .pass-controllers{
+    @include media(p-tablet) {
+      max-width: 100%;
+    }
+    @media (max-width: 650px) {
+      left: -4px;
+    }
+    .eye{
+      top: -15px;
+    }
+  }
+  input[type="text"]::-ms-clear {
+    display: none!important;
+  }
+  input[type="password"]::-ms-reveal {
+    display: none!important;
+  }
+}
+/*SIGN UP / LOG IN PASSWORD STYLES*/
+.loginOrSignUpModal{
+  .passStrengthWrap{
+    margin-top: -4px;
+    position: static;
+  }
+}
+#signupPopup {
+  .eye, .caps {
+    top: 10px;
+  }
+  /*styles for sign up icons for OSX*/
+  .showSignupMacPassword{
+    top: -3px;
+    right: -18px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+  }
+  .showSignupMacPassword.active{
+    background: url(asset_path('eye-off.png'));
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .showSignupMacCaps{right: 25px; top: 11px;}
+  .safariDetected{
+    input::-webkit-credentials-auto-fill-button {
+      right: 0!important;
+    }
+    input{
+      padding-right: 20px;
+    }
+  }
+  input::-webkit-credentials-auto-fill-button {
+    right: 42px!important;
+    top: 16px!important;
+    position: absolute!important;
+  }
+  input::-webkit-caps-lock-indicator {
+    display: none!important;
+    visibility: hidden!important;
+  }
+  input[type="text"]::-ms-clear {
+    display: none!important;
+  }
+  input[type="password"]::-ms-reveal {
+    display: none!important;
+  }
+}
+
+#loginPopup{
+  .eye, .caps{
+    top: 5px;
+  }
+  .showSignInMacPassword{
+    top: -8px;
+    right: -18px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+  }
+  .showSignInMacPassword.active{
+    background: url(asset_path('eye-off.png'));
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .showSignInMacCaps{right: 25px; top: 6px;}
+  #userPassword{
+    padding-right: 70px;
+  }
+  .safariDetected{
+    input::-webkit-credentials-auto-fill-button {
+      right: 0!important;
+    }
+    input{
+      padding-right: 20px;
+    }
+  }
+  input::-webkit-credentials-auto-fill-button {
+    right: 42px!important;
+    top: 11px!important;
+    position: absolute!important;
+  }
+  input::-webkit-caps-lock-indicator {
+    display: none!important;
+    visibility: hidden!important;
+  }
+  input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px var(--bg__content) inset;
+    -webkit-text-fill-color: var(--tp__main);
+  }
+  input[type="text"]::-ms-clear {
+    display: none!important;
+  }
+  input[type="password"]::-ms-reveal {
+    display: none!important;
+  }
+}
+/*settings and forgot password fields*/
+.profiles-edit_application, .users-passwords-edit{
+  .new-password{
+    max-width: 400px;
+    .borderedInput{
+      position: relative;
+    }
+  }
+  .resetPasswordButton:disabled{
+    color: var(--tp__btn__main);
+    background: var(--btn__main);
+  }
+
+  .showResetMacPassword,
+  .userConfirmMacPasswordEye{
+    top: -30px!important;
+    right: 10px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+  }
+  .showResetMacCaps,
+  .userConfirmMacPasswordCaps{
+    right: 55px;
+  }
+  input::-webkit-caps-lock-indicator {
+    visibility: hidden;
+  }
+  @include media(p-phone){
+    .resetPasswordButton{
+      width: 100%;
+    }
+  }
+  input[type="text"]::-ms-clear {
+    display: none!important;
+  }
+  input[type="password"]::-ms-reveal {
+    display: none!important;
+  }
+}
+.profiles-edit_application{
+  .new-password{
+    max-width: none;
+  }
+}
+/*//////////////////*/
+.pass-controllers {
+  .eye, .caps{
+    top: -15px;
+  }
+  @media only screen and (max-width: 650px) {
+    .passStrengthWrap {
+      .passMessage {
+        padding-top: 0;
+      }
+    }
+  }
+}
+.sizeOfMediaButtons {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 45px;
+  a{
+    &:hover{
+      box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2) inset;
+    }
+  }
+}
+// .marL{margin-left: -7px;}
+.phone-verification-area{
+  form{
+    margin: 0 !important;
+  }
+  input[type='submit']{
+    border-radius: 0 3px 3px 0;
+    line-height: 29px;
+    margin-bottom: 0 !important;
+    margin-left: -7px;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    display: inline-block;
+    vertical-align: top;
+    z-index: 999;
+  }
+}
+body #signupPopup .new_user-wrappShow{
+  margin-top: 40px;
+  height: 60px;
+  width: 100%;
+  border-radius: 30px;
+  line-height: 58px;
+  font-size: 17px;
+  margin-bottom: 15px;
+
+}
+.linkedin svg{
+  width: 27px!important;
+  height: 28px!important;
+}
+.fontBot{
+  font-size: 14px;
+}
+.already{font-size: 14px;}
+.showSignUpSocialMedia{margin-top: 30px;}
+.showSocialMedia{font-size: 14.5px;color: var(--tp__main);}
+.firstChild{margin-top: 3px;}
+.secondChild{margin-top: 20px;}
+.thirdChild{margin-top: 8px;}
+.fourthChild{margin-top: 8px;}
+.social_inputs {
+  svg{
+    width: 40px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  i{
+    position: absolute;
+    width: 40px;
+    left: 10px;
+    top: 50%;
+    font-size: 40px;
+    transform: translateY(-50%);
+    &.VideoClientIcon-apple{
+      top:calc(50% - 3px);
+    }
+  }
+}
+a.socialBtn.social_inputs.otherSocial.appleInstUp:hover{color: inherit;}
+@media screen and (max-width: 420px){
+  .social_inputs{
+    white-space: normal!important;
+    line-height: 40px!important;
+  }
+  .social_inputs{
+    svg,i{
+      margin: 10px auto 0;
+      display: block;
+      position: unset;
+      top: 0;
+      left: 0;
+      transform: translateY(0);
+    }
+  }
+}
+.otherSocial{
+  margin: 20px 0;
+}
+.margB{padding-top: 230px;}
+#playvideo-modal #playvideo-iframe{
+  z-index: 199;
+  position: relative;
+}
+
+.modal{
+  -webkit-overflow-scrolling : touch !important;
+  .owl-carousel .owl-stage-outer{
+    overflow: hidden !important;
+  }
+}
+.shareModal ,.modalWithNotification{
+ .modal-content{
+   background-color: transparent;
+ }
+ .modal-body{
+   padding: 0;
+   background: transparent;
+   border-radius: 0;
+   .sm-head{
+     position: relative;
+     background: var(--bg__content);
+     border-radius: 10px;
+     padding: 20px;
+     & > .closeModal{
+       position: absolute;
+       z-index: 1;
+       top:10px;
+       right: 15px;
+       @include transition200();
+       i{
+         z-index: 2;
+         transform: rotate(45deg);
+         display: block;
+         position: relative;
+         color: #a8a8a8;
+         font-size: 18px;
+       }
+       &:hover{
+         transform:scale(1.2);
+       }
+     }
+   }
+ }
+}
+
+.shareModal .sm-body{
+  background: var(--bg__content);
+  padding: 0 1.5rem 2rem;
+}
+
+#social-modal,#get-custom-url-modal.shareModal{
+  padding-bottom: 80px;
+  overflow-y: auto;
+  &:not(.embedActive){
+    .embed-section, #embeddedCodePreview{
+      visibility: hidden;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      padding: 0;
+      overflow: hidden;
+      @include media(tablet){
+        *{
+          height: 0;
+        }
+      }
+    }
+    .share-section{
+      width: 100%;
+    }
+  }
+  .modal-content{
+    background: transparent;
+  }
+  .embed-section-head{
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    color: var(--tp__main);
+    font-size: 14px;
+  }
+  .modal-dialog:not(.modalChangeUrl){
+    width: 96%;
+    max-width: 420px;
+  }
+  &.embedActive{
+    .modal-dialog{
+      width: 96%;
+      max-width: 1140px;
+    }
+    .sm-head{
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  .sm-head{
+    border-radius: 10px;
+    position: relative;
+    background-color: var(--bg__content);;
+    padding: 15px 20px;
+    overflow: hidden;
+    & > .closeModal{
+      position: absolute;
+      z-index: 1;
+      top:10px;
+      right: 15px;
+      @include transition200();
+      i{
+        z-index: 2;
+        transform: rotate(45deg);
+        display: block;
+        position: relative;
+        color: #a8a8a8;
+        font-size: 18px;
+      }
+      &:hover{
+        transform:scale(1.2);
+      }
+    }
+  }
+  .sm-body{
+
+  }
+  .sharetools-menu{
+    font-size: 0;
+    margin-top: 7px;
+    margin-bottom: 15px;
+    a{
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      color: #fff;
+      display: inline-block;
+      vertical-align: top;
+      font-size: 13px;
+      margin-right: 4.3%;
+      margin-left: 0;
+      line-height: 31px;
+      padding: 0;
+      @include media(tablet){
+        margin-bottom: 20px;
+      }
+      &:last-child{
+        margin-right: 0;
+      }
+      &.gplus-share{
+        line-height: 30px;
+        font-size: 16px;
+      }
+      span{
+        line-height: inherit;
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+      }
+      i{
+        //font-size: inherit;
+        vertical-align: unset;
+      }
+    }
+  }
+  .shareSection .link_Share_block{
+    input{
+      width: 100%;
+    }
+    a{
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .link_Share_block{
+    margin-bottom: 7px;
+    position: relative;
+    padding-bottom: 0;
+    label{
+      display: block;
+      line-height: 20px;
+      width: calc(100% - 70px);
+      margin-bottom: 0;
+      label: var(--tp__h1);
+    }
+    input{
+      border:none;
+      margin-bottom: 0;
+      color: var(--siteColorMain);
+    }
+    a{
+      padding: 0 11px;
+      width: auto;
+      line-height: 20px;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+    }
+  }
+  .customCSS{
+    input{
+      display: none;
+      width: 100%;
+    }
+    &.active{
+      .VideoClientIcon-angle-downF:before{
+        transform: rotate(180deg);
+      }
+      input{
+        display: block;
+      }
+    }
+  }
+  .embedIframeLabel{
+    float: right;
+  }
+  textarea#embedIframe{
+    min-height: 114px;
+    margin: 0px;
+    width: calc(100% - 75px);
+    min-width: calc(100% - 75px);
+    max-width: calc(100% - 75px);
+  }
+  textarea#singleEmbedIframe{
+    min-height: 75px;
+    margin: 0px;
+    width: calc(100% - 75px);
+    min-width: calc(100% - 75px);
+    max-width: calc(100% - 75px);
+  }
+  //for embed covers styles ONLY on Immerss, remove if used on both sides(Immerss + client)
+  #unite_embed{
+    &:not(.full){
+      @include Covered();
+    }
+    &.full{
+      @include Covered(true);
+    }
+  }
+}
+
+#requestSessionModal{
+  .groupTitle{
+    color: var(--tp__h1)!important;
+  }
+  label{
+    margin: 0;
+  }
+  .formWrapp section{
+    display: flex;
+    flex-direction: column;
+    .select-tag-block{
+      padding-bottom: 5px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      height: 35px;
+      .ui-datepicker-trigger{
+        padding-right: 0;
+        i{
+          margin-right: 0;
+          color:var(--tp__icons);
+        }
+      }
+      .styled-select{
+        padding-right: 0;
+        b{
+          position: relative;
+          &:after{
+            position: absolute;
+            right: 1px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  @include media(tablet){
+    .element-right-position{
+      text-align: right;
+    }
+  }
+}
+
+#requestSessionModal, #RequestDifferentTimeModal{
+  .modal-body{
+    padding: 16px 18px;
+  }
+  .noteSection{
+    label{
+      color: var(--tp__main);
+    }
+  }
+  .groupTitle{
+    padding-bottom: 9px;
+    color: var(--tp__main);
+  }
+  .modal-dialog{
+    width: 440px;
+  }
+  .sectionBlock{
+    padding: 0;
+  }
+  .formWrapp > .padding-top-10.text-right{
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .overContentSubmit input, button.btn.btn-m{
+    padding: 0 35px;
+    margin-top: 10px;
+  }
+
+}
+
+.followersModal{
+  .modal-dialog{
+    width: 500px;
+  }
+  .modal-body{
+    padding: 2rem 1rem 3rem 3rem;
+  }
+  &__title{
+    color: var(--tp__h1);
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+  }
+  &__body{
+    max-height: 422px;
+    overflow: auto;
+    padding-right: 1rem;
+  }
+  &__follower{
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border__separator);
+    justify-content: space-between;
+  }
+  &__displayName{
+    width: 100%;
+    padding-left: 20px;
+    a{
+      color: var(--tp__secondary);
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+  &__avatar{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    height: 40px;
+    width: 40px;
+  }
+  &__button{
+    position: relative;
+    .btn{
+      width: 100%;
+      font-weight: bold;
+      &.active{
+        background: var(--btn__secondary);
+        border: 1px solid var(--btn__secondary);
+        color: var(--tp__btn__secondary);
+      }
+    }
+  }
+  .follow_tooltip_log{
+    top: 105%;
+    left: -35%;
+  }
+}
+
+#RequestDifferentTimeModal{
+  .styled-datepicker.hasDatepicker{
+    padding-top: 2px;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+  .select-block, .input-block{
+    padding-bottom: 0;
+  }
+  .select-block label{
+    font-size: 14px;
+  }
+}
+#email-modal-share{
+  &:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.8;
+  }
+  fieldset span{
+    color: var(--tp__main);
+    &.error {
+      color: $form_state-error
+    }
+  }
+}
+
+.preview-cancel{
+  .modal-body {
+    font-size: 14px;
+    a{
+      color: var(--tp__active);
+    }
+  }
+}
+
+#session_thumbnail_modal, .CRsessionWrapper #company_logo_modal, #user_avatar_modal, #channel_avatar_modal, #channel_cover_modal{
+  .cropOptions{
+    .btn-group.text-right{
+      position: absolute;
+      bottom: -4rem;
+      right: 0;
+      @include media (tablet) {
+        bottom: -6rem;
+      }
+    }
+  }
+}
+
+#channel_cover_modal.in .saveCrop{
+  position: absolute;
+  right: 0;
+  bottom: -4rem;
+  @include media(tablet){
+    bottom: -5rem;
+  }
+  a{
+    min-width: 9rem;
+  }
+}
+
+#session_thumbnail_modal{
+  .unobtrusive-flash-container .alert{
+    position: relative;
+    font-size: 14px;
+    border: none;
+    line-height: 25px;
+    padding: 20px 30px 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    .close{
+      position: absolute;
+      right: 15px;
+      font-size: 18px;
+      color: var(--tp__icons);
+      transform: rotate(0deg);
+    }
+  }
+  .closeModal{
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+    right: 5px;
+    -webkit-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    i{
+      z-index: 2;
+      transform: rotate(45deg);
+      display: block;
+      position: relative;
+      color: var(--tp__icons);
+      font-size: 18px;
+      padding: 10px;
+    }
+  }
+}
+
+.modalChoice{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.7);
+  z-index: 19;
+  &__body{
+    width: 300px;
+    max-width: 100%;
+    min-height:120px;
+    padding: 20px;
+    box-shadow: 0px 1px 4px 0 $font-color-main-ultra-light;
+    background: var(--bg__content);
+    text-align: center;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__btns{
+    padding-top: 10px;
+    a{
+      width: 90px;
+    }
+    a:last-child{
+      margin-left: 10px;
+    }
+  }
+}
+
+/*эти стили нужны для оповещений о том,что у юзера заканчивается место в хранилище*/
+.statica{
+  /*delete display none when this menu will be needed*/
+  display: none;
+  background: $siteColorMainGold;
+  border-radius: 10px;
+  /*set the  display flex when this menu will be needed*/
+  //display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0 30px;
+  min-height: 60px;
+  @include media(phone){
+    flex-direction: column;
+    padding: 10px 0;
+    line-height: 3;
+  }
+  .btn{
+    color: var(--tp__main);
+    font-weight: bold;
+  }
+}
+
+.modal.editVideo{
+  .unobtrusive-flash-container{
+    top: 20px;
+    right: 20px;
+    width: 360px;
+    z-index: 9999;
+    position: absolute;
+
+    @include media(phone){
+     width: calc(100% - 40px);
+    }
+
+    .alert{
+      border-radius: 1rem;
+      -webkit-border-radius: 1rem;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      opacity: 1;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 4px 7px 0 var(--sh__main);
+      background: var(--bg__tooltip);
+      overflow: hidden;
+      .bodyFlashMessage{
+        padding: 15px 40px 15px 55px;
+      }
+      .close{
+        top: 1.5rem;
+        right: 1.5rem;
+        color: var(--tp__icons);
+        text-align: center;
+        position: absolute;
+      }
+    }
+  }
+}
+
+#review-modal.AddReview{
+  .modal-content{
+    background: none;
+    box-shadow: none;
+  }
+  .modal-body{
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .bodyWrapper{
+    display: flex;
+    border-radius: 10px;
+    background-color: var(--bg__content);
+    box-shadow: 0 4px 7px 0 var(--sh__modals);
+    position: relative;
+    .closeModal{
+      position: absolute;
+      z-index: 1;
+      top:5px;
+      right: 5px;
+      @include transition200();
+      i{
+        z-index: 2;
+        transform: rotate(45deg);
+        display: block;
+        position: relative;
+        color: var(--tp__icons);
+        font-size: 18px;
+        padding: 10px;
+      }
+      &:hover{
+        transform:scale(1.2);
+      }
+    }
+  }
+  .bodyContent{
+    padding: 2rem 3rem 1rem 2rem;
+    width: 65%;
+    @include media(tablet){
+      width: 100%;
+    }
+  }
+  .imgSide{
+    width: 35%;
+    @include media(tablet){
+      display: none;
+    }
+  }
+  .feedContent{
+    padding: 2rem;
+    background: var(--bg__secondary);
+    border: 1px solid var(--border__content__sections);
+    border-radius: 1rem;
+    color: var(--tp__main);
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  .feedContentWrapper{
+    display: flex;
+  }
+  .col-md-6{
+    padding-left: 0;
+    padding-right: 0;
+    @include media(tablet-phone){
+      display: inline-block;
+      width: 50%;
+      margin-left: -0.2rem;
+    }
+  }
+  .rateContent .controls{
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+  }
+  textarea{
+    max-height: 65px;
+    overflow-y: auto;
+    background: none;
+    border: none;
+    resize: none;
+    box-shadow: none;
+    border-bottom: 1px solid var(--border__form__normal);
+    border-radius: 0;
+    &::placeholder{
+      color: var(--tp__inputs);
+    }
+  }
+  .confirmBtn{
+    position: absolute;
+    bottom: -6rem;
+    right: 0;
+  }
+}

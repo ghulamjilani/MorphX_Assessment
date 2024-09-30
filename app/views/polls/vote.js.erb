@@ -1,0 +1,6 @@
+$('#polls .LoadingCover').hide();
+$('#poll_<%= @poll['id'] %> .Votes-b').removeClass('didNotVote').addClass('votedIn');
+$('.Votes-b a').on('click', function(e){
+  e.preventDefault();
+});
+$('#poll_<%= @poll['id'] %> h6').html("Poll Results - Total of <%= @poll['totalVotes'] %> votes");

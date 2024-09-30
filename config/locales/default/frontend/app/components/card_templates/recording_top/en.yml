@@ -1,0 +1,8 @@
+en:
+  frontend:
+    app:
+      components:
+        card_templates:
+          recording_top:
+            upload: Upload
+            private: Private

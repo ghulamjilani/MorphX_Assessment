@@ -1,0 +1,18 @@
+en:
+  views:
+    dashboards:
+      uploads:
+        upload_modal:
+          upload_videos: Upload Videos
+          select_file_to_upload: Select file to upload
+          available_storage: "Storage is %{used_percent}% full. Available storage %{available} / %{limit}"
+          expand_storage: Expand Storage
+          drag_drop_videos: or Drag-n-drop videos here
+          can_select_several_videos: (you can select several videos at once)
+          accepted_video_formats: "Accepted video formats: %{formats}"
+          accepted_video_dimensions: "Accepted video dimensions: %{dimensions}"
+          the_correct_aspect_ratio: "The correct aspect ratio: %{ratio}"
+          maximum_file_size: "Maximum file size: %{max_size}"
+          maximum_video_length: "Maximum video length: %{hour} hours"
+          error_please_try_again: "Error: please, try again"
+          done: Done

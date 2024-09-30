@@ -1,0 +1,135 @@
+- content_for(:extra_body_classes, "dashboards-product_lists header-top dashboards")
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    .pr_new-or-edit
+      .pr_new-or-edit-body
+        .productName
+          New Product List
+        - content_for(:after_include_javascripts) do
+          :javascript
+            $(document).ready(function(){
+              list_form = new window.ListForm({el: '#list_form_area'});
+              list_form.render();
+            });
+        #list_form_area
+          = form_for @list, as: :list, url: dashboard_lists_path, method: :post, html: {class: 'form_V2 list_form'} do |f|
+            %section
+              .input-block.required{class: @list.name.to_s.length > 0 ? '' : 'state-clear'}
+                = f.label :name, 'List Name'
+                = f.text_field :name
+                .errorContainerWrapp
+                  .errorContainer
+              .input-block{class: @list.description.to_s.length > 0 ? '' : 'state-clear'}
+                = f.label :description
+                = f.text_area :description, rows: 1, 'max-length': 500, data: {autoresize: true}
+                .infoContainerWrapp
+                  -#Minimum 24 characters
+                .errorContainerWrapp
+                  .errorContainer
+                .counter_block #{@list.description.to_s.length}/500
+            .text-right.clearfix.padding-top-30
+              %a.stepBackBtn.btn.btn-m.btn-borderred-grey.margin-right-10{href: dashboard_lists_path} Back
+              = f.submit 'Save', class: 'btn btn-m'
+        -#.info-tabs
+          %ul.nav.nav-tabs.nav-justified
+            %li.active
+              %a{href:'#ImportViaURL', "data-toggle":"tab"} Import via URL
+            %li
+              %a{href:'#AddManually', "data-toggle":"tab"} Add Manually
+            %li
+              %a{href:'#ImportViaBarcode', "data-toggle":"tab"} Import via Barcode
+          .tab-content.padding-left-0.padding-right-0.padding-bottom-50
+            #ImportViaURL.tab-pane.active
+              %form
+                .row.form_V2.clearfix
+                  .col-sm-10
+                    .input-block.state-clear.required
+                      %label Add URL
+                      %input{type:'text'}
+                      .errorContainerWrapp
+                        .errorContainer error text
+                  .col-sm-2.Fetch_wrapp.padding-left-0
+                    %a.full-width.btn.btn-m.btn-grey-solid{href:'#'} Fetch
+
+            #AddManually.AddManually.tab-pane
+              %form
+                .row.form_V2.clearfix
+                  .col-md-4
+                    %label.product-image{style: 'background-image:url(http://lorempixel.com/400/400/)'}
+                      %span
+                        %input.inputfile.hidden{name:"", :type => "file"}
+                        Image
+                        %br/
+                        (click to upload)
+                  .col-md-8
+                    .input-block.state-clear.required
+                      %label Product URL
+                      %input{type:'text'}
+                      .errorContainerWrapp
+                        .errorContainer error text
+                    .input-block.state-clear.required
+                      %label Product Name
+                      %input{type:'text'}
+                      .errorContainerWrapp
+                        .errorContainer error text
+                    .input-block.state-clear.required
+                      %label Description
+                      %input{type:'text'}
+                      .infoContainerWrapp
+                        Minimum 24 characters
+                      .counter_block 0/2000
+                      .errorContainerWrapp
+                        .errorContainer error text
+                    .priceSection.clearfix
+                      Price*
+                      %input.btn.btn-s.btn-borderred-grey.pull-right{type:"text", value:'$34.96'}
+                    .input-block.state-clear.required
+                      %label Other info
+                      %input{type:'text'}
+                      .infoContainerWrapp
+                        Minimum 24 characters
+                      .counter_block 0/2000
+                      .errorContainerWrapp
+                        .errorContainer error text
+                .clearfix.text-right
+                  %a.btn.btn-m Add Product
+                  %a.btn.btn-m.btn-grey-solid.btn-red-hover Cancel
+            #ImportViaBarcode.tab-pane
+              %form
+                .row.form_V2.clearfix
+                  .col-sm-10
+                    .input-block.state-clear.required
+                      %label Add Barcode
+                      %input{type:'text'}
+                      .errorContainerWrapp
+                        .errorContainer error text
+                  .col-sm-2.Fetch_wrapp.padding-left-0
+                    %a.full-width.btn.btn-m.btn-grey-solid{href:'#'} Add
+
+
+
+          .products-item-list
+            .row
+              .col-md-6
+                Added Products (6)
+              .col-md-6.text-right.fs-12
+                Sort by
+                %select.styled-select.styled-select_withCss.btn.btn-s.btn-borderred-grey.fs-12
+                  %option Newest
+                  %option Newest
+                  %option Newest
+            .row
+              .col-xs-6.col-sm-4.col-md-4.productTileContainer
+                .productTile
+                  .productTile_image_wrapp
+                    %a.productTile_remove{href:'#', title:'Remove product'}
+                      %i.VideoClientIcon-iPlus.rotateIcon
+                    %img{class:'productTile_image', src:'http://lorempixel.com/400/400/', alt:''}
+                    .afiliateMarker{title:"Congrats! This cool product is ready to make money"} $
+                  .productTile_name Product Name Goes here on this two lines
+                  .productTile_footer.clearfix
+                    .fs-12.text-ellipsis.text-color-LightGrey.padding-bottom-5 Other filters like size, color, etc...
+                    %a.productTile_edit.text-color-main.fs-12.pull-left{href:'#'} Edit Product
+                    .productTile_cost.btn.btn-s.pull-right $12.99

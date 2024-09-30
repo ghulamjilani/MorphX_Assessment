@@ -1,0 +1,8 @@
+en:
+  frontend:
+    app:
+      pages:
+        video_client:
+          header_client:
+            join_link: Join link [logged in user]
+            guest_link: Guest link [anonymous user]

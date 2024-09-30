@@ -1,0 +1,64 @@
+.cropper-container {
+  max-height: 100%;
+
+  .cropper-view-box {
+    border: 1px solid var(--bg__content);
+    outline: none;
+  }
+
+  .cropper-line {
+    background-color: none;
+  }
+
+  .cropper-point {
+    background-color: var(--bg__content);
+    border-radius: 50%;
+    height: 1rem !important;
+    width: 1rem !important;
+    opacity: 1;
+  }
+
+  .cropper-view-box {
+    img {
+      object-fit: contain;
+    }
+  }
+
+  .cropper-canvas {
+    max-height: 100%;
+
+    img {
+      object-fit: contain;
+    }
+  }
+
+  @include media(tablet) {
+    .cropper-point:not(.point-se) {
+      display: none;
+    }
+    .cropper-point.point-se {
+      bottom: 1rem;
+      right: 1rem;
+    }
+  }
+
+  .cropper-dashed {
+    display: none;
+  }
+
+  .point-w, .point-nw, .point-sw {
+    left: -.5rem;
+  }
+
+  .point-nw, .point-n, .point-ne {
+    top: -.5rem;
+  }
+
+  .point-ne, .point-e, .point-se {
+    right: -.5rem;
+  }
+
+  .point-se, .point-s, .point-sw {
+    bottom: -.5rem;
+  }
+}

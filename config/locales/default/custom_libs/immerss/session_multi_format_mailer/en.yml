@@ -1,0 +1,7 @@
+en:
+  custom_libs:
+    immerss:
+      session_multi_format_mailer:
+        session_no_stream_stop_scheduled:
+          subject:  Your session will be stopped in %{minutes_to_stop} minutes
+          body:  "Dear %{public_display_name},\nYour session %{session_link} will be stopped in %{minutes_to_stop} minutes as there is no video stream in your session.\nPlease make sure that your streaming device or software works properly"

@@ -1,0 +1,191 @@
+@include media(reverso-phone) {
+  .toggleSection {
+      display: block !important;
+  }
+}
+
+.searchWrapper {
+  @include media(phone) {
+      width: 100%;
+      flex-direction: column;
+      align-items: unset;
+      margin-top: 1rem;
+  }
+
+  .filter-wrap {
+      margin-right: 3rem;
+  }
+}
+
+.sortFilerAndViewButton {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.filter-container {
+  .filter-wrap {
+      .v-dropdown {
+          .v-dropdown-menu {
+              .datepicker {
+                  header {
+                      span {
+                          color: var(--tp__main);
+                      }
+                  }
+
+                  .picker-wrap {
+                      .vdp-datepicker {
+                          border-bottom: 1px solid #E5E5E5;
+                          padding-bottom: 1rem;
+                          position: relative;
+
+                          &:after {
+                              content: '\e913';
+                              font-family: 'GlobalIcon';
+                              position: absolute;
+                              top: 0;
+                              right: 2rem;
+                              pointer-events: none;
+                          }
+
+                          input {
+                              width: 85%;
+                          }
+                      }
+
+                      .secondPicker {
+                            @include media(phone) {
+                              .vdp-datepicker__calendar {
+                                  right: 50%;
+                                  transform: translateX(30%);
+                              }
+                          }
+                          @include media(p-phone) {
+                              .vdp-datepicker__calendar {
+                                  transform: translateX(20%);
+                              }
+                          }
+                      }
+
+                      @include media(p-phone) {
+                          .vdp-datepicker__calendar {
+                              width: 27rem;
+                          }
+                      }
+                  }
+              }
+
+              li {
+                  input[type="checkbox"] {
+                      content: '';
+                      line-height: 1.4rem;
+                      font-family: 'VideoClientIcon';
+                      position: absolute;
+                      left: 2px;
+                      top: 1.2rem;
+                      font-size: 1.3rem;
+                      font-weight: 300;
+                      z-index: 2;
+                      color: #fff;
+                      background: transparent;
+                      width: 1.6rem;
+                      height: 1.6rem;
+                      border-radius: 3px;
+                      border: 1px solid #d1d5d9;
+                  }
+              }
+
+              .checked {
+                  input[type="checkbox"]:before {
+                      content: '\ea10';
+                  }
+
+                  input[type="checkbox"] {
+                      -moz-appearance: none;
+                      -webkit-appearance: none;
+                      -o-appearance: none;
+                      font-family: 'VideoClientIcon';
+                      color: #ffffff;
+                      background-color: var(--tp__active);
+                      border-color: var(--tp__active);
+                  }
+              }
+          }
+      }
+  }
+
+  .date {
+      .v-dropdown {
+          .v-dropdown-menu {
+              min-width: 28rem;
+          }
+      }
+  }
+
+  .creators{
+      .v-dropdown {
+          .v-dropdown-menu {
+              max-height: 30rem;
+              min-width: 30rem;
+              overflow-y: scroll;
+
+              li {
+                  padding: 0 2rem;
+
+                  &:first-child {
+                      border-bottom: 1px solid var(--border__separator);
+                      position: relative;
+
+                      input {
+                          font-size: 1.6rem;
+                          border-bottom: 1px solid var(--border__separator);
+                      }
+
+                      i {
+                          position: absolute;
+                          color: var(--tp__active);
+                          top: 2rem;
+                          right: 2rem;
+                          font-size: 2.2rem;
+                      }
+
+                  }
+
+                  input[type="checkbox"] {
+                      margin-left: 1.8rem;
+                  }
+              }
+
+              .dropdownInput {
+                  width: 100%;
+                  margin: 2rem 0 2rem 0 !important;
+              }
+          }
+      }
+  }
+}
+
+@include media(phone) {
+  .title {
+      align-items: flex-start !important;
+      width: 100%;
+      justify-content: space-between;
+  }
+
+  .searchWrapper {
+      width: 100%;
+  }
+
+  .sortFilerAndViewButton {
+      width: 100%;
+
+      .search-sort {
+          margin: 0;
+      }
+  }
+
+  .tile-cake {
+      padding-left: 0;
+  }
+}

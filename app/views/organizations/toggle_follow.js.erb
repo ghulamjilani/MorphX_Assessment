@@ -1,0 +1,11 @@
+var subscribeLink = $('a.organization-subscribe-<%= @organization.id %>');
+if (subscribeLink.length === 0) {
+    console.log("can not find follow button");
+} else {
+    if (<%= @following %>) {
+        subscribeLink.addClass('active');
+    } else {
+        subscribeLink.removeClass('active');
+    }
+    subscribeLink.html("<%= @following ? 'Following' : 'Follow' %>");
+}

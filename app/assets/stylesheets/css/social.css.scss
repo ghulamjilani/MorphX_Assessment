@@ -1,0 +1,125 @@
+/*Social links
+----------------------------------------------*/
+
+#social {
+  background: url(asset_path("FooterBg.png"));
+  background-repeat: repeat-x;
+  text-align:left;
+  position:relative;
+  height:auto;
+  overflow:hidden;
+  min-height:66px;
+  max-height:66px;
+  .footer-line{
+    p{
+      color: white;
+      line-height: 66px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+#social .container {
+  text-align:center;
+}
+#social .inner {
+  display:inline-block;
+  min-width:80%;
+}
+//a.social-link {
+//  padding-top:1%;
+//  padding-bottom:1%;
+//  position:relative;
+//  display:block;
+//  float:left;
+//  width:20%;
+//  position:relative;
+//  text-align:center;
+//  color:#fff;
+//  font-size:14px;
+//  text-shadow:1px 1px 1px #333;
+//}
+
+//a.social-link:before {
+//  position:absolute;
+//  display:block;
+//  content:'\a0';
+//  z-index:100;
+//  width:172px;
+//  height:172px;
+//  left:50%;
+//  top:45%;
+//  margin-top:-86px;
+//  margin-left:-86px;
+//  -webkit-transform: scale(0.6);
+//  -moz-transform: scale(0.6);
+//  transform: scale(0.6);
+//}
+
+//a.social-link:hover {
+//  color:#fff;
+//}
+//a.social-link span {
+//  display:inline-block;
+//  padding-top:55px;
+//}
+//
+//.social-fancy-fb:before,
+//.social-fancy-tw:before,
+//.social-fancy-in:before,
+//.social-fancy-rss:before,
+//.social-fancy-google:before {
+//  background: image-url('social-fancy-s957b354efa.png') no-repeat top;
+//}
+//
+//
+//.social-fancy-fb:before{
+//  background-position: 0 -688px;
+//}
+//
+//.social-fancy-tw:before{
+//  background-position: 0 -344px;
+//}
+//
+//.social-fancy-in:before{
+//  background-position: 0 -516px;
+//}
+//
+//.social-fancy-rss:before{
+//  background-position: 0 -172px;
+//}
+//
+//.social-fancy-google:before{
+//  background-position: 0 0;
+//}
+
+
+@media (max-width: 768px) {
+
+  #social .inner {
+    width:90%;
+  }
+//  a.social-link {
+//    padding-left:0;
+//    padding-right:0;
+//  }
+}
+
+@media (max-width: 500px) {
+
+  #social {
+    height:80px;
+  }
+
+//  a.social-link span {
+//    text-indent:-1000px;
+//    overflow:hidden;
+//  }
+//  a.social-link:before {
+//    top:50%;
+//    margin-top:-92px;
+//    -webkit-transform: scale(0.5);
+//    -moz-transform: scale(0.5);
+//    transform: scale(0.5);
+//  }
+}

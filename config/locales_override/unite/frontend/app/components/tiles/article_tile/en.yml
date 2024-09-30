@@ -1,0 +1,7 @@
+en:
+  frontend:
+    app:
+      components:
+        tiles:
+          article_tile:
+            label: Article

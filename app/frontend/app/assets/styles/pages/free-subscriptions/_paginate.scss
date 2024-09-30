@@ -1,0 +1,33 @@
+.FS__paginate {
+  @include flex(flex, center, flex-end);
+  min-width: 17rem;
+  @include media(p-phone) {
+    width: 100%;
+    position: absolute;
+    right: 1rem;
+    bottom: 0;
+  }
+
+  &__arrow {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--bg__label);
+    position: relative;
+    margin-left: 1rem;
+  }
+
+  &__disable {
+    pointer-events: none;
+    background: var(--border__separator);
+
+    .FS__paginate__icon {
+      color: var(--tp__icons);
+    }
+  }
+
+  &__icon {
+    @include center('vh');
+    color: white;
+  }
+}

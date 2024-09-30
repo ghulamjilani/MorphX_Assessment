@@ -1,0 +1,110 @@
+@import "main/core";
+@import "tools/core";
+@import "sidebar/core";
+@import "layouts/core";
+
+html {
+  -webkit-text-size-adjust: none
+}
+
+body {
+  touch-action: pan-x pan-y;
+}
+
+.videoClient body {
+  background-color: #333333;
+}
+
+// нужно переписать стили хедера и зафиксировать высоту в переменных, затем переписать значения для контента
+
+.spa-rooms { // static tooltips for videoclient and webrtc
+  .v-tooltip {
+    color: #fff;
+    background-color: #404040;
+  }
+}
+
+.v-tooltip {
+  background: var(--bg__tooltip);
+  border-radius: .5rem;
+  border: none;
+
+  .v-tooltip-arrow {
+    display: none;
+  }
+}
+
+.vc {
+  overflow: hidden;
+}
+
+.banReasonsModal {
+  .MK2-modal__dialog {
+    width: 60rem;
+    overflow: inherit;
+
+    .banTitle {
+      color: var(--tp__h1);
+      font-weight: bold;
+    }
+  }
+
+  .MK2-modal__body {
+    overflow: inherit;
+
+    .dropdownMK2__toggle__text {
+      color: var(--tp__inputs);
+    }
+  }
+
+  .dropdownMK2 {
+    &__menu {
+      top: 6.5rem;
+    }
+
+    &__item {
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--border__separator);
+      }
+
+      a {
+        white-space: normal;
+      }
+    }
+  }
+}
+
+.client {
+  position: relative;
+  // -webkit-touch-callout: none;
+  // -webkit-user-select: none;
+  // -khtml-user-select: none;
+  // -moz-user-select: none;
+  // -ms-user-select: none;
+  // user-select: none;
+  background: $client__bg__main;
+  color: $client__tp__main;
+  overflow: hidden;
+  height: calc(100vh - 5rem);
+  @include flex(flex, false, false);
+  @include media(xl-desktop) {
+    height: calc(100vh - 5rem)
+  }
+  @include media(tablet) {
+    flex-direction: column;
+    height: calc(100vh - 3.5rem);
+    margin-top: 4rem;
+    video::-webkit-media-controls { //спрятать контролы в респонсиве
+      display: none !important;
+    }
+  }
+
+  video {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    // @include media(tablet){
+    //   object-fit: cover;
+    // }
+  }
+}

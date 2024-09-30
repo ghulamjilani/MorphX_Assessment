@@ -1,0 +1,154 @@
+.STATIC_DATA{
+  // class for static data
+  outline: 1px solid red !important;
+}
+
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  outline: none !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*:active, *:focus {
+  outline: none !important;
+}
+
+html {
+  height: 100%;
+  font-size: 10px;
+  @include media(reverso-xxl-desktop) {
+    font-size: .5vw;
+  }
+}
+
+body {
+  height: 100%;
+  line-height: 1.8rem;
+  font: normal 1.4rem/1.6 'Roboto', sans-serif;
+  color: var(--tp__main);
+  background: var(--bg__main);
+}
+
+.vue-app {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.pageComponent {
+  flex: 1 0 auto;
+}
+
+.pageCover {
+  backdrop-filter: blur(3px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  background: rgba(0, 0, 0, .2); //static color for cover
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+a:not(.btn):focus, a:not(.btn):hover, a:not(.btn):active {
+  color: var(--tp__active);
+  cursor: pointer;
+}
+.content{
+  &__wrapp{
+    //general wrapper has no width, you can set extra classes for the background color, or extra padding
+  }
+  &__main{
+    //the main container that defines the volume for the content
+    width: $CONTENT_WIDTH;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+}
+
+
+//TODO: understand what these styles do here and what they are fo
+.slide-enter-active {
+  transition: all .5s;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translateX(-200px);
+}
+
+.slide-leave-active {
+  transition: all 0.3s;
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(200px);
+}
+
+.main-enter-active {
+  transition: all 1s;
+  transition-delay: .6s;
+
+  &.cm__tools__wrapper {
+    transition: all 1s;
+    transition-delay: .6s;
+  }
+}
+
+.main-enter {
+  opacity: 0;
+}
+
+.main-leave-active {
+  transition: all 0s;
+  position: absolute;
+}
+
+.main-leave {
+  opacity: 0;
+}
+
+.main-leave-to {
+  opacity: 0;
+}
+
+.sidebar-enter-active {
+  transition: all 0.5s;
+}
+
+.sidebar-enter {
+  opacity: 0;
+  transform: translateX(300px);
+}
+
+.sidebar-leave-active {
+  transition: all 0.5s;
+}
+
+.sidebar-leave {
+  opacity: 0;
+}
+
+.sidebar-leave-to {
+  opacity: 0;
+  transform: translateX(300px);
+}
+.cursor-pointer {
+  cursor: pointer;
+}

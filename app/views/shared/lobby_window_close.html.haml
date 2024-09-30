@@ -1,0 +1,14 @@
+!!!
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: :en, xmlns: 'http://www.w3.org/1999/xhtml', 'xmlns:fb': 'http://ogp.me/ns/fb#'}
+  / <![endif]
+  %head
+  %body
+    :javascript
+      try{
+        opener = window.opener;
+        window.close();
+        opener.showErrorFromLobby(#{message.to_json}, '#{defined?(type) ? type : ''}');
+      } catch(e) {};

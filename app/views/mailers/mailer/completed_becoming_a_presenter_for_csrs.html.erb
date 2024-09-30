@@ -1,0 +1,29 @@
+<p>
+  <%= I18n.t("views.mailer.completed_becoming.new", host: Rails.application.credentials.global[:host].capitalize) %>
+</p>
+
+<% title = @user.email || @user.unconfirmed_email %>
+<p>
+  Email:
+  <br>
+  <%= link_to title, service_admin_panel_presenter_url(@user.id) %>
+</p>
+
+<% if @user.public_display_name %>
+<p>
+  Display Name:
+  <br>
+  <%= @user.public_display_name %>
+</p>
+<% end %>
+
+<p>
+  Channel:
+  <br>
+
+  <%= link_to @channel.title, service_admin_panel_channel_url(@channel.id) %>
+
+  <div>
+    <%= simple_format @channel.description %>
+  </div>
+</p>

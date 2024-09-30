@@ -1,0 +1,250 @@
+- default_state_for_new_invite = nil
+- default_state_for_new_invite = ModelConcerns::Session::HasInvitedUsers::States::IMMERSIVE if @session.immersive_delivery_method?
+- default_state_for_new_invite = ModelConcerns::Session::HasInvitedUsers::States::LIVESTREAM if @session.livestream_delivery_method?
+- default_state_for_new_invite = ModelConcerns::Session::HasInvitedUsers::States::IMMERSIVE_AND_LIVESTREAM if @session.immersive_delivery_method? && @session.livestream_delivery_method?
+- default_state_for_new_invite = ModelConcerns::Session::HasInvitedUsers::States::CO_PRESENTER if default_state_for_new_invite.blank?
+- show_once_add_contact = false
+.sectionHeader
+  %a.pull-right.sectionHeader-close{href:'#', onclick:"CloseBar(this)"}
+    x
+  %a.pull-right.reload{tittle:'reload', onclick: 'refresh_invite_modal(); return false;'}
+    %i.VideoClientIcon-clockwise-rotating-circular-arrow
+  Invite Participants
+.content-blockWrapp#InviteParticipantsWrapp.Connecting-mk2
+  .loadSpin.hide
+    .circleG.circleG_1
+    .circleG.circleG_2
+    .circleG.circleG_3
+  - contact_users = current_user.available_contact_users_for_inviting(@session)
+  %div{class: "count-#{contact_users.length} searchUserBlock"}
+
+    - if contact_users.present?
+      .inputWidthButton.clearfix
+        %input#contacts-search.searchInput.full-width.mb10{type:'text', placeholder:'Search your contacts'}
+        %button{type: 'submit', value: '', disabled: ""}
+    .item-wrapp.styledScroll{'data-count'=>contact_users.length}
+      - contact_users.each do |contact_user|
+        %a.text-color-white.clearfix.item.list-group-item{"data-name" => contact_user.public_display_name || contact_user.email, "data-email" => contact_user.email}
+          .row
+            .col-md-2.pr0
+              .Avatar.small{style: "background:url(#{contact_user.avatar_url})"}
+            %div{class: 'instant-invite-contact-from-video col-md-10 pl0', data: { email: contact_user.email, session_id: @session ? @session.id : nil, target_input: :invited_participants, state: default_state_for_new_invite}}
+              %i.VideoClientIcon-iPlus
+              = (contact_user.public_display_name || contact_user.email).to_s.truncate(26)
+
+  .ParticipantsList
+    = semantic_form_for(@session, url: session_instant_invite_user_from_video_path(@session), remote: true, method: :post, html: {class: "live-participant-form"}) do |f|
+      .inputWidthButton.clearfix.mb10
+        %input{id: 'invited_participants_new_input', autofocus: "autofocus", maxlength: "255", name: 'email', placeholder: 'Invite by Email', type: 'text', required: 'required'}
+        %input{type: 'hidden', name: 'state', value: default_state_for_new_invite}
+        %button.liveInviteSubmitButtonVideo{type: 'submit', value: 'Invite', disabled: "disabled"}
+          %i.VideoClientIcon-iPlus
+
+    - if @session.session_invited_immersive_co_presenterships.present?
+      .ParticipantsList
+        .sectionTitle
+          Co presenters
+        .item-wrapp.styledScroll{'data-count'=>@session.session_invited_immersive_co_presenterships.length}
+          - @session.session_invited_immersive_co_presenterships.each do |giip|
+            - participant = giip.participant
+            %a.d-block.text-color-white.clearfix.item{href:'#'}
+              .row
+                .col-md-2.pr0
+                  .Avatar.small{style: "background:url(#{participant.avatar_url})"}
+                .col-md-10.pl0
+                  .pull-right.text-right.pr5
+                    - if invited_participant_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::PENDING
+                      %span.state_white{rel:'pending'}
+                      %span.instant-remove-invited-user-from-video{data: {email: participant.email, session_id: @session.try(:id) }}
+                        %i.VideoClientIcon-minus
+                    - if invited_participant_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::ACCEPTED
+                      %span.state_blue{rel:'accepted'}
+                    - if invited_participant_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::REJECTED
+                      %span.state_red{rel:'rejected'}
+                  %i.VideoClientIcon-minus
+                  = (participant.user.public_display_name || participant.user.email).to_s.truncate(26)
+              - unless current_user.has_contact?(participant.user_id)
+                - unless show_once_add_contact
+                  - show_once_add_contact = true
+                  .addToContacts
+                    .styledCheckBoxWrapp
+                      %label
+                        %input.addUserToContacts{type: 'checkbox', data: {url: toggle_contact_contacts_path(contact_id: participant.user_id)}}
+                        %span Add to Contacts
+
+
+    - if @session.session_invited_immersive_participantships.present?
+      .ParticipantsList
+        .sectionTitle
+          Participants
+        .item-wrapp.styledScroll{'data-count'=>@session.session_invited_immersive_participantships.length}
+          - @session.session_invited_immersive_participantships.each do |giip|
+            - participant = giip.participant
+            %a.d-block.text-color-white.clearfix.item{href:'#'}
+              .row
+                .col-md-2.pr0
+                  .Avatar.small{style: "background:url(#{participant.avatar_url})"}
+                .col-md-10.pl0
+                  .pull-right.text-right.pr5
+                    - if invited_participant_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::PENDING
+                      %span.state_white{rel:'pending'}
+                      %span.instant-remove-invited-user-from-video{data: {email: participant.email, session_id: @session.try(:id) }}
+                        %i.VideoClientIcon-minus
+                    - if invited_participant_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::ACCEPTED
+                      %span.state_blue{rel:'accepted'}
+                    - if invited_participant_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::REJECTED
+                      %span.state_red{rel:'rejected'}
+                  = (participant.user.public_display_name || participant.user.email).to_s.truncate(26)
+              - unless current_user.has_contact?(participant.user_id)
+                - unless show_once_add_contact
+                  - show_once_add_contact = true
+                  .addToContacts
+                    .styledCheckBoxWrapp
+                      %label
+                        %input.addUserToContacts{type: 'checkbox', data: {url: toggle_contact_contacts_path(contact_id: participant.user_id)}}
+                        %span Add to Contacts
+
+
+    - if @session.session_invited_livestream_participantships.present?
+      .ParticipantsList
+        .sectionTitle
+          Livestreamers
+        .item-wrapp.styledScroll{'data-count'=>@session.session_invited_livestream_participantships.length}
+          - @session.session_invited_livestream_participantships.each do |giip|
+            - participant = giip.participant
+            %a.d-block.text-color-white.clearfix.item{href:'#'}
+              .row
+                .col-md-2.pr0
+                  .Avatar.small{style: "background:url(#{participant.avatar_url})"}
+                .col-md-10.pl0
+                  .pull-right.text-right.pr5
+                    - if invited_livestream_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::PENDING
+                      %span.state_white{rel:'pending'}
+                      %span.instant-remove-invited-user-from-video{data: {email: participant.email, session_id: @session.try(:id) }}
+                        %i.VideoClientIcon-minus
+                    - if invited_livestream_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::ACCEPTED
+                      %span.state_blue{rel:'accepted'}
+                    - if invited_livestream_status(participant) == ModelConcerns::ActsAsInvitableAbstractSessionPerson::Statuses::REJECTED
+                      %span.state_red{rel:'rejected'}
+                  = (participant.user.public_display_name || participant.user.email).to_s.truncate(26)
+              - unless current_user.has_contact?(participant.user_id)
+                - unless show_once_add_contact
+                  - show_once_add_contact = true
+                  .addToContacts
+                    .styledCheckBoxWrapp
+                      %label
+                        %input.addUserToContacts{type: 'checkbox', data: {url: toggle_contact_contacts_path(contact_id: participant.user_id)}}
+                        %span Add to Contacts
+
+
+
+      -#%fieldset.inputs.inviteViaEmailWrapper
+      -#  .email.input.required.autofocus.stringish.form-group
+      -#    %input.form-control{id: 'invited_participants_new_input', autofocus: "autofocus", maxlength: "255", name: 'email', placeholder: "Enter Email Address", type: "email", required: 'required'}
+      -#    .video-groupButton.text-right
+      -#      .multi-type-invite-icon-view-by-email-container{style: 'display: inline-block'}
+      -#      - default_state_for_new_invite = nil
+      -#      - default_state_for_new_invite = ModelConcerns::Session::HasInvitedUsers::States::IMMERSIVE_AND_LIVESTREAM if @session.immersive_delivery_method? && @session.livestream_delivery_method?
+      -#      - default_state_for_new_invite = ModelConcerns::Session::HasInvitedUsers::States::IMMERSIVE if @session.immersive_delivery_method?
+      -#      - default_state_for_new_invite = ModelConcerns::Session::HasInvitedUsers::States::LIVESTREAM if @session.livestream_delivery_method?
+      -#      - default_state_for_new_invite = ModelConcerns::Session::HasInvitedUsers::States::CO_PRESENTER if default_state_for_new_invite.blank?
+      -#      %input{type: 'hidden', name: 'state', value: default_state_for_new_invite}
+      -#      %button.liveInviteSubmitButtonVideo{type: 'submit', value: 'Invite', disabled: "disabled"}
+      -#        %i.VideoClientIcon-iPlus
+      -#.clearfix
+      -#.invited_participants_list.users_list.list-group.userListBlock
+      -#  .invited
+      -#    -#new 2
+      -#    -#nead init AFTER DOM REBILD
+      -#    :javascript
+      -#      if($('.invited_participants_list .invited .list-group-item').length > 3){
+      -#        $('.invited').jScrollPane();
+      -#      }
+      -#      if($('.invited_participants_list .removable .remWrapsection .list-group-item').length > 5){
+      -#        $('.remWrapsection').jScrollPane();
+      -#      }
+      -#
+      -#      view = new MultiTypeInviteIconView({immersive_is_allowed: function() { return #{@session.immersive_delivery_method?} },
+      -#                                          livestream_is_allowed: function() { return #{@session.livestream_delivery_method?} } });
+      -#      $('.multi-type-invite-icon-view-by-email-container').append(view.render().el);
+      -#    -#new 2
+      -#
+      -#  - contact_users = current_user.available_contact_users_for_inviting(@session)
+      -#  - if contact_users.present?
+      -#    .removable
+      -#      .remHeadersection
+      -#        %input#contacts-search.contacts-search{placeholder: 'Search your Contacts...', type: 'text'}
+      -#      .remWrapsection
+      -#        - contact_users = current_user.available_contact_users_for_inviting(@session)
+      -#        - contact_users.each do |contact_user|
+      -#          .list-group-item{"data-name" => contact_user.public_display_name || contact_user.email, "data-email" => contact_user.email}
+      -#
+      -#            %div.text-left
+      -#              = image_tag(contact_user.avatar_url, alt: contact_user.public_display_name, class: 'some-class', width: 16, height: 16)
+      -#              %strong{alt: (contact_user.public_display_name || contact_user.email), title: (contact_user.public_display_name || contact_user.email)}
+      -#                = (contact_user.public_display_name || contact_user.email).to_s.truncate(26)
+      -#
+      -#            %div.text-right
+      -#              %div{class: "multi-type-invite-icon-view-container", style: 'display: inline-block'}
+      -#              = link_to '', class: 'instant-invite-contact-from-video', data: { email: contact_user.email, session_id: @session.id, target_input: :invited_participants } do
+      -#                %i.VideoClientIcon-iPlus
+      -#            .clearfix
+      -#
+      -#    :javascript
+      -#      var userIds = #{contact_users.map(&:id).to_json};
+      -#      $.each(userIds, function(key, id) {
+      -#        var view = new MultiTypeInviteIconView({immersive_is_allowed: function() { return #{@session.immersive_delivery_method?} },
+      -#                                            livestream_is_allowed: function() { return #{@session.livestream_delivery_method?} } });
+      -#        var placeholder = $('.multi-type-invite-icon-view-container:eq(' + key + ')');
+      -#        if (placeholder.length != 1) {
+      -#          throw new Error("can not find placeholder for icon view");
+      -#        }
+      -#        $(placeholder).html(view.render().el);
+      -#      });
+      -#
+      -#
+      -#  - if @session.invited_users_as_json.present?
+      -#    :javascript
+      -#      models                             = _.map(#{@session.invited_users_as_json.to_json}, function(item) { return new InvitedUser(item) });
+      -#      collection                         = new window.InvitedUserCollection(models);
+      -#      window.sessionInviteUsersVideoView = new SessionInviteUsersVideoView({
+      -#        users: collection,
+      -#        el: '.session-invite-users-video-placeholder',
+      -#        session_id: #{@session.id},
+      -#        immersive_is_allowed: function() { return #{@session.immersive_delivery_method?} },
+      -#        livestream_is_allowed: function() { return #{@session.livestream_delivery_method?} }
+      -#      });
+      -#      sessionInviteUsersVideoView.render();
+      -#
+      -#    .invitedList
+      -#      %h1.heading
+      -#        Participants
+      -#
+      -#      .invited
+      -#        .session-invite-users-video-placeholder
+      -#  .clearfix
+    :javascript
+      var userIds = #{contact_users.map(&:id).to_json};
+      $.each(userIds, function(key, id) {
+        var view = new MultiTypeInviteIconView({immersive_is_allowed: function() { return #{@session.immersive_delivery_method?} },
+                                            livestream_is_allowed: function() { return #{@session.livestream_delivery_method?} } });
+        var placeholder = $('.multi-type-invite-icon-view-container:eq(' + key + ')');
+        // if (placeholder.length != 1) {
+        //   throw new Error("can not find placeholder for icon view");
+        // }
+        $(placeholder).html(view.render().el);
+      });
+
+
+    - if @session.invited_users_as_json.present?
+      :javascript
+        models                             = _.map(#{@session.invited_users_as_json.to_json}, function(item) { return new InvitedUser(item) });
+        collection                         = new window.InvitedUserCollection(models);
+        window.sessionInviteUsersVideoView = new SessionInviteUsersVideoView({
+          users: collection,
+          el: '.session-invite-users-video-placeholder',
+          session_id: #{@session.id},
+          immersive_is_allowed: function() { return #{@session.immersive_delivery_method?} },
+          livestream_is_allowed: function() { return #{@session.livestream_delivery_method?} }
+        });
+        sessionInviteUsersVideoView.render();

@@ -1,0 +1,32 @@
+- user = @room.presenter_user
+%li
+  .member{id: "member-source-#{source.id}", data: {source_id: source.id}}
+    -#%div{class: "img-circle status offline_source_#{source.id} role_source"}
+    -#  offline
+    .panel-group{id: "accordion-source-#{source.id}"}
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            - member = @room_members.find_by(source_id: source.id)
+            %a{class: "user-control btn collapsed V-user-icon V-role_source", href: "#collapseOne-source-#{source.id}",
+               data:{tipName: source.name.truncate(15),
+                     user: source.name ,
+                     user_id: source.id,
+                     user_role: 'source',
+                     has_control:     (!!member.try(:has_control)).to_s,
+                     mic_disabled:    (!!member.try(:mic_disabled)).to_s,
+                     video_disabled:  (!!member.try(:video_disabled)).to_s,
+                     toggle: "collapse", parent: "#accordion-source-#{source.id}"}}
+              = image_tag user.avatar_url, alt: source.name
+        - if is_organizer?
+          .panel-collapse.collapse.control-list{id: "collapseOne-source-#{source.id}"}
+            .panel-body
+              %i.VideoClientIcon-angle-downF
+              = link_to "#", class: "btn control microphone-off", data: {:'unmute-tip' => 'Mute', tip: 'Mute', url: mute_lobby_path(@room.id, member_id: user.id, source_id: source.id), dontenable: true}, style: visible?(!member.try(:mic_disabled)) do
+                %span{class: "icon-headphones"}
+              = link_to "#", class: "btn control microphone-on", data: {:'unmute-tip' => 'Mute', tip: 'Unmute', url: unmute_lobby_path(@room.id, member_id: user.id, source_id: source.id), dontenable: true}, style: visible?(member.try(:mic_disabled)) do
+                %span{class: "icon-headphones"}
+              = link_to "#", class: "btn control video-on", data: {:'unmute-tip' => 'Camera on', tip: 'Camera on', url: start_video_lobby_path(@room.id, member_id: user.id, source_id: source.id), dontenable: true}, style: visible?(member.try(:video_disabled)) do
+                %span{class: "icon-eye"}
+              = link_to "#", class: "btn control video-off", data: {:'unmute-tip' => 'Camera off', tip: 'Camera off', url: stop_video_lobby_path(@room.id, member_id: user.id, source_id: source.id), dontenable: true}, style: visible?(!member.try(:video_disabled)) do
+                %span{class: "icon-eye"}

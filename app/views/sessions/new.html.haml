@@ -1,0 +1,69 @@
+- content_for(:additional_meta_tags) do
+  -#<!-- Core build with no theme, formatting, non-essential modules -->
+  %script{src: "//cdn.quilljs.com/1.3.6/quill.js"}
+  %link{href: "//cdn.quilljs.com/1.3.6/quill.snow.css", rel: "stylesheet"}
+
+- content_for(:extra_body_classes, 'hidePageHeader resetMainContainer header-top session-form')
+-#  #NOTE @current_organization uses in layouts/application/organization_custom_styles partial for customization pages
+- @current_organization  = @channel.try(:organization) || (@channel.organizer.organization rescue nil)
+
+-#.sc = session create : name space
+- if @original_session
+  - original_fields = {medium_cover_url: @original_session.medium_cover_url}
+  - session_json = original_fields.merge(@session.as_json(methods: Session.underscorjs_additional_methods - [:medium_cover_url])).to_json.html_safe
+- else
+  - session_json = @session.to_json(methods: Session.underscorjs_additional_methods).html_safe
+- content_for(:after_include_javascripts) do
+  :javascript
+    (function(){
+      $(document).ready(function() {
+        var session  = new Session(#{session_json});
+        var wa_rtmp  = #{@channel.organization.ffmpegservice_account_by(service_type: 'rtmp').to_json.html_safe};
+        var wa_ipcam = #{@channel.organization.ffmpegservice_account_by(service_type: 'ipcam').to_json.html_safe};
+        var users    = new InvitedUserCollection(#{@users.to_json.html_safe});
+        var contacts = new ContactUserCollection([]);
+        window.session_form_fields = new SessionFormCentralContainer({
+          subscription: #{@subscription.to_json.html_safe},
+          feature_parameters: #{@feature_parameters.to_json.html_safe},
+          zoom_enabled: #{Rails.application.credentials.backend[:initialize][:zoom][:enabled]},
+          model: session,
+          zoom_connected: #{@connected_zoom_account.present?},
+          zoom_paid: #{@paid_zoom_account || false},
+          zoom_connect_url: '#{@zoom_connect_url}',
+          original_session_id: '#{@original_session&.id}',
+          wa_rtmp: wa_rtmp,
+          wa_ipcam: wa_ipcam,
+          channels: #{@channels.to_json.html_safe},
+          previous_sessions: #{@previous_sessions.to_json.html_safe},
+          channel_presenters: #{@channel_presenters.to_json.html_safe},
+          users: users,
+          lists: #{@lists.to_json.html_safe},
+          organizations: #{@organizations.to_json.html_safe},
+          zoom_logo_url: "#{asset_path('zoomLogo.png')}",
+          service_logo_url: "#{asset_path('services/' + Rails.application.credentials.global[:project_name].to_s.downcase + '/footerLogo.png')}",
+          ppv_enabled: #{Rails.application.credentials.global[:ppv]}
+        });
+        window.session_form_fields.render();
+        window.invite_modal = new InviteModal({contacts: contacts, users: users});
+        window.invite_modal.render();
+      });
+    })();
+
+#session_form_container
+  - url = @session.new_record? ? channel_sessions_path(@channel.slug) : channel_session_path(@channel.slug, @session.slug_was)
+  = form_for [@channel, @session], url: url, html: {class: 'sc-wrapp form_V2 session_form'} do |f|
+    .padding-left-20.padding-right-20.margin-bottom-20.margin-top-20.mobileShow.hide
+      %a.mobile_device.full-width.btn.btn-m{href:'#'} &#9776; Options and Invites
+    #scMainContainer.sc.container
+      -#first add loading spiner, after all else
+      -#REMOVE .hide class TO SHOW loader AND ADD BLUR FOR CONTENT
+      .LoadingCover.hide
+        %span.LoadingText.padding-bottom-20.fs-22.display-block
+          = @session.new_record? ? 'Creating' : 'Updating'
+          your awesome live session...
+        .spinnerSlider
+          .bounceS1
+          .bounceS2
+          .bounceS3
+      #fields_region.blurOnLoadingCover
+  #modals_container.sc-modals

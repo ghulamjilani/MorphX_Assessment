@@ -1,0 +1,12 @@
+en:
+  controllers:
+    api:
+      v1:
+        user:
+          comments:
+            errors:
+              type_not_allowed: commentable type %{commentable_type} is not allowed
+              create_forbidden: You are not allowed to comment this %{commentable_type}
+              read_forbidden: You are not allowed view this comment
+              update_forbidden: You are not allowed to change this comment
+              destroy_forbidden: You are not allowed to delete this comment

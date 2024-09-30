@@ -1,0 +1,10 @@
+en:
+  controllers:
+    api:
+      v1:
+        user:
+          channel_subscriptions:
+            create:
+              success: Successfully subscribed to %{plan_name}.
+              success_gift: Successfully purchased gift subscription for %{user_name} to %{plan_name}.
+              error: Error during payment processing. Please check your payment method.

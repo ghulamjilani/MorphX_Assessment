@@ -1,0 +1,9 @@
+en:
+  forgot_password:
+    enter_email: Enter your email below to
+    rez_link: receive your reset link
+    email: Email
+    send_link: Send reset link
+    back: Back To Login
+    no_found: Email not found
+    instructions: You will receive an email with instructions on how to reset your password in a few minutes.

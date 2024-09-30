@@ -1,0 +1,13 @@
+<% email_direct_message_context(@session.channel.title) %>
+
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  <%= @follower.public_display_name %> added <a href="<%= @session.absolute_path %>"><%= @session.always_present_title %></a> to their wish list.
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@session.channel.title) %>
+</p>

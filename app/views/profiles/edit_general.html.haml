@@ -1,0 +1,12 @@
+.row#profilePage
+  - content_for(:page_title, 'Personal Profile')
+
+  = render 'profiles/nav'
+
+  .col-md-9.main-section-form.technicalPage.profiles-edit_general
+    = semantic_form_for(current_user, as: :profile, url: update_general_profile_path, method: :put, html: { class: 'form_V2 padding-top-0'}) do |f|
+      = render 'fields', f: f
+
+      .padding-bottom-10.text-right
+        = link_to 'Cancel', url_for(:back), class: 'btn btn-l btn-grey-solid'
+        = f.action :submit, label: 'Save Changes', as:  :button, button_html: { class: 'btn btn-l margin-left-10', value: 'Save Changes', data: {disable_with: 'Please wait…'}}

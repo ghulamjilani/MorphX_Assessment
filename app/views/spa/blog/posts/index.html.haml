@@ -1,0 +1,18 @@
+- if @organization
+  - content_for(:additional_meta_tags) do
+    %meta{property: 'og:description', content: @organization.share_description }
+    %meta{property: 'og:title', content: "#{@organization.share_title}: Community"}
+    %meta{property: 'og:url', content: organization_community_absolute_url(@organization) }
+    %meta{property: 'og:type', content: :blog}
+    %meta{name: 'twitter:card', content: 'summary_large_image'}
+    %meta{name: 'twitter:title', content: @organization.share_title}
+    %meta{name: 'twitter:description', content: @organization.share_description}
+
+    - if @organization.share_image_url.present?
+      %meta{property: 'og:image', content: image_url(@organization.share_image_url)}
+      %meta{property: 'og:image:url', content: image_url(@organization.share_image_url)}
+      %meta{property: 'og:image:type', content: 'image/jpg'}
+      %meta{name: 'twitter:image', content: image_url(@organization.share_image_url)}
+
+    - if twitter_handle(@organization)
+      %meta{name: 'twitter:site', content: twitter_handle(@organization)}

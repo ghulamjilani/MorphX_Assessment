@@ -1,0 +1,11 @@
+en:
+  devise:
+    mailer:
+      confirmation_instructions:
+        subject: "Please Confirm Your Email"
+    failure:
+      invalid: "Invalid %{authentication_keys} or Password."
+      not_found_in_database: "Invalid %{authentication_keys} or Password."
+      inactive: "Account is not active."
+    invitations:
+      invitation_token_invalid: "This invitation link is not valid. Possibly this invitation was already used."

@@ -1,0 +1,9 @@
+= I18n.t('mailers.service_subscriptions_mailer.grace_started_payment_failed.body',
+  user_name: @user.public_display_name,
+  grace_days: @grace_period_days,
+  plan_name: @plan_package.name,
+  plan_price: @plan.formatted_price,
+  plan_interval: @plan.formatted_interval,
+  edit_billing_profile_url: edit_billing_profile_url,
+  support_email: Rails.application.credentials.global[:support_mail],
+  platform_name: Rails.application.credentials.global[:service_name]).html_safe

@@ -1,0 +1,11 @@
+$('#payment-modal').remove();
+window.modalBody = '<%= escape_javascript render("#{action_name}", format: :html) %>';
+
+$(modalBody).modal();
+
+$('body').on('shown.bs.modal', '#payment-modal', function() {
+  <%= yield(:after_include_javascripts) %>
+  $('body').addClass('modal-open');
+
+  new window.PaymentModalView({el: '#payment-modal', stripe_key: '<%= Rails.application.credentials.global.dig(:stripe, :public_key) %>', amount: '<%= @charge_amount %>'})
+});

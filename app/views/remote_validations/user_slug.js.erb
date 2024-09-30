@@ -1,0 +1,5 @@
+<% if @valid %>
+  $('input[name*=slug]').val('<%= @slug %>');
+  $('.modal:visible').modal('hide');
+  $('#slug-placeholder').html('<%= @slug %>');
+<% end %>

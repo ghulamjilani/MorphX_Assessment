@@ -1,0 +1,121 @@
+{{#if (and session.finished (or session.owner session.can_rate))}}
+    <div id="session_feedback_{{session.id}}" class="session_feedback_area">
+    <div id="vue-review">
+
+    </div>
+    {{!-- <div class="main-video-container-reiting">
+    <div class="mv-r-h">
+        <div>
+            <div class="clearfix">
+                {{#if session.owner}}
+                    <div class="col-md-12 mv-r-t">
+                        <div class="avatarImg-MD margin-bottom-20" style="background-image: url('{{session.organizer_image}}')"></div>
+                    </div>
+                    <div class="userNAme margin-bottom-10 text-color-Darkgrey">
+                        Hello,
+                        <span>{{session.organizer_name}}!</span>
+                    </div>
+                {{else}}
+                    <div class="userNAme margin-bottom-10 text-color-Darkgrey">
+                        {{#if current_user_id}}
+                            Hello,
+                            <span>{{current_user_name}}!</span>
+                        {{else}}
+                            Hello!
+                        {{/if}}
+                    </div>
+                    <div class="col-md-12">
+                        [%= I18n.t('sessions.ratings.livestream_experience_title') %]
+                        <a href="{{session.organizer_path}}" target="_blank"
+                           class="text-color-Darkgrey">{{session.organizer_name}}</a>?
+                        <div class="avatarImg-MD margin-left-20"
+                             style="background-image: url('{{session.organizer_image}}')"></div>
+                    </div>
+                {{/if}}
+            </div>
+            {{#unless session.owner}}
+              <fieldset class="rate quality_of_content_rate ratingHalfStar inlile-block">
+                <input id="quality_of_content_rate-star5" name="quality_of_content_rate" type="radio" value="5" {{#if (eq session.quality_of_content_rate 5)}} checked {{/if}} {{#if session.quality_of_content_rate_saved}} disabled {{/if}}>
+                <label for="quality_of_content_rate-star5" title="Awesome 5!!"></label>
+                <input id="quality_of_content_rate-star4" name="quality_of_content_rate" type="radio" value="4" {{#if (eq session.quality_of_content_rate 4)}} checked {{/if}} {{#if session.quality_of_content_rate_saved}} disabled {{/if}}>
+                <label for="quality_of_content_rate-star4" title="Very good 4"></label>
+                <input id="quality_of_content_rate-star3" name="quality_of_content_rate" type="radio" value="3" {{#if (eq session.quality_of_content_rate 3)}} checked {{/if}} {{#if session.quality_of_content_rate_saved}} disabled {{/if}}>
+                <label for="quality_of_content_rate-star3" title="Satisfactory 3"></label>
+                <input id="quality_of_content_rate-star2" name="quality_of_content_rate" type="radio" value="2" {{#if (eq session.quality_of_content_rate 2)}} checked {{/if}} {{#if session.quality_of_content_rate_saved}} disabled {{/if}}>
+                <label for="quality_of_content_rate-star2" title="Bad 2"></label>
+                <input id="quality_of_content_rate-star1" name="quality_of_content_rate" type="radio" value="1" {{#if (eq session.quality_of_content_rate 1)}} checked {{/if}} {{#if session.quality_of_content_rate_saved}} disabled {{/if}}>
+                <label for="quality_of_content_rate-star1" title="Awful 1"></label>
+              </fieldset>
+            {{/unless}}
+        </div>
+
+        <div>
+            <div class="clearfix">
+                {{service_experience}}
+            </div>
+            <fieldset class="rate immerss_experience_rate ratingHalfStar inlile-block">
+                <input id="immerss_experience_rate-star5" name="immerss_experience_rate" type="radio" value="5" {{#if (eq session.immerss_experience_rate 5)}} checked {{/if}} {{#if session.immerss_experience_rate_saved}} disabled {{/if}}>
+                <label for="immerss_experience_rate-star5" title="Awesome 5!!"></label>
+                <input id="immerss_experience_rate-star4" name="immerss_experience_rate" type="radio" value="4" {{#if (eq session.immerss_experience_rate 4)}} checked {{/if}} {{#if session.immerss_experience_rate_saved}} disabled {{/if}}>
+                <label for="immerss_experience_rate-star4" title="Very good 4"></label>
+                <input id="immerss_experience_rate-star3" name="immerss_experience_rate" type="radio" value="3" {{#if (eq session.immerss_experience_rate 3)}} checked {{/if}} {{#if session.immerss_experience_rate_saved}} disabled {{/if}}>
+                <label for="immerss_experience_rate-star3" title="Satisfactory 3"></label>
+                <input id="immerss_experience_rate-star2" name="immerss_experience_rate" type="radio" value="2" {{#if (eq session.immerss_experience_rate 2)}} checked {{/if}} {{#if session.immerss_experience_rate_saved}} disabled {{/if}}>
+                <label for="immerss_experience_rate-star2" title="Bad 2"></label>
+                <input id="immerss_experience_rate-star1" name="immerss_experience_rate" type="radio" value="1" {{#if (eq session.immerss_experience_rate 1)}} checked {{/if}} {{#if session.immerss_experience_rate_saved}} disabled {{/if}}>
+                <label for="immerss_experience_rate-star1" title="Awful 1"></label>
+            </fieldset>
+        </div>
+
+        {{#if session.owner}}
+            <form class="form_V2 padding-top-0" id="reviewSession" style="visibility: visible;">
+                <div class="input-block">
+                <textarea name="overall_experience_comment" max-length="250" maxlength="250" minlength="3" rows="1"
+                          placeholder="We are happy to hear more from you..."
+                    {{#unless session.immerss_experience_rate}} title="Please select a rating first" {{/unless}}
+                    {{#if session.overall_experience_comment_saved}} readonly {{/if}}
+                    {{#unless session.immerss_experience_rate}} disabled {{/unless}}
+                          class="bg_transperant experience_comment
+                    {{#if (gt (length session.overall_experience_comment) 10)}} active {{/if}}
+                    {{#unless session.immerss_experience_rate}} disabled {{/unless}}">{{session.overall_experience_comment}}</textarea>
+                    {{#unless session.overall_experience_comment}}
+                        <div class="counter_block">0/250</div>
+                        <div class="errorContainerWrapp"></div>
+                    {{/unless}}
+                </div>
+            </form>
+            <div>
+                <div class="clearfix">
+                    <a href="#" class="btn btn-m save_rating {{#unless session.immerss_experience_rate}}disabled{{/unless}}"
+                       {{#unless session.immerss_experience_rate}}disabled{{/unless}}>Done</a>
+                </div>
+            </div>
+        {{else}}
+            <form class="form_V2 padding-top-0" id="reviewSession" style="visibility: visible;">
+                <div class="input-block">
+                    <textarea name="overall_experience_comment" max-length="250"
+                              maxlength="250" minlength="3" rows="1"
+                              placeholder="We are happy to hear more from you..."
+                              {{#unless (and session.quality_of_content_rate session.immerss_experience_rate)}} title="Please select a rating first" {{/unless}}
+                              {{#if session.overall_experience_comment_saved}} readonly {{/if}}
+                              {{#unless (and session.quality_of_content_rate session.immerss_experience_rate)}} disabled {{/unless}}
+                              class="bg_transperant experience_comment
+                                {{#if (gt (length session.overall_experience_comment) 10)}} active {{/if}}
+                                {{#unless (and session.quality_of_content_rate session.immerss_experience_rate)}} disabled {{/unless}}">{{session.overall_experience_comment}}</textarea>
+                    {{#unless session.overall_experience_comment_saved}}
+                        <div class="counter_block">0/250</div>
+                        <div class="errorContainerWrapp"></div>
+                    {{/unless}}
+                </div>
+            </form>
+            <div>
+                <div class="clearfix">
+                    <a href="#" class="btn btn-m save_rating {{#unless (and session.quality_of_content_rate session.immerss_experience_rate)}}disabled{{/unless}}"
+                       {{#unless (and session.quality_of_content_rate session.immerss_experience_rate)}}disabled{{/unless}}>Done</a>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+    </div> --}}
+    </div>
+{{/if}}

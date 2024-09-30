@@ -1,0 +1,110 @@
+@import 'mixin';
+
+.SF{
+  display: flex;
+  flex-direction: row;
+  span{
+    white-space: nowrap;
+    font-size: 14px;
+    color: var(--tp__main);
+    line-height: 40px;
+  }
+  &__wrapp{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 30px 0;
+  }
+  &__section{
+    .searchDropDown{
+      .dropdown{
+        .btn{
+          padding: 0 30px 0 14px;
+          border: 1px solid var(--tp__btn__bordered);
+          border-radius: 10px;
+        }
+      }
+    }
+    .btn:not(button){
+      line-height: 36px;
+      padding: 0 30px 0 0;
+      background-position-x:calc(100% - 10px);
+      min-width: 170px;
+      text-align: left;
+      background-color: transparent;
+      border-bottom: 1px solid var(--border__form__normal);
+      border-radius: 0;
+      font-size: 14px;
+      color: var(--tp__inputs);
+      //margin-left: 20px;
+      height: 40px;
+      position: relative;
+      span{
+        background-image: url(asset_path('brBg_grey2_old.png'));
+        background-repeat: no-repeat;
+        display: inline-block;
+        vertical-align: middle;
+        position: absolute;
+        right: 10px;
+        top: calc(50% - 4px);
+        width: 10px;
+        height: 10px;
+      }
+      &.active{
+        span{
+          transform: rotate(180deg);
+          top: calc(50% - 5px);
+        }
+        .btn{
+          width: 170px
+        }
+      }
+      @include media(tablet-pTablet) {
+        margin-right: 15px;
+      }
+      @media only screen and (max-width: 400px) {
+        min-width: 200px;
+      }
+    }
+  }
+  &__block{
+    padding-right: 30px;
+    div{
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 10px;
+      span{
+        margin-right: 20px;
+        min-width: 80px;
+      }
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+    .btn:not(button){
+      width: 150px;
+      margin-left: 0;
+    }
+  }
+
+  &__filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    &__wrapp{
+      align-items: flex-start;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      border-top: 1px solid #E2E7EA;
+      border-bottom: 1px solid #E2E7EA;
+      padding: 20px 0;
+      a.btn{
+        margin-left: 0;
+      }
+      button{
+        width: 170px;
+      }
+    }
+  }
+}

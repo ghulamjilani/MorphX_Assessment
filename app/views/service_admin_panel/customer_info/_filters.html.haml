@@ -1,0 +1,21 @@
+%form#new_q.filter_form{'accept-charset': 'UTF-8', action: '/service_admin_panel/customer_info', method: :get}
+  %input{name: 'utf8', type: :hidden, value: "✓"}/
+  #q_browser_input.numeric.input.optional.stringish.filter_form_field.filter_string
+    %label.label{for: :q_browser} browser
+    %input#q_browser{name: 'q[browser]', step: :any, type: :text}/
+  #q_browser_input.numeric.input.optional.stringish.filter_form_field.filter_string
+    %label.label{for: :q_device} device
+    %input#q_device{name: 'q[device]', step: :any, type: :text}/
+  #q_browser_input.numeric.input.optional.stringish.filter_form_field.filter_string
+    %label.label{for: :q_os} os
+    %input#q_os{name: 'q[os]', step: :any, type: :text}/
+  #q_ip_input.numeric.input.optional.stringish.filter_form_field.filter_string
+    %label.label{for: :q_ip} ip
+    %input#q_ip{name: 'q[ip]', step: :any, type: :text}/
+  #q_created_at_input.date_range.input.optional.stringish.filter_form_field.filter_date_range
+    %label.label Created at
+    %input#q_created_at_gteq_datetime.datepicker{maxlength: '10', name: 'q[created_at_start]', placeholder: :From, size: '12', type: :text, value: ''}/
+    %input#q_created_at_lteq_datetime.datepicker{maxlength: '10', name: 'q[created_at_end]', placeholder: :To, size: '12', type: :text, value: ''}/
+  .buttons
+    %input{name: :commit, type: :submit, value: :Filter}/
+    %a.clear_filters_btn{href: '#'} Clear Filters

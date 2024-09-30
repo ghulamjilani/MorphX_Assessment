@@ -1,0 +1,106 @@
+%form#channe_members.form_V2{action: save_creators_channel_path(@channel), 'accept-charset': 'UTF-8', autocomplete: :off, 'data-remote': true, method: :post, style: 'visibility: visible;'}
+  %input{name: :utf8, type: :hidden, value: '✓'}
+    %h2.text-center.fs-18.text-color-main.margin-bottom-10.margin-top-20
+      = I18n.t('views.channels.edit_creators.manage_creators', creators_upper: I18n.t('dictionary.creators_upper'))
+    -#%h4.text-center.fs-14.margin-bottom-5 {{ page_description }}
+    .sectionBlock_wrapp.margin-top-20
+      %section.sectionBlock
+        .UserImage-wrapp
+          -#%h3.labelTitle.margin-bottom-10
+            = I18n.t('dictionary.creators_upper', creators_upper: I18n.t('dictionary.creators_upper'))
+          #networkPresenters.User-list.clearfix
+            .tile.add
+              .text-center
+              .User-listImage
+                %a.ReadyToInviteAdditional{data: {toggle: :modal}, href: '#add_creator_modal'}
+                  %i.VideoClientIcon-iPlus{style: 'background: rgba(194,194,194,0.5)'}
+            - @presenterships_data.each do |presenter|
+              .tile{data: {email: presenter.email}}
+                .text-center
+                  - if current_user.id == presenter.user.id
+                    %a.you You
+                  - else
+                    %a.others &nbsp;
+                    %a.remove_user_item.pull-right{href: '#'} x
+                    -#%a.remove_user_item.pull-right{href: remove_member_channel_path(@channel, presenter_id: presenter.presenter_id), data: {remote: true, confirm: 'Are you sure?', method: :delete}} x
+                .User-listImage{class: (current_user.id == presenter.user.id ? :you : :others), style: "background-image: url(#{presenter.user.avatar_url})"}
+                  - if current_user.id == presenter.user.id
+                    %i.VideoClientIcon-EditF.you
+                %span.text-center.full-width.display-block
+                  - if presenter.user.public_display_name
+                    = presenter.user.public_display_name
+                  - else
+                    = presenter.user.email
+
+      %div
+        .text-right.cancelAndSaveButtons
+          %a.btn.btn-l.btn-borderred-light{href: url_for(:back) || @channel.relative_path} Cancel
+          %button.submitButton.btn.btn-l{name: :button, type: :submit}
+            Save
+            %span.spinnerSlider.spinnerSmall.spinnerColor_white.spinerStatick
+              .bounceS1
+              .bounceS2
+              .bounceS3
+
+#presenter_modals
+  #add_creator_modal.shareModal.modal.fade.modal-s{'aria-hidden': true, role: :dialog, tabindex: -1}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          .unobtrusive-flash-container
+          .sm-head
+            = render partial: 'become_presenter_steps/close_modal'
+            .modal-tabs.full-width.margin-bottom-10
+              %ul.nav.nav-tabs
+                %li.active{style: 'width: 50%;'}
+                  %a{href: '#invite_creator', data: {toggle: :tab}}
+                    = I18n.t('wizard.modals.presenter_info.email')
+                %li{style: 'width: 50%;'}
+                  %a{href: '#search_creator', data: {toggle: :tab}}
+                    = I18n.t('wizard.modals.presenter_info.search')
+                -#%li
+                  %a{href: '#add_creator', data: {toggle: :tab}}
+                    = I18n.t('wizard.modals.presenter_info.got_info')
+            .tab-content.padding-bottom-0
+              %section#invite_creator.tab-pane.active
+                -#%form#invite_by_email.form_V2{action: add_member_channel_path(@channel), 'data-remote': true, method: :post}
+                %form#invite_by_email.form_V2.padding-top-0.padding-bottom-0{'data-remote': true}
+                  .input-block.state-clear
+                    %label{for: :invite_email}= I18n.t('wizard.modals.presenter_info.email_placeholder')
+                    %input#invite_email{type: :text, name: :emails}
+                    .errorContainerWrapp
+                  .text-right
+                  = label_tag :add_another_creator_email, class: 'text-color-Blue checkbox choice text-right' do
+                    = check_box_tag :add_another_creator_email
+                    %span
+                      = I18n.t('views.channels.edit_creators.add_another_creator')
+                    -#%span{rel: :tipsy, class: "VideoClientIcon-q5", title: I18n.t('wizard.modals.presenter_info.email_tooltip')}
+                  .bottomPushContainer
+                    .text-right
+                      %button.invite.btn.btn-m{type: :submit} Invite
+              %section#search_creator.tab-pane
+                %form#searchByName.form_V2.padding-top-0{'data-remote': true}
+                  .input-block.state-clear
+                    %label{for: :query}= I18n.t('wizard.modals.presenter_info.search_placeholder', service_name: Rails.application.credentials.global[:service_name])
+                    %input#query{type: :text}
+                    .errorContainerWrapp
+                    -#%span{rel: :tipsy, title: I18n.t('wizard.modals.presenter_info.search_tooltip')}
+                      %i.VideoClientIcon-q5
+                  .bottomPushContainer
+                    .text-right
+                      %button.search.btn.btn-m{type: :submit}
+                        Search
+                        %span.spinnerSlider.spinnerSmall.spinnerColor_white.spinerStatick
+                          .bounceS1
+                          .bounceS2
+                          .bounceS3
+
+                      %button.clear.btn.btn-m.btn-borderred-light.margin-left-10{type: :button} Clear
+                .UserImage-wrapp
+                  #searchResults.User-list.clearfix
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function(){
+      new window.Channel.Members({members: #{@presenterships_json.to_json.html_safe}});
+    });

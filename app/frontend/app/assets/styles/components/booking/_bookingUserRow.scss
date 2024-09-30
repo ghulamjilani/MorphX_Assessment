@@ -1,0 +1,118 @@
+.bookingUserRow {
+  width: 100%;
+  padding: 3rem;
+  // background-color: #aff4c6;
+  background-color: var(--bg__secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  // overflow: auto;
+  margin-bottom: 6rem;
+
+  &__text {
+    flex: 1;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 3rem 0;
+    font-size: 2.6rem;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &__avatars {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  &__avatar {
+    cursor: pointer;
+    width: 30rem;
+    height: 30rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--bg__main);
+    gap: 0 3rem;
+    padding: 1.5rem;
+    color: var(--tp__h1);
+    margin-bottom: 1rem;
+
+    &__name {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+  }
+
+  &.sessionPage {
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 1rem;
+    margin-bottom: 4.5rem;
+    border: 1px solid var(--border__separator);
+    padding-top: 2.5rem;
+    .bookingUserRow{
+      &__text{
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-top: 0;
+      }
+      &__avatars{
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+      }
+      &__avatar{
+        width: 100%;
+        background: none;
+        height: auto;
+        padding: 0;
+        margin: 0;
+        .avatar{
+          margin-bottom: 1.3rem;
+        }
+        &__name{
+          font-size: 1.6rem;
+          color: var(--tp__main);
+          font-weight: normal;
+          margin-bottom: 1.4rem;
+        }
+        .btn{
+          min-width: auto;
+          padding: 0.6rem 1rem;
+          min-height: auto;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
+        img{
+          width: 6rem;
+          height: 6rem;
+        }
+        i{
+          width: 2.1rem;
+          height: 2.1rem;
+          font-size: 1rem;
+          border: 1px solid var(--bg__main);
+        }
+      }
+    }
+    @include media(tablet) {
+
+    }
+  }
+}
+
+.bookingUsers {
+  .homePage__title__wrapper {
+    margin-bottom: 1rem;
+  }
+}

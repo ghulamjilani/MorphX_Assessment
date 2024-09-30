@@ -1,0 +1,31 @@
+[% d = new Date(dateString); %]
+[% var day = d.getDay(); %]
+[% var diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday %]
+
+[% var start_of_week = new Date(d.setDate(diff)); %]
+
+[% var before_week_end = new Date(start_of_week); %]
+[% var next_week_start = new Date(start_of_week); %]
+
+[% before_week_end.setDate(start_of_week.getDate() - 1); %]
+[% next_week_start.setDate(start_of_week.getDate() + 7); %]
+
+[% var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; %]
+
+<a data-value="[%= dateAsFormattedString(before_week_end) %]" class="jumpTo week_day prev_week"></a>
+[% _.each([0, 1, 2, 3, 4, 5, 6], function(i){ %]
+  [% var date = new Date(start_of_week); %]
+  [% date.setDate(start_of_week.getDate() + i); %]
+
+  [% var loop_active = ""; %]
+
+  [% if (dateAsFormattedString(date) == dateString) loop_active = "active"; %]
+
+  <a data-value="[%= dateAsFormattedString(date) %]" class="[%= loop_active %] week_day" style="font-size: 13px">
+    [%= days[date.getDay()] %]
+    <span>- [%= date.getDate() %]</span>
+  </a>
+[% }) %]
+<a data-value="[%= dateAsFormattedString(next_week_start) %]" class="jumpTo week_day next_week"></a>
+
+<div class="clearfix"></div>

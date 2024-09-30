@@ -1,0 +1,12 @@
+<p>
+  <%= I18n.t('views.mailer.session_mailer.you_as_co_presenter_accepted_session_invitation.you_have_accepted_invitation', creator: I18n.t('dictionary.creator')) %>
+  <a href="<%= @session.absolute_path(UTM.build_params({utm_content: @user.utm_content_value})) %>"><%= @session.always_present_title %>"</a>.
+</p>
+
+<p>
+  The session starts at <%= @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %>.
+</p>
+
+<p>
+  See you there!
+</p>

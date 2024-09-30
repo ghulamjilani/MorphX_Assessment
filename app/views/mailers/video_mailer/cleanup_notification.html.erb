@@ -1,0 +1,10 @@
+<p>The following unprocessed videos are going to be deleted in <%= pluralize(@time_interval, 'day') %> if you don't mark them to be processed:</p>
+<ul>
+    <% @videos.each do |video| %>
+        <li>
+            <a href="<%= video.short_url %>" target="_blank">"<%= video.always_present_title %>"</a> from <%= video.created_at.strftime('%d.%m.%Y') %>
+        </li>
+    <% end %>
+</ul>
+<p><%= link_to 'Go to your dashboard', replays_dashboard_url %> and click "Process Video" button for videos you want to save.</p>
+

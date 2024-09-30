@@ -1,0 +1,6 @@
+<% if current_user.voted_as_when_voted_for(@recording) %>
+$('.recording-like-<%= @recording.id %>').addClass('active').addClass('selected');
+<% else %>
+$('.recording-like-<%= @recording.id %>').removeClass('active').removeClass('selected');
+<% end %>
+$('.recording-like-<%= @recording.id %> .likes_count, .likes-counter-recording-<%= @recording.id %>').text('<%= @recording.likes_count %>');

@@ -1,0 +1,159 @@
+.channel__info {
+  &__wrapp {
+    @include media(reverso-tablet) {
+      @include flex(flex, stretch, space-between);
+    }
+  }
+
+  &__left {
+    @include media(reverso-desktop) {
+      width: calc(100% - 50rem);
+    }
+    @include media(reverso-tablet) {
+      width: calc(100% - 40rem);
+      padding-right: 2rem;
+      @include flex(flex, stretch, space-between);
+      flex-direction: column;
+      width: calc(100% - 50rem);
+    }
+
+    &__footer {
+      background: var(--bg__content__secondary);
+      padding: 1rem 3rem;
+      border-radius: 1rem;
+      margin-top: 3rem;
+
+      > :not(:last-child) {
+        margin-right: 2rem;
+      }
+
+      @include media(reverso-desktop) {
+        justify-content: space-between;
+      }
+      @include media(reverso-tablet) {
+        flex-wrap: wrap;
+        @include flex(flex, stretch, false);
+      }
+      @include media(tablet) {
+        justify-content: space-between;
+        margin-bottom: 5rem;
+        div div {
+          display: inline-block;
+          min-width: 8rem;
+        }
+      }
+      @include media(phone) {
+        flex-direction: column;
+        > div {
+          display: flex;
+
+          span {
+            padding-left: 0.5rem;
+          }
+        }
+        > :last-child {
+          margin-right: 2rem;
+        }
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    &__readMore {
+      color: var(--tp__h1);
+      font-weight: bold;
+      font-size: 1.4rem;
+      margin-top: 3rem;
+      cursor: pointer;
+    }
+  }
+
+  &__right {
+    background: var(--bg__content);
+    border-radius: 1rem;
+    padding: 6rem 3rem;
+    @include boxShadow__main(var(--sh__main));
+    @include media(reverso-desktop) {
+      max-width: 50rem;
+      min-width: 50rem;
+    }
+    @include media(reverso-tablet) {
+      max-width: 40rem;
+      min-width: 40rem;
+    }
+
+    &__label {
+      color: var(--tp__h3);
+      font-weight: bold;
+      font-size: 2rem;
+      padding-bottom: 3rem;
+    }
+
+    &__owner {
+      cursor: pointer;
+      @include flex(flex, center);
+      padding-bottom: 3rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border__separator);
+
+      .avatar__xl {
+        margin-right: 3rem;
+      }
+
+      &__name {
+        font-weight: bold;
+        font-size: 2.2rem;
+      }
+
+      button {
+        color: var(--tp__secondary);
+        margin-right: 1rem;
+        cursor: pointer;
+
+        span {
+          color: var(--tp__h1);
+          font-weight: bold;
+        }
+      }
+    }
+
+    &__creator {
+      font-weight: bold;
+      font-size: 1.6rem;
+
+      .avatar__l {
+        margin-right: 5rem;
+      }
+
+      &__label {
+        @include flex(flex, stretch, space-between);
+        font-weight: bold;
+        font-size: 2rem;
+        color: var(--tp__h3);
+        margin-bottom: 3rem;
+
+        .btn__reset {
+          color: var(--tp__secondary);
+          font-weight: bold;
+          font-size: 1.2rem;
+          cursor: pointer;
+        }
+      }
+    }
+
+    &__block {
+      @include flex(flex, center);
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.mChannel__info {
+  &__description {
+    white-space: pre-line;
+    font-size: 1.6rem;
+    color: var(--tp__secondary);
+  }
+}

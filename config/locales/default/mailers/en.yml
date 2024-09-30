@@ -1,0 +1,31 @@
+en:
+  mailers:
+    dashboard:
+      subject: Welcome to %{service_name}!
+      body: "<h2> Dear [username] ,</h2>\n<p style='font-size:16px'>I am happy to invite you to the new platform!</br>Visit <a href='%{service_link}'>%{service_link}</a> to join me at %{service_name}!</p>"
+    channel:
+      presenter_invited:
+        title: "Welcome,<br/>We’re excited you’ve joined %{service_name}!"
+      employee_invited:
+        subject: "You’ve been invited on %{service_name} to the %{name} company."
+    mailer:
+      welcome_stopped_during_becoming_a_presenter:
+        subject: "Getting started on %{service_name}"
+      time_to_service:
+        subject: "It's time to %{service_name}"
+    recording:
+      ready:
+        subject: "Your video is now ready on %{service_name}"
+    video:
+      ready:
+        subject: "Your video is now ready on %{service_name}"
+      upload:
+        subject: "Your video is now ready on %{service_name}"
+    ffmpegservice_stream:
+      stream_stopped:
+        subject: 'Your stream has been stopped'
+    blog:
+      new_mention_in_post:
+        subject: You have been mentioned in blog post on %{service_name}!
+      new_mention_in_comment:
+        subject: You have been mentioned in comment on blog post on %{service_name}!

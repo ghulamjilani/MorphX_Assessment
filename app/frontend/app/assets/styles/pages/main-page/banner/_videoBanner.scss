@@ -1,0 +1,36 @@
+.videoBanner {
+  position: relative;
+  width: 132rem;
+  margin: 0 auto;
+  max-width: 100%;
+  @include flex(flex,flex-start , center);
+
+  &__toggleSound {
+    position: absolute;
+    bottom: 1.7rem;
+    right: 5rem;
+    z-index: 2;
+    width: 4rem;
+    height: 4rem;
+    @include transition200();
+    @include flex(flex, center, center);
+    border-radius: 50%;
+    background-color: var(--bg__content__secondary);
+    color: var(--tp__main);
+    cursor: pointer;
+
+    @include media(desktop){
+      right: 3rem;
+    }
+    @include media(phone){
+      bottom: 1rem;
+      right: 1.5rem;
+    }
+  }
+
+  video {
+    width: 125rem;
+    margin: 1rem auto 0 auto;
+    max-width: 96%;
+  }
+}

@@ -1,0 +1,6 @@
+en:
+  mailboxer:
+    sent: "Message has been sent"
+    message_mailer:
+      subject_new: "New message from %{user_name}: %{subject}"
+      subject_reply: "New reply from %{user_name}: RE: %{subject}"

@@ -1,0 +1,1 @@
+Hi <%= @user.public_display_name %>. Just a reminder that you have a session coming up at <%= @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %>.

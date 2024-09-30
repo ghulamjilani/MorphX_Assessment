@@ -1,0 +1,75 @@
+@import "form";
+@import "r-modal";
+@import "table";
+@import "filters";
+@import "paginate";
+@import "l-modal";
+@import "recipient";
+@import "preview";
+
+.CM {
+  padding: 3rem 3rem 4rem;
+  background: var(--bg__content);
+  border-radius: 1rem;
+  box-shadow: 0 .4rem .7rem 0 var(--sh__main);
+
+  &__dashboard {
+    .dashboardMK2__main__content {
+      overflow: visible;
+    }
+  }
+
+  &__all {
+    &__checkbox {
+      pointer-events: none;
+    }
+  }
+
+  &__title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--tp__h1);
+    padding-bottom: 2rem;
+  }
+
+  &__form__wrapper {
+    margin-bottom: 4rem;
+  }
+
+  &__write {
+    @include flex(flex, center, space-between);
+    padding-bottom: 4rem;
+    @include media(phone) {
+      flex-direction: column;
+      button {
+        margin-top: 1rem;
+        width: 100%;
+      }
+    }
+
+    &__title {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__loader {
+    margin-top: 4rem;
+  }
+
+  &__empty {
+    @include center('vh');
+    font-size: 1.8rem;
+  }
+  &__export {
+    @include flex(flex, center, flex-end);
+    margin-bottom: 2rem;
+  }
+  &__selectedInfo {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    .btn {
+      font-size: 1.6rem;
+      color: #095F73;
+    }
+  }
+}

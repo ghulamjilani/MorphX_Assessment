@@ -1,0 +1,44 @@
+<div class="crop-images-wrapp" cid="{{cid}}">
+    <div class="row">
+        <div class="crop-images col-md-12">
+            <img id="crop-img" src="{{base64_img}}">
+        </div>
+    </div>
+
+    <div class="cropOptions">
+        <div class="btn-group text-right">
+            <a href="#" class="crop btn btn-m" title="Crop">
+              <span class="docs-tooltip" data-toggle="tooltip" title="Crop and add image">
+                Crop
+              </span>
+            </a>
+            <a href="#" class="rejectedButton clear btn btn-m btn-grey-solid" data-dismiss="modal" title="Clear">
+              <span class="docs-tooltip" data-toggle="tooltip" title="Clear and Cancel">
+                Cancel
+              </span>
+            </a>
+        </div>
+        <div class="nav-btns">
+            <button title="" data-option="0.1" data-method="zoom" data-toggle="tooltip" class="iconWrapp" type="button" data-original-title="Zoom In">
+              <span class="docs-tooltip">
+                <span class="GlobalIcon-plus-circle"></span>
+              </span>
+            </button>
+            <button title="Zoom Out" data-option="-0.1" data-method="zoom" data-toggle="tooltip" class="iconWrapp" type="button">
+              <span class="docs-tooltip">
+                <span class="GlobalIcon-minus-circle"></span>
+              </span>
+            </button>
+            <button type="button" class="iconWrapp" data-toggle="tooltip" data-method="rotate" data-option="-45" title="Rotate Left">
+                <span class="docs-tooltip">
+                  <span class="GlobalIcon-rotate-angle-left"></span>
+                </span>
+            </button>
+            <button type="button" class="iconWrapp" data-toggle="tooltip" data-method="rotate" data-option="45" title="Rotate Right">
+                <span class="docs-tooltip">
+                  <span class="GlobalIcon-rotate-angle-right"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<h4 class="groupTitle">Create channel gallery</h4>
+<div class="container-wrapper">
+  <div id="upload-materials-popup" class="modal fade material-upload-modal" aria-hidden="true"
+       aria-labelledby="materialModal" role="dialog" tabindex="-1">
+    <div class="unobtrusive-flash-container"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" class="close">×</button>
+          <h3>
+            Upload Channel Materials
+          </h3>
+        </div>
+        <div class="modal-body">
+          <div class="LoadingCover">
+            <div class="spinnerSlider">
+                <div class="bounceS1"></div>
+                <div class="bounceS2"></div>
+                <div class="bounceS3"></div>
+            </div>
+          </div>
+          <div id="upload-images">
+            <div class="row">
+              <div class="upload-info">
+                <span>
+                  Drag & Drop or
+                  <input type="file" name="channel-images" id="channel-cover">
+                  <label for="channel-cover">choose an image file.</label>
+                  <div>
+                    <small>
+                      (Supported formats: jpg, jpeg, png, bmp)
+                    </small>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div id="external-url">
+            <div class="row">
+              <div class="url-info">
+                <strong>
+                  link videos, images, and rich media from your favorite content providers.
+                </strong>
+                <span>
+                  <input type="text" name="channel-link" placeholder="URL" class="input-lg">
+                  <button class="add-url btn-white btn-blue-hover">Add material</button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="loudThumbnailsList"></div>
+
+          <div class="crop-images-wrapp"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="btn btn-m" data-target="#upload-materials-popup" data-toggle="modal">
+    <span>Open upload form</span>
+  </a>
+  <i class='VideoClientIcon-q5 text-color-Blue' rel='tipsy' title='Upload images & link videos, images, and rich media from your favorite content providers. You can always add, delete or rearrange this content later.'></i>
+
+  <div class="materials-list"></div>
+</div>
+<div class="row-buttons">
+  {{channelFormFooter}}
+</div>

@@ -1,0 +1,14 @@
+en:
+  views:
+    dashboard:
+      money:
+        purchases:
+          page_title: Money
+          date: Date
+          type: Type
+          description: Description
+          amount: Amount
+          payment_method: Payment Method
+          system_credit: System Credit
+          pay_pal: PayPal
+          no_purchases: No purchases yet

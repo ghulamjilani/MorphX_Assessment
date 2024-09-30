@@ -1,0 +1,6 @@
+en:
+  controllers:
+    payouts:
+      payout_methods:
+        errors:
+          no_connect_account: You need to create Payout Connect Account first

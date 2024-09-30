@@ -1,0 +1,24 @@
+//body:not(.showVideo) {
+//  .clouds {
+//    position: absolute;
+//    left: 0;
+//    top: 0rem;
+//    background-image: url(asset_path("video_client/clouds.png"));
+//    background-repeat: repeat-x;
+//    background-size: contain;
+//    -webkit-animation: backgroundScroll 60s linear infinite;
+//    animation: backgroundScroll 60s linear infinite;
+//    z-index: 1;
+//    width: 100%;
+//    height: 28.7rem;
+//  }
+//
+//  @include keyframes(backgroundScroll) {
+//    from {
+//      background-position: 0 0;
+//    }
+//    to {
+//      background-position: 100% 0;
+//    }
+//  }
+//}

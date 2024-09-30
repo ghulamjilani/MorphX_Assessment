@@ -1,0 +1,39 @@
+.messageMK2 {
+  @include flex(flex, false, false);
+  padding-bottom: 1rem;
+  padding-right: .5rem;
+
+  &__avatar {
+    padding-right: 1rem;
+    padding-top: .7rem;
+
+    &__image {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+    }
+  }
+
+  &__text {
+    color: $client__tp__main;
+    font-size: 1.4rem;
+    padding: 1rem 1.2rem;
+    word-break: break-all;
+
+    &__timestamp {
+      font-size: 1.2rem;
+      color: $client__tp__icons;
+      padding-right: 1rem;
+    }
+
+    &__owner {
+      background: $client__bg__content__secondary;
+      border-radius: .3rem;
+    }
+
+    &__name {
+      font-weight: bold;
+      color: #095F73;
+    }
+  }
+}

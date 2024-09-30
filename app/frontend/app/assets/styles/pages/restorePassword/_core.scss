@@ -1,0 +1,131 @@
+.restorePassword {
+  padding-bottom: 9rem;
+
+  &__banner {
+    height: 35rem;
+    background: var(--bg__secondary);
+    width: 100%;
+    @include flex(flex, center, center);
+    padding-bottom: 11rem;
+
+    &__wrapper {
+      @include flex(flex, center, center);
+      width: 100%;
+      flex-direction: column;
+    }
+
+    &__title {
+      color: var(--tp__h1);
+      font-weight: bold;
+      font-size: 2.6rem;
+      padding-bottom: 4rem;
+      @include media(phone) {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__image {
+    position: absolute;
+    z-index: 3;
+    max-width: 90%;
+
+    &__wrapper {
+      width: 67.1rem;
+      height: 15.6rem;
+      @include flex(flex, center, center);
+    }
+  }
+
+  &__errors {
+    width: 39rem;
+    margin: 0 auto;
+    margin-top: -3rem;
+    @include media(phone) {
+      max-width: 90%;
+      width: 100%;
+    }
+  }
+
+  &__form {
+    @include flex(flex, center, center);
+    flex-direction: column;
+    width: 100%;
+    span{
+      width: 100%;
+    }
+
+    &__wrapper {
+      @include flex(flex, center, center);
+      background: var(--bg__content);
+      height: 43rem;
+      width: 79rem;
+      max-width: 90%;
+      border-radius: 1rem;
+      margin-top: -.5rem;
+      z-index: 2;
+      position: relative;
+      margin: 0 auto;
+      margin-top: -15.8rem;
+    }
+
+    &__title {
+      color: var(--tp__h2);
+      font-weight: bold;
+      font-size: 2.2rem;
+      padding-bottom: 5.5rem;
+      @include media(phone) {
+        font-size: 1.8rem;
+      }
+    }
+
+    &__inputs {
+      width: 39rem;
+      height: 12rem;
+      margin: 0 auto;
+
+      input::-webkit-credentials-auto-fill-button {
+        right: 2.5rem !important;
+        top: 2.3rem;
+        position: absolute !important;
+      }
+
+      input::-webkit-caps-lock-indicator {
+        right: 5rem !important;
+        top: 2rem;
+        position: absolute !important;
+      }
+
+      @include media(phone) {
+        max-width: 90%;
+        width: 100%;
+      }
+
+      .passwordInput {
+        height: 8.2rem;
+      }
+
+      #input_id {
+        padding-right: 2rem;
+      }
+
+      .input__field__icon {
+        font-size: 1.8rem;
+        top: 1.5rem;
+        color: var(--tp__icons);
+        width: auto;
+      }
+    }
+
+    &__rep {
+      height: 7.5rem;
+    }
+
+    &__button {
+      margin: 3.5rem 0 5rem;
+      min-width: 16rem;
+      min-height: 4rem;
+      font-size: 1.4rem;
+    }
+  }
+}

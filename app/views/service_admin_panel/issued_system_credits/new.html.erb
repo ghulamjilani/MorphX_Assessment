@@ -1,0 +1,21 @@
+<%= form_tag service_admin_panel_issued_system_credits_path, method: :post, class: "formtastic" do %>
+  <fieldset class="inputs">
+  <ol>
+    <li class="string input optional stringish">
+      <%= label_tag :email, nil, class: 'label' %>
+      <%= text_field_tag :email %>
+    </li>
+    <li class="string input optional stringish">
+      <%= label_tag :system_credit_refund_amount, nil, class: 'label' %>
+      <%= text_field_tag :system_credit_refund_amount %>
+    </li>
+  </ol>
+  </fieldset>
+  <fieldset class="actions">
+    <ol>
+      <li class="action input_action ">
+        <%= submit_tag "Issue system credit refund" %>
+      </li>
+    </ol>
+  </fieldset>
+<% end %>

@@ -1,0 +1,14 @@
+%section.tile-cake.tile-cake-Channels{id: "channel_tile_#{channel.id}", data: {type: :channel, id: channel.id}, class: (defined?(custom_class) ? custom_class : '' )}
+  .tile-img
+    = link_to spa_user_path(channel.organizer.slug), class: 'channelTile-presenterName text-ellipsis' do
+      .avatarImg-SD{style: "background-image: url('#{channel.organizer.small_avatar_url}')"}
+      Owned by
+      = channel.organizer.always_present_title
+    .tile-imgContainer.owl-lazy{'data-src': channel.image_tile_url}
+    %a.tile_link{href: channel.relative_path}
+    %a.channelName.text-ellipsis{href: channel.relative_path}= channel.always_present_title
+  .tile-body
+    .row
+      .col-md-12.text-color-red.tile-body-text
+        - if channel.subscription && channel.subscription.plans.active.present?
+          Subscription plans starting from $#{"%.2f" % channel.subscription.plans.active.pluck(:amount).map(&:to_f).sort[0]}

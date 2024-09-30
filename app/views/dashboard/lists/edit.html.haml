@@ -1,0 +1,159 @@
+- content_for(:extra_body_classes, "dashboards-product_lists header-top dashboards")
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    .pr_new-or-edit
+      .pr_new-or-edit-body
+        .productName
+          Edit
+          #{@list.name}
+          List (#{@list.products.count})
+        - content_for(:after_include_javascripts) do
+          :javascript
+            $(document).ready(function(){
+              var list_form = new window.ListForm({el: '#list_form_area'});
+              list_form.render();
+            });
+        #list_form_area
+          = form_for @list, as: :list, url: dashboard_list_path(@list), method: :put, html: {class: 'form_V2 list_form'} do |f|
+            %section
+              .input-block.required{class: @list.name.to_s.length > 0 ? '' : 'state-clear'}
+                = f.label :name, 'List Name'
+                = f.text_field :name
+                .errorContainerWrapp
+                  .errorContainer
+              .input-block{class: @list.description.to_s.length > 0 ? '' : 'state-clear'}
+                = f.label :description
+                = f.text_area :description, rows: 1, 'max-length': 500, data: {autoresize: true}
+                .infoContainerWrapp
+                  -#Minimum 24 characters
+                .errorContainerWrapp
+                  .errorContainer
+                .counter_block #{@list.description.to_s.length}/500
+            .text-right.clearfix.padding-top-30
+              %a.stepBackBtn.btn.btn-m.btn-borderred-grey.margin-right-10{href: dashboard_lists_path} Back
+              = f.submit 'Save', class: 'btn btn-m'
+        .info-tabs
+          %ul.nav.nav-tabs.nav-justified
+            %li.active
+              %a{href: '#ImportViaURL', data: {toggle: :tab}} Import via URL
+            %li
+              %a{href: '#AddManually', data: {toggle: :tab}} Add Manually
+            - if current_user.can_use_barcode_area
+              %li
+                %a{href: '#ImportViaBarcode', data: {toggle: :tab}} Import via Barcode
+          .tab-content.padding-left-0.padding-right-0.padding-bottom-50
+            #ImportViaURL.tab-pane.active
+              = form_tag search_by_url_dashboard_list_products_path(@list), remote: true, id: :search_by_url  do
+                .row.form_V2.clearfix
+                  .col-sm-10
+                    .input-block.state-clear.required
+                      %label Add URL
+                      %input{type: :text, name: :url}
+                      .errorContainerWrapp
+                        .errorContainer
+                  .col-sm-2.Fetch_wrapp.padding-left-0
+                    %button.full-width.btn.btn-m.btn-grey-solid{type: :submit} Fetch
+
+            #AddManually.AddManually.tab-pane
+              - content_for(:after_include_javascripts) do
+                :javascript
+                  $(document).ready(function(){
+                    var product_form = new window.ProductForm({el: '#AddManually'});
+                    product_form.render();
+                  });
+              - new_product = ::Shop::Product.new.tap{|p| p.build_product_image}
+              = form_for new_product, as: :product, url: dashboard_list_products_path(@list), method: :post, html: {remote: true, style: 'visibility: visible;'} do |f|
+                .row.form_V2.clearfix
+                  .col-md-4
+                    %label.product-image{style: "background-image: url(#{new_product.image_url})", default_image: image_url('product/default_product.jpg')}
+                      %span
+                        = f.fields_for :product_image do |pi|
+                          = pi.file_field :original, class: 'inputfile hidden'
+                        Image
+                        %br/
+                        (click to upload)
+                    %span.ImgRecomendation
+                      If you want to take a photo, we recommend taking photos in
+                      %u landscape
+                      version.
+                  .col-md-8
+                    .input-block.state-clear.required
+                      = f.label :url, 'Product URL'
+                      = f.text_field :url
+                      .errorContainerWrapp
+                        .errorContainer
+                    .input-block.state-clear.required
+                      = f.label :title, 'Product Name'
+                      = f.text_field :title
+                      .errorContainerWrapp
+                        .errorContainer
+                    .input-block.state-clear
+                      = f.label :short_description, 'Short Description'
+                      = f.text_area :short_description, 'max-length': 500, data: {autoresize: true}
+                      -#.infoContainerWrapp Minimum 24 characters
+                      .counter_block 0/500
+                      .errorContainerWrapp
+                        .errorContainer
+                    .input-block.state-clear
+                      = f.label :description, 'Description'
+                      = f.text_area :description, 'max-length': 2000, data: {autoresize: true}
+                      .counter_block 0/2000
+                      .errorContainerWrapp
+                        .errorContainer
+                    .priceSection.clearfix
+                      Price
+                      = f.text_field :price, class: 'btn btn-s btn-borderred-grey pull-right', placeholder: '0.00'
+                      .errorContainerWrapp
+                        .errorContainer
+                    .input-block.specs
+                      = f.label :specifications, ''
+                      = f.text_area :specifications, 'max-length': 255, placeholder: 'eg. Size: 4, 4.5, 5, 6.5', data: {autoresize: true}
+                      .counter_block 0/255
+                      .errorContainerWrapp
+                        .errorContainer
+                .clearfix.text-right
+                  = f.submit 'Add Product', class: 'btn btn-m'
+                  %a.clear_form.btn.btn-m.btn-grey-solid.btn-red-hover{href: '#'} Cancel
+            - if current_user.can_use_barcode_area
+              #ImportViaBarcode.tab-pane
+                = form_tag search_by_upc_dashboard_list_products_path(@list), remote: true, id: :search_by_upc do
+                  .row.form_V2.clearfix
+                    .col-sm-10
+                      .input-block.state-clear.required
+                        %label Add Barcode
+                        %input{type: :text, name: :barcode}
+                        .errorContainerWrapp
+                          .errorContainer
+                    .col-sm-2.Fetch_wrapp.padding-left-0
+                      %button.full-width.btn.btn-m.btn-grey-solid{type: :submit} Add
+
+          .products-item-list
+            .row
+              .col-md-6.total_count
+                Added Products (#{@list.products.count})
+              .col-md-6.text-right.fs-12
+                Sort by
+                %a.btn.btn-s.btn-borderred-grey.fs-12.dropdown-toggle{'data-toggle': :dropdown, href: '#'} Newest
+                %ul.dropdown-menu
+                  %li= link_to 'Newest', dashboard_list_products_path(@list, order: :desc), remote: true
+                  %li= link_to 'Oldest', dashboard_list_products_path(@list, order: :asc), remote: true
+            #productsArea.row.productsArea
+              - @list.products.each do |product|
+                .col-xs-6.col-sm-4.col-md-4.productTileContainer{id: "product_tile_#{product.id}"}
+                  .productTile
+                    .productTile_image_wrapp
+                      = link_to dashboard_list_product_path(@list, product), class: 'productTile_remove', remote: true, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove product' do
+                        %i.VideoClientIcon-iPlus.rotateIcon
+                      %img.productTile_image{src: product.image_url, alt: ''}
+                      - if product.affiliate_url.present?
+                        .afiliateMarker{title: 'Congrats! This cool product is ready to make money'} $
+                    .productTile_name= product.title
+                    .productTile_footer.clearfix
+                      .fs-12.text-ellipsis.text-color-LightGrey.padding-bottom-5= product.description
+                      = link_to 'Edit Product', edit_dashboard_list_product_path(@list, product), remote: true, class: 'productTile_edit text-color-Blue fs-12 pull-left'
+                      .productTile_cost.btn.btn-s.pull-right= product.price.format
+                    .productTile_footer.clearfix.full-width{rel: :tipsy, title: product.short_url(product.organization&.user)}
+                      %input.productTile_url.text-ellipsis.pull-left{type: :text, value: product.short_url(product.organization&.user), readonly: true}
+                      %a.productTile_copy.btn.btn-s.pull-right.btn-grey-solid{href: '#', onclick: 'copyToClipboard(this); return false'} Copy

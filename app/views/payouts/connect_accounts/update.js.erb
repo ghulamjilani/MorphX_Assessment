@@ -1,0 +1,5 @@
+$('#add_bank_info').removeClass('hide');
+$('#add_account_info').addClass('hide');
+$('#add_bank_info').html("<%= escape_javascript(render(partial: 'payouts/bank_info_form', locals: { payout_method: @payout_method, connect_account: @connect_account.stripe_item, bank_account: @connect_bank_account })) %>");
+InitBankInfoValidation();
+prepareTitles();

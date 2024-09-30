@@ -1,0 +1,115 @@
+- content_for(:page_title, 'Help')
+- content_for(:extra_body_classes, 'FAQ header-top')
+
+= cache do
+  .faq-Page
+    .info-tabs
+      %ul.nav.nav-tabs.nav-justified
+        %li.active
+          %a{href: '#participants', "data-toggle" => "tab"} for users
+        %li
+          %a{href: '#presenters', "data-toggle" => "tab"}
+            = I18n.t('views.pages.help_center.for_creators', creators: I18n.t('dictionary.creators') )
+    .tab-content
+      %div#presenters.tab-pane
+        .row
+          %aside.col-md-3.left-side-bar
+            %ul.nav.slideBox.firstLinenav
+              - faq_presenters.keys.each do |category|
+                %li.d-has-list
+                  %a.ensure-link-style{"data-id" => category}
+                    %i{class: "VideoClientIcon-#{help_icon(category)}"}
+                    = category.to_s.gsub('and', '&').humanize.titleize
+            %div.secondLinenav.slideBox
+              - faq_presenters.each do |category, _hash|
+
+                %div.nav{"data-nav" => category}
+                  %h3
+                    %i{class: "VideoClientIcon-#{help_icon(category)}"}
+                    = category.to_s.gsub('and', '&').humanize.titleize
+                  %a.backButton.ensure-link-style back
+
+                  - if _hash.present?
+                    - _hash.each_pair do |key, values|
+                      - if values[:subject].present? && values[:body].present?
+                        %a.ensure-link-style{"data-id-text" => "#{category}-#{key}"}= I18n.interpolate(values[:subject], faq_replacements)
+          .col-md-9
+            .contentWrapp
+              - faq_presenters.each do |category, _hash|
+
+                - if _hash.present?
+                  - _hash.each_pair do |key, values|
+                    - if values[:subject].present? && values[:body].present?
+                      .content-box{"data-id-text-box" => "#{category}-#{key}"}
+                        .Q= I18n.interpolate(values[:subject], faq_replacements)
+                        .A= simple_format(I18n.interpolate(values[:body], faq_replacements), {}, sanitize: false)
+            .contentList.row
+
+              - already_displayed_columns = 0
+              - faq_presenters.each do |category, _hash|
+
+                %div.col-md-4{style: already_displayed_columns == 3 ? 'clear: both' : ''}
+                  %h3
+                    %i{class: "VideoClientIcon-#{help_icon(category)}"}
+                    = category.to_s.gsub('and', '&').humanize.titleize
+                  - if _hash.present?
+                    - _hash.each_pair do |key, values|
+                      - if values[:subject].present? && values[:body].present?
+                        %a.ensure-link-style{"data-id-text" => "#{category}-#{key}", "data-id-parentNav" => category}= I18n.interpolate(values[:subject], faq_replacements)
+                - already_displayed_columns = already_displayed_columns + 1
+
+      %div#participants.tab-pane.active
+        .row
+          %aside.col-md-3.left-side-bar
+            %ul.nav.slideBox.firstLinenav
+              - faq_participants.keys.each do |category|
+                %li.d-has-list
+                  %a.ensure-link-style{"data-id" => category}
+                    %i{class: "VideoClientIcon-#{help_icon(category)}"}
+                    = category.to_s.gsub('and', '&').humanize.titleize
+            %div.secondLinenav.slideBox
+              - faq_participants.each do |category, _hash|
+
+                %div.nav{"data-nav" => category}
+                  %h3
+                    %i{class: "VideoClientIcon-#{help_icon(category)}"}
+                    = category.to_s.gsub('and', '&').humanize.titleize
+                  %a.backButton.ensure-link-style back
+
+                  - if _hash.present?
+                    - _hash.each_pair do |key, values|
+                      - if values[:subject].present? && values[:body].present?
+                        %a.ensure-link-style{"data-id-text" => "#{category}-#{key}"}= I18n.interpolate(values[:subject], faq_replacements)
+          .col-md-9
+            .contentWrapp
+              - faq_participants.each do |category, _hash|
+
+                - if _hash.present?
+                  - _hash.each_pair do |key, values|
+                    - if values[:subject].present? && values[:body].present?
+                      .content-box{"data-id-text-box" => "#{category}-#{key}"}
+                        .Q= I18n.interpolate(values[:subject], faq_replacements)
+                        .A= simple_format(I18n.interpolate(values[:body], faq_replacements), {}, sanitize: false)
+            .contentList.row
+
+              - already_displayed_columns = 0
+              - faq_participants.each do |category, _hash|
+
+                %div.col-md-4{style: already_displayed_columns == 3 ? 'clear: both' : ''}
+                  %h3
+                    %i{class: "VideoClientIcon-#{help_icon(category)}"}
+                    = category.to_s.gsub('and', '&').humanize.titleize
+                  - if _hash.present?
+                    - _hash.each_pair do |key, values|
+                      - if values[:subject].present? && values[:body].present?
+                        %a.ensure-link-style{"data-id-text" => "#{category}-#{key}", "data-id-parentNav" => category}= I18n.interpolate(values[:subject], faq_replacements)
+                - already_displayed_columns = already_displayed_columns + 1
+
+- content_for(:after_include_javascripts) do
+  %script{type: "text/javascript"}
+    :plain
+      $(function() {
+        if (window.location.hash && window.location.hash == '#for-presenters') {
+          $('a[href=#presenters]').click();
+        } // else is not needed because it is opened "For Users" by default
+      });

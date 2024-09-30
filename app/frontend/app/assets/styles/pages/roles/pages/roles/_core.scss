@@ -1,0 +1,184 @@
+.dashboardMK2.rolesPage {
+  .dashboardMK2__main__content {
+    overflow: visible;
+  }
+
+  @include media(reverso-desktop) {
+    width: 140rem;
+  }
+}
+
+.rolesPage{
+  .selectArrow.up{
+    top: 30%;
+  }
+}
+
+.roles {
+  max-width: 102rem;
+  margin: 0 auto;
+
+  &__page {
+    .dashboardMK2__main__content {
+      overflow: visible;
+    }
+  }
+
+  &__tabs {
+    padding-top: 6.5rem;
+  }
+
+  &__filters {
+    &__top {
+      @include flex(flex, center, space-between);
+      @include media(phone) {
+        flex-direction: column-reverse;
+        span {
+          margin-top: 2rem;
+        }
+      }
+
+      &__buttons {
+        :not(:last-child) {
+          margin-right: 1.5rem;
+        }
+
+        @include media(phone) {
+          margin-bottom: 2rem;
+        }
+        @include media(p-phone) {
+          button {
+            width: 100%;
+            margin-top: 2rem;
+          }
+        }
+      }
+    }
+
+    &__bottom {
+      @include flex(flex, center, space-between);
+      margin-top: 3rem;
+      padding: 3rem;
+      background: var(--bg__content);
+      box-shadow: 0 0.1rem 0.4rem var(--sh__main);
+      border-radius: 1rem;
+
+      .checkboxMK2:not(:last-child) {
+        margin-right: 3rem;
+      }
+    }
+
+    &__classType {
+      @include media(p-phone) {
+        display: flex;
+        flex-direction: column;
+        label {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    @include media(phone) {
+      &__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      &__buttons {
+        margin-top: 2rem;
+      }
+    }
+  }
+
+  &__rolesList {
+    padding: 3rem;
+    background: var(--bg__content);
+    border-radius: 1rem;
+    box-shadow: 0 0.1rem 0.4rem var(--sh__main);
+    color: var(--tp__secondary);
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+
+    &__top {
+      @include flex(flex, center, space-between);
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border__separator);
+
+      &__text {
+        width: 70%;
+      }
+
+      @include media(phone) {
+        flex-direction: column;
+        align-items: flex-start;
+        &__text {
+          width: 100%;
+          margin-bottom: 2rem;
+        }
+        button {
+          width: 100%;
+        }
+      }
+    }
+
+    &__bottom {
+      &__item {
+        @include flex(flex, center, false);
+        position: relative;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--border__separator);
+        }
+
+        &__wrapper {
+          display: flex;
+        }
+
+        &__description {
+          font-size: 1.2rem;
+          color: var(--tp__secondary);
+          @include media(desktop) {
+            max-width: 90%;
+          }
+          @include media(reverso-desktop) {
+            max-width: 45rem;
+          }
+        }
+
+        &__icon {
+          cursor: pointer;
+          @include center(v);
+          right: 1.5rem;
+          color: var(--tp__icons);
+        }
+
+        @include media(desktop) {
+          flex-direction: column;
+          align-items: flex-start;
+          .coloredSquare__wrapper {
+            margin-bottom: 1rem;
+          }
+          &__icon {
+            top: 3rem;
+            right: 0;
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+  }
+
+  &__customRolesList {
+    padding: 3rem;
+    background: var(--bg__content);
+    border-radius: 1rem;
+    box-shadow: 0 0.1rem 0.4rem var(--sh__main);
+
+    &__title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      padding: 3rem 0;
+    }
+  }
+}

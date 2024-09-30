@@ -1,0 +1,196 @@
+- interactor = ObtainAccessToRecording.new(@recording, current_user)
+- if [ObtainTypes::PAID_RECORDING, ObtainTypes::FREE_RECORDING].include?(params[:type]) && interactor.could_be_obtained?
+  - @obtain_type = 'Recording'
+  - @obtain_type_label = 'Upload'
+  - @charge_amount = interactor.charge_amount
+- else
+  - raise "can not interpret, #{params[:type]}"
+
+#payment-modal.modal.fade{'aria-hidden' => 'true', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body.clearfix
+        .unobtrusive-flash-container
+        .left_b.upload
+          %h6= I18n.t('views.recordings.preview_purchase.session_info')
+          .content
+            .img{style: "background-image:url(#{@recording.poster_url})"}
+            .description= @recording.always_present_title
+            .name
+              = link_to @recording.organizer.public_display_name, spa_user_path(@recording.organizer.slug), class: 'text-color-Darkgrey'
+            .details
+              -#.inlile-block.text-color-LightGrey
+                %i.VideoClientIcon-calendar-mk2
+                = time_with_tz_in_chosen_format(@recording.start_at)
+              -#.inlile-block.text-color-LightGrey
+                %i.VideoClientIcon-sand-clock
+                #{@recording.duration} mins
+              .inline-block.text-color-LightGrey
+                %i.VideoClientIcon-play-icon1
+                = @obtain_type_label
+            -# FIXME: show when tax done
+            - @tax = 0.0
+            .amount
+              %div
+                .pull-right= as_currency(@charge_amount)
+                = I18n.t('views.recordings.preview_purchase.price')
+              %div.discount
+                .pull-right $0.00
+                .text= I18n.t('views.recordings.preview_purchase.discount')
+              %div.tax
+                .pull-right= as_currency(@tax)
+                = I18n.t('views.recordings.preview_purchase.tax')
+            .TotalAmount
+              .pull-right= as_currency(@charge_amount)
+              = I18n.t('views.recordings.preview_purchase.total_amount')
+
+        - unless current_user.confirmed?
+          - content_for(:after_include_javascripts) do
+            :plain
+                var len = $('#preview-purchase-missing-confirmed-email-container').length;
+                if ( len == 0) {
+                  console.log('failed');
+                }
+
+                window.previewPurchaseMissingConfirmedEmailView = new PreviewPurchaseMissingConfirmedEmailView({email: "#{current_user.email || current_user.unconfirmed_email}", el: '#preview-purchase-missing-confirmed-email-container'});
+                window.previewPurchaseMissingConfirmedEmailView.render();
+
+        .right_b
+          .LoadingCover.hidden{style: "margin-top: 30px; height: 30px"}
+            .spinnerSlider
+              .bounceS1
+              .bounceS2
+              .bounceS3
+
+          %h6= I18n.t('views.recordings.preview_purchase.payment_method')
+          .content
+            %ul.nav.nav-tabs{role: :tablist}
+              %li.active{role: :presentation}
+                %a.btn-borderred-grey{href: '#', 'aria-controls': 'Payment_AddCreditCard', role: :tab, data: {toggle: :tab, target: '#Payment_AddCreditCard'}}
+                  = I18n.t('views.recordings.preview_purchase.credit_card')
+              - if Rails.application.credentials.frontend[:paypal]
+                %li{role: :presentation}
+                  %a.btn-borderred-grey{href: '#', 'aria-controls': 'Payment_PayPal', role: :tab, data: {toggle: :tab, target: '#Payment_PayPal'}}
+                    %img{src: 'https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png', alt: I18n.t('views.recordings.preview_purchase.payPal_logo')}
+              - unless Rails.env.production?
+                %li{role: :presentation}
+                  %a{href: '#', 'aria-controls': 'Payment_SystemCredit', role: :tab, data: {toggle: :tab, target: '#Payment_SystemCredit'}}
+                    = I18n.t('views.recordings.preview_purchase.system_credit')
+
+            .tab-content
+              - if current_user.has_payment_info? && current_user.with_stripe_data!
+                - if current_user.credit_cards && current_user.credit_cards.length > 0
+                  #Payment_CreditCard.tab-pane{role: :tabpanel}
+                    = form_tag confirm_purchase_recording_path(@recording.id, type: params[:type]), method: :post, id: 'payment-form-card', class: 'form_V2', style: 'visibility: visible;' do
+                      = hidden_field_tag :customer_id, current_user.stripe_customer_id
+                      .row
+                        - current_user.credit_cards.each do |card|
+                          .col-md-12
+                            %label.choice.radio
+                              %input{type: :radio, value: card['id'], name: :stripe_card, required: true}
+                              %span= '*' * 12 + card['last4']
+                        .col-md-12
+                          %button.btn.btn-l{data: {disable_with: I18n.t('views.recordings.preview_purchase.processing')}}
+                            = I18n.t('views.recordings.preview_purchase.submit_payment')
+              #Payment_AddCreditCard.tab-pane.active{role: :tabpanel}
+                - if current_user.has_payment_info? && current_user.with_stripe_data!
+                  - if current_user.credit_cards && current_user.credit_cards.length > 0
+                    = form_tag confirm_purchase_recording_path(@recording.id, type: params[:type]), method: :post, id: 'payment-form-existing-card', class: 'form_V2', style: 'visibility: visible;' do
+                      = hidden_field_tag :recording_id, @recording.id
+                      = hidden_field_tag :charge_amount, @charge_amount
+                      = hidden_field_tag :obtain_type, @obtain_type
+                      = hidden_field_tag :description, "Buy access to recording ##{@recording.title}"
+                      .row
+                        .col-md-12
+                          #ExistingCreditCard
+                            .select-block.state-derty
+                              %label Card Number
+                              %select{name: :stripe_card, required: true}
+                                - current_user.credit_cards.each do |card|
+                                  %option{value: card['id'], data: {country: card['address_country'], zip: card['address_zip']}}= '*' * 12 + card['last4']
+                            -#.input-block.CVC
+                            -#  %input{type:'text', placeholder:'CVC'}
+                            %a#add_card.btn.btn-m.btn-borderred-grey{href: '#'}= I18n.t('views.recordings.preview_purchase.add_card')
+                      .submitBox
+                        %button.btn.btn-m.full-width.btn-borderred-red{data: {disable_with: I18n.t('views.recordings.preview_purchase.processing')}}
+                          = I18n.t('views.recordings.preview_purchase.submit_payment')
+
+                = form_tag confirm_purchase_recording_path(@recording.id, type: params[:type]), method: :post, id: 'payment-form', class: "form_V2 #{'hidden' if current_user.credit_cards && current_user.credit_cards.length > 0}" do
+                  = hidden_field_tag :recording_id, @recording.id
+                  = hidden_field_tag :charge_amount, @charge_amount
+                  = hidden_field_tag :obtain_type, @obtain_type
+                  = hidden_field_tag :description, "Buy access to recording ##{@recording.title}"
+                  = hidden_field_tag :stripe_token, nil
+                  .row
+                    .col-md-12
+                      #card-element
+                        // A Stripe Element will be inserted here.
+                        // #cardexp-element
+                        // #cardcvc-element
+                    .col-md-12.mb10
+                      // Used to display form errors.
+                      #card-errors.error{role: :alert}
+                  .row.margin-top-10
+                    .col-md-12
+                      .input-block.state-clear.required
+                        %label.fixed_top{for: :name_on_card}= I18n.t('views.recordings.preview_purchase.name_on_card')
+                        %input#name_on_card{type: :text, name: :name_on_card, placeholder: 'Jane Doe'}
+                        .errorContainerWrapp
+                  .row
+                    .col-md-6.country_col
+                      .select-block.state-derty.required
+                        %label.fixed_top{for: :country}= I18n.t('views.recordings.preview_purchase.country')
+                        = country_select nil, :country, {selected: current_user.account.try(:country) || 'US', prompt: true}, {id: :card_country, name: :country, class: 'styled-select styled-select_withCss full-width', placeholder: 'United States'}
+                        .errorContainerWrapp
+                    .col-md-6
+                      #zip_code_block.input-block.state-clear.required
+                        %label.fixed_top{for: :zip_code}= I18n.t('views.recordings.preview_purchase.zip_code')
+                        %input#zip_code{type: :text, name: :zip_code, placeholder: '08934'}
+                        .errorContainerWrapp
+                  .submitBox
+                    .col-md-12
+                      %button.btn.btn-m.full-width.btn-borderred-red{data: {disable_with: I18n.t('views.recordings.preview_purchase.processing')}}
+                        = I18n.t('views.recordings.preview_purchase.submit_payment')
+
+              - if Rails.application.credentials.frontend[:paypal]
+                #Payment_PayPal.tab-pane{role: :tabpanel}
+                  = form_tag confirm_paypal_purchase_recording_url(@recording.id, type: params[:type], provider: :paypal, user_id: current_user.id), method: :post, id: 'paypal_payment_form', class: 'form_V2', style: 'visibility: visible;' do
+                    .submitBox
+                      .col-md-12
+                        #submit-paypal
+
+                  :javascript
+                    (function setupPaypal() {
+                      paypal.Buttons({
+                        style: {
+                          layout: 'horizontal'
+                        },
+                        env: "#{ENV['PAYPAL_MODE']}",
+                        createOrder: function() {
+                          return $.post("#{paypal_purchase_recording_url(@recording.id, type: params[:type])}", $('#paypal_payment_form').serialize()).then(function(data) {
+                            return data.token
+                          });
+                        },
+                        onApprove: function(data) {
+                          var $form = $("#paypal_payment_form");
+                          // Add a hidden inputs
+                          $form.append($('<input type="hidden" name="paymentID"/>').val(data.paymentID));
+                          $form.append($('<input type="hidden" name="payerID"/>').val(data.payerID));
+                          $form.submit();
+                        }
+                      }).render('#submit-paypal');
+                    }());
+              - unless Rails.env.production?
+                #Payment_SystemCredit.tab-pane{role: :tabpanel}
+                  %div.clearfix
+                    .pull-right
+                      = as_currency(current_user.system_credit_balance)
+                    SystemCredit
+                  - if current_user.system_credit_balance >= @charge_amount
+                    = form_tag confirm_purchase_recording_path(@recording.id, type: params[:type]), method: :post, id: 'system_credit_payment_form', class: 'form_V2', style: 'visibility: visible;' do
+                      = hidden_field_tag :payment_method, PaymentMethods::SystemCredit
+                      .submitBox
+                        .col-md-12
+                          %button.btn.btn-m.full-width.btn-borderred-red{data: {disable_with: I18n.t('views.recordings.preview_purchase.processing')}}
+                            = I18n.t('views.recordings.preview_purchase.submit_payment')

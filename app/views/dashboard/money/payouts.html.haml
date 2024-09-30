@@ -1,0 +1,38 @@
+- content_for(:page_title, I18n.t('views.dashboard.money.payouts.page_title'))
+- content_for(:extra_body_classes, 'dashboards header-top')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+
+  .col-md-9.main-content-section
+    = render 'dashboards/navigation/my_money_tabs'
+    .row
+      .col-md-12
+        - if @payouts.count > 0
+          .session-table.fht-table-wrapper
+            %table.table.table-hover.table-dashed-border.table-striped.responsiveTable.full-width
+              %thead
+                %tr
+                  %th
+                    = I18n.t('views.dashboard.money.payouts.date')
+                  %th
+                    = I18n.t('views.dashboard.money.payouts.description')
+                  %th
+                    = I18n.t('views.dashboard.money.payouts.amount')
+                  %th
+                    = I18n.t('views.dashboard.money.payouts.status')
+              %tbody
+                - @payouts.each do |payout|
+                  %tr
+                    %td{data: {th: I18n.t('views.dashboard.money.payouts.date')}}
+                      = time_with_tz_in_chosen_format(payout.created_at)
+                    %td{data: {th: I18n.t('views.dashboard.money.payouts.description')}}
+                      = payout.reference
+                    %td{data: {th: I18n.t('views.dashboard.money.payouts.amount')}}
+                      = as_currency(payout.amount_cents / 100.0)
+                    %td{data: {th: I18n.t('views.dashboard.money.payouts.status')}}
+                      = payout.status
+          .text-center
+            = paginate @payouts
+        - else
+          = I18n.t('views.dashboard.money.payouts.no_payouts')

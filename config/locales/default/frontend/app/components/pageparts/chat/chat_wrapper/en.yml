@@ -1,0 +1,10 @@
+en:
+  frontend:
+    app:
+      components:
+        pageparts:
+          chat:
+            chat_wrapper:
+              enter: Enter
+              guest: Guest
+              sign_in: Log in to post messages.

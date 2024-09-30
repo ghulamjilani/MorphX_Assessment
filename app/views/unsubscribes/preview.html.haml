@@ -1,0 +1,6 @@
+%p= "Are you sure you prefer not to receive \"#{@prefer_not_to_receive_description}\" email notifications in the future?"
+
+= semantic_form_for(User.new, url: unsubscribe_path(token: @token), method: :post, html: { class: 'form-inline'}) do |f|
+  %div{style: 'margin-top: 10px'}
+    = f.action :submit, as: :button, label: 'Yes, Unsubscribe Me', button_html: {class: 'btn btn-l', data: {disable_with: 'Please wait…'}}
+    = link_to 'No, I changed my mind', root_path, class: 'btn btn-l btn-grey-solid margin-left-10'

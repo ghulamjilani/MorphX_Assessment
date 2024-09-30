@@ -1,0 +1,11 @@
+en:
+  views:
+    dashboards:
+      company:
+        company: Company
+        my_company: My Company
+        edit: Edit
+        website: "Website:"
+        owner: "Owner:"
+        tagline: "Tagline:"
+        member_of: "Member of:"

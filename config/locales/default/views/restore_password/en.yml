@@ -1,0 +1,10 @@
+en:
+  restore_password:
+    reset_pass: Reset Password
+    change_pass: Change Password
+    new_pass: New Password
+    rep_pass: Repeat New Password
+    incorrect_pass: The passwords entered do not match.
+    changed_pass: Password changed
+    invalid_token: Reset password token is invalid
+    error: Something went wrong please try again later

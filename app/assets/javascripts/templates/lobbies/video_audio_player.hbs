@@ -1,0 +1,55 @@
+{{#if canPlay}}
+    <div class="jPlayer"></div>
+    {{#if isVideo}}
+        <div class="mediaBox">
+            <a class="MeD-fulscr">
+                <i class="icon-glyph-4"></i>
+            </a>
+            <a class="MeD-restore-screen">
+                <i class="icon-glyph-4"></i>
+            </a>
+        </div>
+    {{/if}}
+    <h5 class="MediaBoxTitle">
+        {{name}}
+    </h5>
+
+    <div class="MediaLeng">
+        <span class="MeD-left current-time">00:00</span>
+        <div>
+            <div class="MeD-overlay progress-bar">
+                <div class="progress-bar-val">
+                    <a></a>
+                </div>
+            </div>
+        </div>
+        <span class="MeD-right duration">00:00</span>
+    </div>
+{{else}}
+    <h5 class="MediaBoxTitle">
+        {{name}}
+    </h5>
+    <span class="Alsm">File of this format does not support preview.</span>
+{{/if}}
+<span class="err-play Alsm" style="display: none;">File of this format does not support preview.</span>
+
+<div class="MediaNav"></div>
+
+{{#if canPlay}}
+    <div class="MediaSoundV">
+        <i class="VideoClientIcon-q6"></i>
+
+
+        <div class="MeD-overlay sound-bar">
+            <div class="sound-val">
+                <a></a>
+            </div>
+        </div>
+
+        <i class="VideoClientIcon-glyph-7"></i>
+    </div>
+{{/if}}
+
+{{#unless isLoaded}}
+    <div class="loading"></div>
+{{/unless}}

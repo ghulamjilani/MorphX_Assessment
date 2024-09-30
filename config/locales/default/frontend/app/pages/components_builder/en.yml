@@ -1,0 +1,14 @@
+en:
+  frontend:
+    app:
+      pages:
+        components_builder:
+          components_manager: Components Manager
+          tiles:
+            test: Test Modal
+            homepage: Homepage
+            feed: Feed
+            organizationpage: Organization Page
+            terms: Terms of use
+            privacy_policy: Privacy Policy
+            sandbox: Sandbox

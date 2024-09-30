@@ -1,0 +1,10 @@
+<p>
+  Session <a href="<%= @url %>"><%= @session.always_present_title %></a> is still unpublished. Please do not forget to publish it.
+</p>
+
+<p>
+  Start time:
+  <strong>
+    <%= @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %>
+  </strong>
+</p>

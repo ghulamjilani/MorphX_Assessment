@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+form(decorate: true, action: service_admin_panel_ffmpegservice_status_path, method: :get,
+     style: 'margin-bottom: 40px;max-width: 400px;') do |f|
+  f.label 'ffmpegservice account id', for: :ffmpegservice_account_id, class: 'label'
+  para do
+    f.input id: :ffmpegservice_account_id, name: :ffmpegservice_account_id, size: 40, value: ffmpegservice_account_id, type: :text,
+            style: 'margin-bottom: 10px;'
+  end
+  f.label 'stream id', for: :stream_id, class: 'label'
+  para do
+    f.input id: :stream_id, name: :stream_id, size: 40, value: stream_id, type: :text, style: 'margin-bottom: 10px;'
+  end
+  para do
+    f.input :submit, type: :submit
+  end
+end

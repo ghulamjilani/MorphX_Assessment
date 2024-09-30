@@ -1,0 +1,4 @@
+:javascript
+  window.ConfigGlobal = #{raw Rails.application.credentials.global.to_json};
+  window.ConfigGlobal.env = '#{Rails.env}'
+  window.ConfigFrontend = #{raw Rails.application.credentials.frontend.to_json};

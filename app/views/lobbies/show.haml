@@ -1,0 +1,867 @@
+- content_for(:page_title, @abstract_session.always_present_title.html_safe)
+- start_session_timer = @abstract_session.start_at - Time.now
+
+-#.showVideo add to body for remove cover
+.cover.full_size
+  .left-part
+  .right-part
+  .content.chrome_plugin_install.text-center.text-color-white
+    .animatedObject-wrapper
+      .flashmessageWrapp
+        %section.flashMessage
+          .info info
+          .error error
+    .loadSpin#circleG.hide
+      .mt50
+      .fs20 Welcome
+      %small Please wait...
+      .loadSpin#circleG
+        %span.circleG#circleG_1
+        %span.circleG#circleG_2
+        %span.circleG#circleG_3
+    - if browser.chrome? || browser.firefox?
+      = render 'lobbies/steps/chrome'
+    - else
+      = render 'lobbies/steps/other_browsers'
+    -# TODO: Add ratings to video client
+    .rating{style: 'display:none; margin: 0'}
+      - if false && @role == 'participant' && @abstract_session.is_a?(Session)
+        = render 'lobbies/rating'
+.main-section
+  .V-header.clearfix
+    .logo{style: "background-image: url('#{image_url("services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png")}')"}
+    .oneThird{data: {step: 1, intro: 'FIXME!!! ed posuere consectetur est at lobortis. Fusce dapibus', position: :bottom}}
+      .inCallButtonAutostart-wrapp
+        - if @role == 'presenter' && @abstract_session.is_a?(Session)
+          %a#inCallButtonAutostart.d-inline-block.headerHeight.headerWidth.text-center.linkSwitch{href: '#', class: ('on' if @room.autostart), rel:'tooltip', data:{tip:'Avto-start'}}
+      %section.play
+        -#add .record for showing record button
+        - if @role == 'presenter'
+          -# IMD-79 - Disable start btn and add tooltip for presenter unless session start
+          %a.MainVideoButton.ensure-link-style{class: @room.active? ? 'INTR PlayINTR' : 'INTRdefault', rel:'tooltip', data:{tip:@room.active? ? 'Pause' : 'Go-live', tipStart: 'Start', tipPause: 'Pause'}, disabled: true}
+            %div.circleButton
+              %span
+              %span
+              %span
+            .playButton
+              %span{id: :inCallButtonStartStreaming, class: "VideoClientIcon-play3 disabled ", data:{timer: start_session_timer, 'timer-end-at-in-seconds': @abstract_session.start_at.to_i}, style: "#{@room.active? ? 'display:none;' : ''}"}
+              %span{id: :inCallButtonBrbOn, class: "VideoClientIcon-pause2 disabled", style: "#{@room.active? ? '' : 'display:none;'}"}
+              %span{id: :inCallButtonBrbOff, class: 'VideoClientIcon-play3', style: 'display:none;'}
+
+      %section#roomState.state{class: state_class}
+        %span.live live
+        -#%span.GreenRoom Green Room
+        %span.offAir Off Air
+      %section.timeCounterWrapp
+        .d-inline-block.timeCounter
+          %span.time-left{data: {'timer-end-at-in-seconds': @abstract_session.end_at.to_i} }
+            = @abstract_session.end_at - Time.now
+          %span.time-start{style: 'display:none;'}
+
+
+    .twoThird{data: {step: 2, intro: 'FIXME!!! ed posuere consectetur est at lobortis. Fusce dapibus', position: :bottom}}
+      .userCount
+        %a.d-inline-block.active{href: '#', onclick: "V_showUserList(false,'.immersive-users-wrapp',this)", rel:'tooltip', data:{tip:'Participants'}}
+          %i.VideoClientIcon-three-users
+          %span.immersiveIcon 0
+        .immersive-users-wrapp.hide
+          .presenters.styledScroll
+            -#- (@pusers_with_questions + @pusers_without_questions).each do |user|
+              %a.userAvatar{style: "background:url(#{user.avatar_url})", href: '#', onclick: 'OpenParticipantPref(this)' , 'data-name': user.public_display_name}
+            -# FIXME!!! Static
+            %a.userAvatar.STATIC_DATA{style: 'background:url()', href: '#', onclick: 'OpenParticipantPref(this)' , 'data-name': 'ololo lol'}
+        -#= render partial: 'lobbies/member_participant', locals: {user: user}
+        %a.livestream-users-wrapp-toggle.d-inline-block.pl15.active{href: '#', onclick: "V_showUserList(false,'.livestream-users-wrapp',this)", rel:'tooltip', data:{tip:'Watchers'}}
+          %i.VideoClientIcon-Views
+          %span.livestreamIcon 0
+        .livestream-users-wrapp.hide
+          .presenters.styledScroll
+            -# FIXME!!! Static
+            %a.userAvatar.STATIC_DATA{style: 'background:url()', href: '#', onclick: 'OpenParticipantPref(this)' , 'data-name': 'ololo lol'}
+
+        .sessionName.d-inline-block
+          = @abstract_session.always_present_title
+      %section.flashMessage.pl10
+        -#for flashMessage add class info/error for show flash message
+        .info info
+        .error error
+
+
+    .threeThird{data: {step: 3, intro: 'FIXME!!! ed posuere consectetur est at lobortis. Fusce dapibus', position: :bottom}}
+      %section.d-inline-block.vertical-midle
+        %span.SignalLevel{rel:'tooltip', data:{tip:'Connection quality'}}
+          %span
+          %span
+          %span
+        -#%a.d-inline-block.vertical-midle.headerHeight.headerWidth.text-center{href: '#'}
+        -#  %i.VideoClientIcon-float
+        - unless show_webrtc?
+          %a#inCallButtonTogglePreview.btn.videoclient-layout.d-inline-block.vertical-midle.headerHeight.headerWidth.text-center{rel:'tooltip', data:{tip:'Layout'}}
+            %i.VideoClientIcon-web-mk2
+        %a#inCallButtonFullpage.d-inline-block.vertical-midle.headerHeight.headerWidth.text-center{href:'#', rel:'tooltip', data:{tip:'Full screen'}}
+          %i.VideoClientIcon-expand2
+        - if @role == 'presenter'
+          %a#inCallButtonStopStreaming.d-inline-block.vertical-midle.headerHeight.headerWidth.text-center{href: '#', rel:'tooltip', data:{tip:'Exit'}}
+            %i.VideoClientIcon-log-out.rotate180
+        - elsif @role == 'participant' || @role == 'co_presenter'
+          %a#inCallButtonDisconnect.d-inline-block.vertical-midle.headerHeight.headerWidth.text-center{href: '#'}
+            %i.VideoClientIcon-log-out.rotate180
+        %a.d-inline-block.vertical-midle.headerHeight.headerWidth.text-center.btn-HidePanel-toggle{href: '#'}
+          %i.VideoClientIcon-unlock
+          %i.VideoClientIcon-lock
+      %section
+
+
+  .V-right-panel-wrapp
+    .V-right-panel
+      .ShowLine.hidden
+      .V-right-panel-contaiver{"data-step":"4", "data-intro":'ed posuere consectetur est at lobortis. Fusce dapibus', "data-position":'left'}
+        #inCallButtonPanel.WLS-right-sideBar
+          %section.presenterProfile_wrapp
+            .V-L_s
+              .text-color-main
+                = @room.presenter_user.public_display_name
+            .V-R_s
+              - if @role == 'presenter'
+                %a#presenterProfile.userAvatar{style: "background-image:url(#{@room.presenter_user.avatar_url}); cursor:default;", href:'#'}
+              - elsif @role == 'participant' || @role == 'co_presenter'
+                %a#presenterProfile.userAvatar{style: "background-image:url(#{@room.presenter_user.avatar_url})", href:'#', "data-id":"Profile", onclick:"appendBar(this)"}
+
+          .d-inline-block.vertical-midle.headerHeight.full-width
+          - if @role == 'presenter'
+            %section.V-toggleBlock
+              %a{href:'#', onclick:'VToggleBlock(this)'}
+                .V-L_s
+                  .V-L_s-head
+                    Users
+                    %i.VideoClientIcon-navigate-up-arrow
+                .V-R_s
+                  %i.VideoClientIcon-users
+              .V-toggleBlock_body
+                - _path = modal_session_live_participants_video_path(@abstract_session.id, format: :js)
+                %a#inCallButtonToggleInvite{href:'#', data: {url: _path, target: '#InviteParticipants', id: 'InviteParticipants'}, onclick:'appendBar(this)'}
+                  .V-toggleBlock_body-icon
+                    %i.VideoClientIcon-addparticipant
+                  .V-toggleBlock_body-name
+                    Invite
+                -#%a{href:'#', "data-id":"ManageAllParticipants", onclick:"appendBar(this);refreshManagerPanel()"}
+                -#  .V-toggleBlock_body-icon
+                -#    %i.VideoClientIcon-manageparticipants
+                -#  .V-toggleBlock_body-name
+                -#    Manage
+          %section.V-toggleBlock
+            %a{href:'#', onclick:'VToggleBlock(this)'}
+              .V-L_s
+                .V-L_s-head
+                  Chat
+                  %i.VideoClientIcon-navigate-up-arrow
+              .V-R_s
+                %i.VideoClientIcon-speechbubble
+            .V-toggleBlock_body
+              %a.Chat{href:'#', "data-id":"chat", onclick:"appendBar(this)"}
+                .V-toggleBlock_body-icon
+                  %i.VideoClientIcon-speechbubble
+                .V-toggleBlock_body-name
+                  Chat
+              -#%a{href:'#', "data-id":"twitter", onclick:"appendBar(this)"}
+              -#  .V-toggleBlock_body-icon
+              -#    %i.VideoClientIcon-twitter
+              -#  .V-toggleBlock_body-name
+              -#    Twitter
+          %section.V-toggleBlock
+            %a{href:'#', onclick:'VToggleBlock(this)'}
+              .V-L_s
+                .V-L_s-head
+                  Money
+                  %i.VideoClientIcon-navigate-up-arrow
+              .V-R_s
+                %i.VideoClientIcon-coin-2
+            .V-toggleBlock_body
+              %a{href:'#', "data-id":"shop", onclick:"appendBar(this)"}
+                .V-toggleBlock_body-icon
+                  %i.VideoClientIcon-shopping-cart
+                .V-toggleBlock_body-name
+                  Shop
+              %a{href:'#', "data-id":"donation", onclick:"appendBar(this)"}
+                .V-toggleBlock_body-icon
+                  %i.VideoClientIcon-coin-2
+                .V-toggleBlock_body-name
+                  Donations
+          %section.V-toggleBlock
+            %a{href:'#', onclick:'VToggleBlock(this)'}
+              .V-L_s
+                .V-L_s-head
+                  Additional Features
+                  %i.VideoClientIcon-navigate-up-arrow
+              .V-R_s
+                %i.VideoClientIcon-add
+            .V-toggleBlock_body
+              -#%a#inCallButtonLocalShare{href:'#', "data-id":"ShareAWindow", onclick:"appendBar(this)"}
+              -#  .V-toggleBlock_body-icon
+              -#    %i.VideoClientIcon-multiplescreens
+              -#  .V-toggleBlock_body-name
+              -#    Screen Share
+              %a{href:'#', "data-id":"polls", onclick:"appendBar(this)"}
+                .V-toggleBlock_body-icon
+                  %i.VideoClientIcon-pollstatistics
+                .V-toggleBlock_body-name
+                  Polls
+              -#- if @role == 'presenter'
+              -#  = link_to  '#',id: 'inCallButtonLectureMode', class: '', data:{tip:'Group mode'} do
+              -#    .V-toggleBlock_body-icon
+              -#      %i.VideoClientIcon-lecture2
+              -#    .V-toggleBlock_body-name
+              -#      Lecture Mode
+
+    .V-VideoContainer{"data-step":"5", "data-intro":'ed posuere consectetur est at lobortis. Fusce dapibus', "data-position":'left'}
+      -#Profile
+      %section#Profile
+        .styledScroll.text-center
+          %div
+            %a.Avatar{style: "background-image:url(#{@room.presenter_user.small_avatar_url})", href: '#'}
+            %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          %a.Name.fs16.mb10.d-block{href: '#'}= @room.presenter_user.public_display_name
+          - if @room.presenter_user.user_account
+            .social.mb10
+              - @room.presenter_user.user_account.social_links.each do |link|
+                %a{href: link.link, class: social_class(link.provider)[:a_class]}
+                  %i{class: social_class(link.provider)[:i_class]}
+            .desc= @room.presenter_user.user_account.bio_without_external_urls
+          .clearfix.btnGroup.mb10
+            .half-width.d-inline-block.vertical-midle.pr5
+              %a.greanBtn.full-width{href: @room.presenter_user.relative_path, target: '_blank'} View Profile
+            .half-width.d-inline-block.vertical-midle.pl5.pr5
+              = link_to (@room.presenter_user == current_user ? '#' : @room.presenter_user.toggle_follow_relative_path), method: :post, remote: true, class: 'mainButton full-width' do
+                - if !user_signed_in? || !current_user.fast_following?(@room.presenter_user)
+                  Follow
+                - else
+                  Following
+      -#Profile end
+
+
+      -#chat
+      %section#chat
+        .sectionHeader
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          Chat
+          .inCallButtonChat-wrapp{style: 'display: inline-block;'}
+            - if @role == 'presenter' && @abstract_session.is_a?(Session)
+              %a#inCallButtonChat.d-inline-block.headerHeight.headerWidth.text-center.linkSwitch{href: '#', class: ('on' if @abstract_session.allow_chat), rel: :tooltip, data: {tip: 'Enable Chat'}, style: 'margin: 2px 0 0 10px;'}
+
+        .styledScroll.overflow-hidden
+          - if @abstract_session.is_a?(Session) && @abstract_session.allow_chat
+            %iframe{ src: chat_widget_url(class: 'session', id: @abstract_session.id, theme: 'dark') }
+          - else
+            Chat is disabled by presenter
+      -#chat End
+
+      -# liveShare panel
+      %section#liveShare
+        .sectionHeader
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          Live Stream
+        .styledScroll
+          .videoPlace-wrapp
+            #videoPlace2
+              %span.noActiveStream
+                .loadSpin.hide
+                  .circleG.circleG_1
+                  .circleG.circleG_2
+                  .circleG.circleG_3
+                  %text Please wait, stream is initializing and will start in few minutes
+                %b NO ACTIVE STREAMS
+          .sectionTitle Live Share
+          #platformsCover.AvailablePlatforms.text-left.mb10
+            .WaitStreamStart-box
+              start stream first
+              .GO_LINE.GO_LINE_UP
+                %i.VideoClientIcon-navigate-up-arrow
+                %i.VideoClientIcon-navigate-up-arrow
+                %i.VideoClientIcon-navigate-up-arrow
+            .row.mb10.clearfix
+              .loadSpin.hide
+                .circleG.circleG_1
+                .circleG.circleG_2
+                .circleG.circleG_3
+              .col-md-5.social.pr0
+                .social-f
+                  %i.VideoClientIcon-facebookF
+                Facebook
+              .col-md-7.text-right
+                %a#start_facebook.lightGreyBtn.d-inline-block.text-center.full-width{href: '#'} Start Sharing
+
+
+            -#.row.mb10.clearfix.Connecting
+            -#  .loadSpin.hide
+            -#    .circleG.circleG_1
+            -#    .circleG.circleG_2
+            -#    .circleG.circleG_3
+            -#  .col-md-6.social
+            -#    .social-f
+            -#      %i.VideoClientIcon-facebook
+            -#    DEMO
+            -#  .col-md-6.text-right
+            -#    %a.lightGreyBtn.w-90.d-inline-block.vertical-midle.text-center{href: '#'}
+            -#      Connecting
+            -#
+            -#
+            -#.row.mb10.clearfix.Error
+            -#  .loadSpin.hide
+            -#    .circleG.circleG_1
+            -#    .circleG.circleG_2
+            -#    .circleG.circleG_3
+            -#  .col-md-6.social
+            -#    .social-f
+            -#      %i.VideoClientIcon-facebook
+            -#    DEMO
+            -#  .col-md-6.text-right
+            -#    %a#start_facebook.lightGreyBtn.w-90.d-inline-block.vertical-midle.text-center{href: '#'}
+            -#      Connecting
+
+
+            -#.row.mb10.clearfix
+            -#  .loadSpin.hide
+            -#    .circleG.circleG_1
+            -#    .circleG.circleG_2
+            -#    .circleG.circleG_3
+            -#  .col-md-6.social
+            -#    .social-f
+            -#      %i.VideoClientIcon-facebook
+            -#    DEMO
+            -#  .col-md-6.text-right
+            -#    %a#start_facebook.lightGreyBtn.w-90.d-inline-block.vertical-midle.text-center.active{href: '#'}
+            -#      Sharing
+
+
+            .row.mb10.clearfix
+              .loadSpin.hide
+                .circleG.circleG_1
+                .circleG.circleG_2
+                .circleG.circleG_3
+              .col-md-5.social.pr0
+                .social-youtube
+                  %i.VideoClientIcon-youtube
+                Youtube
+              .col-md-7.text-right
+                %a#start_youtube.lightGreyBtn.d-inline-block.text-center.full-width{href: '#', class: ('error' unless @has_youtube_access)}
+                  - if @has_youtube_access
+                    Start Sharing
+                  - else
+                    Connect YouTube
+
+
+          -#.sectionTitle
+          -#  Latest Scene
+          -#.LatestScene.text-left
+          -#  .row.mb10.clearfix
+          -#    .col-md-6
+          -#      Twitter
+          -#    .col-md-6.text-right
+          -#      %a.greanBtn.w-40.d-inline-block.vertical-midle.text-center{href: '#'}
+          -#        Sent
+          -#  .row.active.clearfix.mb10
+          -#    .col-md-6
+          -#      Instagram
+          -#    .col-md-6.text-right
+          -#      %a.mainButton.w-40.d-inline-block.vertical-midle.text-center{href: '#'}
+          -#        Send
+          -#.sectionTitle
+          -#  Social Share
+          - if @abstract_session.is_a?(Session)
+            - short_url = short_share_url(@abstract_session) # @abstract_session.absolute_path
+            - full_url = full_share_url(@abstract_session)
+            - share_msg = share_default_message(@abstract_session)
+            -# while share by email hidden
+            .socialIconBox{style: 'text-align: center;'}
+              %a.socialIcon.circle.socialIcon-facebook.fb-share{href: "https://www.facebook.com/sharer.php?u=#{full_url}", target: '_blank'}
+                %i.VideoClientIcon-facebookF
+
+              %a.socialIcon.circle.socialIcon-twitter.twitter-share{href: "https://twitter.com/intent/tweet?url=#{full_url}&text=#{@abstract_session.share_title}", target: '_blank'}
+                %i.VideoClientIcon-twitter2
+              %a.socialIcon.circle.socialIcon-linkedin.linkedin-share{href: "https://www.linkedin.com/shareArticle?mini=true&url=#{full_url}&title=#{@abstract_session.share_title}&summary=#{@abstract_session.share_description}&source=#{Rails.application.credentials.global[:host]}", target: '_blank'}
+                %i.VideoClientIcon-linkedin2
+              -#%a.socialIcon.circle.socialIcon-pinterest.pinterest-share{href: "http://pinterest.com/pin/create/button/?url=#{full_url}&description=#{@abstract_session.always_present_title}&media=#{pinterest_share_preview_image_url(@abstract_session)}", target: '_blank'}
+              %a.socialIcon.circle.socialIcon-pinterest.pinterest-share{href: "http://pinterest.com/pin/create/button/?url=#{full_url}&description=#{@abstract_session.share_title}&media=#{@abstract_session.share_image_url}", target: '_blank'}
+                %i.VideoClientIcon-pinterest2
+              -#%a.socialIcon.circle.socialIcon-youtube{href: '#'}
+              -#  %i.VideoClientIcon-youtube
+              -#%a.socialIcon.circle{href: '#'}
+              -#  %i.VideoClientIcon-snapchat-ghost
+              -#%a.socialIcon.circle.socialIcon-instagram{href: '#'}
+              -#  %i.VideoClientIcon-instagram
+              -#%a.socialIcon.circle.socialIcon-tumblr.tumblr-share{href: "https://www.tumblr.com/widgets/share/tool?canonicalUrl=#{full_url}&url=#{full_url}&title=#{@abstract_session.share_title}&content=#{@abstract_session.share_image_url}&caption=#{@abstract_session.share_description}", target: '_blank'}
+              %a.socialIcon.circle.socialIcon-tumblr.tumblr-share{href: "https://www.tumblr.com/widgets/share/tool?canonicalUrl=#{full_url}&content=#{@abstract_session.share_image_url}&caption=#{@abstract_session.share_title} #{@abstract_session.share_description}", target: '_blank'}
+                %i.VideoClientIcon-tumblr
+
+              %a.socialIcon.circle.socialIcon-reddit.reddit-share{href: "https://ssl.reddit.com/submit?url=#{full_url}&title=#{@abstract_session.share_title}", target: '_blank'}
+                %i.VideoClientIcon-reddit
+              %a.socialIcon.circle.socialIcon-google.gplus-share{href: "https://plus.google.com/share?url=#{full_url}", target: '_blank'}
+                %i.VideoClientIcon-google
+              -#%a.socialIcon.circle.bg_transperant{href: '#'}
+              -#  @
+            %div
+              Permalink
+              .PermalinkWrapp
+                %input#Permalink{type: :text, readonly: :readonly, onclick: '$(this).select()', value: (short_url || full_url).html_safe}
+                %a.lightGreyBtn.d-inline-block.text-center{href: '#', onclick: 'copyToClipboard(this); return false'} Copy
+        -# liveShare panel end
+
+
+      -# Menu Type
+      %section#MenuType
+        .sectionHeader
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)', tittle:'close'} x
+          %a.pull-right.reload.STATIC_DATA{href: '#', tittle:'reload'}
+            %i.VideoClientIcon-clockwise-rotating-circular-arrow
+          Settings
+        #configurationWrap.styledScroll
+          - if show_webrtc?
+            = render 'webrtc_settings'
+
+      -# Menu Type end
+
+
+      -#Invite Participants
+      %section#InviteParticipants
+        .sectionHeader
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          %a.pull-right.reload{tittle:'reload', onclick: 'refresh_invite_modal(); return false;'}
+            %i.VideoClientIcon-clockwise-rotating-circular-arrow
+          Invite Participants
+        .content-blockWrapp#InviteParticipantsWrapp.Connecting.Connecting-MK2
+          .loadSpin.hide
+            .circleG.circleG_1
+            .circleG.circleG_2
+            .circleG.circleG_3
+      -#Invite Participants
+
+
+      -# Share a Window
+      %section#ShareAWindow
+        .sectionHeader
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          Screen Share
+        .styledScroll
+          %a#extInstallBut.lightGreyBtn.text-center.full-width{href: '#', onclick: "window.open('https://chrome.google.com/webstore/detail/jbagnbabffebnloeajochhpipcjhpamb', '', 'width=1020, height=620')"}
+            Install extension
+          #inCallLocalShareList
+      -# Share a Window end
+
+
+      -#Manage all Participants
+      %section#ManageAllParticipants
+        .sectionHeader
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          Manage all Participants
+        .content-blockWrapp#groupSettings.Connecting.Connecting-MK2
+          .loadSpin.hide
+            .circleG.circleG_1
+            .circleG.circleG_2
+            .circleG.circleG_3
+
+
+      -#twitter
+      %section#twitter
+        .sectionHeader
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          Twitter
+        #twitterArea
+          - if @abstract_session.is_a?(Session) && @abstract_session.has_twitter_feed?
+            = render 'shared/twitter_feed', twitter_feed_href: @abstract_session.twitter_feed_href, twitter_feed_widget_id: @abstract_session.twitter_feed_widget_id, twitter_feed_title: @abstract_session.twitter_feed_title
+
+
+      -#polls
+      -# %section#polls{class: @role == 'presenter' ? 'presenter' : ''}
+        .sectionHeader{style: 'margin-bottom: 0;'}
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          Polls
+        .LoadingCover.semitransparent_LoadingCover{style: 'display: none;'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        .styledScroll
+          #pollsArea.clearfix
+            - @polls.each do |poll|
+              = render 'polls/poll', poll: poll
+          - if @role == 'presenter'
+            #newPollArea
+              %a.heading{href: '#'} Create New Poll
+              = form_tag polls_path, method: :post, remote: true, id: :new_poll, class: :hide do
+                .fields
+                  = hidden_field_tag 'poll[room_id]', @room.id
+                  -# Skip image url (we're not using it now)
+                  -#= text_field_tag 'poll[image_url]', nil, placeholder: 'Image url'
+                  = text_area_tag 'poll[question]', nil, required: true, placeholder: 'Type your question', id: :poll_question
+                  - 2.times do |i|
+                    = text_field_tag 'poll[sides][][answer]', nil, required: true, placeholder: "Answer #{i + 1}"
+                .btn-group
+                  = link_to 'Add answer', '#', class: 'add_answer col-md-6 mainButton btn-withIcon'
+                  = link_to 'Save', '#', class: 'save_poll col-md-6'
+            #choosePollArea.mt5.clearfix
+              - selected_poll = @polls.detect{|p| p['local_poll']['selected']}.try{|p| p['id']}
+              -#- options = '<option disabled="disabled">Select Poll</option>'.html_safe + options_for_select(@polls.map{|p| [p['tagline'], p['id']]}, selected: selected_poll)
+              - options = options_for_select(@polls.map{|p| [p['tagline'], p['id']]}, selected: selected_poll)
+              = select_tag :poll_id, options, class: 'full-width mb5 mt5', id: :select_poll, data: {url: enable_poll_lobby_path(@room), disableUrl: disable_poll_lobby_path(@room)}, prompt: 'Select Poll'
+              -#%a#closePolls.mb50.mainButton{href: '#', data: {url: disable_poll_lobby_path(@room)}} Disable Polls Panel
+            .clearfix
+
+      -#polls
+
+
+      -#donation
+      %section#donation
+        .sectionHeader
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          Donation
+      -#donation
+
+
+      -#shop
+      %section#shop
+        .redBG.sectionHeader{style: 'margin-bottom: 0;'}
+          %a.pull-right.sectionHeader-close{href: '#', onclick: 'CloseBar(this)'} x
+          Product Lists
+        .LoadingCover.semitransparent_LoadingCover{style: 'display:none;'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        .styledScroll
+          #listsArea.clearfix
+            - if @role == 'presenter'
+              #chooseListArea
+                - selected_list = @lists.detect{|l| l.selected}.try(:id)
+                - options = options_for_select(@lists.map{|l| [l.name, l.id]}, selected: selected_list)
+                = select_tag :list_id, options, class: 'full-width mb5', id: :select_list, data: {url: enable_list_lobby_path(@room), disableUrl: disable_list_lobby_path(@room)}, prompt: 'Select List'
+
+            - @lists.each do |list|
+              .list_info{id: "shop_info_#{list.id}", style: list.selected ? '' : 'display: none;'}
+                .redBG
+                  -#.shopName= list.name
+                  .description= list.description
+                  -#- if list.url FIXME!!!
+                  -#  = link_to list.url, list.url, class: :siteUrl, target: '_blank'
+                .sectionTitle
+                  .text-color-white.pt10 Products
+                .Products-wrapp
+                  .prodctTileList
+                    - if list.products.size.zero?
+                      No Products
+                    - else
+                      - list.products.each do |product|
+                        .productTile
+                          .productTile-img{style: "background-image: url('#{product.image_url}')"}
+                          .productTile-short-description
+                            = link_to product.title, product.url, style: 'cursor: pointer;', target: '_blank', onclick: "window.open('#{product.url}', '#{product.title}', 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;"
+                            .mt15
+                              - if product.price_cents > 0
+                                .price.pull-right= product.price.format
+                              .productInfo.inline-block.fs10= product.specifications
+                            %a{href: '#', onclick: 'jQuery(this).parents(".productTile").toggleClass("active")', style: 'cursor: pointer;'} Read More...
+                          .productTile-long-description= product.description
+
+
+        -#.BAG.pb20
+        -#  .bag-title.mb10
+        -#    My Bag
+        -#  .productTile
+        -#    %img.productTile-img{src: 'http://lorempixel.com/400/200/'}
+        -#    .productTile-short-description
+        -#      %a{href: '#', onclick: 'jQuery(this).parents('.productTile').toggleClass('active')'}
+        -#        Kylo Ren Costume for Kids Star Wars: The Force Awakens
+        -#      %div
+        -#        .price.pull-right
+        -#          $34.12
+        -#        %a.productLink{href: '#', target: '_blank'}
+        -#          http://bit.ly/2eiCz66
+        -#    .productTile-long-description
+        -#      Cras mattis consectetur purus sit amet fermentum.
+        -#      Donec sed odio dui. Integer posuere erat a ante venenatis
+        -#      dapibus posuere velit aliquet. Nullam quis risus eget urna
+        -#      mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper.
+        -#  .subtotal.mb10
+        -#    .pull-right
+        -#      $40.00
+        -#    Subtotal
+        -#  %a.mainButton.d-block.full-width.fs14.uppercase{href: '#'} proceed to checkout
+      -#shop
+
+  - if @room.rtmp_or_cam? && @role == 'presenter'
+    - ffmpegservice_account = @room.ffmpegservice_account
+    - content_for(:after_include_javascripts) do
+      :javascript
+        $(function(){
+          if ("#{ffmpegservice_account&.stream_status}" == "up"){
+            window.videoPlacePlayer = initTheOplayer("", '#videoPlace');
+            window.videoPlace2Player = initTheOplayer("", '#videoPlace2');
+              videoPlacePlayer.source = {
+                sources: [
+                  {
+                    src: "#{ffmpegservice_account.stream_m3u8_url}",
+                    type: 'application/x-mpegurl'
+                  }
+                ]
+              };
+              videoPlace2Player.source = {
+                sources: [
+                  {
+                    src: "#{ffmpegservice_account.stream_m3u8_url}",
+                    type: 'application/x-mpegurl'
+                  }
+                ]
+              };
+            }
+        })
+    #pluginWrap.videoWrapper
+      .rtmp-wrapp
+        .responsive-video.text-center
+          .videoPlace-wrapp
+            #videoPlace
+              %span.noActiveStream
+                .loadSpin.hide
+                  .circleG.circleG_1
+                  .circleG.circleG_2
+                  .circleG.circleG_3
+                  %text Please wait, stream is initializing and will start in few minutes
+                %b NO ACTIVE STREAMS
+      .credentialsPlaceWrapp
+        #credentialsPlace{class: "#{'safariDetected' if browser.safari? }"}
+          .credentialsPlace-content
+            %div
+              %span
+                Stream status:
+              %input{readonly: :readonly, type: :text, value: text_by_status(ffmpegservice_account&.stream_status), style: "color:#{color_by_status(ffmpegservice_account&.stream_status)};", class:"status_#{color_by_status(ffmpegservice_account&.stream_status)}"}
+
+              - if ffmpegservice_account&.stream_status == 'off'
+                %a{href: '#', onclick: "window.location.href='#{start_rtmp_stream_lobby_path(@room)}';", style: "color:#{color_by_status(ffmpegservice_account&.stream_status)};"}
+                  Start
+              -else
+                %a{href: '#', onclick: "window.location.href='';"}
+                  Refresh
+            - unless @room.service_type == 'ipcam'
+              %div
+                %span
+                  coreserver:
+                %input{readonly: :readonly, type: :text, value: ffmpegservice_account.server}
+                %a{href: '#', onclick: 'copyToClipboard(this)'}
+                  copy
+              %div
+                %span
+                  port:
+                %input{readonly: :readonly, type: :text, value: ffmpegservice_account.port }/
+                %a{href: '#', onclick: 'copyToClipboard(this)'} copy
+              %div
+                %span
+                  streamname:
+                %input{readonly: :readonly, type: :text, value: ffmpegservice_account.stream_name}/
+                %a{href: '#', onclick: 'copyToClipboard(this)'} copy
+              %div
+                %span
+                  username:
+                %input{readonly: :readonly, type: :text, value: ffmpegservice_account.username}/
+                %a{href: '#', onclick: 'copyToClipboard(this)'} copy
+              %div
+                %span
+                  password:
+                %input{readonly: :readonly, type: :text, value: ffmpegservice_account.password}/
+                %a{href: '#', onclick: 'copyToClipboard(this)'} copy
+
+
+  - else
+    - if show_webrtc?
+      #VidyoArea.videoWrapper{style: ''}
+
+        .VideoArea-type-1.VT-C-1
+          .videoContainer-tileList-wrapp
+            .videoContainer-tileList.VT-W.text-center
+              .tile#shareVideoTile{style: 'display: none;'}
+                #shareVideoDiv.sharevideo-wrapper
+                  %video#shareVideo0.remotevideo-default{autoplay: ''}
+                  .participant-title-wrapper
+                    %span#shareName.participant-title
+              - (0..24).each do|i|
+                .tile
+                  %div.participant-wrapper{id: "participantDiv#{i}"}
+                    %video.remotevideo-default{autoplay: '', id: "remoteVideo#{i}"}
+                    .participant-title-wrapper
+                      %span.onlylist.participant-title{id: "participant#{i}"}
+
+          .selfViewDiv-wrapper
+            #selfViewDiv.local-participant-wrapper.openFull
+              %video#localVideo.localvideo-default{autoplay: '', muted: ''}
+              .participant-title-wrapper
+                %span#localNameDiv.participant-title Self View
+    - else
+      #pluginWrap.videoWrapper
+- content_for(:after_include_javascripts) do
+  :javascript
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '#{ENV['FACEBOOK_APP_ID']}',
+        xfbml: true,
+        version: 'v2.5' // FIXME: 'v2.10' is actual version (also check .env file)
+      });
+    };
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = '//connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $('.fb-share').click(function(e) {
+      e.preventDefault();
+      $.ajax({
+        type: "POST",
+        data: { _method: 'POST'},
+        url: "#{increment_share_counter_path(@abstract_session, 'facebook')}",
+        success: function() { }
+      });
+      var width  = 550,
+          height = 450,
+          left   = ($(window).width()  - width)  / 2,
+          top    = ($(window).height() - height) / 2,
+          opts   = 'width='  + width  +
+                   ',height=' + height +
+                   ',top='    + top    +
+                   ',left='   + left +
+                   ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+      window.open($(this).attr('href'), 'fbShareWindow', opts);
+      return false;
+    });
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $('.gplus-share').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          data: { _method: 'POST'},
+          url: "#{increment_share_counter_path(@abstract_session, 'gplus')}",
+          success: function() { }
+        });
+        var width  = 495,
+            height = 395,
+            left   = ($(window).width()  - width)  / 2,
+            top    = ($(window).height() - height) / 2,
+            url    = this.href,
+            opts   = 'status=1' +
+                     ',width='  + width  +
+                     ',height=' + height +
+                     ',top='    + top    +
+                     ',left='   + left +
+                     ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+        window.open($(this).attr('href'), 'gplus', opts);
+        return false;
+    });
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $('.tumblr-share').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          data: { _method: 'POST'},
+          url: "#{increment_share_counter_path(@abstract_session, 'tumblr')}",
+          success: function() { }
+        });
+        var width  = 540,
+            height = 600,
+            left   = ($(window).width()  - width)  / 2,
+            top    = ($(window).height() - height) / 2,
+            url    = this.href,
+            opts   = 'status=1' +
+                     ',width='  + width  +
+                     ',height=' + height +
+                     ',top='    + top    +
+                     ',left='   + left +
+                     ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+        window.open($(this).attr('href'), 'pinterest', opts);
+        return false;
+    });
+- content_for(:after_include_javascripts) do
+  :javascript
+    $('.twitter-share').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          data: { _method: 'POST'},
+          url: "#{increment_share_counter_path(@abstract_session, 'twitter')}",
+          success: function() { }
+        });
+        var width  = 575,
+            height = 400,
+            left   = ($(window).width()  - width)  / 2,
+            top    = ($(window).height() - height) / 2,
+            opts   = 'status=1' +
+                     ',width='  + width  +
+                     ',height=' + height +
+                     ',top='    + top    +
+                     ',left='   + left +
+                     ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+        window.open($(this).attr('href'), 'twitter', opts);
+        return false;
+    });
+    //520 x 570
+- content_for(:after_include_javascripts) do
+  :javascript
+    $('.reddit-share').click(function(e) {
+        $.ajax({
+          type: "POST",
+          data: { _method: 'POST'},
+          url: "#{increment_share_counter_path(@abstract_session, 'reddit')}",
+          success: function() { }
+        });
+        return true;
+    });
+- content_for(:after_include_javascripts) do
+  :javascript
+    $('.pinterest-share').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          data: { _method: 'POST'},
+          url: "#{increment_share_counter_path(@abstract_session, 'pinterest')}",
+          success: function() { }
+        });
+        var width  = 750,
+            height = 695,
+            left   = ($(window).width()  - width)  / 2,
+            top    = ($(window).height() - height) / 2,
+            opts   = 'status=1' +
+                     ',width='  + width  +
+                     ',height=' + height +
+                     ',top='    + top    +
+                     ',left='   + left +
+                     ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+        window.open($(this).attr('href'), 'pinterest', opts);
+        return false;
+    });
+- content_for(:after_include_javascripts) do
+  :javascript
+    $('.linkedin-share').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          data: { _method: 'POST'},
+          url: "#{increment_share_counter_path(@abstract_session, 'linkedin')}",
+          success: function() { }
+        });
+        var width  = 520,
+            height = 570,
+            left   = ($(window).width()  - width)  / 2,
+            top    = ($(window).height() - height) / 2,
+            opts   = 'status=1' +
+                     ',width='  + width  +
+                     ',height=' + height +
+                     ',top='    + top    +
+                     ',left='   + left +
+                     ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+        window.open($(this).attr('href'), 'linkedin', opts);
+        return false;
+    });

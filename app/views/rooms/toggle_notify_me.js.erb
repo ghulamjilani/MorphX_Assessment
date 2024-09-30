@@ -1,0 +1,13 @@
+var container = $('.toggle-notification-setting-btn:contains(VoD)');
+<% if @result %>
+  $(container).addClass('active');
+  $(container).find('i.icon-bell').hide();
+  $(container).find('i.icon-bell-alt').show();
+  $.showFlashMessage("We'll notify you when this video is available", {type: 'info'});
+//  $(container).next().show();
+<% else %>
+  $(container).find('i.icon-bell-alt').hide();
+  $(container).find('i.icon-bell').show();
+  $(container).removeClass('active');
+//  $(container).next().hide();
+<% end %>

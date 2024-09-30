@@ -1,0 +1,46 @@
+$responsiveHeaderClient: 7rem;
+
+
+$client__tp__main: #FFFFFF;
+$client__tp__secondary: #A6A6A6;
+$client__tp__secondary__dropdowns: #6F7073;
+$client__tp__icons: #6F7073;
+$client__tp__active: #F23535;
+$client__tp__modal: #303840;
+$client__tp__labels: #6F7073;
+$client__tp__disabled: #4D4D4D;
+$client__tp__inputs: #FFFFFF;
+$client__tp__inputs__placeholder: #A6A6A6;
+$client__tp__btn__tetriary: #303840;
+$client__tp__main__yellow: #FFC20A;
+
+$client__bg__header: #282828;
+$client__bg__main: #222222;
+$client__bg__content__secondary: #333333;
+$client__bg__content: #282828;
+$client__bg__dropdowns: #FFFFFF;
+$client__bg__modal: #FFFFFF;
+$client__bg__tooltip: #404040;
+$client__bg__hover: #333333;
+$client__bg__green: #37A67D;
+$client__tgl__on__disabled: #E5E5E5;
+$client__tgl__switch__off: #A6A6A6;
+
+$client__btn__main: #F23535;
+$client__btn__tetriary: #FFFFFF;
+$client__btn__bgLabel: #095F73;
+
+$client__Main__Orange: #FF530D;
+
+
+@import "header/core";
+@import "client/core";
+@import "mainTile/core";
+@import "tile/core";
+@import "chat/core";
+@import "invite/core";
+@import "manage/core";
+@import "notSupported/core";
+@import "webRTC/core";
+@import "selfView/core";
+@import "virtualBackground";

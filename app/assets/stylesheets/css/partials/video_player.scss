@@ -1,0 +1,86 @@
+@import "../../mixin";
+body .video-js.theoplayer-skin.vjs-fullscreen{
+  height: 100%;
+  top:0;
+  .built-in-playlist, .PicInPicOn, .curtainTogl, .poll-icon{
+    display: none;
+  }
+  .vjs-fullscreen-control{
+    margin-left: 0;
+  }
+}
+html body .video-js.theoplayer-skin {
+  outline: none !important;
+  /* was commented for player voice slider progress color 30.09.21*/
+  // .vjs-volume-level, .vjs-play-progress, .vjs-slider-bar, .theo-menu-header, .theo-controlbar-button.theo-settings-control-button-hd:after, .theo-primary-background, .theoplayer-skin .theo-settings-control-label-hd, .theoplayer-skin .theo-menu-header, .theo-social .theo-social-container .theo-social-label{
+  //   background: $siteColorMain;
+  // }
+  .theo-primary-background, .vjs-loading-spinner, .vjs-loading-spinner:before, .vjs-loading-spinner:after, .theo-menu-header{
+    border-color: $siteColorMain;
+  }
+  .theo-primary-color, .vjs-big-play-button, .vjs-volume-level, .vjs-play-progress, .vjs-slider-bar, .theo-settings-control-menu-item-value, .theo-settings-control-menu-item-hd-label, .theo-upnext-panel .theo-upnext-panel-content .theo-upnext-panel-autoplay, .theo-settings-control-menu-item-hd-label, .theo-big-play-button-svg-container svg, .theo-settings-control-menu-item-value, .theo-menu .theo-menu-item.vjs-selected, .theo-menu .theo-menu-item.vjs-selected:focus, .theo-menu .theo-menu-item.vjs-selected:hover{
+    color: $siteColorMain;
+  }
+  button.vjs-big-play-button{
+    width: 75px;
+    padding-bottom:75px;
+    &:after{
+      display: none;
+    }
+    svg{
+      display: none;
+    }
+    .theo-big-play-button-svg-container{
+      &:after{
+        content: "\e942";
+        font-family: 'VideoClientIcon';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 81px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #fff;
+        opacity: 0.6;
+        font-size: 61px;
+        display: block;
+
+        @include transition200();
+      }
+      &:hover:after{
+        opacity: 1;
+      }
+    }
+  }
+  button.PicInPicOn{
+    background-color: transparent;
+  }
+  .theo-primary-color, .vjs-big-play-button, .vjs-volume-level, .vjs-play-progress, .vjs-slider-bar, .theo-settings-control-menu-item-value, .theo-settings-control-menu-item-hd-label, .theo-upnext-panel .theo-upnext-panel-content .theo-upnext-panel-autoplay, .theo-settings-control-menu-item-hd-label, .theo-big-play-button-svg-container svg, .theo-settings-control-menu-item-value, .theo-menu .theo-menu-item.vjs-selected, .theo-menu .theo-menu-item.vjs-selected:focus, .theo-menu .theo-menu-item.vjs-selected:hover, .theo-settings-control-menu-item-hd-label, .theo-big-play-button-svg-container svg, .theo-settings-control-menu-item-value{
+    color: $siteColorMain;
+  }
+  & *, & *:active, & *:focus, & *:before{
+    outline: none !important;
+  }
+  .theo-context-menu {
+    background: var(--bg__content);
+    padding: 0 4px 0 0;
+    border-radius: 4px;
+    cursor: default;
+    .theo-context-menu-a{
+      vertical-align: middle;
+      color: var(--tp__main);
+      font-size: 10px;
+      pointer-events: none;
+      cursor: default;
+      padding-left: 22px;
+      padding-right: 2px;
+      background-image: url(asset_path("services/morphx/favicon.png"));
+      display: inline-block;
+      background-position: 5px center;
+      background-size: 12px;
+      background-repeat: no-repeat;
+    }
+  }
+}

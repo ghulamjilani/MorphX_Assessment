@@ -1,0 +1,6 @@
+{{#each this}}
+    <input type="hidden" name="session[dropbox_materials_attributes][{{@index}}][id]"               value="{{id}}">
+    <input type="hidden" name="session[dropbox_materials_attributes][{{@index}}][path]"             value="{{path}}">
+    <input type="hidden" name="session[dropbox_materials_attributes][{{@index}}][_destroy]"         value="{{_destroy}}">
+    <input type="hidden" name="session[dropbox_materials_attributes][{{@index}}][mime_type]"        value="{{mime_type}}">
+{{/each}}

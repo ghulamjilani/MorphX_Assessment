@@ -1,0 +1,134 @@
+.IpCam {
+  &__client {
+    @include media(tablet) {
+      height: calc(100% - 8rem);
+    }
+  }
+
+  &__tools {
+    bottom: 1rem;
+  }
+
+  &__flex {
+    width: 11rem;
+  }
+
+  &__video {
+    width: 100%;
+    height: 100%;
+    @include flex(flex, flex-start, center);
+    @include media(tablet) {
+      padding-top: 5rem;
+    }
+
+    .video-js {
+      width: calc(100% - 2rem);
+      height: calc(100% - 8rem);
+      @include media(tablet) {
+        height: 100%;
+      }
+    }
+
+    .theo-primary-color {
+      color: #F23535;
+    }
+
+    .theo-primary-background {
+      background: #F23535;
+    }
+
+    .theo-context-menu {
+      background: #FFF;
+      padding: 0 .4rem 0 0;
+      border-radius: 4px;
+      cursor: default;
+
+      &:hover {
+        background: #FFF;
+      }
+
+      .theo-context-menu-a {
+        vertical-align: middle;
+        color: #000;
+        font-size: 1rem;
+        pointer-events: none;
+        cursor: default;
+        padding-left: 2.2rem;
+        padding-right: .2rem;
+        display: inline-block;
+        background-position: .5rem center;
+        background-size: 1.2rem;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  &__wait {
+    background: #282828;
+    border-radius: 1rem;
+    width: 80%;
+    margin: 0 auto;
+    height: calc(100% - 15rem);
+    @include flex(flex, center, center);
+    flex-direction: column;
+    margin-top: 4rem;
+    @include media(tablet) {
+      margin-top: 8rem;
+    }
+
+    &__title {
+      color: #FFFFFF;
+      font-size: 2.6rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 2rem;
+      @include media(tablet) {
+        font-size: 2rem;
+      }
+    }
+
+    &__loader {
+      height: 12rem;
+      width: 10rem;
+      position: relative;
+    }
+  }
+
+  &__golive {
+    transition: all .6s;
+    position: fixed;
+    bottom: 6rem;
+    width: 100%;
+    padding: 0 3rem;
+    @include flex(flex, center, center);
+  }
+
+  &__cs {
+    color: #FFFFFF;
+    @include media(tablet) {
+      & > .chatMK2 {
+        top: 5rem !important; // .mobile.landscape .chatMK2 - refactor
+        height: calc(100% - 5rem) !important; // .mobile.landscape .chatMK2 - refactor
+      }
+    }
+
+    .chatMK2__header__keyboard {
+      display: flex;
+    }
+
+    &__showMore {
+      width: 90%;
+      margin: 2rem auto;
+    }
+
+    &__contacts {
+      height: calc(100% - 20rem);
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__right {
+    width: 3rem;
+  }
+}

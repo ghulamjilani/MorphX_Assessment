@@ -1,0 +1,57 @@
+// app/assets/config/manifest.js
+//
+//= link_tree ../images
+//= link_directory ../javascripts .js
+//= link_directory ../stylesheets .css
+
+//= link application.css
+//= link spa.css
+//= link application.js
+//= link chatcss/custom.css
+//= link home.js
+//= link jquery.js
+//= link respond.js
+//= link video_client/core.css
+//= link video_client/core.js
+//= link video_page/vidyo/vidyo.client.messages.js
+//= link video_page/webrtc84/vidyo.client.js
+//= link video_page/webrtc84/vidyo.client.messages.js
+//= link video_page/webrtc84/vidyo.client.private.messages.js
+//= link video_client/videoapplication.js
+//= link video_client/webrtcapplication.js
+//= link video_client/vidyo_io.js
+//= link widgets/core.css
+//= link gender/male.png
+//= link theoplayer/ui.css
+//= link widgets/template_V.css
+//= link widgets/template_V_P.css
+//= link widgets/template_V_L.css
+//= link widgets/template_V_P_L.css
+//= link css/partials/_NOT_GLOBAL_aos.css
+//= link views/widgets/player.js
+//= link views/widgets/additions.js
+//= link views/widgets/shop.js
+//= link aos.js
+//= link lax.js
+//= link embeds/channel.js
+//= link embeds/chromcast.js
+
+//= link views/widgets/chat_with_dependencies.js
+//= link pages/studios.js
+//= link gender/newMale.svg
+//= link search/Immersive.png
+//= link ImmerssNotificationAvatar.jpg
+//= link channels/default_cover.png
+//= link favicon.png
+//= link logo.png
+//= link emoji/icons.svg
+//= link company/default_logo.jpg
+//= link gender/hidden.png
+//= link gender/newHidden.svg
+//= link channels/noChannel.png
+//= link new_home_page/b_bg.mp4
+//= link VideoClientIcon/fonts/VideoClientIcon-V2.woff
+//= link VideoClientIcon/fonts/VideoClientIcon-V2.ttf
+//= link VideoClientIcon/fonts/VideoClientIcon-V2.svg
+//= link Portico/Portico_Regular.otf
+//= link Portico/Portico_Outline.otf

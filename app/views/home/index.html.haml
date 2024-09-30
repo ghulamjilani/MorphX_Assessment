@@ -1,0 +1,396 @@
+- content_for(:extra_body_classes, " NewHome NewHome-index hidePageHeader transpered-header header-top")
+- if Rails.env.production?
+  - content_for(:additional_google_head) do
+    / Google Tag Manager
+    :javascript
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KT3N8KN');
+    / End Google Tag Manager
+
+    / Global site tag (gtag.js) - Google Ads: 814903788
+    %script{async: "", src: "https://www.googletagmanager.com/gtag/js?id=AW-814903788"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-814903788');
+    / End Global site tag
+
+    -# call gtag_report_conversion when someone clicks on the chosen link or button.
+    :javascript
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-814903788/hTpICKfEkqgBEOzjyYQD',
+            'event_callback': callback
+        });
+        return false;
+      }
+  - content_for(:additional_google_body) do
+    / Google Tag Manager (noscript)
+    %noscript
+      %iframe{src: "https://www.googletagmanager.com/ns.html?id=GTM-KT3N8KN", height: "0", width: "0", style: "display:none;visibility:hidden"}
+    / End Google Tag Manager (noscript)
+
+
+%section.nh_1
+  .nh_1_content
+    %video{muted:'muted',autoplay:'true',loop:'true', src: asset_path('new_home_page/b_bg.mp4'), type:"video/mp4"}
+    .fullVideoWrapp.video-js.theoplayer-skin.theo-seekbar-above-controls
+    %a.fullVideoWrappClose
+      %i.VideoClientIcon-iPlus
+    -#hide for demmo
+    -#.nh_1_content_centerBanner
+      -#%h3 Double your online sales
+      -#%h5 with live shoppable video
+      -#.text-center
+      -#  %a.showFullVideo{href:'#',title:'see how'}
+      -#    %i.VideoClientIcon-movie-player-play-button
+      -#%h6 Humanizing eCommerce
+
+    -#hide for demmo
+    -# demmo
+    .nh_1_content_centerBanner{style:'padding-top:150px'}
+      %h3{style:'margin-bottom:150px'} Humanizing eCommerce
+      .text-center{style:'margin-bottom:120px'}
+        %a.showFullVideo{href:'#',title:'see how', style:'font-size:100px'}
+          %i.VideoClientIcon-play-icon1
+    -# demmo
+    .tab__Header_wrapp
+      .tab__Header
+        %a{href:'#nh_2'} What
+        %a{href:'#nh_3'} Who
+        %a{href:'#nh_4'} Why
+        %a{href:'#nh_5'} How
+        %a{href:'#nh_6'} Cost
+        %a{href:'#nh_7'} Get-Ahead
+        %a{href:'#nh_form'} Contact
+.hide_on_desktop.padding-left-10.padding-right-10.padding-bottom-50
+  %a.btn.btn-l.margin-top-20.full-width{href:'#nh_form' } contact us
+.nh_wrapp
+  .container
+    %section.nh_2.nh_content#nh_2
+      .nh__ls.nh__withText
+        %h6.lax{'data-lax-translate-x_large':"vh (Math.round($('.nh__ls').width()-170)), (vh*0.7) ((Math.round($('.nh__ls').width())-170)), (vh*0.6) 0", "data-lax-anchor":"self"}
+          %span.lax{'data-lax-scale_large':"vh 3, (vh*0.7) 3, (vh*0.6) 1", "data-lax-anchor":"self"} What do we do?
+        %p.lax{'data-lax-opacity_large':'vh 0, (vh*0.7) 0, (vh*0.6) 1', "data-lax-anchor":"self"} We leverage shoppable live video to seamlessly deliver the white glove experience of the physical showroom to shoppers browsing at home or on their phone.
+        .nh__list.lax{'data-lax-opacity_large':'vh 0, (vh*0.8) 0, (vh*0.7) 1', "data-lax-anchor":"self"}
+          .nh__list_item1
+            %div
+              %span
+                = image_tag('newHomePage/picture-2.png', alt: 'Live co-shoppingwith customers')
+            Live co-shopping
+            %br
+            with customers
+          .nh__list_item2
+            %div
+              %span
+                = image_tag('newHomePage/picture-3.png', alt: 'live shopping channel')
+            Embedded trunk shows
+            %br
+            & live shopping channel
+          .nh__list_item3
+            %div
+              %span
+                = image_tag('newHomePage/picture-4.png', alt: 'influencer sales')
+            Trackable ambassador
+            %br
+            & influencer sales
+      .nh__rs.lax{'data-lax-opacity_large':'vh 0, (vh*0.5) 0, (vh*0.4) 1', "data-lax-anchor":"self"}
+        %img.lax{'data-lax-translate-y_large':"vh 0, -elh 120", "data-lax-anchor":"self", src: asset_path('newHomePage/picture-5.png'), srcset: "#{asset_path('newHomePage/picture-5@2x.png')} 2x, #{asset_path('newHomePage/picture-5@3x.png')} 3x"}
+        .bgBlock.lax{'data-lax-translate-y_large':"vh 0, -elh -170", "data-lax-anchor":"self"}
+        .bgBlock_bordered.lax{'data-lax-translate-y_large':"vh 0, -elh -900", "data-lax-anchor":"self"}
+
+    %section.nh_3.nh_content#nh_3
+      .nh__ls.lax{'data-lax-opacity_large':'vh 0, (vh*0.5) 0, (vh*0.4) 1', "data-lax-anchor":"self"}
+        %img.lax{'data-lax-translate-y_large':"vh 0, -elh 150", "data-lax-anchor":"self", src: asset_path('newHomePage/phone.png'), srcset: "#{asset_path('newHomePage/phone@2x.png')} 2x, #{asset_path('newHomePage/phone@3x.png')} 3x"}
+        .bgBlock.lax{'data-lax-translate-y_large':"vh 0, -elh -100", "data-lax-anchor":"self"}
+        .bgBlock_bordered.lax{'data-lax-translate-y_large':"vh 0, -elh -20", "data-lax-anchor":"self"}
+      .nh__rs.nh__withText
+        %h6.lax{'data-lax-translate-x_large':"vh -30, (vh*0.7) -30, (vh*0.6) 0", "data-lax-anchor":"self"}
+          %span.lax{'data-lax-scale_large':"vh 3, (vh*0.7) 3, (vh*0.6) 1", "data-lax-anchor":"self"} Who is it for?
+        .nh__list.nh__list__withDots.lax{'data-lax-opacity_large':'vh 0, (vh*0.65) 0, (vh*0.55) 1', "data-lax-anchor":"self"}
+          .nh__list_item1
+            Brands that want to provide a white glove, retail-like experience online
+          .nh__list_item2
+            Brands that want to activate sale associates beyond the physical store or showroom
+          .nh__list_item3
+            Brands seeking an easy way to capitalize on powerful consumer engagement trends
+
+    %section.nh_4.nh_content#nh_4
+      .nh__ls.nh__withText
+        %h6.lax{'data-lax-translate-x_large':"vh (Math.round($('.nh__ls').width()-195)), (vh*0.7) ((Math.round($('.nh__ls').width())-195)), (vh*0.6) 0", "data-lax-anchor":"self"}
+          %span.lax{'data-lax-scale_large':"vh 3, (vh*0.8) 3, (vh*0.7) 1", "data-lax-anchor":"self"} Why do I need it?
+        %p.lax{'data-lax-opacity_large':'vh 0, (vh*0.65) 0, (vh*0.55) 1', "data-lax-anchor":"self"} Luxury shoppers are migrating online. Live video engages them where they’re at.  Brands that deliver authentic, personal live video are winning in this new market landscape.
+      .nh__rs.lax{'data-lax-opacity_large':'vh 0, (vh*0.5) 0, (vh*0.4) 1', "data-lax-anchor":"self"}
+        .nh__list.lax{'data-lax-translate-y_large':"vh -120, -elh 120", "data-lax-anchor":"self"}
+          .nh__list_item1.nh__list_item
+            .imgWithText
+              %span
+                = image_tag('newHomePage/increase.png', alt: 'increase')
+              30%
+            %p
+              Increased sales conversions
+              %br
+              for retail sites with live video
+          .nh__list_item2.nh__list_item
+            .imgWithText
+              %span
+                = image_tag('newHomePage/shopping-cart-2.png', alt: 'Greater')
+              67%
+            %p
+              Greater likelihood that consumer will buy
+              %br
+              a product seen in a live video
+          .nh__list_item3.nh__list_item
+            .imgWithText
+              %span
+                = image_tag('newHomePage/eye-4.png', alt: 'watch')
+              4X
+            %p
+              As many consumers would rather watch a
+              %br
+              live video of a product than read about it
+        .bgBlock.lax{'data-lax-translate-y_large':"vh 0, -elh -100", "data-lax-anchor":"self"}
+        .bgBlock_bordered.lax{'data-lax-translate-y_large':"vh 0, -elh -20", "data-lax-anchor":"self"}
+  %section.nh_5.nh_content.text-center#nh_5
+    .nh__ts
+      %h6.lax{'data-lax-scale_large':"vh 3, (vh*0.8) 3, (vh*0.7) 1", "data-lax-anchor":"self"} How does it work?
+      %p.lax{'data-lax-opacity_large':'vh 0, (vh*0.7) 0, (vh*0.6) 1', "data-lax-anchor":"self"}
+        We help luxury brands reach a new generation of online customers by
+        %br
+        seamlessly integrating our solution into their existing infrastructure.
+    .nh__bs.lax{'data-lax-opacity_large':'vh 0, (vh*0.75) 0, (vh*0.65) 1', "data-lax-anchor":"self"}
+      .line
+      .container_line
+        .line_item_1.lax{'data-lax-translate-y_large':"vh 0, -elh -100", "data-lax-anchor":"self"}
+          %span
+            = image_tag('newHomePage/chat-11.png', alt: 'Initiation')
+          .line_item_h
+            Initiation
+          Data gathering and discovery
+        .line_item_2.lax{'data-lax-translate-y_large':"vh 0, -elh -100", "data-lax-anchor":"self"}
+          %span
+            = image_tag('newHomePage/technics.png', alt: 'Customization')
+          .line_item_h
+            Customization
+          Branded apps and back office system integration
+        .line_item_3.lax{'data-lax-translate-y_large':"vh 0, -elh -100", "data-lax-anchor":"self"}
+          %span
+            = image_tag('newHomePage/start-up.png', alt: 'Launch')
+          .line_item_h
+            Launch
+          Training and onboarding
+  .container
+    %section.nh_6.nh_content#nh_6
+      .nh__ls.nh__withText
+        %h6.lax{'data-lax-translate-x_large':"vh (Math.round($('.nh__ls').width()-200)), (vh*0.7) ((Math.round($('.nh__ls').width())-200)), (vh*0.6) 0", "data-lax-anchor":"self"}
+          %span.lax{'data-lax-scale_large':"vh 3, (vh*0.7) 3, (vh*0.6) 1", "data-lax-anchor":"self"}  What does it cost?
+        %p.lax{'data-lax-opacity_large':'vh 0, (vh*0.6) 0, (vh*0.5) 1', "data-lax-anchor":"self"}
+          Unlike other video platforms, we don’t charge an exorbitant
+          %br
+          monthly fee. Instead we focus on tying our success to yours
+          %br
+          with a small sales commission.
+        .nh__list.nh__list__withDots.lax{'data-lax-opacity_large':'vh 0, (vh*0.7) 0, (vh*0.6) 1', "data-lax-anchor":"self"}
+          .nh__list_item1
+            Low monthly fee
+          .nh__list_item2
+            Commission-based model
+          .nh__list_item3
+            Customization, installation, and launch
+
+      .nh__rs.lax{'data-lax-opacity_large':'vh 0, (vh*0.55) 0, (vh*0.45) 1', "data-lax-anchor":"self"}
+        .bgBlock.lax{'data-lax-translate-y_large':"vh 0, -elh -100", "data-lax-anchor":"self"}
+        .bgBlock-text.lax{'data-lax-translate-y_large':"vh 0, -elh 150", "data-lax-anchor":"self"}
+          %img{src: asset_path('newHomePage/shopping-basket-2.png')}
+          = t('home_page.index.avarage', service_name: Rails.application.credentials.global[:service_name])
+          .text-color-main recoup their entire onboarding cost in 3 months
+          with just one incremental sale per day.
+        .bgBlock_bordered.lax{'data-lax-translate-y_large':"vh 0, -elh -400", "data-lax-anchor":"self"}
+
+    %section.nh_7.nh_content#nh_7
+      .nh__ls.lax{'data-lax-opacity_large':'vh 0, (vh*0.58) 0, (vh*0.48) 1', "data-lax-anchor":"self"}
+        .graph.lax{'data-lax-translate-y_large':"vh 0, -elh 150", "data-lax-anchor":"self"}
+          %img{src: asset_path('newHomePage/graph.png')}
+          .graph_col_1
+            %span
+              = t('home_page.index.without', service_name: Rails.application.credentials.global[:service_name])
+          .graph_col_2
+            %span
+              = t('home_page.index.with', service_name: Rails.application.credentials.global[:service_name])
+        .bgBlock.lax{'data-lax-translate-y_large':"vh 0, -elh -100", "data-lax-anchor":"self"}
+        .bgBlock_bordered
+
+      .nh__rs.nh__withText
+        %h6.lax{'data-lax-translate-x_large':"vh -130, (vh*0.7) -130, (vh*0.6) 0", "data-lax-anchor":"self"}
+          %span.lax{'data-lax-scale_large':"vh 3, (vh*0.7) 3, (vh*0.6) 1", "data-lax-anchor":"self"}= t('home_page.index.brand', service_name: Rails.application.credentials.global[:service_name])
+        %p.lax{'data-lax-opacity_large':'vh 0, (vh*0.6) 0, (vh*0.5) 1', "data-lax-anchor":"self"}= t('home_page.index.avarage', service_name: Rails.application.credentials.global[:service_name])
+        .nh__list.nh__list__withDots.lax{'data-lax-opacity_large':'vh 0, (vh*0.58) 0, (vh*0.48) 1', "data-lax-anchor":"self"}
+          .nh__list_item1
+            Increase sales conversions
+          .nh__list_item2
+            Access incremental profitability
+          .nh__list_item3
+            Provide white glove customer service
+
+    %section.nh_form#nh_form
+      .container
+        .formBox
+          %h6.lax.padding-left-20.padding-right-20.lax{'data-lax-translate-x_large':"vh -130, (vh*0.7) -130, (vh*0.6) 0", "data-lax-anchor":"self"}
+            %span.lax{'data-lax-scale_large':"vh 3, (vh*0.7) 3, (vh*0.6) 1", "data-lax-anchor":"self"}= I18n.t('go_live.section_8_footer.title')
+          = form_tag lets_talk_path, method: :post, class: 'form_V2', id: :lets_talk, data: {remote: true} do
+            .formContainer.lax{'data-lax-opacity_large':'vh 0, (vh*0.6) 0, (vh*0.5) 1', "data-lax-anchor":"self"}
+              .input-block.state-clear.required
+                %label{for: :name} Name
+                %input#FirstName{type: :text, name: :name, required: true}
+                .errorContainerWrapp
+                  .errorContainer
+              .input-block.state-clear.required
+                %label{for: :company} Company
+                %input#LastName{type: :text, name: :company, required: true}
+                .errorContainerWrapp
+                  .errorContainer
+              .input-block.state-clear.required
+                %label{for: :email} Email
+                %input#Email{type: :email, name: :email, required: true}
+                .errorContainerWrapp
+                  .errorContainer
+              .input-block.phone-area
+                %label.padding-bottom-10{for: :phone} Phone
+                %input#Phone{type: :tel, name: :phone}
+                .errorContainerWrapp
+                  .errorContainer
+              .input-block.state-clear
+                %label{for: :about} About
+                %textarea#About{name: :about}
+                .errorContainerWrapp
+                  .errorContainer
+              - if recaptcha_form_field_enabled?
+                .input-block.state-clear.recapthaWrapp
+                  = recaptcha_tags
+            .text-right.padding-top-20.clearfix
+              %input.btn.btn-l.btn-red.btn-square.padding-left-50.padding-right-50{type: :submit, value: 'Send'}
+        - content_for(:after_include_javascripts) do
+          :javascript
+            window.onbeforeunload = function () {
+              window.scrollTo(0, 0);
+            };
+- content_for(:after_include_javascripts) do
+  = javascript_include_tag 'lax'
+
+  :javascript
+    lax.setup({
+        breakpoints: { small: 0, large: 992 }
+    });
+    const updateLax = (event) => {
+      lax.update(window.scrollY);
+      window.requestAnimationFrame(updateLax)
+    };
+    window.requestAnimationFrame(updateLax);
+
+    $(document).ready(function() {
+
+
+      // for tab header active state
+
+      $('.tab__Header a').click(function (event) {
+        var target = this.getAttribute('href');
+        console.log(target);
+        console.log($(target).first());
+        console.log($(target).first().offset());
+        $('html, body').animate({scrollTop: $(target).first().offset().top + 80}, 1500);
+        return false
+      });
+
+      let mainNavLinks = document.querySelectorAll(".tab__Header a");
+      let mainSections = document.querySelectorAll(".main-content");
+      let lastId;
+      let cur = [];
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+        mainNavLinks.forEach(link => {
+          let section = document.querySelector(link.hash);
+          if (
+            section.offsetTop <= fromTop &&
+            section.offsetTop + section.offsetHeight > fromTop
+          ) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      });
+
+
+
+      // $('.LetsTalk').click(function(e) {
+      //   $('html, body').animate({scrollTop: $(".nh_4").first().offset().top - 100}, 500);
+      //   return false
+      // });
+      $(window).scroll(function(){
+        var nhh = $('.nh_1_content_centerBanner').height();
+        if ($(window).scrollTop() >= (nhh + 256)) {
+            $('.tab__Header').addClass('fixed-header');
+        }
+        else {
+            $('.tab__Header').removeClass('fixed-header');
+            }
+      });
+
+
+      $('.showFullVideo').click(function(e){
+        $('.nh_1').addClass('active');
+        setTimeout("$('.nh_1').addClass('showVideo');$('.fullVideoWrapp video').prop('muted', false)", 0);
+        // url_1 = 'https://vod.unite.live/static_vod/s3_1mp4/playlist.m3u8';
+        // append_1 = $('.fullVideoWrapp');
+        // data_1 = "mutedAutoplay: 'all'";
+        // window.initTheOplayer(url_1, append_1, data_1);
+
+
+
+
+        var element2 = document.querySelector('.fullVideoWrapp');
+        var player2 = new THEOplayer.Player(element2, {
+          license: window.ConfigFrontend.services.theo_player.license,
+          libraryLocation : location.origin + "/javascripts/theo/",
+          ui: {
+            width: '100%',
+            height: '100%',
+            fluid: false,
+            preload:'auto'
+            fullscreen: {
+              fullscreenOptions: {
+                navigationUI: "auto"
+              }
+            }
+          });
+          player2.muted = false;
+          player2.autoplay = true;
+          player2.  source = {
+          sources : [{
+            src : 'https://vod.unite.live/static_vod/s3_1mp4/playlist.m3u8',
+            type : 'application/x-mpegurl'
+          }]
+        };
+        player2.addEventListener('ended', function() {
+          player2.destroy();
+          $('.nh_1').removeClass('showVideo active')
+        });
+        $('.fullVideoWrappClose').click(function(event) {
+          event.preventDefault();
+          player2.destroy();
+          $('.nh_1').removeClass('showVideo active')
+        });
+        THEOplayer_UI_Hotkeys(player2)
+        THEOplayer_UI_Events(player2)
+      });
+    });

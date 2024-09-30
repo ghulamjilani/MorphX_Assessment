@@ -1,0 +1,6 @@
+<%=
+{
+  template: render(partial: "member_#{@member.current_role}", locals: {user: @member}, formats: :html),
+  role: @member.current_role
+}.to_json.html_safe
+ %>

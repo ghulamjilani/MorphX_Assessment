@@ -1,0 +1,8 @@
+.info-tabs
+  %ul.nav.nav-tabs.nav-justified
+    %li{class: has_active_class([new_spa_dashboard_blog_post_path])}
+      %a{href: new_spa_dashboard_blog_post_path} New Post
+    %li{class: has_active_class([spa_dashboard_blog_path, spa_dashboard_blog_posts_path])}
+      %a{href: spa_dashboard_blog_posts_path} Manage
+    %li{class: 'disable', title: 'Available soon'}
+      %a{href: spa_dashboard_blog_comments_path} Comments

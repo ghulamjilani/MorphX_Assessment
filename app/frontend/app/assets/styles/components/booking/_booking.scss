@@ -1,0 +1,441 @@
+//left column width
+$lCW: 4rem;
+$LCWresponsive: 2.3rem;
+
+
+.bookingDashboard {
+  &__content{
+    padding: 3rem 3rem 4rem;
+    background: var(--bg__content);
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.7rem 0 var(--sh__main);
+    min-height: 10rem;
+    margin-bottom: 3rem;
+    @include media(tablet){
+      padding: 1rem;
+    }
+  }
+  &__title {
+    h2{
+      color: var(--tp__h1);
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+    &__withBtn{
+
+      @include media(reverso-tablet){
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      @include media(tablet){
+        .btn{
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+
+  .vuecal__cell-events-count {
+    background-color: transparent;
+    border-radius: 12px;
+    display: flex;
+    .vuecal__events-count {
+      background-color: #42a3b9cc;
+      color: #fff;
+      border-radius: 12px;
+      margin: 0 3px;
+      padding: 1px 3px;
+      text-align: center;
+    }
+    .vuecal__events-count__sessions {
+      background-color: red;
+      z-index: 21;
+      color: white;
+    }
+  }
+  .vuecal{
+
+    //TABLE HEADER
+    box-shadow: none;
+    //changing the display order of the month toggle buttons
+    &__header {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+      width: 100%;
+    }
+    //change stiling of the month toggle buttons
+    &__menu{
+      width: 100%;
+      background: var(--btn__secondary);
+      border-radius: 1rem;
+      @include media(reverso-tablet){
+        width: 18rem;
+        height: 2rem;
+      }
+      @include media(tablet){
+        height: 3rem;
+        margin-bottom: 2rem;
+      }
+      button{
+        padding: 0;
+        height: 100%;
+        width: 33.3%;
+        text-align: center;
+        font-size: 1.2rem;
+        display: inline-block;
+        border: none;
+        color: var(--tp__btn__secondary);
+        font-weight: bold;
+        &.vuecal__view-btn--active{
+          background: var(--tp__btn__bordered);
+          color: var(--tp__btn__bordered__hover);
+          border-radius: 1rem;
+        }
+      }
+    }
+    &__title-bar{
+      background: transparent;
+      position: relative;
+      width: 100%;
+      @include media(reverso-tablet){
+        min-height: 3rem;
+        padding-right: 9rem;
+
+      }
+      @include media(tablet){
+        flex-direction: row;
+        display: flex;
+        justify-content: space-between;
+      }
+      .vuecal__arrow{
+        height: 3rem;
+        width: 3rem;
+        padding: 0;
+        margin: 0;
+        background: var(--btn__secondary);
+        border-radius: 100%;
+        @include media(reverso-tablet){
+          position: absolute;
+          bottom: 0;
+          &--prev{
+            right: 4rem;
+            padding-right: .3rem;
+          }
+          &--next{
+            right: 0rem;
+            padding-left: .3rem;
+          }
+        }
+        i{
+          display: inline-block;
+          vertical-align: middle;
+          font-size: 1.3rem;
+          color: var(--tp__icons);
+        }
+        &:hover{
+          background: var(--tp__btn__bordered);
+          i{
+            color: var(--tp__btn__bordered__hover);}
+        }
+      }
+      .vuecal__today-btn{
+        background: var(--btn__secondary);
+        display: inline-block;
+        border-radius: 1rem;
+        color: var(--tp__btn__secondary);
+        min-width: 6rem;
+        text-align: center;
+        padding: 0 1rem;
+        font-size: 1.2rem;
+        line-height: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        @include media(tablet){
+          display: none;
+        }
+        &:hover{
+          background: var(--tp__btn__bordered);
+          color: var(--tp__btn__bordered__hover);
+        }
+      }
+    }
+    &__title{
+      font-size: 1.4rem;
+      @include media(tablet){
+        width: auto;
+      }
+      button{
+        color: var(--tp__h1);
+        font-weight: bold;
+      }
+    }
+    &__weekdays-headings{
+      width: 100%;
+    }
+
+    // TABLE BODY
+    //remove table cell border for time cells
+
+    .vuecal__weekdays-headings{
+      border-bottom: none;
+    }
+    .vuecal__bg{
+     padding-top: 1rem;
+    }
+    &__body{
+      .vuecal__time-cell-label{
+        position: relative;
+        top: -.9rem;
+        @include media(tablet){
+          top: -.6rem;
+        }
+      }
+      .vuecal__time-column{
+        width: $lCW;
+        @include media(tablet){
+          width: $LCWresponsive;
+          font-size: 1rem;
+        }
+      }
+      .vuecal__time-column > .vuecal__time-cell > .vuecal__time-cell-line:before{
+        left:$lCW ;
+        @include media(tablet){
+          left:$LCWresponsive ;
+        }
+      }
+      .week-view .vuecal__event-time{
+        @include media(tablet){
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+.vuecal--week-numbers .vuecal__weekdays-headings, .vuecal--view-with-time .vuecal__weekdays-headings{
+  @include media(tablet){
+    padding-left: $LCWresponsive;
+  }
+}
+//add extra padding for day view
+.vuecal--day-view{
+  .vuecal__header{
+    padding-bottom: 1rem;
+  }
+}
+
+.bookingCalendar {
+
+  .fullCalendar {
+    max-height: 80vh;
+  }
+
+  .vuecal__special-hours {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .4rem;
+
+    em {font-size: 0.9em;color: #999;}
+  }
+  .vuecal__title-bar {
+    background: transparent;
+    position: relative;
+    width: 100%;
+    @include media(reverso-tablet) {
+      width: calc(100% - 18rem);
+      min-height: 3rem;
+      padding-right: 9rem;
+
+    }
+  }
+  .vuecal__cells.month-view .vuecal__cell {
+    height: 10rem;
+
+  }
+
+  .closed {
+    background:
+      #fff7f0
+      repeating-linear-gradient(
+        -45deg,
+        rgba(255, 162, 87, 0.25),
+        rgba(255, 162, 87, 0.25) 5px,
+        rgba(255, 255, 255, 0) 5px,
+        rgba(255, 255, 255, 0) 15px
+      );
+    color: #f6984c;
+  }
+}
+.session__event{
+  height: 100%;
+  flex-direction: column;
+  &__tile {
+    background-color: var(--btn__main);
+    z-index: 21 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    height: 100%;
+    .vuecal__event{
+      background: transparent;
+      height: 100%;
+      min-height: 3rem;
+    }
+    .trigger{
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      color: var(--tp__btn__main);
+    }
+    .v-popover{
+      height: 100%;
+    }
+  }
+  &__content{
+   display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    &__title{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+    span{
+      width: 10rem;
+      display: inline-block;
+    }
+    &__list{
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      & > div{
+        display: flex;
+      }
+    }
+  }
+  &__buyerDetails{
+    &__title{
+      padding-bottom: 1rem;
+      font-weight: bold;
+    }
+    &__list{
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      &__additionalInfo{
+        max-width: 100%;
+        width: 40rem;
+        padding-top: 1rem;
+      }
+    }
+    .bookingLabel__wrapper{
+      overflow: auto;
+    }
+    img{
+      display: block;
+    }
+  }
+  &__popover{
+    &.v-tooltip{
+      max-width: 90vw;
+    }
+    &__trigger{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      height: 100%;
+    }
+    &.sunday {
+      margin-left: -15rem;
+    }
+  }
+  &__popoverMobile {
+    &.v-tooltip{
+      width: 90vw;
+      margin-left: 15rem;
+      &.sunday {
+        margin-left: -15rem;
+      }
+    }
+    &__trigger{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      height: 100%;
+    }
+  }
+}
+
+.bookingSlot {
+  align-items: center;
+  margin-top: 2rem;
+  border: 1px solid var(--border__content__sections);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  @include media(reverso-tablet){
+    display: flex;
+    justify-content: space-between;
+  }
+  &__info{
+
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: 130%;
+    color: var();
+    @include media(reverso-tablet){
+      width: 50%;
+      max-width: 50%;
+    }
+    @include media(tablet){
+      padding-bottom: 2rem;
+    }
+    span{
+      font-size: 1.2rem;
+      color: var(--tp__secondary);
+    }
+  }
+  &__left {
+    @include media(reverso-tablet){
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+    }
+  }
+
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    gap: 1rem;
+    @include media(tablet){
+      justify-content: space-evenly;
+    }
+    i {
+      cursor: pointer;
+      opacity: 0.7;
+      transition: 0.2s;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+.input__field__bottom__description {
+  color: var(--tp__labels);
+}

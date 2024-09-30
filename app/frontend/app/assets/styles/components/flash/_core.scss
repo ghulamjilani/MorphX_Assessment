@@ -1,0 +1,215 @@
+.flash__container {
+  display: none;
+  opacity: 0;
+  transition: 1s;
+  position: fixed;
+  right: 2rem;
+  top: 8rem;
+  width: 40rem;
+  max-width: 100%;
+  z-index: 222222;
+  @include media(phone) {
+    right: 0;
+    width: 95%;
+  }
+
+  &__alert {
+    &::before {
+      content: '';
+      width: 5px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    overflow: hidden;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    opacity: 1;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0.4rem 0.7rem 0 var(--sh__main);
+    background-color: var(--bg__tooltip);
+    color: var(--tp__main);
+    @include media(phone) {
+      max-width: 95%;
+      margin: 0 auto;
+    }
+
+    &::after {
+      font-family: GlobalIcon;
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 2.2rem;
+      line-height: 2rem;
+      border: none;
+      text-align: center;
+    }
+
+    .notificationText {
+      display: block;
+      padding: 1.3rem 4rem 1.3rem 5rem;
+    }
+  }
+
+  &__infinite {
+    padding: 1.3rem 2rem 1.3rem 2rem;;
+
+    &__header {
+      @include flex(flex, center, space-between);
+      vertical-align: top;
+      color: var(--tp__main);
+      font-size: 1.3rem;
+      padding: 0.4rem 4rem 0 3rem;
+
+      span {
+        cursor: pointer;
+      }
+
+      &__title {
+        font-size: 1.8rem;
+        vertical-align: middle;
+        @include text__ellipsis(2);
+        max-width: 82%;
+        color: var(--tp__main);
+      }
+    }
+
+    &__body {
+      font-size: 1.4rem;
+      line-height: 1.8rem;
+      color: var(--tp__main);
+      padding-top: 1rem;
+      padding-left: 3rem;
+
+      .FlashBox-F {
+        padding-top: 1.5rem;
+      }
+
+      p {
+        margin: 0 0 1rem;
+
+        span {
+          @include text__ellipsis(3);
+          display: inline;
+        }
+      }
+
+      a {
+        color: var(--tp__active);
+      }
+
+      .FlashBox-btnBox {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: flex-end;
+
+        .btn__bordered, .btn-borderred-secondary {
+          color: var(--tp__btn__bordered);
+
+          &:hover {
+            color: var(--tp__btn__bordered__hover);
+          }
+        }
+
+        .btn__save {
+          color: var(--tp__btn__save);
+        }
+      }
+    }
+
+    &__buttons {
+      @include flex(flex, center, flex-end);
+      padding-top: 1.5rem;
+
+      &__accept, &__decline {
+        font-size: 1.2rem;
+        font-weight: normal;
+        min-height: 3rem;
+        line-height: 2.8rem;
+      }
+
+      &__decline {
+        margin-right: 1rem;
+
+        &:hover {
+          background: var(--btn__save);
+          border: 1px solid var(--btn__save);
+        }
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: var(--tp__icons);
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+  }
+
+  .flash__info, .flash__notice {
+    &:before {
+      background-color: #2091E3;
+    }
+
+    &::after {
+      content: '\e942';
+      color: #2091E3;
+    }
+  }
+
+  .flash__warning, .flash__error {
+    &:before {
+      background-color: #FF530D;
+    }
+
+    &::after {
+      content: '\e942';
+      color: #FF530D;
+    }
+  }
+
+  .flash__success {
+    &::before {
+      background-color: #37A67D;
+    }
+
+    &::after {
+      content: '\e914';
+      color: #37A67D;
+    }
+  }
+}
+
+.flash__container__show {
+  display: block;
+  opacity: 1;
+}
+
+// vue transition
+.flash-list-enter-active {
+  transition: all 1s;
+}
+
+.flash-list-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.flash-list-leave-active {
+  transition: all 0.3s;
+}
+
+.flash-list-leave-to {
+  opacity: 0;
+  transform: translateX(300px);
+}

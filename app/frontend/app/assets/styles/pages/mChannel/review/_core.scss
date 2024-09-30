@@ -1,0 +1,17 @@
+.mChannel__review {
+  padding: 3rem 0;
+
+  .review__section {
+    width: 48%;
+
+    @include media(tablet) {
+      width: 100%;
+    }
+  }
+
+  .review__show-more {
+    margin: 3rem auto 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+}

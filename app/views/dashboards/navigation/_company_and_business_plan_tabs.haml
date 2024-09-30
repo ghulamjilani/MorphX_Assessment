@@ -1,0 +1,8 @@
+.info-tabs
+  %ul.nav.nav-tabs.nav-justified
+    %li{class: has_active_class([dashboard_path, company_dashboard_path])}
+      %a{href: company_dashboard_path} Company
+    - if Rails.application.credentials.global.dig(:service_subscriptions, :enabled)
+      - if can?(:manage_business_plan, current_user.current_organization) || current_user.service_subscription.present?
+        %li{class: has_active_class([dashboard_path, spa_dashboard_business_plan_index_path])}
+          %a{href: spa_dashboard_business_plan_index_path} Business Plan

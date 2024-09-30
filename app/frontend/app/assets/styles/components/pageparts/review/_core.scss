@@ -1,0 +1,63 @@
+.review {
+  &__label {
+    font-size: 21px;
+    padding-bottom: 20px;
+    width: 100%;
+  }
+
+  &__sessionPage {
+    @include flex(flex, center, false);
+    width: 100%;
+    flex-direction: column;
+
+    .mChannel__label {
+      width: 100%;
+      font-size: 21px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__empty {
+    width: 100%;
+    @include flex(flex, center, center);
+    color: var(--tp__main);
+    font-size: 1.4rem;
+  }
+
+  &__header {
+    width: 100%;
+    border-radius: 1rem;
+    background: var(--bg__content__secondary);
+    padding: 2rem 3rem;
+    @include flex(flex, center, space-between);
+    margin-bottom: 2rem;
+
+    &__title {
+      color: var(--tp__main);
+      font-size: 1.4rem;
+    }
+
+    &__button {
+      color: var(--tp__btn__bordered);
+      font-size: 1.3rem;
+      font-weight: bold;
+      border-radius: 1.5rem;
+      min-width: 12rem;
+      min-height: 3rem;
+    }
+  }
+
+  &__wrapp {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__section {
+    width: 100%;
+    @include flex();
+    padding: 0 0 4rem;
+  }
+}

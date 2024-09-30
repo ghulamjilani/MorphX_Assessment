@@ -1,0 +1,54 @@
+<div class="panel_contents">
+  <table cellpadding="0" cellspacing="0" class="text-center">
+    <thead>
+      <tr>
+        <th class="col col-organization"> Organization </th>
+        <th class="col col-presenter"> Presenter </th>
+        <th class="col col-channels"> Channels </th>
+        <th class="col col-sessions"> Sessions </th>
+        <th class="col col-videos"> Videos </th>
+        <th class="col col-recordings"> Recordings </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="odd">
+        <td class="col col-organization"><%= link_to(user.organization.name, service_admin_panel_organization_path(user.organization.id)) if user.organization %> </td>
+        <td class="col col-presenter"><%= link_to(user.display_name, service_admin_panel_presenter_path(user.presenter.id)) if user.presenter %></td>
+        <td class="col col-channels">
+          <% user.channels.limit(5).each do |channel| %>
+            <p> <%= link_to(channel.title, service_admin_panel_channel_path(channel.id)) %></p>
+          <% end %>
+          <p><%= link_to "All", :controller => "channels", :action => "index", 'q[presenter_user_id_eq]' => "#{user.id}".html_safe unless user.channels.empty? %></p>
+        </td>
+        <td class="col col-sessions">
+          <% user.channels.each do |channel| %>
+            <% channel.sessions.where(start_at: 1.day.ago..10.days.from_now).order(start_at: :asc).limit(5).each do |session|%>
+              <p> <%= session.start_at.utc.to_s(:short) %> -
+                <%= link_to("#{session.title}(id: #{session.id})", service_admin_panel_session_path(session.id)) %> -
+                <%= session.end_at.utc.to_s(:short) %>
+                <% if session.start_at < Time.now && session.end_at > Time.now %>
+                  <span class="status_tag red">live</span>
+                <% end %>
+              </p>
+            <% end %>
+          <% end %>
+          <p><%= link_to "All", :controller => "sessions", :action => "index", 'q[presenter_user_id_eq]' => "#{user.id}".html_safe%></p>
+        </td>
+        <td class="col col-videos">
+          <% user.videos.limit(5).each do |video| %>
+            <p> <%= link_to(video.title, service_admin_panel_video_path(video.id)) %></p>
+          <% end %>
+          <p><%= link_to "All", :controller => "videos", :action => "index", 'q[user_id_eq]' => "#{user.id}".html_safe unless user.videos.empty? %></p>
+        </td>
+        <td class="col col-videos">
+          <% user.channels.limit(5).each do |channel| %>
+            <% channel.recordings.limit(2).each do |record| %>
+              <p> <%= link_to(record.title, service_admin_panel_recording_path(record.id)) %></p>
+            <% end %>
+            <p><%= link_to "#{channel.title} (all)", :controller => "recordings", :action => "index", 'q[channel_id_eq]' => "#{channel.id}".html_safe unless channel.recordings.empty? %></p>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

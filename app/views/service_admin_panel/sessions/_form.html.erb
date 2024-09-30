@@ -1,0 +1,139 @@
+<%= semantic_form_for @session, builder: ActiveAdmin::FormBuilder, url: "/service_admin_panel/sessions/#{@session.id}" do |f| %>
+  <% f.object.errors.full_messages.each do |message| %>
+    <div class="alert alert-error" style="color: red; font-size: 18px">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <fieldset class="inputs">
+    <ol>
+      <small style="color: red" class="small_in_session_admin">
+        Be careful with costs modification! Think twice before updating it, enter only valid amounts.
+      </small>
+      <li>
+        <%= f.input :title, label: 'Title' %>
+      </li>
+
+      <li>
+        <%= f.input :immersive_purchase_price, label: 'Interactive purchase price', as: 'number', step: 'any'  %>
+      </li>
+
+      <li>
+        <%= f.input :livestream_purchase_price, label: 'Livestream purchase price', as: 'number', step: 'any'   %>
+      </li>
+
+      <li>
+        <%= f.input :immersive_free_slots, label: 'Interactive free slots', as: 'number', step: 'any'   %>
+      </li>
+
+      <li>
+        <%= f.input :livestream_free_slots, label: 'Livestream free slots', as: 'number', step: 'any'   %>
+      </li>
+
+      <small style="color: red" class="small_in_session_admin">
+        NOTE: minimum price varies if you change duration. Update it accordingly if needed(but not mandatory).
+      </small>
+
+      <li>
+        <%= f.input :duration, label: 'Duration(in minutes)', as: :select, collection: (15..600).step(5).to_a  %>
+      </li>
+
+      <li>
+        <%= f.input :donate_video_tab_content_in_markdown_format, label: 'Donate video tab content(that goes before Donate buttons)', input_html: {rows: 3} %>
+      </li>
+
+      <li>
+        <%= f.input :donate_video_tab_options_in_csv_format, label: 'Donate options in USD separated by commas(CSV format)' %>
+      </li>
+
+      <li>
+        <%= f.input :promo_start, as: :datepicker %>
+      </li>
+
+      <li>
+        <%= f.input :promo_end, as: :datepicker %>
+      </li>
+
+      <li>
+        <%= f.input :promo_weight, label: 'Promo Weight', as: :number %>
+      </li>
+
+      <li>
+        <%= f.input :featured, label: 'Featured' %>
+      </li>
+
+      <%- unless current_admin.platform_admin? %>
+        <li>
+          <%= f.input :fake, label: 'Fake' %>
+        </li>
+      <% end %>
+      <li>
+        <%= f.input :show_on_home, label: 'Show On Home' %>
+      </li>
+      <li>
+        <%= f.input :blocked, label: 'Blocked' %>
+      </li>
+      <li>
+        <%= f.input :block_reason, label: 'Block Reason', as: :text, input_html: {rows: 6} %>
+      </li>
+
+      <li>
+        <%= f.input :autostart , label: 'Autostart' %>
+      </li>
+
+      <% if [Session::Statuses::REQUESTED_FREE_SESSION_PENDING,
+          Session::Statuses::REQUESTED_FREE_SESSION_APPROVED,
+          Session::Statuses::REQUESTED_FREE_SESSION_REJECTED].include?(f.object.status.to_s) %>
+        <li>
+          <%= f.input :status, as: :select, collection: [
+            ::Session::Statuses::REQUESTED_FREE_SESSION_PENDING,
+            ::Session::Statuses::REQUESTED_FREE_SESSION_APPROVED,
+            ::Session::Statuses::REQUESTED_FREE_SESSION_REJECTED
+          ] %>
+        </li>
+
+        <li>
+          <%= f.input :requested_free_session_declined_with_message, input_html: {rows: 7, cols: 25} %>
+        </li>
+
+      <% elsif !@session.channel.listed? || @session.channel.fake || @session.fake %>
+        <li>
+          <%= f.input :status, as: :select, collection: ::Session::Statuses::ALL, label: 'You can change status of fake session' %>
+        </li>
+      <% end %>
+      <li>
+        <%= f.input :commercials_url %>
+      </li>
+
+      <li>
+        <%= f.input :commercials_duration %>
+      </li>
+
+      <li>
+        <%= f.input :commercials_mime_type %>
+      </li>
+
+      <li>
+        <%= f.input :remote_cover_url %>
+      </li>
+
+      <div class="wrapper_session_image_admin">
+        <img src="<%= @session.cover.url %>" width="85%" height="85%">
+        <img src="<%= @session.share_image_url %>" width="85%" height="85%">
+        <img src="<%= @session.small_cover_url %>" width="85%" height="85%">
+        <img src="<%= @session.medium_cover_url %>" width="85%" height="85%">
+        <img src="<%= @session.large_cover_url %>" width="85%" height="85%">
+        <img src="<%= @session.player_cover_url %>" width="85%" height="85%">
+      </div>
+    </ol>
+  </fieldset>
+
+  <fieldset class="actions">
+    <ol>
+      <li>
+        <%= f.actions %>
+      </li>
+    </ol>
+  </fieldset>
+  
+<% end %>

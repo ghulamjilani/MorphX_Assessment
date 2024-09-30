@@ -1,0 +1,137 @@
+.tips-vue-app {
+  min-width: 3rem;
+}
+
+.tips {
+  @include flex(flex, flex-start, flex-start);
+  position: relative;
+
+  .MK2-modal__close {
+    top: 0;
+    padding: 0;
+    right: 0;
+  }
+
+  &__subscription {
+    @include flex(flex, center, flex-end);
+  }
+
+  &__info {
+    cursor: pointer;
+
+    &__wrapper {
+      @include flex(flex, center, space-between);
+    }
+  }
+
+  &__sessionPage {
+    flex-direction: column;
+    position: absolute;
+    left: calc(100% + 3rem);
+    width: 20rem;
+    margin-top: -2rem;
+    @include media(desktop) {
+      position: relative;
+      flex-direction: row;
+      left: auto;
+      width: 100%;
+      margin-top: none;
+      padding-top: 1.5rem;
+    }
+
+    .MK2-modal__close {
+      @include media(desktop) {
+        top: 1.5rem;
+      }
+    }
+
+    &__link {
+      @include text__ellipsis();
+      @include media(desktop) {
+        white-space: normal;
+      }
+
+      &__wrapper {
+        @include text__ellipsis();
+        width: 100%;
+        @include media(desktop) {
+          white-space: normal;
+        }
+      }
+    }
+
+    &__obs {
+      margin-top: -.8rem;
+      @include media(desktop) {
+        margin-top: none;
+      }
+    }
+
+    &__header {
+      position: absolute;
+      top: 0;
+      @include media(desktop) {
+        position: relative;
+      }
+    }
+
+    &__image {
+      padding-top: 3.5rem;
+      @include media(desktop) {
+        padding-top: 0;
+      }
+    }
+  }
+
+  @include media(phone) {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  &__header {
+    color: var(--tp__h1);
+    font-weight: bold;
+
+    &__icon {
+      color: var(--tp__icons);
+      font-size: 2rem;
+      padding-right: 1rem;
+    }
+  }
+
+  &__image {
+    height: 100%;
+    padding-right: 1.5rem;
+  }
+
+  &__text {
+    @include flex(flex, flex-start, space-between);
+    flex-direction: column;
+    height: 100%;
+    padding-right: 1.5rem;
+    width: 100%;
+  }
+
+  &__body {
+    color: var(--tp__secondary);
+    font-size: 1.4rem;
+    p {
+      font-size: 1.4rem;
+      color: var(--tp__secondary);
+    }
+  }
+
+  &__link {
+    font-size: 1.4rem;
+    color: var(--tp__links__hover);
+  }
+
+  &__type {
+    &__recurrence {
+      @include media(reverso-desktop) {
+        margin-top: -15rem;
+      }
+    }
+  }
+}

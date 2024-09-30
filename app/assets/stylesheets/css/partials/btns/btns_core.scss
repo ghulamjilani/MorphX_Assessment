@@ -1,0 +1,527 @@
+@import "mixin";
+@import "btnSmall";
+@import "btnDefault";
+@import "btnBig";
+
+
+
+
+//
+//   COR BTN STYLES
+//   =>
+
+.btn, .mainButton{
+  color: var(--tp__btn__main);
+  padding: 1px 15px 1px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+  max-width: 100%;
+  margin-bottom: 0;
+  font-weight: normal;
+  cursor: pointer;
+  &:not(input){
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+  @include btn-mod-BG-and-borders();
+  @include transition200();
+  @include media(reverso-tablet){
+    &:hover{
+      opacity: 0.9;
+      outline: none;
+    }
+  }
+  &.btn-square{
+    border-radius: 3px;
+  }
+  &:active{
+    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.2) inset;
+    color: #fff;
+    outline: none;
+  }
+  &:focus{
+    //color: #fff;
+    outline: none;
+  }
+  i {
+    font-size: 13px;
+  }
+  &.with-icon-left{
+    i{
+      position: absolute;
+      left: 10px;
+      line-height: inherit;
+      font-size: inherit;
+    }
+  }
+  &.with-icon-right{
+    i{
+      position: absolute;
+      right: 10px;
+      line-height: inherit;
+      font-size: inherit;
+    }
+  }
+  .hoverText{
+    display: none;
+    position: absolute;
+    background: var(--siteColorMain);
+    left: -1px;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    line-height: inherit;
+    color: #fff;
+    padding-top: 1px;
+    @include btn-mod-BG-and-borders();
+  }
+  &.hoverText{
+    &:hover{
+      .hoverText{
+        display: block;
+      }
+    }
+  }
+  &select{
+    background: transparent ;
+    border-radius: 20px ;
+    -webkit-border-radius: 20px ;
+    -webkit-appearance: none;
+    &:hover, &:focus{
+      background: transparent ;
+      -webkit-appearance: none;
+    }
+  }
+  &.btn-circle{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  @include media(tablet){
+    white-space: normal;
+  }
+  &.text-color-red:disabled{
+    color: var(--siteColorMain);
+  }
+}
+/* removing default border for buttons*/
+input.btn{
+  border: 0;
+}
+
+//   <=
+//   COR BTN STYLES
+//
+
+
+
+//
+//   COLOR FOR BTNS
+//   =>
+
+.btn.btn-red{
+  @include btn-mod-BG-and-borders(var(--btn__main));
+}
+
+.btn.btn-green{
+  @include btn-mod-BG-and-borders($siteColorMainGrean);
+  @include media(reverso-tablet){
+    &:hover{
+      background: lighten($siteColorMainGrean, 10%);
+      border-color: lighten($siteColorMainGrean, 10%);
+    }
+  }
+}
+.btn.btn-borderred-white:not(.active){
+  @include btn-mod-BG-and-borders(transparent, #fff);
+  color: #fff;
+  @include media(reverso-tablet){
+    &:not([disabled]):not([class*=" btn-hover-"]):hover{
+      background: var(--btn__main);
+      color: #fff;
+      border-color: var(--btn__main);
+    }
+  }
+  &:active{
+    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1) inset;
+    color: #fff;
+  }
+  &:focus{
+    color: #fff;
+  }
+}
+
+.btn.btn-solid-white:not(.active){
+  @include btn-mod-BG-and-borders(#fff, #fff);
+  color: $siteColorMain;
+  @include media(reverso-tablet){
+    &:not([disabled]):not([class*=" btn-hover-"]):hover{
+      background: var(--btn__main);
+      color: #fff;
+      border-color: var(--btn__main);
+    }
+  }
+  &:active{
+    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1) inset;
+    color: #fff;
+  }
+  &:focus{
+    color: $siteColorMain;
+  }
+}
+
+.btn.btn-borderred-grey:not(.active){
+  @include btn-mod-BG-and-borders(transparent, var(--btn__bordered));
+  color: var(--tp__btn__bordered);
+  &.text-color-white{
+    color: var(--tp__main);
+  }
+  @include media(reverso-tablet){
+    &:not([disabled]):not([class*=" btn-hover-"]):hover{
+      background: var(--btn__bordered);
+      color: var(--tp__btn__bordered__hover);
+      border-color: var(--btn__bordered);
+      i{
+        color: var(--tp__btn__bordered__hover);
+      }
+    }
+  }
+  &:active{
+    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1) inset;
+    color: var(--tp__main);
+  }
+  &:focus{
+    color: var(--tp__main);
+  }
+}
+.btn.btn-borderred-secondary:not(.active){
+  @include btn-mod-BG-and-borders(transparent, var(--btn__bordered));
+  color: var(--btn__bordered);
+  background: transparent;
+  &:hover{
+    background: var(--bg__label);
+    color: #fff;
+    border: 1px solid var(--bg__label);
+  }
+  &:focus{
+    background: var(--bg__label);
+    color: #fff;
+  }
+}
+.btn.btn-borderred-secondary.active{
+  background: var(--bg__label);
+  border: 1px solid var(--bg__label);
+  color: #fff;
+}
+.btn.btn-borderred-light:not(.active){
+  @include btn-mod-BG-and-borders(var(--btn__secondary), var(--btn__secondary));
+  color: var(--tp__main);
+}
+.btn.btn-borderred-red:not(.active){
+  @include btn-mod-BG-and-borders(transparent, var(--btn__main));
+  color: var(--btn__main);
+  &.text-color-white{
+    color: #fff;
+  }
+  &:active{
+    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1) inset;
+  }
+}
+
+.btn.btn-borderred-green:not(.active){
+  @include btn-mod-BG-and-borders(transparent, $siteColorMainGrean);
+  color: $siteColorMainGrean;
+  &.text-color-white{
+    color: #fff;
+  }
+  @include media(reverso-tablet){
+    &:not([disabled]):not([class*=" btn-hover-"]):hover{
+      background: lighten($siteColorMainGrean, 10%);
+      color: #fff;
+      border-color: lighten($siteColorMainGrean, 10%);
+    }
+  }
+  &:active{
+    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1) inset;
+    color: $siteColorMainGrean;
+  }
+  &:focus{
+    color: $siteColorMainGrean;
+  }
+}
+
+.btn.btn-bordered-blue:not(.active){
+  @include btn-mod-BG-and-borders(transparent, var(--btn__main));
+  color: var(--btn__main);
+  &.text-color-white{
+    color: var(--tp__btn__main);
+  }
+  @include media(reverso-tablet){
+    &:not([disabled]):not([class*=" btn-hover-"]):hover{
+      background: var(--btn__main);
+      color: var(--tp__btn__main);
+      border-color: var(--btn__main);
+    }
+  }
+  &:active{
+    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1) inset;
+  }
+}
+
+.btn.btn-grey-solid{
+  @include btn-mod-BG-and-borders(var(--btn__secondary));
+  color: var(--tp__main);
+  @include media(reverso-tablet){
+    &:hover{
+      opacity: 0.95;
+    }
+  }
+}
+
+
+//NEW!!!!!! not included to Kss
+.btn.btn-lightGrey-solid{
+  @include btn-mod-BG-and-borders(#ffffff);
+  color: var(--tp__icons);
+  &:hover{
+    color: lighten($font-color-main-ultra-light, 2%);
+  }
+}
+.btn.btn-borderred-botom{
+  @include btn-mod(36px, 20px);
+  background: transparent;
+  border:none;
+  color: var(--tp__main);
+  border-bottom: 2px solid #eff1f2;
+  text-align: center;
+  border-radius: 0;
+  @include media(reverso-tablet){
+    &:hover{
+      border-color: lighten($siteColorMain, 2%);
+      color: lighten($siteColorMain, 2%);
+    }
+  }
+  &:active{
+    box-shadow: none;
+  }
+  &.active, li.active &{
+    border-color: var(--tp__active);
+    color:var(--tp__active);
+  }
+}
+
+.btn.btn-withOut-border-bg{
+  border: none;
+  background: transparent;
+  @include media(reverso-tablet){
+    &:hover{
+      background: transparent;
+      color: var(--tp__active);
+    }
+  }
+  &:active{
+    box-shadow: none;
+  }
+}
+//   <=
+//   COLOR FOR BTNS
+//
+
+
+
+//
+//   HOVER STYLES
+//   =>
+@include media(reverso-tablet){
+  body .btn.btn-hover-red{
+    &:not([disabled]):hover{
+      @include btn-mod-BG-and-borders(var(--tp__active));
+      color: var(--tp__btn__main__hover);
+      span, i{
+        color: var(--tp__btn__main__hover);
+      }
+    }
+  }
+  body .btn.btn-hover-green{
+    &:not([disabled]):hover{
+      $btn-hover-green:lighten($siteColorMainGrean, 2%);
+      @include btn-mod-BG-and-borders($btn-hover-green);
+      &:not(.btn-borderred-grey){
+        color: #fff;
+        span, i{
+          color: #fff;
+        }
+      }
+    }
+  }
+  body .btn.btn-hover-blue{
+    &:not([disabled]):hover{
+      $btn-hover-blue:lighten($siteColorMain, 2%);
+      @include btn-mod-BG-and-borders($btn-hover-blue);
+      color: #fff;
+      span, i{
+        color: #fff;
+      }
+    }
+  }
+  body .btn.btn-hover-grey{
+    &:not([disabled]):hover{
+      $btn-hover-grey:lighten(#e2e7ea, 2%);
+      @include btn-mod-BG-and-borders($btn-hover-grey);
+      color: #fff;
+      span, i{
+        color: #fff;
+      }
+    }
+  }
+  body .btn.btn-hover-bordered{
+    &:not([disabled]):hover{
+      $btn-hover-bordered:lighten($font-color-main-light, 2%);
+      @include btn-mod-BG-and-borders(transparent, $btn-hover-bordered);
+      color: $btn-hover-bordered;
+      span, i{
+        color: $btn-hover-bordered;
+      }
+    }
+  }
+}
+//@include media(tablet){
+//  .btn{
+//    pointer-events: none !important;
+//  }
+//}
+
+//   <=
+//   HOVER STYLES
+//
+
+.label_That_Looks_Like_A_Button_Thank_You_Design{
+  pointer-events: none !important;
+}
+
+body .btns-group{
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  margin-bottom: 10px;
+  padding-left: 0;
+  list-style: none;
+
+  &.nav-tabs{
+    a{
+      width: 100%;
+    }
+  }
+  .active a:not(.btn-borderred-botom):not(.btn-grey-solid), a.active:not(.btn-borderred-botom):not(.btn-grey-solid), li.active a.btn-borderred-grey.btn{
+    @include btn-mod-BG-and-borders(var(--btn__main));
+    color: var(--tp__btn__main);
+  }
+  .active .btn-grey-solid{
+    @include btn-mod-BG-and-borders(var(--btn__main));
+    color: var(--tp__btn__main);
+  }
+  .btn-borderred-grey:not(.active){
+    background: #f8f8f8;
+  }
+  &.transperantBg{
+    .btn-borderred-grey:not(.active){
+      background: transparent;
+    }
+  }
+  & > *{
+    margin: 0;
+    width: 100%;
+    &:first-child, &:first-child a.btn{
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-left-width:1px!important; ;
+    }
+    &:last-child:not(:only-child), &:last-child:not(:only-child) a.btn, &.bordered-last{
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      border-left: none !important;
+    }
+    &:not(:first-child):not(:last-child):not(.bordered-last), &:not(:first-child):not(:last-child):not(.bordered-last) a{
+      border-radius:0 !important;
+      border-left: none;
+    }
+    &:only-child, &:only-child a, &.single-tab, &.single-tab a , &.dropdown-menu{
+      border-radius: 20px !important;
+    }
+    .bordered-last{
+      border-top-right-radius: 20px !important;
+      border-bottom-right-radius: 20px !important;
+    }
+    &.dropdown-menu{
+      padding-top: 10px;
+    }
+  }
+  & > div{
+    cursor: default;
+  }
+  &.disabled{
+    a, button{
+      cursor: default;
+    }
+    .active a, a.active, li.active a.btn-borderred-grey.btn{
+      @include btn-mod-BG-and-borders(#e0e8ed);
+      color: #fff;
+    }
+    .btn.btn-borderred-grey:not(.active){
+      border-color: #e0e8ed;
+      color: #c6d9e3;
+    }
+    & > *{
+      pointer-events: none !important;
+    }
+  }
+}
+body .switch-btns{
+  box-sizing: border-box;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg__content);
+  border: 1px solid var(--border__separator);
+  .btn{
+    width: 50%;
+    font-weight: bold;
+  }
+  .btn.active{
+    color: #fff;
+    background: #095F73;
+    @include btn-mod-BG-and-borders($siteColorSecondary);
+  }
+  .btn:not(.active){
+    color: var(--tp__main);
+    background: var(--bg__content);
+    border: 1px solid var(--bg__content);
+  }
+  .btn.btn-hover-secondary{
+    &:not([disabled]):hover{
+      $btn-hover-green:lighten($siteColorSecondary, 2%);
+      color: #fff;
+      @include btn-mod-BG-and-borders($siteColorSecondary);
+      &:not(.btn-borderred-grey){
+        color: #fff;
+      }
+    }
+  }
+  //.btn.light-gray-Active{
+  //  @include btn-mod-BG-and-borders($siteColorSecondary);
+  //  color: #fff;
+  //}
+}

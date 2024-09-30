@@ -1,0 +1,8 @@
+en:
+  frontend:
+    app:
+      components:
+        tiles:
+          organization_tile:
+            channels: "%{count} Channels"
+            creators: "%{count} Creators"

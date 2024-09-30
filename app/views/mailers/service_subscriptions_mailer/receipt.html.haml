@@ -1,0 +1,35 @@
+%p.greeting
+  Dear
+  = @user.first_name
+
+%p
+  Thank you for purchasing a #{@plan.nickname}
+
+- if @payment_transaction.present?
+  %pre
+    %p -- Transaction Information --
+    %p Merchant:           #{Rails.application.credentials.global[:service_name]}
+    %p Amount:             #{number_to_currency(@payment_transaction.amount / 100.0)}
+    - if @payment_transaction.tax_cents > 0
+      %p Tax:                #{number_to_currency(@payment_transaction.tax_cents / 100.0)}
+      %p Total:              #{number_to_currency((@payment_transaction.amount + @payment_transaction.tax_cents) / 100.0)}
+    - if @discount && @discount.coupon
+      %p Coupon:             #{@discount.coupon.id}
+      %p Savings:            #{number_to_currency(@invoice.lines.data[0].discount_amounts[0].amount / 100.0)}
+
+    %p Transaction Date:   #{Time.zone.now.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z')}
+    -# Tax Exempt:         #{@payment_transaction.tax_exempt ? 'yes' : 'no' %}
+    %p Payment method:     #{@payment_transaction.provider}
+    %p Payment ID:         #{@payment_transaction.pid}
+    -# if @payment_transaction.credit_card?
+      -# Authorization Code: #{@payment_transaction.processor_authorization_code}
+    %p Status:             #{@payment_transaction.status.humanize.titleize}
+
+    %p -- Payment Information --
+    - if @payment_transaction.credit_card?
+      %p Card Type:          #{@payment_transaction.card_type}
+      %p Credit Card Number: #{'*' * 12 + @payment_transaction.credit_card_last_4.to_s}
+    -# elsif @payment_transaction.paypal?
+      -# PayPal Email: <%#= @payment_transaction.paypal_payer_email %>-->
+    -# - else
+    -#   = Rails.logger.info @payment_transaction.inspect

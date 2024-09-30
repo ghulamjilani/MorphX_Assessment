@@ -1,0 +1,27 @@
+
+<div data-email="{{email}}" class="contactList-item clearfix {{#if state}} active {{/if}}">
+    <div class="row">
+        <div class="{{#if immersive_and_livestream}}col-md-8{{else}}col-md-12{{/if}} text-ellipsis {{#if new_contact}}fs-14{{/if}}">
+            <div class="avatarImg-SD" style="background-image: url('{{avatar_url}}')"></div>
+            {{#if new_contact}}
+                <a href="mailto:{{email}}" class="text-color-Blue">{{email}}</a> has been added to your list
+            {{else}}
+                {{display_name}} ({{email}})
+            {{/if}}
+        </div>
+        {{#if immersive_and_livestream}}
+            <div class="col-md-2 text-center col-xs-2 col-xs-push-8 col-md-push-0 state_selector {{#unless role_selection}}hidden{{/unless}}">
+                <label class="radio choice">
+                    <input type="radio" name="state_{{cid}}" value="livestream" {{#if (eq state 'livestream')}} checked {{/if}}>
+                    <span></span>
+                </label>
+            </div>
+            <div class="col-md-2 text-center col-xs-2 col-xs-push-8 col-md-push-0 state_selector {{#unless role_selection}}hidden{{/unless}}">
+                <label class="radio choice">
+                    <input type="radio" name="state_{{cid}}" value="immersive" {{#if (eq state 'immersive')}} checked {{/if}}>
+                    <span></span>
+                </label>
+            </div>
+        {{/if}}
+    </div>
+</div>

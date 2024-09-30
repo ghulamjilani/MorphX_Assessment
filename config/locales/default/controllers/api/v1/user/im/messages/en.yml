@@ -1,0 +1,9 @@
+en:
+  controllers:
+    api:
+      v1:
+        user:
+          im:
+            messages:
+              errors:
+                not_found: Message not found

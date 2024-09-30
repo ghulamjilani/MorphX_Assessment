@@ -1,0 +1,8 @@
+[% for (var i = 0; i < channel_presenters[channel_id].length; i++) { %]
+<li class="[% if(channel_presenters[channel_id][i].id == presenter_id) { %]active[% } %]">
+    <a class="display-block" data-user-id="[%= channel_presenters[channel_id][i].id %]" href="#">
+        <span class="avatarImg-SD set_session_presenter" style="background-image: url('[%= channel_presenters[channel_id][i].avatar_url %]')"></span>
+        [%= channel_presenters[channel_id][i].name %]
+    </a>
+</li>
+[% } %]

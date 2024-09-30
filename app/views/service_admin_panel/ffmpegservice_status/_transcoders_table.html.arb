@@ -1,0 +1,70 @@
+# frozen_string_literal: true
+
+client = Sender::Ffmpegservice.new(sandbox: false)
+
+table do
+  thead do
+    tr do
+      th(class: 'col', style: 'text-align: center;') { 'stream_id' }
+      th(class: 'col', style: 'text-align: center;') { 'ffmpegservice account' }
+      th(class: 'col', style: 'text-align: center;') { 'state' }
+      th(class: 'col', style: 'text-align: center;') { 'connected' }
+      th(class: 'col', style: 'text-align: center;') { 'protocol' }
+      th(class: 'col', style: 'text-align: left;') { 'name' }
+      th(class: 'col', style: 'text-align: center;') { 'active sessions' }
+      th(class: 'col', style: 'text-align: center;') { 'uptime_id' }
+      th(class: 'col', style: 'text-align: center;') { 'updated_at' }
+      th(class: 'col', style: 'text-align: center;') { 'actions' }
+    end
+  end
+  tbody do
+    collection.each_with_index do |transcoder_data, i|
+      transcoder = transcoder_data[:transcoder]
+      transcoder_state = transcoder_data[:transcoder_state]
+      transcoder_stats = transcoder_data[:transcoder_stats]
+      ffmpegservice_account = transcoder_data[:ffmpegservice_account]
+      state = transcoder_state ? transcoder_state[:state] : 'undefined'
+      connected = transcoder_stats.is_a?(Hash) && transcoder_stats.dig(:connected, :value) == 'Yes'
+      active_sessions = Session.ongoing.not_stopped.not_cancelled.where(ffmpegservice_account_id: ffmpegservice_account&.id).map do |session|
+        if transcoder && ffmpegservice_account
+          link_to(session.id, service_admin_panel_session_path(session.id), target: '_blank')
+        end
+      end.join("\n").html_safe
+
+      actions = []
+      # if state.eql?('stopped')
+      actions << link_to('Start', service_admin_panel_ffmpegservice_status_start_stream_path(stream_id: transcoder[:id]))
+      # elsif state.eql?('started')
+      actions << link_to('Stop', service_admin_panel_ffmpegservice_status_stop_stream_path(stream_id: transcoder[:id]))
+      actions << link_to('Reset', service_admin_panel_ffmpegservice_status_reset_stream_path(stream_id: transcoder[:id]))
+      # end
+
+      tr(class: (i.odd? ? 'odd' : 'even')) do
+        td(class: 'col col-stream-id') { transcoder ? transcoder[:id] : 'undefined' }
+        td(class: 'col col-ffmpegservice-account') do
+          if transcoder && ffmpegservice_account
+            link_to(ffmpegservice_account.id, service_admin_panel_ffmpegservice_account_path(ffmpegservice_account.id), target: '_blank')
+          end
+        end
+        td(class: 'col col-state') { state }
+        td(class: 'col col-connected') { status_tag(connected) }
+        td(class: 'col col-protocol') { transcoder[:protocol] }
+        td(class: 'col col-name', style: 'text-align: left;') { transcoder[:name] }
+        td(class: 'col col-connected') do
+          if active_sessions.present?
+            status_tag('green', label: active_sessions)
+          else
+            (if ffmpegservice_account.present?
+               status_tag('red', label: 'NO')
+             else
+               status_tag(false)
+             end)
+          end
+        end
+        td(class: 'col col-uptime-id') { transcoder_state ? transcoder_state[:uptime_id] : 'undefined' }
+        td(class: 'col col-updated-at') { transcoder ? transcoder[:updated_at] : 'undefined' }
+        td(class: 'col col-actions') { actions.join("\n").html_safe }
+      end
+    end
+  end
+end

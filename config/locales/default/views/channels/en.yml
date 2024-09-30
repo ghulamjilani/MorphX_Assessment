@@ -1,0 +1,9 @@
+en:
+  views:
+    channels:
+      edit_creators:
+          manage_creators: "Manage %{creators_upper}"
+          add_another_creator: "Add another %{creator}"
+      show:
+        followers: "%{service_name} Followers"
+        follow_creator_first: "You need to follow %{creator} first"

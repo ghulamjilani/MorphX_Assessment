@@ -1,0 +1,123 @@
+.virtualBackground {
+  background: $client__bg__hover;
+  width: 40rem;
+  @include flex(flex, false, space-between);
+  flex-direction: column;
+  padding: 2rem 1.5rem 3rem;
+  z-index: 110;
+  @include media(reverso-tablet) {
+    margin-top: 0.5rem;
+  }
+  @include media(tablet) {
+    position: fixed;
+    width: 100%;
+    z-index: 101;
+    top: auto;
+    bottom: 0;
+    height: calc(100% - 4rem);
+  }
+
+  &__header {
+    position: relative;
+    @include flex(flex, center, space-between);
+    font-size: 1.8rem;
+    padding-bottom: 1.5rem;
+    &__title{
+      font-weight: bold;
+      color: $client__tp__main;
+    }
+
+    &__close {
+      color: $client__tp__secondary;
+      cursor: pointer;
+    }
+
+    &__keyboard {
+      display: none;
+    }
+  }
+
+  &__body {
+    @include media(reverso-tablet) {
+      @include flex(flex, false, flex-start);
+      flex-direction: column;
+    }
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar, ::-webkit-scrollbar {
+      border-radius: .3rem;
+    }
+
+    &__keyboard {
+      margin-bottom: 10rem;
+    }
+    &__imgs{
+      @include flex(flex, center, space-between);
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    &__imgsItem{
+      width: 100%;
+      max-width: 17.8rem;
+      height: 100%;
+      max-height: 10rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      border: 2px solid transparent;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      &.active{
+        border: 2px solid var(--border__form__active);
+        border-radius: 0.5rem;
+      }
+      @include media(tablet){
+        max-width: 100%;
+        max-height: 20rem;
+      }
+      .icon{
+        cursor: pointer;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 3rem;
+        height: 3rem;
+        background: #FFF;
+        border-radius: 50%;
+      }
+      i{
+        @include center(vh);
+        font-size: 2rem;
+        color: #A6A6A6;
+      }
+    }
+    input{
+      color: $client__tp__main!important;
+      padding-right: 2rem!important;
+    }
+    .input__field__bottom{
+      display: none;
+    }
+    .wrapper{
+      padding-bottom: 3rem;
+    }
+  }
+
+  &__image {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border: 1px solid transparent;
+    margin-bottom: 1rem;
+
+    &__active {
+      border: 1px solid red;
+    }
+  }
+  &__notSupported {
+    color: var(--tp__inputs__validation);
+    font-size: 1.8rem;
+    text-align: center;
+  }
+}

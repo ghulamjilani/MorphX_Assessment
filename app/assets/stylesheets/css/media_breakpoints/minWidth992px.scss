@@ -1,0 +1,74 @@
+@import "mixin";
+
+@media all and (min-width: 992px) {
+  .hide_on_desktop{
+    display: none;
+    &.active{
+      display: block !important;
+    }
+  }
+  .col-md-pull-right{
+    float: right;
+  }
+  .NT-wrapper{
+    display: none !important;
+  }
+
+  .banerWrapp{
+    .lighter{
+      position: absolute;
+      top: 11%;
+      color: #FFF;
+    }
+    .Boldier{
+      position: absolute;
+      top: 27%;
+      color: #FFF;
+    }
+    .text-center{
+      position: absolute;
+      top: 40%;
+    }
+  }
+  //.header-top.transpered-header{
+  //  .account-name{
+  //    i{
+  //      color:$header-icon-color-HT;
+  //    }
+  //  }
+  //  .dropdown-menu {
+  //    top: 98%;
+  //  }
+  //  .navbar.navbar-default {
+  //    background: rgba(0, 0, 0, 0.2) !important;
+  //    box-shadow: none;
+  //    -webkit-box-shadow: none;
+  //    .header-search-input{
+  //      color: #fff;
+  //    }
+  //    a {
+  //      color: $header-icon-color-HT;
+  //    }
+  //    .account.dropdown-menu li{
+  //      a {
+  //        color: $header-icon-color;
+  //      }
+  //      &:hover a{
+  //        color: #fff;
+  //      }
+  //    }
+  //
+  //  }
+  //
+  //}
+  .loginOrSignUpModal{
+    .popover-content{
+      white-space: nowrap;
+    }
+  }
+  #announcements{
+    max-height: 150px;
+  }
+
+}
+

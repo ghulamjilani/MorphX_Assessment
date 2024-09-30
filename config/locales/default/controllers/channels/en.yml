@@ -1,0 +1,12 @@
+en:
+  controllers:
+    channels:
+      added_to_notification_list: You will be notified as soon as we have an upcoming session.
+      archived: Channel has been archived
+      create_success: Channel successfully created!
+      just_listed: Channel has been listed
+      just_unlisted: Channel has been unlisted
+      submitted_for_review: Channel has been submitted for review
+      update_success: Channel successfully updated!
+      business_plan_max_channels_error: You have reached the maximum number of channels for your Business Plan
+      business_plan_limits_error: You can't create channel because of your current Business Plan limits.

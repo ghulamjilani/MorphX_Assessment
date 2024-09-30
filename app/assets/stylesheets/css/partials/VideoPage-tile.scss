@@ -1,0 +1,365 @@
+@import "mixin";
+
+.ribbon-tile{
+  .heading{
+    color: #fff;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #fff;
+    line-height: 4rem;
+    margin-bottom: 1rem;
+  }
+}
+body.videoclient{
+  .select2-container{
+    .select2-choice{
+      background: #272727;
+      color: #e5e5e5;
+      border-radius: 0;
+      -webkit-border-radius: 0;
+      border: none;
+      height: 3rem;
+      line-height: 3.2rem;
+    }
+  }
+  .ribbon-container-right{
+    .LoadingCover{
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      &:after{
+        background: rgba(255, 255, 255, 0.60);
+      }
+    }
+  }
+}
+#newPollArea{
+  position: relative;
+  .LoadingCover{
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  input[type='text']{
+    background: transparent none repeat scroll 0 0;
+    border-color: #4b4b4b;
+    border-image: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    margin: 0 0 1rem;
+    width: 100%;
+    color: #fff;
+    &::-webkit-input-placeholder {
+      color: #636363;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+      color: #636363;
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+      color: #636363;
+    }
+
+    &:-ms-input-placeholder {
+      color: #636363;
+    }
+  }
+  #poll_question{
+    border: none !important;
+    background: #272727;
+    &::-webkit-input-placeholder {
+      color: #787878;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+      color: #787878;
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+      color: #787878;
+    }
+
+    &:-ms-input-placeholder {
+      color: #787878;
+    }
+  }
+  .btn-group{
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    .col-md-6{
+      border-radius: 0;
+      -webkitborder-radius: 0;
+    }
+    .save_poll{
+      border: medium none;
+      height: 2.8rem;
+      line-height: 3rem !important;
+      background: #ffffff !important;
+      margin: 5px 0;
+      margin-left: 5px!important;
+      width: calc(50% - 5px);
+    }
+  }
+  .removable_answer{
+    font-size: 0;
+    input[type='text']{
+      width: 80%;
+    }
+    a.remove_answer{
+      background: red;
+      color: #fff;
+      display: inline-block;
+      height: 3.7rem;
+      line-height: 4.2rem;
+      text-align: center;
+      vertical-align: top;
+      width: 20%;
+      font-size: 1.6rem;
+      margin-left: 0!important;
+    }
+  }
+  .close_poll{
+    height: 3.8rem;
+    line-height: 3.8rem !important;
+    margin-top: 0;
+    padding-left: 25px !important;
+    padding-right: 0;
+    width: 100%;
+    i{
+      top: 33% !important;
+    }
+  }
+
+}
+
+
+
+#containerShop{
+  .sectionHeader-close {
+    display: inline-block;
+    vertical-align: top;
+    width: 1.6rem;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0.3;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  overflow: hidden;
+  padding: 0;
+  .shopName{
+    padding: 1.5rem 0 0 0;
+  }
+  .redBG{
+    background: #94323e;
+    color: #fff;
+    padding: 0.5rem 0.5rem 0 0.5rem;
+    .sectionHeader{
+      color: #FFFFFF;
+    }
+    & + .sectionTitle{
+      margin: 0 0.5rem 1rem;
+    }
+  }
+  #ShopArea{
+    height: calc(100% - 50px);
+  }
+  .lists{
+    overflow: auto;
+    height: 100%;
+  }
+  .siteUrl{
+    color: #fff;
+    display: block;
+    background: rgba(0,0,0,0.3);
+    margin: 1rem 0 0 0;
+    padding: 0.5rem 0.5rem 0.6rem;
+  }
+  .description{
+    padding-top: 2rem;
+    opacity: 0.6;
+    font-size: 13px;
+    line-height: 1.6;
+    font-weight: 200;
+  }
+  .sectionTitle, .Products-wrapp{
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .sectionTitle.products{
+    color: $siteColorMain;
+    font-size: 1.4rem;
+    line-height: 2.5rem;
+    border-bottom: 0.1rem solid #fff;
+    padding-bottom: 0.5rem;
+  }
+  .WLS-title{
+    color: #fff;
+    border-color: #fff;
+  }
+  .Products-wrapp{
+    height: 100%;
+    padding: 0.5rem 0.5rem 2.5rem 0.5rem;
+    background: #2d2d2d none repeat scroll 0 0;
+    overflow: visible;
+  }
+
+  .productTile{
+    .productTile-img{
+      width: 3.7rem;
+      height: 3.7rem;
+      background-size: cover;
+      background-position: center center;
+      display: inline-block;
+      vertical-align: top;
+      @include transition200();
+      &:hover{
+        -moz-transform:scale(3.5) translateX(13px) translateY(2px);
+        -webkit-transform:scale(3.5) translateX(13px) translateY(2px);
+        -o-transform: scale(3.5) translateX(13px) translateY(2px);
+        -ms-transform: scale(3.5) translateX(13px) translateY(2px);
+        transform: scale(3.5) translateX(13px) translateY(2px);
+      }
+    }
+    .productTile-short-description{
+      width: calc(100% - 4rem);
+      display: inline-block;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+      vertical-align: top;
+      margin-bottom: 1rem;
+      &>a{
+        cursor: default;
+        color: $siteColorMain;
+      }
+    }
+    .price{
+      color: #17d381;
+    }
+    .productTile-long-description{
+      display: none;
+    }
+    &.active{
+      .productTile-long-description{
+        display: block;
+        margin: 1rem -0.5rem 1rem -0.5rem;
+        padding: 1rem 0.5rem;
+        background: #404040;
+      }
+    }
+  }
+
+  .BAG{
+    .bag-title{
+      margin: -0.5rem -0.5rem 1rem -0.5rem;
+      padding: 0 0.5rem 0 0.5rem;
+      background: #17d381;
+      line-height: 2;
+    }
+    .subtotal{
+      background: #272727;
+      color: #6d6d6d;
+      line-height: 1.5rem;
+      font-size: 1.2rem;
+      padding: 0 0.5rem;
+    }
+    .mainButton{
+      margin-left: 0 !important;
+    }
+  }
+
+  #chooseListArea{
+    padding: 1rem 0;
+  }
+
+}
+
+.close_pollWrapper{
+  padding-top: 1.5rem;
+  border-top: 1px solid #fff;
+  font-size: 0;
+
+  #choosePollArea, #closePolls{
+    display: inline-block;
+    vertical-align: top;
+  }
+  #closePolls{
+    background: red;
+    display: inline-block;
+    height: 3rem;
+    line-height: 3.2rem;
+    text-align: center;
+    vertical-align: top;
+    width: 20%;
+    text-align: center;
+    a{
+      display: block;
+      line-height: 3.2rem;
+      font-size: 1.6rem;
+      color: #fff;
+    }
+  }
+  #choosePollArea{
+    width: 80%;
+  }
+}
+
+.blueBg{
+  background: #327b94;
+  color: #fff;
+  padding: 0 6px 5px;
+  h1.heading, .heading i{
+    color: #fff !important;
+  }
+  .heading{
+    border-bottom-color: #fff !important;
+  }
+}
+.donateCount{
+  background:#3a3a3a ;
+  height: 48px;
+  width: calc(100% + 12px);
+  position: relative;
+  margin: 10px -6px;
+  span{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background: #3a3a3a;
+    text-align: center;
+    line-height: 34px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  & > div{
+    height: 100%;
+    background:#29b651 ;
+  }
+}
+.ContributorsList{
+  margin-top: 10px;
+  color: #fff;
+  padding: 5px;
+  .ContributorsList-h{
+    border-bottom: 1px solid #fff;
+    padding-bottom: 6px;
+    margin-bottom: 15px;
+  }
+  .ContributorsList-b{
+    height: 70px;
+    overflow: auto;
+  }
+}

@@ -1,0 +1,370 @@
+- interactor1 = ObtainImmersiveAccessToSession.new(@session, current_user)
+- interactor2 = ObtainLivestreamAccessToSession.new(@session, current_user)
+- interactor3 = ObtainRecordedAccessToSession.new(@session, current_user)
+- if [ObtainTypes::PAID_IMMERSIVE, ObtainTypes::FREE_IMMERSIVE].include?(params[:type]) && interactor1.could_be_obtained?
+  - @obtain_type = 'Immersive'
+  - @charge_amount = interactor1.charge_amount
+  - @obtain_type_label = 'Live'
+
+- elsif [ObtainTypes::PAID_LIVESTREAM, ObtainTypes::FREE_LIVESTREAM].include?(params[:type]) && interactor2.could_be_obtained?
+  - @obtain_type = 'Livestream'
+  - @charge_amount = params[:type] == ObtainTypes::PAID_LIVESTREAM ? @session.livestream_purchase_price : 0
+  - @obtain_type_label = 'Live'
+
+- elsif params[:type] == ObtainTypes::PAID_VOD && interactor3.could_be_obtained?
+  - @obtain_type = 'Replay'
+  - @charge_amount = interactor3.charge_amount
+  - @obtain_type_label = 'Replay'
+  - @replay = @session.room.videos.available.first
+- else
+  - raise "can not interpret, #{params[:type]}"
+- placeholder_suffix = "#{@session.id}-#{Time.now.to_i}"
+
+#payment-modal.modal.fade{'aria-hidden' => 'true', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      .modal-body.clearfix
+        .unobtrusive-flash-container
+        -#!!!!!section if Session!!!!!
+        .PayFormWrapper
+          = render partial: 'become_presenter_steps/close_modal'
+          - if @obtain_type == 'Immersive'
+            .left_b.interactive
+              %h6
+                = I18n.t('views.sessions.preview_purchase_stripe.interactive_session_details')
+              .content
+                .img__wrapper
+                  .img{style: "background-image:url(#{@obtain_type == 'Replay' ? @replay.poster_url : @session.medium_cover_url})"}
+                  .description= @obtain_type == 'Replay' ? @replay.always_present_title : @session.always_present_title
+                  .name
+                    = link_to @session.organizer.public_display_name, spa_user_path(@session.organizer.slug), class: 'text-color-Darkgrey'
+                  .details
+                    .inline-block
+                      %i.GlobalIcon-empty-calendar
+                      = timeForInteractive(@session.start_at)
+                    .inline-block
+                      %i.GlobalIcon-clock
+                      #{@session.duration}
+                      = I18n.t('views.sessions.preview_purchase_stripe.mins')
+                .desc
+                  %span= I18n.t('views.sessions.preview_purchase_stripe.the_following_table_indicates_the_browsers_supported')
+                  %span= I18n.t('views.sessions.preview_purchase_stripe.support_recent_and_two_previous_versions_browsers')
+                -# FIXME: show when tax done
+                .supportDevicesTable
+                  %table.table.full-width
+                    %thead
+                      %tr
+                        %th
+                          %span
+                        %th
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.chrome')
+                        %th
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.firefox')
+                        %th
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.safari')
+                        %th
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.edge')
+                    %tbody
+                      %tr
+                        %td
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.android')
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                        %td
+                      %tr
+                        %td
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.ios')
+                        %td
+                        %td
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                      %tr
+                        %td
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.linux')
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                        %td
+                      %tr
+                        %td
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.mac_os')
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                      %tr
+                        %td
+                          %span= I18n.t('views.sessions.preview_purchase_stripe.windows')
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                          %i.GlobalIcon-check
+                        %td
+                        %td
+                          %i.GlobalIcon-check
+                .desc.desc-bottom
+                  %span= I18n.t('views.sessions.preview_purchase_stripe.support_chromium_edge_edge_is_not_supported')
+
+          - else
+            .left_b.replaySession
+              %h6= "#{@obtain_type == 'Replay' ? 'Replay' : 'Session'} Info"
+              .content
+                .img{style: "background-image:url(#{@obtain_type == 'Replay' ? @replay.poster_url : @session.medium_cover_url})"}
+                .description= @obtain_type == 'Replay' ? @replay.always_present_title : @session.always_present_title
+                .name
+                  = link_to @session.organizer.public_display_name, spa_user_path(@session.organizer.slug), class: 'text-color-Darkgrey'
+                .details
+                  .inline-block.text-color-LightGrey
+                    %i.VideoClientIcon-calendar-icon
+                    = time_with_tz_in_chosen_format(@session.start_at)
+                  .inline-block.text-color-LightGrey
+                    %i.VideoClientIcon-sand-clock
+                    #{@session.duration} mins
+                  .inline-block.text-color-LightGrey
+                    %i.VideoClientIcon-play-icon1
+                    = @obtain_type_label
+                -# FIXME: show when tax done
+                - @tax = 0.0
+                .amount
+                  %div
+                    .pull-right= as_currency(@charge_amount)
+                    = I18n.t('views.sessions.preview_purchase_stripe.price')
+                  %div.discount
+                    .pull-right $0.00
+                    .text= I18n.t('views.sessions.preview_purchase_stripe.discount')
+                  %div.tax
+                    .pull-right= as_currency(@tax)
+                    = I18n.t('views.sessions.preview_purchase_stripe.tax')
+                .TotalAmount
+                  .pull-right= as_currency(@charge_amount)
+                  = I18n.t('views.sessions.preview_purchase_stripe.total_amount')
+
+          - unless current_user.confirmed?
+            - content_for(:after_include_javascripts) do
+              :plain
+                  var len = $('#preview-purchase-missing-confirmed-email-container').length;
+                  if ( len == 0) {
+                    console.log('failed');
+                  }
+
+                  window.previewPurchaseMissingConfirmedEmailView = new PreviewPurchaseMissingConfirmedEmailView({email: "#{current_user.email || current_user.unconfirmed_email}", el: '#preview-purchase-missing-confirmed-email-container'});
+                  window.previewPurchaseMissingConfirmedEmailView.render();
+
+          .right_b{class: ('interactive' if @obtain_type == 'Immersive')}
+            .LoadingCover.hidden{style: "margin-top: 30px; height: 30px"}
+              .spinnerSlider
+                .bounceS1
+                .bounceS2
+                .bounceS3
+
+            %h6= I18n.t('views.sessions.preview_purchase_stripe.payment_method')
+            .content
+              %ul.nav.nav-tabs.nav-justified{role: :tablist}
+                %li.active{role: :presentation}
+                  %a.btn-borderred-grey{href: '#', 'aria-controls': 'Payment_AddCreditCard', role: :tab, data: {toggle: :tab, target: '#Payment_AddCreditCard'}}
+                    = I18n.t('views.sessions.preview_purchase_stripe.credit_card')
+                - if Rails.application.credentials.frontend[:paypal]
+                  %li{role: :presentation}
+                    %a.btn-borderred-grey{href: '#', 'aria-controls': 'Payment_PayPal', role: :tab, data: {toggle: :tab, target: '#Payment_PayPal'}}
+                      %img{src: 'https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png', alt: 'PayPal Logo'}
+                - unless Rails.env.production?
+                  %li{role: :presentation}
+                    %a{href: '#', 'aria-controls': 'Payment_SystemCredit', role: :tab, data: {toggle: :tab, target: '#Payment_SystemCredit'}}
+                      = I18n.t('views.sessions.preview_purchase_stripe.system_credit')
+
+              .tab-content
+                #Payment_AddCreditCard.tab-pane.active{role: :tabpanel}
+                  - if current_user.has_payment_info? && current_user.with_stripe_data!
+                    - if current_user.credit_cards && current_user.credit_cards.length > 0
+                      = form_tag confirm_purchase_channel_session_path(@session.channel_id, @session.id, type: params[:type]), method: :post, id: 'payment-form-existing-card', class: 'form_V2', style: 'visibility: visible;' do
+                        = hidden_field_tag :session_id, @session.id
+                        = hidden_field_tag :charge_amount, @charge_amount
+                        = hidden_field_tag :obtain_type, @obtain_type
+                        = hidden_field_tag :description, "Buy access to session ##{@session.title}"
+                        = hidden_field_tag :discount, nil
+                        .row
+                          .col-md-12
+                            #ExistingCreditCard
+                              .select-block.state-derty
+                                %label= I18n.t('views.sessions.preview_purchase_stripe.card_number')
+                                %select{name: :stripe_card, required: true}
+                                  - current_user.credit_cards.each do |card|
+                                    %option{value: card['id'], data: {country: card['address_country'], zip: card['address_zip']}}= '*' * 12 + card['last4']
+                              -#.input-block.CVC
+                              -#  %input{type:'text', placeholder:'CVC'}
+                              %a#add_card.btn.btn-m.btn-square.btn-borderred-grey{href: '#'}
+                                = I18n.t('views.sessions.preview_purchase_stripe.add_card')
+                        .row.coupon_col
+                          .col-md-6
+                            .input-block.state-clear
+                              %label.fixed_top{for: :coupon}
+                                = I18n.t('views.sessions.preview_purchase_stripe.add_promotion_code')
+                              %input.coupon{type: :text, name: :coupon, placeholder: I18n.t('views.sessions.preview_purchase_stripe.enter_code')}
+                              .errorContainerWrapp
+                          .col-md-6.padding-top-20
+                            %a.apply_coupon.btn.btn-m.btn-borderred-red.btn-square{href: '#', data: {disable_with: I18n.t('views.sessions.preview_purchase_stripe.processing')}}
+                              = I18n.t('views.sessions.preview_purchase_stripe.apply')
+                        - if @obtain_type == 'Immersive'
+                          .amount.interactive
+                            %div
+                              .pull-right= as_currency(@charge_amount)
+                              = I18n.t('views.sessions.preview_purchase_stripe.price')
+                            %div.tax
+                              .pull-right= as_currency(@tax)
+                              = I18n.t('views.sessions.preview_purchase_stripe.tax')
+                            .TotalAmount
+                              .pull-right= as_currency(@charge_amount)
+                              = I18n.t('views.sessions.preview_purchase_stripe.total_amount')
+                        .submitBox
+                          .col-md-12
+                            %button.btn.btn-l.full-width{data: {disable_with: I18n.t('views.sessions.preview_purchase_stripe.process')}} Submit Payment
+
+                  = form_tag confirm_purchase_channel_session_path(@session.channel_id, @session.id, type: params[:type]), method: :post, id: 'payment-form', class: "form_V2 #{'hidden' if current_user.credit_cards && current_user.credit_cards.length > 0}" do
+                    = hidden_field_tag :session_id, @session.id
+                    = hidden_field_tag :charge_amount, @charge_amount
+                    = hidden_field_tag :obtain_type, @obtain_type
+                    = hidden_field_tag :description, "Buy access to session ##{@session.title}"
+                    = hidden_field_tag :stripe_token, nil
+                    = hidden_field_tag :discount, nil
+                    .row
+                      .col-md-12
+                        #card-element
+                          // A Stripe Element will be inserted here.
+                          // #cardexp-element
+                          // #cardcvc-element
+                      .col-md-12.mb10
+                        // Used to display form errors.
+                        #card-errors.error{role: :alert}
+                    .row.margin-top-10
+                      .col-md-12
+                        .input-block.state-clear.required
+                          %label.fixed_top{for: :name_on_card}
+                            = I18n.t('views.sessions.preview_purchase_stripe.name_on_card')
+                          %input#name_on_card{type: :text, name: :name_on_card, placeholder: I18n.t('views.sessions.preview_purchase_stripe.jane_doe')}
+                          .errorContainerWrapp
+                    .row
+                      .col-md-6.country_col
+                        .select-block.state-derty.required
+                          %label.fixed_top{for: :country}
+                            = I18n.t('views.sessions.preview_purchase_stripe.country')
+                          = country_select nil, :country, {selected: current_user.account.try(:country) || 'US', prompt: true}, {id: :card_country, name: :country, class: 'styled-select styled-select_withCss full-width', placeholder: I18n.t('views.sessions.preview_purchase_stripe.united_states')}
+                          .errorContainerWrapp
+                      .col-md-6
+                        #zip_code_block.input-block.state-clear.required
+                          %label.fixed_top{for: :zip_code}
+                            = I18n.t('views.sessions.preview_purchase_stripe.zip_code')
+                          %input#zip_code{type: :text, name: :zip_code, placeholder: '08934'}
+                          .errorContainerWrapp
+                    .row.coupon_col
+                      .col-md-6
+                        .input-block.state-clear
+                          %label.fixed_top{for: :coupon}
+                            = I18n.t('views.sessions.preview_purchase_stripe.add_promotion_code')
+                          %input.coupon{type: :text, name: :coupon, placeholder: I18n.t('views.sessions.preview_purchase_stripe.enter_code')}
+                          .errorContainerWrapp
+                      .col-md-6.padding-top-20
+                        %a.apply_coupon.btn.btn-m.btn-borderred-red.btn-square{href: '#', data: {disable_with: I18n.t('views.sessions.preview_purchase_stripe.processing')}}
+                          = I18n.t('views.sessions.preview_purchase_stripe.apply')
+                    - if @obtain_type == 'Immersive'
+                      .amount.interactive
+                        %div
+                          .pull-right= as_currency(@charge_amount)
+                          = I18n.t('views.sessions.preview_purchase_stripe.price')
+                        %div.tax
+                          .pull-right= as_currency(@tax)
+                          = I18n.t('views.sessions.preview_purchase_stripe.tax')
+                        .TotalAmount
+                          .pull-right= as_currency(@charge_amount)
+                          = I18n.t('views.sessions.preview_purchase_stripe.total_amount')
+                    .submitBox
+                      .col-md-12
+                        %button.btn.btn-l.full-width{data: {disable_with: I18n.t('views.sessions.preview_purchase_stripe.process')}}
+                          = I18n.t('views.sessions.preview_purchase_stripe.submit_payment')
+
+                - if Rails.application.credentials.frontend[:paypal]
+                  #Payment_PayPal.tab-pane{role: :tabpanel}
+                    = form_tag confirm_paypal_purchase_channel_session_path(@session.channel_id, @session.id, type: params[:type]), method: :post, id: 'paypal_payment_form', class: 'form_V2', style: 'visibility: visible;' do
+                      = hidden_field_tag :session_id, @session.id
+                      = hidden_field_tag :obtain_type, @obtain_type
+                      = hidden_field_tag :provider, :paypal
+                      = hidden_field_tag :discount, nil
+
+                      .row.coupon_col
+                        .col-md-6
+                          .input-block.state-clear
+                            %label.fixed_top{for: :coupon}
+                              = I18n.t('views.sessions.preview_purchase_stripe.add_promotion_code')
+                            %input.coupon{type: :text, name: :coupon, placeholder: I18n.t('views.sessions.preview_purchase_stripe.enter_code')}
+                            .errorContainerWrapp
+                        .col-md-6.padding-top-20
+                          %a.apply_coupon.btn.btn-m.btn-borderred-red.btn-square{href: '#', data: {disable_with: I18n.t('views.sessions.preview_purchase_stripe.processing')}}
+                            = I18n.t('views.sessions.preview_purchase_stripe.apply')
+                      - if @obtain_type == 'Immersive'
+                        .amount.interactive
+                          %div
+                            .pull-right= as_currency(@charge_amount)
+                            = I18n.t('views.sessions.preview_purchase_stripe.price')
+                          %div.tax
+                            .pull-right= as_currency(@tax)
+                            = I18n.t('views.sessions.preview_purchase_stripe.tax')
+                          .TotalAmount
+                            .pull-right= as_currency(@charge_amount)
+                            = I18n.t('views.sessions.preview_purchase_stripe.total_amount')
+                      .submitBox
+                        .col-md-12
+                          #submit-paypal
+
+                  :javascript
+                    (function setupPaypal() {
+                      paypal.Buttons({
+                        style: {
+                          layout: 'horizontal'
+                        },
+                        env: "#{ENV['PAYPAL_MODE']}",
+                        createOrder: function() {
+                          return $.post("#{paypal_purchase_channel_session_url(@session.channel_id, @session.id, type: params[:type])}", $('#paypal_payment_form').serialize()).then(function(data) {
+                            return data.token
+                          });
+                        },
+                        onApprove: function(data) {
+                          var $form = $("#paypal_payment_form");
+                          // Add a hidden inputs
+                          $form.append($('<input type="hidden" name="paymentID"/>').val(data.paymentID));
+                          $form.append($('<input type="hidden" name="payerID"/>').val(data.payerID));
+                          $form.submit();
+                        }
+                      }).render('#submit-paypal');
+                    }());
+                - unless Rails.env.production?
+                  #Payment_SystemCredit.tab-pane{role: :tabpanel}
+                    %div.clearfix.padding-top-20
+                      .pull-right
+                        = as_currency(current_user.system_credit_balance)
+                      = I18n.t('views.sessions.preview_purchase_stripe.system_credit')
+                    - if @obtain_type == 'Immersive'
+                      .amount.interactive
+                        %div
+                          .pull-right= as_currency(@charge_amount)
+                          = I18n.t('views.sessions.preview_purchase_stripe.price')
+                        %div.tax
+                          .pull-right= as_currency(@tax)
+                          = I18n.t('views.sessions.preview_purchase_stripe.tax')
+                        .TotalAmount
+                          .pull-right= as_currency(@charge_amount)
+                          = I18n.t('views.sessions.preview_purchase_stripe.total_amount')
+                    - if current_user.system_credit_balance >= @charge_amount
+                      = form_tag confirm_purchase_channel_session_path(@session.channel_id, @session.id, type: params[:type]), method: :post, id: 'system_credit_payment_form', class: 'form_V2', style: 'visibility: visible;' do
+                        = hidden_field_tag :payment_method, PaymentMethods::SystemCredit
+                        .submitBox
+                          .col-md-12
+                            %button.btn.btn-l.full-width{data: {disable_with: I18n.t('views.sessions.preview_purchase_stripe.process')}}
+                              = I18n.t('views.sessions.preview_purchase_stripe.submit_payment')

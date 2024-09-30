@@ -1,0 +1,55 @@
+window.modalBody = '<%= escape_javascript render("#{action_name}", format: :html) %>';
+
+$(document).one('shown.bs.modal', '.modal', function() {
+  window.initializeFormsVisibility();
+
+  $('form.new_message').validate({
+    rules: {
+      'message[subject]': {
+        required:  true,
+        maxlength: 160,
+        normalizer: function( value ) {
+          return $.trim( value );
+        }
+      },
+      'message[body]': {
+        required: true,
+        maxlengthWithOutHtml: 2000,
+        normalizer: function( value ) {
+          return $.trim( value );
+        }
+      },
+      'message[recipient]': {
+        required: true
+      }
+    },
+    //submitHandler: function() {
+    //  debugger
+    //},
+    errorElement: 'span',
+    ignore: '.ignore',
+    onclick: false,
+    focusout: true,
+    focusCleanup: true,
+    errorPlacement: function (error, element) {
+        return error.appendTo(element.parents('.input-block, .select-block').find('.errorContainerWrapp')).addClass('errorContainer');
+    },
+    highlight: function (element) {
+        var wrapper;
+        wrapper = $(element).parents('.input-block, .select-block');
+        element.setAttribute("style", "color:#F23535; border-bottom: 1px solid #F23535!important;");
+        return wrapper.addClass('error').removeClass('valid');
+    },
+    unhighlight: function (element) {
+        var wrapper;
+        wrapper = $(element).parents('.input-block, .select-block');
+        element.setAttribute("style", "color:#6f7073; border-bottom: 1px solid #baccdb;");
+        return wrapper.removeClass('error').addClass('valid');
+    },
+    showErrors: function (errorMap, errorList) {
+        return this.defaultShowErrors();
+    }
+  });
+});
+
+$(modalBody).modal('show');

@@ -1,0 +1,33 @@
+#outdatedModal.modal.fade{role: :dialog, data: {backdrop: "static",}}
+  .modal-dialog
+    .unobtrusive-flash-container
+    .modal-content
+      - unless devise_invitation_token_in_signup_modal.present?
+        = render 'become_presenter_steps/close_modal'
+      .modal-body
+        .outdated-modal
+          = image_tag 'outdated.png', alt: Rails.application.credentials.global[:service_name], class: 'img-responsive'
+        .outdated-body
+          %div.technicalPage__label.padding-top-50.padding-bottom-40
+            You’re using an outdated browser
+          %div.text-left
+            %div
+              %span
+                You’re using an outdated browser. Some functions of the site may not be available.
+            %div.padding-top-30
+              %span
+                Download the latest version of Chrome browser for the best experience and full access to our functionality.
+          .btn.btn-l.btn-red.confirmOutdated
+            Okay i understood
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function(){
+    if(!$.cookie('setIeCookie')){
+      $('#outdatedModal').modal('show');
+        $('.confirmOutdated').click( function(){
+          $.cookie('setIeCookie', 'IE');
+          $('#outdatedModal').modal('hide');
+        });
+      }
+    });

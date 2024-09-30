@@ -1,0 +1,29 @@
+@import "mixin";
+
+.tile-cake.tile-cake-Creators{
+  .CreatorsName{
+    width: 100%;
+    text-align: center;
+    color: var(--tp__main);
+    padding: 10px 5px 5px;
+    z-index: 29;
+  }
+  .tile-img .tile-imgContainer{
+    padding-top: 100%;
+    border-radius: 100%;
+  }
+  .channelSubscribe{
+    position: absolute;
+    bottom:8px;
+    z-index: 19;
+    width: 100%;
+  }
+}
+
+.CreatorsTileSlider{
+  .owl-item section.tile-cake{
+    width: calc(100% - 30px);
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}

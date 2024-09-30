@@ -1,0 +1,431 @@
+@import "../../mixin";
+
+@mixin alert-stylesMK2($color : var(--tp__main)){
+  background-color:var(--bg__content);
+  color:$color;
+}
+
+
+.header.responsive .unobtrusive-flash-container, .unobtrusiveMobile-flash-container{
+  position: absolute;
+  right: 20px;
+  top: calc(100% + 5px);
+  width: 400px;
+  .alert{
+    overflow: hidden;
+    text-align: left;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    opacity: 1;
+    width: 100%;
+    position: relative;
+    @include boxShadow__main(var(--sh__main));
+    background: var(--bg__tooltip);
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: var(--tp__icons);
+      text-align: center;
+      i{
+        font-size: 13px;
+        -moz-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        display: inline-block;
+        position: relative;
+      }
+    }
+    .bodyFlashMessage{
+      padding: 15px 40px 15px 55px;
+    }
+  }
+}
+
+.unobtrusiveMobile-flash-container {
+  right: 1.5rem;
+  top: calc(100% + 0.5rem);
+  width: calc(100% - 2.5rem);
+  .close {
+    @include media(p-tablet) {
+      font-size: 2rem;
+    }
+  }
+}
+
+.header.responsive .open-pushy-flash{
+  padding: 0;
+  width: 100%;
+  right: 0;
+  .alert .close{
+    top: 1.1rem;
+    font-size: 2rem;
+  }
+  @include media(reverso-p-tablet){
+    display: none;
+  }
+}
+.alert{
+  &:before{
+    content: '';
+    width: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+}
+.alert-success    {
+  &:before{
+    background-color: #37A67D;
+  }
+  @include alert-stylesMK2();
+  &:after{
+    font-family: "GlobalIcon";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: "\e914";
+    color: #37A67D;
+    font-size: 14px;
+  }
+}
+.alert-info, .alert-message       {
+  &:before{
+    background-color: #2091E3;
+  }
+  @include alert-stylesMK2();
+  &:after{
+    content: '\e942';
+    font-family: "GlobalIcon";
+    color: #2091E3;
+  }
+}
+.alert-warning    {
+  &:before{
+    background-color: #FFC20A;
+  }
+  @include alert-stylesMK2();
+  &:after{
+    content: '\e92e';
+    font-family: "GlobalIcon";
+    color: #FFC20A;
+  }
+}
+.alert-danger     {
+  &:before{
+    background-color: #FF530D;
+  }
+  @include alert-stylesMK2();
+  &:after{
+    content: '\e942';
+    font-family: "GlobalIcon";
+    color: #FF530D;
+  }
+}
+.alert-success, .alert-info, .alert-warning, .alert-danger, .alert-message{
+  position: relative;
+  font-size: 14px;
+  border: none;
+  &:after{
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 22px;
+    padding: 0 5px;
+    width: 20px;
+    height: 20px;
+    line-height: 30px;
+    border-radius: 14px;
+    border:none;
+    text-align: center;
+  }
+}
+
+
+.FlashBox{
+  margin-top: 10px;
+  background: var(--bg__tooltip);
+  color: var(--tp__main);
+  @include boxShadow__main(var(--sh__main));
+  position: relative;
+  font-size: 14px;
+  line-height: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  &:before{
+    content: '';
+    width: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #2091E3;
+  }
+  &:after{
+    content: '\e942';
+    color: #2091E3;
+    font-family: GlobalIcon;
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 22px;
+    padding: 0 5px;
+    width: 20px;
+    height: 20px;
+    line-height: 30px;
+    border-radius: 14px;
+    border: none;
+    text-align: center;
+  }
+  .close{
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: var(--tp__icons);
+    font-size: 1.6rem;
+    font-weight: bold;
+    z-index: 999;
+    &::before{
+      cursor: pointer;
+    }
+  }
+  .FlashBox-h{
+    padding: 13px 80px 5px 45px;
+    position: relative;
+    @include flex(flex, center, space-between);
+    .FlashBox-count{
+      display: inline-block;
+      vertical-align: top;
+      color: var(--tp__main);
+      font-size: 13px;
+      span{
+        vertical-align: middle;
+      }
+      a{
+        color: var(--tp__main);
+        display: inline-block;
+        font-size: 14px;
+        vertical-align: middle;
+      }
+    }
+    .closeFlashBox{
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: var(--tp__icons);
+      font-size: 21px;
+      opacity: 0.2;
+      font-weight: bold;
+      &:hover{
+        opacity: 1;
+        color: var(--tp__active);
+      }
+    }
+    .VideoClientIcon-iPlus{
+      font-size: 13px;
+      -moz-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      display: inline-block;
+      position: relative;
+    }
+    .FlashBox-Title{
+      display: inline-block;
+      padding: 0 5px;
+      vertical-align: middle;
+      color: var(--tp__main);
+    }
+  }
+  .FlashBox-B{
+    font-size: 14px;
+    line-height: 18px;
+    padding: 10px 40px 20px 50px;
+    color: var(--tp__main);
+    a{
+      color: var(--tp__active);
+    }
+    &__ellipsis{
+      @include text__ellipsis(3);
+      a{
+        color: var(--tp__active);
+      }
+    }
+  }
+  .FlashBox-optionBox{
+    .checkbox.choice{
+      margin-bottom: 5px;
+      margin-top: 2px;
+      span{
+        font-size: 12px;
+        padding-top: 2px;
+      }
+    }
+    background: var(--bg__tooltip);
+    padding:0 10px;
+  }
+  .FlashBox-F{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    font-size: 14px;
+    min-height: 45px;
+    color: var(--tp__main);
+    .FlashBox-btnBox{
+      padding-top: 1rem;
+      .btn-s.active{
+        color: var(--tp__btn__main);
+      }
+      .btn{
+        min-width: 9rem;
+        min-height: 2rem;
+        font-weight: bold;
+        &:first-child{
+          margin-right: 1rem;
+          background: var(--btn__secondary);
+          color: var(--tp__btn__secondary);
+          border: none;
+        }
+      }
+      i{
+        display: none !important;
+      }
+    }
+  }
+}
+
+[rel='tipsy']{
+  display: inline-block;
+  &.VideoClientIcon-q5, &.icon-info-circled, &.icon-attention-circled{
+    font-size: 12px;
+  }
+  i{
+    line-height: 26px;
+    display: inline-block;
+    &.VideoClientIcon-q5, &.icon-info-circled, &.icon-attention-circled{
+      font-size: 12px;
+    }
+  }
+}
+
+.FormBoxWithTooltip{
+  & > div{
+    display: inline-block;
+    vertical-align: middle;
+    width: auto!important;
+  }
+  i[rel='tipsy']{
+    vertical-align: super;
+  }
+  &.tolTop{
+    vertical-align: top;
+    i[rel='tipsy']{
+      vertical-align: top;
+      padding-top: 30px;
+    }
+  }
+  &.tagitWrapper{
+    & > div{
+      width: 435px!important;
+      max-width: 90%;
+      ul.tagit{
+        min-width: 100% ;
+      }
+
+    }
+
+  }
+}
+
+.special-block{
+  &>a{
+    z-index: 19;
+  }
+  &>div{
+    z-index: 9;
+  }
+}
+
+
+.unobtrusive-flash-container{
+  .alert{
+    position: relative;
+    font-size: 14px;
+    line-height: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .close{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 18px;
+    color: var(--tp__icons);
+  }
+  .bodyFlashMessage{
+    padding: 15px 40px 15px 55px;
+  }
+}
+
+[data-tooltip]{
+  position: relative;
+  &:after{
+    content: attr(data-tooltip);
+    position: absolute;
+    min-width: 200px;
+    max-width: 350px;
+    border-radius: 10px;
+    background-color: var(--tp__main);
+    text-align: center;
+    padding: 0 5px;
+    color: var(--tp__icons);
+    font-size: 12px;
+    top:147%;
+    left: 50%;
+    transform: translateX(-50%);
+    visibility: hidden;
+    opacity: 0;
+    @include transition200();
+    z-index: 21;
+  }
+  &:before{
+    content:"";
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent var(--tp__main) transparent;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top:120%;
+    visibility: hidden;
+    opacity: 0;
+    @include transition200();
+    z-index: 11;
+  }
+  &:hover{
+    &:after, &:before{
+      visibility: visible;
+      opacity: 1;
+    }
+    &:after{
+      top:calc(100% + 1.5rem);
+    }
+    &:before{
+      top:calc(100% - -.4rem);
+    }
+  }
+}

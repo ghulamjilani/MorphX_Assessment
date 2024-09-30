@@ -1,0 +1,43 @@
+<div class="moreVideos">
+  <div class="moreVideos__wrapper">
+    <div class="margin-bottom-10">
+      <a class="avatarImg-MD" href="{{model.organizer_path}}" style="background-image:url('{{model.organizer_image}}')"></a>
+    </div>
+    {{#if any}}
+      <div class="span text">{{model.organizer_name}} has {{#if model.cancelled}}cancelled{{else}}completed{{/if}} the session</div>
+  </div>
+        <div class="moreVideos-B">
+            <div class="clearfix sliderWrapper">
+                {{#each replays}}
+                    <section class="tile-cake session-tile">
+                        <div class="tile-img">
+                            <div class="tile-imgContainer owl-lazy" data-src="{{image_url}}"></div>
+                            <a class="tile_link" href="{{url}}"></a>
+                            <a class="social-sharing" data-method="get" data-remote="" href="{{share_url}}" rel="nofollow" style="visibility: visible;" title="Share">
+                                <i class="VideoClientIcon-share-mk4"></i>
+                            </a>
+                            {{#if (gt price 0)}}
+                                <div class="sessionCost" title="${{price}}">
+                                    <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                                </div>
+                            {{/if}}
+                        </div>
+                        <div class="tile-body">
+                            <a class="tile-name" href="{{url}}">
+                                {{title}}
+                            </a>
+                        </div>
+                    </section>
+                {{/each}}
+            </div>
+            <div class="spinnerSlider" style="display:none">
+                <div class="bounceS1"></div>
+                <div class="bounceS2"></div>
+                <div class="bounceS3"></div>
+            </div>
+        </div>
+    {{else}}
+        <div class="span text">Presented by {{model.organizer_name}}</div>
+        <a class="btn btn-m" href="{{model.organizer_path}}">View Profile</a>
+    {{/if}}
+</div>

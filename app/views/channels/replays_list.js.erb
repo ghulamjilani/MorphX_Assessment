@@ -1,0 +1,17 @@
+$('#PL_Replays .tile-cake-sidebar-wrapp').append("<%= escape_javascript(render(partial: 'channels/playlist/replay', collection: @replays, locals: {channel: @channel})) %>");
+$('#PL_Replays a[data-remote]').css('visibility', 'visible');
+if(Immerss.replay) {
+  $('#PL_Replays .tile-cake-sidebarrr[data-id='+ Immerss.replay.id +']').addClass('active');
+}
+window.initializeDateTimes();
+<% if @replays.length > 0 %>
+  $('#PL_Replays').removeClass('hidden');
+  $('#PL_ReplaysToggle').removeClass('hidden');
+<% end %>
+<% if @replays.length == 6 %>
+$('#PL_Replays .show_more').attr('href', "<%= replays_list_channel_path(@channel.id, {limit: @limit, offset: @offset + @limit}) %>");
+$('#PL_Replays .show_more').removeClass('hidden');
+<% else %>
+$('#PL_Replays .show_more').addClass('hidden');
+<% end %>
+$('.mainVideoSection-rightSidebar_cover').addClass('hidden');

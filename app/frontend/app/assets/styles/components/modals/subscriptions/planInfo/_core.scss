@@ -1,0 +1,252 @@
+.PlanInfoModal {
+  .MK2-modal__dialog {
+    padding: 2rem 0;
+    max-width: 74rem;
+    min-width: 74rem;
+    @include media(p-tablet) {
+      padding: 2rem;
+      max-width: 94%;
+      min-width: 0;
+      width: 76rem;
+    }
+    @include media(p-phone) {
+      padding: 1rem;
+      max-width: 94%;
+    }
+  }
+
+  .MK2-modal__body {
+    width: 100%;
+    padding: 0;
+  }
+
+  &__wrapper {
+    display: flex;
+    @include media(phone) {
+      display: block;
+    }
+  }
+
+  &__leftPart {
+    @include media(reverso-p-tablet) {
+      padding: 0 1rem 0 2rem;
+    }
+  }
+
+  &__leftPart, &__rightPart {
+    @include media(reverso-phone) {
+      width: 50%;
+    }
+    @include media(phone) {
+      width: 100%;
+    }
+  }
+
+  &__section1 {
+    margin-bottom: 2rem;
+    box-shadow: 0 0.4rem 0.7rem 0 var(--sh__main);
+    border-radius: 1rem;
+    background: var(--bg__content);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      border-radius: 1rem 1rem 0 0;
+      max-height: 9rem;
+      object-fit: cover;
+    }
+
+    &__circle {
+      position: absolute;
+      width: 5rem;
+      height: 5rem;
+      background: #fab4b4;
+      border-radius: 100%;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      &__child {
+        position: absolute;
+        height: 4rem;
+        width: 4rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 100%;
+        background: #F23535;
+      }
+
+      &__parent {
+        content: '';
+        position: relative;
+        height: 6rem;
+        width: 6rem;
+        top: -3rem;
+        border-radius: 100%;
+        background: #feebeb;
+        z-index: 1;
+        margin-bottom: -2rem;
+      }
+    }
+
+    &__planName {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    &__info {
+      font-size: 1.4rem;
+      width: 100%;
+
+      &__top {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border__separator);
+
+        .line {
+          margin-bottom: 2rem;
+          width: 100%;
+          border-bottom: 1px solid var(--border__content__sections);
+        }
+      }
+
+      &__item {
+        display: flex;
+        align-items: baseline;
+        min-width: 15.5rem;
+        text-align: left;
+        padding-bottom: 1.3rem;
+
+        i {
+          color: var(--tp__icons);
+          padding-right: 1rem;
+          font-size: 1.8rem;
+        }
+
+        span {
+          font-size: 1.4rem;
+          line-height: 1.4rem;
+          font-weight: bold;
+          padding-right: 0;
+          color: var(--tp__main);
+        }
+
+        &.disabled {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  &__section2 {
+    padding: 2rem;
+    box-shadow: 0 0.4rem 0.7rem 0 var(--sh__main);
+    border-radius: 1rem;
+    background: var(--bg__content);
+    margin-bottom: 1rem;
+
+    i {
+      color: var(--tp__h1);
+    }
+  }
+
+  &__rightPart {
+    padding: 0 2rem 0 1rem;
+
+    .wrapper.CardNameInput {
+      padding-top: 2rem;
+    }
+
+    &__flexInputs {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+
+      > div {
+        width: 50%;
+      }
+
+      > *:not(:last-child) {
+        margin-right: 2rem;
+      }
+    }
+
+    &__label {
+      color: var(--tp__h1);
+      margin-bottom: 1rem;
+    }
+
+    &__table {
+      border-radius: 1rem;
+      background: rgba(9, 95, 115, 0.05);
+      border: 1px solid rgba(9, 95, 115, 0.2);
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      span {
+        color: var(--tp__inputs);
+      }
+
+      &__bottom {
+        font-size: 1.6rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border__separator);
+      }
+    }
+
+    &__table b, &__bottom b {
+      color: var(--tp__secondary);
+    }
+  }
+
+  &__disabledButton {
+    padding: 1.5rem 0;
+    min-width: 8rem;
+    text-align: center;
+    max-width: 8rem;
+    background: var(--bg__label);
+    color: #fff; /*as was in monolith*/
+    margin: 3rem 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    border-radius: 0.5rem;
+  }
+
+  #stripe-card-element {
+    min-height: 20px;
+  }
+
+  &__gift-error {
+    color: var(--tp__inputs__validation);
+  }
+}
+
+.subsPlansModal {
+  &__Title {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    font-weight: bold;
+    color: var(--tp__h1);
+  }
+  &__savedCard {
+    margin-bottom: 3rem;
+  }
+}

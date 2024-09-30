@@ -1,0 +1,16 @@
+<% email_direct_message_context(@session.channel.title) %>
+
+<p>
+  Session: <a href="<%= @url %>"><%= @session.always_present_title %></a> is about to start soon.
+</p>
+
+<p>
+  Start time:
+  <strong>
+    <%= @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %>
+  </strong>
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@session.channel.title) %>
+</p>

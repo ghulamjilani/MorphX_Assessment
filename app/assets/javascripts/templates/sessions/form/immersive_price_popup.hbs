@@ -1,0 +1,39 @@
+<div class="stb-h">Price breakdown</div>
+<div class="stb-b text-center padding-top-10">
+    <div class="stb-1">
+        <label>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            {{#if (and can_change_immersive_access_cost (not immersive_free))}}
+                <input type="hidden" name="session[immersive_access_cost]" value="{{immersive_access_cost}}">
+                <input id="immersive_total_cost" step="0.01" type="text" class="price_number"
+                       mincost="{{immersiveTotalMinCost}}" maxcost="{{immersiveTotalMaxCost}}"
+                       value="{{immersiveTotalPurchasePrice}}">
+            {{else}}
+                <input disabled value="{{immersiveTotalPurchasePrice}}">
+            {{/if}}
+            <div title="min ${{immersiveTotalMinCost}}">Session Price</div>
+        </label>
+    </div>
+    {{!--
+    <div class="stb-2">
+        <span>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            <div id="immersive_service_fee">{{immersiveServiceFee}}</div>
+        </span>
+        Service Fee
+    </div>
+    --}}
+    <div class="stb-sum">
+        <label>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            {{#if (and can_change_immersive_access_cost (not immersive_free))}}
+                <input id="immersive_revenue" step="0.01" type="text" class="price_number"
+                       mincost="{{immersiveRevenueMin}}" maxcost="{{immersiveRevenueMax}}"
+                       value="{{immersiveRevenue}}">
+            {{else}}
+                <input disabled value="{{immersiveRevenue}}">
+            {{/if}}
+            <div title="{{revenueSplitTitle}}">Your Earnings</div>
+        </label>
+    </div>
+</div>

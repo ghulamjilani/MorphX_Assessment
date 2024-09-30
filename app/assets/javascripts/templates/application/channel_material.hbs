@@ -1,0 +1,58 @@
+<div class="material-img">
+    <span class="material-index"></span>
+
+    <div>
+      {{#if cropped_canvas}}
+          <a class="ensure-link-style" rel="tipsy" title="Image name: {{imageName}}</br> <img src='{{cropped_canvas}}' style='width:100%;margin-top:5px;' alt=''/>" data-target="#material-{{cid}}" data-toggle="modal" style="background-image: url({{cropped_canvas}})"></a>
+      {{else}}
+        {{#if img_src}}
+            <a class="ensure-link-style" rel="tipsy" title="Image name: {{imageName}}</br> <img src='{{img_src}}' style='width:100%;margin-top:5px;' alt=''/>" data-target="#material-{{cid}}" data-toggle="modal" style="background-image: url({{img_src}})"></a>
+        {{else}}
+            Processing material...
+        {{/if}}
+      {{/if}}
+    </div>
+</div>
+<div class="material-actions">
+    <span class="material-desc">
+      {{#if editMode}}
+          <input type="text" class="description" value="{{description}}" placeholder="Add some description here...">
+      {{else}}
+        {{#if description}}
+          {{description}}
+        {{else}}
+            You can add some description by clicking on "Edit" button
+        {{/if}}
+      {{/if}}
+
+    </span>
+    <span class="material-btns">
+        {{#if editMode}}
+            <a class="ensure-link-style done btn btn-primary"><i class="icon-ok"></i></a>
+        {{else}}
+            <a class="ensure-link-style edit btn btn-primary"><i class="VideoClientIcon-editF"></i></a>
+        {{/if}}
+
+        <a class="ensure-link-style delete btn btn-primary"><i class="VideoClientIcon-trash-emptyF"></i></a>
+    </span>
+</div>
+<div class="clearfix"></div>
+<div id="material-{{cid}}" class="modal fade material-modal" aria-hidden="true" aria-labelledby="materialModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="modalLabel" class="modal-title text-left">Image preview</h4>
+            </div>
+            <div class="modal-body">
+              {{#if embedded}}
+                {{{embedded}}}
+              {{else}}
+                  <img src="{{preview_src}}">
+              {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+en:
+  views:
+    dashboard:
+      subscriptions:
+        new:
+          page_title: Subscriptions

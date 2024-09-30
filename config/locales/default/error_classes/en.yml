@@ -1,0 +1,8 @@
+en:
+  error_classes:
+    access_forbidden:
+      message: You are not allowed to perform this action
+    not_authorized:
+      message: You are not authorized to perform this action
+    abstract_method_not_inherited:
+      message: Abstract class method must be overridden

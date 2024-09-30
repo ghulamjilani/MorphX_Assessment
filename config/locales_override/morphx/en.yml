@@ -1,0 +1,12 @@
+en:
+  host_url: https://morphx.io
+  wizard:
+    step1:
+      birthday_tooltip: Providing your birthday helps make sure you get the right Morphx experience for your age. Your birthday will not be shared. For more details please visit our <a target='_blank' class='text-color-Blue' href='%{path}'>Privacy Policy</a>.
+      description: |-
+        Congratulations on taking the first step in a quick three step process to create your very own live interactive network.
+        Morphx is proud to work with influencers like yourself, who want to extend their reach and grow their revenue. An Morphx influencer can be an individual or a brand. We provide you with all the tools necessary to create and deliver your live content, as well as engage your audience the way only live video can. Let’s take a few minutes to set up your profile!
+    step2:
+      title: Your Morphx Channel is your window to the world, make sure it's a good view!
+    step3:
+      list_tooltip: Once your network is approved, your channel will be listed publicly on our home page and on our Morphx Live Guide.

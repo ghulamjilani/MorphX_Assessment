@@ -1,0 +1,6 @@
+{{#each dateRange}}
+    <span class="date-title" style="left: {{sectionTitlePosLeft this.position this.items.length ../pixelsPerSection}}px;">{{@key}}</span>
+    {{#each this.items}}
+        <div class="section" style="width: {{../../pixelsPerSection}}px;">{{this.time}}</div>
+    {{/each}}
+{{/each}}

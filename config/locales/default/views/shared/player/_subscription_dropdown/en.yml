@@ -1,0 +1,11 @@
+en:
+  views:
+    shared:
+      player:
+        _subscription_dropdown:
+          go_to_channel: Go to Channel
+          subscribed: Subscribed
+          subscribe: Subscribe to Channel
+          subscription: Subscription
+          subscribe_to_channel: Subscribe to Channel
+          gift_subscription: Gift Subscription

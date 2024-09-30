@@ -1,0 +1,115 @@
+#NetworkSalesReports {
+  margin: 0 4rem;
+}
+
+.reports-table-wrapper {
+  overflow: auto;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.reports-table {
+  border-top: 1px solid var(--border__separator);
+  overflow: visible;
+  border-collapse: collapse;
+  width: 100%;
+
+  thead th {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--tp__secondary);
+    background: var(--bg__secondary);
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    min-width: 9rem;
+
+    &:hover i {
+      opacity: 0.5;
+    }
+
+    &:last-child {
+      padding: 2rem;
+    }
+  }
+
+  tbody {
+    tr:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+    tr:nth-child(2n) {
+      background: var(--bg__content__secondary);
+    }
+
+    @include media(tablet) {
+      padding: 0;
+    }
+
+    tr.total {
+      color: var(--tp__secondary);
+      background: var(--bg__secondary);
+    }
+
+    td {
+      padding: 1rem 2rem;
+
+      &:last-child {
+        padding: 0 2rem;
+        @include media(tablet) {
+          padding: 3rem;
+        }
+      }
+    }
+  }
+
+  .sorting-arrows {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0.2rem;
+    top: calc(50% - 1rem);
+
+    i {
+      display: block;
+      opacity: 0.2;
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__sortingUp{
+    transform: rotateZ(180deg);
+  }
+
+  &__nowrap {
+    white-space: nowrap;
+  }
+}
+
+.reportFilters {
+  // margin-left: 3rem;
+
+  .channelFilters__classType {
+    padding: 0;
+  }
+
+  .channelFilters__tagsList {
+    .toggle-icon {
+      cursor: pointer;
+      margin-right: 1.5rem;
+    }
+  }
+
+  .channelFilters__tagsList .chips {
+    margin-right: 0.2rem;
+  }
+
+  .checkboxMK2.disabled {
+    opacity: 0.8;
+  }
+}

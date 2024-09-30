@@ -1,0 +1,12 @@
+- if @brand_new_presenter_users.present?
+  .col-md-12
+    .headline
+      %h2 New
+    .TileSliderWrapp.owlSlider
+      .spinnerSlider
+        .bounceS1
+        .bounceS2
+        .bounceS3
+      .TileSlider.owl-carousel
+        - @brand_new_presenter_users.each do |user|
+          = render('shared/tiles/user', user: user)

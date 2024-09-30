@@ -1,0 +1,84 @@
+#dashboardReviews {
+  position: relative;
+  min-height: 30rem;
+
+  .channelFilters__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &.btn {
+      height: fit-content;
+    }
+
+    @include media(p-phone) {
+      flex-direction: column;
+      align-items: flex-start;
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .chips {
+    margin-bottom: 0rem;
+  }
+
+  .blogFilters.channelFilters__active {
+    margin-top: 0rem;
+  }
+
+  .comment__2ndlevel {
+    .comment {
+      .comment__right {
+        width: 100%;
+      }
+    }
+  }
+
+  .review__section {
+    width: 100%;
+  }
+
+  .comment {
+    .comment__right {
+      width: 50%;
+    }
+
+    .preview {
+      position: relative;
+      width: calc(50% - 43px);
+      // padding: 1rem 1rem 1rem 2rem;
+      margin-left: 2rem;
+      height: 15rem;
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem;
+
+      img {
+        display: block;
+        // width: calc(50% - 43px);
+        max-width: 20rem;
+        // height: 12rem;
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+
+      &__name {
+        // color: white;
+        // position: absolute;
+        // bottom: 2.4rem;
+        // background-color: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        height: fit-content;
+        margin-left: 1rem;
+        // padding: 0.2rem;
+      }
+    }
+
+    &__hide {
+      opacity: 0.5;
+    }
+  }
+}

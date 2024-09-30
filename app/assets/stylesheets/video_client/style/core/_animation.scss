@@ -1,0 +1,159 @@
+
+/*loading animation*/
+@import "mixin";
+@include keyframes(animIn){
+  0% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0
+  }
+
+  50% {
+    opacity: 1
+  }
+
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0
+  }
+}
+
+.loading {
+    position: absolute;
+    top: calc(50% - 5px);
+    left: 50%
+}
+
+.loading .bullet {
+    position: absolute;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-animation: animIn .65s ease-in-out 0s infinite;
+    animation: animIn .65s ease-in-out 0s infinite
+}
+
+.loading .bullet:nth-child(1) {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s
+}
+
+.loading .bullet:nth-child(2) {
+    -webkit-animation-delay: .15s;
+    animation-delay: .15s
+}
+
+.loading .bullet:nth-child(3) {
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s
+}
+
+.loading .bullet:nth-child(4) {
+    -webkit-animation-delay: .45s;
+    animation-delay: .45s
+}
+/*loading animation END*/
+
+//loader animation
+
+
+@include keyframes(bounce_circleG){
+  0%{
+  }
+
+  50%{
+    background-color: #ffffff;
+    opacity: 1;
+  }
+
+  100%{
+  }
+}
+
+.loadSpin{
+  color: #FFFFFF;
+}
+
+
+#circleG{
+  display: block;
+  margin: 0px auto;
+  padding: 10px 0;
+  text-align: center;
+}
+.inRow{
+  display: inline-flex;
+}
+.smallCircleG{
+  background-color:#3d9ed3;
+  opacity: 0.2;
+  height:5px;
+  margin-left:10px;
+  width:5px;
+  display: inline-block;
+  -webkit-animation-name:bounce_circleG;
+  -webkit-animation-duration:4s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-direction:linear;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-border-radius:8px;
+  animation-name:bounce_circleG;
+  animation-duration:2s;
+  animation-iteration-count:infinite;
+  animation-direction:linear;
+  animation-fill-mode: forwards;
+  border-radius:8px;
+  &:first-child{
+    margin-left: 0;
+  }
+}
+.circleG{
+  background-color:#3d9ed3;
+  opacity: 0.2;
+  height:10px;
+  margin-left:10px;
+  width:10px;
+  display: inline-block;
+  -webkit-animation-name:bounce_circleG;
+  -webkit-animation-duration:6.55s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-direction:linear;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-border-radius:8px;
+  animation-name:bounce_circleG;
+  animation-duration:3.28s;
+  animation-iteration-count:infinite;
+  animation-direction:linear;
+  animation-fill-mode: forwards;
+  border-radius:8px;
+  &:first-child{
+    margin-left: 0;
+  }
+}
+$animation-delay:0.4s ;
+#circleG_1, .circleG_1{
+  -moz-animation-delay:$animation-delay;
+  -webkit-animation-delay:$animation-delay;
+  -o-animation-delay:$animation-delay;
+  -ms-animation-delay:$animation-delay;
+  animation-delay:$animation-delay;
+}
+
+#circleG_2, .circleG_2{
+  -moz-animation-delay:$animation-delay * 2;
+  -webkit-animation-delay:$animation-delay* 2;
+  -o-animation-delay:$animation-delay* 2;
+  -ms-animation-delay:$animation-delay* 2;
+  animation-delay:$animation-delay* 2;
+}
+
+#circleG_3, .circleG_3{
+  -moz-animation-delay:$animation-delay * 3;
+  -webkit-animation-delay:$animation-delay* 3;
+  -o-animation-delay:$animation-delay* 3;
+  -ms-animation-delay:$animation-delay* 3;
+  animation-delay:$animation-delay* 3;
+}
+
+//loader animation END

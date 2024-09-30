@@ -1,0 +1,47 @@
+<% email_direct_message_context(@session.channel.title) %>
+
+<% if @user.can_receive_abstract_session_invitation_without_invitation_token? %>
+  <% if @session.session_invited_immersive_participantships.length > 0%>
+    <p>
+      <%= simple_format I18n.t('mailer.without_invitation_token.you_invited_message',
+                              abstract_session_link: "<a href=\"#{@session.absolute_path}\" target=\"_blank\">#{@session.always_present_title}</a>",
+                              presenter_link: "<a href=\"#{@session.organizer.absolute_path}\" target=\"_blank\">#{@session.organizer.public_display_name}</a>",
+                              start_at: @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z'),
+                              role: 'participant',
+                              kind_of_abstract_session: 'session') %>
+    </p>
+  <% else %>
+    <p>
+      <%= simple_format I18n.t('mailer.without_invitation_token.you_invited_message',
+                              abstract_session_link: "<a href=\"#{@session.absolute_path}\" target=\"_blank\">#{@session.always_present_title}</a>",
+                              presenter_link: "<a href=\"#{@session.organizer.absolute_path}\" target=\"_blank\">#{@session.organizer.public_display_name}</a>",
+                              start_at: @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z'),
+                              role: 'viewer',
+                              kind_of_abstract_session: 'session') %>
+    </p>
+  <% end %>
+
+  <p>
+  <%= simple_format I18n.t('mailer.without_invitation_token.follow_link_message',
+                           url: @follow_link_url,
+                           kind_of_abstract_session: 'session') %>
+  </p>
+<% else %>
+  <p>
+    <%= simple_format I18n.t('mailer.with_invitation_token.you_invited_message',
+                             abstract_session_link: "<a href=\"#{@session.absolute_path}\" target=\"_blank\">#{@session.always_present_title}</a>",
+                             presenter_link: "<a href=\"#{@session.organizer.absolute_path}\" target=\"_blank\">#{@session.organizer.public_display_name}</a>",
+                             start_at: @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z'),
+                             role: 'participant',
+                             kind_of_abstract_session: 'session') %>
+
+  <p>
+    <%= simple_format I18n.t('mailer.with_invitation_token.follow_link_message',
+                             url: @follow_link_url,
+                             kind_of_abstract_session: 'session') %>
+  </p>
+<% end %>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@session.channel.title) %>
+</p>

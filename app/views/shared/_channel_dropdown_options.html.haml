@@ -1,0 +1,35 @@
+= dropdown_with_icons do
+  - if can?(:create_session, channel)
+    %li
+      %i.VideoClientIcon-plusF
+      = link_to 'New Session', new_channel_session_path(channel.slug)
+
+  %li
+    %i.VideoClientIcon-EditF
+    = link_to 'Edit', edit_channel_path(channel.slug)
+
+  - if can?(:list, channel)
+    %li
+      %i.icon-bell-alt
+      = link_to 'List', list_channel_path(channel.id), method: :post, data: {confirm: I18n.t('channels.show.list_confirmation')}
+
+  - if can?(:unlist, channel)
+    %li
+      %i.icon-bell-alt
+      = link_to 'Unlist', unlist_channel_path(channel.id), method: :post, data: {confirm: I18n.t('channels.show.unlist_confirmation')}
+
+  - if can?(:submit_for_review, channel)
+    %li
+      %i.icon-bell-alt
+      = link_to 'Submit For Review',
+                submit_for_review_channel_path(channel.id),
+                method: :post,
+                data: {confirm: 'Are you sure you want to submit channel for review?'}
+
+  - if can?(:archive, channel)
+    %li
+      %i.VideoClientIcon-lock
+      = link_to 'Archive',
+        archive_channel_path(channel.id),
+        method: :post,
+        data: {confirm: I18n.t('channels.show.archive_confirmation')}

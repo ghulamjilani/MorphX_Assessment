@@ -1,0 +1,39 @@
+<div class="m-rth-wrapp">
+    <h3 class="m-object">
+      Discussion: <%= conversation.subject %>
+    </h3>
+
+    <div class="action m-rth">
+        <% unless @box.eql? 'trash' %>
+          <%= link_to 'Remove this chat',
+                      message_path(conversation, location: 'conversation', box: @box),
+                      data: {confirm: 'Are you sure?'},
+                      method: :delete, class: 'btn-red' %>
+        <% end %>
+    </div>
+
+    <h4 class="m-Participants">
+      <span><%= participants_list(conversation.recipients, conversation) %></span>
+    </h4>
+</div>
+
+
+<hr class="soften">
+<div class="messages">
+  <%= render partial: 'message', collection: @receipts.map(&:message) %>
+
+  <% unless @box.eql? 'trash' %>
+      <br>
+      <%= form_tag message_path(conversation), method: :put, class: "cont_conversation" do %>
+
+          <div class="row">
+              <div class="editor col-md-10">
+                <%= text_area_tag :body, nil, rows: 6, cols: 53, placeholder: 'Type your message...', class: "required form_tag" %>
+              </div>
+              <div class="col-md-2">
+                <%= submit_tag 'Reply', name: :reply_all, class: "mainButton bigBtn full-width" %>
+              </div>
+          </div>
+      <% end %>
+  <% end %>
+</div>

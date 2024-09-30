@@ -1,0 +1,191 @@
+@import "../../../../mixin";
+
+.Subscription_item{
+  &__title{
+    font-size:18px;
+    padding-bottom: 10px;
+    a{
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--tp__active);
+    }
+  }
+}
+//subscription MODAL
+#subscription_list{
+  .modal-dialog{
+    width: 80rem;
+    @include media(tablet){
+      width: 100%;
+      max-width: 94%;
+    }
+    .closeModal{
+      top: 0.6rem;
+      right: 0.7rem;
+      i{
+        font-size: 2.1rem;
+      }
+    }
+  }
+  .modal-body{
+    padding: 4rem 3rem 0;
+    .groupTitle{
+      font-size: 2.2rem;
+      font-weight: bold;
+      line-height: 2.2rem;
+      color: var(--tp__h1);
+      padding: 0;
+      margin-bottom: 2.3rem;
+    }
+    .subscriptionTitle{
+      word-break: break-word;
+      font-size: 1.5rem;
+      line-height: 2.2rem;
+      color: var(--tp__secondary);
+      margin-bottom: 2.7rem;
+    }
+    .subscription_list-wrapper{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      @include media(tablet){
+        justify-content: space-evenly;
+      }
+    }
+    .subscription_list-item{
+      width: 24rem;
+      min-height: 46rem;
+      padding: 2rem 2rem 2rem;
+      margin-right: 1rem;
+      margin-bottom: 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border__content__sections);
+      border-radius: 2rem;
+      @include media(reverso-tablet){
+        &:nth-child(3n+3) {
+          margin-right: 0;
+        }
+      }
+      @include media(p-phone){
+        margin-right: 0;
+        width: 100%;
+      }
+    }
+    .tittle{
+      font-size: 1.8rem;
+      line-height: 1.8rem;
+      color: var(--tp__main);
+      font-weight: bold;
+      margin-bottom: auto;
+      word-break: break-word;
+      text-align: center;
+    }
+    .fl_currency{
+      @include flex(flex, center, center);
+      margin-bottom: 3rem;
+      margin-top: 2rem;
+      font-size: 3.2rem;
+      color: var(--tp__main);
+      line-height: 2.4rem;
+      font-weight: bold;
+      padding: 0;
+    }
+    .longTile_mk3{
+      flex-direction: column;
+      border-radius: 2rem;
+      margin-bottom: 0;
+      border: none;
+      height: 100%;
+      .buyBtn{
+        width: 100%;
+        padding-top: 3rem;
+        @include media(phone){
+          width: 50%;
+        }
+        a{
+          width: 100%;
+          font-weight: bold;
+          color: var(--tp__btn__bordered);
+          background: transparent;
+          border: 1px solid var(--btn__bordered);
+          &:hover{
+            background: var(--btn__bordered);
+            color: var(--tp__btn__bordered__hover);
+          }
+        }
+      }
+    }
+    .right_side{
+      padding: 0;
+      @include flex(flex, center, false);
+      flex-direction: column;
+      height: 100%;
+      .buyBtn{
+        padding-top: 0;
+      }
+    }
+    .details{
+      width: 100%;
+      padding-top: 0;
+      .fl_plan{
+        @include flex(flex, center, false);
+        font-size: 1.4rem;
+        line-height: 1.4rem;
+        font-weight: bold;
+        padding-right: 0;
+        color: var(--tp__main);
+        &.disabled{
+          opacity: 0.5;
+        }
+        i{
+          color: var(--tp__icons);
+          padding-right: 1rem;
+          font-size: 1.8rem;
+        }
+      }
+      .secondLine{
+        margin: 0 1rem 3.2rem 0.6rem;
+        border-bottom: 1px solid var(--border__content__sections);
+        .fl_plan{
+          padding-bottom: 1.3rem;
+          font-size: 1.4rem;
+          line-height: 1.4rem;
+          font-weight: bold;
+          padding-right: 0;
+          color: var(--tp__main);
+          i{
+            color: var(--tp__icons);
+            padding-right: 1rem;
+            font-size: 1.8rem;
+          }
+          &.disabled{
+            opacity: 0.5;
+          }
+          &:last-child{
+            padding-bottom: 3rem;
+          }
+        }
+      }
+      .thirdLine{
+        margin: 0 1rem 3rem 0.6rem;
+        .fl_plan{
+          padding-right: 0;
+          padding-bottom: 1.3rem;
+          &:last-child{
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+#submit-warn-modal{
+  .cancelAndSaveButtons{
+    position: absolute;
+    bottom: -5rem;
+    right: 0;
+  }
+}

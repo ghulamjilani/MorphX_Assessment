@@ -1,0 +1,39 @@
+
+.panel_contents
+  %table{border: 0, cellpadding: 0, cellspacing: 0}
+    %thead
+      %tr
+        %th.col.col-source Source
+        %th.col.col-campaign Campaign
+        %th.col.col-refc Ref code
+        %th.col.col-refc_user Ref User
+        %th.col.col-user_id User ID
+        %th.col.col-user_name User Name
+        %th.col.col-created_at Created At
+        %th.col.col-enter_point Enter Point
+        %th.col.col-referer Referer
+        %th.col.col-browser Browser
+        %th.col.col-ip IP
+        %th.col.col-first UTM Content
+        %th.col.col-actions
+        -#%th.col.col-visitor_id visitor_id
+        -#%th.col.col-first_add First Add
+    %tbody
+      - @items.each_with_index do |item, index|
+        %tr{id: "visitor_source_#{item.id}", class: index.even? ? :even : :odd}
+          %td.col.col-source= item.utm_source
+          %td.col.col-campaign= item.campaign
+          %td.col.col-refc= item.refc
+          %td.col.col-refc= item.refc ? ReferralCode.find_by(code: item.refc)&.user&.public_display_name : ''
+          %td.col.col-user_id= item.user_id
+          %td.col.col-user_name= item.user_id ? User.find_by(id: item.user_id)&.public_display_name : ''
+          %td.col.col-created_at= item.created_at
+          %td.col.col-enter_point= item.enter_point
+          %td.col.col-referer= item.referer
+          %td.col.col-browser= item.browser
+          %td.col.col-ip= item.ip_address
+          %td.col.col-first= item.first.to_s.split('|||').join("<br/>").html_safe
+          %td.col.col-actions
+          -#%td.col.col-visitor_id= item.visitor_id
+          -#%td.col.col-first_add= item.first_add.to_s.split('|||').join("<br/>").html_safe
+= paginate @items

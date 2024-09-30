@@ -1,0 +1,71 @@
+.Rlayout {
+  &__title {
+    color: var(--tp__main);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 2rem;
+  }
+
+  &__tiles {
+    @include flex(flex, baseline, space-between);
+    padding-bottom: 1rem;
+
+    .container {
+      width: auto;
+      max-width: none;
+    }
+  }
+
+  &__tile {
+    @include flex(flex, center, space-between);
+    border: 1px solid var(--border__separator);
+    border-radius: 1rem;
+    width: calc(100% - 3rem);
+    padding: 1.2rem;
+  }
+
+  &__info {
+    width: 16rem;
+    font-size: 1.3rem;
+    color: var(--tp__secondary);
+    line-height: 1.8rem;
+
+    &__title {
+      color: var(--tp__main);
+      font-size: 1.6rem;
+      padding-bottom: .8rem;
+      text-transform: capitalize;
+    }
+  }
+
+  &__replay {
+    width: 350px;
+    padding-left: 40px;
+    @include media(p-tablet) {
+      width: 100%;
+      padding: 2rem 0 0;
+    }
+
+    &__tile {
+      width: 28rem;
+      @include media(p-tablet) {
+        width: calc(100% - 3rem);
+      }
+    }
+  }
+
+  &__monolit {
+    .radioMK2 .checkmark {
+      height: 1.4rem;
+      width: 1.4rem;
+
+      &::after {
+        @include center('vh');
+      }
+    }
+
+    &__tile {
+      width: calc(100% - 2rem);
+    }
+  }
+}

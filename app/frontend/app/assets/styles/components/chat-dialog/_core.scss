@@ -1,0 +1,154 @@
+.chatDialog{
+  // background: var(--bg__dropdowns);
+  width: 100%;
+  height: 100%;
+  @include flex(flex, false, space-between);
+  flex-direction: column;
+  position: relative;
+
+  &__body {
+    @include media(reverso-tablet) {
+      @include flex(flex, false, flex-start);
+      flex-direction: column;
+    }
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 1rem;
+    &::-webkit-scrollbar, ::-webkit-scrollbar {
+      border-radius: .3rem;
+    }
+  }
+
+  &__footer{
+    padding: 1rem 1.5rem 1em;
+    border-top: 1px solid var(--border__separator);
+    width: calc(100% + .3rem);
+
+    #chatDialog__footer__input{
+      padding-right: 3rem;
+      color: var(--tp__inputs);
+      border-bottom: 1px solid #E6E6E6;
+    }
+
+    &__icon{
+      color: var(--tp__icons);
+    }
+
+    &__emoji{
+      // position: fixed;
+      // bottom: 0rem;
+      // right: 35rem;
+      z-index: 99;
+    }
+    &__buttons {
+      @include flex(flex, center, space-between );
+      .btn{
+        font-size: 1.6rem;
+        padding: 0.8rem 2rem;
+        &.btn__main.btn__normal{
+          width: 100%;
+        }
+      }
+    }
+  }
+  &__message{
+    @include flex(flex, false, false);
+    padding-bottom: 1rem;
+    padding-right: .5rem;
+  }
+  &__avatar {
+    padding-right: 1rem;
+    padding-top: .7rem;
+
+    &__image {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+    }
+  }
+
+  &__text {
+    color: var(--tp__main);
+    font-size: 1.4rem;
+    padding: 1rem 1.2rem;
+    padding-right: 2rem;
+    word-break: break-word;
+    width: 100%;
+    position: relative;
+
+    &__timestamp {
+      font-size: 1.2rem;
+      color: var(--tp__main);
+      padding-right: 1rem;
+    }
+
+    &__owner {
+      background: var(--bg__content__secondary);
+      border-radius: .3rem;
+    }
+
+    &__name {
+      font-weight: bold;
+      color: #095F73;
+    }
+
+    &:hover {
+      .chatDialog__remove {
+        display: block;
+      }
+    }
+  }
+
+  .input__field__bottom__smile {
+    color: #FFC20A; //static
+  }
+
+  .input__field__bottom__counter {
+    color: var(--tp__labels);
+  }
+
+  .input__field__bottom.bottom__right {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    justify-content: space-between;
+    padding-top: .3rem;
+  }
+
+  .input__field__icon {
+    top: 36%;
+  }
+
+  &__remove {
+    display: none;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: var(--tp__active);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all .3s;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.video-client, .webRTC__client, .curtainActive .MV_Chat_section {
+  .chatDialog {
+    // --tp__main: $client__tp__main;
+    // --bg__content__secondary: $client__bg__content__secondary;
+    // --tp__inputs: $client__tp__inputs;
+    // webrtc camera was override this
+    --tp__main: #FFFFFF;
+    --bg__content__secondary: #333333;
+    --tp__inputs: #FFFFFF;
+    --border__separator: #333333;
+  }
+}
+
+.MV_Chat_section.closed {
+  .chatDialog {
+    display: none;
+  }
+}

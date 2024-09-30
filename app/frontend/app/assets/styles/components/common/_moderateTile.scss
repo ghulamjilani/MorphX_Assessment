@@ -1,0 +1,81 @@
+.moderateTile {
+  width: 100%;
+  display: flex;
+  // justify-content: space-between;
+  // padding: 0.5rem 0.5rem 0rem 0.5rem;
+  margin-top: 0.5rem;
+  // background-color: bisque;
+
+  &.top-right {
+    position: absolute;
+    z-index: 99;
+    top: 1rem;
+    right: 1rem;
+    min-height: 24px;
+    width: fit-content;
+    margin-top: 0;
+  }
+
+  &__dropdown {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .MK2options__icon {
+      font-size: 1.5rem;
+      padding: 0.1rem 0.2rem;
+    }
+    // &__icon {
+    //   transform: rotate(180deg);
+    // }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+  }
+
+  &__block, &__roundedBlock, &__circleBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 3px;
+    color: #6F7073;
+    padding: 0.1rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+  }
+
+  &__roundedBlock {
+    border-radius: 100px;
+    padding: 0.2rem 1rem;
+  }
+
+  &__circleBlock {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    color: red;
+  }
+
+  .MK2options__options {
+    width: 20rem;
+    // top: initial;
+    // bottom: 2rem;
+  }
+
+  &__message {
+    color: var(--tp__active);
+  }
+}
+
+.homePage.isPlatformOwner {
+  .ArticleTile {
+    height: 31rem;
+  }
+}
+
+.moderateTile.ChannelsTile__btns, .OrganizationTile .moderateTile {
+  padding: 0.5rem 1rem;
+}

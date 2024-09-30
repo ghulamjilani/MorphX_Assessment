@@ -1,0 +1,43 @@
+en:
+  frontend:
+    app:
+      components:
+        pageparts:
+          header:
+            search: "Search"
+            join: "Join"
+            next: "Next session:"
+            start_creating: "START CREATING"
+            sign_up: Sign Up
+            sign_in: Log In
+            complete_business: ""
+            complete_channel: ""
+            confirm_email: "Please confirm your email address"
+            rewrite_email: "Didn't receive email instructions?"
+            resending_instructions: "Resending instructions…"
+            check_inbox: "Please check your inbox."
+            notifications:
+              latest_notifications: "Latest Notifications"
+              mark_all: "Mark all as read"
+              clear_all: "Clear all"
+              load_more: "Load More"
+              view_all: "View all"
+              empty: "No notifications."
+            messages:
+              mess_count: "Messages"
+              load_more: "Load More"
+              view_all: "View all"
+              empty: "No messages."
+            user:
+              dashboard: "Dashboard"
+              settings: "Settings"
+              help: "Help"
+              logout: "Logout"
+              logout_message: Logout successfully
+              reports: Reports
+              my_feed: My Library
+            sessions_create:
+              go_live: "Go Live"
+              fast_interactive: "Easy Conference"
+              fast_interactive_tooltip: "Quick setup for conference (like zoom)"
+              upload: "Upload Video"

@@ -1,0 +1,8 @@
+- content_for(:page_title, 'Video Sources')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+
+  .col-md-9
+    #ch-vue-app
+      = content_tag 'comp-wrapper', nil, data: { component: 'video-sources-container', props: {}}.to_json

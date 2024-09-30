@@ -1,0 +1,296 @@
+<section class="form_V2 no-padding">
+    <div class="modalChoice hidden">
+        <div class="modalChoice__body">
+            This change cannot be reversed.
+            Are you sure you would like to continue?
+            <div class="modalChoice__btns">
+                <a class="yes btn btn-l" href="javascript: void(0);">Yes</a>
+                <a class="no btn btn-l btn-grey-solid" href="javascript: void(0);">No</a>
+            </div>
+        </div>
+    </div>
+    <div class="editVideo_wrapp">
+        <div class="editVideo__top clearfix">
+            <div class="leftSection">
+                <h5>Video Editor</h5>
+              {{#if blocked}}
+                <div class="video__blocked">
+                  <p><span>This video is blocked by platform administrator.</span></p>
+                  <span>Block Reason:</span> {{{block_reason}}}
+                  <br>
+                  Please <a href="/support">Contact Us</a> for any questions.
+                </div>
+              {{/if}}
+                <section class="crop-wrapp hidden">
+                    <div class="unobtrusive-flash-container"></div>
+                    {{#if blocked}}
+                      {{{block_reason}}}
+                      <a href="/support">Contact Us</a>
+                    {{/if}}
+                    <div class="upload-area">
+                        <div class="row">
+                            <div class="upload-info" style="">
+                                <div class="dotsWrapp">
+                                    <div class="dot1"></div>
+                                    <div class="dot2"></div>
+                                    <div class="dot3"></div>
+                                    <div class="dot4"></div>
+                                    <div class="dot5"></div>
+                                    <div class="dot6"></div>
+                                    <div class="dot7"></div>
+                                    <div class="dot8"></div>
+                                </div>
+                                <div class="LoadingCover hidden">
+                                    <div class="spinnerSlider">
+                                        <div class="bounceS1"></div>
+                                        <div class="bounceS2"></div>
+                                        <div class="bounceS3"></div>
+                                    </div>
+                                </div>
+
+                                <span>
+                                <label>
+                                    <input class="inputfile" name="video[image]" type="file">
+                                    Select file to upload
+                                </label>
+                                <div class="fs-12 hideForMobile">or drag-n-drop your image here</div>
+                            </span>
+                            </div>
+                        </div>
+                        <div class="btn-group text-right">
+                            <a href="javascript: void(0);" class="cancelButton clear btn btn-s btn-grey-solid">Cancel</a>
+                        </div>
+                    </div>
+                    <div class="crop-container"></div>
+                    <div class="fs-12">
+                        Suggested size: 970x270 px
+                        <br>
+                        We recommend using high resolution image.
+                    </div>
+                </section>
+                <section class="main-wrapp">
+                    <div id="videoAreaModal_{{id}}" class="videoArea"> </div>
+
+                    {{#unless published}}
+                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header" ></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default leftButtonSlider" style="left: 0%;"></span>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default rightButtonSlider" style="left: 0%;"></span>
+                        </div>
+                    {{/unless}}
+
+                    <div class="timeline_image_picker hidden">
+                        <div id="slider-range-timeline" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;" ></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default leftButtonSlider" style="left: 0%;"></span>
+                        </div>
+                        <div class="pull-left">Drag picker to the desired frame</div>
+                        <div class="pull-right">
+                            <a class="select_frame btn btn-s" href="javascript: void(0);">Select Frame</a>
+                        </div>
+                    </div>
+                    {{#unless published}}
+                        <div class="clearfix rangeTime">
+                            <label>
+                                START
+                                <input type="text" class="leftEditSlider">
+                            </label>
+                            <label class="pull-right">
+                                END
+                                <input type="text" class="rightEditSlider">
+                            </label>
+                        </div>
+                    {{/unless}}
+                </section>
+            </div>
+
+            <div class="rightSection">
+                <h5>Thumbnail</h5>
+                <div class="padding-top-5">
+                    <div class="thumbnail_tile addCustom {{#if (eq source_type 0)}}active{{/if}}">
+                        <div class="LoadingCover hidden">
+                            <div class="spinnerSlider">
+                                <div class="bounceS1"></div>
+                                <div class="bounceS2"></div>
+                                <div class="bounceS3"></div>
+                            </div>
+                        </div>
+                        <a href="javascript: void(0);" class="choice_image" style='background-image:url({{uploaded_poster_url}}),url({{default_poster_url}});'>
+                        </a>
+                        <a class="add_custom_image" href="javascript: void(0);" >
+                            <i class="VideoClientIcon-add73"></i>
+                        </a>
+                    </div>
+                    Custom
+                </div>
+                {{#if (eq status 'found')}}
+                    <div class="padding-top-5">
+                        <div class="thumbnail_tile addfromtimeline {{#if (eq source_type 1)}}active{{/if}}">
+                            <div class="LoadingCover hidden">
+                                <div class="spinnerSlider">
+                                    <div class="bounceS1"></div>
+                                    <div class="bounceS2"></div>
+                                    <div class="bounceS3"></div>
+                                </div>
+                            </div>
+                            <a href="javascript: void(0);" class="choice_image" style='background-image:url({{timeline_poster_url}}),url({{default_poster_url}});'>
+                            </a>
+                            <a class="add_frame_image" href="javascript: void(0);">
+                                <i class="VideoClientIcon-add73"></i>
+                            </a>
+                        </div>
+                        Pick from timeline
+                    </div>
+                {{/if}}
+
+                {{#if (eq status 'found')}}
+                    <a href="javascript: void(0);" {{#unless can_upload_videos}}disabled title="Not allowed by your Business plan"{{/unless}}
+                       class="process_video btn btn-l btn-red full-width fs12 border-radius-3 {{#unless can_upload_videos}}disabled{{/unless}}">
+                      Process Video</a>
+                {{/if}}
+            </div>
+        </div>
+        <div class="editVideo__bottom clearfix">
+            <div class="leftSection">
+            <h5>Video settings</h5>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-block">
+                            <label for="video_title">Title</label>
+                            <input name="video[title]" value="{{title}}" minlength="3" required>
+                            <div class="errorContainerWrapp">
+                                <div class="errorContainer">error text</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+<!--                        <div class="input-block {{#unless description}}state-clear{{/unless}} descriptionWrapp">-->
+<!--                            <label for="video_description">Description</label>-->
+<!--                            <textarea name="video[description]" class="videoDescription" data-autoresize="true" rows="1" minlength="3">{{description}}</textarea>-->
+<!--                            <div class="errorContainerWrapp">-->
+<!--                                <div class="errorContainer">error text</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                            <div class="input-block descriptionWrapp">
+                              <label for="video_description">Description</label>
+                            </div>
+                            <div id="descriptionToolbar">
+{{!--                               <span class="ql-formats"> --}}
+{{!--                                 <select class="ql-header"> --}}
+{{!--                                   <option value="1">Heading</option> --}}
+{{!--                                   <option value="2">Subheading</option> --}}
+{{!--                                   <option selected>Normal</option> --}}
+{{!--                                 </select> --}}
+{{!--                               </span> --}}
+                              <span class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-list" value="ordered"></button>
+                                <button class="ql-list" value="bullet"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-link"></button>
+                              </span>
+                            </div>
+                            <div id="descriptionWrapp" style="min-height: 300px;">
+                              {{{description}}}
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rightSection rightSection__wrapper">
+                {{#if can_access_products}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="productWrapp">
+                            <span>Link product list</span>
+                            <select name="video[list_id]" class="styled-select_withCss full-width" placeholder="No product list">
+                                <option value="" {{#unless list_id}}selected{{/unless}}>No product list</option>
+                                {{#each lists}}
+                                    <option value="{{this.id}}" {{#if (eq ../list_id this.id)}}selected{{/if}}>{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+                <div class="row padding-top-5">
+                    <div class="col-md-5">Price</div>
+                    <div class="col-md-7 text-right">
+                        <div class="toggle_price btns-group full-width greenActive transperantBg margin-bottom-5"
+                            {{#unless can_monetize_content}}disabled title="PPV is disabled for your type of subscription"{{/unless}}>
+                            <a class="set_free btn btn-s btn-borderred-grey full-width btn-hover-green {{#if is_free}}active{{/if}}" href="javascript: void(0);">Free</a>
+                            <a class="set_price btn btn-s btn-borderred-grey full-width btn-hover-green {{#unless can_monetize_content}}disabled{{/unless}} {{#if (gt purchase_price 0)}}active{{/if}}" href="javascript: void(0);">{{#if (gt purchase_price 0)}}${{purchase_price}}{{else}}Set Price{{/if}}</a>
+                        </div>
+                        {{#if can_monetize_content}}
+                        <div id="replay_price_popup_{{id}}" class="tooltipBody setPrice text-left hidden">
+                            <div class="stb-h">Price breakdown</div>
+                            <div class="stb-b text-center padding-top-10">
+                                <div class="stb-1">
+                                    <label>
+                                        <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                                        <input type="hidden" name="video[purchase_price]" value="{{purchase_price}}">
+                                        <input class="total_cost price_number" step="0.01" type="number" mincost="{{min_price}}" maxcost="{{max_price}}" value="{{purchase_price}}">
+                                        <div title="min ${{min_price}}">Video Price</div>
+                                    </label>
+                                </div>
+                                <div class="stb-sum">
+                                    <label>
+                                        <i class="VideoClientIcon-dollar-currency-symbol"></i>
+                                        <input class="revenue price_number" step="0.01" type="number" mincost="{{min_revenue_price}}" maxcost="{{max_revenue_price}}" value="{{revenue}}">
+                                        <div title="Based on {{creator_revenue}}/{{immerss_revenue}} revenue split">Your Earnings</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="row padding-top-5">
+                    <div class="col-md-5">Visibility</div>
+                    <div class="col-md-7 text-right">
+                        <input type="hidden" name="video[show_on_profile]">
+                        <div class="toggle_visibility btns-group full-width transperantBg margin-bottom-5">
+                            <a data-hide="false" class="btn btn-s btn-borderred-grey full-width {{#unless hide}}active{{/unless}}" href="javascript: void(0);">Show</a>
+                            <a data-hide="true" class="btn btn-s btn-borderred-grey full-width {{#if hide}}active{{/if}}" href="javascript: void(0);">Hide</a>
+                        </div>
+                    </div>
+                </div>
+                {{#if ppv_enabled}}
+                    <div class="row padding-top-5">
+                      <div class="col-md-5">Only PPV</div>
+                      <div class="col-md-7 text-right">
+                        <input type="hidden" name="video[only_ppv]">
+                        <div class="toggle_only_ppv btns-group full-width transperantBg margin-bottom-5"
+                          {{#unless can_monetize_content}}disabled title="PPV is disabled for your type of subscription"{{/unless}}>
+                          <a data-only_ppv="true" class="btn btn-s btn-borderred-grey full-width {{#if only_ppv}}active{{/if}} {{#unless can_monetize_content}}disabled{{/unless}}" {{#unless can_monetize_content}}disabled{{/unless}} href="javascript: void(0);">On</a>
+                          <a data-only_ppv="false" class="btn btn-s btn-borderred-grey full-width {{#unless only_ppv}}active{{/unless}}" href="javascript: void(0);">Off</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row padding-top-5">
+                      <div class="col-md-5">Only Subscribers</div>
+                      <div class="col-md-7 text-right">
+                        <input type="hidden" name="video[only_subscription]">
+                        <div class="toggle_only_subscription btns-group full-width transperantBg margin-bottom-5"
+                          {{#unless can_monetize_content}}disabled title="PPV is disabled for your type of subscription"{{/unless}}>
+                          <a data-only_subscription="true" class="btn btn-s btn-borderred-grey full-width {{#if only_subscription}}active{{/if}} {{#unless can_monetize_content}}disabled{{/unless}}" {{#unless can_monetize_content}}disabled{{/unless}} href="javascript: void(0);">On</a>
+                          <a data-only_subscription="false" class="btn btn-s btn-borderred-grey full-width {{#unless only_subscription}}active{{/unless}}" href="javascript: void(0);">Off</a>
+                        </div>
+                      </div>
+                    </div>
+                {{/if}}
+                <div class="row padding-top-5">
+                  <div class="col-md-5">Status</div>
+                  <div class="col-md-7 text-right">
+                    <a class="{{#if private}}set_public{{else}}active{{/if}} btn btn-s btn-grey-solid full-width" href="javascript: void(0);">{{#if private}}Private{{else}}Public{{/if}}</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

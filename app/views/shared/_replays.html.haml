@@ -1,0 +1,12 @@
+- if replays.present?
+  .ReplaysWrapp
+    .row
+      .col-md-12
+        .TileSliderWrapp.owlSlider
+        .spinnerSlider
+          .bounceS1
+          .bounceS2
+          .bounceS3
+        .TileSlider.replaysSlider.owl-carousel.replay_tile_slider.activeSlide
+          - replays.each do |replay|
+            = render_shared_model_with_live_views_counter('shared/tiles/video', video: replay, session: replay.session)

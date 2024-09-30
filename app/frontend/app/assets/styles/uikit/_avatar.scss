@@ -1,0 +1,52 @@
+$sizes:(
+  //1-width 2-fontSize
+  xxs:(2, 1),
+  xs:(2.6, 1.2),
+  s:(3, 1.2),
+  m:(5, 1.6),
+  l:(6, 1.6),
+  xl:(10, 2.2),
+  sl:(15, 2.6),
+  xxl:(19, 3)
+);
+
+//$sizes: (xxs: 2, xs: 2.6, s:3, m:5, l:6, xl:10, xxl:20);
+@each $name, $size in $sizes {
+  $avatarWidth: nth($size, 1);
+  $avatarFontSize: nth($size, 2);
+  .avatar__#{$name} {
+    overflow: hidden;
+    img, &__img{
+      width: #{$avatarWidth}rem;
+      height: #{$avatarWidth}rem;
+    }
+    &__name{
+      font-size: #{$avatarFontSize}rem;
+      margin-top: #{$avatarFontSize + 0.4}rem;
+    }
+  }
+}
+
+
+
+.avatar{
+  display: inline-block;
+  text-align: center;
+  &__name{
+    font-weight: bold;
+    line-height: 130%;
+    color: var(--tp__primary);
+  }
+  img{
+    border-radius: 100%;
+    display: block;
+    background-color: var(--tp__icons);
+  }
+  &__img{
+    border-radius: 100%;
+    background-color: var(--tp__icons);
+    &__wrapper{
+      display: inline-block;
+    }
+  }
+}

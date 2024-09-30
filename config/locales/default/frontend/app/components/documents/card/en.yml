@@ -1,0 +1,13 @@
+en:
+  frontend:
+    app:
+      components:
+        documents:
+          card:
+            open_document: Open document
+            member: Member
+            free: Free
+            published: Published
+            size: Size
+            date: Date
+            purchases_temporarily_unavailable: Purchases on this channel is temporarily unavailable.

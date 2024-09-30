@@ -1,0 +1,1030 @@
+- if @session
+  - livestream_interactor = ObtainLivestreamAccessToSession.new(@session, current_user)
+  - immersive_interactor = ObtainImmersiveAccessToSession.new(@session, current_user)
+  - if can?(:join_as_participant, @session) || can?(:join_as_co_presenter, @session)
+    - if @session.room_members.find_by(abstract_user: current_user).try(:backstage?)
+      - session_start_at = @session.room.actual_start_at.to_i
+    - else
+      - session_start_at = @session.start_at.to_i
+  - elsif can? :join_as_presenter, @session
+    - session_start_at = @session.room.actual_start_at.to_i
+  - else
+    - session_start_at = @session.start_at.to_i
+  - @live = @session.in_progress?
+
+- content_for(:after_include_javascripts) do
+  = javascript_include_tag 'home'
+  :javascript
+    window.Immerss.chatCss = "#{asset_url('chatcss/custom.css')}";
+    window.session_view = new window.SessionShowView({session: window.Immerss.session});
+    window.session_view.render();
+- content_for(:extra_body_classes, ' bannerCollaps session_or_replay_or_recording ')
+- content_for(:page_title) do
+  - if @session
+    = @session.always_present_title.html_safe
+    -# Slava Vot Tvoe Polotence
+    - if Rails.env.production? && @session.organizer.id == 1620
+      - content_for(:after_include_javascripts) do
+        :javascript
+          $(document).ready(function(){
+            $('.mainVideoSection-head .text-ellipsis.margin-bottom-10-p-tablet').tooltip().mouseover();
+            setTimeout(function(){ $('.ui-tooltip').remove(); }, 10000);
+          });
+
+- content_for(:extra_body_classes, 'sessions resetMainContainer single_page_sessions_and_channels hidePageHeader header-top sp')
+
+- content_for(:additional_meta_tags) do
+  - item = @session
+
+  - if item
+    %meta{property: 'og:image', content: item.share_image_url}
+    %meta{property: 'og:image:url', content: item.share_image_url}
+    %meta{property: 'og:image:width', content: item.class::SHARE_IMAGE_WIDTH}
+    %meta{property: 'og:image:height', content: item.class::SHARE_IMAGE_HEIGHT}
+    %meta{property: 'og:image:type', content: 'image/jpg'}
+    %meta{property: 'og:description', content: strip_tags(item.share_description)}
+    %meta{property: 'og:title', content: item.share_title}
+    %meta{property: 'og:url', content: item.short_url || item.absolute_path}
+
+    %meta{name: 'twitter:card', content: 'summary_large_image'}
+    %meta{name: 'twitter:site', content: '@Immerss'}
+    %meta{name: 'twitter:title', content: item.share_title}
+    %meta{name: 'twitter:description', content: strip_tags(item.share_description)}
+    %meta{name: 'twitter:image', content: item.share_image_url}
+  %meta{property: 'og:type', content: :website}
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function () {
+      $('.ShowAboutText').click(function(e) {
+        $(this).toggleClass('active');
+      });
+      checkWindowWidth();
+      $(window).resize(function(e) {
+        checkWindowWidth();
+      });
+    });
+    function checkWindowWidth() {
+      if($(window).width() >= 640){
+        if (!$('.ShowAboutText').hasClass('active')){
+          toggleShowAboutTextBtn();
+        }
+      }
+    }
+    function toggleShowAboutTextBtn(){
+      $('.MVc-About').toggleClass('active');
+    }
+
+    // script for help dropDown
+    $(document).ready(function () {
+      var $mv = $('.mainVideoSection');
+      $('.HAS__HelpDropDown').hover(
+        function() {
+          if (!$('body').hasClass('visit_sessionPage_first')){
+            $( this ).addClass('active');
+            $mv.addClass('SHOW__HelpDropDown');
+          }
+        }, function() {
+          if (!$('body').hasClass('visit_sessionPage_first')){
+            $( this ).removeClass('active');
+            $mv.removeClass('SHOW__HelpDropDown');
+          }
+        }
+      );
+    });
+- if !cookies['visit_sessionPage'] && !@live
+  - content_for(:after_include_javascripts) do
+    :javascript
+      $(document).ready(function () {
+        if($('.main-video-container-reiting, .theo-player-wrapper').length) {
+          return false
+        }
+        $('body').addClass('visit_sessionPage_first');
+        var $mv = $('.mainVideoSection');
+         // find first step(by lowest number in data attr, first step can be 2 or 3)
+
+        // create arrey with data attrs id
+        var dataAttr = $("[data-helpstepcount]").map(function() {
+          return $(this).attr('data-helpstepcount');
+        }).get();
+        // sort arrey numbers from 1>
+        dataAttrSorted = dataAttr.sort(function(a, b){return a-b});
+
+        // find next closest number in arrey
+        function getVal(array, val) {
+          for (var i=0; i < array.length; i++) {
+            if (array[i] > val) {
+              return array[i];
+            }
+          }
+        }
+        // find first number in arrey
+        var sortNum = [];
+        sortNum = getVal(dataAttrSorted,0);
+        // init first available step
+        NextStep(sortNum);
+
+        function TogleHelpDropdown_shadow(){
+          $mv.toggleClass('SHOW__HelpDropDown')
+        }
+
+        function NextStep(number){
+          console.log('==== NextStep ====');
+          console.log(number);
+          console.log('==== NextStep ====');
+          $('.HAS__HelpDropDown').removeClass('active');
+          $("[data-helpstepcount='"+ number +"']").parents('.HAS__HelpDropDown').addClass('active');
+          if(!$('.SHOW__HelpDropDown').length){
+            TogleHelpDropdown_shadow();
+          }
+          sortNum = number;
+        }
+        $('.NextHelpDropDown').click(function(e) {
+          console.log('==== NextHelpDropDown ====');
+          console.log(sortNum);
+          console.log(dataAttrSorted);
+          var nextStep_num = getVal(dataAttrSorted,sortNum);
+          console.log(nextStep_num);
+          NextStep(nextStep_num);
+          console.log('==== NextHelpDropDown ====');
+        });
+        $('.HideHelpDropDown').click(function(e) {
+          $.cookie('visit_sessionPage', 'true', {expires: 7777, path: '/'});
+          $('.HAS__HelpDropDown').removeClass('active');
+          TogleHelpDropdown_shadow();
+          $('body').removeClass('visit_sessionPage_first');
+        });
+      });
+
+%div
+  - session_classes = [("zoom-based-session" if @session.zoom?), ("canceledSession" if @session.cancelled?)].join(' ')
+  .session{class: session_classes}
+    .container
+      #player-container.player-container-wrapp.MainForm_block_for_AffixSection
+        .videoBlock
+          .mainVideoSection-wrapper
+            #main_panel_head.mainVideoSection-head
+              - if @session.blocked? && can?(:edit, @session)
+                .video__blocked
+                  %p
+                    %span
+                      This video is blocked by platform administrator.
+                  %span Block Reason:
+                  = @session.block_reason
+                  %br
+                  Please
+                  = link_to 'Contact Us', support_home_url
+                  for any questions.
+            -# To show flash .flashActiveDARK
+            - if @session.cancelled?
+              .mainVideoSection.flashActiveDARK
+                .moreVideos
+                  .margin-bottom-10
+                    %a.avatarImg-MD{href: @session.organizer.absolute_path, style: "background-image:url('#{@session.organizer.small_avatar_url}')"}
+                  .span.text #{@session.organizer.public_display_name} has cancelled the session
+                  -#- more_from_presenter = Video.with_new_vods.not_fake.where('sessions.presenter_id = ?', @session.presenter_id).limit(10).order('RANDOM()').preload(:session)
+                  - @replays = Video.with_new_vods.not_fake.where('sessions.presenter_id = ?', @session.presenter_id).limit(10).order('RANDOM()').preload(:session)
+                  - if @replays.size > 0
+                    .moreVideos-B
+                      .clearfix.sliderWrapper
+                        - @replays.each do |video|
+                          %section.tile-cake.session-tile
+                            .tile-img
+                              .tile-imgContainer.owl-lazy{style: "background-image: url('#{video.poster_url}')"}
+                              %a.tile_link{href: video.absolute_path}
+                              %a.social-sharing{data: {method: :get, remote: true}, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, href: video.session.preview_share_relative_path(vod_id: video.id), rel: :nofollow, style: 'visibility: visible;', title: 'Share'}
+                                %i.VideoClientIcon-share-mk4
+                              - if video.session.recorded_purchase_price > 0
+                                .sessionCost
+                                  %i.VideoClientIcon-dollar-currency-symbol
+                            .tile-body
+                              %a.tile-name{href: video.absolute_path}
+                                = video.always_present_title
+                        - content_for(:after_include_javascripts) do
+                          :javascript
+                            $(".sliderWrapper").owlCarousel({
+                                items: 1,
+                                loop: false,
+                                callbacks: true,
+                                autoWidth: false,
+                                nav: true,
+                                navText: '',
+                                margin: 0,
+                                lazyLoad: true,
+                                autoplay: false,
+                                info: true,
+                                responsiveClass: true,
+                                responsive: {
+                                    0: {
+                                      items: 1,
+                                      nav: false,
+                                      loop: false
+                                    },
+                                    640: {
+                                        items: 3
+                                    },
+                                    1300: {
+                                        items: 4
+                                    },
+                                    1960: {
+                                        items: 5
+                                    }
+                                }
+                            });
+                      .spinnerSlider{style:'display:none'}
+                        .bounceS1
+                        .bounceS2
+                        .bounceS3
+            - elsif @session.finished?
+              .mainVideoSection.flashActive
+                .mainVideoSection-body.scrollerInit
+                  .toggleLeft
+                  .toggleRight
+                  #vue-optin
+                    = content_tag 'comp-wrapper', nil, data: { component: 'MopsShowController', props: {}}.to_json
+                  #review_container
+                  #video_player_container.main-video-container.draggableElement.skrollable.skrollable-before.ui-draggable.ui-draggable-handle{data: {'emit-events':''}}
+                    .responsive-video{style: "background-image: url('#{@session.player_cover_url}')"}
+                  .MVc-topLine
+                    - if @session.channel.organization
+                      %a.company_logo_wrapp{href: @session.channel.organization.relative_path, target: '_blank'}
+                        .company_logo{style: "background-image: url('#{@session.channel.organization.logo_url}')"}
+                        .company_name= @session.channel.organization.name
+                    .btnsBar
+                      - if @session.private?
+                        .private
+                          = I18n.t('views.sessions.show.private')
+                      .status
+                        .offAir.HAS__HelpDropDown{class: (:hidden if @live)}
+                          off air
+                          .HelpDropDown.bottom-left_pos{'data-helpstepcount': '3'}
+                            .HelpDropDown_h
+                              Stream status
+                            .HelpDropDown_b
+                              This Livestream is
+                              %span.text-color-Darkgrey OFF AIR
+                              now. When Livestream starts status will change to
+                              %span.text-color-red LIVE
+                            .HelpDropDown_f
+                              %a.HideHelpDropDown{href:'#'}
+                                Don't show this again
+                                %span
+                                  %i.VideoClientIcon-angle-rightF
+
+                        .live{class: (:hidden unless @live)}
+                          live
+                #flash_container
+                  .mainVideoSection-fleshMessage
+                    .whiteBodyBox
+                      = I18n.t('sessions.show.messages.ls_ended')
+                      .newVideoTranscoded
+                        = I18n.t('sessions.show.messages.ls_replay')
+                        %a{href:""}
+                          = I18n.t('sessions.show.messages.ls_ready')
+                      .checkLater
+                        - if @session.do_record?
+                          %br/
+                          = I18n.t('sessions.show.messages.check_replay_later')
+            - elsif @session.in_progress? || @session.upcoming?
+              .mainVideoSection{class: (!@session.do_immerssive? && @session.running? && @live && (can?(:join_as_livestreamer, @session) || can?(:view_livestream_as_guest, @session)) ? 'flashActive' : '')}
+                .mainVideoSection-body.scrollerInit
+                  .toggleLeft
+                  .toggleRight
+                  #vue-optin
+                    = content_tag 'comp-wrapper', nil, data: { component: 'MopsShowController', props: {}}.to_json
+                  #review_container
+                  #video_player_container.main-video-container.draggableElement.skrollable.skrollable-before.ui-draggable.ui-draggable-handle{data: {'emit-events':''}}
+                    .responsive-video{style: "background-image: url('#{@session.player_cover_url}')"}
+                      .session_video_container{data: {id: @session.id}}
+                        #jwplayer_data_contaioner
+                    .countDown
+                      .countDown__wrapp
+                        .date.text-center
+                          .date_block_left
+                            = I18n.t('sessions.show.player.start_at_label', date: time_with_tz_in_chosen_format(Time.at(@session.start_at))).html_safe
+                          .date_block_right
+                            = I18n.t('sessions.show.player.duration_label', duration: @session.duration).html_safe
+                        .LiveIn{data: {seconds: session_start_at, 'timer-end-at-in-seconds': session_start_at}}
+                          .LiveIn_title
+                          .countWrapp
+                            .count
+                              %span.days-left --
+                              %span.hours-left --
+                              %span.minutes-left --
+                              %span.sec-left --
+                            .countI
+                              %span.days-left days
+                              %span.hours-left hrs
+                              %span.minutes-left min
+                              %span.sec-left sec
+
+                  .MVc-topLine
+                    -# %span.pollsIcon
+                    -#   %a{title: 'Polls', data: {remote: true}, href:'', onclick:"window.eventHub.$emit('poll-template:open')"}
+                    -#     %i.poll-icon
+                    -#%a.btn.btn-m.btn-borderred-white.btn-square.MVc-topLine_btn.STATIC_DATA{href:'#'}
+                    -#  Be a Guest for $4.99
+                    -#  %i.icon-cancel.margin-left-10
+                    - if @session.channel.organization
+                      %a.company_logo_wrapp{href: @session.channel.organization.relative_path, target: '_blank'}
+                        .company_logo{style: "background-image: url('#{@session.channel.organization.logo_url}')"}
+                        .company_name= @session.channel.organization.name
+                    .btnsBar
+                      - if @session.private?
+                        .private
+                          = I18n.t('views.sessions.show.private')
+                      .status
+                        -#.offAir.HAS__HelpDropDown{class: (:hidden if @live)}
+                        .offAir
+                          off air
+                          -#.HelpDropDown.bottom-left_pos{'data-helpstepcount': '3'}
+                          -#  .HelpDropDown_h
+                          -#    Stream status
+                          -#  .HelpDropDown_b
+                          -#    This Livestream is
+                          -#    %span.text-color-Darkgrey OFF AIR
+                          -#    now. When Livestream starts status will change to
+                          -#    %span.text-color-red LIVE
+                          -#  .HelpDropDown_f
+                          -#    %a.HideHelpDropDown{href:'#'}
+                          -#      Don't show this again
+                          -#      %span
+                          -#        %i.icon-angle-right
+                        .live{class: (:hidden unless @live)}
+                          live
+                    .unmuteButton.hidden
+                      %i.VideoClientIcon-volume_off
+                      %span tap to unmute
+                .mainVideoSection-content_block.hide
+                  .MVc-topLine
+                    - if @session.channel.organization
+                      %a.company_logo_wrapp{href: @session.channel.organization.relative_path, target: '_blank'}
+                        .company_logo{style: "background-image: url('#{@session.channel.organization.logo_url}')"}
+                        .company_name= @session.channel.organization.name
+                      - if @session.zoom?
+                        %a.zoomSession.desktopZoomTitle
+                          This is a Zoom stream. A Zoom account is required to participate
+                    .btnsBar
+                      - if @session.private?
+                        .private
+                          = I18n.t('views.sessions.show.private')
+                      .status
+                        .offAir{class: (@live ? :hidden : 'HAS__HelpDropDown')}
+                          off air
+                          - unless @live
+                            .HelpDropDown.bottom-left_pos{'data-helpstepcount': '3'}
+                              .HelpDropDown_h
+                                Stream status
+                              .HelpDropDown_b
+                                This Livestream is
+                                %span.text-color-Darkgrey OFF AIR
+                                now. When Livestream starts status will change to
+                                %span.text-color-red LIVE
+                              .HelpDropDown_f
+                                %a.HideHelpDropDown{href:'#'}
+                                  Don't show this again
+                                  %span
+                                    %i.VideoClientIcon-angle-rightF
+                        .live{class: (:hidden unless @live)}
+                          live
+                    .unmuteButton.hidden
+                      %i.VideoClientIcon-volume_off
+                      %span tap to unmute
+                  - if @session.zoom?
+                    %div.text-center.tabletZoomTitle
+                      %a.zoomSession
+                        This is a Zoom stream. A Zoom account is required to participate
+                  .pleaseWait-centerLine.hide
+                    .pleaseWait-message.text-center
+                      Video is temporarily unavailable. Please wait
+                  .MVc-centerLine
+                    .date.text-center
+                      .date_block_left
+                        = I18n.t('sessions.show.player.start_at_label', date: time_with_tz_in_chosen_format(Time.at(@session.start_at))).html_safe
+                      - if current_user
+                        - if can?(:toggle_remind_me_session, @session)
+                          - reminder_set = current_user.session_reminders.exists?(session: @session)
+                          .bellWrapp.HAS__HelpDropDown
+                            = link_to toggle_remind_me_session_path(@session.slug), remote: true, method: :post, style: 'visibility: visible;', class: "remind_me #{('active' if reminder_set)}" do
+                              %i.icon-bell-alt
+                            .HelpDropDown.bottom-center_pos{'data-helpstepcount': '2'}
+                              .HelpDropDown_h
+                                = I18n.t('sessions.show.hints.reminder_title')
+                              .HelpDropDown_b
+                                = I18n.t('sessions.show.hints.reminder_description')
+                              .HelpDropDown_f
+                                %a.NextHelpDropDown{href:'#'}
+                                  = I18n.t('sessions.show.hints.next')
+                                  %span
+                                    %i.VideoClientIcon-angle-rightF
+                      - else
+                        .bellWrapp.HAS__HelpDropDown
+                          %a.authOpenLogin{data: {toggle: :modal}, href: '#loginPopup'}
+                            %i.icon-bell-alt
+                          .HelpDropDown.bottom-center_pos{'data-helpstepcount': '2'}
+                            .HelpDropDown_h
+                              = I18n.t('sessions.show.hints.reminder_title')
+                            .HelpDropDown_b
+                              = I18n.t('sessions.show.hints.reminder_description')
+                            .HelpDropDown_f
+                              %a.NextHelpDropDown{href:'#'}
+                                = I18n.t('sessions.show.hints.next')
+                                %span
+                                  %i.VideoClientIcon-angle-rightF
+                      .date_block_right
+                        = I18n.t('sessions.show.player.duration_label', duration: @session.duration).html_safe
+                    .LiveIn{data: {seconds: session_start_at, 'timer-end-at-in-seconds': session_start_at}}
+                      .LiveIn_title
+                      .countWrapp
+                        .count
+                          %span.days-left --
+                          %span.hours-left --
+                          %span.minutes-left --
+                          %span.sec-left --
+                        .countI
+                          %span.days-left days
+                          %span.hours-left hrs
+                          %span.minutes-left min
+                          %span.sec-left sec
+                  - if @session.organizer == current_user || can?(:join_as_co_presenter, @session)
+                    - if @session.do_immerssive?
+                      .MVc-bottomLine
+                        .MVc-bottomLine_item.join_line
+                          %span.waitingForInteractive Please click on the JOIN button to join the session
+                          = raw join_room(abstract_session: @session, link_css_classes: 'btn btn-m joinZoom', initialization_type: JoinInitializationTypes::PLAYER_OVERLAY, enforce_title: true).html_link
+                  - elsif @session.published?
+                    .MVc-bottomLine
+                      - if @session.do_livestream?
+                        .MVc-bottomLine_item{class: ('HAS__HelpDropDown' if @session.livestream_purchase_price.zero?)}
+                          - if can?(:join_as_livestreamer, @session)
+                            = I18n.t('sessions.show.player.livestream.purchased_label').html_safe
+                            - if !@session.in_progress? && !@session.finished?
+                              / user can cancel participation t1
+                              - if can?(:opt_out_as_livestream_participant, @session) && !@session.livestream_purchase_price.zero?
+                                .dropdown.dropdown-list.pull-right
+                                  .btns-group
+                                    %a.btn.btn-m.btn-white.disabled{href: '#', onclick: 'return false'}
+                                      Purchased
+                                    %ul.dropdown-menu
+                                      %li
+                                        %a{data: {remote: true, disable_with: 'Processing...'}, href: sessions_preview_live_opt_out_modal_path(@session.id)}
+                                          Cancel Participation
+                                    %a.btn.btn-m.btn-white{data: {toggle: :dropdown}, href: '#', style: 'width: auto;'}
+                                      %span.VideoClientIcon-angle-downF.fs-16
+                              - elsif !@session.livestream_purchase_price.zero?
+                                %a.btn.btn-m.btn-white.disabled{href: '#', onclick: 'return false'}
+                                  - if can?(:access_as_subscriber, @session)
+                                    Subscribed
+                                  - else
+                                    Purchased
+                              - else
+                                %span
+                                  .HelpDropDown.right-center_pos{'data-helpstepcount': '1'}
+                                    .HelpDropDown_h
+                                      = I18n.t('sessions.show.hints.free_ls_title')
+                                    .HelpDropDown_b
+                                      = I18n.t('sessions.show.hints.free_ls_descr')
+                                    .HelpDropDown_f
+                                      %a.NextHelpDropDown{href:'#'}
+                                        = I18n.t('sessions.show.hints.next')
+                                        %span
+                                          %i.VideoClientIcon-angle-rightF
+                            -# - else
+                            -#   %a#btn-watch-livestream.btn.btn-m.btn-white{href: '#', style: (@live ? '' : 'display: none;')}
+                            -#     = I18n.t('sessions.show.player.livestream.watch_button_label')
+
+                          - elsif livestream_interactor.can_have_free_trial?
+                            = I18n.t('sessions.show.player.livestream.paid_label').html_safe
+                            %a.btn.btn-m.btn-white{data: {remote: true, disable_with: 'Processing...'}, href: preview_purchase_channel_session_path(@session.slug, {type: 'free_livestream'})}
+                              Free trial
+                          - elsif livestream_interactor.could_be_purchased?
+                            = I18n.t('sessions.show.player.livestream.paid_label').html_safe
+                            - if current_user
+                              - if can?(:monetize_content_by_business_plan, @session.channel.organization)
+                                %a.btn.btn-m.btn-white{data: {remote: true, disable_with: 'Processing...'}, href: preview_purchase_channel_session_path(@session.slug, {type: 'paid_livestream'})}
+                                  Buy for #{number_to_currency(@session.livestream_purchase_price.to_f, precision: 2)}
+                              - else
+                                %a.btn.btn-m.btn-white.disabled{disabled: true, href: 'javascript:void(0)'}
+                                  Buy for #{number_to_currency(@session.livestream_purchase_price.to_f, precision: 2)}
+                            - else
+                              %a.buy_livestream_btn.btn.btn-m.btn-white.noscript.authOpenLogin{onclick: "set_preview_purchase_cookie('preview_purchase_livestream_#{@session.id}');", data: {toggle: :modal}, href: '#loginPopup'}
+                                Buy for #{number_to_currency(@session.livestream_purchase_price.to_f, precision: 2)}
+                              - if cookies["preview_purchase_livestream_#{@session.id}"]
+                                - content_for(:after_include_javascripts) do
+                                  :javascript
+                                    $(document).ready(function() {
+                                      $('.MVc-bottomLine_item .buy_livestream_btn').click();
+                                    });
+                                - cookies.delete("preview_purchase_livestream_#{@session.id}")
+                          - elsif @session.livestream_purchase_price.zero? && (!@session.only_subscription || @session.only_subscription && can?(:access_as_subscriber, @session))
+                            %span
+                              = I18n.t('sessions.show.player.livestream.free_label').html_safe
+                              .HelpDropDown.right-center_pos{'data-helpstepcount': '1'}
+                                .HelpDropDown_h
+                                  = I18n.t('sessions.show.hints.free_ls_title')
+                                .HelpDropDown_b
+                                  = I18n.t('sessions.show.hints.free_ls_descr')
+                                .HelpDropDown_f
+                                  %a.NextHelpDropDown{href:'#'}
+                                    = I18n.t('sessions.show.hints.next')
+                                    %span
+                                      %i.VideoClientIcon-angle-rightF
+                            -# %a#btn-watch-livestream.btn.btn-m.btn-white{href: '#', style: (@live ? '' : 'display: none;')}
+                            -#   = I18n.t('sessions.show.player.livestream.watch_button_label')
+                      - if @session.do_immerssive?
+                        .MVc-bottomLine_item
+                          - if can?(:join_as_participant, @session) || can?(:join_as_co_presenter, @session)
+                            .MVc-bottomLine_item.join_line
+                              .line-item-control-wrap
+                                %span
+                                  = I18n.t('sessions.show.player.immersive.purchased_label').html_safe
+                                = raw join_room(abstract_session: @session, link_css_classes: 'btn btn-m desktopBtn', initialization_type: JoinInitializationTypes::PLAYER_OVERLAY, enforce_title: true).html_link
+                          - elsif user_signed_in? && @session.room_members.banned.exists?(abstract_user: current_user)
+                            You have been banned from this session.
+                          - elsif @session.max_number_of_immersive_participants.present? && !@session.interactive_slots_available?
+                            All slots are reserved #{@session.interactive_participants_count}/#{@session.max_number_of_immersive_participants}
+                          - elsif current_user && (immersive_interactor.can_have_free_trial? || immersive_interactor.can_take_for_free? || immersive_interactor.could_be_purchased?)
+                            - if immersive_interactor.can_take_for_free?
+                              = I18n.t('sessions.show.player.immersive.free_label', purchased: @session.interactive_participants_count, total: @session.max_number_of_immersive_participants).html_safe
+                              %a.btn.btn-m.btn-white{data: {remote: true, disable_with: 'Processing...'}, href: preview_purchase_channel_session_path(@session.slug, {type: 'free_immersive'})}
+                                Reserve
+                            - elsif immersive_interactor.can_have_free_trial?
+                              = I18n.t('sessions.show.player.immersive.paid_label', purchased: @session.interactive_participants_count, total: @session.max_number_of_immersive_participants).html_safe
+                              %a.btn.btn-m.btn-white{data: {remote: true, disable_with: 'Processing...'}, href: preview_purchase_channel_session_path(@session.slug, {type: 'free_immersive'})}
+                                Free Trial
+                            - elsif immersive_interactor.could_be_purchased?
+                              = I18n.t('sessions.show.player.immersive.paid_label', purchased: @session.interactive_participants_count, total: @session.max_number_of_immersive_participants).html_safe
+                              - if can?(:monetize_content_by_business_plan, @session.channel.organization)
+                                %a.buy_immersive_btn.btn.btn-m.btn-white.noscript{data: {remote: true, disable_with: 'Processing...'}, href: preview_purchase_channel_session_path(@session.slug, {type: 'paid_immersive'})}
+                                  = I18n.t('sessions.show.player.buy_label', price: number_to_currency(@session.immersive_purchase_price.to_f, precision: 2)).html_safe
+                                - if cookies["preview_purchase_immersive_#{@session.id}"]
+                                  - content_for(:after_include_javascripts) do
+                                    :javascript
+                                      $(document).ready(function() {
+                                        $('.MVc-bottomLine_item .buy_immersive_btn').click();
+                                      });
+                                  - cookies.delete("preview_purchase_immersive_#{@session.id}")
+                              - else
+                                %a.buy_immersive_btn.btn.btn-m.btn-white.noscript.disabled{disabled: true, href: 'javascript:void(0)'}
+                                  = I18n.t('sessions.show.player.buy_label', price: number_to_currency(@session.immersive_purchase_price.to_f, precision: 2)).html_safe
+                          - elsif !current_user && !@session.only_subscription?
+                            - if @session.immersive_free?
+                              = I18n.t('sessions.show.player.immersive.free_label', purchased: @session.interactive_participants_count, total: @session.max_number_of_immersive_participants).html_safe
+                              %a.btn.btn-m.btn-white.authOpenLogin{data: {toggle: :modal}, href: '#loginPopup'}
+                                Reserve
+                            - else
+                              = I18n.t('sessions.show.player.immersive.paid_label', purchased: @session.interactive_participants_count, total: @session.max_number_of_immersive_participants).html_safe
+                              %a.btn.btn-m.btn-white.authOpenLogin{onclick: "set_preview_purchase_cookie('preview_purchase_immersive_#{@session.id}');", data: {toggle: :modal}, href: '#loginPopup'}
+                                = I18n.t('sessions.show.player.buy_label', price: number_to_currency(@session.immersive_purchase_price.to_f, precision: 2)).html_safe
+                      - if @subscription && @session.booking.blank?
+                        - if can?(:subscribe, @subscription) || !current_user
+                          .MVc-bottomLine_item
+                            - if @session.only_subscription
+                              = I18n.t('sessions.show.player.only_subscription_label')
+                            - else
+                              = I18n.t('sessions.show.player.subscription_label')
+                            - if can?(:monetize_content_by_business_plan, @session.channel.organization)
+                              %a.btn.btn-m.btn-red.sub_btn{href: preview_plans_stripe_subscription_path(@subscription), data: {remote: true}}
+                                = I18n.t('sessions.show.player.subscription_btn_label', price: number_to_currency(@subscription.plans.active.pluck(:amount).map(&:to_f).sort[0])).html_safe
+                            - else
+                              %a.btn.btn-m.btn-red.sub_btn.disabled{disabled: true, href: 'javascript:void(0)'}
+                                = I18n.t('sessions.show.player.subscription_btn_label', price: number_to_currency(@subscription.plans.active.pluck(:amount).map(&:to_f).sort[0])).html_safe
+                      - elsif @session.only_subscription && (!livestream_interactor.could_be_purchased? || !immersive_interactor.could_be_purchased?)
+                        .MVc-bottomLine_item
+                          = I18n.t('sessions.show.player.contact_owner')
+
+                -#TODO for Dasha: ADD .flashActive for .mainVideoSection to hide other blocks and add blur, then make display:block to .mainVideoSection-fleshMessage,
+                -#TODO for Dasha: ADD .flashActiveDARK for .mainVideoSection to add black cover, then make display:block to .mainVideoSection-fleshMessage
+                -#TODO for Dasha: Here are 2 different designs, the difference for you is only in the class for .mainVideoSection == i ne govorite chto ya ne ob'yasnyal.)
+                #flash_container
+                  - if (!@session.do_immerssive? && @session.running? && @live && (can?(:join_as_livestreamer, @session) || can?(:view_livestream_as_guest, @session)))
+                    .mainVideoSection-fleshMessage.started{style: 'display: block;'}
+                      .whiteBodyBox
+                        = I18n.t('sessions.show.messages.you_will_be_connected').html_safe
+                  -# Example
+                  -#.mainVideoSection-fleshMessage{style: 'display: none;'}
+                  -#  .whiteBodyBox
+                  -#    Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum.
+                  -#  .padding-top-20
+                  -#    %a.btn.btn-m{href:'#'} Yes
+                  -#    %a.btn.btn-m.btn-lightGrey-solid.btn-red-hover{href:'#'} cancel
+                  -#.mainVideoSection-fleshMessage{style: 'display: none;'}
+                  -#  .whiteBodyBox Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum.
+                  -#  %a.mainVideoSection-fleshMessage-close x
+
+            .mainVideoSection-footer
+              .mainVideoSection-footer-line
+
+                #placement_748914.mainVideoSection-footer-ad
+
+                .mainVideoSection-footer-line-one
+                  %h4.text-ellipsis
+                    %span{title: @session.title}
+                      = @session.title
+                .mainVideoSection-footer-line-two
+                  .mflt-l
+                    .followingAndSubscribe
+                      = link_to '', spa_user_path(@session.organizer.slug), target: '_blank', class: 'avatar', style: "background-image: url('#{@session.organizer.small_avatar_url}')"
+                      = link_to @session.organizer.public_display_name, spa_user_path(@session.organizer.slug), class: 'userName', title: @session.organizer.public_display_name
+                      - if current_user != @session.organizer
+                        - if current_user
+                          %a.btn.btn-s{class: "followBtn user-subscribe-#{@session.organizer.id} #{current_user.following?(@session.organizer) ? 'active' : ''}", data: {remote: true}, href: @session.organizer.toggle_follow_relative_path}
+                            - if current_user && current_user.following?(@session.organizer)
+                              Following
+                            - else
+                              Follow
+                        - else
+                          %a.btn.btn-s.active.authOpenLogin{data: {toggle: :modal}, href: '#loginPopup'}
+                            Follow
+                      - if @session.organizer.paypal_donations_url.present?
+                        = link_to 'Donate', @session.organizer.paypal_donations_url, target: :_blank, class: 'margin-left-10 btn__donate btn btn__main btn-m'
+
+                  .mflt-r
+                    -# %span.pollsIcon
+                    -#   %a{title: 'Polls', data: {remote: true}, href:'', onclick:"window.eventHub.$emit('poll-template:open')"}
+                    -#     %i.poll-icon
+                    - if !@session.private? || (@session.private? && current_user && (@session.organizer == current_user || @session.channel.organizer == current_user || @session.channel.organization.organization_memberships.active.exists?(user_id: current_user.id)))
+                      - if @session.organizer == current_user || @session.channel.organizer == current_user
+                        %span.participantsCount{title: 'Total Participants', data: {toggle: :modal, target: '#SessionParticipantsList_modal'}}
+                          %i.VideoClientIcon-user-mk2
+                          = @session.total_participants_count
+                      %span.viewsCount{title: 'Watchers'}
+                        %i.VideoClientIcon-Views
+                        - if @session.room.present?
+                          -# By default it's zero, so when viewer connected show 1 instead of 0, counter updates by cron task
+                          = @session.room.watchers_count.zero? ? 1 : @session.room.watchers_count
+                        - else
+                          0
+                    .btn-grey.btn
+                      = render(partial: 'shared/player/rating_dropdown', locals: {model: @session, content_type: :session})
+                    - if can?(:share, @session)
+                      %a.btn-grey.btn{title: 'Share', data: {remote: true}, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, href: @session.preview_share_relative_path, rel: :nofollow}
+                        %i.VideoClientIcon-share-mk4
+                        Share
+                    - elsif !current_user
+                      %a.btn-grey.btn.authOpenLogin{title: 'Share',data: {toggle: :modal}, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, href: '#loginPopup', rel: :nofollow}
+                        %i.VideoClientIcon-share-mk4
+                        Share
+                    - if current_user && can?(:have_in_wishlist, @session)
+                      %a.btn-grey.btn{href: toggle_wishlist_items_path(model_id: @session.id, model_type: 'Session'), data: {method: :post, remote: true}, class: ["add-to-wish-list-button", wishlist_class(@session), "session-wishlist-#{@session.id}"].join(' ')}
+                        %i.VideoClientIcon-bookmark
+                        Add to Favorite
+                    - elsif !current_user
+                      %a.btn-grey.btn.authOpenLogin{title: 'Save', data: {toggle: :modal}, href: '#loginPopup', rel: :nofollow}
+                        %i.VideoClientIcon-bookmark
+                        Add to Favorite
+                    - if @session.booking.blank? && (can?(:edit, @session) || can?(:clone, @session) || can?(:cancel, @session) || livestream_interactor.could_be_purchased?)
+                      .dropdown.dropdown-list.text-left.NoMinWidth.clearfix.margin-left-15.margin-bottom-0
+                        %a.btn-grey-small.More-dropdown.dropdown-toggle.NoMinWidth{'data-toggle': :dropdown,  role: :button}
+                          %i.VideoClientIcon-dots-horizontal-triple
+                        %ul#session_actions_dropdown.dropdown-menu.full-width.dropdown-menu-withIcons
+                          - if can?(:edit, @session) && can?(:edit_session_by_business_plan, @session.channel)
+                            %li.edit
+                              %i.VideoClientIcon-Edit
+                              %a{href: edit_channel_session_path(@session.channel.slug, @session.slug)} Edit
+                            %li.invite
+                              %i.VideoClientIcon-paper-planeF
+                              %a{data: {remote: true}, href: modal_session_live_participants_portal_path(@session.slug)} Invite
+                            - if can?(:end, @session) && !can?(:cancel, @session)
+                              %li.end
+                                %i.GlobalIcon-clear
+                                %a.end_session_page{"data-room_id": @session.room_id, "title": "#{I18n.t('sessions.show.end_session_tooltip')}"}
+                                  = I18n.t('sessions.show.end_session')
+                          - if can?(:clone, @session) && can?(:clone_session_by_business_plan, @session.channel)
+                            %li.clone
+                              %i.icon-squares
+                              - if @session.cloneable_with_options?
+                                %a{data: {remote: true}, href: sessions_preview_clone_modal_path(@session.id)} Clone
+                              - else
+                                %a{href: clone_channel_session_path(@session.channel.id, @session.id)} Clone
+                          - if can?(:publish, @session)
+                            %li.publish
+                              %i.icon-ok
+                              %a{data: {confirm: I18n.t('sessions.show.publish_confirmation'), method: :post}, href: publish_channel_session_path(@session.channel.id, @session.id)} Publish
+                          - if can?(:cancel, @session)
+                            %li.cancel
+                              %i.icon-cancel-circled
+                              %a{data: {remote: true}, href: sessions_preview_cancel_modal_path(@session.id)} Cancel
+                          - if can?(:edit, @session) && @session.has_recurring?
+                            %li.edit.unchain
+                              %i.VideoClientIcon-unlinkF
+                              = link_to 'Unchain', unchain_session_path(@session.id), style: 'visibility: visible'
+                            %li.edit.unchain.unchain-all
+                              %i.VideoClientIcon-linkF
+                              = link_to 'Unchain all', unchain_session_path(@session.id, all: true), style: 'visibility: visible'
+                          - if livestream_interactor.could_be_purchased?
+                            %li.access_by_code
+                              %i.VideoClientIcon-lock
+                              - if current_user.present?
+                                = link_to 'Get access by code', '#GetAccessByCodeModal', data: {toggle: :modal, target: '#GetAccessByCodeModal'}, style: 'visibility: visible'
+                              - else
+                                = link_to 'Get access by code', '#loginPopup', data: {toggle: :modal, target: '#loginPopup'}, style: 'visibility: visible', class: 'authOpenLogin'
+                .mainVideoSection-footer-line-three
+                  - if @session.finished?
+                    Streamed on #{time_with_tz_in_chosen_format(Time.at(@session.start_at))}
+                  - else
+                    Live on #{time_with_tz_in_chosen_format(Time.at(@session.start_at))}
+
+              - if Nokogiri::HTML.parse(@session.always_present_description).inner_text.present? || Nokogiri::HTML.parse(@session.custom_description_field_value).inner_text.present?
+                .mainVideoSection-about.active
+                  - if Nokogiri::HTML.parse(@session.always_present_description).inner_text.present? || Nokogiri::HTML.parse(@session.custom_description_field_value).inner_text.present?
+                    .MVc-AboutHead
+                      %a.MVc-AboutBody_toggle.fs-16.active{href:'#', onclick:"$('.mainVideoSection-about, .MVc-AboutBody_toggle, .MVc-AboutBody').toggleClass('active');return false"}
+                        %span.s_more
+                          \...view more
+                        %span.s_less
+                          view less
+                  .MVc-AboutBody
+                    - if Nokogiri::HTML.parse(@session.always_present_description).inner_text.present?
+                      %p.margin-bottom-5= sanitize(simple_format(@session.always_present_description, {}, sanitize: false))
+                    - if Nokogiri::HTML.parse(@session.custom_description_field_value).inner_text.present?
+                      .MVc-AboutBody__section
+                        .MVc-AboutHead.margin-top-20 Instructions
+                        %p.margin-bottom-5= sanitize(simple_format(@session.custom_description_field_value, {}, sanitize: false))
+                    - content_for(:after_include_javascripts) do
+                      :javascript
+                        $('.MVc-AboutBody a').attr('target','_blank');
+              .channelInfo
+                = render(partial: 'shared/player/subscription_dropdown', locals: {subscription: @subscription, channel: @session.channel})
+        .mainVideoSection-rightSidebar
+          .mainVideoSection-wrapperMobile
+          .mainVideoSection-rightSidebar_sectionWrapp.AffixSection
+            = render partial: 'shared/player/right_sidebar_loader'
+            - content_for(:after_include_javascripts) do
+              :javascript
+                window.loadSessions = function() {
+                  var data;
+                  data = $('#MV_Upcoming').data();
+                  return $.ajax({
+                    type: 'GET',
+                    url: Routes.sessions_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#MV_Upcoming').tooltip();
+                  });
+                };
+                window.loadReplays = function() {
+                  var data;
+                  data = $('#PL_Replays').data();
+                  return $.ajax({
+                    type: 'GET',
+                    url: Routes.replays_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#PL_Replays').tooltip();
+                  });
+                };
+                window.loadRecordings = function() {
+                  var data;
+                  data = $('#PL_Recordings').data();
+                  return $.ajax({
+                    type: 'GET',
+                    url: Routes.recordings_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#PL_Recordings').tooltip();
+                  });
+                };
+                /*window.loadReviews = function() {
+                  var data;
+                  data = $('#reviewsArea').data();
+                  return $.ajax({
+                    type: 'GET',
+                    url: Routes.reviews_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  });
+                };*/
+                window.loadSessions();
+                window.loadReplays();
+                window.loadRecordings();
+                // window.loadReviews();
+
+            %section.MV_Chat_section{style: '', class: (@session.started? && @session.allow_chat ? 'opened active' : !@session.started? || !@session.allow_chat ? 'closed' : 'opened')}
+              - if @session.upcoming?
+                - if @session.allow_chat
+                  .MV_Chat
+                    .tab-content-t.chat.chat-title
+                      %span Chat
+                      %a.toggle_chat.active{href: '#'}
+                        Expand
+              - else
+                - if @session.allow_chat
+                  .MV_Chat
+                    .tab-content-t.chat.chat-title
+                      %span Chat is not available anymore
+              -# "srcdoc" attribute is mandatory here to prevent actual loading of content by url.
+              -# We only need it to load when session is started.
+              -# See app/assets/javascripts/pages/session.js 'showChat' function
+              -# for details.
+              #ch-vue-app-chat
+                = content_tag 'comp-wrapper', nil, data: { component: 'ChatWrapper', props: {sessionId: @session.id}}.to_json
+              -# %iframe.MV_Chat_iframe{src: chat_widget_url(id: @session.id, theme: 'light', class: 'session'), srcdoc: '' }
+            .smallScrolls
+              #ch-vue-booking
+                = content_tag 'comp-wrapper', nil, data: { component: 'BookingUsersRow', props: {users: [@session.user], textMode: 'session'}}.to_json
+              %ul.nav.nav-tabs.nav-justified
+                %li#MV_UpcomingToggle.active
+                  %a{href: '#MV_Upcoming', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.live')
+                %li#PL_ReplaysToggle.hidden
+                  %a{href: '#PL_Replays', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.replays')
+                %li#PL_RecordingsToggle.hidden
+                  %a{href: '#PL_Recordings', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.uploads')
+              %section.tab-content
+                %section#MV_Upcoming.tab-pane.active{data: {channel_id: @channel.id, limit: 6, offset: 0}}
+                  .tile-cake-sidebar-wrapp.sessions
+                  %a.hidden.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: sessions_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    Show more
+
+                %section#PL_Replays.tab-pane.hidden{data: {channel_id: @channel.id, limit: 6, offset: 0}}
+                  .tile-cake-sidebar-wrapp.replays
+                  %a.hidden.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: replays_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    Show more
+
+                %section#PL_Recordings.tab-pane.hidden{data: {channel_id: @channel.id, limit: 6, offset: 0}}
+                  .tile-cake-sidebar-wrapp.recordings
+                  %a.hidden.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: recordings_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    Show more
+
+              #placement_748915.ad-content
+              #placement_748916.ad-content
+
+        #main_container_content
+          .mainVideoSection-sub-wrapper.productsSection
+            .mainVideoSection-sub
+
+          #ch-vue-app
+            = content_tag 'comp-wrapper', nil, data: { component: 'ReviewsCommentsSection', props: {model: {creator_id: @session.organizer.id, id: @session.id, type: 'Session', can_rate: @can_rate, show_comments: @session.show_comments, show_reviews: @session.show_reviews, allow_chat: @session.allow_chat}}}.to_json
+          = render 'shared/you_may_also_like_sessions', sessions: @you_may_also_like_sessions
+
+  #modals_container.modals
+    - if @session
+      #AdditionalInformation.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+        .modal-dialog
+          .modal-content
+            = render partial: 'become_presenter_steps/close_modal'
+            .modal-body
+              %h4.groupTitle.clearfix
+                = @session.custom_description_field_label
+              %section
+                = simple_format @session.custom_description_field_value
+
+    #calendar_view.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+      .modal-dialog
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Calendar
+            %section
+              #calendar
+
+    = render 'shared/modal_live_participants_portal'
+
+    - if can?(:request_another_time, @session)
+      = render 'shared/request_different_time_modal', channel: @channel, session: @session
+
+#subscription_modals
+#SessionParticipantsList_modal.modal.fade{session: @session.id, 'aria-hidden': true, role: :dialog, tabindex: -1}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        %h4.groupTitle.clearfix Participants
+        %section
+          .SessionParticipantsList.load
+            .LoadingCover
+              .spinnerSlider
+                .bounceS1
+                .bounceS2
+                .bounceS3
+- if current_user.present?
+  #GetAccessByCodeModal.modal.fade{session: @session.id, 'aria-hidden': true, role: :dialog, tabindex: -1}
+    .modal-dialog
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          %h4.groupTitle.clearfix Get access by code
+          %section
+            = form_tag get_access_by_code_path(@session.id), method: :post, class: 'form_V2' do
+              .formWrapp
+                .input-block.required.state-clear
+                  = text_field_tag :code, nil, placeholder: 'Code', required: true
+                  .errorContainerWrapp
+                - if recaptcha_form_field_enabled?(:session_page)
+                  .input-block.state-clear
+                    = recaptcha_tags
+              .clearfix.padding-top-10
+                = submit_tag 'Get Access', class: 'btn btn-m pull-right', data: {disable_with: 'Processing...'}
+.mobileFooterNav.smallScrolls
+  %div.active{data: { target: "about" }} About Session
+  - if @session.allow_chat
+    %div{ data: { target: "chat" } } Chat
+  %div{data: { target: "polls" }} Polls
+  -# - if @session.lists.present?
+  %div{data: { target: "products" }, style: 'display: none;'} Products
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function() {
+      let pollsShow = false;
+
+      let initialHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+      function handleResize() {
+        if (!document.body.classList.contains('mobile_device') || (window.innerWidth > 641)) {
+          return;
+        }
+
+        let currentHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        let menu = document.querySelector('.mobileFooterNav');
+
+        if (currentHeight < initialHeight) {
+          menu.style.display = 'none';
+          document.body.classList.add('mobileNav__hidden');
+        } else {
+          menu.style.display = 'flex';
+          document.body.classList.remove('mobileNav__hidden');
+        }
+      }
+
+      // Обработчик для обычного resize
+      window.addEventListener('resize', handleResize);
+
+      // Дополнительный обработчик для visualViewport, если он доступен
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', handleResize);
+      }
+
+       function updateElementSize() {
+            if (!document.body.classList.contains('mobile_device')) {
+              return false;
+            }
+
+           let fixedElement = document.querySelector('.mainVideoSection-body');
+           let contentElement = document.querySelector('#player-container');
+
+           // let width = fixedElement.offsetWidth;
+           let width = window.innerWidth;
+           let height = (width * 9) / 16;
+
+          console.log("width", width);
+           if( width <= 640 ) {
+             fixedElement.style.height = height + 'px';
+             contentElement.style.paddingTop = height + 'px';
+           }else {
+              fixedElement.style.height = 'auto';
+              contentElement.style.paddingTop = '0px';
+           }
+        }
+
+       window.addEventListener('load', updateElementSize);
+       window.addEventListener('resize', updateElementSize);
+      document.querySelector('.mobileFooterNav').addEventListener('click', function(e) {
+          let target = e.target;
+          let dataTarget = target.getAttribute('data-target');
+          if(dataTarget) {
+            let bodyClasses = [...document.body.classList];
+            bodyClasses = bodyClasses.filter(item => !item.startsWith('mobileNav__'));
+            bodyClasses.push('mobileNav__' + dataTarget);
+            document.body.className = bodyClasses.join(' ');
+            document.body.classList.remove('overflow-hidden')
+            document.querySelectorAll('.mobileFooterNav > div').forEach(div => div.classList.remove('active'));
+            target.classList.add('active');
+
+            if (dataTarget === 'polls') {
+              window.eventHub.$emit('poll-template:open')
+              pollsShow = true;
+            }else{
+              if(pollsShow) {
+                window.eventHub.$emit('poll-template:close')
+                pollsShow = false;
+              }
+            }
+          }
+        });
+
+        setTimeout(() => {
+          var adb = window.AdButler || {};
+          adb.ads = adb.ads || [];
+
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748914, [1200,800], 'placement_748914', opt); }, opt: { place: 0, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748915, [600,600], 'placement_748915', opt); }, opt: { place: 1, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748916, [600,600], 'placement_748916', opt); }, opt: { place: 2, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+        }, 100)
+    });
+
+
+%script(type="application/xml" id="adsTmpl")
+  != render 'widgets/player/ads'

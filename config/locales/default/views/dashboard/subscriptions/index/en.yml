@@ -1,0 +1,11 @@
+en:
+  views:
+    dashboard:
+      subscriptions:
+        index:
+          page_title: Subscriptions
+          archived: Archived
+          enabled: Enabled
+          disabled: Disabled
+          plans: Plans
+          new_subscription: New Subscription

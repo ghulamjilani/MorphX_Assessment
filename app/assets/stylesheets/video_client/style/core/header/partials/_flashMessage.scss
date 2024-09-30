@@ -1,0 +1,49 @@
+.flashMessage{
+  display: block;
+  position: relative;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1 !important;
+  &>div{
+    visibility: hidden;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    @include transition();
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 1rem;
+    position: absolute;
+    z-index: 99;
+    top: $header-height * -1;
+  }
+  .info{
+    background: $siteColorMain;
+
+  }
+  .error{
+    background: $video-volor-red;
+
+  }
+  &.info{
+    z-index: 99 !important;
+    .info{
+      transform: translateY($header-height);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  &.error{
+    z-index: 99 !important;
+    .error{
+      transform: translateY($header-height);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

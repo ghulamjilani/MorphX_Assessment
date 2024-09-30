@@ -1,0 +1,15 @@
+en:
+  controllers:
+    api:
+      v1:
+        user:
+          rooms:
+            errors:
+              banned: 'You are banned from this session. Reason: %{reason}.'
+              session_unavailable: Session is unavailable
+              join_interactive_by_token:
+                invalid_access_token: Invalid access token
+                session_is_full: Session is full
+              update:
+                already_started: Session has already started
+                too_early_to_start: "Room cannot be started before the session's scheduled start time: %{start_at}"

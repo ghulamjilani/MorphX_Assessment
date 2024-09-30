@@ -1,0 +1,9 @@
+var container = $('p:contains(Latest Notifications)');
+
+if (container.length == 1) {
+  $('li[data-notification-id]').removeClass('active');
+  $(container).find('span').html('0');
+  $('.notification_count').removeClass('blink_me');
+} else {
+  throw new Error("can not find *latest notifications* container");
+}

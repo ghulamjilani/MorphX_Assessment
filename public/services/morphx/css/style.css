@@ -1,0 +1,38 @@
+body, html {
+  min-height: 100%; }
+
+body {
+  font-family: Arial;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite; }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
+.soon__section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #bababa;
+  font-size: 12px;
+  font-weight: 100;
+  padding: 50px 50px 30px 50px;
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 30px; }
+  .soon__section h2 {
+    font-weight: 100; }
+.soon__logo {
+  max-width: 150px;
+  margin: 0 auto; }
+  .soon__logo img {
+    width: 100%; }
+
+/*# sourceMappingURL=style.css.map */

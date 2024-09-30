@@ -1,0 +1,188 @@
+- content_for(:extra_body_classes, 'channel_landing bannerCollaps channel_landing_user_show header-top hidePageHeader')
+- content_for(:page_title, @user.public_display_name)
+- content_for(:additional_meta_tags) do
+  %meta{property: 'og:image', content: @user.share_image_url}
+  %meta{property: 'og:image:url', content: @user.share_image_url}
+  %meta{property: 'og:image:width', content: 280}
+  %meta{property: 'og:image:height', content: 280}
+  %meta{property: 'og:image:type', content: 'image/jpg'}
+  %meta{property: 'og:description', content: @user.share_description}
+  %meta{property: 'og:title', content: @user.share_title}
+  %meta{property: 'og:url', content: @user.short_url || @user.absolute_path}
+
+  %meta{name: 'twitter:card', content: 'summary_large_image'}
+  %meta{name: 'twitter:site', content: '@Immerss'}
+  %meta{name: 'twitter:title', content: @user.share_title}
+  %meta{name: 'twitter:description', content: @user.share_description}
+  %meta{name: 'twitter:image', content: @user.share_image_url}
+  %meta{property: 'og:type', content: :website}
+
+.ch-p
+  .ch-p_L_wrapp.full-width
+    .ch-p_L
+      .ch-p_presenter.text-center
+        - if @user == current_user
+          .dropdown.dropdown-list.ch-p_presenter_edit.NoMinWidth.clearfix.text-left
+            %a.More-dropdown.dropdown-toggle.NoMinWidth{href: '#', data: {toggle: :dropdown}}
+              %i.VideoClientIcon-dots-horizontal-triple
+            %ul.dropdown-menu.dropdown-menu-withIcons
+              %li
+                %a{href: edit_general_profile_path} Edit Profile
+                %i.VideoClientIcon-pencilF
+        .avatarImg-XXl{style: "background-image: url(#{@user.avatar_url})"}
+        .ch-p_presenter_name.fs-20.padding-top-5.text-color-grey
+          = @user.public_display_name
+        .starRating_wrapp.padding-bottom-10
+          - rating = numeric_rating_for(@user)
+          %ul.starRating.inline-block.padding-top-0
+            - 5.times do |index|
+              %li
+                %i{class: ((rating >= index + 1) ? 'VideoClientIcon-starF' : (rating >= index + 0.5) ? 'VideoClientIcon-star-half-altF' : 'VideoClientIcon-star-emptyF'), style: 'text-align: left;'}
+          %span= rating.round(2)
+        - if current_user != @user
+          - can_follow = !user_signed_in? || !current_user.fast_following?(@user)
+          .ch-p_presenter_follow
+            .ch-p_Follow.position-relative{class: can_follow ? '' : 'hide'}
+              - unless user_signed_in?
+                %a{href: '#', onlick: 'return false;', class: "with_tooltip_log follow_btn btn btn-m user-subscribe-#{@user.id}"}
+                  Follow
+              - else
+                = link_to @user.toggle_follow_relative_path, method: :post, remote: true, class: "follow_btn btn btn-m user-subscribe-#{@user.id}" do
+                  Follow
+              %a.btn.btn-m.btn-borderred-grey.btn-circle.with_tooltip_mess{href: '#', onlick: 'return false;'}
+                %i.VideoClientIcon-mailF
+              %span.follow_tooltip_log
+                You need to log in first
+              %span.follow_tooltip_mess
+                = I18n.t('views.users.show.you_need_follow_creator_first', creator: I18n.t('dictionary.creator'))
+
+            .ch-p_Contact{class: can_follow ? 'hide' : ''}
+              .dropdown.dropdown-list.Contact_dropdown.text-left.margin-bottom-0
+                %a.btn.btn-m.btn-grey-solid.dropdown-toggle{data: {toggle: :dropdown}} Contact
+                %ul.dropdown-menu.full-width
+                  %li
+                    -#%a{href: '#messageModal', data: {toggle: :modal}} Send Message
+                    %a{href: new_message_path(receiver: @user), class: ('disabled' unless can?(:contact, @user)), data: {remote: true}} Send Message
+                  - unless @owned_channels.empty?
+                    %li
+                      %a{href: '#requestSessionModal', data: {toggle: :modal}} Request Session
+              = degradable_link_to @user.toggle_follow_relative_path, method: :post, remote: true, title:'Unfollow', class: "btn btn-m btn-borderred-grey btn-circle vertical-top btn-red-hover UnFollow_btn user-subscribe-#{@user.id}" do
+                %i.VideoClientIcon-iPlus.rotate45
+
+        .text-center.hide_on_desktop.margin-top-10
+          %a.ch-p_presenter_mobile_showMore.text-color-LightGrey.fs-14{href: '#'}
+            %span more
+            %i.VideoClientIcon-angle-downF.margin-left-10
+        .hide_on_mobile.ch-p_presenter_mobile_content
+
+      - if @instagram_social_link.present? || @facebook_social_link.present? || @twitter_social_link.present? || @gplus_social_link.present? || @linkedin_social_link.present? || @youtube_social_link.present?
+        .ch-p_presenter_social.hide_on_mobile.ch-p_presenter_mobile_content
+          %p.fs-l.text-color-Darkgrey Also on
+          .socialMK2
+            - if @facebook_social_link.present?
+              %a.facebook{href: @facebook_social_link.link_as_url, target: '_blank'}
+                %span
+                  %i.VideoClientIcon-facebookF.fs-14
+            - if @twitter_social_link.present?
+              %a.twitter{href: @twitter_social_link.link_as_url, target: '_blank'}
+                %span
+                  %i.VideoClientIcon-twitter2.fs-14
+            - if @instagram_social_link.present?
+              %a.instagram{href: @instagram_social_link.link_as_url, target: '_blank'}
+                %span
+                  %i.VideoClientIcon-instagram.fs-14
+            - if @gplus_social_link.present?
+              %a.gplus{href: @gplus_social_link.link_as_url, target: '_blank'}
+                %span
+                  %i.VideoClientIcon-google.fs-14
+            - if @youtube_social_link.present?
+              %a.youtube{href: @youtube_social_link.link_as_url, target: '_blank'}
+                %span
+                  %i.VideoClientIcon-youtube.fs-14
+            - if @linkedin_social_link.present?
+              %a.linkedin{href: @linkedin_social_link.link_as_url, target: '_blank'}
+                %span
+                  %i.VideoClientIcon-linkedin-1F.fs-14
+      .ch-p_presenter_about.hide_on_mobile.ch-p_presenter_mobile_content
+        - if @user.account
+          %p.text-color-Darkgrey.fs-l About
+          .ch-p_aboutTxt_wrapp
+            .ch-p_aboutTxt.smallScrolls<
+              = @user.account.bio
+            %a.ch-p_aboutTxt_moreBtn{href: '#'} Read More
+
+        .row.padding-top-10
+          .col-xs-2.country_wrapp.ch-p_presenter_about_tablet
+            .intl-tel-input
+              .selected-flag.no-padding
+                .iti-flag.countryFlag{class: (@user.try(:account).try(:country) || 'US').downcase}
+          .col-xs-10.text-ellipsis.padding-left-0.padding-right-0
+            = ISO3166::Country.new(@user.try(:account).try(:country) || 'US').name
+
+        .row.padding-top-10
+          .col-xs-2.speaking_wrapp.ch-p_presenter_about_tablet
+            %i.VideoClientIcon-speaking2.fs-24
+          .col-xs-10.text-ellipsis.padding-left-0.padding-right-0
+            = format_lang(@user.language)
+
+        - if @website_url.present?
+          .row.padding-top-5
+            .col-xs-2.website_url_wrapp
+              %i.VideoClientIcon-web.fs-18
+            .col-xs-10.padding-left-0.padding-right-0
+              %a.text-ellipsis.text-color-main.display-block{href: @website_url, target: '_blank'}= @website_url
+
+      .ch-p_presenter_channels.hide_on_mobile.ch-p_presenter_mobile_content.padding-bottom-10
+        %a{data: {toggle: :modal, target: "#followers"}}
+          %p.fs-l.fc-main-dark
+            #{Rails.application.credentials.global[:service_name]} Followers
+          .row.text-left
+            .col-xs-2.ch-p_presenter_about_tablet
+              %i.VideoClientIcon-following.fs-20
+            .col-xs-7.padding-left-0.padding-right-0
+              Followers
+            #followers_count.col-xs-3.followers_count.text-right
+              = @followers_count
+          = render partial: 'shared/follow', locals: {object: @user, id: 'followers', followers: true}
+
+        .row.text-left.padding-top-10
+          %a{data: {toggle: :modal, target: "#following"}}
+            .col-xs-2.ch-p_presenter_about_tablet
+              %i.VideoClientIcon-follower.fs-20
+            .col-xs-7.padding-left-0.padding-right-0
+              Following
+            #following_count.col-xs-3.followers_count.text-right
+              = @user.follows.unblocked.count
+        = render partial: 'shared/follow', locals: {object: @user, id: 'following', followers: false}
+
+      - if @organization
+        .ch-p_presenter_channels.hide_on_mobile.ch-p_presenter_mobile_content
+          %p.fs-l.fc-main-dark Company
+          .row.padding-bottom-15
+            .col-xs-2.ch-p_presenter_about_tablet
+              %a{href: @organization.absolute_path}
+                .ChannelsImg.border-radius-0{style: "background-image:url(#{@organization.logo_url})"}
+            .col-xs-10.text-ellipsis.padding-left-0.padding-right-0
+              %a{href: @organization.absolute_path}= @organization.name
+
+
+    .padding-left-10.padding-right-10
+      - if @owned_channels.length > 0
+        .chanelLIstSection
+          .fs-l.fc-main-dark.margin-top-10.margin-bottom-10
+            -#.pull-right
+              %a{href:'#'} View all
+            Channels
+          .chanelLIst
+            - @owned_channels.each_with_index do |channel, i|
+              = render partial: 'landing/left_sidebar/channel', locals: {channel: channel, i: i}
+
+      - if @invited_channels.length > 0
+        .chanelLIstSection
+          .fs-l.fc-main-dark.margin-top-10.margin-bottom-10
+            -#.pull-right
+              %a{href:'#'} View all
+            Working with
+          .chanelLIst
+            - @invited_channels.each_with_index do |channel, i|
+              = render partial: 'landing/left_sidebar/channel', locals: {channel: channel, i: i}

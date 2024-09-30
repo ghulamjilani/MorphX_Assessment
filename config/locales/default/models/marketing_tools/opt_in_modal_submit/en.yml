@@ -1,0 +1,7 @@
+en:
+  models:
+    marketing_tools:
+      opt_in_modal_submit:
+        create_contact:
+          errors:
+            invalid_email: Email is invalid

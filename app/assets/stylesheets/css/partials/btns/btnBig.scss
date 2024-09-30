@@ -1,0 +1,20 @@
+@import "mixin";
+
+$btn-size-l:40px;
+
+.btn.btn-l{
+  @include btn-mod($btn-size-l ,15px);
+  &.with-icon-left{
+    padding-left: $btn-size-l + 5;
+  }
+  &.with-icon-right{
+    padding-right: $btn-size-l + 5;
+  }
+  &.btn-circle{
+    width: $btn-size-l;
+    height: $btn-size-l;
+  }
+  &.hoverText span.hoverText{
+    border-radius: $btn-size-l * 0.5;
+  }
+}

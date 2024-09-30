@@ -1,0 +1,13 @@
+<% raise ArgumentError, @user.inspect if @follow_link_url.blank? %>
+
+<p>
+  <%= simple_format I18n.t('mailer.without_invitation_token.assign_as_presenter',
+                           session_name: @session.always_present_title,
+                           session_link: link_to(@session.always_present_title, @session.absolute_path),
+                           network_owner_name: @organizer.public_display_name,
+                           start_at: @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z')) %>
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format I18n.t('mailer.thank_you_message', service_name: Rails.application.credentials.global[:service_name]) %>
+</p>

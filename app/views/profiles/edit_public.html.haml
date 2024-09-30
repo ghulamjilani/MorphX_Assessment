@@ -1,0 +1,62 @@
+.row#profilePage
+  - content_for(:page_title, I18n.t("views.profiles.edit_public.page_title"))
+
+  = render 'profiles/nav'
+
+  .col-md-9.technicalPage.main-section-form
+    = form_for(current_user, as: :profile, url: update_public_profile_path, method: :put, html: {class: 'form_V2 padding-top-0', autocomplete: :off}) do |f|
+      .formWrapp
+        .LoadingCover.profile_next_cover{style:'display:none'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        = f.fields_for :user_account do |uaf|
+          %section
+            .technicalPage__label= I18n.t("views.profiles.edit_public.page_title")
+            - if current_user.presenter
+              #vanity-url-switch-placeholder
+              - content_for(:after_include_javascripts) do
+                :javascript
+                  $(document).ready(function() {
+                    window.vanityUrlSwitchView = new VanityUrlSwitchView({slug: #{current_user.slug.to_json.html_safe}});
+                    vanityUrlSwitchView.render();
+                  });
+
+              #user_account_vanity_url_input.custom-input.string.input.required.stringish.control-group
+                %label.control-label{for: :user_account_vanity_url}= I18n.t("views.profiles.edit_public.fields.your_url", url: Rails.application.credentials.global[:service_name])
+
+                .controls
+                  = %(https://#{ENV['HOST']}/<span id="slug-placeholder">#{ current_user.slug }</span>).html_safe
+                  %p
+                    %a#request-different-url{data: {target: '#get-custom-url-modal', toggle: :modal}}
+                      = I18n.t("views.profiles.edit_public.fields.change_custom_url")
+                  = f.hidden_field :slug
+
+              - if available_on_vod_request_is_visible?
+                .row
+                  .col-xs-12
+                    = uaf.label :available_by_request_for_live_vod, class: 'text-color-Blue checkbox choice' do
+                      = uaf.check_box :available_by_request_for_live_vod
+                      %span I am also available by request for Live On-Demand Sessions
+
+            .input-block{class: ('state-clear' if current_user.account.bio.blank?)}
+              = uaf.label :bio, I18n.t("views.profiles.edit_public.fields.bio")
+              = uaf.text_area :bio, rows: 1, 'max-length': 2000, data: {autoresize: true}
+              .counter_block{'max-length': 2000}= "#{current_user.account.bio.to_s.length}/2000"
+              -#.infoContainerWrapp Minimum 16 characters
+              .errorContainerWrapp
+
+          %section.PersonalLinks.padding-top-30
+            .technicalPage__label= I18n.t("views.profiles.edit_public.title")
+            = uaf.fields_for :social_links do |slf|
+              = slf.hidden_field :provider
+              .input-block{class: ('state-clear' if slf.object.link.blank?)}
+                = slf.label :link, social_link_label_for(slf.object.provider)
+                = slf.text_field :link
+                .errorContainerWrapp
+
+          .clearfix.row
+            .col-xs-12
+              = f.submit I18n.t("views.profiles.edit_public.save_changes"), class: 'btn btn-l pull-right margin-left-10', data: {disable_with: 'Please wait…'}
+              = link_to I18n.t("views.profiles.edit_public.cancel"), url_for(:back), class: 'btn btn-l btn-grey-solid pull-right'

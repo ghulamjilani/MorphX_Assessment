@@ -1,0 +1,70 @@
+<div id="get-custom-url-modal" class="modal shareModal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modalChangeUrl">
+        <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="unobtrusive-flash-container"></div>
+              <div class="sm-head">
+                <a class="closeModal" data-dismiss="modal" href="#">
+                  <i class="VideoClientIcon-iPlus"></i>
+                </a>
+                <h1 class="heading">Change custom URL</h1>
+                <p style="margin: 20px 0; ">
+                  Here's how your profile URL will look:
+                  <span class="result" style="clear: both; display: block; margin: 15px 0">
+                    <a target="_blank" href="https://{{host}}/{{slug}}">
+                      https://{{host}}/{{slug}}
+                    </a>
+                  </span>
+                </p>
+                <form>
+                  <div style="display: none" id="vanity-url-input-container" class=" control-group">
+                    <div class="controls" style="margin-bottom: 25px">
+                      <p>
+                        <i>{{host}}/</i>
+                        <input class="" style="width: 200px" id="inputIcon" type="text">
+                      </p>
+                    </div>
+
+                    <div class="btn-group mr20">
+                      <a id="change-url" href="#" class="btn btn-l save">
+                        <span class="docs-tooltip" data-toggle="tooltip">
+                          <span class="VideoClientIcon-checkmark"></span>
+                          Change URL
+                        </span>
+                      </a>
+
+                      <a href="#" class="btn btn-l btn-red clear cancel">
+                        <span class="docs-tooltip" data-toggle="tooltip">
+                          <span class="GlobalIcon-clear"></span>
+                          Cancel
+                        </span>
+                      </a>
+                    </div>
+
+                  </div>
+                </form>
+
+                <div class="btn-group mr20" id="choose-or-keep-buttons-container">
+                  <a id="select-another-option" href="#" class="btn btn-l save">
+                    <span class="docs-tooltip" data-toggle="tooltip">
+                      <span class="VideoClientIcon-checkmark"></span>
+                      Choose another URL
+                    </span>
+                  </a>
+
+                  <a href="#" class="btn btn-l btn-red clear" data-dismiss="modal">
+                    <span class="docs-tooltip" data-toggle="tooltip">
+                      <span class="GlobalIcon-clear"></span>
+                      Keep it
+                    </span>
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+        </div>
+    </div>
+</div>

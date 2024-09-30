@@ -1,0 +1,9 @@
+%p
+  Your #{@model_type}
+  = link_to @model.always_present_title, @model.absolute_path
+  was blocked by moderator.
+%p
+  Reason: #{@model.block_reason}.
+%p
+  If you have questions, please
+  = link_to 'contact us', support_home_url

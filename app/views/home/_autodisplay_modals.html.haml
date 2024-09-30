@@ -1,0 +1,141 @@
+- #NOTE: order of modals is important! Otherwise some modals will never be seen by user
+- #NOTE: @contacts_to_display_in_modal has to go first because at this point it is alredy marked as seen
+
+- if @contacts_to_display_in_modal.present?
+  .modal.fade{role: "dialog", class: modal_additional_class(::DashboardHelper::FACEBOOK_CONTACT_MODAL)}
+    .modal-dialog
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          .unobtrusive-flash-container
+          %h4.groupTitle.clearfix
+            Great news!
+
+          %section
+            %p
+              - # this may be change into "to your friend list" when we separate contacts from friends.
+              = t('home_page.auto_modal', size: @contacts_to_display_in_modal.size, service_name: Rails.application.credentials.global[:service_name])
+
+            - @contacts_to_display_in_modal.each do |contact|
+              - user = contact.contact_user
+              = link_to spa_user_path(user.slug) do
+                = image_tag(user.avatar_url, class: 'some-class', width: 32, height: 32, alt: user.public_display_name, title: user.public_display_name)
+
+- if current_user
+  - popover_container = '#almost_done_user'
+  #almostDoneModal.loginOrSignUpModal.modal.fade{role: :dialog, class: (display_almost_done_modal? ? 'autodisplay' : ''), 'data-keyboard' => "false"}
+    .modal-dialog
+      .unobtrusive-flash-container
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          .text-left
+            = image_tag 'services/' + Rails.application.credentials.global[:project_name].to_s.downcase + '/logo_small.png', id: 'logo-modal', alt: Rails.application.credentials.global[:service_name], class: "img-responsive #{Rails.application.credentials.global[:project_name].to_s.downcase}"
+          .signUp-message We still need some details from you
+
+          = semantic_form_for(current_user, as: :user, url: update_general_profile_path, method: :put, html: { id: 'almost_done_user', class: 'form-signup rf form_V2', autocomplete: false, novalidate: true, data: {remote: true, type: 'json'} }) do |f|
+            = f.hidden_field :tzinfo
+            .borderedInput{data: {container: popover_container, trigger: :manual, toggle: :popover, placement: :right, content: ''}}
+              = f.input :first_name,
+                        input_html: {placeholder: 'First Name', class: 'form-control nameInput', minlength: 2, readonly: current_user.first_name.present?},
+                        label: false,
+                        wrapper_html: false,
+                        required: true
+
+            .borderedInput{data: {container: popover_container, trigger: :manual, toggle: :popover, placement: :right, content: ''}}
+              = f.input :last_name,
+                        label: false,
+                        input_html: {placeholder: 'Last Name', class: 'form-control lastNameInput', minlength: 2, readonly: current_user.last_name.present?},
+                        wrapper_html: false,
+                        required: true
+            - unless Rails.application.credentials.global[:skip_gender_and_birthdate]
+              - if current_user.birthdate.present?
+                .borderedInput.user_birthdate_inputWrapp
+                  %input.birthday_date.bordernone.almostBirthInput{type: :text, placeholder: 'Birthday', readonly: true, value: current_user.birthdate.strftime('%d %b %Y')}
+              - else
+                .borderedInput.user_birthdate_inputWrapp{data: {container: popover_container, trigger: :manual, toggle: :popover, placement: :right, content: ''}}
+                  %input{name: 'user[birthdate(1i)]', type: :hidden}
+                  %input{name: 'user[birthdate(2i)]', type: :hidden}
+                  %input{name: 'user[birthdate(3i)]', type: :hidden}
+                  %input#birthday_date.birthday_date.bordernone.almostBirthInput{name: :birthdate, type: :text, placeholder: 'Birthday', readonly: true}
+                  %i.VideoClientIcon-calendar-icon.birthday_date_icon.almostDateIcon
+
+              - if current_user.gender.blank?
+                .borderedInput.user_gender_inputWrapp{data: {container: popover_container, trigger: :manual, toggle: :popover, placement: :right, content: ''}}
+                  %select.GenderSelect.styled-select_withCss.full-width{name: 'user[gender]'}
+                    %option{disabled: true, hidden: true, selected: true, style: 'color:red !important', val: ''} Gender
+                    %option{value: 'male'} Male
+                    %option{value: 'female'} Female
+                    %option{value: 'hidden'} Private
+              - else
+                .borderedInput.user_gender_inputWrapp
+                  .string.input.stringish.form-group
+                    %span.form-wrapper
+                      %input.form-control{value: current_user.gender.capitalize, type: :text, readonly: true}
+
+            - if current_user.email.blank? && current_user.unconfirmed_email.blank?
+              .borderedInput
+                = f.input :email,
+                          label: false,
+                          input_html: sign_up_email_input_html_value.merge(popover_attributes(popover_container)),
+                          wrapper_html: false,
+                          required: true,
+                          autocomplete: false
+            - else
+              .borderedInput.user_email_inputWrapp
+                .string.input.stringish.form-group
+                  %span.form-wrapper
+                    %input.form-control{value: current_user.email, type: :text, readonly: true}
+            - if current_user.encrypted_password.blank?
+              .borderedInput.signUpPass.required
+                = f.input :password,
+                          as: :password,
+                          label: false,
+                          input_html: {id: 'ad-password', placeholder: :Password, class: 'form-control inputUp passInput strength-password', autocomplete: 'new-password'},
+                          wrapper_html: false
+                .password-Strength-2-tooltip
+                  Use at least
+                  %b
+                    6 characters,
+                  including one
+                  %b
+                    uppercase
+                  letter, one
+                  %b
+                    lowercase
+                  letter, and one
+                  %b
+                    numeric
+                  character
+                .errorContainerWrapp
+                - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+                  .new-pass-controllers
+                    .eye.ad-showSignupMacPassword
+                    .caps.ad-showSignupMacCaps
+                  .passStrength-2-Wrap
+                    .passStrength-2-indicator
+                      %div.indicator-item
+                      %div.indicator-item
+                      %div.indicator-item
+                    .passStrength-2-Message Weak Password
+                - else
+                  .new-pass-controllers
+                    .eye.ad-showSignupPassword
+                    .caps.ad-showSignupCaps
+                  .passStrength-2-Wrap
+                    .passStrength-2-indicator
+                      %div.indicator-item
+                      %div.indicator-item
+                      %div.indicator-item
+                    .passStrength-2-Message Weak Password
+            - else
+              .borderedInput.user_password_inputWrapp
+                .string.input.stringish.form-group
+                  %span.form-wrapper
+                    %input.form-control{value: '*********', type: :text, readonly: true}
+
+            = f.button 'Submit', class: 'submitBtn btn btn-m full-width margin-top-20'
+
+          .row.ofsetModalTxt.text-center{style: 'padding-top: 0; margin-top: 0'}
+            .col-xs-12
+              %a{style: 'font-size: 14px;', 'data-dismiss': :modal} Skip for now

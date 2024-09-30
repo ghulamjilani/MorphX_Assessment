@@ -1,0 +1,44 @@
+- if user_signed_in? && @channel.organizer == current_user
+  .You_may_also_like_wrapp
+    .row
+      .col-md-10.col-xs-6
+        .section-title.padding-left-10= I18n.t('views.shared._you_may_also_like_sessions.you_may_also_like')
+      .col-md-2.col-xs-6.text-right.channel_you_may_also_like-wrapp
+        = semantic_form_for(@channel, url: you_may_also_like_visibility_channel_path(@channel.slug), html: {class: ''}) do |f|
+          .input-line.clearfix
+            .custom-input.style-select.padding-top-10
+              .select-level{style: 'display:inline-block; width:120px; vertical-align: top;'}
+                = f.input :you_may_also_like_is_visible,
+                          as: :select,
+                          collection: {'Visible': Channel::Constants::YouMayAlsoLike::VISIBLE, 'Hidden': Channel::Constants::YouMayAlsoLike::HIDDEN},
+                          selected: (f.object.you_may_also_like_is_visible ? Channel::Constants::YouMayAlsoLike::VISIBLE : Channel::Constants::YouMayAlsoLike::HIDDEN),
+                          label: false,
+                          input_html: {class: 'styled-select', style: 'width: 100%'}
+              %span.VideoClientIcon-q5.text-color-main{style: '', rel: :tipsy, title: 'Select whether you want this panel to be visible or hidden.'}
+
+    - if sessions.present? && @channel.you_may_also_like_is_visible?
+      .row
+        .col-md-12
+          .TileSliderWrapp.owlSlider
+            .spinnerSlider
+              .bounceS1
+              .bounceS2
+              .bounceS3
+            .TileSlider.YouMayAlsoLikeTileSlider.owl-carousel{style: 'display: block;'}
+              = render(partial: 'shared/tiles/session', collection: sessions, locals: {custom_class: 'margin-right-10'})
+
+- elsif sessions.present? && @channel.you_may_also_like_is_visible?
+  .You_may_also_like_wrapp
+    .row
+      .col-md-12
+        .section-title.padding-left-10= I18n.t('views.shared._you_may_also_like_sessions.you_may_also_like')
+    .row
+      .col-md-12
+        .TileSliderWrapp.owlSlider
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+          .TileSlider.YouMayAlsoLikeTileSlider.owl-carousel{style: 'display: block;'}
+            = render(partial: 'shared/tiles/session', collection: sessions, locals: {custom_class: 'margin-right-10'})
+

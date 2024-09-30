@@ -1,0 +1,40 @@
+@import "participant/core";
+
+.manageParticipant {
+  width: 100%;
+  background: $client__bg__hover;
+  height: 100%;
+  padding: 2rem 1.5rem 0rem;
+  overflow: hidden;
+
+  &__participants {
+    height: 100%;
+
+    &__header {
+      @include flex(flex, center, space-between);
+      padding-bottom: 1.5rem;
+
+      &__title {
+        color: $client__tp__main;
+        font-size: 1.6rem;
+        font-weight: bold;
+      }
+
+      &__close {
+        color: $client__tp__secondary;
+        cursor: pointer;
+      }
+    }
+
+    &__body {
+      height: 100%;
+      overflow: auto;
+      padding-bottom: 6rem; // не забыть поменять когда добавится плитка презентера
+      margin: 0 -1.5rem;
+
+      &::-webkit-scrollbar, ::-webkit-scrollbar {
+        border-radius: 3px;
+      }
+    }
+  }
+}

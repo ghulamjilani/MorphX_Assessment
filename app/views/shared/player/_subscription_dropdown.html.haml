@@ -1,0 +1,72 @@
+-#ch_icon_dr__wrapp = .channelIconDropdown
+-# .ch_icon_dr__wrapp
+-#   %a.avatarImg-XSD.border-radius-0{href: channel.relative_path, style: "background-image:url('#{channel.logo_url}')"}
+-#   .ch_icon_dr__main
+-#     .ch_icon_dr__head
+-#       .ch_icon_dr__logo{style: "background-image:url('#{channel.image_gallery_url}')",}
+-#     .ch_icon_dr__body
+-#       = channel.title
+-#     %a.ch_icon_dr__link{href: channel.relative_path, target: '_blank'}
+-#       = I18n.t('views.shared.player._subscription_dropdown.go_to_channel')
+-# - if subscription
+-#   .dropdown.dropdown-list.inline-block.margin-bottom-0.NoMinWidth.SubscribeDropDown.margin-left-10
+-#     %a.btn.btn-s.btn-borderred-red.dropdown-toggle.subscribebtn{'data-toggle': :dropdown, href: '#'}
+-#       - if can?(:unsubscribe, subscription)
+-#         = I18n.t('views.shared.player._subscription_dropdown.subscribed')
+-#       - elsif can?(:subscribe, subscription) || !current_user
+-#         = I18n.t('views.shared.player._subscription_dropdown.subscribe')
+-#       - else
+-#         = I18n.t('views.shared.player._subscription_dropdown.subscription')
+-#
+-#       %i.VideoClientIcon-angle-downF.pull-right.text-color-red
+-#       %i.VideoClientIcon-angle-upF.pull-right.text-color-red.hide
+-#     .dropdown-menu
+-#       = channel.title
+-#       .row
+-#         - if can?(:subscribe, subscription) || !current_user
+-#           .col-md-6.subsButton
+-#             - if can?(:monetize_content_by_business_plan, channel.organization)
+-#               %a.btn.btn-borderred-red.btn-square{href: preview_plans_stripe_subscription_path(subscription), data: {remote: true}}
+-#                 = I18n.t('views.shared.player._subscription_dropdown.subscribe_to_channel')
+-#             - else
+-#               %a.btn.btn-borderred-red.btn-square.disabled{disabled: true, href: 'javascript:void(0)'}
+-#                 = I18n.t('views.shared.player._subscription_dropdown.subscribe_to_channel')
+-#         .col-md-6.subsButton
+-#           - if can?(:monetize_content_by_business_plan, channel.organization)
+-#             %a.btn.btn-borderred-red.btn-square{href: preview_plans_stripe_subscription_path(subscription, gift: true), data: {remote: true}}
+-#               = I18n.t('views.shared.player._subscription_dropdown.gift_subscription')
+-#           - else
+-#             %a.btn.btn-borderred-red.btn-square.disabled{disabled: true, href: 'javascript:void(0)'}
+-#               = I18n.t('views.shared.player._subscription_dropdown.gift_subscription')
+-#
+
+
+%a{href: channel.relative_path, target: '_blank'}
+  .avatarImg-XSD.border-radius-0{style: "background-image:url('#{channel.logo_url}')"}
+  = channel.title
+- if subscription
+  .dropdown.dropdown-list.inline-block.margin-bottom-0.NoMinWidth.SubscribeDropDown.margin-left-10
+    %a.btn.btn-s.btn-borderred-red.dropdown-toggle.subscribebtn{'data-toggle': :dropdown, href: '#'}
+      - if can?(:unsubscribe, subscription)
+        = I18n.t('views.shared.player._subscription_dropdown.subscribed')
+      - elsif can?(:subscribe, subscription) || !current_user
+        = I18n.t('views.shared.player._subscription_dropdown.subscribe')
+      - else
+        = I18n.t('views.shared.player._subscription_dropdown.subscription')
+    .dropdown-menu
+      .row
+        - if can?(:subscribe, subscription) || !current_user
+          .col-md-6.subsButton
+            - if can?(:monetize_content_by_business_plan, channel.organization)
+              %a.btn.btn-borderred-red.btn-square{href: preview_plans_stripe_subscription_path(subscription), data: {remote: true}}
+                = I18n.t('views.shared.player._subscription_dropdown.subscribe_to_channel')
+            - else
+              %a.btn.btn-borderred-red.btn-square.disabled{disabled: true, href: 'javascript:void(0)'}
+                = I18n.t('views.shared.player._subscription_dropdown.subscribe_to_channel')
+        .col-md-6.subsButton
+          - if can?(:monetize_content_by_business_plan, channel.organization)
+            %a.btn.btn-borderred-red.btn-square{href: preview_plans_stripe_subscription_path(subscription, gift: true), data: {remote: true}}
+              = I18n.t('views.shared.player._subscription_dropdown.gift_subscription')
+          - else
+            %a.btn.btn-borderred-red.btn-square.disabled{disabled: true, href: 'javascript:void(0)'}
+              = I18n.t('views.shared.player._subscription_dropdown.gift_subscription')

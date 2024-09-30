@@ -1,0 +1,7 @@
+en:
+  creator_tile:
+    followers_count: 'Followers:'
+    following_count: 'Following:'
+    follow: Follow
+    following: Following
+    unfollow: Unfollow

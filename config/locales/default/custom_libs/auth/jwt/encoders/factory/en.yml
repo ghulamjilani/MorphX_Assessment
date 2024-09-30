@@ -1,0 +1,8 @@
+en:
+  custom_libs:
+    auth:
+      jwt:
+        encoders:
+          factory:
+            errors:
+              unsupported_type: "Type %{type} is not supported"

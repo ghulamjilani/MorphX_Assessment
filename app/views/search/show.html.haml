@@ -1,0 +1,15 @@
+- content_for(:page_title, 'Search')
+
+-#name space
+-#.searchB-WG  --> search Global wrapper
+-#.searchB-W   --> search wrapper
+-#.searchB-H   --> search head(title) block
+-#.searchB-B   --> search body(content) block
+-#.searchB-BL  --> search left(content) block
+-#.searchB-BR  --> search right(content) block
+-#.searchB-s-h --> section header
+-#.searchB-s-c --> section body
+
+.searchB-WG
+  #ch-vue-app
+    = content_tag 'comp-wrapper', nil, data: { component: 'search' }.to_json

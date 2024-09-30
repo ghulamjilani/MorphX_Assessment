@@ -1,0 +1,29 @@
+- rate_created_at = combination[:rate_created_at]
+- comment         = combination[:comment]
+- session         = combination[:rateable]
+- stars_quantity  = combination[:stars_quantity]
+- rater           = combination[:rater]
+
+.reviews-tile-wrapper
+  .reviews-tile
+    .row
+      .col-md-2.text-center
+        %img.reviews-author-avatar{alt: rater.public_display_name, src: rater.avatar_url}
+        .reviews-author-name= rater.public_display_name
+        %ul.starRating.clearfix{title: "#{stars_quantity.round(2)}/5"}
+          %li
+            %i{class: (stars_quantity > 1) ? 'VideoClientIcon-starF' : 'VideoClientIcon-star-emptyF'}
+          %li
+            %i{class: (stars_quantity > 2) ? 'VideoClientIcon-starF' : 'VideoClientIcon-star-emptyF'}
+          %li
+            %i{class: (stars_quantity > 3) ? 'VideoClientIcon-starF' : 'VideoClientIcon-star-emptyF'}
+          %li
+            %i{class: (stars_quantity > 4) ? 'VideoClientIcon-starF' : 'VideoClientIcon-star-emptyF'}
+          %li
+            %i{class: (stars_quantity >= 5) ? 'VideoClientIcon-starF' : 'VideoClientIcon-star-emptyF'}
+        .reviews-date
+          = time_ago_in_words(rate_created_at).gsub('about', '') + ' ago'
+      - if comment.present?
+        .col-md-10
+          .reviews-body-text
+            %p= simple_format comment

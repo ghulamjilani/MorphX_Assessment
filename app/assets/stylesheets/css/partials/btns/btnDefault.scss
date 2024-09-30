@@ -1,0 +1,19 @@
+@import "mixin";
+$btn-size-m:30px;
+
+.btn.btn-m{
+  @include btn-mod($btn-size-m, 12px);
+  &.with-icon-left{
+    padding-left: $btn-size-m + 5;
+  }
+  &.with-icon-right{
+    padding-right: $btn-size-m + 5;
+  }
+  &.btn-circle{
+    width: $btn-size-m;
+    height: $btn-size-m;
+  }
+  &.hoverText span.hoverText{
+    border-radius: $btn-size-m * 0.5;
+  }
+}

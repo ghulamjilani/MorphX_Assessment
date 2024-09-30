@@ -1,0 +1,9 @@
+en:
+  components:
+    roles:
+      members_table:
+        invite_status:
+          pending: Invited
+          active: Active
+          cancelled: Invite Cancelled
+          suspended: Suspended

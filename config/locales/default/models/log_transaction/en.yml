@@ -1,0 +1,4 @@
+en:
+  models:
+    log_transaction:
+      as_html: "Subscribed to %{service_name} with %{title} plan"

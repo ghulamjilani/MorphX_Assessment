@@ -1,0 +1,9 @@
+-   repo: git://github.com/pre-commit/pre-commit-hooks
+    sha: a751eb58f91d8fa70e8b87c9c95777c5a743a932
+    hooks:
+    -   id: end-of-file-fixer
+        files: \.(erb|haml|js|json|rb|md|py|scss|sh|tmpl|txt|yaml|yml)$
+    -   id: trailing-whitespace
+        files: \.(erb|haml|js|json|rb|md|py|scss|sh|tmpl|txt|yaml)$
+    -   id: check-yaml
+        files: \.(yaml|yml)$

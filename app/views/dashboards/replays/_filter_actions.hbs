@@ -1,0 +1,84 @@
+<!-- toggle .showFilters for show hide filters-->
+<div class="filterWrapp">
+    <form class="filters" action="" style="visibility: visible;">
+        <div class="filter_H">
+            <div class="SearchByTitle clearableField">
+                <input name="filters[query]" class="search clearInput" placeholder="Search by title" type="text">
+                <span class="VideoClientIcon-iPlus rotateIcon clearInputField hidden"></span>
+                <i class="VideoClientIcon-Search searchReplaysUploads"></i>
+            </div>
+            <div class="totalResult inline-block"></div>
+            <div class="fw_right">
+                <div class="ViewResultsWrapp inline-block text-left vertical-midle">
+                  <label>Show</label>
+                  <select id="limit_count" class="styled-select styled-select_withCss pull-right margin-left-10">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="40">40</option>
+                    <option value="80">80</option>
+                  </select>
+                </div>
+                <div class="sortBy inline-block text-left">
+                  <label class="fs-14">Sort by</label>
+                  <select name="filters[sort]" id="sortBy" class="styled-select styled-select_withCss pull-right margin-left-10">
+                    <option value="desc">Newest</option>
+                    <option value="asc">Oldest</option>
+                  </select>
+                </div>
+                <div class="tileStyleToggleBtn inline-block vertical-midle padding-left-10">
+                    <a href="javascript: void(0);" data-type="grid" {{#unless (eq grid_style 'list')}}class="hidden"{{/unless}}>
+                        <i class="VideoClientIcon-listF fs-18"></i>
+                    </a>
+                    <a href="javascript: void(0);" data-type="list" {{#unless (eq grid_style 'grid')}}class="hidden"{{/unless}}>
+                        <i class="VideoClientIcon-layout1 fs-18"></i>
+                    </a>
+                </div>
+                <a class="FilterByBtn padding-left-20">
+                  <button class="btn btn-m btn-borderred-grey">Filters
+                    <i class="VideoClientIcon-tuning"></i>
+                  </button>
+                </a>
+            </div>
+        </div>
+        <div class="filter_B clearfix">
+            <div class="filter_B__wrapper">
+                <span class="fs-16">Date</span>
+                <span class="fs-12 margin-left-10">From</span>
+                <input id="filterDate_from_{{channel_id}}" name="filters[start_at][from]" type="text">
+                <span class="fs-12">To</span>
+                <input id="filterDate_to_{{channel_id}}" name="filters[start_at][to]" type="text">
+            </div>
+            <div class="padding-top-20 display-flex">
+                <label class="checkbox choice">
+                    <input name="filters[free][]" type="checkbox" value="t">
+                    <span>Free</span>
+                </label>
+                <label class="checkbox choice">
+                    <input name="filters[visible][]" type="checkbox" value="t">
+                    <span>Visible</span>
+                </label>
+                <label class="checkbox choice">
+                    <input name="filters[published][]" type="checkbox" value="t">
+                    <span>Processed</span>
+                </label>
+            </div>
+            <div class="display-flex">
+                <label class="checkbox choice">
+                    <input name="filters[free][]" type="checkbox" value="f">
+                    <span>Paid</span>
+                </label>
+                <label class="checkbox choice">
+                    <input name="filters[visible][]" type="checkbox" value="f">
+                    <span>Hidden</span>
+                </label>
+                <label class="checkbox choice">
+                    <input name="filters[published][]" type="checkbox" value="f">
+                    <span>Unprocessed</span>
+                </label>
+            </div>
+            <div class="pull-right">
+              <a class="apply_filters btn btn-m" href="javascript: void(0);">Apply</a>
+            </div>
+        </div>
+    </form>
+</div>

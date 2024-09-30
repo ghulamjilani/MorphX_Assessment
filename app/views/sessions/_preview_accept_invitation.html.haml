@@ -1,0 +1,9 @@
+%div.accept-invitation.modal.fade{id: "acceptPopup#{@session.id}", 'aria-hidden' => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = render 'become_presenter_steps/close_modal'
+      .modal-body
+        %h1.heading.bold
+          Accept Invitation
+        %div.accept-invitationWrapper
+          = raw @body

@@ -1,0 +1,4 @@
+= I18n.t('mailers.service_subscriptions_mailer.deactivated.body',
+  platform_url: Rails.application.credentials.global[:host].capitalize,
+  support_email: Rails.application.credentials.global[:support_mail],
+  platform_name: Rails.application.credentials.global[:service_name]).html_safe

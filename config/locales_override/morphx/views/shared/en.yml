@@ -1,0 +1,5 @@
+en:
+  views:
+    shared:
+      landing:
+        creator_has_not_published: "%{creator_upper} has not published any public channels to this network."

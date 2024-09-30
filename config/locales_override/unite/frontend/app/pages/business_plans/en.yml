@@ -1,0 +1,7 @@
+en:
+  frontend:
+    app:
+      pages:
+        business_plans:
+          plans:
+            interactive: Conference

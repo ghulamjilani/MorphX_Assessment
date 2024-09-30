@@ -1,0 +1,55 @@
+<div class="crop-images-wrapp">
+    <div class="row">
+        <div class="crop-images col-md-8">
+            <img id="crop-img" src="{{img_src}}">
+        </div>
+        <div class="crop-images-previev col-md-4">
+            <div class="docs-preview clearfix">
+                <div class="img-preview preview-lg"></div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="text-right">
+        <!--<div class="btns-group">-->
+            <!--<button title="" data-option="0.1" data-method="zoom" data-toggle="tooltip" class="btn-white btn-blue-hover" type="button" data-original-title="Zoom In">-->
+                <!--<span class="docs-tooltip">-->
+                  <!--<span class="icon-zoom-in-1"></span>-->
+                <!--</span>-->
+            <!--</button>-->
+            <!--<button title="Zoom Out" data-option="-0.1" data-method="zoom" data-toggle="tooltip" class="btn-white btn-blue-hover" type="button">-->
+                <!--<span class="docs-tooltip">-->
+                  <!--<span class="icon-zoom-out-1"></span>-->
+                <!--</span>-->
+            <!--</button>-->
+        <!--</div>-->
+        <div class="btns-group">
+            <button type="button" class="btn-white btn-blue-hover" data-toggle="tooltip" data-method="rotate"
+                    data-option="-45" title="Rotate Left">
+                    <span class="docs-tooltip">
+               <span class="icon-ccw"></span>
+             </span>
+            </button>
+            <button type="button" class="btn-white btn-blue-hover" data-toggle="tooltip" data-method="rotate"
+                    data-option="45" title="Rotate Right">
+                    <span class="docs-tooltip">
+               <span class="icon-cw"></span>
+             </span>
+            </button>
+        </div>
+        <div class="btns-group">
+            <a href="#" class="btn-white btn-blue-hover save" title="Crop">
+                      <span class="docs-tooltip" data-toggle="tooltip" title="Crop and add image">
+                      <span class="VideoClientIcon-checkmark"></span>
+                          Done
+                    </span>
+            </a>
+            <a href="#" class="btn-white btn-red-hover clear" title="Clear">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="Clear">
+                      <span class="GlobalIcon-clear"></span>
+                        Close
+                    </span>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+//MAIN COLORS
+
+$siteColorMain: #f33535;
+
+$video-volor-grey: #3a4b59;
+$video-volor-blue: #396b9f;
+$video-volor-red: #ef2064;
+$video-volor-green: #66d69a;
+$video-volor-light-red: rgb(255, 110, 104);
+$video-volor-white: #fff;
+
+$bodyBackground:#272727;
+$twoThirdBG:$bodyBackground;
+
+//font styles
+$font-Regular: 'Roboto', sans-serif;;
+
+
+
+//main sizes
+$videoclientMinHeight:108rem;
+
+//panel width
+$connectedBarWidth:25rem;
+
+$transitionProperty:1s;
+//header height
+$header-height:3.5rem;
+
+//sideBar width
+$sideBar-width:3.5rem;
+
+//main video button
+$MainVideoButton-size:2.2rem;
+$MainVideoButton-color-grey:#636a6f;
+$MainVideoButton-color-LightGrey:#bbbec1;
+$MainVideoButton-color-DarkGrey:#252f37;
+$MainVideoButton-color-blue: #40d6ff;
+$MainVideoButton-color-DarkBlue: #0f7199;
+
+
+//panels
+$panelBackground:#2d2d2d;
+
+@mixin transition200(){
+  -webkit-transition:all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  -moz-transition:all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  -o-transition:all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition:all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}

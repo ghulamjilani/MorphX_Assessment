@@ -1,0 +1,6 @@
+#tlkio{data: {channel: "Immerss#{session.id}#{session.class.to_s.first}",
+              theme: 'theme--night',
+              nickname: user.public_display_name.truncate(15),
+              'custom-css': asset_url('chatcss/custom.css')},
+       style: 'width:100%;height:100%;'}
+%script{async: '', src: 'https://tlk.io/embed.js', type: 'text/javascript'}

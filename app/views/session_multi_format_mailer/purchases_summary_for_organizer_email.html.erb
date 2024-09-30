@@ -1,0 +1,7 @@
+<% email_direct_message_context(@session.channel.title) %>
+
+<%= simple_format @body %>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@session.channel.title) %>
+</p>

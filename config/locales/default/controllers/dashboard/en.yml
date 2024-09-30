@@ -1,0 +1,9 @@
+en:
+  controllers:
+    free_subscriptions_controller:
+      file_queued: Invitations taken for processing. Refresh the page after a few minutes to see the result.
+      email_queued: Invitation taken for processing. Refresh the page after a few minutes to see the result.
+      errors:
+        invalid_file: Invalid File format
+        owner_action: Only owner can perform this action
+        no_permissions: You have no permissions perform this action

@@ -1,0 +1,7 @@
+$("#edit_product_modal_#{@product.id}").remove();
+$('body').append("#{escape_javascript(render('dashboard/products/modal_form'))}");
+$("#edit_product_modal_#{@product.id}").modal('show');
+product_form = new window.ProductForm({el: "#edit_product_modal_#{@product.id}"});
+product_form.render();
+$("#product_tile_#{@product.id} a.productTile_edit").attr('href', "#edit_product_modal_#{@product.id}").attr('data-toggle', 'modal');
+$("#product_tile_#{@product.id} a.productTile_edit").removeAttr('data-remote');

@@ -1,0 +1,10 @@
+en:
+  controllers:
+    concerns:
+      controller_concerns:
+        api:
+          v1:
+            authorization:
+              errors:
+                blank_jwt: Authorization header is blank
+                expired_jwt: Authorization token has expired

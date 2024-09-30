@@ -1,0 +1,11 @@
+.list-group-item
+  - display_value = f.object.url.present? ? f.object.url : 'stub_link_to_has_many'
+  = f.input :url, as: :string, required: true, input_html: { class: 'input-xxlarge', value: display_value }, wrapper_html: {class: 'custom-input', style: 'display: none;'}
+  %div{style: 'float: left; width: 283px; overflow: hidden;'}
+    %a{href: (f.object.url || display_value), target: '_blank'}
+      = f.object.url || display_value
+  .buttons
+    = f.input :_destroy, as: :hidden
+    = link_to '#', class: "remove_links" do
+      %span.VideoClientIcon-iPlus.rotateIcon.btn-lg{alt: 'Remove', title: 'Remove', style: 'top: 0; padding: 0'}
+  .clear

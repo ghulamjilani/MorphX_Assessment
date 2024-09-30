@@ -1,0 +1,5 @@
+en:
+  components:
+    video_client:
+      main_section:
+        if_creator_not_join_in_time: "If the %{creator} does not join the session within 5 minutes, the session will be terminated automatically."

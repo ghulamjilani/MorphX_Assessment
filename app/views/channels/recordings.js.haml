@@ -1,0 +1,18 @@
+$('#videosArea .recordings_wrapp').append("#{escape_javascript(render(partial: 'shared/tiles/recording', collection: @recordings, locals: {custom_class: 'col-md-4 padding-right-0'}))}");
+:plain
+  window.initializeDateTimes();
+  $('#videosArea a[data-remote]').css('visibility', 'visible')
+  $.each($('section.tile-cake'), function(){
+    var imgOBJ, imgOBJItem, itemattr;
+    imgOBJ = $(this).find('.owl-lazy');
+    imgOBJItem = $(imgOBJ).get(0);
+    if(!!$(imgOBJItem).attr('data-src')){
+      itemattr = $(imgOBJItem).attr('data-src');
+      $(imgOBJItem).removeAttr('data-src');
+      $(imgOBJItem).css({ 'background-image': "url('" + itemattr + "')", 'opacity': 1 });
+    }
+  })
+- if @total_pages == @current_page
+  $('#videosArea .show_more.recordings').remove();
+- else
+  $('#videosArea .show_more.recordings a').attr('href', "#{recordings_channel_path(@channel, limit: @limit, offset: (@offset + @limit)).html_safe}");

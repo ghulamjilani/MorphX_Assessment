@@ -1,0 +1,4 @@
+<% abstract_session_link = %(<a target="_blank" href="#{@abstract_session.absolute_path}">#{@abstract_session.always_present_title}</a>) %>
+
+<% purchase_link = link_to('this link', preview_purchase_channel_session_url(@abstract_session.slug, type: ObtainTypes::PAID_IMMERSIVE)) %>
+<%= simple_format I18n.t('mailer.vod_just_became_available_for_purchase.body', abstract_session_link: abstract_session_link, purchase_link: purchase_link) %>

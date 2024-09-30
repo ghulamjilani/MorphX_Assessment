@@ -1,0 +1,19 @@
+en:
+  views:
+    payouts:
+      bank_info_form:
+        add_info: Add Bank Account info
+        edit_info: Edit Bank Account info
+        please_wait: Please wait…
+        back: Back
+        next: Next
+        routing_number: Routing Number
+        routing_number_info: The Routing Number, sort code, or other country-appropriate institution number for the bank account. For US bank accounts, this is required and should be the ACH routing number, not the wire routing number. If you are providing an IBAN for Account Number, this field is not required.
+        account_number: Account Number/IBAN
+        account_number_info: The account number for the bank account, in string form. Must be a checking account. If you are providing an IBAN the Routing Number is not required.
+        account_holder_name: Account Holder Name
+        currency: Currency
+        country: Country
+        account_file_info: 'Acceptable documents include a bank statement or voided check that displays the last 4 digits of the bank account number. Allowed formats: application/pdf, application/xml, image/jpeg, image/png, text/csv'
+        account_file: Bank Account Ownership Verification
+        account_file_formats: application/pdf, application/xml, image/jpeg, image/png, text/csv

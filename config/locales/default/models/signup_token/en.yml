@@ -1,0 +1,8 @@
+en:
+  models:
+    signup_token:
+      errors:
+        user_validation: User is invalid
+        already_used: Signup Token has been already used
+        expired: Signup Token expired
+        not_usable: Signup Token cannot be used

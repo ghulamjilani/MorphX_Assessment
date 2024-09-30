@@ -1,0 +1,108 @@
+//importPlugins
+@import "style/plugin/scroll_styler/scrollStyle";
+@import "style/plugin/intro/introjs.min";
+
+//import main styles
+@import "style/variables";
+@import "style/core/mixin";
+@import "style/core/animation";
+@import "style/core/core_reset";
+@import "style/core/fonts";
+@import "style/sub_partials/buttons";
+@import "style/core/grid";
+@import "style/core/helpers_class";
+@import "style/core/main";
+@import "style/core/header/core-header";
+@import "style/core/right_Sidebar/core-rightSideBar";
+@import "style/core/video_container/core_videoContainer";
+@import "style/sub_partials/cover/animations_object/cover";
+@import "style/sub_partials/loader";
+@import "style/sub_partials/SUB_page/before_start/before_start_sub_page";
+@import "style/plugin/tooltip";
+
+//WEBRTC
+@import "style/webrtc/core";
+
+
+@import "style/core/right_Sidebar/partials/panels";
+@import "style/core/social";
+@import "style/core/mixin";
+
+@import "css/partials/video_player";
+
+#immerssPlugin {
+  width: 1px;
+  height: 1px;
+}
+#credentialsPlace{
+  //position: absolute;
+  //left: calc(50% + 37px);
+  //top: 40%;
+  width: 670px;
+  //transform: translate(-50%,-50%);
+  //-webkit-transform: translate(-50%,-50%);
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 15px 70px 15px 10px;
+  font-size: 16px;
+  line-height: 26px;
+  color: #fff;
+  display: inline-block;
+  .status_red{
+    text-shadow: 0 0 1px red;
+  }
+  &.safariDetected{
+    a{
+      display: none !important;
+    }
+  }
+  span{
+    display: inline-block;
+    padding-right: 15px;
+    text-align: right;
+    vertical-align: middle;
+    width: 120px;
+  }
+  input{
+    border: none;background: transparent;
+    color: #fff;
+    display: inline-block;
+    font-size: 18px;
+    padding: 0 10px 0 0;
+    position: relative;
+    vertical-align: middle;
+    cursor: default;
+    width: 460px;
+  }
+  .credentialsPlace-content{
+    div{
+      position: relative;
+      border-bottom: 1px solid transparent;
+      margin-bottom: 10px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+      &:hover{
+        border-bottom-color: rgba(255, 255, 255, 0.4);
+        a{
+          opacity: 1;
+        }
+      }
+      a{
+        background: #fff none repeat scroll 0 0;
+        color: #000;
+        display: block;
+        font-size: 12px;
+        line-height: 26px;
+        position: absolute;
+        right: -54px;
+        text-align: center;
+        top: 2px;
+        width: 54px;
+        opacity: 0.3;
+        @include transition();
+      }
+    }
+  }
+}
+

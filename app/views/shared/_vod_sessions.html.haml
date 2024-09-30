@@ -1,0 +1,43 @@
+-# REMOVE ME
+- if records.present?
+  .session-VOD-tileGroup.session_tile_slider.SelectedItem
+    -#TODO: THIS IS STANDART VOD_TILE FROM SLIDER
+    -#        .session-VOD-tileGroup => wrapper
+    -#         if vod selected for wrapper add class .SelectedItem for tile add class .activeVideoTile
+    - records.each do |video|
+      - session = video.room.abstract_session
+      %section.thumbnails.thumbnail-kenburn.kontainer{data: {VideoID: video.id, hash: "#{video.id}"}}
+        .presentation-img-Wrapper
+          .social-sharing-block
+            = degradable_link_to session.toggle_like_relative_path, method: :post, remote: true, class: ["like-block", like_class(session), "session-like-#{session.id}"].join(' '), title: 'Like' do
+              %i.VideoClientIcon-Favorites
+              %span{class: "likes-counter-session-#{session.id}"}
+                = session.likes_count unless session.likes_count.zero?
+
+        = link_to session.preview_share_relative_path(VIDEO_ID_FOR_SHARING => video.id), method: :get, rel: :nofollow, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, remote: true, class: 'social-sharing', title: 'Share' do
+          %i.VideoClientIcon-share-mk4
+
+        - if can?(:have_in_wishlist, session)
+          = degradable_link_to toggle_wishlist_items_path(model_id: video.id, model_type: 'Video'), method: :post, remote: true, class: ["add-to-wish-list-button", wishlist_class(video), "video-wishlist-#{video.id}"].join(' '), title: 'Add to Wishlist' do
+            %i.VideoClientIcon-add73
+        - else
+          %span.add-to-wish-list-button
+            %i.VideoClientIcon-add73
+
+      %a.sessionBoxImg.PlayVideoOnDemand.ensure-link-style{data: vod_data_attributes(video), href: "?video_id=#{video.id}"}
+        %span.playVidio
+          %i.icon-googleplay
+        .sessionBoxImg_main{style: "background-image: url('#{video.poster_url || asset_path(session.channel.image_preview_url)}');"}
+        .sessionBoxImgOverlay
+        .hiddenText
+          .sessionBox_title
+            %span= session.title
+      .caption
+        %h4
+          %a.channel-link.ensure-link-style
+            %span{title: :title}= session.title
+          %em
+            = time_with_tz_in_chosen_format(session.start_at)
+            %span
+              = video.duration_in_minutes || session.duration
+              mins

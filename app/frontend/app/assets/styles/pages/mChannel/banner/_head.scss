@@ -1,0 +1,171 @@
+.mChannel {
+
+  //topLine content
+  &__orgInfo{
+    @include flex($justify_content:space-between, $align_items: center);
+
+    &__logo {
+      cursor: pointer;
+      margin-right: 2.4rem;
+      @include media(phone){
+        margin-right: 1.4rem;
+      }
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-color: var(--bg__hover);
+      border-radius: $CONTENT_BORDER_RADIUS;
+      width: 6rem;
+      min-width: 6rem;
+      height: 6rem;
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.05);
+    }
+    &__content{
+      @include flex($justify_content:space-between, $align_items: flex-end);
+      width: 100%;
+    }
+    &__name{
+      font-weight: 700;
+      font-size: 2.8rem;
+      line-height: 120%;
+      padding-top: 0.5rem;
+      color: var(--tp__h1);
+    }
+    &__description{
+      font-size: 1.4rem;
+      line-height: 150%;
+      span{
+        display: inline-block;
+        color: var(--tp__h1);
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+  }
+  &__head {
+
+    //topLine
+    &__topLine{
+      background: var(--bg__hover);
+      min-height: 10rem;
+      padding: 2rem 2.7rem 2rem 2rem;
+      @include media(phone){
+        padding: 1.5rem 1rem 1.5rem 1rem;
+      }
+      border-radius: 0 0 $CONTENT_BORDER_RADIUS $CONTENT_BORDER_RADIUS;
+    }
+
+    //bottomLine and bottomLine content
+    &__bottomLine{
+      @include flex(flex, center, space-between, row , wrap);
+      max-width: calc(100vw - 4.7rem);
+      @include media(phone){
+        max-width: calc(100vw - 2.5rem);
+      }
+      margin: 0 auto;
+    }
+    @include media(reverso-phone){
+      &__avatarS, &__buttonsS {
+        min-width: 40%;
+        max-width: 40%;
+      }
+    }
+    &__name {
+      width: 100%;
+
+      &__label {
+        width: 100%;
+        font-size: 2.8rem;
+        color: var(--tp__h2);
+        font-weight: bold;
+        padding: 1.9rem 0 1.5rem 0;
+        position: relative;
+        @include text__ellipsis(2);
+        @include media(phone) {
+          margin-bottom: 0;
+          line-height: 3rem;
+        }
+      }
+
+      button {
+        @include btn-mod-BG-and-borders(var(--bg__secondary), var(--bg__secondary));
+        @include btn-mod(2.7rem, 1.4rem);
+        @include text__ellipsis();
+        color: var(--tp__main);
+        border-radius: 0;
+        max-width: 32rem;
+        padding-right: 3rem;
+        position: relative;
+        font-weight: normal;
+
+        i {
+          position: absolute;
+          right: 1rem;
+          font-size: 1.1rem;
+          color: var(--tp__icons);
+          @include center(v);
+        }
+      }
+    }
+
+    &__avatarS {
+      @include media(desktop) {
+        min-width: 50%;
+      }
+      @include media(tablet) {
+        min-width: max-content;
+        margin-bottom: 3rem;
+      }
+      @include media(phone) {
+        display: none;
+      }
+    }
+
+    &__buttonsS {
+      @include media(desktop) {
+        min-width: 50%;
+      }
+      @include media(tablet) {
+        order: 2;
+        min-width: 100%;
+        max-width: 100%;
+        text-align: left;
+      }
+      @include media(phone) {
+        order: 3;
+        @include flex(flex, false, space-between);
+        text-align: center;
+        padding-left: 0;
+      }
+      @include media(p-phone) {
+        width: 100%;
+        flex-wrap: wrap;
+        flex-direction: column;
+        button {
+          width: 100%;
+          max-width: 100%;
+          margin-bottom: 2rem;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+  &__section {
+    width: 125rem;
+    max-width: 94%;
+    margin: 0 auto;
+    &__full{
+      max-width: 100%;
+    }
+  }
+  &__info {
+    background: var(--bg__secondary);
+    padding: 6.5rem 0;
+  }
+
+  &__channels {
+    background: #222222;
+    padding: 6rem 0;
+  }
+
+}

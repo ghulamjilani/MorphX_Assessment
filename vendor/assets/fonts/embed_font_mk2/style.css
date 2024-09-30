@@ -1,0 +1,100 @@
+@font-face {
+  font-family: 'embed_font';
+  src:
+    url('fonts/embed_font.ttf?ah5p8z') format('truetype'),
+    url('fonts/embed_font.woff?ah5p8z') format('woff'),
+    url('fonts/embed_font.svg?ah5p8z#embed_font') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="embed_font"], [class*=" embed_font"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'embed_font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.embed_fontmail:before {
+  content: "\e904";
+}
+.embed_fontshare-mk4:before {
+  content: "\e93f";
+}
+.embed_fontuser-mk2:before {
+  content: "\e958";
+}
+.embed_fontcalendar-mk2:before {
+  content: "\e959";
+}
+.embed_fontgoogle:before {
+  content: "\ea8b";
+}
+.embed_fontfacebook:before {
+  content: "\ea91";
+}
+.embed_fonttwitter:before {
+  content: "\ea97";
+}
+.embed_fontsend:before {
+  content: "\e902";
+}
+.embed_fonthappy-filled-face:before {
+  content: "\e900";
+}
+.embed_fontquestion-1:before {
+  content: "\e901";
+}
+.embed_fontheart:before {
+  content: "\e80e";
+}
+.embed_fontheart-empty:before {
+  content: "\e80f";
+}
+.embed_fontstar:before {
+  content: "\e810";
+}
+.embed_fontstar-empty:before {
+  content: "\e811";
+}
+.embed_fontstar-half-alt:before {
+  content: "\e813";
+}
+.embed_fonteye-1:before {
+  content: "\e9d3";
+}
+.embed_fontiPlus:before {
+  content: "\e609";
+}
+.embed_fontshare57:before {
+  content: "\e903";
+}
+.embed_fontnavigate-up-arrow:before {
+  content: "\e92f";
+}
+.embed_fontdollar-currency-symbol:before {
+  content: "\e94d";
+}
+.embed_fonttumblr:before {
+  content: "\eab9";
+}
+.embed_fontreddit:before {
+  content: "\eac6";
+}
+.embed_fontlinkedin:before {
+  content: "\eaca";
+}
+.embed_fontpinterest:before {
+  content: "\ead2";
+}
+.embed_fontbookmark:before {
+  content: "\e9d2";
+}

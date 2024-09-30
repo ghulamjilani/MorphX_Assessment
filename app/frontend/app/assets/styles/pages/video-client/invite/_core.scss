@@ -1,0 +1,135 @@
+@import "contact/core";
+
+.inviteParticipant {
+  width: 100%;
+  background: $client__bg__hover;
+  height: 100%;
+  padding: 2rem 1.5rem 0;
+  overflow: hidden;
+
+  &__wrapper {
+    width: 40rem;
+    height: 100%
+  }
+
+  &__header {
+    @include flex(flex, center, space-between);
+    font-size: 1.8rem;
+    padding-bottom: 3rem;
+    @include media(tablet) {
+      padding-bottom: 1rem;
+    }
+
+    &__title {
+      font-weight: bold;
+    }
+
+    &__close {
+      color: $client__tp__secondary;
+      cursor: pointer;
+    }
+  }
+
+  &__email {
+    &__label {
+      color: $client__tp__labels;
+      font-size: 1.4rem;
+    }
+
+    #inviteParticipant__email__input {
+      color: $client__tp__inputs;
+      font-size: 1.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-right: 2.5rem;
+      padding-top: 0;
+
+      &::placeholder {
+        color: $client__tp__inputs__placeholder;
+      }
+
+      &:-ms-input-placeholder {
+        color: $client__tp__inputs__placeholder;
+      }
+
+      &::-ms-input-placeholder {
+        color: $client__tp__inputs__placeholder;
+      }
+
+    }
+
+    .input__field__icon {
+      color: $client__tp__icons;
+      top: 25%;
+    }
+  }
+
+  &__contacts {
+    &__title {
+      color: $client__tp__main;
+      font-size: 1.6rem;
+      font-weight: bold;
+      padding: 2rem 0 3rem;
+
+      span {
+        font-weight: normal;
+      }
+
+      @include media(tablet) {
+        padding: 0rem 0 1rem;
+      }
+    }
+
+    &__wrapper {
+      max-height: calc(100% - 23rem);
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin: 0 -1.5rem;
+
+      &::-webkit-scrollbar, ::-webkit-scrollbar {
+        border-radius: .3rem;
+      }
+
+      &__mobile {
+        max-height: calc(100% - 17rem);
+      }
+    }
+
+    &__search {
+      #inviteParticipant__contacts__search__input {
+        color: $client__tp__inputs;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #666666;
+        padding-right: 2.5rem;
+        padding-top: 0;
+
+        &::placeholder {
+          color: $client__tp__inputs__placeholder
+        }
+      }
+
+      .input__field__icon {
+        color: $client__tp__icons;
+        top: 30%;
+      }
+    }
+  }
+
+  .cm__loader {
+    background-color: #282828;
+    // height: fit-content;
+    // padding-top: 50vh;
+    .spinnerSlider {
+      top: 20%;
+
+      & > div {
+        background-color: var(--tp__active);
+      }
+    }
+  }
+
+  &__showMore {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}

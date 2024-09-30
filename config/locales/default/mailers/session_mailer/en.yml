@@ -1,0 +1,11 @@
+en:
+  mailers:
+    session_mailer:
+      co_presenter_invited_to_session:
+        subject:  "You’ve been invited to co-present on %{service_name} by %{name}"
+      presenter_assigned_to_session:
+        subject:  "%{service_name} notification: Session assignment for presenting"
+      presenter_unassigned_from_session:
+        subject:  "You’ve been detached from session on %{service_name} by %{name}"
+      co_presenter_rejected_from_session:
+        subject: "You have been removed as a %{creator} by"

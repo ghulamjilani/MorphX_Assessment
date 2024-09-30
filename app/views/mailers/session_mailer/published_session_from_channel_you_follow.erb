@@ -1,0 +1,10 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  <%= simple_format raw(I18n.t('mailer.published_session_from_user_you_follow.body',
+                               date: @date,
+                               channel_name: "<a href=\"#{@session.channel.absolute_path}\" target=\"_blank\">#{@session.channel.title}</a>",
+                               session_link: absolute_path_for_user(@session))) %>
+</p>

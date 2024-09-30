@@ -1,0 +1,24 @@
+en:
+  views:
+    dashboards:
+      session:
+        mins: mins
+        private: Private
+        public: Public
+        one_on_one: One on One
+        group: Group
+        status: Status
+        visibility: Visibility
+        edit: Edit
+        invite: Invite
+        publish: Publish
+        end_session: End Session
+        end_session_tooltip: This will stop current active session
+        publish_confirmation: Publish confirmation
+        cancel_interactive: Cancel Interactive
+        cancel_livestream: Cancel Livestream
+        cancel_on_demand: Cancel On-Demand
+        unchain: Unchain
+        unchain_all: Unchain all
+        cancel: Cancel
+        toggle_dropdown: Toggle Dropdown

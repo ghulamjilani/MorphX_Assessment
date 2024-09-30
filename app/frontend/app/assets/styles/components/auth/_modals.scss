@@ -1,0 +1,106 @@
+.modal-auth-template {
+  width: 35rem;
+  max-width: 100%;
+  margin: 0 auto 0 auto; //TODO: разобраться в работе этого костыля, и понять почему модалки вне этого контейнера хотя должны быть внутри...... аааааa
+}
+
+.toggleButton {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.disabledButton[disabled] {
+  background: var(--tp__disabled);
+  color: var(--tp__active);
+  border: none;
+}
+
+.buttonsSection {
+  a {
+    color: var(--tp__active);
+  }
+}
+
+/* needs the same height of modals */
+.ForgotPassword {
+  &__title {
+    padding: 9.5rem 0;
+  }
+
+  &__toggleButton {
+    padding-bottom: 10rem;
+  }
+}
+
+.GuestLogin {
+  padding-bottom: 6rem;
+
+  &__image {
+    @include flex(flex, center, center);
+    margin-bottom: 1.5rem;
+  }
+
+  &__welcome {
+    color: var(--tp__h1);
+    font-size: 2.6rem;
+    font-weight: bold;
+    @include flex(flex, center, center);
+    margin-bottom: 3.5rem;
+    text-align: center;
+  }
+
+  &__title {
+    color: var(--tp__secondary);
+  }
+
+  &__toggleButton {
+    padding-bottom: 10rem;
+  }
+}
+
+/* //////// */
+.socialBlock {
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  color: var(--tp__btn__bordered__social);
+  @include flex(flex, center, center);
+  @include transition();
+  position: relative;
+  cursor: pointer;
+  border: 1px solid var(--btn__social);
+  border-radius: 3rem;
+  height: 6rem;
+  background: transparent;
+
+  &__disable {
+    cursor: not-allowed;
+  }
+
+  &:active {
+    background: var(--bg__header);
+  }
+
+  &:hover {
+    box-shadow: inset 0px -0.2rem 0.6rem var(--sh__main);
+  }
+
+  img, i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  i {
+    font-size: 3.5rem;
+    top: 45%;
+  }
+}
+
+.buttonsSection {
+  color: var(--tp__secondary);
+}
+
+/* //////// */

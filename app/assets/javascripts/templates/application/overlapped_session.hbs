@@ -1,0 +1,11 @@
+<div class="pre-time"></div>
+
+<div class="start-at">
+    {{#if isCurrent}}
+      <a href="#" class="present_title_wrapper">
+        {{always_present_title}}
+      </a>
+    {{else}}
+        <a href="{{relative_path}}" target="_blank" class="present_title_wrapper">{{always_present_title}}</a>
+    {{/if}}
+</div>

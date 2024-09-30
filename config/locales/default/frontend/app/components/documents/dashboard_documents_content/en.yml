@@ -1,0 +1,7 @@
+en:
+  frontend:
+    app:
+      components:
+        documents:
+          dashboard_documents_content:
+            documents: Documents

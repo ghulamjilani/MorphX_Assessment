@@ -1,0 +1,31 @@
+<p>
+  <%= @presenter.user.public_display_name %> went into negative balance and his presenter account is locked now.
+</p>
+
+<table>
+  <tr>
+    <td>
+      Current presenter balance:
+    </td>
+
+    <td>
+      <strong>
+        <%= number_to_currency(@presenter.user.presenter_credit_balance, precision: 2) %>
+      </strong>
+    </td>
+
+    <td>
+      Minimum presenter balance to unlock it:
+    </td>
+
+    <td>
+      <strong>
+        <%= number_to_currency(- @presenter.credit_line_amount, precision: 2) %>
+      </strong>
+    </td>
+  </tr>
+</table>
+
+<p>
+  User can either replenish his presenter balance via credit card payment.
+</p>

@@ -1,0 +1,7 @@
+#unite_embed.mio_embed
+  #unite_embed_videoWrapp.mio_embed.unite_embed_videoIframeWrapp
+    #unite_embed_video.mio_embed
+      %iframe(src="#{player_widget_url(share_model.id, share_model.class.to_s.downcase)}" data-role="vplayer" class="" frameborder="0" allowfullscreen name="" srcdoc="" allow="encrypted-media")
+  .unite_embed_additionsIframeWrapp.mio_embed
+    %iframe#unite_embed_additions(src="#{additions_widget_url(share_model.id, share_model.class.to_s.downcase)}" data-role="additions" name="" srcdoc="")
+  = stylesheet_link_tag asset_url('/assets/widgets/template_V_L.css')

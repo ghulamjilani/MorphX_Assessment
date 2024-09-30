@@ -1,0 +1,23 @@
+- content_for(:page_title, 'Payments & Payouts')
+- content_for(:extra_body_classes, 'profiles profiles-edit_billing header-top')
+- content_for(:after_include_javascripts) do
+  :javascript
+    InitPayouts();
+    InitPersonalInfoValidation();
+.row#profilePage
+  = render 'profiles/nav'
+  .col-md-9
+    .info-tabs
+      %ul.nav.nav-tabs.nav-justified
+        %li
+          %a{href: edit_billing_profile_path}= I18n.t('views.payouts.index.payments')
+        %li.active
+          %a.active{href: payouts_payout_methods_path}= I18n.t('views.payouts.index.payouts')
+    .technicalPage.account-edit-page-content.main-section-form.Billing-settings
+      .tab-content
+        #payouts.tab-pane.active
+          .AddBankPayoutMethod.selectCountry
+            .row
+              #add_account_info.col-md-12
+                = render(partial: 'payouts/account_info_form', locals: { connect_account: @connect_account, payout_method: @payout_method, type: @payout_method.business_type, country: @payout_method.country})
+              #add_bank_info.col-md-12

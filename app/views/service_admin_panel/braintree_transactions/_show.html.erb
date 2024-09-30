@@ -1,0 +1,113 @@
+<table border="0" cellspacing="0" cellpadding="0" class="index_table index">
+  <tr>
+    <th class="nobg">ID</th>
+    <th>Amount</th>
+    <th>User</th>
+    <% if @braintree_transaction.abstract_session.present? %>
+      <th>Abstract Session</th>
+      <th>Abstract Session Type</th>
+    <% end %>
+    <th>Braintree ID</th>
+    <% if @braintree_transaction.credit_card? %>
+      <th>Credit card last 4</th>
+    <% else %>
+      <th>PayPal Payment ID</th>
+      <th>PayPal Payer Email</th>
+      <th>PayPal Token</th>
+      <th>PayPal Debug ID</th>
+      <th>PayPal Authorization ID</th>
+    <% end %>
+    <th>Status</td>
+    <th>Type</td>
+  </tr>
+  <% status = @braintree_transaction.reload.status%>
+
+  <tr class="odd">
+    <td><%=h @braintree_transaction.id %></td>
+    <td><%=h @braintree_transaction.amount %></td>
+    <td><%=h link_to @braintree_transaction.user.public_display_name, service_admin_panel_user_path(@braintree_transaction.user_id) %></td>
+    <% if @braintree_transaction.abstract_session.present? %>
+      <td>
+        <% if @braintree_transaction.abstract_session.is_a?(Session) %>
+          <%=h link_to @braintree_transaction.abstract_session.always_present_title, service_admin_panel_session_path(@braintree_transaction.abstract_session.id) %>
+        <% end %>
+      </td>
+      <td><%=h @braintree_transaction.abstract_session.class.to_s %></td>
+    <% end %>
+    <td><%=h @braintree_transaction.braintree_id %></td>
+    <% if @braintree_transaction.credit_card? %>
+      <td><%=h @braintree_transaction.credit_card_last_4 %></td>
+    <% else %>
+      <td><%=h @braintree_transaction.paypal_payment_id %></td>
+      <td><%=h @braintree_transaction.paypal_payer_email %></td>
+      <td><%=h @braintree_transaction.paypal_token %></td>
+      <td><%=h @braintree_transaction.paypal_debug_id %></td>
+      <td><%=h @braintree_transaction.paypal_authorization_id %></td>
+    <% end %>
+    <td><%=h status %></td>
+    <td><%=h @braintree_transaction.type %></td>
+  </tr>
+</table>
+
+<br>
+<hr>
+<br>
+
+<% entries = Plutus::Entry.where(commercial_document: @braintree_transaction) %>
+
+<% if entries.present? %>
+  <h3>Ledger records:</h3>
+
+  <table border="0" cellspacing="0" cellpadding="0" class="index_table index">
+    <tr>
+      <th class="nobg">ID</th>
+      <th>Description</th>
+      <th>Date</td>
+    </tr>
+
+  <% entries.each do |entry| %>
+    <tr class="<%= cycle("even", "odd") -%>">
+        <td><%=link_to(entry.id, service_admin_panel_plutus_entry_path(entry)) %></td>
+        <td><%=h entry.description %></td>
+        <td><%=h entry.created_at %></td>
+      </tr>
+  <% end  %>
+  </table>
+<% end  %>
+
+
+<% if @braintree_transaction.credit_card? && status == BraintreeTransaction::Statuses::SETTLED || @braintree_transaction.paypal? #TODO #FIXME - also check status of paypal transaction(currently I know of just one status) %>
+  <%= form_tag service_admin_panel_braintree_transaction_path(@braintree_transaction.id), method: :put, style: 'width: 300px' do %>
+    <%= label_tag "Amount(in USD)" %>
+    <div>
+      <%= text_field_tag :amount, @braintree_transaction.amount %>
+      <% if @braintree_transaction.credit_card? %>
+        <div>
+          <small>must be within $0.01-$<%= @braintree_transaction.amount.to_f %> interval because transaction is settled</small>
+        </div>
+      <% else %>
+        <div>
+          <small>must be within $0.01-$<%= @braintree_transaction.amount.to_f %> interval</small>
+        </div>
+      <% end %>
+    </div>
+    <br>
+    <div>
+      <%= submit_tag "Send Partial Money Refund" %>
+    </div>
+  <% end %>
+<% elsif  @braintree_transaction.credit_card? && (status == BraintreeTransaction::Statuses::SUBMITTED_FOR_SETTLEMENT || status == BraintreeTransaction::Statuses::AUTHORIZED) %>
+  <%= form_tag service_admin_panel_braintree_transaction_path(@braintree_transaction.id), method: :put, style: 'width: 300px' do %>
+    <%= label_tag "Amount(in USD)" %>
+    <div>
+      <%= text_field_tag :amount, @braintree_transaction.amount, readonly: true %>
+      <div>
+        <small>only full refund is possible because transaction is not settled</small>
+      </div>
+    </div>
+    <br>
+    <div>
+      <%= submit_tag "Send Full Money Refund" %>
+    </div>
+  <% end %>
+<% end %>

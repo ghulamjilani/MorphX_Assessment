@@ -1,0 +1,39 @@
+- reviews.each do |combination|
+  - rate_created_at = combination[:rate_created_at]
+  - comment         = combination[:comment]
+  - session         = combination[:rateable]
+  - stars_quantity  = combination[:stars_quantity]
+  - rater           = combination[:rater]
+
+  .media
+    %a.pull-left.ensure-link-style
+      = image_tag(rater.avatar_url, width: 55, height: 55, alt: rater.public_display_name, class: 'img-circle')
+    .media-body
+      %div
+        = user_rating_for(stars_quantity.to_i)
+
+        %span{style: 'display:none'}
+          %span.starRating
+            %ul.starRating{class: "rating-#{stars_quantity.to_i}", title: "#{stars_quantity.round(2)}/5"}
+              %li
+                %i.VideoClientIcon-starF
+              %li
+                %i.VideoClientIcon-starF
+              %li
+                %i.VideoClientIcon-starF
+              %li
+                %i.VideoClientIcon-starF
+              %li
+                %i.VideoClientIcon-starF
+      %h4.media-heading
+        %a{style: 'color: #333'}= rater.public_display_name
+        rated
+        - if can?(:read, session)
+          = link_to session.always_present_title, session.relative_path
+        - else
+          %a= session.always_present_title
+        = time_ago_in_words(rate_created_at).gsub('about', '') + ' ago'
+
+      - if comment.present?
+        %p
+          = comment

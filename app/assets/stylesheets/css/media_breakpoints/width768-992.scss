@@ -1,0 +1,154 @@
+@import "../../mixin";
+@media all and (min-width: 768px) and (max-width: 992px) {
+  //    helper
+  .LogoWrapp::after{
+    top: 28px;
+  }
+  body.responsivDebag:after{
+    position: fixed;
+    display: block;
+    content: 'max-width:768px-992px';
+    background: #ffffff;
+    padding:2px;
+    top: 1px;
+    left: 1px;
+    z-index: 9999;
+  }
+  .bapBtnWrapper{
+    float: right !important;
+    margin-top: 5px;
+  }
+  .container{
+    width: 100% !important;
+  }
+  .header .navbar-default .navbar-nav{
+    padding: 0px 7px 0 0;
+  }
+  .header .navbar-default .buttons {
+    //margin-top: 0px !important;
+    //padding-bottom: 17px;
+    .login.btn{
+      border-color: var(--bg__label) !important;
+      color: var(--tp__h1) !important;
+    }
+  }
+  .home.home-index .navbar.navbar-default{
+    background-color: var(--bg__main) !important;
+    margin-top: 0 !important;
+    min-height: 50px;
+    .nav-wrapper{
+      height: 50px;
+    }
+    .nav.navbar-nav{
+      margin-top: 0;
+    }
+  }
+  .header{
+    .dropdown{
+      float: right !important;
+      ul{
+        min-width: 178px;
+      }
+    }
+    .container{
+      width: 100% !important;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    .LogoWrapp{
+      width: 140px;
+    }
+    .navbar-default{
+      padding: 0;
+      .buttons{
+        //margin-top: 10px;
+      }
+      .navbar-nav {
+        nav{
+          text-align: left;
+          a{
+            margin-right: 10px;
+          }
+          a:last-child{
+            margin-right: 0 !important;
+          }
+        }
+      }
+    }
+  }
+  .header .nav-links {
+    margin-left: 10px;
+    a{
+      margin-right: 0;
+      width: 10px;
+      min-width: 30px !important;
+    }
+  }
+  .header .bapBtn a, .header .buttons > button{
+    font-size: 12px;
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+  .header .LogoWrapp {
+    width: 70px;
+    margin-top: -5px;
+  }
+  .HomeButton{
+    display: none;
+  }
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  #sessions .img-responsive{
+    width: 100%;
+  }
+  .folowersBoxWrapper{
+    li{
+      width: 31.33;
+    }
+  }
+  .user-profile-Page .presenter-info-wrapper .img-circle.presenter-avatar{
+    width: 40%!important;
+    float: left;
+  }
+  .user-profile-Page .presenter-info-wrapper .follow-section{
+    float: left;
+    width: 60%;
+    margin: 0;
+    padding: 0 0 0px 15px;
+  }
+  .user-profile-Page .FollowersOrFollowingsList ul li {
+    display: inline-block;
+    font-size: 0;
+    padding-bottom: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+  }
+  //.header-search-wrapper .header-search-input {
+  //  font-size: 8px;
+  //  line-height: 23px;
+  //  width: 100px;
+  //}
+  .header{
+    .HomeButton{
+      display: none !important;
+    }
+  }
+  aside.left-side-bar .user-avatar{
+    background-size: contain;
+  }
+  .headerLDR:hover .NT-wrapper{
+    display: none!important;
+  }
+  .flexslider-ComingSoon .owl-item.center .ComingSoon-slide{
+    transform: scale(1) !important;
+  }
+  .ProductsList .ProductsList-item{
+    width: calc(25% - 20px);
+  }
+  .left-side-bar{
+    padding-bottom: 60px;
+  }
+}

@@ -1,0 +1,28 @@
+= form_tag messages_path, method: :post, class: 'new_message form_V2', 'data-remote': true do
+  .modal-content
+    = render partial: 'become_presenter_steps/close_modal'
+    .modal-body
+      %h4.groupTitle.clearfix Send Message
+      %section
+        .LoadingCover{style: 'display:none'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        - if @recipient
+          = hidden_field_tag 'message[recipient]', @recipient.slug, readonly: true
+        - else
+          .select-block.required
+            = label_tag 'Recipient'
+            = select_tag 'message[recipient]', options_for_select(current_user.contact_users.map{|u| [u.public_display_name, u.slug]}), required: true, prompt: (current_user.contact_users.size > 0 ? 'Select Recipient' : 'You have no Contacts')
+            .errorContainerWrapp
+        .input-block.required.state-clear
+          = label_tag :subject
+          = text_field_tag 'message[subject]', nil
+          .errorContainerWrapp
+        .input-block.margin-bottom-10.required.state-clear
+          = label_tag :message
+          = text_area_tag 'message[body]', nil, rows: 1, 'max-length': 2000
+          .errorContainerWrapp
+  .text-right.padding-top-10.padding-bottom-20.overContentSubmit
+    = submit_tag 'Send', class: 'btn btn-m', name: :send_message

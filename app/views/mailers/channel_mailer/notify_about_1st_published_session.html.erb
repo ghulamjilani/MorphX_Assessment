@@ -1,0 +1,12 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  <%=
+    simple_format raw(I18n.t('mailer.notify_about_1st_published_session.body',
+                             presenter_name: @channel.organizer.public_display_name,
+                             channel_link: %(<a href="#{absolute_path_for_user @channel }">#{@channel.title}</a>),
+                             session_link: %(<a href="#{absolute_path_for_user @session}">#{@session.always_present_title}</a>)
+          )) %>
+</p>

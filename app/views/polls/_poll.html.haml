@@ -1,0 +1,27 @@
+.Votes-block{id: "poll_#{poll['id']}", class: poll['local_poll']['selected'] ? '' : 'hidden', data: {'poll-id': poll['id']}}
+  .Votes-h
+    %h6= "Poll Results - Total of #{poll['totalVotes']} votes"
+  .Votes-b{class: poll['is_voted'] ? 'votedIn' : 'didNotVote'}
+    .Votes-Question= poll['tagline']
+    %ul
+      - poll['sides'].each_with_index do |side, i|
+        - path = poll['is_voted'] ? '#' : vote_polls_path(side_id: side['id'], poll_id: poll['id'])
+        %li{id: "side_#{side['id']}"}
+          = link_to path, remote: true, method: :post, class: :vote do
+            .Votes-percent-line{style: "width:#{side['percents']}%; background-color: #{side['color']}"}
+            .coloredDots{style: "background-color: #{side['color']}", class: side['is_voted'] ? 'Voted' : 'notvoted'}
+            .Votes-variables= side['answer']
+            .Votes-percent= "#{side['percents']}%"
+  -# Wait for polls#show design
+  -#.Votes-f
+    .Votes-share
+      Share your vote on
+      .pull-right
+        = link_to "/polls/#{poll['local_poll']['id']}/share/twitter" do
+          %i.VideoClientIcon-Twitter
+        = link_to "/polls/#{poll['local_poll']['id']}/share/facebook" do
+          %i.VideoClientIcon-FacebookF
+        = link_to "/polls/#{poll['local_poll']['id']}/share/linkedin" do
+          %i.VideoClientIcon-Linkedin
+        = link_to "/polls/#{poll['local_poll']['id']}/share/googleplus" do
+          %i.VideoClientIcon-Googleplus

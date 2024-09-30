@@ -1,0 +1,168 @@
+.membersTable {
+  position: relative;
+  background: var(--bg__content);
+  box-shadow: 0 0.1rem 0.4rem var(--sh__main);
+  border-radius: 1rem;
+  margin-top: 2rem;
+
+  &__spinner {
+    position: relative;
+    padding-top: 8rem;
+
+    .spinnerSlider > div {
+      background: var(--tp__active);
+    }
+  }
+
+  &__searchSection {
+    padding: 3rem 3rem 1rem;
+    @include flex(flex, baseline, space-between);
+    @include media(p-phone) {
+      padding: 3rem 1rem 1rem;
+    }
+
+    .wrapper {
+      input {
+        padding-right: 6rem;
+      }
+
+      @include media(reverso-phone) {
+        max-width: 26rem;
+        min-width: 26rem;
+      }
+
+      .input__field__icon {
+        transform: none;
+        top: 1rem;
+        color: var(--tp__icons);
+
+        .GlobalIcon-clear {
+          color: var(--tp__icons);
+          @include center(v);
+          right: 2.5rem;
+        }
+      }
+    }
+
+    @include media(phone) {
+      flex-direction: column;
+      align-items: center;
+      .wrapper {
+        width: 100%;
+      }
+      button {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  .emptyTable {
+    font-size: 2rem;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .m-table {
+    border-top: 1px solid var(--border__separator);
+    overflow: visible;
+
+    thead th {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--tp__secondary);
+      padding: 2rem 0 2rem 3rem;
+
+      &:last-child {
+        padding: 2rem;
+      }
+    }
+
+    tbody {
+      tr:last-child {
+        td {
+          border-bottom: none;
+        }
+      }
+
+      @include media(tablet) {
+        padding: 0;
+      }
+
+      td {
+        padding-left: 3rem;
+
+        &:last-child {
+          padding: 0 2rem;
+          @include media(tablet) {
+            padding: 3rem;
+          }
+        }
+
+        @include media(p-phone) {
+          padding-left: 1rem;
+        }
+        @include media(tablet) {
+          text-align: left;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          &:before {
+            content: '';
+            display: none;
+          }
+          .addRole {
+            margin: 2rem auto 1rem;
+            width: 100%;
+          }
+        }
+        @include media(reverso-tablet) {
+          &:not(:last-child) {
+            border-right: 1px solid var(--border__separator);
+          }
+        }
+
+        &:first-child {
+          vertical-align: top;
+        }
+
+        .wrapper .dropdownMK2 .input__field__bottom {
+          display: none;
+        }
+
+        .roleName {
+          display: inline-block;
+          position: relative;
+          word-break: break-word;
+          @include media(reverso-tablet) {
+            max-width: 100%;
+          }
+          @include media(tablet) {
+            margin-top: 0;
+            margin-right: 2rem;
+          }
+        }
+      }
+    }
+  }
+
+  &__UserAvatar {
+    margin-right: 3rem;
+    display: inline-block;
+    cursor: pointer;
+    @include media(tablet) {
+      margin-right: 2rem;
+    }
+  }
+
+  &__UserNameEmail {
+    display: inline-block;
+    vertical-align: super;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 20rem;
+  }
+}

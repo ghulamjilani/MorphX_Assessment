@@ -1,0 +1,2 @@
+$("#product_tile_#{params[:id]}").remove();
+$(".total_count").text('Added Products (' + (parseInt($(".total_count").text().split('(')[1].split(')')[0]) - 1) + ')');

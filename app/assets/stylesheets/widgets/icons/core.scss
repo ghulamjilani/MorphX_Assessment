@@ -1,0 +1,155 @@
+@import "../variables";
+
+@font-face {
+  font-family: 'embed_font';
+  src:
+          asset-url('embed_font_mk2/fonts/embed_font.ttf') format('truetype'),
+          asset-url('embed_font_mk2/fonts/embed_font.woff') format('woff'),
+          asset-url('embed_font_mk2/fonts/embed_font.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="embed_font"], [class*=" embed_font"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'embed_font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@function unicode($str) {
+  @return unquote("\"") + $str + unquote("\"");
+}
+.embed_fontcalendar-mk2 {
+  &:before {
+    content: unicode($embed_fontcalendar-mk2);
+  }
+}
+.embed_fontmail {
+  &:before {
+    content: unicode($embed_fontmail);
+  }
+}
+.embed_fontshare-mk4 {
+  &:before {
+    content: unicode($embed_fontshare-mk4);
+  }
+}
+.embed_fontuser-mk2 {
+  &:before {
+    content: unicode($embed_fontuser-mk2);
+  }
+}
+.embed_fontgoogle {
+  &:before {
+    content: unicode($embed_fontgoogle);
+  }
+}
+.embed_fontfacebook {
+  &:before {
+    content: unicode($embed_fontfacebook);
+  }
+}
+.embed_fonttwitter {
+  &:before {
+    content: unicode($embed_fonttwitter);
+  }
+}
+.embed_fontsend {
+  &:before {
+    content: unicode($embed_fontsend);
+  }
+}
+.embed_fonthappy-filled-face {
+  &:before {
+    content: unicode($embed_fonthappy-filled-face);
+  }
+}
+.embed_fontquestion-1 {
+  &:before {
+    content: unicode($embed_fontquestion-1);
+  }
+}
+.embed_fontheart {
+  &:before {
+    content: unicode($embed_fontheart);
+  }
+}
+.embed_fontheart-empty {
+  &:before {
+    content: unicode($embed_fontheart-empty);
+  }
+}
+.embed_fontstar {
+  &:before {
+    content: unicode($embed_fontstar);
+  }
+}
+.embed_fontstar-empty {
+  &:before {
+    content: unicode($embed_fontstar-empty);
+  }
+}
+.embed_fontstar-half-alt {
+  &:before {
+    content: unicode($embed_fontstar-half-alt);
+  }
+}
+.embed_fonteye-1 {
+  &:before {
+    content: unicode($embed_fonteye-1);
+  }
+}
+.embed_fontiPlus {
+  &:before {
+    content: unicode($embed_fontiPlus);
+  }
+}
+.embed_fontshare57 {
+  &:before {
+    content: unicode($embed_fontshare57);
+  }
+}
+.embed_fontnavigate-up-arrow {
+  &:before {
+    content: unicode($embed_fontnavigate-up-arrow);
+  }
+}
+.embed_fontdollar-currency-symbol {
+  &:before {
+    content: unicode($embed_fontdollar-currency-symbol);
+  }
+}
+.embed_fonttumblr {
+  &:before {
+    content: unicode($embed_fonttumblr);
+  }
+}
+.embed_fontreddit {
+  &:before {
+    content: unicode($embed_fontreddit);
+  }
+}
+.embed_fontlinkedin {
+  &:before {
+    content: unicode($embed_fontlinkedin);
+  }
+}
+.embed_fontpinterest {
+  &:before {
+    content: unicode($embed_fontpinterest);
+  }
+}
+.embed_fontbookmark {
+  &:before {
+    content: unicode($embed_fontbookmark);
+  }
+}

@@ -1,0 +1,7 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          creators_modal:
+            community: Articles

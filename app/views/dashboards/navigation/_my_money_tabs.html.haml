@@ -1,0 +1,26 @@
+.info-tabs
+  %ul.nav.nav-tabs.nav-justified
+    - if current_user.current_organization && can?(:refund, current_user.current_organization)
+      %li{class: has_active_class([dashboard_path, earnings_dashboard_money_index_path])}
+        %a{href: earnings_dashboard_money_index_path}
+          = I18n.t('views.dashboards.navigation.my_money_tabs.earnings_content')
+
+      %li{class: has_active_class([dashboard_path, payouts_dashboard_money_index_path])}
+        %a{href: payouts_dashboard_money_index_path}
+          = I18n.t('views.dashboards.navigation.my_money_tabs.payouts')
+
+    -# TODO: will be added later
+    - if false
+      %li{class: has_active_class([dashboard_path, products_earnings_dashboard_money_index_path])}
+        %a{href: products_earnings_dashboard_money_index_path}
+          = I18n.t('views.dashboards.navigation.my_money_tabs.earnings_products')
+
+    %li{class: has_active_class([dashboard_path, purchases_dashboard_money_index_path])}
+      %a{href: purchases_dashboard_money_index_path}
+        = I18n.t('views.dashboards.navigation.my_money_tabs.purchases')
+
+    - if current_user.channels_subscriptions.count > 0
+      %li{class: has_active_class([my_subscriptions_dashboard_money_index_path])}
+        %a{href: my_subscriptions_dashboard_money_index_path}
+          = I18n.t('views.dashboards.navigation.my_money_tabs.my_subscriptions')
+

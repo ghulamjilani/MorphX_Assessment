@@ -1,0 +1,14 @@
+#playvideo-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+        %h4.groupTitle
+          Video
+        %section.LoadingCover
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+          %iframe#playvideo-iframe{allowfullscreen: "true", frameborder: "0", height: "468", seamless: "", src: "", webkitallowfullscreen: "true", width: "100%"}

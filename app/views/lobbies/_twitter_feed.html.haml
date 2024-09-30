@@ -1,0 +1,7 @@
+%h1.heading
+  Twitter Feed
+  -#TODO: add close functionality @Ivan
+  %a#closeTwitterFeed.ensure-link-style
+    %i.GlobalIcon-clear
+
+= render 'shared/twitter_feed', twitter_feed_href: @abstract_session.twitter_feed_href, twitter_feed_widget_id: @abstract_session.twitter_feed_widget_id, twitter_feed_title: @abstract_session.twitter_feed_title

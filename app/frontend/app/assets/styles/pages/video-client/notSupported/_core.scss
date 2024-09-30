@@ -1,0 +1,20 @@
+.notSupported {
+  .MK2-modal__dialog {
+    background: $client__bg__tooltip;
+  }
+
+  &__text {
+    padding: 0 0 2rem;
+    font-size: 1.6rem;
+
+    a {
+      color: $client__tp__active;
+    }
+  }
+
+  &__image {
+    svg {
+      width: 100%;
+    }
+  }
+}

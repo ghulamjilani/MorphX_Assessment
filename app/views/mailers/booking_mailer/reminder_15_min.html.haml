@@ -1,0 +1,34 @@
+%p Hello, #{@user.public_display_name},
+
+%p
+  The countdown is on!
+  - if @booking.user == @user
+    Your scheduled session on #{@booking.session.channel.title} with #{@booking.session.organizer.public_display_name} for #{@booking.session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p (timezone %Z)')} is starting in just 15 minutes.
+  - else
+    Your scheduled session on #{@booking.session.channel.title} with #{@booking.user.public_display_name} is starting in just 15 minutes.
+  We are delighted to have you join us for this exciting experience.
+
+- if @booking.user == @user
+  %p You can join the session in 15 minutes by clicking on the link below:
+  %p
+    %a{href: @booking.session.absolute_path} Link to Session page
+- else
+  %p You can already join the session 5 minutes before the scheduled start time. Prepare yourself to dive into a valuable interaction by clicking on the link below:
+  %p
+    %a{href: @booking.session.absolute_path} Link to Session page
+  %p
+    %a{href: spa_room_url(@booking.session.room.id)} Join Link
+
+%p Ensure that you are in a quiet environment with a stable internet connection. This will help you make the most of the session without any interruptions.
+
+%p Feel free to reach out to our support team if you have any questions or require assistance during the session. We are here to provide any help you may need.
+
+- if @booking.user == @user
+  %p Thank you for being a part of our platform and embracing this opportunity to connect with #{@booking.session.organizer.public_display_name}. Get ready for an amazing session ahead!
+- else
+  %p Thank you for being a part of our platform and get ready for an amazing session ahead!
+
+%p
+  Best regards,
+  %br/
+  #{Rails.application.credentials.global[:service_name].capitalize} Team

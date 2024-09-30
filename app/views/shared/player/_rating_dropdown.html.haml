@@ -1,0 +1,43 @@
+- if current_user
+  %span.ratingWrapp{title: (I18n.t('sessions.ratings.not_available') if !mobile_Check && model.is_a?(Session) && (!model.started? || model.upcoming?))}
+    %i.VideoClientIcon-star_rating
+    %span.no-margin.rating_avg
+      = "#{number_with_precision(numeric_rating_for(model), precision: 2, strip_insignificant_zeros: true)}/5"
+    - if (model.is_a?(Recording) && (can?(:see_recording, model))) || (model.is_a?(Session) && (can?(:see_full_version_video, model) || can?(:view_livestream_as_guest, model) || current_user && (can?(:view_free_livestream, model) || can?(:join_as_presenter, model)|| can?(:join_as_livestreamer, model) || can?(:access_as_subscriber, model))))
+      .ratingDropDown{class: ('hidden' if model.is_a?(Session) && (!model.started? && model.upcoming? || !can?(:see_full_version_video, model)))}
+        - quality_of_content_rate = current_user && current_user.ratings_given.find_by(rateable: model, dimension: 'quality_of_content').try(:stars)
+        - overall_experience_comment_saved = current_user && model.reviews.where.not(overall_experience_comment: nil).exists?(user: current_user)
+        .ratingDropDown-h
+          %span= I18n.t('views.shared.player._rating_dropdown.out_of', from: number_with_precision(numeric_rating_for(model), precision: 2, strip_insignificant_zeros: true), to: 5)
+          - if raters_quantity(model) > 1
+            = I18n.t('views.shared.player._rating_dropdown.based_on_ratings', num: raters_quantity(model))
+          - else
+            = I18n.t('views.shared.player._rating_dropdown.based_on_rating', num: raters_quantity(model))
+        - if model.organizer != current_user
+          .ratingDropDown-b
+            - if quality_of_content_rate
+              = I18n.t('views.shared.player._rating_dropdown.your_rating_for_this_is', content_type: content_type, from: number_with_precision(quality_of_content_rate, precision: 2, strip_insignificant_zeros: true))
+            - else
+              = I18n.t('views.shared.player._rating_dropdown.how_would_you_rate_the_content')
+            %fieldset.rate
+              %input#small_quality_of_content_rate-star5{name: :small_quality_of_content_rate, type: :radio, value: "5", checked: (quality_of_content_rate == 5), disabled: !!quality_of_content_rate}
+              %label{for: "small_quality_of_content_rate-star5", title: I18n.t('views.shared.player._rating_dropdown.awesome', num: 5)}
+              %input#small_quality_of_content_rate-star4{name: :small_quality_of_content_rate, type: :radio, value: "4", checked: (quality_of_content_rate == 4), disabled: !!quality_of_content_rate}
+              %label{for: "small_quality_of_content_rate-star4", title: I18n.t('views.shared.player._rating_dropdown.very_good', num: 4)}
+              %input#small_quality_of_content_rate-star3{name: :small_quality_of_content_rate, type: :radio, value: "3", checked: (quality_of_content_rate == 3), disabled: !!quality_of_content_rate}
+              %label{for: "small_quality_of_content_rate-star3", title: I18n.t('views.shared.player._rating_dropdown.satisfactory', num: 3)}
+              %input#small_quality_of_content_rate-star2{name: :small_quality_of_content_rate, type: :radio, value: "2", checked: (quality_of_content_rate == 2), disabled: !!quality_of_content_rate}
+              %label{for: "small_quality_of_content_rate-star2", title: I18n.t('views.shared.player._rating_dropdown.bad', num: 2)}
+              %input#small_quality_of_content_rate-star1{name: :small_quality_of_content_rate, type: :radio, value: "1", checked: (quality_of_content_rate == 1), disabled: !!quality_of_content_rate}
+              %label{for: "small_quality_of_content_rate-star1", title: I18n.t('views.shared.player._rating_dropdown.awful', num: 1)}
+          - unless overall_experience_comment_saved
+            .ratingDropDown-f
+              %textarea{name: :overall_experience_comment, placeholder: 'Leave a comment', 'max-length': 250, maxlength: 250, minlength: 3, rows: 1, readonly: overall_experience_comment_saved}
+              .text-right
+                %a.save_rating.btn.btn-s.btn-borderred-grey.padding-left-30.padding-right-30.margin-top-5{href: '#'}
+                  = I18n.t('views.shared.player._rating_dropdown.submit')
+- else
+  %span.ratingWrapp.authOpenLogin{data: {toggle: :modal, target: '#loginPopup'}, href: '#loginPopup', style: 'cursor: pointer;'}
+    %i.VideoClientIcon-star_rating
+    %span.no-margin.rating_avg
+      = "#{number_with_precision(numeric_rating_for(model), precision: 2, strip_insignificant_zeros: true)}/5"

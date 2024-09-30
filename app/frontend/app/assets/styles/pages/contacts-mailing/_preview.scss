@@ -1,0 +1,32 @@
+.CM__preview {
+  z-index: 20002;
+
+  .MK2-modal {
+    &__dialog {
+      @include media(tablet) {
+        padding: 2rem 1rem 3rem;
+        max-width: 94%;
+      }
+    }
+  }
+
+  * {
+    @include media(tablet) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  img {
+    @include media(tablet) {
+      width: auto;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+  }
+
+  .MK2-modal__close {
+    width: auto;
+    max-width: none;
+  }
+}

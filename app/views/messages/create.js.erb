@@ -1,0 +1,8 @@
+<% if @receipt.errors.blank? %>
+  $('.modal:visible').modal('toggle');
+  setTimeout(()=>{
+    $.showFlashMessage("<%= I18n.t('mailboxer.sent') %>", {type: 'success', timeout: 3000});
+  }, 400)
+<% else %>
+  $.showFlashMessage("<%= @receipt.errors.full_messages.first %>", {type: 'error', timeout: 3000});
+<% end %>

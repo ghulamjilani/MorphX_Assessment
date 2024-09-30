@@ -1,0 +1,38 @@
+<% # NOTE: this template is also rendered from reviews/comment.js.erb(with some additional js) %>
+
+//var triggeredFromLobby = $('body.sessions').length == 0;
+//if (triggeredFromLobby) {
+//  // do nothing, not even removing "disabled" attributes - it is done as part of jquery.raty event
+//} else {
+//  var reviewRelatedElements = $(".review-tab.tab-pane");
+//  if (reviewRelatedElements.length == 0) {
+//    throw new Error('can not find .review-tab');
+//  }
+//  reviewRelatedElements.show();
+//  $('.nav-tabs a[href*=reviews]').click()
+//
+//  var reviewsContainer = $(".review-tab.tab-pane .content");
+//  if (reviewRelatedElements.length == 0) {
+//    throw new Error('can not find ".review-tab.tab-pane .content" element');
+//  }
+//  reviewsContainer.html('<%= escape_javascript render('shared/reviews', format: :html, reviews: @model.channel.reviews_with_comment) %>');
+//}
+
+<% if @rated_mandatory_criteria %>
+  // no need to check :visible because it is hidden at first
+  var $reviewTextArea = $('textarea[name*=_comment]');
+  if ($reviewTextArea.length == 0) {
+    throw new Error("$reviewTextArea container could not be found");
+  }
+
+  // no need to check :visible because it is hidden at first
+  var $reviewButton = $('button#post-review');
+  if ($reviewButton.length != 1) {
+    throw new Error("$reviewButton container could not be found");
+  }
+
+  $reviewTextArea.removeAttr('disabled');
+  $reviewTextArea[0].focus();
+
+  $reviewButton.removeAttr('disabled');
+<% end %>

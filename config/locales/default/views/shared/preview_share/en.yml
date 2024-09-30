@@ -1,0 +1,18 @@
+en:
+  views:
+    shared:
+      preview_share:
+        share: Share
+        full_permalink: Full Permalink
+        short_permalink: Short Permalink
+        referral_permalink: Referral Permalink
+        embed: Embed
+        copy: copy
+        embed_options: Embed Options
+        show_live: Show live
+        show_chat: Show chat
+        show_product_list: Show product list
+        show_playlist: Show playlist
+        show_single_item: Show single item
+        code: code
+        single_frame_code: SINGLE FRAME CODE

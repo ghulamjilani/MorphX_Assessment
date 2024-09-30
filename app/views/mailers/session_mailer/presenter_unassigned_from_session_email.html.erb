@@ -1,0 +1,11 @@
+<% raise ArgumentError, @user.inspect if @follow_link_url.blank? %>
+
+<p>
+  <%= simple_format I18n.t('mailer.without_invitation_token.you_unassigned_message',
+                           abstract_session_link: link_to(@session.always_present_title, @session.absolute_path),
+                           role: 'presenter') %>
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format I18n.t('mailer.thank_you_message', service_name: Rails.application.credentials.global[:service_name]) %>
+</p>

@@ -1,0 +1,9 @@
+en:
+  activeadmin:
+    dashboard:
+      wizard_steps:
+        step1: Personal Info
+        step2: Organization
+        step3: First Channel
+        wizard_complete: Wizard Completed
+        pricing: Pricing

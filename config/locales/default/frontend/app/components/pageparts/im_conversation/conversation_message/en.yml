@@ -1,0 +1,10 @@
+en:
+  frontend:
+    app:
+      components:
+        pageparts:
+          im_conversation:
+            conversation_message:
+              are_you_sure: Are you sure?
+              deleted: Successfully removed.
+              wrong_error: Something went wrong please try again later

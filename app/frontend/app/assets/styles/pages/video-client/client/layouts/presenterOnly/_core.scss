@@ -1,0 +1,159 @@
+.presenterOnly {
+  position: absolute;
+  width: auto;
+  height: calc(100% - 13rem);
+  right: 3rem;
+  top: 3rem;
+  z-index: 2;
+
+  .cm__pinned__pin {
+    top: 0;
+    left: 12rem;
+  }
+
+  .mp {
+    top: 0rem;
+    right: -2rem;
+    transform: translateX(20rem);
+    opacity: 0;
+    transition: .3s;
+  }
+
+  .mp__active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &__participants {
+    min-width: auto;
+    padding: 0;
+    height: 100%;
+
+    &__count {
+      color: $client__tp__secondary;
+      text-align: right;
+      margin-right: 2rem;
+      margin-bottom: 1rem;
+
+      &__select {
+        transform: translateY(0rem);
+        right: -2rem;
+      }
+
+      &__icon {
+        margin-left: 1.5rem;
+        margin-right: 0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__users {
+    flex-direction: column;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  &__plug {
+    @include flex(flex, center, false);
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border .3s;
+
+    &__speaker {
+      border: 2px solid $client__tp__active;
+    }
+  }
+
+  &__tile {
+    cursor: pointer;
+    @include flex(flex, center, false);
+    color: $client__tp__main;
+    margin-right: 2.4rem;
+
+    &:hover {
+      .presenterOnly__tools {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .mp {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    &__micro {
+      position: absolute;
+      min-width: 5rem;
+      text-align: center;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      padding: .2rem 0;
+      font-size: 1.3rem;
+
+      &__active {
+        color: $client__tp__active;
+      }
+
+      &__inactive {
+        color: $client__tp__secondary;
+      }
+    }
+
+    &__wrapper {
+      @include flex(flex, center, center);
+      width: 5.5rem;
+      padding-bottom: 1rem;
+    }
+
+    video {
+      display: none;
+    }
+
+    &__avatar {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+    }
+  }
+
+  &__tools {
+    @include flex(flex, center, flex-start);
+    padding: 1rem;
+    opacity: 0;
+    transform: translateX(-30rem);
+    transition: .3s;
+    width: 14rem;
+    position: relative;
+    z-index: 2;
+    background: rgba(0, 0, 0, .3);
+    backdrop-filter: blur(5px);
+    border-radius: 1rem;
+
+    .mp__participant__tools__list {
+      right: 13.5rem;
+    }
+
+    &__name {
+      @include text__ellipsis();
+      padding-left: 1rem;
+    }
+
+    &__active {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+.presenterVideo {
+  &__avatar {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+  }
+}

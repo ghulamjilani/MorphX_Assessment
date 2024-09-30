@@ -1,0 +1,590 @@
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0;">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" class="personName" width="600"
+                style="background-color: #095f73;border-radius: 20px;padding: 25px 0 25px 0; min-width: 340px;">
+            <tr>
+                <td style="text-align: center;">
+                    <p style="font-style: normal;
+                      font-weight: 900;
+                      text-align: center;
+                      font-size: 38px;
+                      line-height: 38px;
+                      color: #ffffff;">
+                      <%= I18n.t('views.mailer.conf_insruct.time_to.time', service_name: Rails.application.credentials.global[:service_name]) %>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0;">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<% if @user_name.present? %>
+    <tr>
+        <td>
+            <table role="presentation"  border="0" cellpadding="0" cellspacing="0" align="center" width="500">
+                <tr>
+                    <td class="personName">
+                        <p style="
+                        margin: 0;
+                                    font-style: normal;
+                                    font-weight: 900;
+                                    font-size: 18px;
+                                    line-height: 18px;
+                                    color: #095f73;"><%= @user_name %>,</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+<% end %>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center">
+            <tr>
+                <td>
+                    <p style="
+                    margin:0;
+                        font-style: normal;
+                        text-align: left;
+                        font-weight: normal;
+                        font-size: 15px;
+                        color: #000000;
+                        line-height: 150%;">
+                        We are extremely excited to announce the launch of
+                        <a href="<%= root_url %>" style="color: #095f73;text-decoration: none;font-weight: bold;"><%= Rails.application.credentials.global[:host] %>,</a>
+                        a new platform which creates a seamless transition between a traditional studio
+                        experience and an interactive digital one.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style=" font-weight: normal;
+                        font-size: 15px;
+                        color: #000000;
+                        text-align: left;
+                        line-height: 150%;">
+                        <%= I18n.t('views.mailer.conf_insruct.time_to.what', service_name: Rails.application.credentials.global[:service_name].upcase) %>
+                    </p>
+                </td>
+            </tr>
+          <% if @from_user.present? && @content.present? %>
+            <% @content = wrap_content_urls @content %>
+            <% @content = perform_replacements(@content, @replacements) if @replacements.present? %>
+            <tr class="user-content-row">
+                <td align="center">
+                <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+                    <tr><td></td></tr>
+                </table>
+                </td>
+            </tr>
+            <tr class="user-content-row">
+                <td>
+
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid #095F73; table-layout:fixed;width: 100%">
+                    <thead>
+                        <tr>
+                        <td style="width: 20px; table-layout:fixed">&nbsp;</td>
+                        <td style="width: 80px; table-layout:fixed">
+                            <img src="<%= @from_user.avatar_url %>" alt="" width="50" height="50" style="border-radius: 100%">
+                        </td>
+                        <td>
+                            <%= @from_user.display_name %>
+                        </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td style="width: 20px">&nbsp;</td>
+                        <td>
+                        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center">
+                            <tr>
+                            <td>
+                                <p id="user-content" style="
+                                margin:0;
+                                    font-style: normal;
+                                    font-weight: normal;
+                                    font-size: 15px;
+                                    color: #000000;
+                                    padding-top: 20px;
+                                    line-height: 150%;"><%= @content %>
+                                </p>
+                            </td>
+                            </tr>
+                        </table>
+                        </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </td>
+            </tr>
+          <% end %>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  cellpadding="0" cellspacing="0" align="center">
+            <tbody>
+            <tr>
+                <td>
+                    <img src="https://unite.live/email/manyInOne2.png" alt="" border="0"
+                            width="600"
+                            height="400" style="display: block;">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0;">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" align="center" width="500">
+            <tr>
+                <td>
+                    <p style="
+                        margin: 0;
+                                font-style: normal;
+                                text-align: left;
+                                font-weight: 900;
+                                font-size: 24px;
+                                line-height: 24px;
+                                color: #095f73;">Giving You MORE!</p>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 17px 0 17px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="text-align: left;">
+            <tr>
+                <td>
+                    <p style="
+                    margin:0;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 15px;
+                        color: #000000;
+                        line-height: 150%;">
+                        <%= I18n.t('views.mailer.conf_insruct.time_to.invite', service_name: Rails.application.credentials.global[:service_name].upcase) %>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="
+                    margin:0;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 15px;
+                        color: #000000;
+                        line-height: 150%;">
+                      <%= I18n.t('views.mailer.conf_insruct.time_to.offers', service_name: Rails.application.credentials.global[:service_name].upcase) %>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="
+                    margin:0;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 15px;
+                        color: #000000;
+                        line-height: 150%;">
+                        <%= I18n.t('views.mailer.conf_insruct.time_to.this', service_name: Rails.application.credentials.global[:service_name].upcase) %>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="
+                    margin:0;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 15px;
+                        color: #000000;
+                        line-height: 150%;">
+                        You'll connect with your tutors and other participants more than ever with features like:
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style=" font-weight: normal;
+                        font-size: 15px;
+                        color: #000000;
+                        line-height: 0.8;">
+                    <p>- Two-way conversations in streams</p>
+                    <p>- Real-time chatting</p>
+                    <p>- Polling</p>
+                    <p>- And more!</p>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="600"
+                style="background-color: #f2f2f2;border: 1px solid rgba(9,95,115,0.3);border-radius: 20px;">
+            <tr align="center">
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="600"
+                            style="background-color: #f2f2f2;border-radius: 20px;padding: 20px 0 20px 0;">
+                        <tr style="">
+                            <td style="text-align: center;">
+                                <p
+                                        style="
+                                text-decoration: none;
+                                font-style: normal;
+                                text-align: center;
+                                font-weight: 900;
+                                font-size: 24px;
+                                line-height: 24px;
+                                color: #095f73;">Choose Your Sphere of Interest</p></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center">
+            <tr>
+                <td>
+                    <p style="
+                    margin:0;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 15px;
+                        color: #000000;
+                        line-height: 150%;">
+                        <%= I18n.t('views.mailer.conf_insruct.time_to.info', service_name: Rails.application.credentials.global[:service_name].upcase) %>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  cellpadding="0" cellspacing="0" align="center">
+            <tbody>
+            <tr>
+                <td>
+                    <img src="https://unite.live/email/manyInOne.png" alt="" border="0"
+                            width="600"
+                            height="430" style="display: block;">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr style="background:#F23535; background: linear-gradient(180deg, #F23535 51.22%, #F66C50 100%);">
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500"
+                style="border-radius: 20px;">
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr align="center">
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table role="presentation"  cellpadding="0" cellspacing="0" align="center">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <img src="https://unite.live/email/joinOurCommunity.png" alt="" border="0"
+                                        width="600"
+                                        height="200" style="display: block;border-radius: 20px;">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0;">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="text-align: center;">
+                        <tr>
+                            <td>
+                                <p style="
+                        font-style: normal;
+                        font-weight: 900;
+                        font-size: 32px;
+                        text-align: center;
+                        line-height: 32px;
+                        color: #ffffff;">
+                                    Join Our Community
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0;">
+                                    <tr><td></td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="
+                        font-style: normal;
+                        font-weight: 600;
+                        text-align: center;
+                        font-size: 15px;
+                        line-height: 150%;
+                        color: #ffffff;">
+                                    Connect with many amazing teachers around the world, find like-minded persons,
+                                    and learn from each other the best practices to build the strongest community ever.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 17px 0 17px 0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="240"
+                            style="background-color: #ffffff; cursor: pointer;border-radius: 25px;padding: 15px 0 15px 0;">
+                        <tr style="">
+                            <td style="text-align: center;">
+                                <a href="<%= landing_home_url %>"
+                                style="
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 18px;
+                                line-height: 18px;
+                                color: #f23535;">Join now!</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0">
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center">
+            <tr>
+                <td style="text-align: center;">
+                    <p style="
+                    margin:0;
+                        font-style: normal;
+                        font-weight: 600;
+                        text-align: center;
+                        font-size: 15px;
+                        color: #000000;
+                        line-height: 150%;">
+                      <%= I18n.t('views.mailer.conf_insruct.time_to.we', service_name: Rails.application.credentials.global[:service_name].upcase) %>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  cellpadding="0" cellspacing="0" align="center">
+            <tbody>
+            <tr>
+                <td style="text-align: center;">
+                    <img src="https://unite.live/email/boss.jpg" alt="" border="0"
+                            width="50"
+                            class="bossImage"
+                            height="50" style="cursor: pointer;display: block;border-radius: 50%;">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 10px 0 10px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table role="presentation"  cellpadding="0" cellspacing="0" align="center">
+            <tbody>
+            <tr>
+                <td style="text-align: center;">
+                    <img src="https://unite.live/email/signature_1.png" alt="" border="0"
+                            width="140"
+                            height="23" style="cursor: pointer;display: block;">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0">
+            <tr><td></td></tr>
+        </table>
+    </td>
+</tr>

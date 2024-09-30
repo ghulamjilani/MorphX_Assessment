@@ -1,0 +1,7 @@
+<div id="custom-title" class="purchaseVideoLine">
+    <h1>
+        Please purchase to view {{type}}
+    </h1>
+    <a target="_blank" href="{{absolute_path}}" {{#unless userId}}class="showLoginForm" onclick="window.loginView.toggle();return false;"{{/unless}}>Buy for ${{purchase_price}}</a>
+</div>
+

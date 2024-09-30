@@ -1,0 +1,23 @@
+<div class="productTile 123">
+    <div class="productTile_image_wrapp">
+        <a rel="tipsy" title="Remove product" class="productTile_remove"><span aria-hidden="true">&times;</span></a>
+        <img class="productTile_image" src="{{image_url}}" alt="">
+        {{#if is_affiliate}}
+            <div class="afiliateMarker" rel="tipsy" title="Congrats! This cool product is ready to make money">
+                $
+            </div>
+        {{/if}}
+    </div>
+    <div class="productTile_name">{{title}}</div>
+
+    <div class="productTile_footer clearfix">
+        <div class="fs-12 text-ellipsis text-color-LightGrey padding-bottom-5">{{description}}</div>
+        <a href="#" class="productTile_edit text-color-Blue fs-12 pull-left">Edit</a>
+        {{#if price_cents}}<div class="productTile_cost btn btn-s pull-right">{{price}}</div>{{/if}}
+    </div>
+
+    <div class="productTile_footer clearfix full-width" rel="tipsy" title="{{url}}">
+        <input class="productTile_url text-ellipsis pull-left" value="{{url}}"  type="text" readonly>
+        <a href="#" onclick="copyToClipboard(this); return false" class="productTile_copy btn btn-s pull-right btn-grey-solid">Copy</a>
+    </div>
+</div>

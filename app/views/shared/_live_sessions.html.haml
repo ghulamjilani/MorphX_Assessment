@@ -1,0 +1,139 @@
+- if current_user && @channel.organizer != current_user
+  %a#requestSession.btn.btn-s.btn-borderred-grey{href: '#'} Request Session
+
+  #RequestNewSessionForm{style: 'display:none'}
+    = semantic_form_for(Session.new, method: :post, url: request_session_channel_path(@channel.id), remote: true) do |f|
+      .RNS-h
+        Request session
+        %a.close{href: '#', onclick: '$("#RequestNewSessionForm, .RequestNewSessionOverlay").fadeOut();event.preventDefault();'}×
+      .RNS-b
+        .clearfix.group-line
+          .col-md-3 Date
+          .col-md-9.RequestNewSessionDateWrapper
+            %input#RequestNewSessionDate{type: :text}
+            - content_for(:after_include_javascripts) do
+              :javascript
+                $(document).ready(function(){
+                  $('#RequestNewSessionDate').datepicker();
+                });
+        .clearfix.group-line.group-end.selectBlock
+          .col-md-3 Time
+          .col-md-9
+            = f.input :requested_at, as: :time_select, minute_step: 15, input_html: {class: 'styled-select'}, ampm: current_user.try(:am_format?), label: false, include_blank: false
+        .clearfix.group-line
+          .col-md-7
+            %i.VideoClientIcon-People
+            Immersive
+          .col-md-5
+            %label.choice.radio
+              %input{type: :radio, name: 'session[delivery_method]', value: RequestAnotherTime::DeliveryMethods::IMMERSIVE}
+              %span
+        .clearfix.group-line.group-end
+          .col-md-7
+            %i.VideoClientIcon-LiveStream
+            Livestream
+          .col-md-5
+            %label.choice.radio
+              %input{type: :radio, name: 'session[delivery_method]', value: RequestAnotherTime::DeliveryMethods::LIVESTREAM}
+              %span
+        %textarea{name: 'session[comment]', placeholder: 'Type your comment…'}
+        %input.btn.btn-m{type: :submit, 'data-disable-with': 'Please wait…', value: 'Request Session'}
+  .RequestNewSessionOverlay{style: 'display: none;'}
+
+- if sessions.present? || @channel.organization_id == current_user.try(:organization_id)
+  .LiveSessionsWrapp
+    .row
+      .col-md-12
+        .TileSliderWrapp.owlSlider
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+          .TileSlider.liveSessionsSlider.owl-carousel.session_tile_slider.activeSlide
+            - sessions.each do |session|
+              - _section_classes = []
+              - _section_classes.push('active') if session == @session
+              - _section_classes.push('thumbnail-spec') unless session.persisted?
+
+              %section.tile-cake{class: _section_classes.join(' ')}
+                .tile-img
+                  .tile-imgContainer.owl-lazy.STATIC_DATA{alt: "", style:'background-image: url(http://placehold.it/330x185)'}
+                  %a.tile_link{href:session.relative_path}
+                  - if can?(:share, session)
+                    = link_to session.preview_share_relative_path, method: :get, rel: 'nofollow', remote: true, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, class: 'social-sharing', title: 'Share' do
+                      %i.VideoClientIcon-share-mk4
+                  .sessionCost.STATIC_DATA
+                    %i.VideoClientIcon-dollar-currency-symbol
+                    .sessionCost-tooltip.fs-12
+                      .row
+                        .col-xs-6.text-color-Darkgrey.padding-right-0 watch
+                        .col-xs-6.text-color-green.text-right $12.99
+                      .row
+                        .col-xs-6.text-color-Darkgrey.padding-right-0 Participate
+                        .col-xs-6.text-color-green.text-right $12.99
+                      .padding-bottom-5.text-color-LightGrey (Only 5 spots left)
+                .tile-body
+                  %a.tile-name{href: session.relative_path}= session.title || session.always_present_title
+                  %a.tile-owner.text-ellipsis{href: "#"}
+                    By
+                    = session.organizer.public_display_name
+                  .padding-top-10.fs-14.star_ratingWrapper
+                    = raw new_star_rating(numeric_rating_for(session.channel))
+                    %span.display-inline-block.vertical-midle.margin-right-10.STATIC_DATA (53)
+                    .display-inline-block.vertical-midle.STATIC_DATA
+                      .participants.text-ellipsis.display-inline-block.vertical-midle
+                        %i.VideoClientIcon-user-mk2>
+                        = short_number(session.total_participants_count)
+                  %div
+                    %span.ScheduledDate.text-ellipsis.STATIC_DATA Scheduled for september 21, 3.00 PM
+                  %div.STATIC_DATA
+                    %a.btn.btn-s.btn-borderred-grey{href: "#"}
+                      %i.VideoClientIcon-Notifications
+                      Set reminder
+
+
+
+
+
+
+                -#.tile-body
+                -#  %a.tile-name.text-ellipsis= session.title || session.always_present_title
+                -#  .tile-information
+                -#    .participants.text-ellipsis.half-width.display-inline-block.vertical-midle
+                -#      %i.VideoClientIcon-user-mk2
+                -#      = short_number(session.total_participants_count)
+                -#  .tile-btns
+                -#    %a.btn.btn-s.btn-borderred-grey{href: '#'}
+                -#      Starts in :
+                -#      = time_with_tz_in_chosen_format(session.start_at)
+                -#  .tile-hovered-block
+                -#    %a.avatarImg-SD{href: session.organizer.relative_path, style: "background-image: url('#{session.organizer.small_avatar_url}')"}
+                -#    .tile-hovered-block-body
+                -#      %div
+                -#        .pull-right
+                -#          = degradable_link_to session.toggle_like_relative_path, method: :post, remote: true, class: ['like-block', like_class(session), "session-like-#{session.id}"].join(' '), title: 'Like' do
+                -#            %i.VideoClientIcon-Favorites
+                -#          - if can?(:share, session)
+                -#            = link_to session.preview_share_relative_path, method: :get, rel: 'nofollow', remote: true, class: 'social-sharing', title: 'Share' do
+                -#              %i.VideoClientIcon-share57
+                -#        Presented by
+                -#      %a.presenter-name.text-ellipsis{href: session.organizer.relative_path}= session.organizer.public_display_name
+                -#    .tile-hovered-block-footer
+                -#      - immersive_interactor  = ObtainImmersiveAccessToSession.new(session, current_user)
+                -#      - livestream_interactor = ObtainLivestreamAccessToSession.new(session, current_user)
+                -#
+                -#      - if current_ability.can?(:opt_out_as_immersive_participant, session) || current_ability.can?(:opt_out_as_livestream_participant, session)
+                -#        %a.btn.btn-s.btn-borderred-grey{href: session.relative_path}= session.immersive_purchase_price == 0 ? I18n.t('sessions.subscribed') : I18n.t('sessions.purchased')
+                -#      - elsif !immersive_interactor.could_be_obtained_and_not_pending_invitee? && !livestream_interactor.could_be_obtained_and_not_pending_invitee?
+                -#      - else
+                -#        - if immersive_interactor.could_be_obtained_and_not_pending_invitee?
+                -#          - if immersive_interactor.can_have_free_trial? || immersive_interactor.can_take_for_free?
+                -#            = link_to 'Participate FREE', preview_purchase_channel_session_path(session.slug, type: ObtainTypes::FREE_IMMERSIVE), remote: true, class: 'btn btn-s btn-borderred-grey'
+                -#          - elsif immersive_interactor.could_be_purchased?
+                -#            = link_to "Participate #{as_currency immersive_interactor.charge_amount, current_user}", preview_purchase_channel_session_path(session.slug, type: ObtainTypes::PAID_IMMERSIVE), remote: true, class: 'btn btn-s btn-borderred-grey'
+                -#
+                -#        - if livestream_interactor.can_have_free_trial?
+                -#          - if livestream_interactor.could_be_obtained_and_not_pending_invitee? || livestream_interactor.can_take_for_free?
+                -#            = link_to 'Watch it FREE', preview_purchase_channel_session_path(session.slug, type: ObtainTypes::FREE_LIVESTREAM), remote: true, class: 'btn btn-s btn-borderred-grey'
+                -#          - elsif livestream_interactor.could_be_purchased?
+                -#            = link_to "Watch #{as_currency livestream_interactor.charge_amount, current_user}", preview_purchase_channel_session_path(session.slug, type: ObtainTypes::PAID_LIVESTREAM), remote: true, class: 'btn btn-s btn-borderred-grey'

@@ -1,0 +1,45 @@
+#notificationsPopup.NT-wrapper.infoDR.smallScrolls{style: 'display:none'}
+  .NT-header
+    %p
+      %span= new_notifications_count
+      = I18n.t('views.layouts.application.notifications_popup_wrapper.latest_notifications')
+  .NT-body
+    - if display_mark_all_notifications_as_read? || display_clear_all_notifications?
+      .doubleBTN.clearfix
+        - if display_mark_all_notifications_as_read?
+          = link_to I18n.t('views.layouts.application.notifications_popup_wrapper.mark_all'), Rails.application.class.routes.url_helpers.mark_all_as_read_notifications_path, method: :post, remote: true, class: "ensure-link-style"
+        - if display_clear_all_notifications?
+          = link_to I18n.t('views.layouts.application.notifications_popup_wrapper.clear_all'), Rails.application.class.routes.url_helpers.destroy_all_notifications_path, method: :delete, remote: true, class: "ensure-link-style"
+
+    %ul{class: (display_mark_all_notifications_as_read? || display_clear_all_notifications?) ? 'BTN-row-2' : 'BTN-row-1'}
+      - if @latest_notifications && @latest_notifications.length > 0
+        - @latest_notifications.each do |notification|
+          - cache notification do
+            %li.clearfix{'data-notification-id': notification.id, class: [!notification_read?(notification) ? 'NT-new notification__new active' : '']}
+              .col-md-2.text-center
+                - if notification.sender && notification.sender.has_owned_channels?
+                  %a{href: notification.sender.relative_path, class: 'avatarImg-MD', style: "background-image: url('#{notification.sender.avatar_url}')"}
+                - else
+                  %a.avatarImg-MD{href: '#', style: "background-image: url('#{image_url("services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png")}')"}
+              .col-md-10.NT-notificationsContent
+                %strong
+                  - if notification.sender
+                    = notification.sender.public_display_name
+                  - else
+                    = Rails.application.credentials.global[:service_name]
+                = simple_format notification.subject
+                %br
+                = sanitize notification.body
+                .NT-time.clearfix
+                  %time.timeago{datetime: notification.created_at}
+      - else
+        %li.clearfix.fallback.text-center
+          = I18n.t('views.layouts.application.notifications_popup_wrapper.empty')
+    - if @latest_notifications&.length&.zero?
+      .empty
+    - else
+      .doubleBTN.clearfix.lastDb
+        %a.load-more.ensure-link-style
+          = I18n.t('views.layouts.application.notifications_popup_wrapper.load_more')
+        %a{href: Rails.application.class.routes.url_helpers.notifications_path}
+          = I18n.t('views.layouts.application.notifications_popup_wrapper.view_all')

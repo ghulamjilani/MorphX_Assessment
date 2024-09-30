@@ -1,0 +1,7 @@
+<h1>Hello, <%= @user.public_display_name%></h1>
+<p>We want to let you know that we found a stream that we believe hadn't have to be active, so we stopped it.</p>
+<p>Please contact us if you believe that this action was a mistake.</p>
+<ul>
+    <li>Stream ID: <%= @stream_id %></li>
+    <li>Stream stopped at: <%= @stopped_at %></li>
+</ul>

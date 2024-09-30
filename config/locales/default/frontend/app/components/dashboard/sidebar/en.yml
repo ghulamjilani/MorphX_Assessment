@@ -1,0 +1,31 @@
+en:
+  frontend:
+    app:
+      components:
+        dashboard:
+          sidebar:
+            calendar: Calendar
+            my_feed: My Library
+            business_subscription: Business Plan
+            company: Company
+            channels: Channels
+            videos: Videos
+            documents: Documents
+            subscriptions: Subscriptions
+            free_subscriptions: Free Subscriptions
+            user_management: User Management
+            contacts_mailing: Contacts & Mailing
+            contacts: Contacts
+            product_lists: Product Lists
+            studios: Studios
+            video_sources: Video Sources
+            saved: Saved
+            community: Community
+            reviews: Reviews
+            comments: Comments
+            browsing_history: Browsing History
+            statistics: Statistics
+            referrals: Referrals
+            optin: Opt In Manager
+            booking: Booking
+            polls: Polls

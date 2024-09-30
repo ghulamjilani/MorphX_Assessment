@@ -1,0 +1,15 @@
+<% if @error.blank? %>
+  var container = $(".modal[aria-hidden=false]");
+  if (container.length == 0) {
+    alert("can not find active modal window");
+  } else {
+    container.modal('hide');
+  }
+
+  var counter = $('span.counter.badge');
+  if (counter.length == 0) {
+    throw new Error('can not find share counter counter container');
+  } else {
+    counter.text(<%= @session.shares_count %>);
+  }
+<% end %>

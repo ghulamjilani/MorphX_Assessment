@@ -1,0 +1,11 @@
+window.modalBody = '<%= escape_javascript render("#{action_name}", format: :html) %>';
+
+$(document).one("shown.bs.modal", ".modal", function() {
+  $('select.styled-select').select2({
+      minimumResultsForSearch: -1,
+      placeholder: "Select reason"
+  });
+  window.initializeFormsVisibility();
+});
+
+$(modalBody).modal('show');

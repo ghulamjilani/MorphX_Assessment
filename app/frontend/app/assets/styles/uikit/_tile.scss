@@ -1,0 +1,169 @@
+.tileMK2 {
+  &__listMode {
+    display: flex;
+  }
+
+  &__chips__label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1;
+  }
+
+  .sessionCost-tooltip {
+    visibility: hidden;
+    position: absolute;
+    background: var(--bg__content);
+    left: -7.4rem;
+    width: 9.5rem;
+    text-align: center;
+    top: 5rem;
+    opacity: 0;
+    line-height: 2rem;
+    @include transition200();
+    border-radius: 1rem;
+    padding: 0.8rem;
+    @include boxShadow__main(var(--sh__main));
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 100%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border: 1rem solid transparent;
+      border-bottom-color: #fff;
+    }
+  }
+
+  &__wrappper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    z-index: 2;
+  }
+
+  &__ageRestriction{
+    position: relative;
+    margin-right: 1rem;
+    width: 4rem;
+    height: 2.2rem;
+    padding: 0.2rem 0.9rem;
+    background: #F23535;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    &.notPaidVideo{
+      right: 1rem;
+    }
+  }
+
+  .private {
+    margin-top: .5rem;
+  }
+
+  &__chips__dollar {
+    position: relative;
+    margin-right: 1rem;
+    &:hover {
+      .sessionCost-tooltip {
+        opacity: 1;
+        visibility: visible;
+        top: 3.5rem;
+      }
+    }
+  }
+
+  &__img_link {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    position: absolute;
+  }
+
+  &__img {
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 0;
+    padding-top: 56%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    opacity: 1;
+    border-radius: 0.5rem;
+    margin: 0 0 0.9375rem 0;
+
+    &__border {
+      border: 1px solid var(--border__separator);
+    }
+  }
+
+  &__body {
+    color: var(--tp__main);
+    font-weight: bold;
+  }
+
+  &__light_color {
+    color: var(--tp__secondary);
+  }
+
+  &__followig_text {
+    color: var(--tp__active)
+  }
+
+  &__purchased_text {
+    color: #37A67D;
+
+  }
+
+  &__history {
+    .tileMK2 {
+      &__img {
+        height: 9rem;
+        padding: 0;
+        margin: 0 0.9375rem 0 0;
+        flex: 0 0 16rem;
+      }
+      &__chips__dollar {
+        position: absolute;
+        bottom: 1rem;
+        right: 0;
+        z-index: 2;
+      }
+    }
+
+    .text__ellipsis__2row {
+      line-height: 2rem;
+    }
+
+    .tileMK2__img__channel {
+      background-origin: content-box;
+      padding: 2rem 0rem;
+      background-clip: content-box;
+    }
+  }
+
+  &__img__circle {
+    width: 50%;
+    padding-top: 50%;
+    border-radius: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform .2s ease;
+  }
+}

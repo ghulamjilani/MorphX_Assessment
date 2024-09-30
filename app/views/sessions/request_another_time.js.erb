@@ -1,0 +1,6 @@
+<% if @object.valid? %>
+  $('.modal:visible form')[0].reset();
+  $('.modal:visible').modal('toggle');
+<% else %>
+  $.showFlashMessage("<%= @object.errors.full_messages.first %>", {type: 'error', timeout: 3000});
+<% end %>

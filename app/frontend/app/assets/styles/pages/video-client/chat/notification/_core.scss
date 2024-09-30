@@ -1,0 +1,94 @@
+.chatMK2__notifications {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  z-index: 100002;
+}
+
+.tw__notifications {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+  z-index: 1002;
+
+  .chatMK2__notification {
+    padding: 1.5rem;
+  }
+}
+
+.webRTC .tw__notifications {
+  top: 6rem;
+}
+
+.chatMK2__notification {
+  padding: 1.5rem 1.5rem 2rem;
+  background: $client__bg__tooltip;
+  min-width: 29rem;
+  max-width: 29rem;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  word-break: break-word;
+  @include media(tablet) {
+    -webkit-backdrop-filter: blur(5px);
+    background: rgba(64, 64, 64, 0.4);
+    padding: 1rem 1rem .5rem;
+  }
+  @include boxShadow__main(var(--sh__modals));
+
+  &__header {
+    @include flex(flex, center, space-between);
+    padding-bottom: 1.5rem;
+    @include media(tablet) {
+      padding-bottom: .5rem;
+    }
+
+    &__avatar {
+      display: flex;
+      padding-right: 1.5rem;
+
+      &__image {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+      }
+    }
+
+    &__name {
+      width: calc(100% - 8rem);
+      font-weight: bold;
+      color: $client__tp__active;
+    }
+
+    &__time {
+      color: $client__tp__secondary;
+    }
+  }
+
+  &__body {
+    color: $client__tp__main;
+    // @include text__ellipsis(2);
+  }
+}
+
+// vue transition
+.chatMK2__notification-list-enter-active {
+  transition: all 1s;
+}
+
+.chatMK2__notification-list-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.chatMK2__notification-list-leave-active {
+  transition: all 0.3s;
+}
+
+.chatMK2__notification-list-leave-to {
+  opacity: 0;
+  position: fixed;
+  z-index: -1;
+  transform: translateX(300px);
+}

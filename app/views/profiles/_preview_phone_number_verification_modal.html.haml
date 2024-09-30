@@ -1,0 +1,21 @@
+#phone-number-verification-modal.modal.fade{'aria-hidden' => 'true', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+        %h1.heading
+          Phone Number Verification
+        %div
+          .phone-verification-area
+            %form{action: verify_phone_number_path, method: 'POST', 'data-remote' => true, style: 'visibility: visible'}
+              %p
+                = raw "We just sent you a text message to <strong>#{@sent_to_phone_number}</strong> with a verification code that you'll need to enter below:"
+
+              %div{style: 'display: inline-block'}
+                %input.codeConfirm{name: 'code'}
+
+              %input.btn.btn-primary{type: 'submit', value: 'Submit'}
+
+              %p{style: 'font-size: 12px'}
+                NOTE: Your privacy is important to us. Your phone number is for verification only and won't be shared publicly.

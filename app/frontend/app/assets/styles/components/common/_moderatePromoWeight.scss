@@ -1,0 +1,18 @@
+.moderatePromoWeight {
+  .MK2-modal__dialog {
+    width: 50rem;
+  }
+
+  &__modal {
+    padding: 1rem;
+
+    &__body__slider {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  .input__field__angle {
+    top: 1.2rem;
+  }
+}

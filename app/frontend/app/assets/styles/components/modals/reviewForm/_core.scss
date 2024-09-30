@@ -1,0 +1,309 @@
+.session_feedback_area {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  top: 0;
+}
+
+.RF {
+  @include flex(flex, false, space-between);
+  height: 41.9rem;
+  width: 83rem;
+  max-width: 100%;
+
+  .rating__star__wrapp {
+    @include media(p-tablet) {
+      font-size: 2rem;
+    }
+  }
+
+  @include media(p-phone) {
+    height: auto;
+  }
+
+  &__image {
+    width: 25rem;
+    max-width: 25rem;
+    min-width: 25rem;
+    background: rgba(178, 178, 178, .15);
+
+    svg {
+      height: 100%;
+
+      path:first-child {
+        fill: none;
+      }
+    }
+
+    @include media(p-tablet) {
+      display: none;
+    }
+  }
+
+  &__monilit {
+    background: var(--bg__secondary);
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+
+    .unobtrusive-flash-container {
+      position: fixed;
+      right: 2rem;
+      max-width: 40rem;
+
+      .alert {
+        overflow: hidden;
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 7px 0 var(--sh__main);
+        background: var(--bg__tooltip);
+
+        .bodyFlashMessage {
+          padding: 1.5rem 4rem 1.5rem 5.5rem;
+        }
+
+        button {
+          position: absolute;
+          top: 1.5rem;
+          right: 1.5rem;
+          color: var(--tp__icons);
+        }
+      }
+    }
+
+    textarea {
+      @include media(p-tablet) {
+        margin-top: 0.3rem;
+      }
+    }
+
+    .RF__cat {
+      @include media(p-tablet) {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+    }
+
+    .RF__section {
+      @include media(desktop) {
+        padding: 1rem 1.5rem;
+        margin-bottom: 1rem;
+      }
+      @include media(phone) {
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .RF__form {
+      margin: 0 auto;
+      max-width: 65rem;
+      height: 100%;
+      @include media(desktop-tablet) {
+        padding: 1rem 2rem .5rem;
+      }
+      @include media(phone) {
+        padding: 0rem 2rem .5rem;
+      }
+
+      &__title {
+        @include media(desktop) {
+          padding-bottom: 1rem;
+        }
+        @include media(phone) {
+          display: none;
+        }
+      }
+    }
+
+    .RF__smile {
+      @include media(phone) {
+        padding-top: 0.5rem;
+      }
+    }
+
+    .RF__button {
+      @include media(desktop-tablet) {
+        min-height: 3rem;
+      }
+      @include media(phone) {
+        min-width: 10rem;
+        min-height: 3rem;
+        font-size: 1.4rem;
+      }
+
+      &__wrapper {
+        width: 100%;
+
+      }
+    }
+
+    .RF__category__title {
+      @include media(phone) {
+        font-size: 1.8rem;
+        padding-bottom: 1rem;
+      }
+    }
+
+    .RF__image {
+      background: rgba(178, 178, 178, .15);
+      height: 100%;
+      @include media(desktop-tablet) {
+        display: none;
+      }
+      @include media(desktop) {
+        min-width: 23rem;
+      }
+
+      svg {
+        background: none;
+        height: 100%;
+
+        path:first-child {
+          fill: none;
+        }
+      }
+    }
+
+    .RF__form {
+      @include flex(flex, false, center);
+      flex-direction: column;
+    }
+  }
+
+  &__wrapper {
+    .unobtrusive-flash-container {
+      position: fixed;
+      right: 2rem;
+      max-width: 40rem;
+
+      .alert {
+        overflow: hidden;
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 7px 0 var(--sh__main);
+        background: var(--bg__tooltip);
+
+        .bodyFlashMessage {
+          padding: 1.5rem 4rem 1.5rem 5.5rem;
+        }
+
+        button {
+          position: absolute;
+          top: 1.5rem;
+          right: 1.5rem;
+          color: var(--tp__icons);
+        }
+      }
+    }
+
+    .MK2-modal {
+      &__dialog {
+        padding: 0;
+        margin: 8rem auto 2rem;
+      }
+
+      &__body {
+        padding: 0;
+      }
+
+      &__backdrop {
+        z-index: 0;
+      }
+    }
+  }
+
+  &__form {
+    padding: 2rem 2rem .5rem;
+    width: 100%;
+    @include media(p-tablet) {
+      width: 100%;
+    }
+
+    &__title {
+      color: var(--tp__h1);
+      font-weight: bold;
+      font-size: 2.2rem;
+      padding-bottom: 1.5rem;
+    }
+  }
+
+  &__section {
+    background: var(--bg__content__secondary);
+    border: 1px solid var(--border__content__sections);
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+
+    &__title {
+      font-weight: bold;
+      color: var(--tp__main);
+      font-size: 1.6rem;
+      padding-bottom: 2.5rem;
+    }
+
+    &__notice {
+      color: #6F7073; // hard code in design
+      font-size: 1.4rem;
+      font-weight: normal;
+    }
+
+    .rating__star__wrapp{
+      font-size: 1.4rem;
+    }
+  }
+
+  &__categories {
+    @include flex(flex, false, flex-start);
+    flex-direction: column;
+    @include media(p-phone) {
+      flex-direction: column;
+    }
+  }
+
+  &__smile {
+    @include flex();
+    flex-wrap: wrap;
+  }
+
+  &__category {
+    min-width: 50%;
+    padding-bottom: 2rem;
+    @include media(desktop) {
+      padding-bottom: 1rem;
+    }
+    @include media(p-phone) {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    &__title {
+      color: var(--tp__main);
+      font-size: 1.6rem;
+    }
+
+    &__subTitle {
+      padding-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  &__button {
+    min-width: 12rem;
+    min-height: 4rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 2rem;
+    font-size: 1.4rem;
+
+    &__wrapper {
+      z-index: 2;
+      @include flex(flex, center, flex-end);
+      width: 83rem;
+      margin: 0 auto;
+      max-width: 94%;
+    }
+  }
+}

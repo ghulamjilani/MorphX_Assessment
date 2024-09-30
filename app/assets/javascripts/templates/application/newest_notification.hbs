@@ -1,0 +1,16 @@
+<li data-notification-id="{{id}}" class="clearfix {{#if unread}}NT-new active{{/if}}">
+  <div class="col-md-2 text-center">
+    <a href="{{sender_data.path}}" class="avatarImg-MD" {{#if sender_data.avatar}}style="background-image: url('{{sender_data.avatar}}')"{{/if}}></a>
+  </div>
+
+  <div class="col-md-10 NT-notificationsContent">
+    <strong>{{sender_data.name}}</strong>
+    <p>{{{subject}}}</p>
+    <br/>
+    {{{body}}}
+
+    <div class="NT-time clearfix">
+      <time class="timeago" datetime="{{created_at}}"></time>
+    </div>
+  </div>
+</li>

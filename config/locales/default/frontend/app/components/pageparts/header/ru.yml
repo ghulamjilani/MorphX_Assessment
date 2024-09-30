@@ -1,0 +1,41 @@
+ru:
+  frontend:
+    app:
+      components:
+        pageparts:
+          header:
+            search: "Поиск"
+            join: "Подключиться"
+            next: "Слудующая сессия:"
+            start_creating: "СОЗДАТЬ ОРГАНИЗАЦИЮ"
+            sign_up: Регистрация
+            sign_in: Вход
+            complete_business: ""
+            complete_channel: ""
+            confirm_email: "Пожалуйста, подтвердите почту"
+            rewrite_email: "Не получили письмо-подтверждение?"
+            resending_instructions: "Переотправка…"
+            check_inbox: "Пожалуйста проверьте входящие."
+            notifications:
+              latest_notifications: "Последние уведомления"
+              mark_all: "Отметить все как прочитанное"
+              clear_all: "Очистить все"
+              load_more: "Загрузить еще"
+              view_all: "Просмотреть все"
+              empty: "Нет нотификаций"
+            messages:
+              mess_count: "Сообщения"
+              load_more: "Загрузить еще"
+              view_all: "Просмотреть все"
+              empty: "Сообщений нет"
+            user:
+              dashboard: "Панель управления"
+              settings: "Настройки"
+              help: "Помощь"
+              logout: "Выход из системы"
+              logout_message: Вы успешно вышли из системы
+              reports: Отчеты
+            sessions_create:
+              go_live: "Начать трансляцию"
+              fast_interactive: "Интерактивная сессия"
+              upload: "Загрузить видео"

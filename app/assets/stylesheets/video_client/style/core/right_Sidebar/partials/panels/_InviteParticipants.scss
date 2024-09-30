@@ -1,0 +1,145 @@
+#InviteParticipants{
+  overflow: hidden;
+  .Avatar.small{
+    margin-top: 0.4rem;
+  }
+  position: relative;
+  .content-blockWrapp{
+    height: calc(100% - 4.1rem);
+    overflow: auto;
+  }
+  $tileHeight: 3rem;
+
+  .searchUserBlock{
+    height: 50%;
+    max-height:50% ;
+    &.count-0{
+      display: none;
+      & + .ParticipantsList{
+        height: calc(100% - 2.2rem);
+      }
+    }
+    &.count-1{
+      height: $tileHeight;
+
+      & + .ParticipantsList{
+        height: calc(100% - #{$tileHeight + 1.6});
+      }
+    }
+    &.count-2{
+      height: #{$tileHeight * 2};
+
+      & + .ParticipantsList{
+        height: calc(100% - #{$tileHeight * 2 + 1.6});
+      }
+    }
+    &.count-3{
+      height: #{$tileHeight * 3};
+
+      & + .ParticipantsList{
+        height: calc(100% - #{$tileHeight * 3 + 1.6});
+      }
+    }
+    &.count-4{
+      height: #{$tileHeight * 4};
+
+      & + .ParticipantsList{
+        height: calc(100% - #{$tileHeight * 4 + 1.6});
+      }
+    }
+    &.count-5{
+      height: #{$tileHeight * 5};
+
+      & + .ParticipantsList{
+        height: calc(100% - #{$tileHeight * 5 + 1.6});
+      }
+    }
+    &.count-1, &.count-2, &.count-3, &.count-4{
+      .item-wrapp{
+        max-height:100%;
+        padding: 0;
+      }
+      & > .inputWidthButton{
+        display: none;
+      }
+    }
+    .item-wrapp{
+      max-height: calc(100% - 3.6rem);
+      height: 100%;
+      padding-top: 1rem;
+      min-height: $tileHeight;
+    }
+  }
+  .ParticipantsList{
+    margin-top: 1rem;
+    height: calc(50% - 2.2rem);
+    min-height: 10rem;
+    .item-wrapp{
+      max-height: calc(100% - 7.7rem);
+      height: 100%;
+      min-height:$tileHeight ;
+    }
+    .ParticipantsList{
+      margin-top: 0rem;
+      height: calc(50% - 2.4rem);
+      .item-wrapp{
+        max-height:calc(100% - 4rem);
+        height: 100%;
+      }
+    }
+  }
+  .item{
+    display: block;
+    padding-right: 2rem;
+    cursor: pointer;
+    min-height: 3rem;
+    .col-md-10{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 3rem;
+    }
+    .VideoClientIcon-iPlus, .VideoClientIcon-minus{
+      position: absolute;
+      right: 0.3rem;
+      top: 0.9rem;
+      font-size: 0.8rem;
+      @include transition();
+    }
+    .VideoClientIcon-minus{
+      top:1.3rem;
+    }
+    &:hover{
+      color: $siteColorMain;
+      .Avatar{
+        border-color: $siteColorMain;
+      }
+      .VideoClientIcon-iPlus, .VideoClientIcon-minus{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+      }
+    }
+  }
+  .styledCheckBoxWrapp{
+    background: #272727;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.state_red, .state_blue, .state_white{
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 100%;
+  vertical-align: middle;
+}
+.state_red{
+  background: $video-volor-red;
+}
+.state_blue{
+  background: $siteColorMain;
+}
+.state_white{
+  background: #fff;
+}

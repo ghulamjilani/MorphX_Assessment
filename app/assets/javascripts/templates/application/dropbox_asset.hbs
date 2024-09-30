@@ -1,0 +1,25 @@
+<td class="{{kind}}">
+    <div class="filename-col">
+        <img src="{{icon_src}}">
+
+        <div class="filename">
+            {{name_without_path}}
+        </div>
+    </div>
+</td>
+<td class="{{kind}}">
+    {{#if is_dir}}
+        <span class="category">folder</span>
+    {{else}}
+        <span class="category">file</span>
+        <span class='extension'>{{file_extension}}</span>
+    {{/if}}
+</td>
+<td class="{{kind}}">
+    <time class="timeago" datetime="{{modified}}"></time>
+</td>
+<td {{#unless is_dir}} class="select-image" {{/unless}}>
+    {{#unless is_dir}}
+        <input class="select-image" type="checkbox" {{#if isAlreadyPresentMaterial}} checked {{/if}}>
+    {{/unless}}
+</td>

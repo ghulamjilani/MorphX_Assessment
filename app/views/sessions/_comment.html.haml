@@ -1,0 +1,15 @@
+- user = comment.user
+.media
+  %a.pull-left.ensure-link-style
+    = image_tag(user.avatar_url, width: 55, height: 55, alt: user.public_display_name, class: 'img-circle')
+  .media-body
+    %h4.media-heading
+      - if user == @organizer
+        = link_to "#{@organizer.first_name} #{@organizer.last_name}", spa_user_path(@organizer.slug), style: 'color: #333'
+      - else
+        %a{style: 'color: #333'}= user.public_display_name
+      %span
+        = time_ago_in_words(comment.created_at).gsub('about', '') + ' ago'
+        / %a.ensure-link-style Reply
+    %p
+      = comment.overall_experience_comment

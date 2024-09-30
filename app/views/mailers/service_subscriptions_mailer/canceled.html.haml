@@ -1,0 +1,15 @@
+%p Dear #{@user&.public_display_name},
+%p Your Business Plan has been deactivated according to your request.
+%br/
+
+- if @plan_package.present?
+  %p Business Plan: #{@plan_package.name}
+%p Payment: #{@plan.formatted_price}/#{@plan.formatted_interval}
+%br/
+
+%p Thank you for using #{Rails.application.credentials.global[:service_name]}!
+
+%p
+  If you have any questions, feel free to
+  = link_to 'contact us', support_home_url
+

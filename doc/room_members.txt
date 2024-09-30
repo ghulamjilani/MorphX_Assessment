@@ -1,0 +1,7 @@
+[20:16] Nikita Fedyashev: а как мы можем точно узнать что он в gt поучаствовал?
+    создать то не проблема
+    может есть что-то вроде "was_actually_present_in_video_stream"?
+[20:17] Max Dolgih: он будет в room_member.where kind: presenter
+[20:17] Nikita Fedyashev: то есть если у меня плагин не установлен, я создам gt и не смогу подключиться к нему(в lobbies#show), то room_member(presenter) не будет создан?
+[20:18] Max Dolgih: да
+[20:23] Max Dolgih: запись создается после инициплизацией vidyo плагина и пушера но перед получением vidyo credentials. если не установлен плагин то записи не будет

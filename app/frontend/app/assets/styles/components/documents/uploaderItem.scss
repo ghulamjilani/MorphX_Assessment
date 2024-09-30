@@ -1,0 +1,102 @@
+.DocumentsUploaderItem {
+  background: var(--bg__content);
+  border-radius: 1rem;
+  border: 1px solid #E5E5E5;
+  padding: 0 1rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  position: relative;
+
+  &_wrap {
+    min-height: 6rem;
+    @include flex(flex, center, space-between);
+    position: relative;
+    z-index: 2;
+  }
+
+  &_progress {
+    height: 100%;
+    background: var(--bg__secondary);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: width .6s ease;
+  }
+
+  .title {
+    width: 40rem;
+    font-size: 1.6rem;
+    color: var(--tp__main);
+    margin-left: 2rem;
+    @include text__ellipsis();
+  }
+
+  .size {
+    font-size: 1.2rem;
+    color: var(--tp__secondary);
+  }
+
+  .row-wrap {
+    width: 20rem;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .percent {
+    color: var(--tp__secondary);
+  }
+
+  .error-msg {
+    color: var(--tp__inputs__validation);
+
+    i {
+      font-size: 1.6rem;
+      margin-right: 1rem;
+    }
+
+  }
+
+  .confirm {
+    opacity: 0;
+    color: var(--tp__icons);
+    font-size: 1.6rem;
+    margin-right: 1rem;
+
+    button {
+      display: none;
+    }
+
+  }
+
+  @include media(p-phone) {
+
+    .title {
+      margin-left: 1rem;
+    }
+
+    .confirm {
+      margin-right: 0;
+    }
+
+  }
+
+  .tooltip {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+
+  &.done {
+
+    .confirm {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+  }
+
+}

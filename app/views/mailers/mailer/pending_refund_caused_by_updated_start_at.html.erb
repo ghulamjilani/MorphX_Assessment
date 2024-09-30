@@ -1,0 +1,66 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<% abstract_session = @pending_refund.abstract_session %>
+<p>
+  The start time for <%= link_to abstract_session.always_present_title, abstract_session.absolute_path(UTM.build_params({utm_content: @user.utm_content_value})) %>
+  has been changed by presenter.
+</p>
+
+<pre>
+  -- Update --
+
+  <% if @model.session.former_start_at %>
+  before: <%= @model.session.former_start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %>
+  <% end %>
+  after:  <%= @model.session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %>
+</pre>
+
+<% if @model.is_a?(SessionParticipation) %>
+  <% link = link_to 'this link', accept_changed_start_at_session_participation_url(@model) %>
+<% elsif @model.is_a?(SessionCoPresentership) %>
+  <% link = link_to 'this link', accept_changed_start_at_session_co_presentership_url(@model) %>
+<% elsif @model.is_a?(Livestreamer) %>
+  <% link = link_to 'this link', accept_changed_start_at_livestreamer_url(@model) %>
+<% else %>
+  <% raise "can not interpret - #{@model.inspect}" %>
+<% end %>
+
+<p>
+  Please follow <%= raw link %> to accept the change.
+</p>
+
+<p>
+  If the new time doesn't work for you and
+
+  <ul>
+    <% if @pending_refund.payment_transaction.present? %>
+      <li>
+        you want full money refund <%= link_to 'follow this link', pending_refund_get_money_url(@pending_refund) %>.
+      </li>
+    <% end %>
+
+    <% if eligible_for_system_credit_refund?(@pending_refund, @user) %>
+      <li>
+        you want system credit refund <%= link_to 'follow this link', pending_refund_get_system_credit_url(@pending_refund) %>.
+      </li>
+    <% end %>
+  </ul>
+
+</p>
+
+<pre>
+-- Transaction Information --
+Amount:             <%= number_to_currency(@pending_refund.amount / 100.0) %>
+Payment provider:   <%= @pending_refund.payment_transaction.try(:provider) %>
+Payment ID:         <%= @pending_refund.payment_transaction.try(:pid) %>
+<% if @pending_refund.payment_transaction.present? && @pending_refund.payment_transaction.credit_card? %>
+Card Type:          <%= @pending_refund.payment_transaction.card_type %>
+Credit Card Number: <%= '*'*12 + @pending_refund.payment_transaction.credit_card_last_4.to_s %>
+<%# elsif @pending_refund.braintree_transaction.present? && @pending_refund.braintree_transaction.paypal? %>
+<!--PayPal Email: <%#= @pending_refund.braintree_transaction.paypal_payer_email %>-->
+<% else %>
+  <% Rails.logger.info "can not interpret #{@pending_refund.inspect}" %>
+<% end %>
+</pre>

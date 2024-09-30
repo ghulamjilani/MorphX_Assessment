@@ -1,0 +1,13 @@
+<% @content = wrap_content_urls @content %>
+<% @content = perform_replacements(@content, @replacements) if @replacements.present? %>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" align="center" width="500" style="max-width:100%">
+      <tr>
+        <td id="custom_content">
+          <%= @content %>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>

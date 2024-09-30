@@ -1,0 +1,1 @@
+./bin/rspec --pattern "spec/seed_spec.rb,spec/plutus_accounts_spec.rb,spec/jobs/**/*_spec.rb,spec/features/**/*_spec.rb,spec/fixtures/**/*_spec.rb,spec/helpers/**/*_spec.rb,spec/interactors/**/*_spec.rb,spec/jobs/**/*_spec.rb,spec/lib/**/*_spec.rb,spec/mailers/**/*_spec.rb,spec/routing/**/*_spec.rb,spec/support/**/*_spec.rb,spec/views/**/*_spec.rb,spec/*.feature"

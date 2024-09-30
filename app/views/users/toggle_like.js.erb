@@ -1,0 +1,6 @@
+<% if current_user.voted_as_when_voted_for(@user) %>
+    $('.user-like-<%= @user.id %>').addClass("selected").addClass("active");
+<% else %>
+    $('.user-like-<%= @user.id %>').removeClass("selected").removeClass("active");
+<% end %>
+$(".likes-counter-user-<%= @user.id %>").text("<%= @user.likes_count.zero? ? '' : @user.likes_count %>");

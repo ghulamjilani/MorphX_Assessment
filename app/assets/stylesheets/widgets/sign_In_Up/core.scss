@@ -1,0 +1,267 @@
+:root {
+  --pt_signIn: 71px;
+  --mt_signIn_button: 71px;
+  --logo_margin:10px 0 20px;
+  --logo_align:center;
+  --logo_width:60%;
+  --logo_height:24%;
+
+  --modal-f_text_margin:1em 0;
+
+  //--GLOBAL, can be customized!!!
+  --main_color: #{$siteColorMain};
+  //--GLOBAL, can be customized!!!END
+}
+//variable and responsive in bottom
+
+
+.modals_wrapp{
+  background: rgba(0,0,0,0.7);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  .modal{
+    width: 360px;
+    max-width: 96%;
+  }
+  .closeModal{
+    position: absolute;
+    right: 10px;
+    top:10px;
+    i{
+      display: inline-block;
+      position: relative;
+      transform: rotate(-45deg);
+      color: var(--tp__icons);
+      font-size: 18px !important;
+    }
+  }
+  .closeModalSign{
+    position: absolute;
+    right: 10px;
+    top:10px;
+    i{
+      display: inline-block;
+      position: relative;
+      transform: rotate(-45deg);
+      color: var(--tp__icons);
+      font-size: 18px !important;
+    }
+  }
+  .modal-h{
+    text-align: left;
+  }
+  .modal-f{
+    text-align: center;
+    p{
+      margin: 10px 0;
+      font-size: 14px;
+      color: var(--tp__secondary);
+    }
+    a{
+      color: var(--tp__active);
+      font-size: 14px;
+    }
+  }
+  .embed_logo{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    width: 100%;
+    max-width: 145px;
+    height: 35px;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  //input styles
+  input,select{
+    display: block;
+    border:none;
+    border-bottom:1px solid var(--border__separator);
+    color: var(--tp__main);
+    padding: 0;
+    margin: 0px 0 20px 0 !important;
+    height: 30px;
+    line-height: 26px;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    background: transparent;
+    border-radius: 0;
+    outline: none !important;
+    &.error{
+      border-color: $siteColorMainRed !important;
+    }
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: var(--tp__main);
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color:var(--tp__main);
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: var(--tp__main);
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: var(--tp__main);
+    }
+    &:focus, &:active{
+      border-color: var(--tp__main);
+    }
+  }
+  select{
+    background: transparent;
+    padding-right:20px;
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url(asset_path('brBg_grey2.png'));
+    background-repeat: no-repeat;
+    background-position: right top 60%;
+    color:$font-color-main-light;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    &::-ms-expand {
+      display: none;
+    }
+    option{
+      padding: 0;
+      color: #96a7b5 !important;
+    }
+    &:not(:focus):invalid {
+      color:var(--tp__main);
+    }
+    //&:valid{
+    //  color: var(--tp__main);
+    //}
+  }
+  input[type="date"]::before {
+    color: var(--tp__main) !important;
+    content: attr(placeholder);
+  }
+  input[type="date"] {
+    color: #ffffff!important;
+  }
+  input[type="date"]:focus,
+  input[type="date"]:valid {
+    color: var(--tp__main) !important;
+  }
+  input[type="date"]:focus::before,
+  input[type="date"]:valid::before {
+    content: "" !important;
+  }
+  .error_container{
+    color: $siteColorMainRed;
+  }
+  button{
+    padding: 1px 15px 0;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+    max-width: 100%;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+    color: var(--tp__btn__main);
+    background: var(--btn__main);
+    border: 1px solid var(--btn__main);
+    width: 100%;
+    font-size: 16px;
+    height: 40px;
+    line-height: 26px;
+    border-radius: 20px;
+    &:hover{
+      filter: brightness(110%);
+    }
+  }
+  [disabled]{
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    box-shadow: none;
+  }
+}
+
+
+#modal_sign_in{
+  .modal-b{
+    padding-top: var(--pt_signIn);
+  }
+  button{
+    margin-top: var(--mt_signIn_button);
+  }
+}
+#modal_sign_up{
+  .BirthdayWrap{
+    position: relative;
+    input{
+      padding-right: 20px;
+      position: relative;
+      z-index: 9999;
+    }
+    i{
+      position: absolute;
+      color: var(--tp__icons);
+      right: 4px;
+      top: 8px;
+      z-index: 1;
+    }
+  }
+}
+
+@media all and (max-height:550px) {
+  :root {
+    //sign in spec
+    --pt_signIn: 10vh;
+    --mt_signIn_button: 10vh;
+    //sign in spec end
+  }
+}
+@media all and (max-height:440px) {
+  :root {
+    //sign in spec
+    --pt_signIn: 4vh;
+    --mt_signIn_button: 4vh;
+    //sign in spec end
+    --logo_margin:0;
+    --logo_align:left;
+    --logo_width:35vh;
+    --logo_height:10vh;
+
+    --modal-f_text_margin:1vh 0;
+  }
+
+
+  .modals_wrapp .modal{
+    padding: 3vh 4vh;
+  }
+}
+@media all and (max-height:375px) {
+  #modal_sign_up{
+    form > input, form > select, form div{
+      display: inline-block;
+      vertical-align: top;
+      margin:0 2% !important;
+    }
+    button{
+      margin-top: 0;
+    }
+  }
+  .modal-b{
+    overflow: hidden;
+  }
+}
+@media all and (max-width:320px) {
+  .modals_wrapp .modal-f {
+    p,a{
+      font-size: 3.5vw;
+    }
+  }
+}

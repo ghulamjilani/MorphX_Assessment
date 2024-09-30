@@ -1,0 +1,118 @@
+.chips {
+  width: fit-content;
+
+  &__iconed {
+    display: flex;
+  }
+
+  &__icon {
+    cursor: pointer;
+    color: var(--tp__icons);
+  }
+
+  &__label {
+    // position: absolute;
+    // top: 1rem;
+    // left: 1rem;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0 0.7rem;
+    margin-right: .5rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 2rem;
+    overflow: hidden;
+    background: white;
+    border-radius: 0.3rem;
+    border: none;
+    z-index: 1;
+    min-width: 5rem;
+    line-height: initial;
+
+    &__anyWidth {
+      min-width: auto;
+      width: auto;
+    }
+
+    &.chips__label__margin0 {
+      margin-right: 0;
+    }
+    &.memberLevel{
+      background-color: var(--btn__main);
+      color: var(--tp__btn__main);
+    }
+  }
+
+  &__dollar {
+    color: #303840;
+    background: #FFC20A;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+
+    i {
+      color: var(--tp__btn__dark);
+      @include center("vh");
+    }
+
+    &__price {
+      @include flex(flex, center, false);
+      flex-direction: column;
+
+      &__row {
+        @include flex(flex, center, space-between);
+        width: 100%;
+        font-size: 1.2rem;
+
+        span {
+          color: #12dcb4; // взял с монолита, там статический цвет(возможно нужно поменять)
+        }
+      }
+    }
+  }
+
+  .sessionCost-tooltip {
+    visibility: hidden;
+    position: absolute;
+    background: var(--bg__content);
+    color: var(--tp__btn__dark);
+    right: -1rem;
+    width: 13.5rem;
+    text-align: center;
+    top: 5rem;
+    opacity: 0;
+    line-height: 2rem;
+    @include transition200();
+    border-radius: 1rem;
+    padding: 1rem;
+    @include boxShadow__main(var(--sh__main));
+
+    &__long {
+      width: 20rem;
+    }
+
+    span {
+      padding-left: 0.3rem;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 100%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border: 1rem solid transparent;
+      border-bottom-color: #fff;
+    }
+  }
+}

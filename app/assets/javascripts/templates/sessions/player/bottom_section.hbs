@@ -1,0 +1,70 @@
+{{#if is_session}}
+    <div class="mainVideoSection-sub-header">
+        <ul class="full-width nav nav-tabs nav-justified" role="tablist">
+            <li class="full-width description-tab" style="{{#if (or description custom_description)}}{{else}}display: none;{{/if}}">
+                <a data-toggle="tab" data-target="#MS_Description" href="#">Description</a>
+            </li>
+            <li class="full-width shop-tab" style="display: none;">
+                <a data-toggle="tab" data-target="#MS_Shop" href="#">Shop</a>
+            </li>
+            {{!-- Skip donations
+                <li class="full-width donation-tab" style="display: none;">
+                    <a class="btn btn-m btn-borderred-grey btn-hover-green" data-toggle="tab"
+                     data-target="#MS_Donation" href="#">Donation</a>
+                </li>
+            --}}
+            <li class="full-width polls-tab" style="display: none;">
+                <a data-toggle="tab" data-target="#MS_Polls" href="#">Polls</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mainVideoSection-sub-body">
+        <div class="tab-content">
+            <div class="tab-pane" id="MS_Description">
+                {{#if description}}
+                    <p class="margin-bottom-5">{{{description}}}</p>
+                {{/if}}
+                {{#if custom_description}}
+					<div class="MVc-AboutBody__section">
+						<div class="MVc-AboutHead margin-top-20">Instructions</div>
+						<p class="margin-bottom-5">{{{custom_description}}}</p>
+					</div>
+                {{/if}}
+            </div>
+            <div class="tab-pane" id="MS_Shop">
+                {{! javascripts/templates/sessions/player/shop_tab.hbs }}
+            </div>
+
+            {{!-- Skip donations
+                <div class="tab-pane" id="MS_Donation">
+                    <div class="donationsContainer">
+                        <div class="donations_wrapper">
+                            <div class="placeholder">
+                                {{! Donation }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            --}}
+
+            <div class="tab-pane" id="MS_Polls">
+                {{! javascripts/templates/sessions/player/polls.hbs }}
+            </div>
+        </div>
+    </div>
+{{else}}
+    <div class="mainVideoSection-sub-header" style="visibility: hidden" >
+        <ul class="full-width nav nav-tabs nav-justified" role="tablist">
+            <li class="full-width shop-tab" style="display: none;">
+                <a data-toggle="tab" data-target="#MS_Shop" href="#">Shop</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mainVideoSection-sub-body">
+        <div class="tab-content">
+            <div class="tab-pane" id="MS_Shop">
+                {{! javascripts/templates/sessions/player/shop_tab.hbs }}
+            </div>
+        </div>
+    </div>
+{{/if}}

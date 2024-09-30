@@ -1,0 +1,9 @@
+<% if @success %>
+  window.modalBody = '<%= escape_javascript render("profiles/#{action_name}", format: :html) %>';
+
+  $(document).one("shown.bs.modal", "#phone-number-verification-modal", function() {
+    //
+  });
+
+  $(modalBody).filter('#phone-number-verification-modal').modal('show');
+<% end %>

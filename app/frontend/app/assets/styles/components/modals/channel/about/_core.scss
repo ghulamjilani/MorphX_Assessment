@@ -1,0 +1,458 @@
+.ownerModal {
+
+  .MK2-modal {
+    &__dialog {
+      margin-bottom: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      padding: 0;
+      width: 74rem;
+      @include media(p-tablet) {
+        width: 90%;
+      }
+    }
+
+    &__header {
+      padding: 5rem 6rem 0rem 6rem;
+      width: 100%;
+      @include media(p-tablet) {
+        padding: 5rem 2rem 0rem 2rem;
+      }
+
+      img {
+        height: auto;
+      }
+    }
+
+    &__body {
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+    }
+  }
+
+  &__margin{
+    .MK2-modal__dialog{
+      margin-bottom: 8rem;
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    }
+  }
+
+  &__footer {
+    width: 74rem;
+    margin: 0 auto 8rem;
+    padding: 2rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    .channel__list__wrapp{
+      max-width: 100%;
+      .ChannelsTile{
+        width: 29rem; //TODO:VADIM remove width
+        margin: 0 auto;
+        @include media(p-tablet){
+          width: 100%;
+          max-width: 94%;
+          height: auto;
+        }
+      }
+    }
+    @include media(p-tablet) {
+      width: 90%;
+      padding: 2rem 0;
+    }
+
+    .channel__tile {
+      width: 50%;
+      margin: 0 0 3rem;
+      @include media(p-tablet){
+        width: 100%;
+      }
+    }
+  }
+
+  &__message {
+    padding: 0 6rem 0 6rem;
+    width: 100%;
+    height: 47.5rem;
+    position: relative;
+    overflow: hidden;
+    @include media(tablet) {
+      padding: 0 2rem 0 2rem;
+    }
+
+    &__subject {
+      #subject {
+        font-size: 1.6rem;
+        color: var(--tp__inputs);
+      }
+
+      .input__field__bottom__errors {
+        font-size: 1.4rem;
+      }
+    }
+
+    &__quill {
+      display: flex;
+      flex-direction: column-reverse;
+
+      &__wrapper {
+        position: relative;
+
+        .quillWrapper {
+          display: flex;
+          flex-direction: column-reverse;
+          max-height: 27rem;
+          overflow: hidden;
+
+          .ql-toolbar.ql-snow {
+            position: relative;
+            border: none;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding: 0;
+            z-index: 2;
+            margin-top: 0;
+
+            &:after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: calc(100% - 1rem);
+            }
+
+            .ql-formats {
+              margin-bottom: 0;
+              margin-right: 0;
+            }
+          }
+
+          #quill-container {
+            border: none;
+            overflow: auto;
+            position: relative;
+            padding: 0;
+
+            &:after {
+              content: '';
+              border-bottom: 1px solid var(--border__separator);
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+            }
+
+            #emoji-palette {
+              left: 10% !important;
+            }
+
+            #emoji-palette.goTop {
+              top: auto !important;
+              bottom: 0 !important;
+            }
+          }
+
+          .ql-emoji {
+            padding: 0;
+
+            &:hover {
+              svg > .ql-fill {
+                fill: var(--tp__icons);
+              }
+
+              svg > .ql-stroke {
+                stroke: var(--tp__icons);
+              }
+            }
+
+            svg > .ql-fill {
+              fill: var(--tp__icons);
+            }
+
+            svg > .ql-stroke {
+              stroke: var(--tp__icons);
+            }
+          }
+
+          .ql-editor {
+            padding: 0 3rem 0 0;
+            max-height: 100%;
+            overflow: hidden;
+            min-height: auto;
+            font-size: 1.7rem;
+            color: var(--tp__inputs);
+
+            p {
+              line-height: 1.3;
+            }
+
+            &::before {
+              left: 0;
+              font-size: 1.4rem;
+              font-style: normal;
+              color: var(--tp__labels);
+            }
+
+            .ql-emojiblot {
+              position: relative;
+              top: -0.6rem;
+            }
+          }
+        }
+
+        &__error {
+          .quillWrapper {
+            .ql-editor {
+              &::before {
+                color: var(--tp__inputs__validation);
+              }
+            }
+
+            #quill-container {
+              border-bottom: 1px solid var(--border__form__error);
+            }
+          }
+        }
+      }
+    }
+
+    &__bottom {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      @include flex(flex, center, flex-end);
+    }
+
+    &__title {
+      border-top: 1px solid var(--border__separator);
+      @include flex(flex, center, space-between);
+      padding: 3rem 0;
+      color: var(--tp__main);
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    &__buttons {
+      position: absolute;
+      bottom: 2rem;
+      right: 6rem;
+      @include media(tablet) {
+        right: 2rem;
+      }
+
+      &__cancel {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  &__body {
+    padding: 0rem 6rem 0rem 6rem;
+    width: 100%;
+    @include media(p-tablet) {
+      padding: 0rem 2rem 0rem 2rem;
+    }
+  }
+
+  &__title {
+    @include flex(flex, center, space-between);
+    color: var(--tp__h3);
+    padding: 3rem 0;
+
+    &__border {
+      border-top: 1px solid var(--border__separator);
+    }
+  }
+
+  &__label {
+    color: var(--tp__h1);
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+
+  &__social {
+    border-radius: 50%;
+    background: var(--tp__secondary);
+    color: var(--bg__main);
+    padding: 0.6rem 1.5rem;
+    margin-right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    position: relative;
+
+    i {
+      @include center(vh);
+      font-size: 1.6rem;
+    }
+
+    @include media(p-tablet) {
+      margin-right: .5rem;
+    }
+
+    &__wrapper {
+      display: flex;
+    }
+  }
+
+  &__description {
+    color: var(--tp__secondary);
+    line-height: 180%;
+  }
+
+  &__readMore {
+    color: var(--tp__h1);
+    font-weight: bold;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  &__classes {
+    background: var(--bg__main);
+    padding: 0 6rem 0 6rem;
+    @include media(p-tablet) {
+      padding: 0 2rem 0 2rem;
+    }
+
+    &__svg {
+      padding: 10rem 0 5rem;
+
+      &__text {
+        font-size: 1.5rem;
+        color: var(--tp__main);
+        padding-top: 3rem;
+        text-align: center;
+      }
+    }
+  }
+
+  &__content {
+    border-bottom: 1px solid var(--border__separator);
+
+    .mChannel__tiles__items {
+      justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+
+      .cardMK2 {
+        width: calc(50% - 1.35rem);
+        margin: 1rem 0;
+        @include media(phone) {
+          width: 100%;
+        }
+      }
+
+      &.placeholder .cardMK2 {
+        padding-left: 0;
+        display: block;
+
+        .spinnerSlider {
+          transform: translateX(-50%);
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &__view-all {
+    color: var(--tp__h1);
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__followers {
+    padding: 0 6rem 0 6rem;
+    @include media(p-tablet) {
+      padding: 0 2rem 0 2rem;
+    }
+    @include media(p-phone) {
+      padding: 0 1rem 0 2rem;
+    }
+
+    &__title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: calc(100% - 3rem);
+      border-bottom: 1px solid var(--border__separator);
+      border-top: 1px solid var(--border__separator);
+      @include media(p-phone) {
+        width: calc(100% - 1rem);
+      }
+
+      h4 {
+        color: var(--tp__h1);
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 2.5rem 0;
+      }
+
+      span {
+        top: auto;
+        right: -1rem;
+      }
+    }
+
+    &__body {
+      max-height: 97.9rem;
+      overflow: auto;
+      padding-right: 2.5rem;
+      margin-bottom: 4rem;
+      @include media(p-phone) {
+        padding-right: 0.5rem;
+      }
+    }
+
+    &__follower {
+      display: flex;
+      align-items: center;
+      padding: 1.5rem 1rem 1.5rem 0;
+      border-bottom: 1px solid var(--border__separator);
+      justify-content: space-between;
+    }
+
+    &__displayName {
+      width: 100%;
+      padding-left: 2.5rem;
+      padding-right: 2rem;
+      @include media(p-tablet) {
+        padding-left: 1.5rem;
+      }
+      @include media(p-phone) {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      a {
+        color: var(--tp__secondary);
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+    }
+
+    &__avatar {
+      background-color: var(--tp__main); // убрать
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      height: 6rem;
+      width: 6rem;
+      border-radius: 50%
+    }
+
+    &__button {
+      position: relative;
+
+      &__channel {
+        min-width: 14.2rem;
+        padding: 0 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+.blog {
+  &__filters {
+    margin: 3rem 0 3rem 0;
+    @include flex(flex, center, flex-end);
+    @include media(phone) {
+      @include flex(flex, center, space-between);
+    }
+
+    &__icon {
+      margin-right: 1rem;
+    }
+  }
+
+  &__showMore {
+    margin: 3rem auto 0 auto;
+    @include flex(flex, false, center);
+  }
+
+  &__yet {
+    @include flex(flex, false, center);
+    margin-top: 5rem;
+    color: var(--tp__main);
+  }
+
+  &__empty {
+    background: var(--bg__content);
+    border-radius: 10px;
+    @include flex(flex, center, center);
+    flex-direction: column;
+    padding: 14rem;
+
+    &__page {
+      margin-top: 3rem;
+    }
+
+    &__svg {
+      padding: 2rem 0 1rem;
+      max-width: 90%;
+    }
+
+    &__create {
+      background: var(--bg__content);
+      border-radius: 10px;
+      @include flex(flex, center, center);
+      flex-direction: column;
+      padding: 2rem 0 6rem;
+    }
+
+    &__text {
+      color: var(--tp__h1);
+      font-size: 1.8rem;
+      padding-top: 4rem;
+      font-weight: bold;
+      text-align: center;
+      width: 37.5rem;
+      max-width: 90%;
+    }
+
+    &__button {
+      margin-top: 6rem;
+      min-width: 22rem;
+    }
+  }
+
+  &__placeholders {
+    .tile-cake__standalone {
+      padding-top: 30%;
+    }
+  }
+}
+
+.ql-emojiblot {
+  max-height: 2rem;
+
+  .ap {
+    font-size: 1.8rem;
+    position: relative;
+    top: -0.2rem;
+  }
+}

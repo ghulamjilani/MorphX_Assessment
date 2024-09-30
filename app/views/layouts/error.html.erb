@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= favicon_link_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png", rel: 'shortcut icon'%>
+  <title><%= page_title %></title>
+  <link rel="stylesheet" href="/error/css/style.css">
+</head>
+
+<body>
+  <%= render 'layouts/application/customization' %>
+
+  <div class="e-bg">
+    <div class="e-bg_el">
+      <div class="e-yield">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

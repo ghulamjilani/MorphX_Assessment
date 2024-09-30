@@ -1,0 +1,9 @@
+%h3 Feature Parameters
+- PlanFeature.order(:name).each_with_index do |plan_feature, index|
+  - feature_parameter = f.object.feature_parameters.find_or_initialize_by(plan_feature_id: plan_feature.id)
+  %li
+    = f.hidden_field_tag "plan_package[feature_parameters_attributes][#{index}][id]", feature_parameter.id
+    = f.hidden_field_tag "plan_package[feature_parameters_attributes][#{index}][plan_feature_id]", plan_feature.id
+    = f.label_tag "plan_package[feature_parameters_attributes][#{index}][value]", plan_feature.name
+    = f.text_field_tag "plan_package[feature_parameters_attributes][#{index}][value]", feature_parameter.value, placeholder: plan_feature.parameter_type, style: 'width: 20%;'
+    %p{style: 'display: inline;padding-left: 20px;'}= plan_feature.description

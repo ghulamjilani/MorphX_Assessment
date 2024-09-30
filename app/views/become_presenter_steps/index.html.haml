@@ -1,0 +1,513 @@
+- content_for(:tabs) do
+  #user_info.form-body.disabledLayer
+  #channel.form-body.disabledLayer
+  #presenters.form-body.disabledLayer
+
+- content_for(:after_include_javascripts) do
+  %script
+    $(document).ready(function(){ Forms.Networks.wizard(); });
+
+- content_for(:modals) do
+  - user_account = @user.user_account || @user.build_user_account
+
+  #channels_modals
+    #chanelCoverModal.modal.fade{data: {backdrop: :static, keyboard: false}}
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Upload Primary Image
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              .upload-area
+                .row
+                  .upload-info.padding-top-80.padding-bottom-80
+                    .dotsWrapp
+                      .dot1
+                      .dot2
+                      .dot3
+                      .dot4
+                      .dot5
+                      .dot6
+                      .dot7
+                      .dot8
+                    = render partial: 'become_presenter_steps/loading_cover'
+                    %span
+                      %input#channel-cover.inputfile{name: 'channel-cover', type: :file}
+                      %label.btn.btn-s{for: 'channel-cover'}= I18n.t('forms.info.select_file')
+                      %div.fs-12.hideForMobile
+                        or drag-n-drop your image here
+              .crop-container
+              .fs-13.sugSize
+                %span Suggested size:
+                2560x1440px px
+                %br
+                We recommend using high resolution image.
+
+
+
+    #channelGalleryModal.modal.fade{data: {backdrop: :static, keyboard: false}}
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              .modal-tabs.hide
+                %ul.nav.nav-tabs
+                  %li.active
+                    %a{href: '#DragDropOrChoose', 'data-toggle': :tab} Upload
+                  %li
+                    %a{href: '#addImageByUrlTab', 'data-toggle': :tab} Web Address (URL)
+            .tab-content
+              .unobtrusive-flash-container
+              %section.crop-wrapp.tab-pane.active#DragDropOrChoose
+                .unobtrusive-flash-container
+                .upload-area
+                  .row
+                    .upload-info.padding-top-80.padding-bottom-80
+                      .dotsWrapp
+                        .dot1
+                        .dot2
+                        .dot3
+                        .dot4
+                        .dot5
+                        .dot6
+                        .dot7
+                        .dot8
+                      = render partial: 'loading_cover'
+                      %span
+                        %input#channel-gallery.inputfile{name: 'channel-gallery', type: :file}
+                        %label.btn.btn-s{for: 'channel-gallery'}= I18n.t('forms.info.select_file')
+                        %div.fs-12.hideForMobile
+                          or drag-n-drop your image here
+                .crop-container
+                .fs-13.sugSize
+                  %span Suggested size:
+                  1920x1024 px
+                  %br
+                  = I18n.t('forms.info.image_upload_tip', type: 'gallery')
+                %hr/
+                .GalleryImage-wrapp
+                  .Gallery-list.clearfix{style: 'max-height: 350px;overflow-y: scroll;'}
+
+              %section#addImageByUrlTab.tab-pane
+                %form.form_V2
+                  .input-block.state-clear
+                    %label{for: 'AddImageByUrl'}= I18n.t('wizard.step2.add_image_by_url_label')
+                    %input#AddImageByUrl{type: :text}
+                    .errorContainerWrapp
+                  .text-right
+                    %button.mainButton{type: :button} Add
+                  .text-center= I18n.t('wizard.step2.add_image_by_url_info')
+
+                %hr/
+                .GalleryImage-wrapp
+                  .Gallery-list.clearfix{style: 'max-height: 350px;overflow-y: scroll;'}
+
+
+  #company_modals
+    #companyModal.modal.fade{data: {backdrop: :static, keyboard: false}}
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              = I18n.t('wizard.modals.company_info.title')
+            %section
+              - company = @user.organization || @user.build_organization
+              = form_for(company, url: '#', method: :post, remote: true, html: {class: 'form_V2 BAP-formWrapp mb50',
+                 autocomplete: :off, id: :company_form}) do |f|
+                .ProfileImageAndCoverImage-wrapp
+                  %label.labelTitle
+                    Logo & Cover Images
+                  %a.ProfileImage-change.company.image{data: {'hover-text': "#{company.logo ? 'Change' : 'Add'} Logo",
+                      backdrop: :static, keyboard: false, target: '#companyLogoModal', toggle: :modal},
+                      style: "background-image: url('#{company.logo ? company.logo.try(:medium_url) : image_url('company/default_logo.jpg')}')"}
+                  .CoverImage.semitransparent_LoadingCover
+                    %a.CoverImage-demo.company{data: {'hover-text': "#{company.cover ? 'Change' : 'Add'} Cover Image",
+                       target: '#companyCoverModal', toggle: :modal, backdrop: :static, keyboard: false},
+                       style: company.cover ? "background-image: url('#{company.cover.medium_url}')" : ''}
+                    .spinnerSlider.hidden
+                      .bounceS1
+                      .bounceS2
+                      .bounceS3
+
+                .input-block.required{class: company.name.present? ? 'valid' : 'state-clear'}
+                  = f.label :name, 'Brand Name'
+                  = f.text_field :name
+                  .errorContainerWrapp
+
+                .input-block{class: company.website_url.present? ? 'valid' : 'state-clear'}
+                  = f.label :website_url, 'Brand URL'
+                  = f.text_field :website_url
+                  .errorContainerWrapp
+
+                .input-block{class: company.tagline.present? ? 'valid' : 'state-clear'}
+                  = f.label :tagline, 'Tagline or slogan'
+                  = f.text_field :tagline, class: :tagline, 'max-length': 160
+                  .counter_block= "#{company.tagline.to_s.size}/160"
+                  %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.company_info.tagline_tooltip')}
+                  .infoContainerWrapp= I18n.t('forms.info.min_length', count: 8)
+                  .errorContainerWrapp
+
+                .input-block.required{class: company.description.present? ? 'valid' : ''}
+                  = f.label :description, 'About'
+                  = f.text_area :description, 'data-autoresize': '', rows: 5, 'max-length': 2000,
+                      placeholder: I18n.t('forms.info.description_placeholder', count: 2000)
+                  .counter_block{'max-length': 2000} 0/2000
+                  .infoContainerWrapp= I18n.t('forms.info.min_length', count: 24)
+                  .errorContainerWrapp
+
+              .text-right
+                %button.submitButton.mainButton{type: :button} Save
+
+
+    #companyCoverModal.modal.fade
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Upload Company Cover
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              .upload-area
+                .row
+                  .upload-info.padding-top-80.padding-bottom-80
+                    .dotsWrapp
+                      .dot1
+                      .dot2
+                      .dot3
+                      .dot4
+                      .dot5
+                      .dot6
+                      .dot7
+                      .dot8
+                    = render partial: 'loading_cover'
+                    %span
+                      %input#company-cover.inputfile{name: 'company-cover', type: :file}
+                      %label.btn.btn-s{for: 'company-cover'}= I18n.t('forms.info.select_file')
+                      %div.fs-12.hideForMobile
+                        or drag-n-drop your image here
+              .crop-container
+              .fs-13.sugSize
+                %span Suggested size:
+                2560x1440px
+                %br
+                = I18n.t('forms.info.image_upload_tip', type: 'cover')
+
+
+    #companyLogoModal.modal.fade
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Upload Company Logo
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              .upload-area
+                .row
+                  .upload-info
+                    .dotsWrapp
+                      .dot1
+                      .dot2
+                      .dot3
+                      .dot4
+                      .dot5
+                      .dot6
+                      .dot7
+                      .dot8
+                    = render partial: 'loading_cover'
+                    %span
+                      %input#company-logo#company-logo.inputfile{name: 'company-logo', type: :file}
+                      %label.btn.btn-s{for: 'company-logo'}= I18n.t('forms.info.select_file')
+                      %div.fs-12.hideForMobile
+                        or drag-n-drop your image here
+              .crop-container
+              .fs-13.sugSize
+                %span Suggested size:
+                900x900 px
+                %br
+                We recommend using high resolution image.
+
+
+  #presenter_modals
+    #ReadyToInviteAdditional.modal.fade
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              .modal-tabs
+                %ul.nav.nav-tabs
+                  %li.active
+                    %a{href: '.ReadyToInviteAdditional-tab1', data: {toggle: :tab}}
+                      = I18n.t('wizard.modals.presenter_info.got_info')
+                  %li
+                    %a{href: '.ReadyToInviteAdditional-tab2', data: {toggle: :tab}}
+                      = I18n.t('wizard.modals.presenter_info.email')
+                  %li
+                    %a{href: '.ReadyToInviteAdditional-tab3', data: {toggle: :tab}}
+                      = I18n.t('wizard.modals.presenter_info.search')
+            .unobtrusive-flash-container
+
+            .tab-content
+              %section.ReadyToInviteAdditional-tab1.tab-pane.active
+                - user = User.new
+                - user.build_user_account
+                = form_for(user, as: :presenter, url: '#', method: :post, remote: true,
+                    html: {class: 'form_V2 BAP-formWrapp', autocomplete: :off, id: :savePresenterData}) do |f|
+                  .row
+                    .col-md-12
+                      .fields-section.mb50
+                        .ProfileImageAndCoverImage-wrapp
+                          %label.labelTitle
+                            Profile & Cover Image
+                          %a.ProfileImage-change.presenter_logo{data: {'hover-text': 'Add Image', backdrop: :static,
+                              keyboard: false, target: '#presenterLogoModal', toggle: :modal},
+                              style: "background-image: url('#{user.medium_avatar_url}')"}
+                          %a.CoverImage-demo.presenter_cover{data: {'hover-text': 'Add Cover', backdrop: :static,
+                              keyboard: false, target: '#presenterCoverModal', toggle: :modal}}
+                        .input-block.required.state-clear
+                          = f.label :first_name
+                          = f.text_field :first_name
+                          .errorContainerWrapp
+                        .input-block.required.state-clear
+                          = f.label :last_name
+                          = f.text_field :last_name
+                          .errorContainerWrapp
+                        .input-block.required.state-clear
+                          = f.label :email
+                          = f.email_field :email
+                          .errorContainerWrapp
+                        = fields_for :user_account do |fa|
+                          .input-block.state-clear
+                            = fa.label :tagline, 'Tagline'
+                            = fa.text_field :tagline, class: :tagline, 'max-length': 160
+                            .counter_block{'max-length': 160} 0/160
+                            %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.presenter_info.tagline_tooltip')}
+                            .infoContainerWrapp= I18n.t('forms.info.min_length', count: 8)
+                            .errorContainerWrapp
+                          .input-block.required
+                            = fa.label :bio
+                            = fa.text_area :bio, 'data-autoresize': '', rows: 5, 'max-length': 2000,
+                                placeholder: I18n.t('forms.info.description_placeholder', count: 2000)
+                            .counter_block{'max-length': 2000} 0/2000
+                            %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.presenter_info.bio_tooltip', count: 24)}
+                            .infoContainerWrapp= I18n.t('forms.info.min_length', count: 24)
+                            .errorContainerWrapp
+                          .input-block.required.state-clear
+                            %label.fixed_top Tags
+                            .tag_list_wrapp{style: 'padding-top: 0;'}= fa.text_field :talent_list, class: :tag
+                            .counter_block{'max-length': 20} 0/20
+                            %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.presenter_info.talent_list_tooltip')}
+                            .infoContainerWrapp= I18n.t('forms.info.min_tags_count')
+                            .errorContainerWrapp
+                      .text-right
+                        %button.submitButton.mainButton{type: :button} Save
+
+              %section.ReadyToInviteAdditional-tab2.tab-pane
+                %form#invite_by_email.form_V2{data: {remote: true}}
+                  .input-block.state-clear
+                    %label{for: :invite_email}= I18n.t('wizard.modals.presenter_info.email_placeholder')
+                    %input#invite_email{type: :text, name: :emails}
+                    .errorContainerWrapp
+                  -#%span.icon-help-circled{rel: "tipsy", title: I18n.t('wizard.modals.presenter_info.email_tooltip')}
+                  .text-right
+                    %button.invite.btn.btn-m{type: :submit} Invite
+
+              %section.ReadyToInviteAdditional-tab3.tab-pane
+                %form#searchByName.form_V2{data: {remote: true}}
+                  .input-block.state-clear
+                    %label{for: :query}= I18n.t('wizard.modals.presenter_info.search_placeholder', service_name: Rails.application.credentials.global[:service_name])
+                    %input#query{type: :text}
+                    .errorContainerWrapp
+                  -#%span.icon-help-circled{rel: :tipsy, title: I18n.t('wizard.modals.presenter_info.search_tooltip')}
+                  .text-right
+                    %button.search.btn.btn-m{type: :submit} Search
+                    %button.clear.btn.btn-m.btn-borderred-grey.btn-hover-red{type: :button} Clear
+                .UserImage-wrapp
+                  #searchResults.User-list.clearfix
+
+
+    -# For presenter info
+    #presenterLogoModal.modal.fade
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Upload Logo
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              .upload-area
+                .row
+                  .upload-info
+                    = render partial: 'loading_cover'
+                    %span
+                      = I18n.t('forms.info.drop_image_here')
+                      %input#presenter-logo.inputfile{name: 'presenter-logo', type: :file}
+                      %label{for: 'presenter-logo'}= I18n.t('forms.info.select_file')
+                      %div
+                        %small= I18n.t('forms.info.image_upload_tip', type: 'avatar or logo')
+                      .validationParam
+                        min image sizes:
+                        %br
+                        height: 256px
+                        %br
+                        width: 256px
+              .loudThumbnailsList
+              .crop-container
+
+
+    #presenterCoverModal.modal.fade
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Upload Cover
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              .upload-area
+                .row
+                  .upload-info
+                    = render partial: 'loading_cover'
+                    %span
+                      = I18n.t('forms.info.drop_image_here')
+                      %input#presenter-cover.inputfile{name: 'presenter-cover', type: :file}
+                      %label{for: 'presenter-cover'}= I18n.t('forms.info.select_file')
+                      %div
+                        %small= I18n.t('forms.info.image_upload_tip', type: 'cover')
+                      .validationParam
+                        min image sizes:
+                        %br
+                        height: 300px
+                        %br
+                        width: 600px
+                        %br
+                        (recommended 2560x1440px)
+              .loudThumbnailsList
+              .crop-container
+
+
+  #user_account_modals
+    #userAccountModal.modal.fade
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              = I18n.t('wizard.modals.user_info.title')
+            %section
+              = form_for(user_account, as: 'user[user_account_attributes]', url: '#', remote: true, html: {class: 'form_V2 BAP-formWrapp mb20', autocomplete: :off, id: :user_account}) do |f|
+                .row
+                  .col-md-12
+                    .ProfileImageAndCoverImage-wrapp
+                      %label.labelTitle Profile & Cover Image
+                      %a.ProfileImage-change.user_logo{data: {'hover-text': 'Add Image', backdrop: :static,
+                         keyboard: false, toggle: :modal, target: '#userLogoModal'},
+                         style: "background-image: url('#{@user.medium_avatar_url}')"}
+                      %a.CoverImage-demo.user_cover{data: {'hover-text': "#{user_account.bg_image.present? ? 'Change' : 'Add'} Image",
+                         target: '#userCoverModal', toggle: :modal, backdrop: :static, keyboard: false},
+                         style: user_account.bg_image.present? ? "background-image: url('#{user_account.bg_image_url}')" : ''}
+
+                    .input-block{class: user_account.tagline.present? ? 'valid' : 'state-clear'}
+                      = f.label :tagline, for: :my_account_tagline
+                      = f.text_field :tagline, class: :tagline, 'max-length': 160, id: :my_account_tagline
+                      .counter_block{'max-length': 160} 0/160
+                      %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.user_info.tagline_tooltip')}
+                      .infoContainerWrapp= I18n.t('forms.info.min_length', count: 8)
+                      .errorContainerWrapp
+
+                    .input-block.required{class: user_account.bio.present? ? 'valid' : ''}
+                      = f.label :bio
+                      = f.text_area :bio, 'data-autoresize': '', rows: 5, 'max-length': 2000,
+                          placeholder: I18n.t('forms.info.description_placeholder', count: 2000)
+                      .counter_block{'max-length': 2000} 0/2000
+                      %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.user_info.bio_tooltip', count: 24)}
+                      .infoContainerWrapp= I18n.t('forms.info.min_length', count: 24)
+                      .errorContainerWrapp
+
+                    .input-block.required{class: user_account.talent_list.present? ? 'valid' : 'state-clear'}
+                      %label.fixed_top Tags
+                      .tag_list_wrapp
+                        = f.text_field :talent_list, class: :tag, value: user_account.talents.join(','), id: :my_account_talent_list
+                      .counter_block{'max-length': 20} 0/20
+                      %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.user_info.talent_list_tooltip')}
+                      .infoContainerWrapp= I18n.t('forms.info.min_tags_count')
+                      .errorContainerWrapp
+
+                    .row.mt20
+                      .col-md-12.blueTitle
+                        = f.label :available_by_request_for_live_vod, class: 'checkbox choice display-block right-position' do
+                          = f.check_box :available_by_request_for_live_vod, checked: user_account.new_record? ? true : user_account.available_by_request_for_live_vod
+                          %span.display-block= I18n.t('wizard.modals.user_info.available_on_demand')
+                        %hr.margin-top-0{style: 'width: 100%'}
+                        .errorContainerWrapp
+
+              .text-right
+                %button.submitButton.mainButton Save
+
+
+    -# For account info
+    #userLogoModal.modal.fade
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Upload Logo
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              .upload-area
+                .row
+                  .upload-info
+                    = render partial: 'loading_cover'
+                    %span
+                      = I18n.t('forms.info.drop_image_here')
+                      %input#user-logo.inputfile{name: 'user-logo', type: :file}
+                      %label{for: 'user-logo'}= I18n.t('forms.info.select_file')
+                      %div
+                        %small= I18n.t('forms.info.image_upload_tip', type: 'avatar or logo')
+                      .validationParam
+                        min image sizes:
+                        %br
+                        height: 256px
+                        %br
+                        width: 256px
+              .loudThumbnailsList
+              .crop-container
+
+
+    #userCoverModal.modal.fade
+      .modal-dialog
+        .modal-content
+          = render partial: 'close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Upload Cover
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              .upload-area
+                .row
+                  .upload-info
+                    = render partial: 'loading_cover'
+                    %span
+                      = I18n.t('forms.info.drop_image_here')
+                      %input#user-cover.inputfile{name: 'user-cover', type: :file}
+                      %label{for: 'user-cover'}= I18n.t('forms.info.select_file')
+                      %div
+                        %small= I18n.t('forms.info.image_upload_tip', type: 'cover')
+                      .validationParam
+                        min image sizes:
+                        %br
+                        height: 300px
+                        %br
+                        width: 600px
+                        %br
+                        (recommended 2560x1440px)
+              .loudThumbnailsList
+              .crop-container

@@ -1,0 +1,66 @@
+<div class="clearfix ProductsList-title">
+    {{!-- PAGINATION (WILL COME LATER) }}
+    <div class="pull-right hidden">
+        <div class="display-inline-block vertical-midle">
+            View Results
+            <select class="btn btn-borderred-grey">
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+            </select>
+        </div>
+        <div class="margin-left-20 display-inline-block vertical-midle">
+            Sort by
+            <select class="btn btn-borderred-grey">
+                <option>newest</option>
+                <option>latest</option>
+                <option>i chtoto isho</option>
+            </select>
+        </div>
+    </div>
+    {{! PAGINATION --}}
+
+    Product Gallery
+</div>
+<div class="ProductsList">
+    {{#each lists as |list|}}
+        <div class="list-item {{#if (and (not list.selected) (eq ../type 'session'))}}hidden{{/if}}"
+             id="list_{{list.id}}">
+
+            {{#each list.products as |product|}}
+                <div class="ProductsList-item">
+                    <a class="product-img-wrapp" data-id="{{product.id}}" target="_blank"
+                       onclick="window.open('{{product.url}}', '{{product.title}}', 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;"
+                       href="{{product.url}}">
+                        <div class="product-img" style="background-image: url('{{product.image_url}}')"></div>
+                    </a>
+                    <div class="product-details-wrapp">
+                        <div class="product-name text-color-Darkgrey fs-14">
+                            {{product.title}}
+                        </div>
+                        <div class="product-details">
+                            <div class="text-ellipsis fs-12 text-color-LightGrey">
+                                {{product.specifications}}
+                            </div>
+                        </div>
+                        <div class="product-details-footer clearfix">
+                            <a class=" text-ellipsis fs-12"
+                               target="_blank"
+                               onclick="window.open('{{product.url}}', '{{product.title}}', 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;"
+                               href="{{product.url}}">{{product.url}}</a>
+                            {{#if (gt product.price_cents 0)}}
+                                <div class="pull-right text-right">
+                                    <a class="btn btn-s text-center text-ellipsis"
+                                       target="_blank"
+                                       onclick="window.open('{{product.url}}', '{{product.title}}', 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;"
+                                       href="{{product.url}}">{{product.price}}</a>
+                                </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{/each}}
+    {{!-- WILL BE IMPLEMENTED LATER }}<div class="clearfix margin-top-20 margin-bottom-30 hidden"><div class="text-center"><a class="btn bnt-m" href="#">show more</a></div><hr/></div>{{! TROLOLO --}}
+</div>

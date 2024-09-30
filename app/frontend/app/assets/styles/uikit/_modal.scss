@@ -1,0 +1,183 @@
+.MK2-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20001;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  // height: 100vh;
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  &__dialog {
+    position: relative;
+    min-width: 20rem;
+    max-width: 94%;
+    background-color: var(--bg__content);
+    border-radius: 1rem;
+    margin: 8rem auto 8rem;
+    padding: 4.2rem 3rem 3rem 3rem; //if change top padding, change it in .MK2-modal__header img.default
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 2;
+    overflow: auto;
+    @include media(reverso-p-tablet) {
+      width: fit-content;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    color: var(--tp__icons);
+    top: 1rem;
+    right: 1rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    font-size: 1.4rem;
+    @include transition200();
+
+    &:hover {
+      transform: scale(1.2);
+      @include transition200();
+    }
+  }
+
+  &__header {
+    @include flex(flex, flex-start, space-between);
+    width: 100%;
+
+    .title {
+      color: var(--bg__label);
+      font-weight: bold;
+      margin-top: 0;
+    }
+
+    img {
+      height: 3rem;
+      max-width: 14.5rem;
+      object-fit: contain;
+
+      &.default {
+        margin: -2.3rem auto 4rem;// compinsation for .MK2-modal__dialog top padding
+      }
+    }
+  }
+
+  &__body {
+    padding: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+    width: 100%;
+
+    .modalInputs {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 3rem;
+
+      label {
+        padding-bottom: 1rem;
+        line-height: 1.3rem;
+        margin-bottom: 0;
+      }
+
+      input {
+        padding: 0;
+        font-size: 1.5rem;
+      }
+
+      .error {
+        font-size: 1.4rem;
+        color: var(--tp__inputs__validation);
+      }
+    }
+  }
+
+  &__footer {
+    //padding: 1rem 0;
+    position: relative;
+  }
+
+  .bodyWrapper {
+    padding: 2rem;
+    background: rgba(9, 95, 115, 0.05);
+    border: 1px solid rgba(9, 95, 115, 0.2);
+    border-radius: 1rem;
+
+    &.edit {
+      margin-bottom: 2rem;
+      padding: 2rem;
+      width: 100%;
+      background: rgba(9, 95, 115, 0.05);
+      border: 1px solid rgba(9, 95, 115, 0.2);
+      border-radius: 1rem;
+    }
+
+    &.remove {
+      background: #fff1f1;
+      padding: 2rem;
+      border-radius: 1rem;
+      border-color: #df6b6b;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .modal-buttons {
+    @include flex(flex, false, flex-end);
+    position: absolute;
+    top: 4rem;
+    right: 0;
+
+    .btn {
+      width: 10rem;
+
+      &:last-child {
+        margin-left: 1.5rem;
+      }
+    }
+
+    .btn[disabled] {
+      color: white !important;
+      pointer-events: all !important;
+    }
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  opacity: 1;
+  transition: opacity 0.25s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.dialogFade-enter-active,
+.dialogFade-leave-active {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: all 0.3s;
+}
+
+.dialogFade-enter,
+.dialogFade-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}

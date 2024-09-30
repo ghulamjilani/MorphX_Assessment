@@ -1,0 +1,10 @@
+.info-tabs
+  %ul.nav.nav-tabs.nav-justified
+    - if current_user&.current_organization&.active_subscription_or_split_revenue?
+      %li{class: has_active_class(sessions_presents_dashboard_paths)}
+        %a{href: sessions_presents_dashboard_path, remote: true} Present
+    %li{class: has_active_class(sessions_participates_dashboard_paths)}
+      %a{href: sessions_participates_dashboard_path, remote: true} Participate
+    - if display_co_present_tab?
+      %li{class: active_link_to_class(sessions_co_presents_dashboard_path)}
+        %a{href: sessions_co_presents_dashboard_path, remote: true} Co-present

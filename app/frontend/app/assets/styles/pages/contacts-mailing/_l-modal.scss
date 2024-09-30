@@ -1,0 +1,78 @@
+.CM__Lmodal {
+  .MK2-modal {
+    &__dialog {
+      overflow: visible;
+      width: 93rem;
+      margin: 8rem auto 2rem;
+      padding: 2rem 3rem 3rem;
+    }
+
+    &__body {
+      overflow: visible;
+      padding: 0;
+    }
+  }
+
+  &__form {
+    &__title {
+      color: var(--tp__h3);
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    &__select {
+      .dropdownMK2__menu {
+        width: 100%;
+        left: 0;
+        top: 6.5rem;
+      }
+    }
+  }
+
+  &__buttons {
+    width: 93rem;
+    max-width: 94%;
+    margin: 0 auto;
+    @include flex(flex, center, flex-end);
+
+    button {
+      margin-left: 2rem;
+    }
+
+    &__wrapper {
+      z-index: 1;
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  #emoji-palette {
+    left: 50% !important;
+    transform: translateX(-50%);
+    width: 25rem;
+  }
+
+  .quillWrapper {
+    .ql-snow {
+      .ql-stroke {
+        stroke: var(--tp__icons);
+      }
+
+      .ql-fill {
+        fill: var(--tp__icons);
+      }
+
+      .ql-picker-label {
+        &::before {
+          color: var(--tp__icons);
+        }
+      }
+    }
+  }
+
+  .ql-editor.ql-blank {
+    &::before {
+      color: var(--tp__inputs__active);
+    }
+  }
+}

@@ -1,0 +1,8 @@
+en:
+  frontend:
+    app:
+      components:
+        channel:
+          line_tile:
+            documents: "%{count} documents"
+            add_document: Add Document

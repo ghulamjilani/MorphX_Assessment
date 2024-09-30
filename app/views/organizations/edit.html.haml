@@ -1,0 +1,274 @@
+- content_for(:additional_meta_tags) do
+  -#<!-- Core build with no theme, formatting, non-essential modules -->
+  %script{src: "//cdn.quilljs.com/1.3.6/quill.js"}
+  %link{href: "//cdn.quilljs.com/1.3.6/quill.snow.css", rel: "stylesheet"}
+- content_for(:extra_body_classes, 'wizard company_form_page header-top')
+- content_for(:page_title, @title)
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9.main-content-section
+    .main-content
+      %section#edit_company.CRsession.clearfix
+        .CRsessionWrapper.clearfix
+          .sectionBlock_wrapp
+            .company_icon_block.avatar_block{title: 'Company icon identifies the company.'}
+              .LoadingCover.profile_next_cover{style: 'display:none'}
+              #company_logo.avatar.border-radius-0{style: "background-image:url('#{@organization.logo_url}')", logoID: @organization.logo.try(:id)}
+              = link_to '#company_logo_modal', data: {toggle: :modal} do
+                .LoadingCover.profile_next_cover{style: 'display:none'}
+                %i.VideoClientIcon-pencilF
+
+            - form_url = @organization.persisted? ? organization_path(@organization.id) : organizations_path
+            - form_method = @organization.persisted? ? :put : :post
+            = form_for @organization, url: form_url, method: form_method, html: {id: :company_form, class: 'form_V2 company_form', enctype: 'multipart/form-data'} do |f|
+              .formWrapp
+                .LoadingCover.profile_next_cover{style:'display:none'}
+                  .spinnerSlider
+                    .bounceS1
+                    .bounceS2
+                    .bounceS3
+                = f.hidden_field :id
+                %section.sectionBlock
+                  .input-block.required{class: ('state-clear' if @organization.name.blank?)}
+                    = f.label :name, 'Name'
+                    = f.text_field :name
+                    .errorContainerWrapp
+                  .input-block{class: ('state-clear' if @organization.website_url.blank?)}
+                    = f.label :website_url, 'Website URL'
+                    = f.text_field :website_url
+                    .errorContainerWrapp
+                  .input-block.margin-bottom-10{class: ('state-clear' if @organization.description.blank?)}
+                    %span.about.fs__16 About
+                    = f.hidden_field :description
+                    #descriptionToolbar
+                      %span.ql-formats
+                        %button.ql-bold
+                        %button.ql-italic
+                      %span.ql-formats
+                        %button.ql-list{value: :ordered}
+                        %button.ql-list{value: :bullet}
+                      %span.ql-formats
+                        %button.ql-link
+                    #descriptionEditor
+                      = raw(sanitize(@organization.description.to_s.html_safe))
+                %section.sectionBlock
+                  .row
+                    .col-xs-12.text-color-Darkgrey.margin-bottom-10
+                      Cover
+                  .row
+                    .col-xs-12.ChannelCover_wrapp.padding-bottom-10
+                      #company_cover.ChannelCover{style: "background-image: url(#{organization_cover_url(@organization)})", coverID: @organization.cover.try(:id)}
+                        = link_to (@organization.cover.try(:id) ? 'Edit' : 'Upload'), '#company_cover_modal', data: {toggle: :modal}, class:'text-uppercase padding-left-20 padding-right-20'
+                %section.sectionBlock
+                  .input-block{class: ('state-clear' if @organization.embed_domains.blank?)}
+                    -# = f.label :embed_domains, 'Embed Domains (eg: https://domain1.com https://domain2.com)'
+                    = f.label :embed_domains, 'Allowed domains for Embed placement (leave empty if no restrictions)'
+                    = f.text_field :embed_domains
+                    .errorContainerWrapp
+                %section.sectionBlock
+                  %div
+                    %label.checkbox.choice
+                      = f.label :multiroom_status, class: 'text-color-Blue checkbox choice' do
+                        - if can?(:manage_multiroom_by_business_plan, @organization) && can?(:multiroom_config, @organization)
+                          = f.check_box :multiroom_status, { checked: @organization.multiroom_enabled? }, 'default', 'disabled'
+                          %span MultiRoom Functionality
+                        - else
+                          = f.check_box '', checked: false, readonly: true, disabled: true
+                          %span MultiRoom Functionality
+                %section.sectionBlock
+                  %div
+                    .input-block
+                      %label.checkbox.checkbox-swith
+                        = check_box_tag('stop_no_stream_sessions', 'on', false, id: 'stop_no_stream_sessions_checkbox', style: 'display:none;', class: 'checkbox checkbox-swith')
+                        %span
+                          = I18n.t('models.organization.attributes.stop_no_stream_sessions')
+                    #stopNoStreamSessions.input-block.required.hidden
+                      = label_tag = I18n.t('models.organization.attributes.time', time_min: 5, time_max: 30)
+                      = f.text_field :stop_no_stream_sessions, id: 'stop_no_stream_sessions_text',  oninput: "this.value = this.value.replace(/[^0-9]*/g, ''); if(this.value != '') {this.value = Math.min(30,Math.max(0,+this.value));}"
+                %section.sectionBlock
+                  #socialLinkListWrapp.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
+                    .panel
+                      .panel-heading.no-padding{:role => "tab"}
+                        %a.socialToggle.d-block.collapsed.col-md-12.text-color-Darkgrey.fs-16.padding-left-0{"aria-controls" => "socialLinkList", "aria-expanded" => "true", "data-parent" => "#socialLinkListWrapp", "data-toggle" => "collapse", :href => "#socialLinkList", :role => "button"}
+                          -#Link and authorize company social media profiles
+                          Link company social media profiles
+                          %i.VideoClientIcon-angle-downF
+                    .panel-collapse{'aria-labelledby': 'headingOne', role: :tabpanel}
+                      #socialLinkList.collapse
+                        .socialList.padding-top-10.padding-bottom-0
+                          = f.fields_for :social_links do |s|
+                            - if s.object.provider == 'facebook'
+                              .socialList-item.clearfix
+                                %div.socialIcon.faceBook
+                                  %i.VideoClientIcon-facebookF
+                                = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+                                = s.hidden_field :provider
+                            - elsif s.object.provider == 'twitter'
+                              .socialList-item.clearfix
+                                %div.socialIcon.twitter
+                                  %i.VideoClientIcon-twitter2
+                                = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+                                = s.hidden_field :provider
+                            - elsif s.object.provider == 'google'
+                              .socialList-item.clearfix
+                                %div.socialIcon.Google
+                                  %i.VideoClientIcon-google
+                                = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+                                = s.hidden_field :provider
+                            - elsif s.object.provider == 'linkedin'
+                              .socialList-item.clearfix
+                                %div.socialIcon.LinkedIn
+                                  %i.VideoClientIcon-linkedinF
+                                = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+                                = s.hidden_field :provider
+                            - elsif s.object.provider == 'instagram'
+                              .socialList-item.clearfix
+                                %div.socialIcon.Instagram
+                                  %i.VideoClientIcon-instagram
+                                = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+                                = s.hidden_field :provider
+                            - elsif s.object.provider == 'youtube'
+                              .socialList-item.clearfix
+                                %div.socialIcon.Youtube
+                                  %i.VideoClientIcon-youtube
+                                = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+                                = s.hidden_field :provider
+                            - elsif s.object.provider == 'telegram'
+                              .socialList-item.clearfix
+                                %div.socialIcon.Telegram
+                                  %i.GlobalIcon-telegram
+                                = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: '/mypage'
+                                = s.hidden_field :provider
+                          -#.socialList-item.clearfix
+                          -#  %a.socialIcon.faceBook{href: '#'}
+                          -#    %i.icon-facebook
+                          -#  %input{type:'text', placeholder:"/mypage"}
+                          -#  %a.btn.btn-s.pull-right.margin-top-5{href:'#'} Link&amp;Authorize
+                          -#.socialList-item.clearfix
+                          -#  %a.socialIcon.Google{href: '#'}
+                          -#    %i.VideoClientIcon-google-plus
+                          -#  %input{type:'text', placeholder:"/mypage", value:'/demo/fffflink'}
+                          -#  %a.btn.btn-s.btn-borderred-grey.pull-right.margin-top-5{href:'#'} UnlinkAccount
+                          -#.socialList-item.clearfix
+                          -#  %a.socialIcon.Instagram{href: '#'}
+                          -#    %i.VideoClientIcon-instagram
+                          -#  %input{type:'text', placeholder:"/mypage"}
+                          -#  %a.btn.btn-s.pull-right.margin-top-5{href:'#'} Link&amp;Authorize
+                          -#.socialList-item.clearfix
+                          -#  %a.socialIcon.LinkedIn{href: '#'}
+                          -#    %i.icon-linkedin
+                          -#  %input{type:'text', placeholder:"/mypage"}
+                          -#  %a.btn.btn-s.pull-right.margin-top-5{href:'#'} Link&amp;Authorize
+                          -#.socialList-item.clearfix
+                          -#  %a.socialIcon.twitter{href: '#'}
+                          -#    %i.icon-twitter
+                          -#  %input{type:'text', placeholder:"/mypage"}
+                          -#  %a.btn.btn-s.pull-right.margin-top-5{href:'#'} Link&amp;Authorize
+                - if ENV['MIND_BODY_API_KEY'] && !@organization.new_record?
+                  %section.sectionBlock.padding-top-10
+                    .row.company__row
+                      %div
+                        MindBodyOnline
+                      %div
+                        %a.btn.btn-m.btn-borderred-grey.pull-right{class: "#", "data-target" => "#addMindBodyModal", "data-toggle" => "modal"}
+                          - if @organization.mind_body_db_site.present?
+                            Re-Connect
+                          - else
+                            Connect
+
+                .clearfix.row
+                  .col-xs-12
+                    = f.submit 'Save', id: :company_save_btn, class: 'btn btn-m pull-right margin-right-15'
+                    = link_to 'Cancel', url_for(:back) || company_dashboard_path, class: 'btn btn-m pull-right btn-grey-solid btn-red-hover margin-right-15'
+            #company_cover_modal.modal.fade{data: {keyboard: false, backdrop: :static}}
+              .modal-dialog
+                .unobtrusive-flash-container
+                .modal-content
+                  = render partial: 'become_presenter_steps/close_modal'
+                  .modal-body
+                    %h4.groupTitle.clearfix
+                      Cover
+                    %section.crop-wrapp
+                      #cover-upload-area.upload-area
+                        .row
+                          .upload-info
+                            .dotsWrapp{class: @organization.cover.try(:id) ? 'hidden' : ''}
+                              .dot1
+                              .dot2
+                              .dot3
+                              .dot4
+                              .dot5
+                              .dot6
+                              .dot7
+                              .dot8
+                            = render partial: 'become_presenter_steps/loading_cover'
+
+                            %span
+                              %input#company_cover_file.inputfile{type: :file}
+                              %label{for: 'company_cover_file'}= I18n.t('forms.info.select_file')
+                              %div.fs-12.hideForMobile
+                                or drag-n-drop your image here
+                      .crop-container
+                      .fs-13.sugSize
+                        %span Suggested size:
+                        970x270 px
+                        %br
+                        We recommend using high resolution image.
+            #company_logo_modal.modal.fade{data: {keyboard: false, backdrop: :static}}
+              .modal-dialog
+                .unobtrusive-flash-container
+                .modal-content
+                  = render partial: 'become_presenter_steps/close_modal'
+                  .modal-body
+                    %h4.groupTitle.clearfix
+                      Company icon
+                    %section.crop-wrapp
+
+                      #logo-upload-area.upload-area
+                        .row
+                          .upload-info.padding-top-80.padding-bottom-80
+                            .dotsWrapp
+                              .dot1
+                              .dot2
+                              .dot3
+                              .dot4
+                              .dot5
+                              .dot6
+                              .dot7
+                              .dot8
+                            = render partial: 'become_presenter_steps/loading_cover'
+                            %span
+                              = file_field_tag :company_logo_file, class: :inputfile, accept: '.jpg,.jpeg,.png,.bmp'
+                              = label_tag :company_logo_file, I18n.t('forms.info.select_file')
+                              .fs-12.hideForMobile or drag-n-drop your image here
+                      .crop-container
+                      .fs-13.sugSize
+                        %span Suggested size:
+                        280x280 px
+                        %br
+                        We recommend using high resolution image.
+                      .loudThumbnailsList
+                    -#.text-right
+                      %button.submitButton.mainButton Save
+
+            - if ENV['MIND_BODY_API_KEY'] && !@organization.new_record?
+              #addMindBodyModal.modal.fade{data: {keyboard: false, backdrop: :static}}
+                #add_mind_body_form.form_V2{data: {action: api_v1_public_organization_mind_body_sites_path(@organization.id), method: 'POST'}}
+                  .modal-dialog
+                    .modal-content
+                      = render partial: 'become_presenter_steps/close_modal'
+                      .modal-body
+                        %section
+                          .unobtrusive-flash-container
+                          .input-block.state-clear.required
+                            %label{for: :site_id} Business ID
+                            %input#site_id{type: :text, name: 'site_id', value: @organization.mind_body_db_site&.remote_id}
+                            .errorContainerWrapp
+                    .text-right.padding-top-10
+                      %input#add_mind_body_submit.btn.btn-m{value: 'Activate'}
+          = content_for(:after_include_javascripts) do
+            :javascript
+              $(document).ready(function() {
+                window.Company.edit({members: []})
+              });

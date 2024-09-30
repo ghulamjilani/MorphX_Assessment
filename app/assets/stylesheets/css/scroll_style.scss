@@ -1,0 +1,24 @@
+@import "../mixin";
+
+
+::-webkit-scrollbar {
+  background-color: #e2e7ea;
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #baccdb;
+  border-radius: 4px;
+  &:hover{
+    background-color: #abbdcc;
+  }
+}
+
+.smallScrolls{
+  &::-webkit-scrollbar, ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+  }
+}

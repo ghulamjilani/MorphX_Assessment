@@ -1,0 +1,115 @@
+.customizationNav {
+  width: 30rem;
+  height: 100vh;
+  padding: 20px;
+  background: var(--bg__main);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999999;
+  border: 1px solid #ccc;
+  // box-shadow: 0 2px 11px #ccc;
+  display: none;
+  overflow: auto;
+}
+
+html.customization-active {
+  padding-left: 30rem;
+
+  .header {
+    width: calc(100% - 30rem) !important;
+    left: 30rem !important;
+  }
+
+  .customizationNav {
+    display: block;
+  }
+
+  h4 {
+    cursor: pointer;
+    // color: ;
+  }
+
+  #theme-select {
+    width: 100%;
+  }
+}
+
+.row-fluid {
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  border: 1px solid var(--border__separator);
+  background: var(--bg__content__secondary);
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,.4);
+
+  .sysparamModal {
+    display: none;
+  }
+
+  // .devCustomization {
+  //   display: none;
+  // }
+}
+
+//html.videoClient{
+//  @include media(desktop){
+//    font-size: 1.3vh;
+//  }
+//  @media all
+//  and (max-width: 991px)
+//  and (orientation: landscape){
+//    font-size: 2vh;
+//  }
+//}
+
+.vue-styleguide {
+  --bg__main: #222222;
+  --bg__secondary: rgba(9, 95, 115, 0.7);
+  --bg__content: #282828;
+  --bg__content__secondary: rgba(9, 95, 115, 0.4);
+  --bg__header: #222222;
+  --bg__label: #095F73;
+  --bg__dropdowns: #404040;
+  --bg__tooltip: #404040;
+  --btn__main: #F23535;
+  --btn__secondary: #E6E6E6;
+  --btn__tetriary: #FFFFFF;
+  --btn__bordered: #FFFFFF;
+  --btn__save: #F23535;
+  --btn__cancel: #FFFFFF;
+  --btn__subscribe: #F23535;
+  --btn__social: rgba(255, 255, 255, 0.3);
+  --tgl__on: #F23535;
+  --tgl__off: #4D4D4D;
+  --tgl__switch__off: #666666;
+  --tgl__disabled: #333333;
+  --tp__h1: #FFFFFF;
+  --tp__h2: #FFFFFF;
+  --tp__h3: #FFFFFF;
+  --tp__main: #FFFFFF;
+  --tp__secondary: #A6A6A6;
+  --tp__links__hover: #F23535;
+  --tp__labels: #6F7073;
+  --tp__inputs: #A6A6A6;
+  --tp__inputs__active: #FFFFFF;
+  --tp__inputs__validation: #FF530D;
+  --tp__active: #F23535;
+  --tp__disabled: #4D4D4D;
+  --tp__icons: #6F7073;
+  --tp__btn__white: #FFFFFF;
+  --tp__btn__dark: #303840;
+  --tp__btn__bordered: #FFFFFF;
+  --tp__btn__bordered__social: #A6A6A6;
+  --sh__main: #282828;
+  --sh__secondary: #282828;
+  --border__content__sections: #095F73;
+  --border__table: #333333;
+  --border__separator: #4C4C4C;
+  --border__form__normal: #4C4C4C;
+  --border__form__active: #666666;
+  --border__form__error: #FF530D;
+  --border__tooltip: #666666;
+  --border__toggle__active: #666666;
+  --border__toggle__disabled: #4C4C4C;
+}

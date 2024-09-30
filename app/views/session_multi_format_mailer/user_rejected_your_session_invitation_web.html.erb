@@ -1,0 +1,4 @@
+<p>
+  <%= @user.public_display_name %> has declined your session invitation to
+  <a href="<%= @session.absolute_path(UTM.build_params({utm_content: @user.utm_content_value})) %>"><%= @session.always_present_title %>"</a>.
+</p>

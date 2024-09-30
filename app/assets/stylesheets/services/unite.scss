@@ -1,0 +1,10 @@
+@import "mixin";
+.unite{
+  .header .LogoWrapp {
+    width: auto!important;
+    #logo-header{
+      width: max-content;
+      vertical-align: baseline;
+    }
+  }
+}

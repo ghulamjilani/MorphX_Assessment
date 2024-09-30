@@ -1,0 +1,10 @@
+%p Dear #{@user.public_display_name},
+%p Hope you were happy with your Free Trial on #{Rails.application.credentials.global[:service_name]}. However, it's finished and the payment has not been made within #{@suspended_days} days after.
+%p Your Trial subscription is deactivated. All content is removed.
+%p Your account and organization configuration still remain active.
+%p You can choose a new Business Plan and purchase another subscription. Welcome back to #{Rails.application.credentials.global[:service_name]}!
+%p
+  If you have any questions, feel free to
+  = link_to 'contact us', support_home_url
+  any time.
+

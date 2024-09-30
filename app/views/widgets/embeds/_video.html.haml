@@ -1,0 +1,6 @@
+#unite_embed.mio_embed{style:'display:block'}
+  #unite_embed_videoWrapp.mio_embed.unite_embed_videoIframeWrapp{style:'display:block'}
+    #unite_embed_video.mio_embed{style:'display:block'}
+      %iframe(src="#{player_widget_url(share_model.id, share_model.class.to_s.downcase)}" data-role="vplayer" frameborder="0" allowfullscreen name="" srcdoc="" allow="encrypted-media")
+
+    = stylesheet_link_tag asset_url('/assets/widgets/template_V.css')

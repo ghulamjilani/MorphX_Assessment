@@ -1,0 +1,98 @@
+.profile-section
+  .technicalPage__label= I18n.t("views.profiles.fields.title")
+
+  - if current_user_never_gave_us_email_that_we_saved? # otherwise Twitter user can't complete registration profile
+    .row
+      .col-md-12.col-sm-12
+        = f.input :email, required: true, wrapper_html: {class: 'custom-input'}, label: I18n.t("views.profiles.fields.email")
+      %div.col-sm-3{style: 'display: none;'}
+        private&nbsp
+        %input.bs-switch{type: :checkbox}
+    - if f.object.unconfirmed_email.present?
+      .row
+        .col-md-12.col-sm-12
+          = f.input :unconfirmed_email, wrapper_html: {class: 'custom-input'}, input_html: { disabled: :disabled }
+          %span
+            = I18n.t("views.profiles.fields.to_change_your_email_address_please_confirm_your_email")
+
+  = f.inputs do
+    = f.input :first_name, required: true, wrapper_html: {class: 'custom-input'}, label: I18n.t("views.profiles.fields.first_name")
+    = f.input :last_name, required: true, wrapper_html: {class: 'custom-input'}, label: I18n.t("views.profiles.fields.last_name")
+    = f.input :display_name, required: true, wrapper_html: {class: 'custom-input'}, label: I18n.t("views.profiles.fields.display_name")
+
+    = f.input :public_display_name_source,
+              as: :radio,
+              label: false,
+              required: false,
+              collection: {content_tag(:span, I18n.t('views.profiles.fields.use_display_name')) => User::PublicDisplayNameSources::DISPLAY_NAME, content_tag(:span, I18n.t('views.profiles.fields.use_full_name')) => User::PublicDisplayNameSources::FULL_NAME},
+              include_blank: false
+
+    = f.input :custom_slug_value, input_html: {value: f.object.slug}, wrapper_html: {class: 'custom-input'}, label: I18n.t("views.profiles.fields.custom_url", url: Rails.application.credentials.global[:service_name])
+    - unless Rails.application.credentials.global[:skip_gender_and_birthdate]
+      .row.fixROW
+        .col-md-12.col-sm-12
+          = f.input :gender,
+                    as: :select,
+                    collection: {'Male' => User::Genders::MALE, 'Female' => User::Genders::FEMALE, 'Private' => User::Genders::HIDDEN},
+                    include_blank: true,
+                    input_html: {style: 'width: 200px', class: 'styled-select' },
+                    wrapper_html: {class: 'custom-input'},
+                    label: I18n.t("views.profiles.fields.gender")
+        %div.col-lg-3.col-sm-3{style: 'display: none;'}
+          private&nbsp
+          %input.bs-switch{type: :checkbox}
+    .row.fixROW
+      .col-md-12.col-sm-12
+        .custom-input.margin-bottom-15
+          %span.form-label
+            %label.control-label= I18n.t("views.profiles.fields.birthdate")
+          %span.form-wrapper
+            .user_birthdate_inputWrapp
+              %input{name: 'profile[birthdate(1i)]', type: :hidden}
+              %input{name: 'profile[birthdate(2i)]', type: :hidden}
+              %input{name: 'profile[birthdate(3i)]', type: :hidden}
+              %input#birthday_date_general.birthday_date{name: 'birthdate', class: 'form-control birthDayInput', type: :text, readonly: true}
+              - profile_birthdate = f.object.birthdate ? f.object.birthdate.strftime("%d %B %Y") : nil
+              - content_for(:after_include_javascripts) do
+                :javascript
+                  jQuery(document).ready(function(){
+                    if(#{profile_birthdate.to_json.html_safe} == null) return;
+                    document.querySelector('#birthday_date_general').value = #{profile_birthdate.to_json.html_safe};
+                    var date;
+                    date = $('#birthday_date_general').datepicker('getDate');
+                    jQuery('[name="profile[birthdate(1i)]"]').val(date.getFullYear());
+                    jQuery('[name="profile[birthdate(2i)]"]').val(date.getMonth() + 1);
+                    jQuery('[name="profile[birthdate(3i)]"]').val(date.getDate());
+                    return $('#birthday_date_general').valid();
+                  });
+      .col-lg-3.col-sm-3{style: 'display: none;'}
+        private&nbsp
+        %input.bs-switch{type: :checkbox}
+
+  = f.semantic_fields_for :user_account do |user_account_form|
+    %div
+      .custom-input.margin-bottom-15.confirmPhone__wrapper
+        %span.form-label
+          %label.control-label= I18n.t("views.profiles.fields.phone_number")
+        %span.form-wrapper.confirmPhone#phoneVerificationViewPlaceholder
+          - _phone_verification_view_value = user_account_form.object.phone ? user_account_form.object.phone.phony_formatted(format: :international) : nil
+          - content_for(:after_include_javascripts) do
+            :javascript
+              jQuery(document).ready(function(){
+                window.view = new PhoneVerificationView({value: #{_phone_verification_view_value.to_json.html_safe}, confirmed_numbers: #{confirmed_phone_numbers(current_user).to_json.html_safe}, el: '#phoneVerificationViewPlaceholder'});
+              });
+
+      %div.col-lg-3.col-sm-3{style: 'display: none;'}
+        private&nbsp
+        %input.bs-switch{type: :checkbox}
+    .clearfix
+      = user_account_form.input :country,
+                as: :country,
+                include_blank: true,
+                required: true,
+                input_html: { id: 'phone-country', required: true, style: 'width: 435px', class: 'styled-select-search styled-select-large', title: I18n.t("views.profiles.fields.field_is_required") },
+                wrapper_html: {class: 'custom-input'},
+                label: I18n.t("views.profiles.fields.country")
+      = user_account_form.input :city, wrapper_html: {class: 'custom-input'}, label: I18n.t("views.profiles.fields.city")
+      = user_account_form.input :country_state, label: I18n.t("views.profiles.fields.state_province"),
+                required: false, wrapper_html: {class: 'custom-input'}

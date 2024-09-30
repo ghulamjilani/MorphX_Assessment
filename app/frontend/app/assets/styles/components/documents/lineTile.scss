@@ -1,0 +1,98 @@
+.DocumentsLineTile {
+  min-height: 9.2rem;
+  margin-top: 1rem;
+  background: var(--bg__content__secondary);
+  box-shadow: 0 .4rem .7rem 0 var(--sh__main);
+  border-radius: 1rem;
+  font-size: 1.2rem;
+
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+
+  &.mark_hidden {
+    opacity: 0.6;
+  }
+
+  .preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 16rem;
+    background-color: var(--bg__hover);
+    border-radius: 1rem 0 0 1rem;
+    color: var(--tp__disabled);
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: .5rem 0;
+    font-size: 1.5rem;
+    color: var(--tp__main);
+
+    .title {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    .description {
+      color: var(--tp__secondary);
+    }
+
+    .bottom {
+      display: flex;
+      gap: 3rem;
+    }
+  }
+
+  .actions {
+    align-self: flex-start;
+    font-size: 1.6rem;
+    padding: .5rem;
+    min-width: 7rem;
+    text-align: end;
+
+    i {
+      padding: .5rem;
+    }
+
+    > * {
+      display: inline-block;
+      cursor: pointer;
+      opacity: 0.05;
+      transition: opacity .3s ease;
+
+      &:last-child {
+        opacity: .7;
+      }
+
+      &.MK2options {
+        opacity: 1;
+      }
+    }
+  }
+
+  &:hover {
+    .actions > * {
+      opacity: .7;
+
+      &:hover {
+        opacity: .9;
+      }
+
+      &.MK2options {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.dashboard_view .actions {
+    min-width: 16rem;
+  }
+}

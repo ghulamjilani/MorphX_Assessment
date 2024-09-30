@@ -1,0 +1,28 @@
+.vertical {
+  &__tile {
+    width: 100%;
+    padding: 1rem 1.5rem 0 0;
+
+    &__presenter {
+      padding-top: 0;
+      width: 100%;
+      background: $client__btn__bgLabel;
+      //.participantsTile__video__speakerPresenter{
+      //  &:before{
+      //    display: none; /* hive border when presenter displayed in layout*/
+      //  }
+      //}
+    }
+
+    @include media(tablet) {
+      width: 20rem;
+      min-width: 20rem;
+      height: 100%;
+      padding: 0 0 0 .4rem;
+    }
+    @include media(phone) {
+      width: 15rem;
+      min-width: 15rem;
+    }
+  }
+}

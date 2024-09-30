@@ -1,0 +1,9 @@
+- content_for(:page_title, 'Send invitation')
+
+= semantic_form_for resource, as: resource_name, url: invitation_path(resource_name), method: :post do |f|
+  = #devise_error_messages1!
+  = f.inputs do
+    - resource.class.invite_key_fields.each do |field| #like :email
+      = f.input field.to_sym, required: true, input_html: {autofocus: true}, wrapper_html: {class: 'custom-input'}
+
+  = f.action :submit, as: :button, label: 'Send an invitation', button_html: { class: 'btn-u' }

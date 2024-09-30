@@ -1,0 +1,6 @@
+en:
+  models:
+    organization:
+      attributes:
+        stop_no_stream_sessions: Stop no stream sessions
+        time: 'Time (%{time_min}-%{time_max})'

@@ -1,0 +1,30 @@
+- # do not rename/change this because some social apps have already that URL in settings
+- # see config/routes.rb
+.sectionBlock.textPage
+  - content_for(:page_title, ContentPages::REFUND_AND_CANCELLATION_POLICY)
+
+  %h4= ContentPages::REFUND_AND_CANCELLATION_POLICY
+
+  %p The deadline to receive a refund is 12 hours before the session.
+  %p Cancellations received prior to the deadline will be eligible for a full refund or system credit, participant’s choice.  System credit may be used to purchase any service on #{Rails.application.credentials.global[:service_name]}.
+  %p Cancellations received after the deadline that are 4 or more hours prior to the session are eligible for a system credit equal to 50% of the purchased price.  System credit may be used to purchase any service on #{Rails.application.credentials.global[:service_name]}.
+  %p Cancellations received less than 4 hours prior to the session will not be eligible for a refund or a system credit.
+  %p Refunds or system credit will not be available for participants who choose not to attend a session, “no-show”.
+  %p Participants will be able to apply for a refund or system credit within 24 hours after the session if not satisfied.
+  %p All refund requests must be made by the attendee or credit card holder.
+  %p Refunds will be credited back to the original payment method used for payment.
+
+  %br
+  %h4 Session Cancellation by Presenter
+  %p The Presenter reserves the right to cancel a session due to low enrollment or other circumstances which would make the session non-viable.
+  %p If Presenter cancels a session, participants will be refunded in full.
+  %p If Presenter cancels a session without valid reason cancellation fees will be assessed against the Presenter’s account. Cancellation fee is calculated for each registered participant at the rate of 10% of session price with a minimum of $1.00 but not to exceed $9.00.
+  %p In the circumstance that the minimum number of participants is not reached, 24 hours prior to the session, and the session is canceled more than 24 hours prior no cancellation fees will apply. If the session is canceled less than 24 hours prior to the session cancellation fees will apply.
+  %p Cancellation fees will apply if minimum participants is reached and the session is canceled.
+  %p Should circumstances arise that result in the postponement of a session, participants will be notified and have the right to either request a full refund or transfer registration to the same session at the  future date.
+  %p These above polices apply to all #{Rails.application.credentials.global[:service_name]} Sessions.
+  %br
+  %h4 Session Cancellation by Co-Presenter
+  %p Co-Presenter cancellations, purchased by the Co-Presenter, received prior to the start of the session will receive a full refund.
+  %p Refunds will not be available if the Co-Presenter is a no-show.
+  %p In the circumstance that the Presenter purchased the session for the Co-Presenter and the Co-Presenter cancels the Presenter will not be charged the Co-Presenter fee.

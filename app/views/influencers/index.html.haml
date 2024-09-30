@@ -1,0 +1,32 @@
+- content_for(:extra_body_classes, "hidePageHeader header-top influencers")
+.influencers_wrapp
+  .baner-b
+    .baner-cover
+      %span
+        Future of the
+        %br
+        Influencer
+        %br
+        Industry
+    .videoWrapp
+      .responsive-video
+        .theoplayer-container.video-js.theoplayer-skin.theo-seekbar-above-controls
+
+
+    -##unite_embed
+    -#  #unite_embed_videoWrapp.unite_embed_videoIframeWrapp
+    -#    #unite_embed_video
+    -#      -#%iframe{:allow => "encrypted-media", :allowfullscreen => "", "data-name" => "video8560", "data-role" => "vplayer", :frameborder => "0", :name => "", :src => "https://unite.live/widgets/8560/video/player", :srcdoc => ""}
+    -#      %iframe{:allow => "encrypted-media", :allowfullscreen => "", "data-name" => "video8560", "data-role" => "vplayer", :frameborder => "0", :name => "", "data-src" => "https://unite.live/widgets/8560/video/player", :srcdoc => ""}
+    -#    %link{:href => "https://assets.unite.live/assets/widgets/template_V.css", :media => "screen", :rel => "stylesheet"}/
+    -#%script{:defer => "defer", :src => "https://assets.unite.live/assets/embeds/channel.js"}
+    -#%script{:defer => "defer", :src => "https://assets.unite.live/assets/embeds/chromcast.js"}
+  .baner-f
+    %a.btn.btn-white.pull-right{href: lets_get_started_button_link[:link]} GET STARTED
+    = I18n.t('views.influencers.index.setup', service_name: Rails.application.credentials.global[:service_name])
+
+
+.imgWrappContainer
+  - (1..175).each do |i|
+    .imgWrapp
+      %img{src: asset_path("influencers/logo/image#{i}.jpg")}

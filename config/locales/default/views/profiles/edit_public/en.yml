@@ -1,0 +1,12 @@
+en:
+  views:
+    profiles:
+      edit_public:
+        page_title: Public Profile
+        title: Personal Links
+        fields:
+          your_url: Custom %{url} URL
+          change_custom_url: Change custom URL
+          bio: About Me
+        save_changes: Save Changes
+        cancel: Cancel

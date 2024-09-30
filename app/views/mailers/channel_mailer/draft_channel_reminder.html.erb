@@ -1,0 +1,11 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  You have draft channel - <%= link_to @channel.title, @channel.absolute_path %>.
+</p>
+
+<p>
+  Are you ready to submit it for review? Please note that it becomes possible to schedule a session only after channel has been approved.
+</p>

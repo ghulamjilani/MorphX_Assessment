@@ -1,0 +1,61 @@
+//body:not(.showVideo) {
+//  .diver_block {
+//    padding-bottom: 4rem;
+//    margin-bottom: 7rem;
+//    position: relative;
+//    z-index: -1;
+//    .diver {
+//      margin: -5rem auto 0;
+//      width: 7.6rem;
+//      height: 8.8rem;
+//      background: url(asset_path("video_client/blue_diver.png")) no-repeat center/contain;
+//      z-index: 19;
+//      position: relative;
+//      display: block;
+//    }
+//    .yyykor-wrapp {
+//      position: absolute;
+//      z-index: 9;
+//      background: red;
+//      width: 10rem;
+//      top: 5rem;
+//      bottom: 0;
+//      left: calc(50% - 5rem);
+//      background: url(asset_path("video_client/rope.png")) repeat-y center top;
+//      @include transition();
+//      animation-name: spin;
+//      animation-duration: 3s;
+//      animation-iteration-count: infinite;
+//      animation-timing-function: ease-in-out;
+//      animation-direction: alternate;
+//    }
+//    .yyykor {
+//      position: absolute;
+//      bottom: -4.4rem;
+//      left: calc(50% - 2.8rem);
+//      width: 5.8rem;
+//      height: 6.3rem;
+//      background: url(asset_path("video_client/anchor.png")) no-repeat top/contain;
+//    }
+//    &.DRpos1 {
+//
+//    }
+//  }
+//
+//  @-webkit-keyframes spin {
+//    0% {
+//      -webkit-transform: rotate(-4deg);
+//    }
+//    100% {
+//      -webkit-transform: rotate(4deg);
+//    }
+//  }
+//  @keyframes spin {
+//    0% {
+//      transform: rotate(-4deg);
+//    }
+//    100% {
+//      transform: rotate(4deg);
+//    }
+//  }
+//}

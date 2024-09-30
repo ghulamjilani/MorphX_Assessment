@@ -1,0 +1,8 @@
+%section.tile-cake.tile-cake-Creators{id: "creator_tile_#{user.id}", class: (defined?(custom_class) ? custom_class : '' )}
+  .tile-img
+    %a.tile-imgContainer.owl-lazy.display-block{href: user.relative_path, 'data-src': user.large_avatar_url}
+    %a.CreatorsName.text-ellipsis.display-block{href: user.relative_path}= user.always_present_title
+    -#.text-center
+      %a.substrate{href: user.relative_path}
+      .text-center
+        = vanilla_follow_link(user, "btn btn-s margin-top-5 margin-bottom-5 user-subscribe-#{user.id} %>", 'z-index: 2;')

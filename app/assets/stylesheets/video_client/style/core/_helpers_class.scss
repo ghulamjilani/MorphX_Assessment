@@ -1,0 +1,156 @@
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+
+.d-block {
+  display: block !important;
+}
+.d-inline-block {
+  display: inline-block !important;
+}
+.d-inline {
+  display: inline !important;
+}
+.hide, .hidden{
+  display: none !important;
+}
+.vertical-midle{
+  vertical-align: middle !important;
+}
+.vertical-sub{
+  vertical-align: sub !important;
+}
+.vertical-top{
+  vertical-align: top !important;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+.overflow-hidden{
+  overflow: hidden !important;
+}
+
+.clearfix{
+  @include clearfix();
+}
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.text-left{
+  text-align: left;
+}
+$column: 5;
+$length: length(5);
+
+.text-color-white{
+  color: $video-volor-white;
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 0.1rem;
+  margin: -0.1rem;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 0.1rem;
+  &.focusable:active, &.focusable:focus {
+    /* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+    clip: auto;
+    height: auto;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+.font-bold{
+  font-weight: bold !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.full_size{
+  width: 100%;
+  height: 100%;
+}
+.full-width{
+  width: 100%;
+}
+.full-height{
+  height: 100%;
+}
+.half-width{
+  width: 50%;
+}
+.parent-forVH-align {
+  position: relative;
+}
+.child-forVH-align {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.headerHeight{
+  height: $header-height;
+}
+.headerWidth{
+  width: $header-height;
+}
+.rotate180{
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+.bg_transperant{
+  background: transparent !important;
+}
+.on, [class$="-on"], [class$="-on "]{
+  color: $siteColorMain !important;
+  i{
+    &:after{
+      display: none;
+    }
+  }
+}
+.off, [class$="-off"], [class$="-off "]{
+  color: $video-volor-red !important;
+  i{
+    position: relative;
+    &:after{
+      border-bottom: 1px solid $video-volor-red;
+      bottom: 35%;
+      content: "";
+      height: 100%;
+      left: -55%;
+      position: absolute;
+      transform: rotate(-35deg);
+      width: 150%;
+      display: block;
+    }
+  }
+}
+.load{
+
+}
+@include generate-fontSize();
+@include generate-widt();
+
+
+@include generate-margin-bottom();
+@include generate-margin-right();
+@include generate-margin-top();
+@include generate-padding-bottom();
+@include generate-padding-top();
+@include generate-padding-left();
+@include generate-padding-right();
+
+

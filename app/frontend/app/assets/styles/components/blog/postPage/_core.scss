@@ -1,0 +1,140 @@
+.postPage {
+  &__navigation {
+    padding: 3rem 0;
+    @include flex(flex, center, space-between);
+    @include media(tablet) {
+      padding: 3rem 0 1.5rem;
+    }
+    @include media(phone) {
+      @include flex(flex, flex-start, space-between);
+    }
+
+    .managePost__header__newPost {
+      margin-left: 2rem;
+      margin-right: 0;
+    }
+
+    &__next {
+      @include media(phone) {
+        margin-bottom: 2rem;
+      }
+    }
+
+    &__left {
+      @include media(phone) {
+        @include flex(flex, flex-end, false);
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__post {
+    padding: 3rem 0;
+    @include media(tablet) {
+      padding: 3rem;
+      background: var(--bg__content);
+      margin-top: 1.5rem;
+      border-radius: 1rem;
+    }
+    @include media(phone) {
+      padding: 3rem 1.5rem 1.5rem;
+    }
+  }
+}
+
+pre.ql-syntax {
+  background-color: var(--bg__content__secondary) !important;
+  color: var(--tp__main) !important;
+  font-size: 1.6rem;
+}
+
+.PostPage {
+  .newPost__info__checkboxWrapper .draft {
+    color: #fff;
+  }
+
+  .cardMK2__post__body__description__postPage {
+    p {
+      font-size: 1.6rem;
+      margin-bottom: 1.6rem;
+    }
+
+    ol, ul {
+      font-size: 1.6rem;
+    }
+
+    * {
+      line-height: 1.625;
+    }
+  }
+
+  #post-page {
+    max-width: 80rem;
+  }
+
+  .linkPreview.NoImg {
+    padding: 0;
+
+    .linkPreview__image {
+      min-width: unset;
+      width: 0;
+      @include media(phone) {
+        padding-top: 0;
+      }
+    }
+
+    .linkPreview__text {
+      width: 100%;
+    }
+  }
+}
+
+@media print {
+  body.PostPage {
+    .cardMK2__post__body__title, .cardMK2__post__body__description, .linkPreview__text {
+      *, *:before, *:after, p:first-line, div:first-line, blockquote:first-line, li:first-line {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+    }
+
+    .header__container, .footer, .header__headerFix,
+    .postPage__navigation, .cardMK2__post__body__header,
+    .cardMK2__post__body__options,
+    .cardMK2__post__comments,
+    .cardMK2__post__body__tags,
+    .row-fluid, .linkPreview,
+    .chatGroup, .morphx__embed, .mio_embed, iframe, .embed__innerInsert {
+      display: none !important;
+    }
+
+    a {
+      &:before, &:after, &:first-letter {
+        color: var(--tp__active) !important;
+      }
+    }
+
+    blockquote span {
+      &:before, &:after, &:first-line {
+        color: #000 !important;
+      }
+
+      color: #000 !important;
+    }
+
+    .postPage__wrapper {
+      margin-top: 0 !important;
+    }
+
+    .postPage__post, .postPage__navigation {
+      padding: 0 !important;
+    }
+
+    .cardMK2__post__imgWrapper__image, .linkPreview__image {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+}

@@ -1,0 +1,108 @@
+en:
+  assets:
+    javascripts:
+      templates:
+        sessions:
+          form:
+            fields:
+              new_stream: new stream
+              use_template: use template
+              edit: Edit
+              new: New
+              session: Session
+              update: Update
+              go_live : Go Live
+              schedule_live_stream: Schedule live stream
+              storage_is: Storage is %{num}% full.
+              available_storage: Available storage %{used}GB / %{total}GB
+              expand_storage: Expand Storage
+              use_previous_configured_session: Use previous configured session
+              default_template: Default Template
+              min: Min
+              main_info: Main Info
+              channel: Channel
+              host: Host
+              session_title: Session Title
+              streaming_platform: Streaming Platform
+              link_account: Link account
+              participants: Participants
+              viewers_are_not_supported_interactive_mode_only: Viewers are not supported. Interactive mode only allowed with ZOOM streaming platform.
+              view_only: View only
+              set_price: Set Price
+              price_breakdown: Price breakdown
+              session_price: Session Price
+              your_earnings: Your Earnings
+              interactive: Interactive
+              no_of_slots: No. of slots
+              free: Free
+              only_ppv: Only PPV
+              only_subscribers: Only Subscribers
+              invite: Invite
+              viewers: Viewers
+              additional_info: Additional Info
+              description: Description
+              instructions: Instructions
+              thumbnail: Thumbnail
+              change: Change
+              pre_roll: Pre-roll
+              video_settings: Video Settings
+              record: Record
+              interactive_replay_layout: Interactive Replay Layout
+              grid: Grid
+              video: Video
+              audio: Audio
+              all_participants: all participants
+              presenter_focus: presenter focus
+              presenter_only: presenter only
+              chat: Chat
+              chat_enabled_zoom_platform: Chat is always enabled with ZOOM streaming platform.
+              public: Public
+              private: Private
+              privacy: Privacy
+              age_restriction: Age restriction
+              sensitive_adult: Contains sensitive or adult content
+              stream_settings: Stream Settings
+              settings_zoom_platform: Stream Settings are not available with ZOOM streaming platform.
+              remember: Remember
+              start: Start
+              duration: Duration
+              when_going_live: When are you going live?
+              now: Now
+              later: Later
+              date: Date
+              start_time: Start Time
+              preparation_time: Preparation time
+              minutes: Minutes
+              recurrence: Recurrence
+              repeat_on: Repeat on
+              sun: Sun
+              mon: Mon
+              tue: Tue
+              wed: Wed
+              thu: Thu
+              fri: Fri
+              sat: Sat
+              ends_after: Ends After
+              occurence: occurence
+              ends_on: Ends On
+              products: Products
+              livestream: Livestream
+              replays: Replays
+              select_product_list: Select Product List
+              contributions: Contributions
+              donations: Donations
+              polls: Polls
+              existing_poll: Existing Poll
+              question: Question
+              answer: Answer
+              save_template: Save as a template
+              please_select: Please select
+              camera: Camera
+              mobile_app: Mobile App
+              something_else: Something Else
+              room: Room
+              ip_cam: IP Cam
+              encoder: Encoder
+              link_zoom_account: Link Zoom Account
+              need_paid_use_zoom: You need to have a paid account in order to be able to use Zoom for your livestream.
+              close: close

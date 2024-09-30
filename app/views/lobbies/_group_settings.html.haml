@@ -1,0 +1,68 @@
+.btnMasivGroup.mb10
+  %a{href: @room.video_disabled? ? start_all_videos_lobby_path(@room.id) : stop_all_videos_lobby_path(@room.id), data: {remote: true, method: 'POST'}, class: @room.video_disabled? ? "groupSettings-Vid-on" : "groupSettings-Vid-off",  rel:'css_tooltip', css_tooltip_text:@room.video_disabled? ? 'Enable Camera' : 'Disable Camera'}
+    %i.VideoClientIcon-video
+  -#%a{href:'#'}
+  -#  %i.VideoClientIcon-sound
+  %a{href: @room.mic_disabled? ? unmute_all_lobby_path(@room.id) : mute_all_lobby_path(@room.id), data: {remote: true, method: 'POST'}, class: @room.mic_disabled? ? "groupSettings-Vol-on" : "groupSettings-Vol-off" ,  rel:'css_tooltip', css_tooltip_text:@room.mic_disabled? ? 'Enable Microphone' : 'Disable Microphone'}
+    %i.VideoClientIcon-microphone
+  %a{href: @room.backstage? ? disable_all_backstage_lobby_path(@room.id) : enable_all_backstage_lobby_path(@room.id), data: {remote: true, method: 'POST'}, class: @room.backstage? ? "groupSettings-Backstage-on" : "groupSettings-Backstage-off" ,  rel:'css_tooltip', css_tooltip_text:@room.backstage? ? 'Enable Green-room' : 'Disable Green-room'}
+    %i.VideoClientIcon-stanchios
+  %a.btn.groupSettings-kick-on.disabled.ensure-link-style{style: 'visibility: hidden;'}
+    %i.VideoClientIcon-q4
+.sectionTitle
+  Manage Participants
+.styledScroll
+  - (@co_presenter_users + @pusers_with_questions + @pusers_without_questions).each do |user|
+  - member = @room_members.find_by(abstract_user: user)
+    .userWrapp
+      %a.d-block.text-color-white.clearfix.item{href:'#', onclick:'ManageAllParticipants_dropDownOpen(this)'}
+        .row
+          .col-md-2.pr0
+            .Avatar.small{style: "background:url(#{user.avatar_url})"}
+          .col-md-10.pl0.pr40
+            %i.VideoClientIcon-navigate-up-arrow
+            %i.VideoClientIcon-navigate-down-arrow
+            = [user.public_display_name, user.email].find(&:present?)
+      .btnMasivGroup
+        = link_to start_video_lobby_path(@room.id, member_id: user.id), class: " groupSettings-Vid-on #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(member.try(:video_disabled)),  rel:"css_tooltip", css_tooltip_text:"Enable Camera" do
+          %i.VideoClientIcon-video
+        = link_to stop_video_lobby_path(@room.id, member_id: user.id), class: " groupSettings-Vid-off #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(!member.try(:video_disabled)),  rel:"css_tooltip", css_tooltip_text:"Disable Camera" do
+          %i.VideoClientIcon-video
+
+        = link_to unmute_lobby_path(@room.id, member_id: user.id), class: "  groupSettings-Vol-on #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(member.try(:mic_disabled)),  rel:"css_tooltip", css_tooltip_text:"Enable Microphone" do
+          %i.VideoClientIcon-microphone
+        = link_to mute_lobby_path(@room.id, member_id: user.id), class: "  groupSettings-Vol-off #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(!member.try(:mic_disabled)),  rel:"css_tooltip", css_tooltip_text:"Disable Microphone" do
+          %i.VideoClientIcon-microphone
+
+        = link_to disable_backstage_lobby_path(@room.id, member_id: user.id), class: " groupSettings-Backstage-on #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(member.try(:backstage)), rel:"css_tooltip", css_tooltip_text:"Enable Green-room" do
+          %i.VideoClientIcon-stanchios
+        = link_to enable_backstage_lobby_path(@room.id, member_id: user.id), class: " groupSettings-Backstage-off #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(!member.try(:backstage)), rel:"css_tooltip", css_tooltip_text:"Disable Green-room" do
+          %i.VideoClientIcon-stanchios
+
+        = link_to "#", class: "pull-right ban_kick #{banned?(user) ? 'groupSettings-kick-off' : 'groupSettings-kick-on'} #{disable_if_banned_or_not_joined(user)}", id: "inCallButtonBan", data: {url: ban_kick_lobby_path(@room.id, banned_id: user.id)}, rel:"css_tooltip", css_tooltip_text:"Ban user" do
+          %i.VideoClientIcon-q4
+
+        = link_to answer_lobby_path(@room.id, member_id: user.id), class: " answer-the-question-user #{active_if_has_question(user)} #{disable_if_banned_or_not_joined(user)} #{disabled_if_no_question(user)}", data: {remote: true, method: "POST"}, rel:"css_tooltip", css_tooltip_text:"Ask a Question" do
+          %i.VideoClientIcon-q5
+
+-#- if @sources.present?
+-#  %li.users-group
+-#    %div.groupSettings-Name
+-#      Sources
+-#
+-#- @sources.each do |source|
+-#  - member = @room_members.find_by(source_id: source.id)
+-#  - user = @room.presenter_user
+-#  %li
+-#    %div.groupSettings-Name
+-#      = source.name
+-#    %div.groupSettings-Nav
+-#      = link_to start_video_lobby_path(@room.id, member_id: user.id, source_id: source.id), class: "btn groupSettings-Vid-on #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(member.try(:video_disabled)) do
+-#        %i.icon-eye
+-#      = link_to stop_video_lobby_path(@room.id, member_id: user.id, source_id: source.id), class: "btn groupSettings-Vid-off #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(!member.try(:video_disabled)) do
+-#        %i.icon-eye
+-#
+-#      = link_to unmute_lobby_path(@room.id, member_id: user.id, source_id: source.id), class: "btn control groupSettings-Vol-on #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(member.try(:mic_disabled)) do
+-#        %i.icon-headphones
+-#      = link_to mute_lobby_path(@room.id, member_id: user.id, source_id: source.id), class: "btn control groupSettings-Vol-off #{disable_if_banned_or_not_joined(user)}", data: {remote: true, method: "POST"}, style: visible?(!member.try(:mic_disabled)) do
+-#        %i.icon-headphones

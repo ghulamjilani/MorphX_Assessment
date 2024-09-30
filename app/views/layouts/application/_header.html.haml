@@ -1,0 +1,287 @@
+:plain
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https://#{ENV['HOST']}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "#{Rails.application.class.routes.url_helpers.spa_search_index_url}?fq={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+/ === Header ===
+
+%div.hide
+  .header.responsive.fixed-top.pushy.pushy-right
+    .navbar.navbar-default{role: :navigation}
+      / Brand and toggle get grouped for better mobile display
+
+      .nav-wrapper
+        %a.closeMobileNav{href: '#'}
+          .close-menu
+        %ul.nav.navbar-nav.navbar-left
+          %li.nav-links
+            - logo_link = @current_organization&.logo_link(current_user)
+            - if @current_organization && url = customize_logo_url
+              = link_to logo_link, class: 'customize_logo' do
+                = image_tag(url)
+            - else
+              = link_to logo_link, class: 'LogoWrapp' do
+                = render "layouts/application/services/logo_#{Rails.application.credentials.global[:project_name].to_s.downcase}" rescue ""
+              = link_to logo_link, class: 'SmallLogo' do
+                = render "layouts/application/services/smallLogo_#{Rails.application.credentials.global[:project_name].to_s.downcase}" rescue ""
+            - unless Rails.application.credentials.global[:enterprise] || (params[:controller] == 'home' && params[:action] == 'landing' && !user_signed_in? || params[:controller] == 'home' && params[:action] == 'index' || params[:controller] == 'search' || params[:controller] == 'become_presenter_steps' && params[:action] == 'info')
+              .header-search.desctop
+                = form_tag Rails.application.class.routes.url_helpers.spa_search_index_url, method: :get, class:'header-search-form desctop-search' do
+                  .header-search-wrapper.clearfix.desc-search.clearableField
+                    %input{type: :text, class: 'header-search-input clearInput', name: :fq, placeholder: I18n.t('views.layouts.application.header.search')}
+                    %div
+                      %i.VideoClientIcon-iPlus.rotateIcon.clearInputField.hidden
+                    %button{type: :button, class: 'header-search-submit', value: ''}
+                      %i.VideoClientIcon-Search
+          - if user_signed_in?
+            %li.hidden-xs-i.lastIcon
+              .NextSession
+                - if nearest_abstract_session.present?
+                  - if show_sources_button?(nearest_abstract_session)
+                    %section.SI-bi-title.clearfix
+                      .btn-group.full-width.SourceButton
+                        = raw join_room(abstract_session: nearest_abstract_session, link_css_classes: 'btn btn-m NextSessionButton SourceButton-main', initialization_type: JoinInitializationTypes::HEADER_NEXT_SESSION, enforce_title: true).html_link
+                        %button.mainButton.bigBtn.dropdown-toggle.SourceButton-toggle{aria: {expanded: false, haspopup: true}, data: {toggle: :dropdown}, type: :button, rel: :tipsy, title: 'Select source'}
+                          %span.caret
+                          %span.sr-only Toggle Dropdown
+                        %ul.dropdown-menu
+                          - nearest_abstract_session.session_sources.each do |source|
+                            %li
+                              = link_to source.name, '#', onclick: join_room(abstract_session: nearest_abstract_session, enforce_title: false, source_id: source.id).onclick_value
+                  - else
+                    - if can?(:join_as_presenter, nearest_abstract_session) || can?(:join_as_co_presenter, nearest_abstract_session) || can?(:join_as_participant, nearest_abstract_session)
+                      = raw join_room(abstract_session: nearest_abstract_session, link_css_classes: 'NextSessionButton btn btn-m', initialization_type: JoinInitializationTypes::HEADER_NEXT_SESSION, enforce_title: true).html_link
+            %li.mobileUserIdent{style: 'display: none'}
+              = link_to spa_user_path(current_user.slug) do
+                %span#profile-pic.img-circle{style: "background-image: url(#{current_user.medium_avatar_url});"}
+                %br.clearfix
+                = current_user.public_display_name
+            - unless set_your_password_page? # otherwise we may lose user before his user profile is complete/he is logged in
+
+              %li.bapBtnWrapper
+                - if params[:controller] == 'home' && params[:action] == 'index'
+                  = link_to 'Discover', discover_home_path, class: 'bapBtn'
+                - if !(params[:controller] == 'home' && params[:action] == 'index') && Rails.application.credentials.global.dig(:wizard, :enabled)
+                  - if user_signed_in? && can?(:become_a_creator, current_user) && !controller_path.include?('wizard')
+                    - if !current_user.presenter&.channel_invited_presenterships&.exists?(status: 'accepted') && !current_user.organization_memberships_active.exists?
+                      = link_to work_with_us_title, work_with_us_link, class: 'bapBtn'
+                  - elsif !user_signed_in? && controller_name != 'wizard' && can?(:become_a_creator, current_user)
+                    = link_to 'START CREATING', landing_home_path, class: 'bapBtn'
+                    -#.bapBtn-tooltip.hidden.clearfix
+                    -#  = link_to 'Immerss for Business', work_with_us_link, class: 'goLive'
+                    -#  = link_to 'Immerss for Influencers', influencers_path, class: 'goInfluencers'
+
+              -# - if current_user_has_unconfirmed_email?
+              -#   .unobtrusive-flash-container.open-pushy-flash.unobtrusiveMobile-flash-container
+                -# #notification-info-block.hideForDesktopp
+                -#   .container.text-center
+                -#     %span
+                -#       = I18n.t('views.layouts.application.header.confirm_email')
+                -#     -# one case is when email is changed and wasn't yet confirmed,
+                -#     -# or when signed up via Twitter, and then set email in profile(it is set as unconfirmed_email),
+                -#     -# the other is when user created via email/password, "email" is present but confirmed_at is nil
+                -#     - unconfirmed_email = current_user.unconfirmed_email || current_user.email
+                -#     = link_to "Didn't receive email instructions?",
+                -#       Rails.application.class.routes.url_helpers.user_confirmation_path(user: {email: unconfirmed_email}, format: :json),
+                -#       method: :post,
+                -#       class: 'btn btn-s resend_confirm',
+                -#       data: {disable_with: 'Resending instructions…', remote: true}
+
+
+
+            -#%li.HomeButton.hideForMobile.headerBtns
+            -#  %a{href: '/'}
+            -#    %i.icon-home{title: 'Home', rel: :tipsy}
+
+            - if can?(:create_session, current_user.current_organization) || can?(:upload_recording, current_user.current_organization)
+              %li.hidden-xs-i.hideForMobile.headerBtns.vertical-baseline.dropdown-toggle
+                %a.createSession{data: {close: {others: false}, delay: 0, hover: :dropdown, toggle: :dropdown}, href: '#'}
+                  %i.VideoClientIcon-video1
+                %ul.account.dropdown-menu
+                  - if can?(:create_session, current_user.current_organization)
+                    %li#header_session_start
+                      %i.VideoClientIcon-video1
+                      %a{href: sessions_new_path}
+                        = I18n.t('views.layouts.application.header.sessions_create.go_live')
+                    - if can?(:create_interactive_stream_feature, current_user.current_organization) && can?(:start_session, current_user.current_organization)
+                      %li#header_session_start
+                        %i.GlobalIcon-users
+                        %a.openCIS
+                          = I18n.t('views.layouts.application.header.sessions_create.fast_interactive')
+                  - if can?(:upload_recording, current_user.current_organization)
+                    %li#header_upload_video
+                      %i.VideoClientIcon-upload-cloud
+                      %a{href: uploads_dashboard_path}
+                        = I18n.t('views.layouts.application.header.sessions_create.upload')
+            - if can?(:create_session, current_user.current_organization)
+              %li.hidden-xs-i.notification_count_wrapp.headerLDR.headerBtns.hide_on_desktop
+                %a.session-dropdown-list{ href: '#'}
+                  %i.VideoClientIcon-stream-video-icon
+                  %i.VideoClientIcon-angle-downF
+            - if display_todo_modal?
+              %li.hidden-xs-i.Todo_count_wrapp.headerLDR.headerBtns
+                %a.blink_me.blink_me_red.ensure-link-style{href: '#', data: {count: remainig_todo_task_count}}
+                  %i.VideoClientIcon-ok-squaredF
+                = render 'layouts/application/todo_wrapper'
+            %li.hidden-xs-i.notification_count_wrapp.headerLDR.headerBtns
+              %a.notification_count.notifications-header.notifications-header__icon.blink_me_red{class: notifications_tab_class, href: Rails.application.class.routes.url_helpers.notifications_path, data: {count: new_notifications_count}}
+                %i.VideoClientIcon-notifications-icon
+              = render 'layouts/application/notifications_popup_wrapper'
+            %li.hidden-xs-i.message_count_wrapp.headerLDR.headerBtns
+              %a.blink_me_red{class: messages_tab_class, href: Rails.application.class.routes.url_helpers.messages_path, data: {count: unread_messages_count}}
+                %i.VideoClientIcon-messages-icon
+              = render 'layouts/application/messages_popup_wrapper'
+            -#%li.hidden-xs-i.hideForMobile.headerBtns
+            -#  %a{href: Rails.application.class.routes.url_helpers.dashboard_path}
+            -#    %i.VideoClientIcon-dashboard{title: 'Dashboard', rel: :tipsy}
+
+            %li.dropdown
+              = link_to spa_user_path(current_user.slug), class: 'account-name dropdown-toggle hideForMobile', data: {close: {others: false}, delay: 0, hover: :dropdown, toggle: :dropdown} do
+                %span#profile-pic.img-circle{style: "background-image: url(#{current_user.medium_avatar_url});"}
+                %i.VideoClientIcon-angle-downF
+              %ul.account.dropdown-menu.menu-list
+                %li.hideForMobile
+                  = link_to spa_user_path(current_user.slug) do
+                    %i.VideoClientIcon-user-mk3
+                    = current_user.public_display_name
+
+                - if can?(:create_session, current_user.current_organization)
+                  %li.session-dropdown.hide
+                    %a{href: sessions_new_path}
+                      %i.VideoClientIcon-video1
+                      = I18n.t('views.layouts.application.header.sessions_create.go_live')
+                  - if can?(:create_interactive_stream_feature, current_user.current_organization) && can?(:start_session, current_user.current_organization)
+                    %li.session-dropdown.hide
+                      %a.openCIS
+                        %i.GlobalIcon-users
+                        = I18n.t('views.layouts.application.header.sessions_create.fast_interactive')
+                - if can?(:upload_recording, current_user.current_organization)
+                  %li.session-dropdown.hide
+                    %a{href: uploads_dashboard_path}
+                      %i.VideoClientIcon-upload-cloud
+                      = I18n.t('views.layouts.application.header.sessions_create.upload')
+
+                %li#dashboard-dropdown-menu
+                  %a{href: Rails.application.class.routes.url_helpers.dashboard_path}
+                    %i.VideoClientIcon-Vector-1
+                    = I18n.t('views.layouts.application.header.user.dashboard')
+                - if current_user.role == 'presenter'
+                  - if current_user.all_organizations.count("DISTINCT organizations.id") > 1
+                    %li.company__menu
+                      %a.company__menu__link{href: current_user.current_organization.relative_path}
+                        %div.company__menu__image{style: "background-image: url(#{current_user.current_organization.small_logo_url});"}
+                        %div.company__menu__name
+                          = current_user.current_organization.name
+                        %div.company__menu__icon.GlobalIcon-check
+                    - current_user.all_organizations.each do |company|
+                      - unless current_user.current_organization == company
+                        %li.company__menu.company__menu__submenu
+                          %a.company__menu__link.company__menu__submenu__link{href: set_current_organization_path(company.id), data: {method: :post, confirm: 'Your current organization will be changed'}}
+                            %div.company__menu__image{style: "background-image: url(#{company.small_logo_url});"}
+                            %div.company__menu__name
+                              = company.name
+                  - elsif current_user.current_organization
+                    %li.company__menu
+                      %a.company__menu__link{href: current_user.current_organization.relative_path}
+                        %div.company__menu__image{style: "background-image: url(#{current_user.current_organization.small_logo_url});"}
+                        %div.company__menu__name
+                          = current_user.current_organization.name
+                %li
+                  = link_to Rails.application.class.routes.url_helpers.edit_general_profile_path do
+                    %i.VideoClientIcon-Vector-3
+                    = I18n.t('views.layouts.application.header.user.settings')
+                - if Rails.application.credentials.global[:pages][:help]
+                  %li
+                    = link_to Rails.application.class.routes.url_helpers.pages_help_path do
+                      %i.VideoClientIcon-Vector-4
+                      = I18n.t('views.layouts.application.header.user.help')
+                %li
+                  = link_to Rails.application.class.routes.url_helpers.destroy_user_session_path do
+                    %i.VideoClientIcon-Vector-5
+                    = I18n.t('views.layouts.application.header.user.logout')
+
+        - if !user_signed_in? || (user_signed_in? && can?(:become_a_creator, current_user))
+          .buttons
+            - unless set_your_password_page? # otherwise we may lose user before his user profile is complete/he is logged in
+              - if !user_signed_in? && controller_name != 'wizard'
+                -#.bapBtn.closeMobileNavBTN
+                -#  = work_with_us_title
+                -#  .bapBtn-tooltip.hidden.clearfix
+                -#    = link_to 'Immerss for Business', work_with_us_link, class: 'goLive'
+                -#    = link_to 'Immerss for Influencers', influencers_path, class: 'goInfluencers'
+                - if Rails.application.credentials.global[:pages][:business]
+                  - if params[:controller] == 'home' && params[:action] == 'index'
+                    = link_to 'Discover', discover_home_path, class: 'bapBtn closeMobileNavBTN discoverBtn'
+                  - else
+                    = link_to work_with_us_title, work_with_us_link, class: 'bapBtn closeMobileNavBTN workWithUs'
+            - unless user_signed_in?
+              - if display_signup?
+                %button.signup.btn.btn-l.closeMobileNavBTN.text-uppercase{data: {target: '#signupPopup', toggle: :modal}}
+                  = I18n.t('views.layouts.application.header.sign_up')
+              %button.login.btn.btn-l.btn-borderred-grey.text-uppercase.closeMobileNavBTN{data: {target: '#loginPopup', toggle: :modal}} Log In
+
+    .unobtrusive-flash-container.header-sideBarNotification
+      - if user_signed_in? && params[:autodisplay_remote_ujs_path].blank? && params[:action] != 'preview_purchase' && controller_name != 'complete_presenter'
+        = raw BlockingNotificationPresenter.new(current_user, current_ability).to_s
+
+  .header-fix
+.mobileHeader{class: "#{'parolNeZapilili' if current_user_has_unconfirmed_email?}", style: "display: none"}
+  - logo_link = @current_organization&.logo_link(current_user)
+  - if @current_organization && url = customize_logo_url
+    = link_to logo_link, class: 'customize_logo' do
+      = image_tag(url)
+  - else
+    = link_to logo_link, class: 'LogoWrapp' do
+      = image_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/logo_small.png", id: 'logo-header', alt: Rails.application.credentials.global[:service_name], class: 'img-responsive'
+  - unless Rails.application.credentials.global[:enterprise] || (params[:controller] == 'home' && params[:action] == 'landing' && !user_signed_in? || params[:controller] == 'home' && params[:action] == 'index' || params[:controller] == 'search' || params[:controller] == 'become_presenter_steps' && params[:action] == 'info')
+    .header-search
+      = form_tag Rails.application.class.routes.url_helpers.spa_search_index_url, method: :get, class:'header-search-form mobile-search' do
+        .header-search-wrapper.clearfix.mobile-search
+          %input{type: :text, class: 'header-search-input', name: :fq, placeholder: 'Search'}
+          %button{type: :button, class: 'header-search-submit', value: ''}
+            %i.VideoClientIcon-Search
+  - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+    .menu-btn.ios_devive
+      &#9776
+  - else
+    .menu-btn
+      &#9776
+  .clearfix
+  .unobtrusive-flash-container.unobtrusiveMobile-flash-container
+    - if user_signed_in? && params[:autodisplay_remote_ujs_path].blank? && params[:action] != 'preview_purchase' && controller_name != 'complete_presenter'
+      = raw BlockingNotificationPresenter.new(current_user, current_ability).to_s
+  - if user_signed_in?
+    - if nearest_abstract_session.present?
+      - if show_sources_button?(nearest_abstract_session)
+        %section.SI-bi-title.clearfix
+          .btn-group.full-width.SourceButton
+            = raw join_room(abstract_session: nearest_abstract_session, link_css_classes: 'btn btn-m SourceButton-main', initialization_type: JoinInitializationTypes::HEADER_NEXT_SESSION, enforce_title: true).html_link
+            %button.mainButton.bigBtn.dropdown-toggle.SourceButton-toggle{aria: {expanded: false, haspopup: true}, data: {toggle: :dropdown}, type: :button, rel: :tipsy, title: 'Select source'}
+              %span.caret
+              %span.sr-only Toggle Dropdown
+            %ul.dropdown-menu
+              - nearest_abstract_session.session_sources.each do |source|
+                %li
+                  = link_to source.name, '#', onclick: join_room(abstract_session: nearest_abstract_session, enforce_title: false, source_id: source.id).onclick_value
+
+      - else
+        = raw join_room(abstract_session: nearest_abstract_session, link_css_classes: 'NextSessionButton btn btn-m', initialization_type: JoinInitializationTypes::HEADER_NEXT_SESSION, enforce_title: true).html_link
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function(){
+      let el = $('.openCIS');
+      if(el.length){
+        $(el).on( "click", function() {
+          modalApp.emitVueEvent('openModalCIS');
+        });
+      }
+    });

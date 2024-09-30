@@ -1,0 +1,32 @@
+<a class="tile-list {{#if isPlaying}}active{{/if}}" href="javascript: void(0);">
+    <div class="t-img">
+        <div class="t-img" style="background-image: url({{poster_url}})"></div>
+        {{#if is_paid}}
+            <div class="price">
+                <i class="embed_fontdollar-currency-symbol"></i>
+            </div>
+        {{/if}}
+    </div>
+    <div class="t-body">
+        <div class="t-name">
+            {{title}}
+        </div>
+        <div class="t-date">
+            {{formattedStartAt}}
+        </div>
+        <div class="t-info">
+            <ul class="starRating" title="{{rating}}">
+                {{#each ratingClasses}}
+                    <li>
+                        <i class="{{this}}"></i>
+                    </li>
+                {{/each}}
+            </ul>
+            <div class="starRating_count">({{rating}})</div>
+            <div class="t-viewCount">
+                <i class="embed_fonteye-1"></i>
+                {{views_count}}
+            </div>
+        </div>
+    </div>
+</a>

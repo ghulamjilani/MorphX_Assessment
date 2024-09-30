@@ -1,0 +1,16 @@
+- content_for(:extra_body_classes, "dashboards-subscriptions header-top dashboards")
+- content_for(:page_title, I18n.t('views.dashboard.subscriptions.new.page_title'))
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function() {
+      window.subscriptions_mono_image = "#{asset_path('Subscriptions/Subscriptions_mono.png')}";
+      window.view = new window.SubscriptionPlanForm({
+        action: 'new',
+        collection: new window.PlansCollection(#{@subscription.plans.to_json.html_safe})});
+    });
+.row
+  %aside.col-md-3.left-side-bar
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9.MainForm_block_for_AffixSection
+    = form_for @subscription, {url: dashboard_subscriptions_path, method: :post, html: {class: 'subscription_form'}} do |f|
+      = render partial: 'dashboard/subscriptions/form', locals: {f: f}

@@ -1,0 +1,8 @@
+- content_for(:page_title, 'Contacts ')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    = render 'dashboards/navigation/contacts_and_mailing_tabs'
+    #ch-vue-app
+      = content_tag 'comp-wrapper', nil, data: { component: 'Contacts', props: {}}.to_json

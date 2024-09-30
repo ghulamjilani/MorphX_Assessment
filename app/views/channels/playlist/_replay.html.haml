@@ -1,0 +1,15 @@
+- session = replay.session
+.tile-cake-sidebarrr.replay-tile{data: {id: replay.id, type: :replay}, id: "player_replay_#{replay.id}"}
+  .tile-img
+    = link_to replay.relative_path do
+      .img{style: "background-image: url('#{(replay.poster_url || asset_url(session.channel.image_preview_url))}')"}
+    - unless session.recorded_purchase_price.to_f.zero?
+      %i.VideoClientIcon-dollar-currency-symbol
+  %a.tile-body.switch_replay{href: replay.relative_path}
+    .tile-name{rel: 'tipsy', title: replay.always_present_title}
+      = replay.always_present_title
+    .text-color-ultra-LightGrey
+      .participants.text-ellipsis.display-inline-block.vertical-midle.margin-right-5.pull-right
+        %i.VideoClientIcon-Views.fs-20.vertical-sub
+        = replay.views_count
+      .time= time_with_tz_in_chosen_format(session.start_at)

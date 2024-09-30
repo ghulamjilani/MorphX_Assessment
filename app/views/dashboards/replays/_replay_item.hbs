@@ -1,0 +1,83 @@
+<div {{#if blocked}} data-tooltip="Block Reason: {{{block_reason}}}" {{/if}}>
+  <div class="actions_bar">
+      {{#if can_edit_videos}}
+          {{#if (and published done)}}
+              <a class="togglePrivate_tile {{#unless private}}active{{/unless}}" href="javascript: void(0);"
+                 title="{{#if private}}Private{{else}}Public{{/if}}">
+                  <i class="VideoClientIcon-unlock1 h_i"></i>
+                  <i class="VideoClientIcon-lock1 sh_i"></i>
+              </a>
+              <a class="toggleVisible_tile {{#if show_on_profile}}active{{/if}}" href="javascript: void(0);" title="{{#if show_on_profile}}Visible{{else}}Hidden{{/if}}">
+                {{#if show_on_profile}}
+                  <i class="VideoClientIcon-eye"></i>
+                {{else}}
+                  <i class="GlobalIcon-eye-off"></i>
+                {{/if}}
+              </a>
+              {{#if share_url}}
+                  <a class="share_tile" href="{{share_url}}" data-remote="true" style="visibility: visible;" title="Share">
+                      <i class="VideoClientIcon-share-2"></i>
+                  </a>
+              {{/if}}
+          {{/if}}
+          <a href="javascript: void(0);" {{#unless move_available}}class="disabled"{{/unless}} title="{{#if move_available}}{{i18n 'dashboard.move_to_another_channel.button.title'}}{{else}}{{i18n 'dashboard.move_to_another_channel.button.one_channel_title'}}{{/if}}">
+              <i class="VideoClientIcon-move-icon {{#if move_available}}move_single_video{{/if}}" data-id="{{id}}"></i>
+          </a>
+          <a class="edit_tile" data-target="#editVideo" data-toggle="modal" href="#editVideo" title="Edit">
+              <i class="VideoClientIcon-edit-icon"></i>
+          </a>
+      {{/if}}
+      {{#if can_delete_videos}}
+          <a class="delete_tile" href="javascript: void(0);" title="Delete">
+              <i class="VideoClientIcon-trash-2"></i>
+          </a>
+      {{/if}}
+  </div>
+  {{#if blocked}}
+      <div class="video-tile__blocked__wrapp">
+          <div class="video-tile__blocked">
+              <p>
+                  Content blocked by platform administrator.
+                  <span class="video-tile__blocked__icon"><i class="VideoClientIcon-alert-triangle"></i></span>
+              </p>
+          <p>Please check block reason<p>
+          </div>
+      </div>
+  {{/if}}
+  <div class="video-tile__h">
+      <a class="multiChoiceBtn {{#if selected}}active{{/if}}" href="javascript: void(0);"></a>
+      <div class="thumbnail" style="background-image:url({{poster_url}}),url({{default_poster_url}});"></div>
+      {{#if done}}
+          <div class="videoDuration" title="Video Duration">{{duration}}</div>
+          <div class="status_bar">
+              {{#if published}}<span class="st_p" title="Published">Processed</span>{{/if}}
+              {{#if (and price (gt price 0))}}<span class="st_M" title="${{price}}">$</span>{{/if}}
+              {{#if private}} <span class="st_private">Private</span> {{/if}}
+          </div>
+          {{!-- <div class="st_Watch__wrapper">
+              {{#if new_video_published}}<a href="{{relative_path}}" target="_blank" class="st_Watch" title="Watch">Watch Replay</a>{{/if}}
+          </div> --}}
+      {{else if processing}}
+          <span class="st_Processing">Processing</span>
+      {{else}}
+          <a class="toggleProcess st_Unpublished" href="javascript: void(0);">Unprocessed</a>
+      {{/if}}
+  </div>
+  <div class="video-tile__b">
+      <a class="sessionName" href="{{absolute_url}}" target="_blank">{{title}}</a>
+      {{#if published}}<div class="presenterName">{{presenter_name}}</div>{{/if}}
+  </div>
+  <div class="video-tile__f">
+    <div class="display-flex dateAndTime">
+      <i class="VideoClientIcon-calendar-icon"></i>
+      <span>{{formatted_date}} {{formatted_time}}</span>
+      <i class="VideoClientIcon-clock"></i>
+      <span class="tileVideoDuration" title="Video Duration">{{duration}} min</span>
+      {{!-- <span class="text-center videoCreateTime">{{formatted_time}}</span> --}}
+    </div>
+    <span class="text-right views">
+      <i class="VideoClientIcon-eye"></i>
+      <abbr class="text-right">{{views_count}}</abbr>
+    </span>
+</div>
+</div>

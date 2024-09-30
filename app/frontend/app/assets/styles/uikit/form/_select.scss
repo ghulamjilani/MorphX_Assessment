@@ -1,0 +1,241 @@
+.selectArrow {
+  font-size: 1rem;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--tp__icons);
+  display: inline-block;
+  transition: 0.2s ease;
+}
+
+.selectArrow.up {
+  transition: 0.2s ease;
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+  top: 0; /*need to stay at the top when scrolling*/
+}
+
+.dropdownMK2 {
+  display: inline-block;
+  position: relative;
+  min-width: 100%;
+  max-width: 100%;
+
+  &__multyImage {
+    min-width: 3rem;
+    min-height: 3rem;
+    border-radius: .3rem;
+    margin-bottom: 1rem;
+    background-position: center;
+    background-size: cover;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  &__image {
+    min-width: 3rem;
+    min-height: 3rem;
+    border-radius: .3rem;
+    margin-right: 1rem;
+    background-position: center;
+    background-size: cover;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    color: var(--tp__labels);
+  }
+
+  &__with-label {
+    padding: 1.8rem 0 0.4rem;
+  }
+
+  &.input__field__without-label {
+    padding-top: 1rem;
+  }
+
+  &__toggle {
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid var(--border__separator);
+    min-width: 100%;
+    max-width: 100%;
+    padding: 0 2rem 0 0;
+    text-transform: none;
+    font-weight: 400;
+    // margin-bottom: 7px;
+    float: none;
+    box-shadow: none;
+    border-radius: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &__inherit {
+      width: 100%;
+    }
+
+    &__text {
+      @include text__ellipsis();
+    }
+  }
+
+  &__placeholder {
+    color: var(--tp__labels);
+  }
+
+  &__pure {
+    border-bottom: none;
+    padding: 0;
+  }
+
+  &__disabled {
+    cursor: not-allowed !important; // impossible to do without important
+  }
+
+  &__menu {
+    // max-height: 22rem;
+    // overflow: auto;
+    width: calc(100% + 4rem);
+    position: absolute;
+    left: -2rem;
+    top: 2.5rem;
+    z-index: 1000;
+    padding: 1rem 0;
+    margin: 0.2rem 0 0;
+    list-style: none;
+    text-align: left;
+    border: 1px solid var(--border__separator);
+    border-radius: 0.6rem;
+    @include boxShadow__main(var(--sh__main));
+    background-clip: padding-box;
+    display: block;
+    background: var(--bg__content);
+
+    &__scroll {
+      width: 100%;
+      max-height: 30rem;
+      overflow: auto;
+    }
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 0.3rem;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #c4c4c4;
+      border-radius: 0.3rem;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #acacac;
+    }
+
+    &__inherit {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &__item > a {
+    padding: 1rem 3rem;
+    display: block;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.6;
+    color: var(--tp__secondary);
+    text-decoration: none;
+  }
+
+  &__item {
+    @include flex(flex, center, false);
+    overflow: hidden;
+    height: 4rem;
+    width: 100%;
+    // position: relative;
+    margin: 0;
+
+    &:hover {
+      background: var(--border__table);
+      color: var(--tp__main);
+      cursor: pointer;
+
+      a {
+        color: var(--tp__main);
+      }
+    }
+  }
+
+  &__sending {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    .spinnerSlider > div {
+      background: var(--tp__active);
+    }
+  }
+
+  &__menu {
+    &__checkbox {
+      position: relative;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 1.5rem;
+      width: 1.5rem;
+      border-radius: 0.3rem;
+      border: 1px solid #CCCCCC;
+      background: #fff;
+    }
+  }
+
+  &__menu {
+    &__checkbox.active {
+      background: #F23535;
+      border: 1px solid #F23535;
+
+      &:before {
+        content: "✔";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+      }
+    }
+  }
+
+  &__custom {
+    padding: 1rem 3rem 0 3rem;
+    border-bottom: 1px solid var(--border__separator);
+  }
+}
+
+.datefilterMK2 {
+  &__datepicker {
+    width: 24rem;
+  }
+}

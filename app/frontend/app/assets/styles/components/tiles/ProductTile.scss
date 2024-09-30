@@ -1,0 +1,64 @@
+body:not(.dashboard-lists) {
+  .productTile {
+    width: calc(20% - 1.2rem);
+    height: 400px;
+    background: var(--bg__content);
+    box-shadow: 0px 1px 4px var(--sh__main);
+    border-radius: 1rem;
+    margin-right: 1.2rem;
+    margin-bottom: 3rem;
+
+    @include media(tablet){
+      width: calc(50% - 2.7rem);
+      margin-right: 2.7rem;
+    }
+
+    @include media(phone){
+      width: calc(100%);
+      margin-right: 0;
+    }
+  }
+}
+
+.productTile {
+  &__image {
+    width: 100%;
+    height: 240px;
+    border-radius: 1rem 1rem 0 0;
+    object-fit: contain;
+    cursor: pointer;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    height: 15rem;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--tp__main);
+    line-height: 120%;
+    @include text__ellipsis(2);
+    cursor: pointer;
+  }
+
+  &__description {
+    font-size: 1.4rem;
+    color: var(--tp__secondary);
+    line-height: 120%;
+    @include text__ellipsis(2);
+  }
+
+  &__button {
+    .btn {
+      font-size: 1.6rem;
+    }
+    .btn__square {
+      border-radius: 0.3rem;
+    }
+  }
+}

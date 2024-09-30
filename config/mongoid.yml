@@ -1,0 +1,73 @@
+---
+development:
+  clients:
+    default:
+      database: immerss_development
+      hosts:
+      - localhost:27017
+      options:
+        max_read_retries: 0
+        read_retry_interval: 0
+        write:
+          w: 1
+  options:
+    include_root_in_json: false
+    include_type_for_serialization: false
+    preload_models: false
+    raise_not_found_error: false
+    scope_overwrite_exception: false
+    use_activesupport_time_zone: true
+test:
+  clients:
+    default:
+      database: immerss_test
+      hosts:
+      - localhost:27017
+      options:
+        max_read_retries: 0
+        read_retry_interval: 0
+        write:
+          w: 1
+  options:
+    include_root_in_json: false
+    include_type_for_serialization: false
+    preload_models: false
+    raise_not_found_error: false
+    scope_overwrite_exception: false
+    use_activesupport_time_zone: true
+production:
+  clients:
+    default:
+      database: immerss_production
+      hosts:
+      - mongodb-service.private:27117
+      options:
+        max_read_retries: 0
+        read_retry_interval: 0
+        write:
+          w: 1
+  options:
+    include_root_in_json: false
+    include_type_for_serialization: false
+    preload_models: false
+    raise_not_found_error: false
+    scope_overwrite_exception: false
+    use_activesupport_time_zone: true
+qa:
+  clients:
+    default:
+      database: immerss_qa
+      hosts:
+      - mongodb-service.private:27017
+      options:
+        max_read_retries: 0
+        read_retry_interval: 0
+        write:
+          w: 1
+  options:
+    include_root_in_json: false
+    include_type_for_serialization: false
+    preload_models: false
+    raise_not_found_error: false
+    scope_overwrite_exception: false
+    use_activesupport_time_zone: true

@@ -1,0 +1,49 @@
+@import "infoCards/core";
+@import "membersTable/core";
+@import "roleEdit/core";
+@import "roles/core";
+
+.spa-dashboard-team_management {
+  .v-tooltip {
+    top: 6rem !important;
+    left: 4rem !important;
+    background: var(--bg__label) !important;
+    color: var(--tp__main) !important;
+    /*needs to replace tooltip where it's need*/
+  }
+}
+
+.coloredSquare {
+  border-radius: 0.5rem;
+  @include center(v);
+  width: 2.5rem;
+  height: 2.5rem;
+
+  &__wrapper {
+    width: 2.5rem;
+    margin-right: 5rem;
+    position: relative;
+    @include media(desktop) {
+      margin-right: 2rem;
+      height: 2.5rem;
+    }
+  }
+}
+
+.roleName {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--tp__main);
+  cursor: pointer;
+  margin-right: 2rem;
+
+  &__wrapper {
+    @include media(reverso-desktop) {
+      min-width: 23rem;
+      max-width: 23rem;
+    }
+    @include media(desktop) {
+      max-width: 90%;
+    }
+  }
+}

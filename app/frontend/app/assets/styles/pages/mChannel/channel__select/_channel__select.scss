@@ -1,0 +1,67 @@
+.channel__select {
+  position: relative;
+  &__content {
+    width: 38.5rem;
+    max-width: 90vw;
+    padding: 3rem 2rem 3rem 3rem;
+    position: absolute;
+    right:0;
+    top: 3rem;
+    @include boxShadow__main(var(--sh__main));
+    text-align: left;
+    background: var(--bg__dropdowns);
+    z-index: 100001;
+    border-radius: 0.5rem;
+  }
+  &__wrapp {
+    max-height: 44rem;
+    overflow: auto;
+
+    a {
+      display: block;
+    }
+  }
+
+  &__label {
+    color: var(--tp__h1);
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+  }
+
+  &__item {
+    padding-bottom: 2rem;
+    cursor: pointer;
+  }
+
+  &__title {
+    color: var(--tp__main);
+    font-weight: bold;
+    font-size: 1.6rem;
+    @include text__ellipsis();
+  }
+
+  &__img {
+    padding-bottom: 27.85%;
+    @include bg_cover();
+    border-radius: 1rem;
+    margin-bottom: .5rem;
+  }
+
+  &__subscribe {
+    color: var(--tp__active);
+    line-height: 1.5rem;
+  }
+
+  button{
+    cursor: pointer;
+    min-width: 10rem;
+    text-align: right;
+    position: relative;
+  }
+
+  .GlobalIcon-angle-down{
+    font-size: 1rem;
+    color: var(--tp__icons);
+  }
+}

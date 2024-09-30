@@ -1,0 +1,6 @@
+<%= I18n.t('mailer.without_invitation_token.you_invited_message',
+           abstract_session_link: "<a href=\"#{@session.absolute_path}\" target=\"_blank\">#{@session.always_present_title}</a>",
+           presenter_link: "<a href=\"#{@session.organizer.absolute_path}\" target=\"_blank\">#{@session.organizer.public_display_name}</a>",
+           start_at: @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z'),
+           role: 'participant',
+           kind_of_abstract_session: 'session') %>

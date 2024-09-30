@@ -1,0 +1,55 @@
+- content_for(:extra_body_classes, "dashboards-product_lists ")
+- content_for(:page_title, 'Product list')
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function() {
+    // animation script start
+      $(".pr").hover(
+        function () {
+          $(this).addClass('mouseover');
+        },
+        function () {
+          $(this).removeClass('mouseover');
+          $(this).addClass('mouseout');
+          setTimeout(function() {
+               $(".pr").removeClass("mouseout");
+           }, 910);
+        }
+      );
+    // animation script end
+    })
+.row
+  %aside.col-md-3.left-side-bar
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    .pr_list_wrapp
+      .row.padding-left-30.padding-bottom-10
+        .col-md-6.clearfix
+          %a.btn.btn-m.col-xs-12.col-md-3{href:'#',onclick:'$(".pr_list_wrapp, .pr_new-or-edit").toggleClass("hide");'} New List
+        .col-md-6.text-right.fs-12.padding-top-5
+          Sort by
+          %select.styled-select.styled-select_withCss.btn.btn-s.btn-borderred-grey.fs-12
+            %option= link_to 'Newest', dashboard_lists_path(order: :desc)
+            %option= link_to 'Oldest', dashboard_lists_path(order: :asc)
+      .pr_list
+        - @lists.each_with_index do |list, i|
+          .pr
+            .pr-number= i + 1
+            .pr-body
+              .pr-image{style: "background-image: url(#{list.primary_image})"}
+              .pr-info
+                %span= list.created_at.strftime('%m.%d.%Y')
+                %p= list.name
+              .pr-count
+                %span Items
+                %p= list.products.count
+              .pr-buttons
+                %a{href: '#', title: 'Link'}
+                  %i.VideoClientIcon-linkF
+                %a{href: '#', title: 'Share'}
+                  %i.VideoClientIcon-share
+                %a{href: '#', title: 'Edit', 'data-target': '#edit_product',  'data-toggle': 'modal'}
+                  %i.VideoClientIcon-pencilF
+                %a.text-red-hover{href: '#', title: 'Remove'}
+                  %i.VideoClientIcon-iPlus.rotateIcon

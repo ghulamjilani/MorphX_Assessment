@@ -1,0 +1,4 @@
+en:
+  presenters:
+    session_invitation_buttons_presenter:
+      invited_you_to_participate: "%{presenter_link} invited you to participate in %{session_link} as %{creator}"

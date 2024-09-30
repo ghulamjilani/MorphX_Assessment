@@ -1,0 +1,9 @@
+<% session_link = %(<a target="_blank" href="#{@session.absolute_path}">#{@session.always_present_title}</a>) %>
+<% list_link = %(<a target="_blank" href="https://unite.live/FIXME">this link</a>) %>
+<% raise 'FIXME list_link' if Rails.env.production? %>
+
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<%= simple_format raw I18n.t('mailer.vod_became_available_for_organizer.body', session_link: session_link, list_link: list_link) %>

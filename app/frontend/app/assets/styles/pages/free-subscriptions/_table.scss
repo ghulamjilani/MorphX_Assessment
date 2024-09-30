@@ -1,0 +1,67 @@
+.FS__table {
+  border-collapse: collapse;
+  width: 100%;
+
+  &__wrapper {
+    min-height: 25rem;
+    position: relative;
+  }
+
+  &__head {
+    background: var(--border__table);
+
+    &__th {
+      padding: 1rem 0.5rem;
+      color: var(--tp__main);
+      font-size: 1.6rem;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+
+  &__body {
+    &__tr {
+      color: var(--tp__secondary);
+      border-bottom: 1px solid #E5E5E5;
+    }
+  }
+
+  &__td {
+    padding: 1rem 0.5rem;
+    word-break: break-word;
+  }
+
+  &__title {
+    color: var(--tp__secondary);
+    font-weight: bold;
+  }
+}
+
+@include media(p-tablet) {
+  .FS__table {
+
+    &__head {
+      display: none;
+    }
+
+    &__td {
+      display: block;
+      white-space: normal;
+
+      &:before {
+        content: attr(data-th);
+        font-weight: bold;
+        display: inline-block;
+        vertical-align: middle;
+        width: 40%;
+        text-align: left;
+      }
+    }
+  }
+}
+
+@include media(phone) {
+  .FS__table__td:before {
+    width: 33%;
+  }
+}

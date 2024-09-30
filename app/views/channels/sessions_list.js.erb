@@ -1,0 +1,19 @@
+$('#MV_Upcoming .tile-cake-sidebar-wrapp').append("<%= escape_javascript(render(partial: 'channels/playlist/session', collection: @sessions, locals: {channel: @channel})) %>");
+$('#MV_Upcoming a[data-remote]').css('visibility', 'visible');
+if(Immerss.session) {
+  $('#MV_Upcoming .tile-cake-sidebarrr[data-id='+ Immerss.session.id +']').addClass('active');
+}
+window.initializeDateTimes();
+
+
+<% if @sessions.length > 0 %>
+  $('#MV_Upcoming').removeClass('hidden');
+  $('#MV_UpcomingToggle').removeClass('hidden');
+<% end %>
+<% if @sessions.length == 6 %>
+$('#MV_Upcoming .show_more').attr('href', "<%= sessions_list_channel_path(@channel.id, {limit: @limit, offset: @offset + @limit}) %>");
+$('#MV_Upcoming .show_more').removeClass('hidden');
+<% else %>
+$('#MV_Upcoming .show_more').addClass('hidden');
+<% end %>
+$('.mainVideoSection-rightSidebar_cover').addClass('hidden');

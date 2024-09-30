@@ -1,0 +1,1 @@
+./bin/rspec --pattern "spec/jobs/**/*_spec.rb"

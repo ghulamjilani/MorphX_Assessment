@@ -1,0 +1,61 @@
+#search_product_modal.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+  .modal-dialog
+    %a.close_modal{data: {dismiss: :modal}}
+      %i.VideoClientIcon-iPlus
+    = form_for product, as: :product, url: dashboard_list_products_path(list, type: :search), method: :post, html: {remote: true, style: 'visibility: visible;'} do |f|
+      = f.hidden_field :raw_info
+      = f.hidden_field :barcodes
+      .modal-content
+        .modal-body
+          %h4.groupTitle.clearfix Add product
+          .unobtrusive-flash-container
+          %section
+            .row.form_V2.clearfix.AddManually
+              .col-md-4
+                %label.product-image{style: "background-image: url(#{product.product_image.remote_original_url || product.image_url})"}
+                  %span
+                    = f.fields_for :product_image do |pi|
+                      = pi.hidden_field :remote_original_url
+                      = pi.file_field :original, class: 'inputfile hidden'
+                    Image
+                    %br/
+                    (click to upload)
+              .col-md-8
+                .input-block.required{class: product.url.present? ? '' : 'state-clear'}
+                  = f.label :url, 'Product URL'
+                  = f.text_field :url
+                  .errorContainerWrapp
+                    .errorContainer
+                .input-block.required{class: product.title.present? ? '' : 'state-clear'}
+                  = f.label :title, 'Product Name'
+                  = f.text_field :title
+                  .errorContainerWrapp
+                    .errorContainer
+                .input-block{class: product.short_description.present? ? '' : 'state-clear'}
+                  = f.label :short_description, 'Short Description'
+                  = f.text_area :short_description, 'max-length': 500, data: {autoresize: true}
+                  -#.infoContainerWrapp Minimum 24 characters
+                  .counter_block #{product.short_description.to_s.length}/500
+                  .errorContainerWrapp
+                    .errorContainer
+                .input-block{class: product.description.present? ? '' : 'state-clear'}
+                  = f.label :description, 'Description'
+                  = f.text_area :description, 'max-length': 2000, data: {autoresize: true}
+                  .counter_block #{product.description.to_s.length}/2000
+                  .errorContainerWrapp
+                    .errorContainer
+                .priceSection.clearfix
+                  Price
+                  = f.text_field :price, value: product.price.format, class: 'btn btn-s btn-borderred-grey pull-right'
+                  .errorContainerWrapp
+                    .errorContainer
+                .input-block.specs
+                  = f.label :specifications, ''
+                  = f.text_area :specifications, 'max-length': 255, placeholder: 'eg. Size: 4, 4.5, 5, 6.5', data: {autoresize: true}
+                  .counter_block #{product.specifications.to_s.length}/255
+                  .errorContainerWrapp
+                    .errorContainer
+      .text-right.padding-top-10
+        %a.btn.btn-l.btn-grey-solid.btn-red-hover{html: '#', data: {dismiss: :modal}} Cancel
+        = f.submit 'Save Product', class: 'btn btn-l margin-left-10'
+

@@ -1,0 +1,146 @@
+.mops-dashboard {
+  min-height: 15rem;
+  padding: 3rem 3rem 4rem;
+  background: var(--bg__content);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 0.7rem 0 var(--sh__main);
+
+  &__title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--tp__h1);
+    padding-bottom: 2rem;
+  }
+}
+
+.mops-channel {
+  position: relative;
+  min-height: 7rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-radius: 3px;
+  background-color: var(--bg__content);
+  padding: 1rem;
+  transition: 0.2s ease;
+
+  box-shadow: 0 4px 7px 0 var(--sh__main);
+  background: var(--bg__content__secondary);
+  border: 1px solid rgba(9, 95, 115, 0.2);
+  border-radius: 1rem;
+
+  &__info {
+    cursor: pointer;
+    color: var(--tp__main);
+    padding-right: 4rem;
+    @include flex(flex, center, false);
+    &__logo {
+      height: 5rem;
+      width: 5rem;
+      background-size: cover;
+    }
+    &__name {
+      font-size: 1.6rem;
+      margin-left: 1rem;
+      font-weight: bold;
+    }
+    &__arrow {
+      position: absolute;
+      top: 2.7rem;
+      right: 1rem;
+      i {
+        display: inline-block;
+        transition: 0.2s ease;
+      }
+      &.active i {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
+  &__listSection {
+    &__separateLine {
+      width: 100%;
+      height: 1px;
+      background-color: var(--bg__dropdowns);
+      margin-top: 1rem;
+    }
+    &__mopsList {
+      @include flex(flex, flex-start, false);
+      flex-wrap: wrap;
+    }
+  }
+  &__mops {
+    position: relative;
+    width: 13rem;
+    height: 13rem;
+    margin: 1rem;
+    @include flex(flex, center, center);
+    border: 1px solid var(--border__content__sections);
+    transition: 0.2s ease;
+
+    &__menu {
+      cursor: pointer;
+      position: absolute;
+      top: 0.5rem;
+      right: 0rem;
+    }
+
+    &__status {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      color: var(--tgl__switch__off);
+
+      &.active {
+        color: green;
+      }
+    }
+
+    &__addNew {
+      cursor: pointer;
+    }
+
+    &__statistics {
+      position: absolute;
+      bottom: 0rem;
+      left: 0rem;
+      i {
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+.mops-settings {
+  .MK2-modal__dialog {
+    width: 80rem;
+    max-width: 80rem;
+    padding-bottom: 10rem;
+  }
+  .MK2-modal__footer {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+  }
+  .formManager {
+    overflow-x: hidden;
+    padding-bottom: 10rem;
+  }
+  .formManager__builder {
+    margin-top: 0;
+  }
+  &__form {
+    padding-top: 2rem;
+  }
+  .label {
+    font-size: 1.4rem;
+    color: var(--tp__labels);
+    user-select: none;
+  }
+  .mb-2 {
+    margin-bottom: 2rem;
+  }
+  .mt-2 {
+    margin-top: 2rem;
+  }
+}

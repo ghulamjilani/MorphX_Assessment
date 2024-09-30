@@ -1,0 +1,417 @@
+
+
+@mixin siteColorButtonRGBA($a){
+  background-color: rgba(90, 147, 236, $a);
+};
+
+@mixin siteFontMain($font-size){
+  font-family: $font-Regular;
+  font-size: $font-size;
+}
+
+$font-Slab: 'Roboto Slab', serif;
+$font-Regular: 'Roboto', sans-serif;
+$font-size-m:14px;
+$font-size-l:16px;
+$font-size-xl:20px;
+
+$font-color-main-ultra-light: #a6a6a6;
+$font-color-main-light:#6f7073;
+//$font-color-main-dark:#303840;
+$font-colorWhite:#fff;
+$font-colorBlack:#000;
+$siteColorMain: #F23535;
+$siteColorSecondary: #095F73;
+
+$bg-red-color: #f23837;
+//$bodyBackground: #FBFBFB;
+$contentBackground: var(--bg__content);
+$contentPlaceholderBackground:#ededed;
+
+$font-colorLightGrey:$font-color-main-light;
+
+
+
+
+
+
+$siteColorMainGrey: #bcbcbc;
+$siteColorMainLightGrey: #e6e6e6;
+$siteColorMainDarkGrey: #8a8a8a;
+$siteColorMainDarkGrey2: #282828;
+$siteColorMainGrean: #12dcb4;
+$siteColorMainRed: $siteColorMain;
+$siteColorMainYellow: #F6C84A;
+$siteColorMainGold: #FFC20A;
+
+//FOR V2.0 form only
+$form_main-grey:#306690;
+$form_main-light-grey:$font-color-main-light;
+$form_main-blue: $siteColorMain;
+$form_main-red: $siteColorMainRed;
+$form_main-section_background: var(--bg__content);
+
+$form_state-statick:$font-color-main-light;
+$form_state-focus:$form_main-blue;
+$form_state-error:$form_main-red;
+
+
+
+
+$video-volor-grey: #3a4b59;
+$video-volor-blue: #396b9f;
+$video-volor-red: #F23535;
+$video-volor-bluu: #40d6ff;
+
+//$liveGuideColor: $bodyBackground;
+$liveGuideBorderColor: #b0b0b0;
+
+//header
+//HT --> header transperant state
+
+$header-icon-color: $font-color-main-light ;
+$header-icon-color-dark:  $font-color-main-light ;
+$header-icon-color-HT: #fff;
+$headerHeight: 7rem;
+
+//Dashboard
+$CRsessionWrapperBG:#fcfcfc ;
+$CRsessionWrapperBorderColor:#f2f2f2 ;
+
+
+$main_slider-height:530px;
+$main_slider-width:1920px;
+
+$inputColor: #d1d5d9;
+
+//sessionPage
+$responsiveVideoHeight:calc((100vw * 9) / 16);
+//sessionCreate
+$main_sections_width:440px;
+$main_sections_padding:350px;
+
+//socialNetworkColors
+$social-color-facebook:#3b5999;
+$social-color-twitter:#55acee;
+$social-color-instagram:#e4405f;
+$social-color-google:#dd4b39;
+$social-color-linkedin:#0077B5;
+$social-color-youtube:#cd201f;
+
+
+
+//EMBED
+$topLineHeight:50px;
+$bottomLineHeight:45px;
+//EMBED end
+
+//shadow color
+$mainShadowColor:var(--sh__main);
+
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin font-Regular($fontSize){
+  font-family:$font-Regular;
+  font-size: $fontSize;
+}
+
+
+
+@mixin transition200($who: all, $time: 0.2s , $animationType: cubic-bezier(0.4, 0.0, 0.2, 1)){
+  -webkit-transition:$who $time $animationType;
+  transition:$who $time $animationType;
+}
+
+
+//BTNS MIXINS
+
+@mixin btn-mod($size:20px, $fontSize:$size * 0.5){
+  line-height:$size - 4 ;
+  border-radius: $size * 0.5;
+  font-size:  $fontSize;
+}
+//@mixin btn-mod-BG-and-borders($bg:(linear-gradient(to right, $siteColorMain, lighten($siteColorMain, 15%))), $border:$bg){
+@mixin btn-mod-BG-and-borders($bg: var(--btn__main), $border:$bg){
+  background:$bg ;
+  border: 1px solid $border;
+}
+
+
+@mixin mainButton(){
+  background: var(--btn__main);
+  text-align: center;
+  color: var(--tp__btn__main) !important;
+  border-radius: 3px;
+  border: medium none;
+  font-size: 14px;
+  margin: 5px 0;
+  padding: 5px 9px 4px;
+  text-decoration: none !important;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: normal;
+  line-height: 1.42857;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+
+
+
+@mixin hyphens($mode: auto) {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  // Non standard for webkit
+  word-break: break-word;
+
+  -webkit-hyphens: $mode;
+  -moz-hyphens: $mode;
+  -ms-hyphens: $mode; // IE10+
+  -o-hyphens: $mode;
+  hyphens: $mode;
+
+}
+$fontSizeMounts: (0, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 30, 32);
+@mixin generate-fontSize() {
+  @each $fontSize in $fontSizeMounts {
+    .fs-#{$fontSize} {
+      font-size: #{$fontSize}px;
+    }
+  }
+}
+
+$spaceamounts: (0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 80);
+
+@mixin generate-margin-bottom() {
+  @each $space in $spaceamounts {
+    .margin-bottom-#{$space} {
+      margin-bottom: #{$space}px;
+    }
+  }
+}
+@mixin generate-margin-right() {
+  @each $space in $spaceamounts {
+    .margin-right-#{$space} {
+      margin-right: #{$space}px;
+    }
+  }
+}
+@mixin generate-margin-left() {
+  @each $space in $spaceamounts {
+    .margin-left-#{$space} {
+      margin-left: #{$space}px;
+    }
+  }
+}
+@mixin generate-margin-top() {
+  @each $space in $spaceamounts {
+    .margin-top-#{$space} {
+      margin-top: #{$space}px;
+    }
+  }
+}
+@mixin generate-padding-top() {
+  @each $space in $spaceamounts {
+    .padding-top-#{$space} {
+      padding-top: #{$space}px;
+    }
+  }
+}
+@mixin generate-padding-bottom() {
+  @each $space in $spaceamounts {
+    .padding-bottom-#{$space} {
+      padding-bottom: #{$space}px;
+    }
+  }
+}
+@mixin generate-padding-left() {
+  @each $space in $spaceamounts {
+    .padding-left-#{$space} {
+      padding-left: #{$space}px;
+    }
+  }
+}
+@mixin generate-padding-right() {
+  @each $space in $spaceamounts {
+    .padding-right-#{$space} {
+      padding-right: #{$space}px;
+    }
+  }
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+//example
+//@include keyframes(slide-down) {
+//  0% { opacity: 1; }
+//  90% { opacity: 0; }
+//}
+
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  animation: #{$str};
+}
+//example
+//.element {
+//  @include animation('slide-down 5s 3');
+//}
+
+@mixin text__ellipsis($ellipsisRows:false){
+  @if($ellipsisRows){
+    display: -webkit-box;
+    line-clamp: $ellipsisRows;
+    -webkit-line-clamp: $ellipsisRows;
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }@else {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@mixin media($point) {
+  @if $point == reverso-xxl-desktop {
+    @media all and (min-width: 1930px) { @content; }
+  }
+  @if $point == reverso-xl-desktop {
+    @media all and (min-width: 1312px) { @content; }
+  }
+  @if $point == xl-desktop {
+    @media all and (max-width: 1312px) { @content; }
+  }
+  @if $point == reverso-desktop {
+    @media all and (min-width: 1201px) { @content; }
+  }
+  @if $point == desktop {
+    @media all and (max-width: 1200px) { @content; }
+  }
+  @if $point == p-tablet-desktop {
+    @media all and (min-width: 768px) and (max-width: 1200px) { @content; }
+  }
+  @if $point == desktop-tablet {
+    @media all and (min-width: 992px) and (max-width: 1200px) { @content; }
+  }
+  @if $point == tablet {
+    @media all and (max-width: 991px) { @content; }
+  }
+  @if $point == reverso-tablet {
+    @media all and (min-width: 992px) { @content; }
+  }
+  @if $point == p-tablet {
+    @media all and (max-width: 767px) { @content; }
+  }
+  @if $point == reverso-p-tablet {
+    @media all and (min-width: 768px) { @content; }
+  }
+  @if $point == tablet-phone {
+    @media all and (min-width: 641px) and (max-width: 992px) { @content; }
+  }
+  @if $point == desktop-p-phone {
+    @media all and (min-width: 501px) and (max-width: 1200px) { @content; }
+  }
+  @if $point == phone-p-tablet {
+    @media all and (min-width: 641px) and (max-width: 767px) { @content; }
+  }
+  @if $point == p-phone-p-tablet {
+    @media all and (min-width: 501px) and (max-width: 767px) { @content; }
+  }
+  @if $point == tablet-pTablet {
+    @media all and (min-width: 768px) and (max-width: 992px) { @content; }
+  }
+  @if $point == reverso-phone {
+    @media all and (min-width: 641px) { @content; }
+  }
+  @if $point == phone {
+    @media all and (max-width: 640px) { @content; }
+  }
+  @if $point == p-phone {
+    @media all and (max-width: 500px) { @content; }
+  }
+  @if $point == reverso-p-phone {
+    @media all and (min-width: 501px) { @content; }
+  }
+}
+
+@mixin flex($flex_type:flex, $flex_align:false, $flex_justify:false, $flex_direction:false, $flex_wrap:false, $justify_content:false, $align_items:false) {
+  display: $flex_type;
+  @if $flex_align {
+    align-items: $flex_align;
+  }
+  @if $flex_justify {
+    justify-content: $flex_justify;
+  }
+  @if $flex_direction{
+    flex-direction: $flex_direction
+  }
+  @if $flex_wrap{
+    flex-wrap:$flex_wrap
+  }
+  @if $justify_content{
+    justify-content:$justify_content
+  }
+  @if $align_items{
+    align-items:$align_items
+  }
+}
+
+// CENTERING
+@mixin center($position) {
+  position: absolute;
+  @if $position == 'v' {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  @else if $position == 'h' {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%);
+  }
+  @else if $position == 'vh' {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin boxShadow__main($boxShadow__color:$mainShadowColor){
+  box-shadow: 0 4px 7px 0 $boxShadow__color;
+}
+
+@mixin transition($who:all, $transition : 0.2s, $transition_style: cubic-bezier(0.4, 0.0, 0.2, 1)) {
+  -webkit-transition: $who $transition $transition_style;
+  -moz-transition: $who $transition $transition_style;
+  -o-transition: $who $transition $transition_style;
+  transition: $who $transition $transition_style;
+}
+
+@mixin bg_cover(){
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

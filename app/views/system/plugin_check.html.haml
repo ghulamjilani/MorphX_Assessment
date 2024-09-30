@@ -1,0 +1,87 @@
+!!!
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: 'en', xmlns: 'http://www.w3.org/1999/xhtml', 'xmlns:fb' => 'http://ogp.me/ns/fb#'}
+  / <![endif]
+  %head
+    // ServerTime should be first place
+    :javascript
+      (function(){
+        window.serverTime = new Date(#{(Time.now.to_f*1000).round});
+      })();
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+    = favicon_link_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png", rel: 'shortcut icon'
+
+  %body{class: body_class}
+    - content_for(:after_include_javascripts) do
+      :javascript
+        $(document).ready(function() {
+          parent.frameLoaded();
+        });
+
+    .pluginStatusWrapper
+
+      %div.SI-bi-title-left
+        %i.VideoClientIcon-system
+        %span System
+
+      %div.SI-bi-title-right
+        #pluginJoinFrame{style: 'padding-bottom: 0'}
+          - if browser.chrome?
+            %div{style: 'margin-bottom: 0; padding-bottom: 0'}
+              %span.spWarning
+                %i.icon-attention-alt.circleIcon
+                Unsupported browser
+              - content_for(:after_include_javascripts) do
+                :javascript
+                  $(document).ready(function() {
+                    window.fixIEpluginCheck();
+                  });
+
+          - elsif !browser.platform.mac? && !browser.platform.windows? && !browser.platform.windows_x64?
+            %div{style: 'margin-bottom: 0; padding-bottom: 0'}
+              %span.spWarning
+                %i.icon-attention-alt.circleIcon
+                Unsupported OS
+              - content_for(:after_include_javascripts) do
+                :javascript
+                  $(document).ready(function() {
+                    window.fixIEpluginCheck();
+                  });
+          - else
+            #pluginJoinRow
+              #pluginJoinSuccess{style: 'display: none; padding-bottom: 0; margin-bottom: 0'}
+                %span.spOk
+                  %i.icon-ok.circleIcon
+                  Ready
+              #pluginJoinUninstalled{style: 'display: none; padding-bottom: 0; margin-bottom: 0'}
+                %span.spDW
+                  - if browser.platform.mac?
+                    = link_to 'Download Plugin', download_client_profile_path(client: :web_mac), class: 'btn-yellow'
+                  - if browser.platform.windows? || browser.platform.windows_x64?
+                    = link_to 'Download Plugin', download_client_profile_path(client: :web_win), class: 'btn-yellow'
+              #pluginJoinCheckCam{style: 'display: none; padding-bottom: 0; margin-bottom: 0'}
+                %span.spWarning
+                  %i.icon-attention-alt.circleIcon
+                  Check your webcam
+              #pluginJoinCheckMic{style: 'display: none; padding-bottom: 0; margin-bottom: 0'}
+                %span.spWarning
+                  %i.icon-attention-alt.circleIcon
+                  Check your microphone
+              #pluginJoinBlocked{style: 'display: none; padding-bottom: 0; margin-bottom: 0'}
+                %span.spWarning
+                  %i.icon-attention-alt.circleIcon
+                  Plugin is blocked
+            #pluginJoinContainer
+
+    /[if lt IE 9]
+      = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js'
+      = javascript_include_tag 'respond'
+
+    = include_gon(namespace: 'Immerss', camel_case: true, init: true) # should be included before application.js
+
+    = javascript_include_tag 'application'
+
+    = yield(:after_include_javascripts)

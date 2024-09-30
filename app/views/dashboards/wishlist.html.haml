@@ -1,0 +1,19 @@
+- content_for(:page_title, 'Saved')
+- content_for(:extra_body_classes, 'header-top')
+
+.row#sessions
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9.main-content-section.tablet-flex
+    - if @wishlist_items.count > 0
+      %label.display-block.full-width.margin-bottom-20
+        Saved
+      - @wishlist_items.each do |item|
+        .cat-2.col-md-4.col-sm-6{id: "#{item.model_type.downcase}#{item.model_id}"}
+          = render(partial: "shared/tiles/#{item.model_type.downcase}", locals: {custom_class: '', "#{item.model_type.downcase}": item.model})
+    - else
+      %label
+        Saved
+      .noSavedVideos
+        = render "noSaves"
+        %p= I18n.t('dashboards.wishlist.no_items')

@@ -1,0 +1,50 @@
+@import "mixin";
+
+.morphx {
+  .header .LogoWrapp{
+    width: 15rem;
+    max-height: 4rem;
+    max-width: none;
+    #logo-header{
+      width: auto;
+      max-height: 3.5rem;
+      object-fit: cover;
+    }
+    @include media(reverso-desktop){
+      &:not(.header-top){
+        width: auto;
+      }
+    }
+  }
+
+  .mobileHeader{
+    @include media(p-tablet){
+      min-height: 5rem;
+    }
+  }
+
+  .mx__header__container__offset {
+    margin-top: 2rem;
+    transition: 0.3s all;
+  }
+
+  @include media(p-tablet) {
+    .mx__header__container__offset {
+      margin-top: 0;
+    }
+    .mobileHeader .LogoWrapp #logo-header {
+      max-width: 3.5rem;
+    }
+  }
+}
+#contactUs{
+  label{
+    color: var(--tp__labels);
+    &::after{
+      color: var(--tp__labels);
+    }
+  }
+  input:not([type='hidden']), textarea{
+    color: var(--tp__inputs__active);
+  }
+}

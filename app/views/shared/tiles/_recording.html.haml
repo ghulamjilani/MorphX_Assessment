@@ -1,0 +1,27 @@
+%section.tile-cake{id: "recording_tile_#{recording.id}", data: {type: :recording, id: recording.id}, class: (defined?(custom_class) ? custom_class : '' )}
+  .tile-img
+    .tile-imgContainer.owl-lazy{'data-src': recording.poster_url}
+    %a.tile_link{href: recording.relative_path}
+      %i.VideoClientIcon-play-icon1
+    - if can?(:share, recording)
+      = link_to recording.preview_share_relative_path, method: :get, rel: 'nofollow', 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, remote: true, class: 'social-sharing', title: 'Share' do
+        %i.VideoClientIcon-share-mk4
+    .sessionCost
+      - if recording.purchase_price.to_f > 0
+        %i.VideoClientIcon-dollar-currency-symbol
+        .sessionCost-tooltip.fs-12
+          .row
+            .col-xs-6.text-color-Darkgrey.padding-right-0 Buy
+            .col-xs-6.text-color-green.text-right
+              = number_to_currency(recording.purchase_price.to_f, precision: 2)
+  .tile-body
+    %a.tile-name{href: recording.relative_path,  rel: 'tipsy', title: recording.always_present_title}
+      = recording.always_present_title
+    = link_to "By #{recording.organizer.public_display_name}", spa_user_path(recording.organizer.slug), class: 'tile-owner text-ellipsis display-block'
+    .padding-top-10.fs-14.star_ratingWrapper
+      = raw new_star_rating(numeric_rating_for(recording.channel))
+      %span.display-inline-block.vertical-midle.margin-right-10 (#{recording.channel.raters_count})
+      .display-inline-block.vertical-midle.lh_15
+        .participants.text-ellipsis.display-inline-block.vertical-midle
+          %i.VideoClientIcon-Views.vertical-midle.fs-16
+          = short_number(recording.views_count).html_safe

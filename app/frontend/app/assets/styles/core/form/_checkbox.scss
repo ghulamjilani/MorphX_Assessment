@@ -1,0 +1,65 @@
+.checkboxMK2.choice, .choice .checkboxMK2 {
+  color: var(--tp__main);
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  display: block;
+  font-weight: normal;
+
+  & > span, .labelContent {
+    padding: 0 0 0 2.6rem;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    min-height: 2.2rem;
+
+    &:after {
+      content: '';
+      line-height: 1.4rem;
+      font-family: 'VideoClientIcon';
+      position: absolute;
+      left: 0.2rem;
+      top: 0.3rem;
+      font-size: 1.3rem;
+      font-weight: 300;
+      z-index: 2;
+      color: #fff;
+      background: transparent;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 0.3rem;
+      border: 1px solid var(--border__separator);
+    }
+  }
+
+  input.disabled + span, input:disabled + span, input.disabled + .labelContent, input:disabled + .labelContent {
+    cursor: no-drop;
+
+    &:after {
+      border-color: #acacac;
+    }
+
+    opacity: 0.2;
+  }
+
+  input {
+    position: absolute;
+    left: -5rem;
+    top: 0;
+
+    &:checked {
+      & + span:after, & + .labelContent:after {
+        background: var(--tp__active);
+        border-color: var(--tp__active);
+        content: '\ea10';
+      }
+
+      &.some_selected {
+        & + span:after, & + .labelContent:after {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

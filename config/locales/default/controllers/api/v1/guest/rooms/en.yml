@@ -1,0 +1,12 @@
+en:
+  controllers:
+    api:
+      v1:
+        guest:
+          rooms:
+            errors:
+              banned: 'You are banned from this session. Reason: %{reason}.'
+              join_interactive_by_token:
+                invalid_access_token: Invalid access token
+                guest_access_forbidden: Guests are not allowed to access this page
+                session_is_full: Session is full

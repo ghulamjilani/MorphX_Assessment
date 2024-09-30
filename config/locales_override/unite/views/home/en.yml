@@ -1,0 +1,13 @@
+en:
+  views:
+    home:
+      banner:
+        telegram_link: https://t.me/besovereignworldwide
+  home_page:
+    sticky_panel:
+      organizations: Networks
+      popular: Trending
+      discover: All Videos
+    titles:
+      popular: Trending
+      discover: All Videos

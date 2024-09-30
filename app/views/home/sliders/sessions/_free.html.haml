@@ -1,0 +1,13 @@
+- if @free_sessions.present?
+  .col-md-12
+    .headline
+      %h2
+        Free
+    .TileSliderWrapp.owlSlider
+      .spinnerSlider
+        .bounceS1
+        .bounceS2
+        .bounceS3
+      .TileSlider.owl-carousel
+        - @free_sessions.each do |session|
+          = render('shared/channel_or_session_or_user', model: session)

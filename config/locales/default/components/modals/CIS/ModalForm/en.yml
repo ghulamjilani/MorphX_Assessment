@@ -1,0 +1,17 @@
+en:
+  components:
+    modals:
+      cis:
+        modal_form:
+          cis: Create Interactive Session
+          duration: Duration
+          min: min
+          chat: Chat
+          record: Record
+          participants: Participants
+          privacy: Privacy
+          public: Public
+          private: Private
+          cancel: Cancel
+          start_session: Start Session
+          free_limit_message: You have exceeded the number of allocated free sessions on your plan, please contact admin for any details. Please make sure that all the payments for your sessions are processed through site.

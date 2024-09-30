@@ -1,0 +1,18 @@
+#see https://github.com/ryanb/cancan/wiki/exception-handling
+#possible token:
+#  manage:
+#    all: "Not authorized to %{action} %{subject}."
+en:
+  unauthorized:
+    default: "You are not authorized to access this page."
+  cancan:
+    not_allowed:
+      default: You are not allowed to access this page.
+    unauthorized:
+      general: You are not allowed to perform this action.
+      sessions:
+        because_of:
+          adult: This session is private. You must be logged in and over the age of 18 to access this session.
+          free_session_pending_review: This session is currently under review. It will be accessible to participants shortly.
+          private: This session is private. Only invited users are allowed to access it.
+          forbidden: "You are not authorized to access this session."

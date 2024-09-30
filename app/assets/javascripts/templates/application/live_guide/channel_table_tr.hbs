@@ -1,0 +1,37 @@
+<td width="100%">
+	<div class="schedule-container schedule-contents">
+		<div class="schedule-inner-container">
+          <div class="past_time_overlay" style="width:[%= timeIndicatorLeftMarginPx %]px; "></div>
+      [% /* it is null for dates other than current day */ %]
+      [% if (timeIndicatorLeftMarginPx) { %]
+        <div class="time_indicator" style="left:[%= timeIndicatorLeftMarginPx %]px; "></div>
+      [% } %]
+
+      [% var itemWidth = window.LiveGuideView.prototype.halfHourWidth(); %]
+
+      [% _.each(sessions, function(session) { %]
+
+        [% var date = new Date(session.start_at); %]
+        [% var start_hours = date.getHours(); %]
+        [% var start_minutes = date.getMinutes(); %]
+        [% var duration = session.duration; %]
+
+        [% var start_hour_numerical = start_hours + start_minutes / 60; %]
+        [% var start_point = itemWidth * 2 * start_hour_numerical; %]
+        [% var schedule_width = itemWidth * ( duration / 30 ) - 10; %]
+
+        [% var end_point = start_point + schedule_width; %]
+
+        <a class="schedule-item has-popover"
+          style="display: block; left: [%= start_point %]px; width: [%= schedule_width %]px; background-color: [%= channel_color %]"
+          data-html="true"
+          href="[%= session.relative_path %]"
+          target="_blank"
+          data-content="[%= session.popover_html_content %]">
+          [%= session.title %]
+        </a>
+
+      [% }) %]
+		</div>
+	</div>
+</td>

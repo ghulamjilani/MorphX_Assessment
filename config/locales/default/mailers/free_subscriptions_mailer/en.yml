@@ -1,0 +1,14 @@
+en:
+  mailers:
+    free_subscriptions_mailer:
+      invite:
+        subject: '%{channel_title}: Your access has started: "%{plan_name}"'
+        dear_user: "Dear %{invited_user_name}"
+        user_has_invited: "%{user_name} has invited you to join the <a href='%{channel_url}'>%{channel_title}</a> channel."
+        additional_info: "Thank you for being a <a href='%{channel_url}'>%{channel_title}</a> Member and we hope you enjoy our new membership on <a href=\"%{host_url}\">%{host_name}</a>."
+        can_spam_address: ""
+      going_to_be_finished:
+        subject: '%{channel_title}: Your access is ending next week: "%{plan_name}"'
+      ended:
+        dear_user: "Dear %{invited_user_name}"
+        subject: '%{channel_title}: Your access has ended: "%{plan_name}"'

@@ -1,0 +1,7 @@
+en:
+  models:
+    review:
+      errors:
+        rating_required: Rating is required
+        unsupported_reviewable: Reviews are not allowed for %{reviewable_type}
+        not_allowed: You are not allowed to leave review on this %{reviewable_type}

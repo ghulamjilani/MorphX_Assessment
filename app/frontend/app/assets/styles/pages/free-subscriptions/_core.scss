@@ -1,0 +1,31 @@
+@import "form";
+@import "table";
+@import "paginate";
+
+.FS {
+  padding: 3rem 3rem 4rem;
+  background: var(--bg__content);
+  border-radius: 1rem;
+  box-shadow: 0 .4rem .7rem 0 var(--sh__main);
+  margin-bottom: 1rem;
+  position: relative;
+
+  &__title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--tp__h1);
+    padding-bottom: 2rem;
+  }
+
+  &__empty {
+    @include center('vh');
+    font-size: 1.8rem;
+  }
+}
+
+@include media(p-phone) {
+  .FS {
+    position: relative;
+    padding-bottom: 5rem;
+  }
+}

@@ -1,0 +1,113 @@
+@import "../../mixin";
+.ch-p_C_tiles .reviews{
+  font-size: 0;
+  .reviews-tile{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    @include media(tablet){
+      width: 100%;
+    }
+    @include media(reverso-xl-desktop){
+      width: 50%;
+    }
+  }
+}
+.session_or_replay_or_recording{
+  .ch-p_C_tiles .reviews{
+    font-size: 0;
+    .reviews-tile{
+      @include media(reverso-xxl-desktop){
+        width: 25%;
+      }
+      @include media(reverso-xl-desktop){
+        width: 33.33%;
+      }
+      @include media(tablet){
+        margin-bottom: 30px;
+      }
+    }
+  }
+  .review__section{
+    @include media(desktop-tablet){
+      width: 100%;
+    }
+  }
+}
+.reviews-tile{
+  padding: 30px 15px 20px;
+  font-size: 14px;
+  color: var(--tp__main);
+  .reviews-tile-l{
+    width: 70px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .reviews-tile-r{
+    width: calc(100% - 70px);
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -4px;
+    overflow: hidden;
+  }
+  .reviews-body-wrapp{
+    margin-left: 70px;
+    @include media(tablet){
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
+  .reviews-author-avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+  }
+  .reviews-author-name{
+    a{
+      font-size: $font-size-l;
+      @include text__ellipsis(1);
+      display: block;
+      color:var(--tp__h1);
+    }
+  }
+  .starRating{
+    color: $siteColorMain;
+    padding-right: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    letter-spacing: 0px;
+    i{
+      font-size: 11px;
+    }
+  }
+  .col-md-8{
+    padding-left: 0;
+  }
+  .reviews-date{
+    font-size: $font-size-l;
+  }
+  .reviews-body-text{
+    padding-top: 5px;
+  }
+}
+.Reviews{
+  .ReviewsToggle{
+    font-size: 12px;
+    padding-top: 10px;
+  }
+  &:not(.showAll){
+    .row{
+      & > .reviews-tile-wrapper:not(:first-child){
+        display: none;
+      }
+    }
+  }
+  &.showAll{
+    .VideoClientIcon-navigate-down-arrow{
+      transform: rotate(180deg);
+      position: relative;
+      display: inline-block;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<div class="text-center">
+    {{#if current_user}}
+        <a class="you">You</a>
+    {{else}}
+        <a class="others">Others</a>
+        <a class="remove_user_item pull-right">x</a>
+    {{/if}}
+</div>
+
+<div class="User-listImage {{#if current_user}} you {{else}} others {{/if}}"
+     style='background-image: url("{{logo}}")'>
+  {{#if current_user}}
+      <i class="VideoClientIcon-EditF you"></i>
+  {{/if}}
+</div>
+
+<span class="text-center full-width display-block">
+  {{#if full_name}}
+    {{full_name}}
+  {{else}}
+    {{email}}
+  {{/if}}
+</span>

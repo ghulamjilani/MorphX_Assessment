@@ -1,0 +1,180 @@
+.PlansModal {
+  color: var(--tp__main);
+
+  .MK2-modal {
+    &__dialog {
+      padding: 2rem;
+      width: 80rem;
+      padding: 4rem 3rem 0;
+      @include media(tablet) {
+        width: 100%;
+        max-width: 94%;
+      }
+    }
+
+    &__body {
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  &__Title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    line-height: 2.2rem;
+    color: var(--tp__h1);
+    padding: 0;
+    margin-bottom: 2.3rem;
+  }
+
+  .subsDescription {
+    word-break: break-word;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    color: var(--tp__secondary);
+    margin-bottom: 2.7rem;
+  }
+
+  &__plansWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    @include media(tablet) {
+      justify-content: space-evenly;
+    }
+  }
+
+  &__planItem {
+    width: 24rem;
+    min-height: 46rem;
+    padding: 2rem 2rem;
+    margin-right: 1rem;
+    margin-bottom: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2rem;
+    border: 1px solid var(--border__content__sections);
+    @include media(reverso-tablet) {
+      &:nth-child(3n+3) {
+        margin-right: 0;
+      }
+    }
+    @include media(p-phone) {
+      margin-right: 0;
+    }
+    @include media(phone) {
+      width: 100%;
+    }
+    //&:nth-child(3n){
+    //  margin-right: 0;
+    //}
+    &__recommended {
+      color: #fff;
+      border-radius: 1rem 1rem 0 0;
+      background-color: var(--bg__label);
+      height: 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      top: -2.2rem;
+      width: calc(100% + 0.4rem);
+    }
+  }
+
+  &__recommended {
+    position: relative;
+    top: -3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__economy {
+    color: var(--tp__h1);
+    font-size: 1.4rem;
+    display: block;
+    text-align: center;
+  }
+
+  &__listWrapper {
+    @include flex(flex, center, center);
+    flex-direction: column;
+
+    &__currency {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+      font-size: 3.2rem;
+      color: var(--tp__main);
+      line-height: 2.4rem;
+      font-weight: bold;
+      padding: 0;
+    }
+
+    button {
+      @include media(phone) {
+        width: 50%;
+        margin: 3rem auto 0;
+      }
+    }
+  }
+
+  &__lists {
+    @include flex(flex, flex-start, flex-end);
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__topWrapper {
+    @include flex(flex, center, flex-start);
+    flex-direction: column;
+    margin-bottom: auto;
+
+    span {
+      font-size: 1.8rem;
+      line-height: 1.8rem;
+      color: var(--tp__main);
+      font-weight: bold;
+      word-break: break-word;
+      text-align: center;
+    }
+
+    span:first-child {
+      word-break: break-word;
+      text-align: center;
+    }
+  }
+
+  &__list {
+    width: 100%;
+
+    &.underline {
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border__content__sections);
+    }
+
+    span {
+      padding-bottom: 1.3rem;
+      font-size: 1.4rem;
+      line-height: 1.4rem;
+      font-weight: bold;
+      padding-right: 0;
+      color: var(--tp__main);
+    }
+
+    i {
+      color: var(--tp__icons);
+      padding-right: 1rem;
+      font-size: 1.8rem;
+    }
+
+    &:not(:first-child) {
+      padding-top: 1rem;
+    }
+  }
+
+  &__list.disabled {
+    opacity: 0.5;
+  }
+}

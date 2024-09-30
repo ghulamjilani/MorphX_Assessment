@@ -1,0 +1,19 @@
+{{#if (or immersive co_hosts)}}
+    <option value="desktop_basic" data-type="immersive" data-service-type="webrtcservice"
+        {{#if (eq device_type 'desktop_basic')}}selected{{/if}}>{{ i18n 'sessions.form.device_types.desktop_basic' }}</option>
+    <option value="studio_equipment" data-service-type="webrtcservice"
+        {{#if (eq device_type 'studio_equipment')}} selected {{/if}}>{{ i18n 'sessions.form.device_types.studio_equipment' }}</option>
+    <option value="mobile" data-type="immersive" data-service-type="webrtcservice"
+        {{#if (eq device_type 'mobile')}}selected{{/if}}>{{ i18n 'sessions.form.device_types.mobile' }}</option>
+{{else}}
+    <option value="desktop_basic" data-service-type="webrtcservice"
+        {{#if (eq device_type 'desktop_basic')}} selected {{/if}}>{{ i18n 'sessions.form.device_types.desktop_basic' }}</option>
+    <option value="desktop_advanced" data-service-type="rtmp"
+        {{#if (eq device_type 'desktop_advanced')}} selected {{/if}}>{{ i18n 'sessions.form.device_types.desktop_advanced' }}</option>
+    <option value="professional" data-service-type="rtmp"
+        {{#if (eq device_type 'professional')}} selected {{/if}}>{{ i18n 'sessions.form.device_types.professional' }}</option>
+    <option value="studio_equipment" data-service-type="webrtcservice"
+        {{#if (eq device_type 'studio_equipment')}} selected {{/if}}>{{ i18n 'sessions.form.device_types.studio_equipment' }}</option>
+    <option value="mobile" data-service-type="rtmp"
+        {{#if (eq device_type 'mobile')}} selected {{/if}}>{{ i18n 'sessions.form.device_types.mobile' }}</option>
+{{/if}}

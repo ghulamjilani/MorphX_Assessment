@@ -1,0 +1,39 @@
+/opt/bitnami/mongodb/prod_log/config-1.log {
+  rotate 3
+  size 1G
+  postrotate
+    pkill -SIGUSR1 -f "mongod.*config-1\.conf"
+  endscript
+}
+
+/opt/bitnami/mongodb/prod_log/config-2.log {
+  rotate 3
+  size 1G
+  postrotate
+    pkill -SIGUSR1 -f "mongod.*config-2\.conf"
+  endscript
+}
+
+/opt/bitnami/mongodb/prod_log/config-3.log {
+  rotate 3
+  size 1G
+  postrotate
+    pkill -SIGUSR1 -f "mongod.*config-3\.conf"
+  endscript
+}
+
+/opt/bitnami/mongodb/prod_log/shard-1.log {
+  rotate 3
+  size 1G
+  postrotate
+    pkill -SIGUSR1 -f "mongod.*shard-1\.conf"
+  endscript
+}
+
+/opt/bitnami/mongodb/prod_log/router.log {
+  rotate 3
+  size 1G
+  postrotate
+    pkill -SIGUSR1 -f "mongos.*router\.conf"
+  endscript
+}

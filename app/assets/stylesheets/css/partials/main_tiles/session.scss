@@ -1,0 +1,25 @@
+section.tile-cake.session-tile {
+  margin-bottom: 40px;
+  //.tile-body {
+  //  min-height: 180px;
+  //}
+}
+.player-container-wrapp > *{
+  min-height: 0;
+  min-width: 0;
+}
+.cYouMayAlsoLikeTileSlider, .channel_landing {
+  section.tile-cake.session-tile .tile-body {
+    min-height: 120px;
+  }
+}
+.cYouMayAlsoLikeTileSlider{
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0.1;
+  &.RedyToshow{
+    white-space: inherit;
+    overflow: visible;
+    opacity: 1;
+  }
+}

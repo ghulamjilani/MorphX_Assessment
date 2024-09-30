@@ -1,0 +1,7 @@
+en:
+  frontend:
+    app:
+      components:
+        documents:
+          preview_modal:
+            description: Description

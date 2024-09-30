@@ -1,0 +1,248 @@
+.homePage {
+
+  .adbutler {
+    margin: 0 auto;
+    // width: 128rem;
+
+
+    @include media(desktop) {
+      width: 100%;
+    }
+  }
+
+  .adiframe {
+    margin: 0 auto;
+  }
+
+  .mChannel__tiles__list {
+    padding-top: 1rem;
+  }
+
+  &__footer {
+    position: relative;
+    padding: 3rem 0;
+
+    &__img {
+      filter: brightness(0.7);
+      width: 100%;
+    }
+
+    &__wrapper {
+      @include center('vh');
+      @include flex(flex, center, false);
+      flex-direction: column;
+      width: 100%;
+    }
+
+    &__title {
+      text-align: center;
+      font-size: 4rem;
+      font-weight: bold;
+      color: white;
+      padding-bottom: 2rem;
+      margin-top: 7rem;
+      @include media(desktop) {
+        font-size: 3rem;
+        margin-top: 0;
+      }
+      @include media(tablet) {
+        padding-bottom: 0;
+      }
+      @include media(phone) {
+        font-size: 2rem;
+      }
+      h1 {
+        font-size: 7rem;
+        color: white;
+      }
+      h2 {
+        font-size: 6rem;
+        color: white;
+      }
+      h3 {
+        font-size: 5rem;
+        color: white;
+      }
+    }
+
+    &__button {
+      min-height: 4rem;
+      @include media(phone) {
+        min-height: 3rem;
+      }
+    }
+  }
+
+  &__scroll {
+    position: fixed;
+    @include flex(flex, center, center);
+    top: 6rem;
+    background: var(--bg__header);
+    z-index: 999;
+    width: 100%;
+    left: 0;
+    padding: 3.5rem 11rem 2.4rem;
+    @include media(desktop) {
+      display: block;
+      padding: 3.5rem 2rem 2.4rem;
+    }
+    @include media(p-tablet) {
+      top: 4rem;
+    }
+
+    &__active {
+      background: var(--bg__hover);
+    }
+
+    &__mobile {
+      top: -1rem;
+    }
+
+    .mChannel__tiles__nav {
+      min-width: 125rem;
+      max-width: 160rem;
+      margin: 0;
+      padding: 0;
+      justify-content: space-between;
+
+      white-space: nowrap;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar, &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-corner, &::-webkit-scrollbar-button {
+        display: none;
+      }
+
+      @include media(desktop) {
+        min-width: auto;
+        max-width: auto;
+      }
+    }
+    &__div{
+      display: flex;
+      overflow-x: auto;
+    }
+  }
+
+  &__telegram{
+    position: absolute;
+    @include center(vh);
+    color: #FFF;
+    &__wrapper{
+      margin-left: 1.5rem;
+      min-width: 3.2rem;
+      min-height: 3.2rem;
+      max-width: 3.2rem;
+      max-height: 3.2rem;
+      background: #4380C6;
+      position: relative;
+      display: block;
+      border-radius: 100%;
+      a:not(.btn):focus, a:not(.btn):hover, a:not(.btn):active{
+        color: #FFF;
+      }
+    }
+    &__tooltip{
+      // top: 4rem !important;//overide inline style
+    }
+  }
+
+  &__title {
+    padding: 0 3.5rem;
+    font-size: 2.2rem;
+    color: var(--tp__main);
+    font-weight: bold;
+    margin: 0;
+    @include media(desktop) {
+      padding: 0 .8rem;
+    }
+    @include media(phone) {
+      padding: 0 1rem;
+    }
+
+    &__creators {
+      margin: 0;
+    }
+
+    &__wrapper {
+      padding-top: 2rem;
+      margin-bottom: -1rem;
+      @include flex(flex, center, space-between);
+      @include media(desktop) {
+        width: 100vw;
+        max-width: 100%;
+        margin: 0 auto -1rem;
+        padding: 2rem 0rem 0 1.5rem;
+      }
+      @include media(phone) {
+        padding: 2rem 0rem 0 0rem;
+      }
+
+      &__creators {
+        margin: .5rem 0 0;
+        padding-top: 0;
+      }
+    }
+
+    &__more {
+      color: var(--tp__secondary);
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 0;
+      padding: 0 3.5rem;
+      @include media(desktop) {
+        padding: 0;
+      }
+      @include media(phone) {
+        white-space: nowrap;
+      }
+
+      &__creators {
+        margin: 0;
+      }
+    }
+  }
+
+  &__creators {
+    background: var(--bg__secondary);
+    padding: 2rem 0;
+    margin-top: 3rem;
+
+    &__title {
+      margin: 1rem 0 0;
+    }
+  }
+
+  &__Banner {
+    background-blend-mode: screen;
+    // padding-top: 4.7rem;
+    overflow: hidden;
+  }
+
+  @keyframes animatedBanner {
+    0%, 13.5% {
+      top: 0;
+    }
+    16.5%, 30% {
+      top: -100%;
+    }
+    33%, 46.5% {
+      top: -200%;
+    }
+    49.5%, 63% {
+      top: -300%;
+    }
+    66%, 79.5% {
+      top: -200%;
+    }
+    82.5%, 97% {
+      top: -100%;
+    }
+    100% {
+      top: 0;
+    }
+  }
+}
+
+@import "./videoBanner";
+@import "./customizableBanner";
+@import "./bannerAdvertisement";

@@ -1,0 +1,9 @@
+en:
+  helpers:
+    mailer:
+      email_direct_message_context:
+        direct_message_from: You are receiving a direct message from %{from_name}
+      email_team_thank_you:
+        message: |-
+          Thanks
+          - The %{team_name} Team

@@ -1,0 +1,26 @@
+%table.table.table-hover.table-dashed-border.table-striped.responsiveTable.full-width
+  %thead
+    %tr
+      %th Date
+      %th Type
+      %th Description
+      %th Customer Name
+      %th{width: '10%'} Revenue
+      %th{width: '10%'} Payout Status
+  %tbody
+    - log_transactions.each do |log_transaction|
+      - customer = log_transaction.payment_transaction.try(:user)
+      %tr
+        %td{data: {th: "Date"}}
+          = time_with_tz_in_chosen_format(log_transaction.created_at, false)
+        %td{data: {th: 'Type'}}
+          = log_transaction.type.humanize
+        %td{data: {th: "Description"}}
+          = log_transaction.abstract_session.try(:title)
+        %td{data: {th: 'Customer Name'}}
+          - if customer.present?
+            %a{href: customer.relative_path}= customer&.public_display_name
+        %td{data: {th: 'Revenue'}}
+          = as_currency(log_transaction.amount)
+        %td{data: {th: 'Payout Status'}}
+          = log_transaction.payment_transaction.payout_status rescue ''

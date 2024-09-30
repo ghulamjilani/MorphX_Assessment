@@ -1,0 +1,31 @@
+@mixin modal__sizeCorrection($width:500px, $padding:1em, $bodyPadding:false) {
+  width: $width;
+  padding: $padding;
+  @if ($bodyPadding) {
+    .modal__body {
+      padding: $bodyPadding;
+    }
+  }
+}
+
+@mixin modal__backdrop($backdrop:rgba(0,0,0,0.5)) {
+  background: rgba(0, 0, 0, 0);
+  z-index: 19;
+  visibility: hidden;
+  @include transition();
+  &.show {
+    visibility: visible;
+    background: $backdrop;
+  }
+}
+
+@mixin modal__close() {
+  position: absolute;
+  right: 1rem;
+  top: .5rem;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
+@import "modal";

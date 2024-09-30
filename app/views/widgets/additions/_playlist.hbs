@@ -1,0 +1,32 @@
+<!--In case if chat is available - class "active" is added to this element-->
+<div class="cssTAb">
+    <input type="radio" id="tab-two" name="additions_tabs" checked="checked">
+    <label for="tab-two">
+        Chat
+        <i class="embed_fontnavigate-up-arrow"></i>
+    </label>
+    <div class="tab-content additions_tabs_chat">
+        <div id="embed-vue-chat"></div>
+        <div class="chatCover" style="display: none;">
+            <!--TODO for Dasha: change img position on optimal-->
+            <img src="/chatPL.png" alt="">
+            <div>Chat will be live soon...</div>
+        </div>
+        <!--Chat is appended here-->
+    </div>
+    <input type="radio" id="tab-one" name="additions_tabs">
+    <label for="tab-one" {{#unless hasExternalPlaylist}}style="display: none;"{{/unless}}>
+        Playlist
+        <i class="embed_fontnavigate-up-arrow hidden"></i>
+    </label>
+    <div class="tab-content additions_tabs_list">
+        <div class="track-container">
+            <div class="tracks_new streams-container">
+                <!--Streams collection template is appended here-->
+            </div>
+            <div class="tracks_new replays-container">
+                <!--Tracks collection template is appended here-->
+            </div>
+        </div>
+    </div>
+</div>

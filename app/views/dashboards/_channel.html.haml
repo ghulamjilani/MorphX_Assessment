@@ -1,0 +1,413 @@
+%section.CRsession.clearfix{data: {channel_id: channel.id}}
+  .CRsessionWrapper.clearfix
+    .col-md-4.CRIMGblock.clearfix
+      = link_to image_tag(channel.image_slider_url), channel.relative_path
+    .col-md-8.CRINFOblock.clearfix
+      .CRINFOblockDescription.row
+        .col-md-12.CRINFOblockDescription_head
+          .CRsessionTitle
+            %p.text-ellipsis
+              = link_to channel.title, channel.relative_path
+
+            - if can?(:edit, channel) || can?(:create_session, channel) || can?(:archive, channel)
+              = dropdown_with_icons do
+                - if can?(:create_session, channel)
+                  %li
+                    = link_to new_channel_session_path(channel.slug) do
+                      %i.VideoClientIcon-plusF
+                      %span= I18n.t('views.dashboards.channel.new_session')
+
+                - if can?(:submit_for_review, channel)
+                  %li
+                    = link_to submit_for_review_channel_path(channel.id),
+                              method: :post,
+                              data: {confirm: I18n.t('views.dashboards.channel.channel_review_confirmation')} do
+                      %i.icon-bell-alt
+                      %span= I18n.t('views.dashboards.channel.submit_for_review')
+
+                - if can?(:list, channel)
+                  %li
+                    = link_to list_channel_path(channel.id),
+                              method: :post,
+                              data: {confirm: I18n.t('views.dashboards.channel.list_confirmation')} do
+                      %i.icon-bell-alt
+                      %span= I18n.t('views.dashboards.channel.list')
+
+                - if can?(:unlist, channel)
+                  %li
+                    = link_to unlist_channel_path(channel.id),
+                              method: :post,
+                              data: {confirm: I18n.t('views.dashboards.channel.unlist_confirmation')} do
+                      %i.icon-bell-alt
+                      %span= I18n.t('views.dashboards.channel.unlist')
+
+                - if can?(:edit, channel)
+                  %li
+                    = link_to edit_channel_path(channel.slug) do
+                      %i.VideoClientIcon-editF
+                      %span= I18n.t('views.dashboards.channel.edit')
+
+                  -#%li
+                    - if can?(:manage_creators, channel)
+                      = link_to edit_creators_channel_path(channel.slug) do
+                        %i.VideoClientIcon-usersF
+                        %span Creators
+                    - else
+                      = link_to 'javascript:void(0)', disabled: true, onclick: '$.showFlashMessage("Your Business plan is not supporting this feature", {type: "error", timeout: 4000})' do
+                        %i.VideoClientIcon-usersF
+                        %span Creators
+
+                - if can?(:archive, channel)
+                  %li
+                    = link_to archive_channel_path(channel.id),
+                              method: :post,
+                              data: {confirm: I18n.t('views.dashboards.channel.archive_confirmation')} do
+                      %i.VideoClientIcon-lock.bold
+                      %span= I18n.t('views.dashboards.channel.archive')
+
+        .channel-info-wrapper
+          .col-md-6.channelParams
+            %p.CRsessionCategory
+              %strong
+                = I18n.t('views.dashboards.channel.category')
+                =':'
+              = channel.category.name
+
+            -#%p.CRsessionType
+            -#  %strong Type:
+            -#  = channel.channel_type.description
+
+            %p.CRchannelOrganizer
+              %strong
+                = I18n.t('dictionary.creator_upper')
+                =':'
+              = link_to channel.organizer.public_display_name, spa_user_path(channel.organizer.slug)
+
+            - if channel.organization_id
+              %p.CRchannelCompany
+                %strong
+                  = I18n.t('views.dashboards.channel.company')
+                  =':'
+                = link_to channel.organization.name, channel.organization.relative_path
+
+          .col-md-6
+            %p
+              %strong
+                = I18n.t('views.dashboards.channel.status')
+                =':'
+              = channel_status(channel)
+            %p
+              %strong
+                = I18n.t('views.dashboards.channel.visibility')
+                =':'
+              = channel_visibility(channel)
+
+            %p
+              %strong
+                = I18n.t('views.dashboards.channel.default')
+                =':'
+              = channel.is_default ? 'Yes' : 'No'
+
+            - if channel.channel_location.present?
+              %p.CRsessionLocation
+                %strong
+                  = I18n.t('views.dashboards.channel.location')
+                  =':'
+                = channel.channel_location
+
+            - if channel.approximate_start_date
+              %p.CRsessionStartat
+                %strong #{t('views.dashboard.coming', service_name: Rails.application.credentials.global[:service_name])}
+                %span= channel.approximate_start_date
+
+      .CRFollowers
+        - max_icons_to_display_in_row = 6
+        - followers = channel.user_followers.includes(:image, :user_account)
+        - if followers.size > 0
+          .CRFollowers__header
+            = I18n.t('views.dashboards.channel.followers')
+            (
+            = followers.size
+            )
+          .CRFollowers__body
+            - followers.take(max_icons_to_display_in_row).each do |user|
+              %a{href: user.relative_path, alt: user.public_display_name, title: user.public_display_name}
+                = image_tag(user.avatar_url, width: 40, height: 40, alt: user.public_display_name, class: 'img-circle CRFollowers__avatar')
+            %a.CRFollowers__all{data: {toggle: :modal, target: "#followersChannel#{channel.id}"}}
+              = I18n.t('views.dashboards.channel.view_all')
+          = render partial: 'shared/follow', locals: {object: channel, id: 'followersChannel', followers: true}
+
+      %p.CRsessionDescription
+        = sanitize(simple_format(channel.description, {}, sanitize: false))
+
+      .tagList
+        - channel.tags.each do |tag|
+          %span
+            = tag.name
+      %div.toggle-session-list-Wrapper
+        %a.toggle-session-list.ensure-link-style
+          %span.showSES
+            = I18n.t('views.dashboards.channel.show_sessions')
+            %i.VideoClientIcon-angle-downF
+          %span.hideSES{style: 'display:none'}
+            = I18n.t('views.dashboards.channel.hide_sessions')
+            %i.VideoClientIcon-angle-upF
+  .sessions-container{class: [index.zero? ? 'showSessions' : '']}
+
+    %div.channel{id: "dashboard-channel-#{channel.id}"}
+      .filterListWrapper
+        .row
+          .col-md-8
+            .highlight
+              .filterList.clearfix
+                = I18n.t('views.dashboards.channel.view')
+                =':'
+                %ul.btns-group
+                  %li.upcoming.active
+                    %a.btn.btn-m.btn-grey-solid{href: "#upcoming_#{channel.id}", data: {toggle: :tab, target: "#upcoming_#{channel.id}"}} Upcoming
+                  %li.past
+                    %a.btn.btn-m.btn-grey-solid{href: "#past_#{channel.id}", data: {toggle: :tab, target: "#past_#{channel.id}"}} Past
+                  %li.cancelled
+                    %a.btn.btn-m.btn-grey-solid{href: "#cancelled_#{channel.id}", data: {toggle: :tab, target: "#cancelled_#{channel.id}"}} Cancelled
+                  %li.all
+                    %a.btn.btn-m.btn-grey-solid{href: "#all_#{channel.id}", data: {toggle: :tab, target: "#all_#{channel.id}"}} All
+          - if can?(:create_session, channel)
+            .col-md-4.text-right
+              %a.btn.btn-m.btn-borderred-grey.full-width-p-tablet.margin-top-10-p-tablet{href: new_channel_session_path(channel.slug)}
+                %i.VideoClientIcon-plusF.vertical-midle
+                = I18n.t('views.dashboards.channel.new_session')
+
+      .kkkontainer
+        .tab-content
+          .body.tab-pane.active{id: "upcoming_#{channel.id}", data: {channel_id: channel.id, limit: 6, offset: 0, type: :upcoming}}
+            = form_tag(sessions_dashboard_channel_path(channel.id, {offset: 0, type: :upcoming}), remote: true, method: :get) do
+              .filtersMK2
+                .filtersMK2__top
+                  .filtersMK2__title.clearableField
+                    = text_field_tag :title, nil, placeholder: I18n.t('views.dashboards.channel.search_by_title'), class: 'search clearInput filtersMK2__title__input'
+                    %span.VideoClientIcon-iPlus.rotateIcon.clearInputField.hidden
+                    %i.VideoClientIcon-Search.filtersMK2__title__icon
+                  .filtersMK2__options
+                    .filtersMK2__options__total.inline-block
+                    .filtersMK2__perPage
+                      %label.filtersMK2__perPage__label
+                        = I18n.t('views.dashboards.channel.show')
+                      = select_tag :limit, options_for_select([6, 15, 30, 45, 60], 6), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                    .filtersMK2__perPage
+                      %label.filtersMK2__perPage__label
+                        = I18n.t('views.dashboards.channel.sort_by')
+                      = select_tag :order, options_for_select([['ASC', 'asc'], ['DESC', 'desc']], ['ASC', 'asc']), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                    .filtersMK2__filters
+                      .btn.btn-m.btn-borderred-grey.filtersMK2__filters__button
+                        = I18n.t('views.dashboards.channel.filters')
+                        %i.VideoClientIcon-tuning.filtersMK2__filters__button__icon
+                .filtersMK2__tools
+                  .filtersMK2__startAt
+                    %span.fs-16
+                      = I18n.t('views.dashboards.channel.start_at')
+                    %label.fs-12.filtersMK2__startAt__text__wrapper
+                      .filtersMK2__startAt__text
+                        = I18n.t('views.dashboards.channel.from')
+                      = text_field_tag :start_at_from, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                    %label.fs-12.filtersMK2__startAt__text__wrapper
+                      .filtersMK2__startAt__text
+                        = I18n.t('views.dashboards.channel.to')
+                      = text_field_tag :start_at_to, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                  .filtersMK2__apply__wrapper
+                    = submit_tag 'Apply', class: 'btn btn-m filtersMK2__apply'
+            .message{style: 'display: none'}
+              = I18n.t('views.dashboards.channel.no_upcoming_sessions')
+            .LoadingCover
+              .spinnerSlider
+                .bounceS1
+                .bounceS2
+                .bounceS3
+            .sessions
+            .padding-top-10.text-center
+              %a.hidden.show_more.btn.btn-m.btn-grey-solid{href: sessions_dashboard_channel_path(channel.id, {limit: 6, offset: 6, type: :upcoming}), data: {remote: true, disable_with: 'Loading...'}} Show more
+          .body.tab-pane{id: "past_#{channel.id}", data: {channel_id: channel.id, limit: 6, offset: 0, type: :past}}
+            = form_tag(sessions_dashboard_channel_path(channel.id, {offset: 0, type: :past}), remote: true, method: :get) do
+              .filtersMK2
+                .filtersMK2__top
+                  .filtersMK2__title.clearableField
+                    = text_field_tag :title, nil, placeholder: 'Search by title', class: 'search clearInput filtersMK2__title__input'
+                    %span.VideoClientIcon-iPlus.rotateIcon.clearInputField.hidden
+                    %i.VideoClientIcon-Search.filtersMK2__title__icon
+                  .filtersMK2__options
+                    .filtersMK2__options__total.inline-block
+                    .filtersMK2__perPage
+                      %label.filtersMK2__perPage__label
+                        = I18n.t('views.dashboards.channel.show')
+                      = select_tag :limit, options_for_select([6, 15, 30, 45, 60], 6), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                    .filtersMK2__perPage
+                      %label.filtersMK2__perPage__label
+                        = I18n.t('views.dashboards.channel.sort_by')
+                      = select_tag :order, options_for_select([['Newest', 'desc'], ['Oldest', 'asc']], ['Newest', 'desc']), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                    .filtersMK2__filters
+                      .btn.btn-m.btn-borderred-grey.filtersMK2__filters__button
+                        = I18n.t('views.dashboards.channel.filters')
+                        %i.VideoClientIcon-tuning.filtersMK2__filters__button__icon
+                .filtersMK2__tools
+                  .filtersMK2__startAt
+                    %span.fs-16
+                      = I18n.t('views.dashboards.channel.start_at')
+                    %label.fs-12.filtersMK2__startAt__text__wrapper
+                      .filtersMK2__startAt__text
+                        = I18n.t('views.dashboards.channel.from')
+                      = text_field_tag :start_at_from, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                    %label.fs-12.filtersMK2__startAt__text__wrapper
+                      .filtersMK2__startAt__text
+                        = I18n.t('views.dashboards.channel.to')
+                      = text_field_tag :start_at_to, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                  .filtersMK2__apply__wrapper
+                    = submit_tag 'Apply', class: 'btn btn-m filtersMK2__apply'
+            .message{style: 'display: none'}
+              = I18n.t('views.dashboards.channel.no_upcoming_sessions')
+            .LoadingCover
+              .spinnerSlider
+                .bounceS1
+                .bounceS2
+                .bounceS3
+            .sessions
+            .padding-top-10.text-center
+              %a.hidden.show_more.btn.btn-m.btn-grey-solid{href: sessions_dashboard_channel_path(channel.id, {limit: 6, offset: 6, type: :past}), data: {remote: true, disable_with: 'Loading...'}} Show more
+          .body.tab-pane{id: "cancelled_#{channel.id}", data: {channel_id: channel.id, limit: 6, offset: 0, type: :cancelled}}
+            = form_tag(sessions_dashboard_channel_path(channel.id, {offset: 0, type: :cancelled}), remote: true, method: :get) do
+              .filtersMK2
+                .filtersMK2__top
+                  .filtersMK2__title.clearableField
+                    = text_field_tag :title, nil, placeholder: 'Search by title', class: 'search clearInput filtersMK2__title__input'
+                    %span.VideoClientIcon-iPlus.rotateIcon.clearInputField.hidden
+                    %i.VideoClientIcon-Search.filtersMK2__title__icon
+                  .filtersMK2__options
+                    .filtersMK2__options__total.inline-block
+                    .filtersMK2__perPage
+                      %label.filtersMK2__perPage__label
+                        = I18n.t('views.dashboards.channel.show')
+                      = select_tag :limit, options_for_select([6, 15, 30, 45, 60], 6), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                    .filtersMK2__perPage
+                      %label.filtersMK2__perPage__label
+                        = I18n.t('views.dashboards.channel.sort_by')
+                      = select_tag :order, options_for_select([['Newest', 'desc'], ['Oldest', 'asc']], ['Newest', 'desc']), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                    .filtersMK2__filters
+                      .btn.btn-m.btn-borderred-grey.filtersMK2__filters__button
+                        = I18n.t('views.dashboards.channel.filters')
+                        %i.VideoClientIcon-tuning.filtersMK2__filters__button__icon
+                .filtersMK2__tools
+                  .filtersMK2__startAt
+                    %span.fs-16
+                      = I18n.t('views.dashboards.channel.start_at')
+                    %label.fs-12.filtersMK2__startAt__text__wrapper
+                      .filtersMK2__startAt__text
+                        = I18n.t('views.dashboards.channel.from')
+                      = text_field_tag :start_at_from, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                    %label.fs-12.filtersMK2__startAt__text__wrapper
+                      .filtersMK2__startAt__text
+                        = I18n.t('views.dashboards.channel.to')
+                      = text_field_tag :start_at_to, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                  .filtersMK2__apply__wrapper
+                    = submit_tag 'Apply', class: 'btn btn-m filtersMK2__apply'
+            .message{style: 'display: none'}
+              = I18n.t('views.dashboards.channel.no_upcoming_sessions')
+            .LoadingCover
+              .spinnerSlider
+                .bounceS1
+                .bounceS2
+                .bounceS3
+            .sessions
+            .padding-top-10.text-center
+              %a.hidden.show_more.btn.btn-m.btn-grey-solid{href: sessions_dashboard_channel_path(channel.id, {limit: 6, offset: 6, type: :cancelled}), data: {remote: true, disable_with: 'Loading...'}} Show more
+          .body.tab-pane{id: "all_#{channel.id}", data: {channel_id: channel.id, limit: 6, offset: 0, type: :all}}
+            = form_tag(sessions_dashboard_channel_path(channel.id, {offset: 0, type: :all}), remote: true, method: :get) do
+              .filtersMK2
+                .filtersMK2__top
+                  .filtersMK2__title.clearableField
+                    = text_field_tag :title, nil, placeholder: 'Search by title', class: 'search clearInput filtersMK2__title__input'
+                    %span.VideoClientIcon-iPlus.rotateIcon.clearInputField.hidden
+                    %i.VideoClientIcon-Search.filtersMK2__title__icon
+                  .filtersMK2__options
+                    .filtersMK2__options__total.inline-block
+                    .filtersMK2__perPage
+                      %label.filtersMK2__perPage__label
+                        = I18n.t('views.dashboards.channel.show')
+                      = select_tag :limit, options_for_select([6, 15, 30, 45, 60], 6), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                    .filtersMK2__perPage
+                      %label.filtersMK2__perPage__label
+                        = I18n.t('views.dashboards.channel.sort_by')
+                      = select_tag :order, options_for_select([['Newest', 'desc'], ['Oldest', 'asc']], ['Newest', 'desc']), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                    .filtersMK2__filters
+                      .btn.btn-m.btn-borderred-grey.filtersMK2__filters__button
+                        = I18n.t('views.dashboards.channel.filters')
+                        %i.VideoClientIcon-tuning.filtersMK2__filters__button__icon
+                .filtersMK2__tools
+                  .filtersMK2__startAt
+                    %span.fs-16
+                      = I18n.t('views.dashboards.channel.start_at')
+                    %label.fs-12.filtersMK2__startAt__text__wrapper
+                      .filtersMK2__startAt__text
+                        = I18n.t('views.dashboards.channel.from')
+                      = text_field_tag :start_at_from, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                    %label.fs-12.filtersMK2__startAt__text__wrapper
+                      .filtersMK2__startAt__text
+                        = I18n.t('views.dashboards.channel.to')
+                      = text_field_tag :start_at_to, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                  .filtersMK2__apply__wrapper
+                    = submit_tag 'Apply', class: 'btn btn-m filtersMK2__apply'
+            .message{style: 'display: none'}
+              = I18n.t('views.dashboards.channel.no_upcoming_sessions')
+            .LoadingCover
+              .spinnerSlider
+                .bounceS1
+                .bounceS2
+                .bounceS3
+            .sessions
+            .padding-top-10.text-center
+              %a.hidden.show_more.btn.btn-m.btn-grey-solid{href: sessions_dashboard_channel_path(channel.id, {limit: 6, offset: 6, type: :all}), data: {remote: true, disable_with: 'Loading...'}} Show more
+    -# - if @action_name != 'replays' && can?(:create_session, channel)
+    -#   %div.dashTitln.clearfix
+    -#     %a{href: new_channel_session_path(channel.slug), class: ('pull-right')}
+    -#       %i.VideoClientIcon-iPlus.vertical-midle
+    -#       = I18n.t('views.dashboards.channel.new_session')
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    var AsDatepicker = function (el) {
+      var dateFormat = "mm/dd/yy",
+      from = $(el).find('[name*=start_at_from]').datepicker({
+        defaultDate: "+0w",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1
+      }).on("change", function () {
+        to.datepicker("option", "minDate", getDate(this));
+      }),
+      to = $(el).find('[name*=start_at_to]').datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1
+      }).on("change", function () {
+        from.datepicker("option", "maxDate", getDate(this));
+      });
+
+      function getDate(element) {
+        var date;
+        try {
+          date = $.datepicker.parseDate(dateFormat, element.value);
+        } catch (error) {
+          date = null;
+        }
+        return date;
+      }
+    }
+    $(document).ready(function() {
+      $(document).on('click', '.filtersMK2__filters', function (event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        let el = event.target.parentElement.parentElement.parentElement.parentElement;
+        el.querySelector('.filtersMK2__tools').classList.toggle('filtersMK2__tools__show');
+      });
+      $('.filtersMK2__startAt').each(function (d, el) {
+        AsDatepicker(el);
+      });
+    })

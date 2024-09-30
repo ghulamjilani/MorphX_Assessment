@@ -1,0 +1,276 @@
+
+- content_for(:page_title, 'Notifications')
+.row#profilePage
+  = render 'profiles/nav'
+
+  .col-md-9.main-section-form.technicalPage
+
+    = semantic_form_for @notification_settings, as: :notifications, url: profile_path, method: :put do |f|
+      .technicalPage__label Notifications
+      .table-responsive.overflowTable
+        %table.table.full-width
+          %colgroup
+            %col
+            %col{style:'width:80px'}
+            %col{style:'width:80px'}
+            %col{style:'width:80px'}
+          %thead
+            %tr
+              %th.text-left
+                %i.VideoClientIcon-Vector-3.fs-18
+                %span General Notifications
+              %th.text-center
+                %i.VideoClientIcon-messages-icon
+                %span Email
+              %th.text-center
+                %i.VideoClientIcon-notifications-icon.fs-18
+                %span Web
+              %th.text-center
+                %i.VideoClientIcon-message-square.fs-20
+                %span SMS
+          %tbody
+            - if current_user.role == 'presenter'
+              %tr
+                %td
+                  = content_tag(:span, I18n.t('views.profiles.edit_notifications.user_accepted_or_rejected_your_invitation'))
+                %td.text-center{data: {th: 'Email'}}
+                  = f.input ModelConcerns::Settings::Notification::USER_ACCEPTED_OR_REJECTED_YOUR_INVITATION_VIA_EMAIL.to_sym,
+                      as: :boolean,
+                      label: ''
+                %td.text-center{data: {th: 'Web'}}
+                  = f.input ModelConcerns::Settings::Notification::USER_ACCEPTED_OR_REJECTED_YOUR_INVITATION_VIA_WEB.to_sym,
+                      as: :boolean,
+                      label: ''
+                %td.text-center{data: {th: 'SMS'}}
+                  = f.input ModelConcerns::Settings::Notification::USER_ACCEPTED_OR_REJECTED_YOUR_INVITATION_VIA_SMS.to_sym,
+                      as: :boolean,
+                      input_html: { readonly: true, disabled: true },
+                      label: ''
+            %tr
+              %td
+                = content_tag(:span, I18n.t('views.profiles.edit_notifications.you_have_been_invited'))
+              %td.text-center{data: {th: 'Email'}}
+                = f.input ModelConcerns::Settings::Notification::PARTICIPANT_INVITED_TO_ABSTRACT_SESSION_VIA_EMAIL.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center{data: {th: 'Web'}}
+                = f.input ModelConcerns::Settings::Notification::PARTICIPANT_INVITED_TO_ABSTRACT_SESSION_VIA_WEB.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center{data: {th: 'SMS'}}
+                = f.input ModelConcerns::Settings::Notification::PARTICIPANT_INVITED_TO_ABSTRACT_SESSION_VIA_SMS.to_sym,
+                    as: :boolean,
+                    label: ''
+
+            %tr
+              %td
+                = content_tag(:span, I18n.t('views.profiles.edit_notifications.someone_starts_to_follow_me'))
+              %td.text-center{data: {th: 'Email'}}
+                = f.input ModelConcerns::Settings::Notification::FOLLOW_ME_VIA_EMAIL.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center{data: {th: 'Web'}}
+                = f.input ModelConcerns::Settings::Notification::FOLLOW_ME_VIA_WEB.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center{data: {th: 'SMS'}}
+                = f.input ModelConcerns::Settings::Notification::FOLLOW_ME_VIA_SMS.to_sym,
+                    as: :boolean,
+                    input_html: { readonly: true, disabled: true },
+                    label: ''
+
+            - if current_user.role == 'presenter'
+              %tr
+                %td
+                  = content_tag(:span, I18n.t('views.profiles.edit_notifications.someone_adds_session_to_wishlist'))
+                %td.text-center{data: {th: 'Email'}}
+                  = f.input ModelConcerns::Settings::Notification::WISHLIST_SESSION_VIA_EMAIL.to_sym,
+                      as: :boolean,
+                      label: ''
+                %td.text-center{data: {th: 'Web'}}
+                  = f.input ModelConcerns::Settings::Notification::WISHLIST_SESSION_VIA_WEB.to_sym,
+                      as: :boolean,
+                      label: ''
+                %td.text-center{data: {th: 'SMS'}}
+                  = f.input ModelConcerns::Settings::Notification::WISHLIST_SESSION_VIA_SMS.to_sym,
+                      as: :boolean,
+                      input_html: { readonly: true, disabled: true },
+                      label: ''
+              %tr
+                %td
+                  = content_tag(:span, I18n.t('views.profiles.edit_notifications.session_emergency_stop_scheduled', minutes_to_stop: 5))
+                %td.text-center{data: {th: 'Email'}}
+                  = f.input ModelConcerns::Settings::Notification::SESSION_NO_STREAM_STOP_SCHEDULED_VIA_EMAIL.to_sym,
+                      as: :boolean,
+                      label: ''
+                %td.text-center{data: {th: 'Web'}}
+                  = f.input ModelConcerns::Settings::Notification::SESSION_NO_STREAM_STOP_SCHEDULED_VIA_WEB.to_sym,
+                      as: :boolean,
+                      label: ''
+                %td.text-center{data: {th: 'SMS'}}
+                  = f.input ModelConcerns::Settings::Notification::SESSION_NO_STREAM_STOP_SCHEDULED_VIA_SMS.to_sym,
+                      as: :boolean,
+                      label: ''
+
+      .table-responsive.overflowTable
+        %table.table.full-width
+          %colgroup
+            %col
+            %col{style:'width:80px'}
+            %col{style:'width:80px'}
+            %col{style:'width:80px'}
+          %thead
+            %tr
+              %th.text-left
+                %i.VideoClientIcon-stream-video-icon.fs-16
+                %span Upcoming Sessions Notifications
+              %th.text-center
+                %i.VideoClientIcon-messages-icon
+                %span Email
+              %th.text-center
+                %i.VideoClientIcon-notifications-icon.fs-18
+                %span Web
+              %th.text-center
+                %i.VideoClientIcon-message-square.fs-20
+                %span SMS
+          %tbody
+            %tr
+              %td
+                = content_tag(:span, I18n.t('views.profiles.edit_notifications.with_72_hours_upfront_reminder'))
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_72_VIA_EMAIL.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_72_VIA_WEB.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_72_VIA_SMS.to_sym,
+                    as: :boolean,
+                    input_html: { readonly: true, disabled: true },
+                    label: ''
+            %tr
+              %td
+                = content_tag(:span, I18n.t('views.profiles.edit_notifications.with_24_hours_upfront_reminder'))
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_24_VIA_EMAIL.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_24_VIA_WEB.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_24_VIA_SMS.to_sym,
+                    as: :boolean,
+                    input_html: { readonly: true, disabled: true },
+                    label: ''
+            %tr
+              %td
+                = content_tag(:span, I18n.t('views.profiles.edit_notifications.with_6_hours_upfront_reminder'))
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_6_VIA_EMAIL.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_6_VIA_WEB.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_6_VIA_SMS.to_sym,
+                    as: :boolean,
+                    input_html: { readonly: true, disabled: true },
+                    label: ''
+            %tr
+              %td
+                = content_tag(:span, I18n.t('views.profiles.edit_notifications.with_1_hours_upfront_reminder'))
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_1_VIA_EMAIL.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_1_VIA_WEB.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::HRS_1_VIA_SMS.to_sym,
+                    as: :boolean,
+                    label: ''
+            %tr
+              %td
+                = content_tag(:span, I18n.t('views.profiles.edit_notifications.with_15_minutes_upfront_reminder'))
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::MINS_15_VIA_EMAIL.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::MINS_15_VIA_WEB.to_sym,
+                    as: :boolean,
+                    label: ''
+              %td.text-center
+                = f.input ModelConcerns::Settings::Notification::MINS_15_VIA_SMS.to_sym,
+                    as: :boolean,
+                    label: ''
+
+      - if current_user.role == 'presenter'
+        .table-responsive.overflowTable
+          %table.table.full-width
+            %colgroup
+              %col
+              %col{style:'width:80px'}
+              %col{style:'width:80px'}
+              %col{style:'width:80px'}
+            %thead
+              %tr
+                %th.text-left
+                  %i.VideoClientIcon-PeopleMK2
+                  %span Combined Notifications
+                %th.text-center
+                  %i.VideoClientIcon-messages-icon
+                  %span Email
+                %th.text-center
+                  %i.VideoClientIcon-notifications-icon.fs-18
+                  %span Web
+                %th.text-center
+                  %i.VideoClientIcon-message-square.fs-20
+                  %span SMS
+            %tbody
+              - @combined_settings.each.with_index do |setting, index|
+                %tr
+                  %td
+                    .control-group.boolean.input.optional
+                      .controls
+                        %label.checkbox.checkbox-swith.right-position.margin-bottom-0
+                          %input.combined_notification{type: "hidden", name: "combined_notification_settings[#{index}][enabled]", value: "false"}
+                          %input.combined_notification{type: "hidden", name: "combined_notification_settings[#{index}][action_type]", value: setting.action_type}
+                          %input.combined_notification{type: "checkbox", checked: setting.enabled?, name: "combined_notification_settings[#{index}][enabled]", value: "true"}
+                          %span.full-width.display-block
+                        %label.padding-left-30.text-color-Darkgrey
+                          = I18n.t("comdined_notifications.sendSettings.#{setting.action_type}")
+                        -#%label.checkbox.choice
+                        -#  %input.combined_notification{type: "hidden", name: "combined_notification_settings[#{index}][enabled]", value: "false"}
+                        -#  %input.combined_notification{type: "hidden", name: "combined_notification_settings[#{index}][action_type]", value: setting.action_type}
+                        -#  %input.combined_notification{type: "checkbox", checked: setting.enabled?, name: "combined_notification_settings[#{index}][enabled]", value: "true"}
+                  %td.text-center
+                    = f.input ModelConcerns::Settings::Notification::PURCHASES_SUMMARY_FOR_ORGANIZER_VIA_EMAIL.to_sym,
+                        as: :boolean,
+                        label: ''
+                  %td.text-center
+                    = f.input ModelConcerns::Settings::Notification::PURCHASES_SUMMARY_FOR_ORGANIZER_VIA_WEB.to_sym,
+                        as: :boolean,
+                        label: ''
+                  %td.text-center
+                    = f.input ModelConcerns::Settings::Notification::PURCHASES_SUMMARY_FOR_ORGANIZER_VIA_SMS.to_sym,
+                        as: :boolean,
+                        input_html: { readonly: true, disabled: true },
+                        label: ''
+                %tr.bordernone#notification_controls
+                  %td
+                    .controls.combined_notification_val{style: ("display: none;" unless setting.enabled?)}
+                      = translate_with_haml "comdined_notifications.full_descr.#{setting.action_type}", :input do
+                        %input{type: "text", value: setting.frequency.join(','), name: "combined_notification_settings[#{index}][frequency]"}
+
+      .margin-bottom-10.margin-top-20.text-right
+        = link_to 'Cancel', url_for(:back), class: 'btn btn-l btn-grey-solid'
+        = f.action :submit, label: 'Save Changes', as:  :button, button_html: { class: 'btn btn-l margin-left-10' , disable_with: 'Please wait…'}

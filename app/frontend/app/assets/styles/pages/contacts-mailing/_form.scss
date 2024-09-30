@@ -1,0 +1,77 @@
+.CM__form {
+  &__wrapper {
+    padding: 2rem;
+    background: var(--bg__content__secondary);
+    border-radius: 1rem;
+    border: 1px solid rgba(9, 95, 115, 0.2);
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  &__legend {
+    padding-top: 2rem;
+    font-size: 1.5rem;
+    @include flex(flex, center, space-between);
+
+    &__icon {
+      color: var(--tp__icons);
+      font-size: 1.6rem;
+      padding-right: 1rem;
+    }
+  }
+
+  &__top {
+    display: flex;
+    @include media(phone) {
+      flex-direction: column;
+    }
+  }
+
+  &__name {
+    width: 100%;
+    padding-right: 3rem;
+    @include media(phone) {
+      padding-right: 0;
+    }
+  }
+
+  &__surname {
+    width: 100%;
+  }
+
+  &__tools {
+    @include flex(flex, center, space-between);
+    @include media(p-tablet) {
+      flex-direction: column;
+    }
+    @include media(phone) {
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  &__csv {
+    @include flex(flex, center, space-between);
+    @include media(p-tablet) {
+      padding-top: 2rem;
+    }
+    @include media(phone) {
+      flex-direction: column;
+      label {
+        width: 100%;
+      }
+    }
+
+    &__title {
+      padding-right: 2rem;
+      font-size: 1.5rem;
+      @include media(phone) {
+        padding-bottom: 2rem;
+      }
+    }
+  }
+}

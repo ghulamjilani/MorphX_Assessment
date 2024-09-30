@@ -1,0 +1,60 @@
+.channel__info__owner {
+  @include flex(flex, center);
+  padding-bottom: 3rem;
+  margin: 0;
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+
+  .avatar__xl {
+    margin-right: 0;
+  }
+
+  &__companyLogo {
+    border-radius: 1rem;
+  }
+
+  &__name {
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 2.2rem;
+  }
+
+  &__follow {
+    padding: 0 0 1.5rem;
+
+    button {
+      cursor: pointer;
+    }
+  }
+
+  &__count {
+    color: var(--tp__h1);
+    font-weight: bold;
+  }
+
+  &__button {
+    @include flex(flex, center, center);
+    @include media(tablet){
+      flex-direction: column;
+      .btn{
+        margin:0 0 1rem 0;
+      }
+    }
+  }
+
+  &__message {
+    margin-left: 1rem;
+
+    &__hide {
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        background: transparent;
+        color: var(--tp__btn__bordered);
+        opacity: .5;
+      }
+    }
+  }
+}

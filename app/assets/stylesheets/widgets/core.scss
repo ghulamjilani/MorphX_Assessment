@@ -1,0 +1,32 @@
+/*
+ *= require jquery-ui/flick
+*/
+@import "variables";
+@import "../mixin";
+@import "../css/partials/btns/btns_core";
+@import "../css/GlobalFonts";
+@import "helpers";
+
+
+//@include others core partials
+@import "modules/core";
+@import "tiles/core";
+@import "icons/core";
+@import "player/core";
+@import "additions/core";
+@import "shop/core";
+@import "player_cover/core";
+@import "sign_In_Up/core";
+
+#ui-datepicker-div{
+  font-size: 12px;
+}
+.ui-widget-header{
+  border: none;
+  background: none;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+  border: none;
+  background: none;
+  color: var(--tp__active);
+}

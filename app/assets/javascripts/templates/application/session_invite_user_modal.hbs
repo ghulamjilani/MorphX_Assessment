@@ -1,0 +1,60 @@
+<div class="contentBlock">
+  <div class="leftBlock invtEmail">
+    <p class="contentBlockHead firstLine">Email</p>
+    <div class="email input required autofocus stringish form-group">
+      <input autofocus="autofocus" data-organizer="user1@example.com" id="invited_participants_new_input" maxlength="255" placeholder="Email address" type="email">
+      <a class="invite_btn" href="#">
+        <i class="VideoClientIcon-iPlus"></i>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="users_list list-group contactsList"
+      {{#equal contacts.length 0}}
+         style="display: none"
+      {{/equal}}
+      >
+      <div class="removable">
+        <!--<div class="remHeadersection">-->
+          <!--<p class="contentBlockHead">Contacts</p>-->
+          <!--<input class="contacts-search" placeholder="Search" type="text">-->
+        <!--</div>-->
+        <!--<div class="clearfix">-->
+          <!--<div class="pull-right group-state-buttons">-->
+
+          <!--</div>-->
+        <!--</div>-->
+        <div class="remWrapsection">
+          {{#each contacts}}
+            <div class="list-group-item" data-email="{{ this.email }}" data-name="{{ this.display_name }}">
+              <img class="some-class" width="16" height="16" src="{{ this.avatar_url }}">
+              <strong title="{{ this.email }}">
+                {{ this.display_name }}
+              </strong>
+              <div class="buttons">
+
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="RightBlock users_list">
+    <p class="contentBlockHead firstLine removable">Participants</p>
+    <div class="invited">
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{{#equal done_button_instead_of_submit true}}
+  <a class="btn btn-l pull-right DoneButton" data-dismiss="modal" href="">
+    Done
+  </a>
+{{/equal}}
+{{#equal done_button_instead_of_submit false}}
+  <a class="btn btn-l invite-submit-button pull-right DoneButton" data-dismiss="modal" href="">
+    Invite
+  </a>
+{{/equal}}
+<div class="clearfix"></div>

@@ -1,0 +1,11 @@
+ru:
+  views:
+    layouts:
+      application:
+        notifications_popup_wrapper:
+          latest_notifications: "Последние уведомления"
+          mark_all: "Отметить все как прочитанное"
+          clear_all: "Очистить все"
+          load_more: "Загрузить еще"
+          view_all: "Просмотреть все"
+          empty: "Нет нотификаций"

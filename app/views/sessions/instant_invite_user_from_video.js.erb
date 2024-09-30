@@ -1,0 +1,3 @@
+<% if flash.now[:error].blank? %>
+  $('#social-modal').html('<%= escape_javascript render('modal_live_participants_video', format: :html) %>');
+<% end %>

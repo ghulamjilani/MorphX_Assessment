@@ -1,0 +1,8 @@
+ru:
+  models:
+    organization_membership:
+      statuses:
+        pending: "Приглашён"
+        active: "Активен"
+        cancelled: "Отменён"
+        suspended: "Приостановлен"

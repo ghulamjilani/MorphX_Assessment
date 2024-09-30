@@ -1,0 +1,136 @@
+- #TODO: delete file?
+- content_for(:after_include_javascripts) do
+  :javascript
+     window.initializeJoinTimer();
+-#TODO: from SLAVA, WTF??? old cod?
+.AffixSection
+  #session-buy-and-purchase-options.margin-top-10
+    - if !@session.cancelled? && !@session.finished? && user_signed_in? && (@session.organizer == current_user || current_user.purchased_session?(@session.id))
+      = raw join_room(abstract_session: @session, link_css_classes: 'rightSideBarMainBtn mainButton submit-payment text-center full-width margin-bottom-10 fs-20 margin-top-10 padding-top-5 padding-bottom-5 text-color-white', initialization_type: JoinInitializationTypes::SESSION_SHOW).html_link
+    - elsif @session.cancelled?
+      %a.rightSideBarMainBtn.btn-red.submit-payment.text-center.full-width.margin-bottom-10.fs-20.margin-top-10.padding-top-5.padding-bottom-5.text-color-white{href: '#', disabled: true} Cancelled
+    - elsif @session.finished?
+      %a.rightSideBarMainBtn.btn-green.submit-payment.text-center.full-width.margin-bottom-10.fs-20.margin-top-10.padding-top-5.padding-bottom-5.text-color-white{href: '#', disabled: true} Completed
+
+    #purchase_panel
+      - if !@session.cancelled? && !@session.finished?
+        - content_for(:after_include_javascripts) do
+          :javascript
+            window.sessionBuyAndPurchaseOptionsView = new SessionBuyAndPurchaseOptionsView({
+              el: '#purchase_panel', data:  #{session_buy_and_purchase_options.to_json}
+            });
+            window.sessionBuyAndPurchaseOptionsView.render();
+            window.sessionBuyAndPurchaseOptionsView.checkFirstBuyMethodIfAvailable();
+
+  %section
+    - if @session.co_presenters.present?
+      %section.SI-CoPr
+        .SI-title Co-presenters:
+        %ul
+          -  @session.co_presenters.each do |presenter|
+            %li
+              = link_to spa_user_path(presenter.user.slug) do
+                %img.img-circle{src: presenter.user.avatar_url}
+                = presenter.user.public_display_name
+
+  .session-about-Description-list_forRightPanel.right-sidebarWrapper.margin-top-0
+    .SI-bi-main-Tittle Session Purchase Info
+
+    - if user_signed_in? && current_user.purchased_session?(@session.id)
+      .SI-bi
+        %section.SI-bi-title
+          .SI-bi-title-left
+            %i.VideoClientIcon-LiveStream_3
+            %span Stream
+          .SI-bi-title-right
+            .fs-14.text-color-main= current_user.view_in?(@session.id) ? 'View' : 'Participate'
+
+    .SI-bi
+      %section.SI-bi-title
+        .SI-bi-title-left
+          %i.VideoClientIcon-calendar-icon
+          %span Date
+        .SI-bi-title-right
+          .fs-14.text-color-main
+            = @session.start_at.strftime('%b. %d %I:%M %p')
+
+    - if !@session.cancelled? && !@session.finished? && !@session.started?
+      .SI-bi
+        %section.SI-bi-title
+          .SI-bi-title-left
+            %i.VideoClientIcon-play-button2
+            %span Begins In
+          .SI-bi-title-right
+            .fs-14.text-color-main.join-timer{data: {initialization_type: :sessionshowbeginsin, roomid: @session.room_id, now: Time.now.to_i, start_at: @session.start_at.to_i}}
+              = @session.start_at.strftime('%b. %d %I:%M %p')
+
+    .SI-bi
+      %section.SI-bi-title
+        .SI-bi-title-left
+          %i.VideoClientIcon-clock
+          %span Duration
+        .SI-bi-title-right
+          .fs-14.text-color-main
+            = formatted_session_duration(@session.duration)
+
+    .SI-bi
+      %section.SI-bi-title
+        .SI-bi-title-left
+          %i.VideoClientIcon-key
+          %span Privacy
+        .SI-bi-title-right.fs-14.text-color-main
+          = @session.private? ? 'Private' : 'Public'
+
+    - if display_vod_section_in_right_sidebar?
+      - interactor3 = ObtainRecordedAccessToSession.new(@session, current_user)
+      - if interactor3.could_be_obtained_and_not_pending_invitee? && !vod_room_is_fully_ready?
+        .SI-bi
+          %section.SI-bi-title.SI-bi-VoD
+            - #NOTE - if you ever update the following classes/ids make sure you review app/views/rooms/toggle_notify_me.js.erb first
+            - if user_signed_in?
+              - membership = PendingVodAvailabilityMembership.where(abstract_session: @session, user: current_user).first
+              %a.toggle-notification-setting-btn{href: toggle_notify_me_room_path(@session.room_id), data: {method: :post, remote: true}, style: 'visibility: visible;', class: membership ? 'active' : ''}
+                %i.icon-bell{style: membership ? 'display: none' : ''}
+                %i.icon-bell-alt{style: membership ? '' : 'display: none'}
+                %span VoD: Notify when available
+              -#.notification-setting-info-when-enabled{style: membership ? '' : 'display: none'} we'll notify you when this video is available
+            - else
+              %a.toggle-notification-setting-btn{href: '#', data: {target: '#loginPopup', toggle: :modal}, style: 'visibility: visible;'}
+                %i.icon-bell
+                %span VoD: Notify when available
+
+    - if !@session.cancelled? && !@session.finished? && (@session.organizer == current_user || can?(:live_opt_out, @session) || can?(:vod_opt_out, @session))
+      .SI-bi
+        %section.SI-bi-title
+          %a.addEventToCalendarBtn{href: ical_channel_session_url(@session.channel_id, @session.id, format: :ics)}
+            %i.VideoClientIcon-calendarF
+            %span Add event to calendar
+
+  - if can?(:request_another_time, @session)
+    .fs-12.display-block.text-center.color-grey.margin-top-10{onclick: "openRequestNewSessionForm(event, this, this.offsetWidth)"}
+      %div Unable to attend?
+      %a.ensure-link-style Request different time.
+
+  - if @session.custom_description_field_value.present? && @session.custom_description_field_value.to_s.squish != ''
+    %a.full-width.display-block.btn-grey.mt20.btn-blue-hover.text-center.ensure-link-style{data: {target: '#AdditionalInformation', toggle: :modal}}
+      = @session.custom_description_field_label
+
+  - if @session.participants_count > 0
+    .SessionParticipantsList.full-width.load
+      %a.full-width.display-block.btn-grey.mt20.btn-blue-hover.text-center{data: {target: '#SessionParticipantsList_modal', toggle:'modal'}, href: '#'}
+        = "Session Participants (#{@session.participants_count})"
+
+#SessionParticipantsList_modal.modal.fade{session: @session.id, 'aria-hidden': true, role: :dialog, tabindex: -1}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        %h4.groupTitle.clearfix
+          = "Session Participants (#{@session.participants_count})"
+        %section
+          .SessionParticipantsList
+            .LoadingCover
+              .spinnerSlider
+                .bounceS1
+                .bounceS2
+                .bounceS3

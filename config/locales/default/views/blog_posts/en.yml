@@ -1,0 +1,7 @@
+en:
+  views:
+    blog_posts:
+      additional_settings: 'Additional Settings'
+      hide_post: 'Hide post'
+      show_author_name: 'Hide author name*'
+      prompt: '*This option will hide name and avatar of the creator from this post.'

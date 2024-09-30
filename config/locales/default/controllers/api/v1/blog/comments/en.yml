@@ -1,0 +1,11 @@
+en:
+  controllers:
+    api:
+      v1:
+        blog:
+          comments:
+            errors:
+              create_forbidden: You are not allowed to leave comments on this
+              read_forbidden: You are not allowed to view this comment
+              update_forbidden: You are not allowed to edit this comment
+              destroy_forbidden: You are not allowed to delete this comment

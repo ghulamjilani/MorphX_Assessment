@@ -1,0 +1,69 @@
+en:
+  views:
+    home:
+      discover:
+        with_your_favorite_creators: "with your favorite %{creators}"
+        connect_with_creators: "Connect with %{creators_upper}"
+      services:
+        unite_landing:
+          become_creator: "Become a %{creator}"
+          from_each_other: "from each other to build the best %{creator} marketplace ever."
+        morphx_landing:
+          powerful_video_platform: "Powerful Video Platform on demand, enabling enterprise businesses, media %{creators}, global content producers and power brand %{creators} to deploy and monetize live and video  streaming content"
+        joybee_landing:
+          become_creator: "Become a %{creator}"
+          from_each_other: "from each other to build the best %{creator} marketplace ever."
+      footer_banner:
+        title: Discover Experiences
+      support:
+        form_label: Contact Us
+        name: Name
+        email: Email
+        company_name: Company Name (optional)
+        request: Request
+        send: Send
+  home_page:
+    auto_modal: "%{size} of your Facebook friends are already on %{service_name}, so we've added them to your contact list."
+    discover:
+      header_banner: "%{service_name} & discover experiences"
+      sub_header: "Check out what’s coming up next on %{service_name}"
+    index:
+      avarage: "At an average sale value of $300, brands using %{service_name} can"
+      with: "With %{service_name}"
+      without: "Without %{service_name}"
+      brand: "%{service_name} your brand"
+      oppor: " Don’t miss the opportunity to get ahead of your competition. Live video is the future of consumer engagement and %{service_name} is the easiest way to harness its sales power."
+    landing:
+      title: "%{service_name} & Create"
+    sticky_panel:
+      organizations: Organizations
+      live: Live
+      popular: Popular
+      discover: Discover
+      channels: Channels
+      replays: Replays
+      creators: Creators
+      uploads: Uploads
+      on_demand: On-demand
+    banner:
+      discover: Discover
+      live_experiences: Live Experiences
+      relive: Relive
+      great_sessions: great sessions
+      explore: Explore
+      variety_of_original_content: a variety of original content
+      find: Find
+      your_next_favorite_teacher: your next favorite teacher
+    titles:
+      live_experiences: Live
+      channels: Channels
+      organizations: Organizations
+      replays: Replays
+      videos: Videos
+      connectWithCreators: Connect with Creators
+      uploads: Uploads
+      see_more: See more
+      trending: Trending
+      all_videos: All Videos
+      popular: Popular
+      discover: Discover

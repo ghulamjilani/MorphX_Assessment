@@ -1,0 +1,40 @@
+@import "../../widgets/mixins";
+.mainVideoSection-rightSidebar{
+  @include chat();
+  .tab-content-t.chat.chat-title{
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a{
+      background-color: var(--btn__secondary);
+      border-color: var(--btn__secondary);
+      color: var(--tp__main);
+      padding: 0.5rem 1.1rem 0.5rem 1.1rem;
+      border-radius: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .additions_tabs_chat_wrapp{
+    height: 446px;
+    overflow: hidden;
+    .chatWrapp{
+      border-bottom:1px solid $font-color-main-ultra-light;
+    }
+    .messages{
+      height: calc(100% - 10px);
+    }
+  }
+  &.withChat{
+    section{
+      height: auto;
+      max-height: none;
+    }
+  }
+  .toggle_chat{
+    text-transform: uppercase;
+  }
+}

@@ -1,0 +1,46 @@
+#vue-follow
+  = content_tag 'comp-wrapper', nil, data: { component: 'DashboardFollow', props: {monolit: true}}.to_json
+-# - max_icons_to_display_in_row = 14
+-# - follows = current_user.follows.unblocked.not_deleted
+-# - if follows.size > 0
+-#   %hr.margin-top-0.margin-bottom-0
+-#   .FollowersList.FollowersOrFollowingsList.clearfix.col-md-12
+-#     %div
+-#       %h3
+-#         Following
+-#         %span.followersCount
+-#           = follows.size
+
+-#         %a{data: {toggle: :modal, target: "#following"}}
+-#           See all
+-#     %ul.profileThumbBox
+-#       - follows.take(max_icons_to_display_in_row).each do |follow|
+-#         - if follow.followable_type === "User"
+-#           %li.thumbFollowUserDiv
+-#             %a{href: follow.followable.relative_path, alt: follow.followable.public_display_name, title: follow.followable.public_display_name}
+-#               = image_tag(follow.followable.avatar_url, width: 28, height: 28, alt: follow.followable.public_display_name, class: 'img-circle')
+-#         - if follow.followable_type === "Channel"
+-#           %li.thumbFollowUserDiv
+-#             %a{href: follow.followable.relative_path, alt: follow.followable.title, title: follow.followable.title}
+-#               = image_tag(follow.followable.logo_url, width: 28, height: 28, alt: follow.followable.title, class: 'img-square')
+-#         - if follow.followable_type === "Organization"
+-#           %li.thumbFollowUserDiv
+-#             %a{href: follow.followable.relative_path, alt: follow.followable.name, title: follow.followable.name}
+-#               = image_tag(follow.followable.logo_url, width: 28, height: 28, alt: follow.followable.name, class: 'img-square')
+-# - followers = current_user.user_followers.includes(:image, :user_account)
+-# - if followers.size > 0
+-#   %hr.margin-top-0.margin-bottom-0
+-#   .FollowersOrFollowingsList.FollowersList.clearfix.col-md-12
+-#     %div
+-#       %h3
+-#         Followers
+-#         %span.followersCount
+-#           = followers.size
+
+-#         %a{data: {toggle: :modal, target: "#followers"}}
+-#           See all
+-#     %ul.profileThumbBox
+-#       - followers.take(max_icons_to_display_in_row).each do |follow|
+-#         %li.thumbFollowUserDiv
+-#           %a{href: follow.relative_path, alt: follow.public_display_name, title: follow.public_display_name}
+-#             = image_tag(follow.avatar_url, width: 28, height: 29, alt: follow.public_display_name, class: 'img-circle')

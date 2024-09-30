@@ -1,0 +1,14 @@
+= form_tag cancel_service_admin_panel_stripe_db_service_subscription_path(resource.id), method: :post, 'data-confirm': 'Are you sure want to cancel subscription?' do
+  %div
+    %p CANCELED_AT and STATUS will be updated after receiving appropriate webhook
+    %p Just reload page in few seconds after cancel and you'll see updated attributes
+    %p If all was fine you'll see success flash message after submit form
+  %div
+    = radio_button_tag 'cancel_at_period_end', true, false, required: true
+    = label_tag 'At period end'
+    %br/
+    = radio_button_tag 'cancel_at_period_end', false, false, required: true
+    = label_tag 'Immediately'
+  %br/
+  %div
+    = submit_tag 'Cancel'

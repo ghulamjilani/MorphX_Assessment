@@ -1,0 +1,172 @@
+- content_for(:extra_body_classes, "home home-index hidePageHeader resetMainContainer header-top")
+.homePageBanner
+  %section
+    .homePageBanner__header= t('home_page.discover.header_banner', service_name: Rails.application.credentials.global[:service_name])
+    .homePageBanner__Sub_header
+      = I18n.t('views.home.discover.with_your_favorite_creators', creators: I18n.t('dictionary.creators'))
+    .homePageBanner__imgWrapp
+      .homePageBanner__img.first-slider
+        .homePageBanner__img__slider
+          %img{src: asset_path('newHomePage/banner/1.jpg')}
+          %img{src: asset_path('newHomePage/banner/5.jpg')}
+          %img{src: asset_path('newHomePage/banner/9.jpg')}
+          %img{src: asset_path('newHomePage/banner/13.jpg')}
+        .homePageBanner__img__cover
+        .homePageBanner__img__header
+          %span LIVE
+          Discover Live Experiences
+      .homePageBanner__img.second-slider
+        .homePageBanner__img__slider
+          %img{src: asset_path('newHomePage/banner/2.jpg')}
+          %img{src: asset_path('newHomePage/banner/6.jpg')}
+          %img{src: asset_path('newHomePage/banner/10.jpg')}
+          %img{src: asset_path('newHomePage/banner/14.jpg')}
+        .homePageBanner__img__cover
+        .homePageBanner__img__header
+          %span Videos
+          Relive great sessions
+      .homePageBanner__img.third-slider
+        .homePageBanner__img__slider
+          %img{src: asset_path('newHomePage/banner/3.jpg')}
+          %img{src: asset_path('newHomePage/banner/7.jpg')}
+          %img{src: asset_path('newHomePage/banner/11.jpg')}
+          %img{src: asset_path('newHomePage/banner/15.jpg')}
+        .homePageBanner__img__cover
+        .homePageBanner__img__header
+          %span Channels
+          Explore a variety of original content
+      .homePageBanner__img.fourth-slider
+        .homePageBanner__img__slider
+          %img{src: asset_path('newHomePage/banner/4.jpg')}
+          %img{src: asset_path('newHomePage/banner/8.jpg')}
+          %img{src: asset_path('newHomePage/banner/12.jpg')}
+          %img{src: asset_path('newHomePage/banner/16.jpg')}
+        .homePageBanner__img__cover
+        .homePageBanner__img__header
+          %span Creators
+          Find your next favorite teacher
+.text-color-main
+- if display_home_page_live_guide?
+  #live-guide-row
+    .container
+      #live-guide
+        #channel-widget-container
+        - content_for(:after_include_javascripts) do
+          = javascript_include_tag 'home'
+          :javascript
+            (function(){
+              var l2date = new L2date();
+              var view = new LiveGuideView({
+                container: $('#channel-widget-container'),
+                collection: new ChannelCollection(),
+                subheader_title: "#{t('home_page.discover.sub_header', service_name: Rails.application.credentials.global[:service_name])}",
+                currentDateString: l2date.toCustomFormat("MMM DD, YYYY"),
+                currentTimeHour: parseInt(l2date.toCustomFormat("H"), 10),
+                currentTimeMinute: parseInt(l2date.toCustomFormat("m"), 10),
+                timezoneText: l2date.toCustomFormat("Z")
+              });
+              view.render();
+            })();
+
+
+#sessions
+  - if @upcoming.size > 0
+    .LiveSessionsSection
+      .container
+        %h3.title
+          Live Experiences
+          %a.SeeAllTiles{href: search_path(ford: :new, ft: :Session)} See more
+        .col-md-12
+          .TileSliderWrapp.owlSlider
+            .spinnerSlider
+              .bounceS1
+              .bounceS2
+              .bounceS3
+            .TileSlider.owl-carousel
+              = render(partial: 'shared/tiles/session', collection: @upcoming, locals: {custom_class: 'margin-right-10'})
+
+  - if @replays.size > 0
+    .RecentSessionsSection
+      .container
+        %h3.title
+          Replays And Videos on Demand
+          %a.SeeAllTiles{href: search_path(ford: :views_count, ft: :Video)} See more
+        .col-md-12
+          .TileSliderWrapp.owlSlider
+            .spinnerSlider
+              .bounceS1
+              .bounceS2
+              .bounceS3
+            .TileSlider.owl-carousel
+              = render(partial: 'shared/tiles/video', collection: @replays, locals: {custom_class: 'margin-right-10'})
+
+  - if @channels.size > 0
+    .ChannelsSection
+      .container
+        %h3.title
+          Channels
+          %a.SeeAllTiles{href: search_path(ford: :views_count, ft: :Channel)} See more
+        .col-md-12
+          .TileSliderWrapp.owlSlider
+            .spinnerSlider
+              .bounceS1
+              .bounceS2
+              .bounceS3
+            .TileSlider.owl-carousel.ChannelTileSlider
+              = render(partial: 'shared/tiles/channel', collection: @channels, locals: {custom_class: 'margin-right-10'})
+
+  - if @creators.size > 0
+    .CreatorsSection
+      .container
+        %h3.title
+          = I18n.t('views.home.discover.connect_with_creators', creators_upper: I18n.t('dictionary.creators_upper'))
+          %a.SeeAllTiles{href: search_path(ford: :views_count, ft: :User)} See more
+        -#.row.padding-left-20.padding-right-20
+        -#  .col-xs-6
+        -#    #{@total_creators} Creators
+        -#  .col-xs-6.text-right
+        -#    %a.btn.btn-s.btn-borderred-grey.SeeAllTiles{href: creators_home_path} See all
+        .col-md-12
+          .TileSliderWrapp.owlSlider
+            .spinnerSlider
+              .bounceS1
+              .bounceS2
+              .bounceS3
+            .TileSlider.CreatorsTileSlider.owl-carousel
+              = render(partial: 'shared/tiles/user', collection: @creators, locals: {custom_class: 'margin-right-10'})
+
+  -# - if @companies.size > 0
+  -#   .VideosSection
+  -#     .container
+  -#       %h3.title
+  -#         Brands
+  -#         %span.SubHeader Connect with your favorite Brands
+  -#         %a.btn.btn-l.mainButton.btn-square.text-uppercase.SeeAllTiles{href: brands_home_path} Join
+  -#       -#.row.padding-left-20.padding-right-20
+  -#       -#  .col-xs-6
+  -#       -#    #{@total_companies} Brands
+  -#       -#  .col-xs-6.text-right
+  -#       -#    %a.btn.btn-s.btn-borderred-grey.SeeAllTiles{href: brands_home_path} See all
+  -#       - batch = @companies.size > 15 ? (@companies.size / 2.0).round : 15
+  -#       - @companies.each_slice(batch) do |companies|
+  -#         .col-md-12
+  -#           .TileSliderWrapp.owlSlider
+  -#             .spinnerSlider
+  -#               .bounceS1
+  -#               .bounceS2
+  -#               .bounceS3
+  -#             .TileSlider.owl-carousel.BrandsTileSlider
+  -#               = render(partial: 'shared/tiles/company', collection: companies, locals: {custom_class: 'margin-right-10'})
+
+-#= render 'home/autodisplay_modals'
+
+
+- if Rails.env.production?
+  - content_for(:after_include_javascripts) do
+    :plain
+      <!--- start: simplefeedback.com --->
+      <script type="text/javascript">
+      var sfb_params = { "host": (("https:" == document.location.protocol) ? "https://" : "http://"), "site": "365E74D673568BDEDE3686E54755D2C779ADE180", "id": "3978" };
+      (function(d, t) { var g = d.createElement(t), s = d.getElementsByTagName(t)[0]; g.src = sfb_params.host+'dalit6msb4eer.cloudfront.net/scripts/feedback/sfb_init.js'; s.parentNode.insertBefore(g, s); }(document, 'script'));
+      </script>
+      <!--- end: simplefeedback.com --->

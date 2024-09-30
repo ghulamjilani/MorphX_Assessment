@@ -1,0 +1,12 @@
+<%- if @plan %>
+$('#subscription_modals #subscription_list').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('#subscription_modals').html("<%= escape_javascript(render(partial: 'shared/subscription/purchase', locals: {plan: @plan, image_url: @subscription.channel.image_mobile_preview_url})) %>");
+new window.PaymentModalView({el: '#plan-payment-modal', stripe_key: '<%= Rails.application.credentials.global.dig(:stripe, :public_key) %>', amount: '<%= @plan.amount %>', plan_id: <%= @plan.id %>, subscription_id: <%= @subscription.id %>})
+$('#subscription_modals #plan-payment-modal').modal('show');
+$('a[data-remote]').css('visibility', 'visible');
+<% else %>
+$('#subscription_modals #subscription_list').modal('hide')
+$.showFlashMessage('Plan is not available anymore', {type: 'error'})
+<% end %>

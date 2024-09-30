@@ -1,0 +1,9 @@
+en:
+  views:
+    layouts:
+      application:
+        messages_popup_wrapper:
+          mess_count: "Messages"
+          load_more: "Load More"
+          view_all: "View all"
+          empty: "No messages."

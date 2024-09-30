@@ -1,0 +1,404 @@
+
+.channel_landing_user_show{
+  .main-content#container{
+    overflow: hidden;
+    padding-bottom: 0;
+  }
+}
+.ch-p_L_wrapp{
+  width: 300px;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 14px;
+  &.full-width{
+    width: 100%;
+    .ch-p_presenter_follow{
+      margin: 0 auto;
+      max-width: 25rem;
+    }
+    .ch-p_aboutTxt_moreBtn{
+      display: none;
+    }
+    .ch-p_aboutTxt{
+      max-height: none;
+      overflow: visible;
+    }
+    .col-xs-2{
+      width: 5rem;
+    }
+    .col-xs-7{
+      width: auto;
+      min-width: 8rem;
+    }
+    .col-xs-3{
+      width: auto;
+    }
+    .chanelLIst{
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+      .chanelLIst-item{
+        @include media(reverso-tablet){
+          margin: 0 2rem 3rem;
+          width: calc(50% - 4rem);
+        }
+        @include media(tablet){
+          margin: 0 0rem 3rem;
+          width: 100%;
+        }
+      }
+    }
+    .chanelLIst_name{
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+      transition: all 0.2s ease-in-out;
+      transform: none;
+      font-weight: bold;
+      font-size: 2.8rem;
+      line-height: 130%;
+      color: #FAFAFA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &__title{
+        width: 100%;
+        @include text__ellipsis(2);
+        white-space: normal;
+        padding: 0 .5rem;
+        @include media(phone){
+          font-size: 2rem;
+        }
+      }
+    }
+    .chanelLIstSection{
+      background: #222222;
+      padding: 6rem 0;
+      text-align: center;
+      position: relative;
+      &:before{
+        width: 100vw;
+        position: absolute;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        background: #222222;
+        content: '';
+        z-index: -1;
+        transform: translateX(-50%);
+      }
+      .fs-l{
+        font-weight: bold;
+        font-size: 4rem;
+        line-height: 150%;
+        background-color: #94716b;
+        background-image: linear-gradient(45deg, #b79891, #94716b);
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+        padding-bottom: 6rem;
+        display: block;
+        text-align: center;
+      }
+      .img-responsive{
+        border-radius: 2rem;
+        padding-bottom: 27.85%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        width: 100%;
+        height: 0;
+        position: relative;
+        font-weight: bold;
+        font-size: 2.8rem;
+        line-height: 130%;
+        color: #FAFAFA;
+        &:after{
+          display: none;
+        }
+      }
+    }
+  }
+  @include media(tablet){
+    width: 100%;
+  }
+  .ch-p_L{
+    padding:20px;
+    background-color: var(--bg__content);
+    @include boxShadow__main(var(--sh__main));
+    color: var(--tp__secondary);
+  }
+  .starRating_wrapp{
+    padding-top: 6px;
+  }
+  .starRating{
+    li{
+      width: 20px;
+    }
+    i{
+      font-size: 15px;
+      line-height: 14px;
+      margin: 0 2px;
+      color: #d7d7d9;
+    }
+    & + span{
+      vertical-align: top;
+      line-height: 19px;
+      font-size: 16px;
+    }
+  }
+  .socialMK2{
+    padding-top: 13px;
+    padding-bottom: 10px;
+    a{
+      height: 30px;
+      width: 30px;
+      margin:0 7px 0 0;
+      padding:0;
+      line-height: 30px;
+      vertical-align: top;
+      span{
+        line-height: 20px;
+        position: relative;
+        i{
+          font-size: 20px;
+          position: absolute;
+          top: 50%;
+          display: block;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      &.instagram i{
+        font-size: 17px;
+        position: absolute;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-48%, -47%);
+      }
+      &.modal_email_show{
+        background: $siteColorMain;
+      }
+    }
+  }
+  .ch-p_aboutTxt_wrapp{
+    .ch-p_aboutTxt_moreBtn{
+      background: var(--bg__content);
+    }
+  }
+  i.VideoClientIcon-iPlus.rotate45{
+    line-height: 25px;
+    font-size: 14px;
+    @include center('vh');
+  }
+  .country_wrapp{
+    & ~ div{
+      padding-top: 1px;
+    }
+  }
+  .speaking_wrapp{
+    & ~ div{
+      padding-top: 2px;
+    }
+  }
+  .website_url_wrapp{
+    padding-top: 7px;
+    & ~ div{
+      padding-top: 5px;
+    }
+    i{
+      padding: 0px 1px;
+    }
+  }
+}
+
+.follow_tooltip_log, .follow_tooltip_mess{
+  opacity: 0;
+  display: none;
+  background: #000000ad;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 120%;
+  color: white;
+  font-size: 13px;
+  padding: 3px;
+  transition: opacity .5s ease-in-out;
+}
+.with_tooltip_log{
+  &:active ~ .follow_tooltip_log, &:hover ~ .follow_tooltip_log{
+    display: block;
+    opacity: 1;
+  }
+}
+.with_tooltip_mess{
+  &:active ~ .follow_tooltip_mess, &:hover ~ .follow_tooltip_mess{
+    display: block;
+    opacity: 1;
+  }
+}
+
+.follow_btn, .Contact_dropdown{
+  width: calc(100% - 40px);
+  margin-right: 5px;
+}
+.ch-p_presenter{
+  position: relative;
+}
+.ch-p_presenter_edit{
+  position: absolute;
+  top:-8px;
+  right: -12px;
+  @include media(tablet){
+    a{
+      padding-left: 10px!important;
+      padding-right: 10px!important;
+    }
+  }
+}
+.ch-p_LinfoC{
+  .col-xs-3:not(.followers_count){
+    padding-top: 3px;
+  }
+  .followers_count{
+    text-align: center;
+  }
+}
+.ch-p_presenter, .ch-p_presenter_about, .ch-p_presenter_social, .ch-p_presenter_channels{
+  padding-bottom: 9px;
+  i{
+    color: var(--tp__icons);
+  }
+  .ch-p_Follow i, .UnFollow_btn i{
+    color: var(--tp__btn__bordered);
+  }
+}
+.ch-p_presenter_name{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@include media(tablet){
+  .ch-p_presenter_about_tablet{
+    width: 33px;
+    padding-right: 31px;
+  }
+  .ch-p_presenter_social{
+    .socialMK2 a{
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.intl-tel-input .selected-flag .iti-flag.countryFlag{
+  position: relative !important;
+  display: inline-block;
+  vertical-align: middle;
+  transform: translate(0,0);
+  //width: 15px !important;
+  //height: 15px !important;
+  //border-radius:15px;
+}
+
+.ch-p_presenter_channels{
+  color: var(--tp__secondary);
+  .ChannelsImg{
+    width: 20px;
+    height: 20px;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 30px;
+  }
+  .row, .row a{
+    color: var(--tp__secondary);
+  }
+}
+.ch-p_channelName{
+  font-size: 20px;
+  color: var(--tp__main);
+  @include media(phone){
+    padding: 15px;
+  }
+}
+.ch-p_C_tiles#reviewsArea {
+  padding-top: 30px;
+  .reviews-tile{
+    @include media(phone){
+      .starRating{
+        text-align: inherit;
+      }
+    }
+  }
+}
+
+.ch-p_channelName_sub{
+  color: var(--tp__main);
+  font-size: 14px;
+}
+.ch-p_presenter_mobile_showMore{
+  &.active{
+    i{
+      &:before{
+        display: inline-block;
+        transform:rotate(180deg);
+      }
+    }
+  }
+}
+.ch-p_WorkingWith{
+  padding-bottom: 20px;
+  .Channel-list{
+    font-size: 0;
+  }
+  .avatarImg-SD{
+    margin-right: 10px;
+  }
+}
+.TotalReach{
+  .dropdown-menu{
+    width: 208px;
+    right: -19px;
+    top: -16px;
+    li{
+      line-height: 1.1;
+      font-size: 13px;
+      .pull-right.text-color-main.fs-13{
+        padding-top: 2px;
+      }
+      &:hover{
+        a:not(:hover){
+          color: var(--tp__main)  !important;
+        }
+      }
+    }
+  }
+  .socialMK2{
+    padding-top: 0px;
+    a{
+      width: auto;
+      margin-right: 0;
+      margin-top: 15px;
+      color: var(--tp__main);
+      &:hover{
+        color: var(--siteColorMain) !important;
+      }
+    }
+    span{
+      width: 20px;
+    }
+  }
+  .dropdown-menu [class^="icon-"]:before{
+    width: auto;
+  }
+}

@@ -1,0 +1,17 @@
+<h5>{{humanType}}</h5>
+
+<dl class='dl-horizontal'>
+    <dt>Begins at:</dt>
+    <dd>{{formattedDateTime}}</dd>
+
+    {{#if isSession}}
+        <dt>Prep-Time:</dt>
+        <dd>{{preTime}} minutes</dd>
+    {{/if}}
+
+    <div style='margin-top: 15px; margin-bottom: 5px; height: 10px'>
+      <dt>
+        <i class='VideoClientIcon-clockF'> {{duration}} Minutes</i>
+      </dt>
+    </div>
+</dl>

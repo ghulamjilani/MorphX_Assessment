@@ -1,0 +1,11 @@
+en:
+  channel_tile:
+    owner: Owner
+    since: Since
+    streams: streams
+    subscribe: Subscribe from
+    subscribed: Subscribed
+    part_of: Part of
+    follow_channel: Follow Channel
+    following_channel: Following Channel
+    unfollow_channel: Unfollow Channel

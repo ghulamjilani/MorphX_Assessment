@@ -1,0 +1,106 @@
+.m-table {
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  $textAlignsProps: left, center, right;
+  @each $textAlignsProp in $textAlignsProps {
+    &__th__#{$textAlignsProp} {
+      th {
+        text-align: $textAlignsProp;
+      }
+    ;
+    }
+    &__td__#{$textAlignsProp} {
+      td {
+        text-align: $textAlignsProp;
+      }
+    }
+  }
+
+  $fontWeightProps: bold, normal;
+  @each $fontWeightProp in $fontWeightProps {
+    &__th__fontWeight__#{$fontWeightProp} {
+      th, td::before {
+        font-weight: $fontWeightProp;
+      }
+    }
+  }
+
+  $cellPaddings: (
+          "xs": '0.1rem',
+          "s": '0.5rem',
+          "m": '1rem',
+          "l": '1.5rem',
+          "xl": '2rem'
+  );
+  @each $cellPaddingName, $cellPaddingValue in $cellPaddings {
+    &__cell__padding__#{$cellPaddingName} {
+      th, td {
+        padding: #{$cellPaddingValue};
+      }
+    }
+  }
+
+  &__bordered__all {
+    th, td {
+      border: 1px solid var(--border__separator);
+    }
+  }
+
+  &__bordered__bottom {
+    th, td {
+      border-bottom: 1px solid var(--border__separator);
+    }
+  }
+
+  @mixin m-table-collapse {
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+      padding: 1rem;
+    }
+
+    tr {
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    td {
+      display: flex;
+      text-align: right;
+      justify-content: space-between;
+
+      &:not(:first-child) {
+        border-top: none;
+      }
+
+      &:before {
+        content: attr(data-th);
+        max-width: 45%;
+        margin-right: 5%;
+        text-align: left;
+        @include text__ellipsis(3);
+      }
+    }
+  }
+
+  // we can add more collapse points if necessary  
+  // p-phone, phone, p-tablet, tablet, desktop
+  $collapseProps: phone, tablet;
+  @each $collapseProp in $collapseProps {
+    &__collapse__#{$collapseProp} {
+      @include media($collapseProp) {
+        @include m-table-collapse;
+      }
+    }
+  }
+
+}

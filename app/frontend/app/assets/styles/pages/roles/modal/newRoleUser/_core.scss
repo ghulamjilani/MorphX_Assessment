@@ -1,0 +1,320 @@
+.newRoleUser {
+  .MK2-modal__dialog {
+    width: 74rem;
+    overflow: visible;
+  }
+
+  .MK2-modal__body {
+    overflow: visible;
+    padding: 0;
+  }
+
+  &__head {
+    > :not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+
+    @include flex(flex, center, false);
+    flex-direction: column;
+
+    &__name, &__status {
+      @include flex(flex, baseline, false);
+    }
+
+    &__name {
+      position: relative;
+
+      &__userStatus {
+        @include center(v);
+        left: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: #F23535; /*static color for offline user*/
+      }
+
+      span {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+
+    &__status {
+      padding-left: 1rem;
+      font-size: 1.4rem;
+
+      span {
+        padding-right: 0.5rem;
+        color: var(--tp__secondary);
+      }
+    }
+  }
+
+  &__form {
+    margin: 0 -3rem;
+    padding: 2rem 3rem 1rem;
+    border-top: 1px solid var(--border__separator);
+    border-bottom: 1px solid var(--border__separator);
+
+    &__wrapper {
+      h4 {
+        margin: 0;
+        padding: 1rem 0 3rem;
+        color: var(--tp__h1);
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+    }
+
+    &__csv {
+      @include flex(flex, center, space-between);
+      @include media(p-tablet) {
+        padding-top: 2rem;
+      }
+      @include media(phone) {
+        flex-direction: column;
+        label {
+          width: 100%;
+        }
+      }
+  
+      &__title {
+        padding-right: 2rem;
+        font-size: 1.5rem;
+        @include media(phone) {
+          padding-bottom: 2rem;
+        }
+      }
+    }
+  }
+
+  &__search {
+    padding: 0 3rem;
+    margin: 0 -3rem;
+    border-bottom: 1px solid var(--border__separator);
+
+    .dropdownMK2__menu {
+      top: 4rem;
+    }
+
+    .dropdownMK2__item {
+      padding: 0 1rem;
+    }
+
+    input {
+      background: var(--bg__main) !important;
+      border-radius: 2.5rem;
+      padding: 1rem 6rem 1rem 1rem !important;
+      position: relative;
+    }
+
+    .input__field__icon {
+      top: 2rem;
+      right: 1rem;
+    }
+
+    i {
+      font-size: 1.6rem !important;
+      color: var(--tp__active);
+    }
+  }
+
+  &__table {
+    .m-table {
+      overflow-x: visible;
+
+      th, td {
+        border: none;
+      }
+    }
+
+    &__invalid_header {
+      color: var(--border__form__error);
+    }
+
+    &__channels {
+      @include flex(flex, false, false);
+      flex-direction: column;
+
+      &__item {
+        @include flex(flex, flex-start, flex-start);
+        min-width: 10rem;
+        width: 100%;
+        flex-wrap: wrap;
+        @include media(tablet) {
+          width: auto;
+        }
+
+        .dropdownMK2 {
+          @include flex(flex, center, flex-start);
+          min-width: auto;
+          width: 100%;
+          max-width: 15rem;
+          margin-right: 2rem;
+          @include media(tablet) {
+            min-width: 10rem;
+            width: auto;
+          }
+
+          &__toggle {
+            border-bottom: none;
+          }
+
+          &__menu {
+            max-width: 34rem;
+            width: auto;
+            left: -7rem;
+            @include media(tablet) {
+              left: 0;
+            }
+            @include media(p-phone) {
+              max-width: 24rem;
+            }
+          }
+
+          &__image {
+            display: none;
+          }
+
+          &__item {
+            padding: 0 2rem;
+
+            & > a {
+              @include text__ellipsis();
+              padding: 0;
+
+              &:hover {
+                color: var(--tp__main);
+              }
+
+              &:focus {
+                color: var(--tp__secondary);
+              }
+            }
+          }
+
+          &__checkbox {
+            padding-right: 0.7rem;
+          }
+        }
+      }
+    }
+
+    &__modalChannels {
+      @include flex(flex, baseline, false);
+
+      &:not(:last-child) {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border__separator);
+      }
+
+      @include media(phone) {
+        flex-direction: column;
+      }
+
+      .roleName {
+        margin-right: 3rem;
+      }
+
+      .wrapper {
+        width: 100%;
+      }
+    }
+
+    &__RolesAndChannels {
+      @include flex(flex, flex-start, flex-start);
+      margin: 1rem 0 2rem 0;
+
+      &__wrapper {
+        max-width: 17rem;
+        width: 100%;
+        margin-right: 2rem;
+
+        .roleName {
+          max-width: 17rem;
+          margin: 0;
+          display: inline-block;
+          word-break: break-word;
+        }
+      }
+
+      @include media(tablet) {
+        width: 100%;
+        align-items: baseline;
+        flex-wrap: wrap;
+        &:not(:last-child) {
+          padding-bottom: 2rem;
+          border-bottom: 1px solid var(--border__separator);
+        }
+        &__wrapper {
+          max-width: none;
+          width: auto;
+          min-width: auto;
+          margin-bottom: 2rem;
+
+          .roleName {
+            max-width: none;
+          }
+        }
+      }
+      @include media(p-phone) {
+        flex-direction: column;
+      }
+    }
+
+    &__title {
+      font-size: 1.2rem;
+      color: var(--tp__secondary);
+      font-weight: bold;
+      margin: 2rem 0 4rem;
+    }
+
+    &__wrapper {
+      @include flex(flex, center, false);
+    }
+
+    &__Role {
+      @include flex(flex, center, false);
+      max-width: 100%;
+      padding: 0 2rem 0 1rem;
+      font-size: 1.4rem;
+      color: #FFF;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+
+      &__wrapper {
+        max-width: 17rem;
+      }
+
+      i {
+        padding-left: 0.5rem;
+        cursor: pointer;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.6rem;
+      }
+
+      &__wrapper {
+        @include flex(flex, baseline, false);
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  &__buttons {
+    @include flex(flex, center, flex-end);
+    position: absolute;
+    bottom: -5rem;
+    right: 0;
+
+    button {
+      width: 13rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+
+      &:last-child {
+        margin-left: 2rem;
+      }
+    }
+  }
+}

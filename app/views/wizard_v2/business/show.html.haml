@@ -1,0 +1,213 @@
+- content_for(:additional_meta_tags) do
+  -#<!-- Core build with no theme, formatting, non-essential modules -->
+  %script{src: "//cdn.quilljs.com/1.3.6/quill.js"}
+  %link{href: "//cdn.quilljs.com/1.3.6/quill.snow.css", rel: "stylesheet"}
+- content_for(:extra_body_classes, ' wizard ')
+-#Wizard Steps
+.stepLine-wrapper
+  .stepLine.stepCount-3.active-2
+    .stepLine__head
+      %a.step1{href: '#'}
+        %span
+          = I18n.t('wizard.sign_up')
+      %a.step2.active{href: '#'}
+        %span
+          = I18n.t('wizard.my_business')
+      %a.step3{href: wizard_v2_channel_path}
+        %span
+          = I18n.t('wizard.first_channel')
+    .stepLine__body
+      .loadingline_wrapp
+        .loadingline
+.wizard_business
+  %h2.wizard__title
+    = I18n.t('wizard.set_up_your_business')
+  .sectionBlock_wrapp
+    = form_for @business, url: wizard_v2_business_path, method: :put, html: {multipart: true, id: :wizard_business, class: 'form_V2 wizard_business_form'} do |f|
+      .formWrapp
+        .LoadingCover.profile_next_cover{style: 'display:none'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        = f.hidden_field :id
+        %section.sectionBlock
+          .row
+            .col-xs-12.ChannelCover_wrapp
+              #business_logo.business_logo{logoID: @business.logo.try(:id)}
+                = link_to '#business_logo_modal', data: {toggle: :modal} do
+                  %i.VideoClientIcon-edit-icon
+              .business_logo_title.text-color-LightGrey.fs-18.bold
+                = I18n.t('wizard.logo')
+          #business_logo_modal.modal.fade{data: {keyboard: false, backdrop: :static}}
+            .modal-dialog
+              .unobtrusive-flash-container
+              .modal-content
+                = render partial: 'become_presenter_steps/close_modal'
+                .modal-body
+                  %h4.groupTitle.clearfix
+                    = I18n.t('wizard.busines_logo')
+                  %section.crop-wrapp
+                    #logo-upload-area.upload-area
+                      .row
+                        .upload-info.padding-top-80.padding-bottom-80
+                          .dotsWrapp
+                            .dot1
+                            .dot2
+                            .dot3
+                            .dot4
+                            .dot5
+                            .dot6
+                            .dot7
+                            .dot8
+                          = render partial: 'become_presenter_steps/loading_cover'
+                          %span
+                            = file_field_tag :business_logo_file, class: :inputfile, accept: '.jpg,.jpeg,.png,.bmp'
+                            = label_tag :business_logo_file, I18n.t('forms.info.select_file')
+                            .fs-12.hideForMobile
+                              = I18n.t('wizard.drag_n_drop')
+                    .crop-container
+                    .fs-13.sugSize
+                      %span
+                        = I18n.t('wizard.size')
+                      280x280 px
+                      %br
+                      = I18n.t('wizard.recomend')
+                    .loudThumbnailsList
+          .input-block.required{class: ('state-clear' if @business.name.blank?)}
+            = f.label :name, I18n.t('wizard.business_name')
+            = f.text_field :name, required: true
+            .errorContainerWrapp
+          = f.label :description, I18n.t('wizard.about')
+          .input-block.margin-bottom-10.organizationDescription{class: ('state-clear' if @business.description.blank?)}
+            = f.hidden_field :description
+            #descriptionToolbar
+              %span.ql-formats
+                %button.ql-bold
+                %button.ql-italic
+              %span.ql-formats
+                %button.ql-list{value: :ordered}
+                %button.ql-list{value: :bullet}
+              %span.ql-formats
+                %button.ql-link
+            #descriptionEditor
+              = raw(sanitize(@business.description.to_s.html_safe))
+          .input-block{class: ('state-clear' if @business.website_url.blank?)}
+            = f.label :website_url, I18n.t('wizard.business_website')
+            = f.text_field :website_url
+            .errorContainerWrapp
+
+        %section.sectionBlock
+          #socialLinkListWrapp.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
+            .panel.padding-top-5.padding-bottom-5
+              .panel-heading.no-padding{:role => "tab"}
+                %a.socialToggle.d-block.collapsed.col-md-12.text-color-LightGrey.fs-14.padding-left-0{"aria-controls" => "socialLinkList", "aria-expanded" => "true", "data-parent" => "#socialLinkListWrapp", "data-toggle" => "collapse", :href => "#socialLinkList", :role => "button"}
+                  -#Link and authorize company social media profiles
+                  = I18n.t('wizard.business_sm')
+                  %i.VideoClientIcon-angle-downF
+            .panel-collapse{'aria-labelledby': 'headingOne', role: :tabpanel}
+              #socialLinkList.collapse
+                .socialList.padding-top-10.padding-bottom-0
+                  = f.fields_for :social_links do |s|
+                    - if s.object.provider == 'facebook'
+                      .socialList-item.clearfix.input-block
+                        %div.socialIcon.faceBook
+                          %i.VideoClientIcon-facebookF
+                        = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: I18n.t('wizard.my_page')
+                        = s.hidden_field :provider
+                        .errorContainerWrapp
+                    - elsif s.object.provider == 'twitter'
+                      .socialList-item.clearfix.input-block
+                        %div.socialIcon.twitter
+                          %i.VideoClientIcon-twitter2
+                        = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: I18n.t('wizard.my_page')
+                        = s.hidden_field :provider
+                        .errorContainerWrapp
+                    - elsif s.object.provider == 'google'
+                      .socialList-item.clearfix.input-block
+                        %div.socialIcon.Google
+                          %i.VideoClientIcon-google
+                        = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: I18n.t('wizard.my_page')
+                        = s.hidden_field :provider
+                        .errorContainerWrapp
+                    - elsif s.object.provider == 'linkedin'
+                      .socialList-item.clearfix.input-block
+                        %div.socialIcon.LinkedIn
+                          %i.VideoClientIcon-linkedinF
+                        = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: I18n.t('wizard.my_page')
+                        = s.hidden_field :provider
+                        .errorContainerWrapp
+                    - elsif s.object.provider == 'instagram'
+                      .socialList-item.clearfix.input-block
+                        %div.socialIcon.Instagram
+                          %i.VideoClientIcon-instagram
+                        = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: I18n.t('wizard.my_page')
+                        = s.hidden_field :provider
+                        .errorContainerWrapp
+                    - elsif s.object.provider == 'youtube'
+                      .socialList-item.clearfix.input-block
+                        %div.socialIcon.Youtube
+                          %i.VideoClientIcon-youtube
+                        = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: I18n.t('wizard.my_page')
+                        = s.hidden_field :provider
+                        .errorContainerWrapp
+                    - elsif s.object.provider == 'telegram'
+                      .socialList-item.clearfix.input-block
+                        %div.socialIcon.Telegram
+                          %i.GlobalIcon-telegram
+                        = s.text_field :link, value: (s.object.link ? s.object.link_as_url : s.object.link), placeholder: I18n.t('wizard.my_page')
+                        = s.hidden_field :provider
+                        .errorContainerWrapp
+        %section.sectionBlock
+          .row
+            .col-xs-12.text-color-Darkgrey.margin-bottom-10
+              = I18n.t('wizard.business_cover')
+          .row
+            .col-xs-12.ChannelCover_wrapp.padding-bottom-10
+              #business_cover.ChannelCover{style: "background-image: url(#{organization_cover_url(@business)})", coverID: @business.cover.try(:id)}
+                = link_to (@business.cover.try(:id) ? I18n.t('wizard.edit') : I18n.t('wizard.upload')), '#business_cover_modal', data: {toggle: :modal}, class:'text-uppercase padding-left-20 padding-right-20'
+        #business_cover_modal.modal.fade{data: {keyboard: false, backdrop: :static}}
+          .modal-dialog
+            .unobtrusive-flash-container
+            .modal-content
+              = render partial: 'become_presenter_steps/close_modal'
+              .modal-body
+                %h4.groupTitle.clearfix
+                  = I18n.t('wizard.business_cover')
+                %section.crop-wrapp
+                  #cover-upload-area.upload-area
+                    .row
+                      .upload-info
+                        .dotsWrapp{class: @business.cover.try(:id) ? 'hidden' : ''}
+                          .dot1
+                          .dot2
+                          .dot3
+                          .dot4
+                          .dot5
+                          .dot6
+                          .dot7
+                          .dot8
+                        = render partial: 'become_presenter_steps/loading_cover'
+
+                        %span
+                          %input#channel-cover.inputfile{type: :file}
+                          %label{for: 'channel-cover'}
+                            = I18n.t('forms.info.select_file')
+                          %div.fs-12.hideForMobile
+                            = I18n.t('wizard.drag_n_drop')
+                  .crop-container
+                  .fs-13.sugSize
+                    %span
+                      = I18n.t('wizard.size')
+                    970x270 px
+                    %br
+                    = I18n.t('wizard.recomend')
+        .clearfix.row
+          .col-xs-12.text-center
+            = f.submit I18n.t('wizard.next'), id: :business_next_btn, class: 'btn btn-l padding-left-40 padding-right-40 text-uppercase'
+
+= content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function() {
+      window.Wizard.business_load()
+    });

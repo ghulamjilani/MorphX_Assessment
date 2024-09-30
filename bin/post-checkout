@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+$: << File.expand_path('../../lib', __FILE__)
+
+require 'vcs'
+
+if ARGV[2] == '1'
+  VCS.all.each(&:check_existence!)
+end
+

@@ -1,0 +1,5 @@
+%h1.heading
+  Chat
+  %a.chat-container-close.ensure-link-style
+    %i.GlobalIcon-clear
+= render 'shared/chat_init', session: @abstract_session, user: current_user

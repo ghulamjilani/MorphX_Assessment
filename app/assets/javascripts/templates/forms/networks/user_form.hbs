@@ -1,0 +1,172 @@
+<form class="form_V2" id="user_form" style="visibility: visible;">
+    <section>
+        <input type="hidden" name="user[id]" value="{{id}}"/>
+
+        <h3>{{ i18n "wizard.step1.title" }}</h3>
+
+        <p>{{ i18n "wizard.step1.description" }}</p>
+
+        <div class="responsive-video margin-bottom-20">
+            <iframe src="https://player.vimeo.com/video/203367958?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+
+        {{#unless id}}
+            <div class="socialSignUp-signIn_Wrapp clearfix">
+                <div class="socialSignUp-signIn socialMK2 pull-right">
+                    <a href="{{facebook_auth_url}}">
+                        <span>
+                           <i class="VideoClientIcon-facebookF"></i>
+                        </span>
+                    </a>
+                    <a href="{{gplus_auth_url}}">
+                        <span>
+                            <i class="VideoClientIcon-google"></i>
+                        </span>
+                    </a>
+                    <a href="{{twitter_auth_url}}">
+                       <span>
+                           <i class="VideoClientIcon-twitter2"></i>
+                       </span>
+                    </a>
+                    <a href="{{linkedin_auth_url}}">
+                       <span>
+                           <i class="VideoClientIcon-linkedin-1F"></i>
+                       </span>
+                    </a>
+                </div>
+                <h3 class="padding-top-25 margin-bottom-0">Connect with</h3>
+            </div>
+
+        {{/unless}}
+        <hr>
+
+        <div class="input-block required {{#if first_name}} event-focus valid {{else}} state-clear {{/if}}">
+            <label for="first_name">First name</label>
+            <input value="{{first_name}}" type="text" name="user[first_name]" id="first_name">
+
+            <div class="errorContainerWrapp"></div>
+        </div>
+        <div class="input-block required {{#if last_name}} event-focus valid {{else}} state-clear {{/if}}">
+            <label for="last_name">Last name</label>
+            <input value="{{last_name}}" type="text" name="user[last_name]" id="last_name">
+
+            <div class="errorContainerWrapp"></div>
+        </div>
+        <div class="mb50"></div>
+        <div class="select-block multiple-select required" data-BAP-preview="true" data-BAP-preview-title="Birthday"
+             data-BAP-preview-content="{{i18n "wizard.step1.birthday_tooltip" path=pages_privacy_policy_path }}">
+            <label for="birthdate">Birthday</label>
+
+            <div class="multiple-select-wrapp birthdate-container">
+                <select id="birthdate_m" name="user[birthdate_m]">
+                    <option value="" disabled {{#unless birthdate_m}} selected {{/unless}}>Month</option>
+                    {{monthsOptions birthdate_m}}
+                </select>
+                <select id="birthdate_d" name="user[birthdate_d]">
+                    <option value="" disabled {{#unless birthdate_d}} selected {{/unless}}>Day</option>
+                    {{daysOptions birthdate_d}}
+                </select>
+                <select id="birthdate_y" name="user[birthdate_y]">
+                    <option value="" disabled {{#unless birthdate_y}} selected {{/unless}}>Year</option>
+                    {{yearsOptions birthdate_y}}
+                </select>
+            </div>
+
+
+            <div class="errorContainerWrapp"></div>
+        </div>
+        <div class="select-block multiple-select required">
+            <label for="gender">Gender</label>
+            <select name="user[gender]" id="gender">
+                <option value="" disabled {{#unless gender}} selected {{/unless}}>Select Gender</option>
+                {{genderOptions gender}}
+            </select>
+
+            <div class="errorContainerWrapp"></div>
+        </div>
+
+        {{#if email}}
+            <div class="input-block event-focus valid">
+                <label for="email">Email</label>
+                <input value="{{email}}" readonly disabled type="email" id="email">
+
+                <div class="errorContainerWrapp"></div>
+            </div>
+        {{else}}
+            <div class="input-block required state-clear">
+                <label for="email">Email</label>
+                <input autocomplete="email" required="required" type="email" name="user[email]" id="email">
+
+                <div class="errorContainerWrapp"></div>
+            </div>
+            <div class="input-block state-clear required">
+                <label for="password">Password</label>
+                <input autocomplete="new-password" required="required" type="password" name="user[password]" id="password">
+
+                <div class="errorContainerWrapp"></div>
+            </div>
+        {{/if}}
+
+        <div class="input-block multiple-select fixedLabelTop {{#if phone}} event-focus valid {{else}} state-clear {{/if}}">
+            <label for="phone">Phone</label>
+
+            <div class="placeholder-container">
+                <input id="phone" class="phoneSelect w435" type="tel" value="{{phone}}" name="phoneSelect">
+                <input type="hidden" name='user[user_account_attributes][phone]' value="{{phone}}">
+            </div>
+            <a class="btn btn-s SendCodeToPhoneBTN ensure-link-style" style='display: none'>
+                Send Code
+            </a>
+            <span>{{ i18n "wizard.step1.phone_info" }}</span>
+
+            <div class="errorContainerWrapp"></div>
+        </div>
+        <div class="select-block multiple-select required {{#if country}} event-focus valid {{/if}}">
+            <label for="country">Country</label>
+            <select name="user[user_account_attributes][country]" id="country">
+                <option value="" disabled {{#unless country}} selected {{/unless}}>Select Country</option>
+                {{countriesOptions country}}
+            </select>
+
+            <div class="errorContainerWrapp"></div>
+        </div>
+        <div class="select-block multiple-select required {{#if manually_set_timezone}} event-focus valid {{/if}}">
+            <label for="manually_set_timezone">Timezone</label>
+            <select name="user[manually_set_timezone]" id="manually_set_timezone">
+                <option value="" disabled {{#unless manually_set_timezone}} selected {{/unless}}>Select Timezone
+                </option>
+                {{timezonesOptions manually_set_timezone}}
+            </select>
+
+            <div class="errorContainerWrapp"></div>
+        </div>
+    </section>
+
+    <section class="formSection creator_block userRoleForBrand {{#if bio}}open{{/if}}">
+        <div class="inviteTile">
+            <div class="blueTitle">
+                <label class="checkbox choice display-block right-position">
+                    <input type="checkbox" id="userRoleForNetwork" {{#if bio}} checked="checked" {{/if}}>
+                    <span class="display-block" style="font-weight: normal;">
+                        {{i18n "wizard.step1.content_creator_title"}}
+                    </span>
+                </label>
+                <hr class="margin-top-0">
+            </div>
+            <div class="tileWrapp">
+                <div class="tile">
+                    <div class="User-listImage you" style="background-image: url('{{logo}}')">
+                        <a data-target="#userAccountModal" data-toggle="modal" data-keyboard="false" data-backdrop="static">
+                            <i class="VideoClientIcon-EditF you" style="background-color: rgba(194,194,194,0.5);"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="userNAme">{{first_name}} {{last_name}}</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="text-right">
+        <button id="submit_step_1" name="button" type="button" class="submitButton brn btn-l">Next</button>
+    </div>
+</form>

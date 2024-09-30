@@ -1,0 +1,7 @@
+
+$('.AddtoWishListBTN').html('<%= raw %{<i class="#{wishlist_icon_class}"></i> WishList }%>');
+$(".session-wishlist-<%= @session.id %>").removeClass("selected").removeClass("active");
+
+//if you're in wishlist-dashboard and clicked on toggle-in-wishlist
+//remove this session right away(requested by Alex)
+$('body.dashboards').find("#session<%= @session.id %>").remove();

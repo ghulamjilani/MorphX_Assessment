@@ -1,0 +1,10 @@
+en:
+  frontend:
+    app:
+      components:
+        pageparts:
+          join:
+            join_session: Join Session
+            upcoming_session: Upcoming Session
+            live_sessions: Live Sessions
+            join: Join

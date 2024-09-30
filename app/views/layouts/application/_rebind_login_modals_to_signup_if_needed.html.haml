@@ -1,0 +1,49 @@
+- if user_signed_in? && current_user.identities.blank?
+  - content_for(:after_include_javascripts) do
+    :javascript
+      if (typeof Modernizr !== 'undefined') {
+        if (Modernizr.localstorage) {
+          localStorage.lastTimeSignedInWithEmail = '#{current_user.email}';
+        }
+      }
+- else
+  - if request.params[:utm_medium].present? && request.params[:utm_medium] == 'email'
+    - display_email = '' #even blank string is better & important because at least it distinguishes between signup/login modals(although without email prefilling)
+
+    - if request.params[:utm_content].present?
+      - object = UtmContentToken.new(request.params[:utm_content])
+      - if object.valid? && object.email.present? && object.email != ''
+        - display_email = object.email
+
+    - content_for(:after_include_javascripts) do
+      :javascript
+        if (typeof Modernizr !== 'undefined') {
+          if (Modernizr.localstorage) {
+            localStorage.lastTimeSignedInWithEmail = '#{display_email}';
+          }
+        }
+
+  - content_for(:after_include_javascripts) do
+    :javascript
+      if (typeof Modernizr !== 'undefined') {
+        // fixes #1221
+        if (Modernizr.localstorage) {
+          if (typeof localStorage.lastTimeSignedInWithEmail != 'undefined') {
+            var degradableLinks = document.getElementsByClassName('#{DEGRADABLE_LINK_CLASS}');
+            for (var i = 0; i < degradableLinks.length; ++i) {
+              var item = degradableLinks[i];
+              item.setAttribute('data-target', '#loginPopup');
+            }
+          }
+        }
+      }
+  - content_for(:after_include_javascripts) do
+    :javascript
+      if (typeof Modernizr !== 'undefined') {
+        // fixes #1221
+        if (Modernizr.localstorage) {
+          $(function() {
+            $('form[action*=sign_in]').find('input[name*=email]').val(localStorage.lastTimeSignedInWithEmail);
+          });
+        }
+      }

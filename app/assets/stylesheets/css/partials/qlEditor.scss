@@ -1,0 +1,50 @@
+//custom styles for quill editor
+
+.ql-toolbar.ql-snow, .ql-container.ql-snow, .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options, .ql-snow .ql-tooltip, .ql-snow .ql-tooltip input[type=text]{
+  border: 1px solid var(--border__separator);
+}
+.ql-snow .ql-stroke{
+  stroke: var(--tp__main) !important; //SVG DONT TOUCH THIS
+}
+
+.ql-snow .ql-picker, .ql-snow .ql-tooltip{
+  color: var(--tp__main) !important;
+}
+
+.ql-snow .ql-picker-options, .ql-snow .ql-tooltip{
+  background: var(--bg__dropdowns);
+}
+
+.ql-snow .ql-tooltip input[type=text]{
+  background: var(--bg__content__secondary);
+}
+.ql-snow .ql-tooltip{
+  box-shadow: var(--sh__main) 0px 0px 5px #ddd;
+}
+.ql-snow a{
+  color: var(--tp__active);
+}
+
+.sc .AdditionalInfoBody span.ql-formats{
+  display: inline-block;
+  vertical-align: top;
+  width: auto;
+}
+
+.ql-toolbar.ql-snow{
+  margin-top: 10px;
+}
+.ql-tooltip.ql-editing input[type=text]{
+  font-size: 13px;
+  height: 26px;
+  margin: 0px;
+  padding: 3px 5px !important;
+  width: 170px !important;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 0 !important;
+}
+ql-tooltip ql-editing
+.ql-preview{
+  padding-right: 10px;
+}

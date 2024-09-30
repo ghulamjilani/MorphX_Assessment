@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.myth.theoplayer.com/a957e198-46d9-4500-a6fa-0dfa3206b137/THEOplayer.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.myth.theoplayer.com/a957e198-46d9-4500-a6fa-0dfa3206b137/ui.css" rel="stylesheet" type="text/css">
+    <!-- Chromecast SDK -->
+    <script type="text/javascript" src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+</head>
+<body>
+test
+<div id="video">
+
+</div>
+<style>
+    #video{
+        width: 700px;
+        height: 500px;
+    }
+    .video-js{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        window.initPreviewTheOplayer = function(url, append) {
+            var player;
+            if (append == null) {
+                append = '#jwplayer_data_contaioner';
+            }
+            player = initTheOplayer(url, append);
+            player.addEventListener('waiting', function(e) {
+                $(append).hide();
+                return $('#start_stream_first').show();
+            });
+            return player.addEventListener('progress', function(e) {
+                $('#start_stream_first').hide();
+                return $(append).show();
+            });
+        };
+        (function() {
+            window.initTheOplayer = function(url, append) {
+                var Button, MyButton, PIPbtn, PicInPicButton, attrs, element, exit_PIP, isAdsAvailable, player, req_PIP, source, vidObject;
+                if (append == null) {
+                    append = '#jwplayer_data_contaioner';
+                }
+                element = document.createElement('div');
+                element.className = 'video-js theoplayer-skin theo-seekbar-above-controls';
+                $(append).append(element);
+
+
+                isAdsAvailable = function() {
+                    if (!attrs) {
+                        return false;
+                    }
+                    return _.isString(attrs.commercials_url) && _.isString(attrs.commercials_mime_type) && _.isNumber(attrs.commercials_duration);
+                };
+
+                player = new THEOplayer.Player(element, {
+                    license: window.ConfigFrontend.services.theo_player.license,
+                    libraryLocation: location.origin + "/javascripts/theo/",
+                    ui: {
+                        width: '100%',
+                        height: '100%',
+                        language: 'en',
+                        languages: {
+                            "en": {
+                                "The content will play in": "Starts in"
+                            }
+                        }
+                    }
+                });
+                // THEOplayer_UI_Hotkeys(player);
+                source = {};
+                player.addEventListener('canplay', function(e) {
+                    var v_height, v_width;
+                    v_width = player.videoWidth;
+                    v_height = player.videoHeight;
+                    return $('.video-js').attr({
+                        'data-originalVideoWidth': v_width,
+                        'data-originalVideoHeight': v_height
+                    });
+                });
+                if (url.split('.').pop() === 'm3u8') {
+                    source.sources = [
+                        {
+                            src: url,
+                            type: 'application/x-mpegurl'
+                        }
+                    ];
+                } else {
+                    source.sources = [
+                        {
+                            src: url
+                        }
+                    ];
+                }
+                if (isAdsAvailable()) {
+                    source.ads = [
+                        {
+                            sources: window.getAdsUrl(attrs),
+                            timeOffset: 'start'
+                        }
+                    ];
+                    player.currentTime = attrs.commercials_duration;
+                }
+                player.source = source;
+                player.muted = true;
+                player.autoplay = true;
+                consoleEvents(player);
+                window.lastPlayer = player;
+                Button = THEOplayer.videojs.getComponent('Button');
+                MyButton = THEOplayer.videojs.extend(Button, {
+                    constructor: function() {
+                        Button.apply(this, arguments);
+
+                        /* initialize your button */
+                    },
+                    handleClick: function() {
+                        $('body').toggleClass('curtainActive');
+                    },
+                    buildCSSClass: function() {
+                        return 'curtainTogl';
+                    }
+                });
+                THEOplayer.videojs.registerComponent('MyButton', MyButton);
+                player.ui.getChild('controlBar').addChild('myButton', {});
+                vidObject = $('.main-video-container video')[1];
+                if (document.pictureInPictureEnabled && vidObject) {
+                    PIPbtn = $('.PicInPicOn');
+                    exit_PIP = function() {
+                        document.exitPictureInPicture();
+                        console.log('leavepictureinpicture ');
+                        PIPbtn.removeClass('active');
+                        return $('body').removeClass('PIP_active');
+                    };
+                    req_PIP = function() {
+                        vidObject.requestPictureInPicture();
+                        PIPbtn.addClass('active');
+                        $('body').addClass('PIP_active');
+                        return console.log('showPictureinpicture');
+                    };
+                    vidObject.addEventListener('leavepictureinpicture', function(event) {
+                        PIPbtn.removeClass('active');
+                        $('body').removeClass('PIP_active');
+                    });
+                    $('.main-video-container').addClass('PIP_suported');
+                    PicInPicButton = THEOplayer.videojs.extend(Button, {
+                        constructor: function() {
+                            Button.apply(this, arguments);
+
+                            /* initialize your button */
+                        },
+                        handleClick: function() {
+                            PIPbtn = $('.PicInPicOn');
+                            if (!document.pictureInPictureElement) {
+                                req_PIP();
+                            } else {
+                                exit_PIP();
+                            }
+                        },
+                        buildCSSClass: function() {
+                            return 'PicInPicOn';
+                        }
+                    });
+                    THEOplayer.videojs.registerComponent('PicInPicButton', PicInPicButton);
+                    player.ui.getChild('controlBar').addChild('PicInPicButton', {});
+                }
+
+                // chaanges for context menu
+                function customizeContextMenu(container) {
+                    var contextMenuLink = container.querySelector('.theo-context-menu-a');
+                    // change context menu href
+                    contextMenuLink.href = 'https://unite.live';
+                    contextMenuLink.innerHTML = "Powered";
+                }
+                var element = document.querySelector('.main-video-container');
+                if (element)
+                    customizeContextMenu(element);
+
+
+                return player;
+            };
+
+            window.consoleEvents = function(player) {
+                return $.each(['canplay', 'canplaythrough', 'contentprotectionerror', 'contentprotectionsuccess', 'encrypted', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'pause', 'play', 'playing', 'presentationmodechange', 'progress', 'ratechange', 'readystatechange', 'representationchange', 'seeked', 'seeking', 'segmentnotfound', 'volumechange', 'waiting'], function(i, type) {
+                    return player.addEventListener(type, function(e) {
+                        return console.log(e);
+                    });
+                });
+            };
+
+            window.initPreviewTheOplayer = function(url, append) {
+                var player;
+                if (append == null) {
+                    append = '#jwplayer_data_contaioner';
+                }
+                player = initTheOplayer(url, append);
+                player.addEventListener('waiting', function(e) {
+                    $(append).hide();
+                    return $('#start_stream_first').show();
+                });
+                return player.addEventListener('progress', function(e) {
+                    $('#start_stream_first').hide();
+                    return $(append).show();
+                });
+            };
+
+        }).call(this);
+
+        //url mp4 only
+        //seconds 0: first, -1: last or can set 0%..100%
+        // width 0: auto
+        // height 0: auto
+        // callback = function(imageDataUrl){console.log(imageDataUrl)}
+
+        window.videoImageDataUrl = function (url, seconds, width, height, callback) {
+            var video = document.createElement('video');
+            video.src =  url;
+            video.crossOrigin = 'anonymous';
+            video.onloadedmetadata = function() {
+                var resultSeconds = seconds;
+                if (typeof seconds == 'string'){
+                    resultSeconds = this.duration/100*parseInt(seconds)
+                }
+                this.currentTime = resultSeconds;
+            };
+            video.oncanplay = function(){
+                var resultWidth = video.videoWidth;
+                var resultHeight = video.videoHeight;
+                var proportion = resultWidth/resultHeight;
+                if (width > 0 && height == 0){
+                    resultWidth = width;
+                    resultHeight = width/proportion;
+                }
+                if (width == 0 && height > 0){
+                    resultWidth = height*proportion;
+                    resultHeight = height;
+                }
+                if (width > 0 && height > 0){
+                    resultWidth = width;
+                    resultHeight = height;
+                }
+                var canvas = document.createElement('canvas');
+                canvas.height = resultHeight;
+                canvas.width = resultWidth;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, resultWidth, resultHeight);
+                callback(canvas.toDataURL())
+            };
+        };
+
+        initTheOplayer("https://ak1.picdn.net/shutterstock/videos/25348301/preview/stock-footage-business-new-customers-sale-and-people-concept-thousands-of-people-formed-qr-code-crowd-flight.mp4", '#video');
+
+    })
+
+    </script>
+</body>
+</html>

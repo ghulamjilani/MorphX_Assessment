@@ -1,0 +1,31 @@
+{
+  "participants": [
+    {
+      "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "room_sid": "RMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "date_created": "2017-07-30T20:00:00Z",
+      "date_updated": "2017-07-30T20:00:00Z",
+      "start_time": "2017-07-30T20:00:00Z",
+      "end_time": "2017-07-30T20:00:01Z",
+      "sid": "PAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "identity": "alice",
+      "status": "disconnected",
+      "url": "https://video.webrtcservice.com/v1/Rooms/RMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Participants/PAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "duration": 1,
+      "links": {
+        "published_tracks": "https://video.webrtcservice.com/v1/Rooms/RMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Participants/PAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/PublishedTracks",
+        "subscribed_tracks": "https://video.webrtcservice.com/v1/Rooms/RMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Participants/PAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/SubscribedTracks",
+        "subscribe_rules": "https://video.webrtcservice.com/v1/Rooms/RMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Participants/PAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/SubscribeRules"
+      }
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "page_size": 50,
+    "first_page_url": "https://video.webrtcservice.com/v1/Rooms/RMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Participants?PageSize=50&Page=0",
+    "previous_page_url": "https://video.webrtcservice.com/v1/Rooms/RMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Participants?PageSize=50&Page=0",
+    "url": "https://video.webrtcservice.com/v1/Rooms/RMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Participants?PageSize=50&Page=0",
+    "next_page_url": null,
+    "key": "participants"
+  }
+}

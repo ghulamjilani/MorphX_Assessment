@@ -1,0 +1,31 @@
+!!!
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: 'en'}
+  / <![endif]
+  %head
+    = include_gon(namespace: 'Immerss', camel_case: true, init: true)
+    %title
+      = Rails.application.credentials.global[:service_name]
+    = csrf_meta_tags
+    = action_cable_meta_tag
+    = javascript_include_tag 'views/widgets/chat_with_dependencies'
+    = stylesheet_link_tag 'widgets/core'
+
+    %meta{charset: 'utf-8'}/
+    %meta{content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name: 'viewport'}
+    %meta{content: '', name: 'description'}
+    %meta{content: '', name: 'author'}
+    = favicon_link_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png", rel: 'shortcut icon'
+  %body.IC{class: [(%w(light dark).include?(params[:theme].to_s) ? params[:theme].to_s : ''), ('mobile' if params[:mobile]), mobile_Check] }
+    .main-content
+      .additions_tabs_chat.standalone-chat
+
+    = render 'widgets/webrtcservice/chat_templates'
+    - if current_theme_css
+      %style
+        :plain
+          :root {
+            #{raw current_theme_css}
+          }

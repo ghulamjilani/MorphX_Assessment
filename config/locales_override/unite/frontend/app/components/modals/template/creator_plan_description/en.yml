@@ -1,0 +1,9 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          template:
+            creator_plan_description:
+              interactive: Conference
+              plus_overcharge: + overage charges

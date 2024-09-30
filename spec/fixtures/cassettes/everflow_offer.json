@@ -1,0 +1,130 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://api.eflow.team/v1/networks/offers/1",
+        "body": {
+          "encoding": "US-ASCII",
+          "base64_string": ""
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ],
+          "X-Eflow-Api-Key": [
+            "4cecae998aa098473f5336a55753cead"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.22.0"
+          ],
+          "Date": [
+            "Fri, 07 Oct 2022 12:38:55 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Vary": [
+            "Origin"
+          ],
+          "X-Eflow-Api-Version": [
+            "2.1.2"
+          ],
+          "X-Eflow-Request-Id": [
+            "c57a2511-5e0e-4b63-8e6b-b7e27b7c8eec"
+          ],
+          "X-Ratelimit-Limit": [
+            "900"
+          ],
+          "X-Ratelimit-Remaining": [
+            "899"
+          ],
+          "Via": [
+            "1.1 google"
+          ],
+          "Alt-Svc": [
+            "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+          ]
+        },
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "base64_string": "eyJuZXR3b3JrX29mZmVyX2lkIjoxLCJuZXR3b3JrX2lkIjoxOTI5LCJuZXR3\nb3JrX2FkdmVydGlzZXJfaWQiOjEsIm5ldHdvcmtfb2ZmZXJfZ3JvdXBfaWQi\nOjAsIm5hbWUiOiJkZXZlbG9wbWVudCBtb3JwaHggYnVzaW5lc3Mgc3Vic2Ny\naXB0aW9ucyIsInRodW1ibmFpbF91cmwiOiIiLCJuZXR3b3JrX2NhdGVnb3J5\nX2lkIjoxLCJpbnRlcm5hbF9ub3RlcyI6IiIsImRlc3RpbmF0aW9uX3VybCI6\nImh0dHBzOi8vbXkudW5pdGUubGl2ZS9wcmljaW5nP2VmX3RyYW5zYWN0aW9u\nX2lkPXt0cmFuc2FjdGlvbl9pZH0iLCJzZXJ2ZXJfc2lkZV91cmwiOiIiLCJp\nc192aWV3X3Rocm91Z2hfZW5hYmxlZCI6ZmFsc2UsInZpZXdfdGhyb3VnaF9k\nZXN0aW5hdGlvbl91cmwiOiIiLCJwcmV2aWV3X3VybCI6IiIsIm9mZmVyX3N0\nYXR1cyI6ImFjdGl2ZSIsImN1cnJlbmN5X2lkIjoiVVNEIiwiY2Fwc190aW1l\nem9uZV9pZCI6OTAsInByb2plY3RfaWQiOiIiLCJkYXRlX2xpdmVfdW50aWwi\nOiIiLCJodG1sX2Rlc2NyaXB0aW9uIjoiIiwiaXNfdXNpbmdfZXhwbGljaXRf\ndGVybXNfYW5kX2NvbmRpdGlvbnMiOmZhbHNlLCJ0ZXJtc19hbmRfY29uZGl0\naW9ucyI6IiIsImlzX2ZvcmNlX3Rlcm1zX2FuZF9jb25kaXRpb25zIjpmYWxz\nZSwiaXNfY2Fwc19lbmFibGVkIjpmYWxzZSwiZGFpbHlfY29udmVyc2lvbl9j\nYXAiOjAsIndlZWtseV9jb252ZXJzaW9uX2NhcCI6MCwibW9udGhseV9jb252\nZXJzaW9uX2NhcCI6MCwiZ2xvYmFsX2NvbnZlcnNpb25fY2FwIjowLCJkYWls\neV9wYXlvdXRfY2FwIjowLCJ3ZWVrbHlfcGF5b3V0X2NhcCI6MCwibW9udGhs\neV9wYXlvdXRfY2FwIjowLCJnbG9iYWxfcGF5b3V0X2NhcCI6MCwiZGFpbHlf\ncmV2ZW51ZV9jYXAiOjAsIndlZWtseV9yZXZlbnVlX2NhcCI6MCwibW9udGhs\neV9yZXZlbnVlX2NhcCI6MCwiZ2xvYmFsX3JldmVudWVfY2FwIjowLCJkYWls\neV9jbGlja19jYXAiOjAsIndlZWtseV9jbGlja19jYXAiOjAsIm1vbnRobHlf\nY2xpY2tfY2FwIjowLCJnbG9iYWxfY2xpY2tfY2FwIjowLCJyZWRpcmVjdF9t\nb2RlIjoic3RhbmRhcmQiLCJpc191c2luZ19zdXBwcmVzc2lvbl9saXN0Ijpm\nYWxzZSwic3VwcHJlc3Npb25fbGlzdF9pZCI6MCwiaXNfbXVzdF9hcHByb3Zl\nX2NvbnZlcnNpb24iOmZhbHNlLCJpc19hbGxvd19kdXBsaWNhdGVfY29udmVy\nc2lvbiI6dHJ1ZSwiaXNfZHVwbGljYXRlX2ZpbHRlcl9lbmFibGVkIjpmYWxz\nZSwiZHVwbGljYXRlX2ZpbHRlcl90YXJnZXRpbmdfYWN0aW9uIjoidW5rbm93\nbiIsIm5ldHdvcmtfdHJhY2tpbmdfZG9tYWluX2lkIjo2MzA0LCJpc191c2Vf\nc2VjdXJlX2xpbmsiOnRydWUsImlzX3Nlb19mcmllbmRseSI6ZmFsc2UsImlz\nX2FsbG93X2RlZXBfbGluayI6ZmFsc2UsImlzX3Nlc3Npb25fdHJhY2tpbmdf\nZW5hYmxlZCI6ZmFsc2UsInNlc3Npb25fdHJhY2tpbmdfc3RhcnRfb24iOiJu\ndWxsX3ZhbHVlIiwic2Vzc2lvbl90cmFja2luZ19saWZlc3Bhbl9ob3VyIjow\nLCJzZXNzaW9uX3RyYWNraW5nX21pbmltdW1fbGlmZXNwYW5fc2Vjb25kIjow\nLCJpc192aWV3X3Rocm91Z2hfc2Vzc2lvbl90cmFja2luZ19lbmFibGVkIjpm\nYWxzZSwidmlld190aHJvdWdoX3Nlc3Npb25fdHJhY2tpbmdfbGlmZXNwYW5f\nbWludXRlIjowLCJ2aWV3X3Rocm91Z2hfc2Vzc2lvbl90cmFja2luZ19taW5p\nbWFsX2xpZmVzcGFuX3NlY29uZCI6MCwiaXNfYmxvY2tfYWxyZWFkeV9jb252\nZXJ0ZWQiOmZhbHNlLCJhbHJlYWR5X2NvbnZlcnRlZF9hY3Rpb24iOiJ1bmtu\nb3duIiwiaXNfZmFpbF90cmFmZmljX2VuYWJsZWQiOmZhbHNlLCJyZWRpcmVj\ndF9yb3V0aW5nX21ldGhvZCI6Im51bGxfdmFsdWUiLCJyZWRpcmVjdF9pbnRl\ncm5hbF9yb3V0aW5nX3R5cGUiOiJudWxsX3ZhbHVlIiwidmlzaWJpbGl0eSI6\nInByaXZhdGUiLCJ0aW1lX2NyZWF0ZWQiOjE2NjQ0NTU1NjYsInRpbWVfc2F2\nZWQiOjE2NjQ5Nzc0OTksImNvbnZlcnNpb25fbWV0aG9kIjoic2VydmVyX3Bv\nc3RiYWNrIiwiaXNfd2hpdGVsaXN0X2NoZWNrX2VuYWJsZWQiOmZhbHNlLCJp\nc191c2Vfc2NydWJfcmF0ZSI6ZmFsc2UsInNjcnViX3JhdGVfc3RhdHVzIjoi\nbnVsbF92YWx1ZSIsInNjcnViX3JhdGVfcGVyY2VudGFnZSI6MCwic2Vzc2lv\nbl9kZWZpbml0aW9uIjoiaXBfdXNlcl9hZ2VudCIsInNlc3Npb25fZHVyYXRp\nb24iOjI0LCJhcHBfaWRlbnRpZmllciI6IiIsImlzX2Rlc2NyaXB0aW9uX3Bs\nYWluX3RleHQiOmZhbHNlLCJpc191c2VfZGlyZWN0X2xpbmtpbmciOmZhbHNl\nLCJyZWxhdGlvbnNoaXAiOnsiY2F0ZWdvcnkiOnsibmV0d29ya19jYXRlZ29y\neV9pZCI6MSwibmV0d29ya19pZCI6MTkyOSwibmFtZSI6IlN1YnNjcmlwdGlv\nbnMiLCJzdGF0dXMiOiJhY3RpdmUiLCJ0aW1lX2NyZWF0ZWQiOjE2NjQ0NTUw\nMDQsInRpbWVfc2F2ZWQiOjE2NjQ0NTUwMDR9LCJsYWJlbHMiOnsidG90YWwi\nOjAsImVudHJpZXMiOltdfSwicGF5b3V0X3JldmVudWUiOnsidG90YWwiOjEs\nImVudHJpZXMiOlt7Im5ldHdvcmtfb2ZmZXJfcGF5b3V0X3JldmVudWVfaWQi\nOjEsIm5ldHdvcmtfaWQiOjE5MjksIm5ldHdvcmtfb2ZmZXJfaWQiOjEsImVu\ndHJ5X25hbWUiOiJCYXNlIiwicGF5b3V0X3R5cGUiOiJjcHMiLCJwYXlvdXRf\nYW1vdW50IjowLCJwYXlvdXRfcGVyY2VudGFnZSI6NSwicmV2ZW51ZV90eXBl\nIjoicnBzIiwicmV2ZW51ZV9hbW91bnQiOjAsInJldmVudWVfcGVyY2VudGFn\nZSI6MTAwLCJpc19kZWZhdWx0Ijp0cnVlLCJpc19wcml2YXRlIjpmYWxzZSwi\naXNfcG9zdGJhY2tfZGlzYWJsZWQiOmZhbHNlLCJpc19lbmZvcmNlX2NhcHMi\nOnRydWUsInRpbWVfY3JlYXRlZCI6MTY2NDQ1NTU2NiwiZ2xvYmFsX2FkdmVy\ndGlzZXJfZXZlbnRfaWQiOjAsImlzX211c3RfYXBwcm92ZV9jb252ZXJzaW9u\nIjpmYWxzZSwiaXNfYWxsb3dfZHVwbGljYXRlX2NvbnZlcnNpb24iOnRydWUs\nImlzX2VtYWlsX2F0dHJpYnV0aW9uX2RlZmF1bHRfZXZlbnQiOmZhbHNlLCJy\nZW1vdGVfb2ZmZXJfcmVzb3VyY2UiOnsibmV0d29ya19vZmZlcl9pZCI6MCwi\nbmV0d29ya19pZCI6MCwicmVzb3VyY2VfdHlwZSI6IiIsInJlbW90ZV9yZXNv\ndXJjZV9pZCI6IiIsInJlc291cmNlX2lkIjowLCJsYXN0X3ZhbHVlX21kNSI6\nIiIsImpzb25fY29uZmlnIjoiIiwianNvbl9kYXRhIjoiIiwidGltZV9jcmVh\ndGVkIjowLCJ0aW1lX3NhdmVkIjowfX1dfSwiZW5jb2RlZF92YWx1ZSI6IjJD\nVFBMIiwiaXNfbG9ja2VkX2N1cnJlbmN5Ijp0cnVlLCJjaGFubmVscyI6eyJ0\nb3RhbCI6MCwiZW50cmllcyI6W119LCJpc19sb2NrZWRfY2Fwc190aW1lem9u\nZSI6dHJ1ZSwibWV0YSI6eyJuZXR3b3JrX29mZmVyX2lkIjoxLCJuZXR3b3Jr\nX2lkIjoxOTI5LCJhcHBfaWQiOiIiLCJtZXRhX3BsYXRmb3JtIjoiIiwiYWR2\nZXJ0aXNlcl9jYW1wYWlnbl9uYW1lIjoiIiwiYnVuZGxlX2lkIjoiIiwiY2F0\nZWdvcnkiOiIiLCJzdG9yZV91cmwiOiIiLCJzY29yZV9yYXRpbmciOjAsInRv\ndGFsX3JhdGluZyI6MCwic2l6ZSI6MCwiZGV2ZWxvcGVyIjoiIiwidmVyc2lv\nbiI6IiIsImlzX2FwcF91bmF2YWlsYWJsZSI6dHJ1ZSwidGltZV9jcmVhdGVk\nIjoxNjY0NDU1NTY2LCJ0aW1lX2FwcF9kYXRhX3NhdmVkIjowLCJ0aW1lX3Nh\ndmVkIjoxNjY0OTc3NDk5fSwicmVxdWlyZW1lbnRfa3BpcyI6eyJ0b3RhbCI6\nMCwiZW50cmllcyI6W119LCJyZXF1aXJlbWVudF90cmFja2luZ19wYXJhbWV0\nZXJzIjp7InRvdGFsIjowLCJlbnRyaWVzIjpbXX19LCJpc19lbWFpbF9hdHRy\naWJ1dGlvbl9lbmFibGVkIjpmYWxzZSwiZW1haWxfYXR0cmlidXRpb25fbWV0\naG9kIjoiZmlyc3RfYWZmaWxpYXRlX2F0dHJpYnV0aW9uIiwiYXR0cmlidXRp\nb25fbWV0aG9kIjoibGFzdF90b3VjaCIsImlzX2VtYWlsX2F0dHJpYnV0aW9u\nX3dpbmRvd19lbmFibGVkIjpmYWxzZSwiZW1haWxfYXR0cmlidXRpb25fd2lu\nZG93X21pbnV0ZSI6MCwiZW1haWxfYXR0cmlidXRpb25fd2luZG93X3R5cGUi\nOiJ1bmtub3duIn0K\n"
+        }
+      },
+      "recorded_at": "Fri, 07 Oct 2022 12:38:55 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://api.eflow.team/v1/networks/offers/123",
+        "body": {
+          "encoding": "US-ASCII",
+          "base64_string": ""
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ],
+          "X-Eflow-Api-Key": [
+            "4cecae998aa098473f5336a55753cead"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 404,
+          "message": "Not Found"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.22.0"
+          ],
+          "Date": [
+            "Fri, 07 Oct 2022 12:38:56 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "45"
+          ],
+          "Vary": [
+            "Origin"
+          ],
+          "X-Eflow-Api-Version": [
+            "2.1.2"
+          ],
+          "X-Eflow-Request-Id": [
+            "fb85f63f-affb-4f3e-8ea9-73944c72e7e6"
+          ],
+          "X-Ratelimit-Limit": [
+            "900"
+          ],
+          "X-Ratelimit-Remaining": [
+            "899"
+          ],
+          "Via": [
+            "1.1 google"
+          ],
+          "Alt-Svc": [
+            "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+          ]
+        },
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "base64_string": "eyJlcnJvciI6IkNhbid0IGZpbmQgZW50cnkgaW4gdGhlIGRhdGFiYXNlIn0K\n"
+        }
+      },
+      "recorded_at": "Fri, 07 Oct 2022 12:38:56 GMT"
+    }
+  ],
+  "recorded_with": "VCR 6.1.0"
+}

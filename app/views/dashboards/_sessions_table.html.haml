@@ -1,0 +1,6 @@
+- if can?(:create_session, channel)
+  %div.channel{id: "dashboard-channel-#{channel.id}", data: {new_session_path: new_channel_session_path(channel.slug)}}
+    = yield
+- else
+  %div.channel{id: "dashboard-channel-#{channel.id}"}
+    = yield

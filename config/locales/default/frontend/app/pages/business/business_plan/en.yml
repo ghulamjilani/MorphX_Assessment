@@ -1,0 +1,46 @@
+en:
+  frontend:
+    app:
+      pages:
+        business:
+          business_plan:
+            statuses:
+              active: Active
+              trial: Trial
+              grace: Grace
+              suspended: Suspended
+              trial_suspended: Trial Suspended
+              pending_deactivation: Pending deactivation
+            current_plan: Current Plan
+            auto_renewal: "Auto-renewal: %{serviceSubscriptionAmount} (USD) on %{date}"
+            activating: Activating
+            activate: Activate
+            cancel_subscription: Cancel Subscription
+            cancel_deactivation: Cancel Deactivation
+            tera_bytes: TB
+            giga_bayes: GB
+            storage: Storage
+            unlimited: Unlimited
+            over: Over
+            min_live: min (Live)
+            min_interactive: min (Interactive)
+            min_replays: min (Replays)
+            min_videos: min (Videos)
+            playback: Playback
+            channel: Channel
+            channels: Channels
+            # admins_creators: "%{creators_upper} & Admins"
+            admins_creators: Creators & Admins
+            count_creators_admins: "<b>%{serviceSubscriptionmMnageCreators}</b> Creators & <b>%{serviceSubscriptionManageAdmins}</b> Admins"
+            admin: Admin
+            user: User
+            payment_method: Payment Method
+            details: Details
+            expire: Expire
+            account: Account *****
+            usd: (USD)
+            remove: Remove
+            change_card: Change Card
+            no_subscription: 'You don`t have any subscriptions yet. Choose a Plan or try <a href="/pricing">Free 14 days Trial.</a>'
+            free_trial: Free 14 days Trial.
+            choose_plan: Choose Plan

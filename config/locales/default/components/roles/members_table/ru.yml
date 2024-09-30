@@ -1,0 +1,9 @@
+ru:
+  components:
+    roles:
+      members_table:
+        invite_status:
+          pending: Приглашён
+          active: Активен
+          cancelled: Приглашение отменено
+          suspended: Приостановлен

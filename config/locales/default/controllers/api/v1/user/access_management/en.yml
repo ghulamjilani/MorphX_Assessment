@@ -1,0 +1,15 @@
+en:
+  controllers:
+    api:
+      v1:
+        user:
+          access_management:
+            organization_memberships:
+              errors:
+                invite_error: You can not invite user with this role(s) because you have no permissions or you have reached the maximum number of Admins/Creators for your business plan
+                update_error: You can not add this role(s) because you have no permissions or you have reached the maximum number of Admins/Creators for your business plan
+                members_limit_error: You have reached the maximum number of Admins/Creators for your business plan
+            groups:
+              errors:
+                add_credential_error: Some credentials cannot be added due to Business Plan restrictions
+

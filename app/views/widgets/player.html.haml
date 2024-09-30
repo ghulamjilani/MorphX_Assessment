@@ -1,0 +1,133 @@
+!!!
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: 'en'}
+  / <![endif]
+  %head
+    = render 'layouts/application/config'
+    = stylesheet_link_tag 'widgets/core'
+    = stylesheet_link_tag 'theoplayer/ui'
+    = include_gon(namespace: 'Immerss', camel_case: true, init: true)
+    %title= Rails.application.credentials.global[:service_name]
+    = csrf_meta_tags
+    = action_cable_meta_tag
+    = javascript_include_tag 'views/widgets/player'
+
+    - content_for :embed_player_vue_pack, flush: true do
+      = javascript_pack_tag 'embed_player', defer: true
+    = yield :embed_player_vue_pack
+
+    :css
+      .noscript{position: fixed;top: 0;left: 0;z-index: 99;right: 0;bottom: 0;background: var(--bg__main);}
+      #checkCookies{display: none;position: fixed;top: 0;left: 0;z-index: 99;right: 0;bottom: 0;background: var(--bg__main);}
+
+    %meta{charset: 'utf-8'}/
+    %meta{content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name: 'viewport'}
+    %meta{content: '', name: 'description'}
+    %meta{content: '', name: 'author'}
+    = favicon_link_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png", rel: 'shortcut icon'
+  %body.videoContainer
+    %noscript.noscript
+      %h1{style: 'text-align: center;'} Please enable JavaScript
+      %p{style: 'text-align: center;'} This player requires JavaScript to function properly. Please enable JavaScript in your browser.
+
+    = render 'layouts/application/organization_custom_styles'
+    .i__embed_h
+
+    #player.video-js.theoplayer-skin.theo-seekbar-above-controls
+      #purchase_block
+    .overlay-container
+    .description-container
+    .share-container
+    .built-in-playlist-container
+    .i__embed_f
+
+    .modals_wrapp.hidden
+      - unless current_user
+        - logo_image = @company_settings && @company_settings.logo_image.present? ? @company_settings.logo_image.url : 'logo.png'
+        - if @company_settings && @company_settings.custom_styles.present?
+          :css
+            #{@company_settings.custom_styles}
+        #modal_sign_in.modal.hidden
+          .modal-section
+            .modal-h
+              %a.closeModal{href: '#'}
+                %i.embed_fontiPlus
+              %a.embed_logo{href: root_url, style: "background-image: url('#{image_url("services/" + Rails.application.credentials.global[:project_name].to_s.downcase + "/#{logo_size}.png")}')", target: '_blank'}
+            .modal-b
+              .error_container
+              %form#modal_sign_in_form{action: user_session_path, method: :post, data: {remote: true}}
+                %input{name: :utf8, type: :hidden, value: '✓'}/
+                %input{name: :authenticity_token, type: :hidden, value: form_authenticity_token}/
+                %input{name: :embed, type: :hidden, value: true}/
+
+                %input{placeholder: 'Email', type: :email, name: 'user[email]', id: :userEmail, required: true}/
+                %input{placeholder: 'Password', type: :password, name: 'user[password]', id: :userPassword, required: true}/
+                %button.loginBtn.full-width{type: :submit, data: {disable_with: 'Processing…'}} Log In
+            .modal-f
+              %p
+                Don't have an account?
+                %a.showSignUpForm{href: '#'} Sign Up
+        #modal_sign_up.modal
+          .modal-section
+            .modal-h
+              %a.closeModal{href: '#'}
+                %i.embed_fontiPlus
+              %a.embed_logo{href: root_url, style: "background-image: url('#{image_url("services/" + Rails.application.credentials.global[:project_name].to_s.downcase + "/#{logo_size}.png")}')", target: '_blank'}
+            .modal-b
+              %form#modal_sign_up_form{action: user_registration_url, method: :post, data: {remote: true}}
+                %input{name: :utf8, type: :hidden, value: '✓'}/
+                %input{name: :authenticity_token, type: :hidden, value: form_authenticity_token}/
+                %input{name: :embed, type: :hidden, value: true}/
+
+                %input{placeholder: 'First Name', name: 'user[first_name]', required: true, type: :text, minlength: 2, maxlength: 50}/
+                %input{placeholder: 'Last Name', name: 'user[last_name]', required: true, type: :text, minlength: 2, maxlength: 50}/
+                -#.BirthdayWrap
+                  %input{placeholder: 'Birthday', name: 'user[birthdate]', required: true, type: :text, max: 13.years.ago.to_date}/
+                  %i.embed_fontcalendar-mk2
+                -#%select{id: :userGender, name: 'user[gender]', required: true}
+                  %option{hidden: 'hidden', value: ''} Gender
+                  %option{value: :male} Male
+                  %option{value: :female} Female
+                  %option{value: :hidden} Hidden
+                %input{placeholder: 'Email', name: 'user[email]', autocomplete: :off, required: true, type: :email, onfocus: "this.removeAttribute('readonly');", readonly: true}/
+                %input{placeholder: 'Password', name: 'user[password]', autocomplete: :off, required: true, type: :password, minlength: 6, maxlength: 128, onfocus: "this.removeAttribute('readonly');", readonly: true}/
+                .error_container
+                %button{type: :submit, data: {disable_with: 'Processing…'}} Sign Up
+            .modal-f
+              %p
+                I agree to #{Rails.application.credentials.global[:service_name]}
+                %a{href: page_url(ContentPages::TERMS_CONDITIONS.parameterize(separator: '-')), target: '_blank'} Terms of Use
+                and
+                %a{href: page_url(ContentPages::PRIVACY_POLICY.parameterize(separator: '-')), target: '_blank'} Privacy Policy
+              %p
+                Already have an account?
+                %a.showLoginForm{href: '#'} Log In
+
+
+    %script(type="application/xhtml+xml" id="livestreamOverlayTmpl")
+      != render 'widgets/player/livestream_overlay'
+    %script(type="application/xhtml+xml" id="builtInPlaylistCollectionTmpl")
+      != render 'widgets/player/built_in_playlist_collection'
+    %script(type="application/xhtml+xml" id="builtInPlaylistItemTmpl")
+      != render 'widgets/player/built_in_playlist_item'
+    %script(type="application/xml" id="adsTmpl")
+      != render 'widgets/player/ads'
+    %script(type="application/xml" id="purchaseTmpl")
+      != render 'widgets/player/purchase_template'
+    %script(type="application/xml" id="headerTmpl")
+      != render 'widgets/player/header'
+    %script(type="application/xml" id="footerTmpl")
+      != render 'widgets/player/footer'
+    %script(type="application/xml" id="descriptionTmpl")
+      != render 'widgets/player/description'
+    %script(type="application/xml" id="shareTmpl")
+      != render 'widgets/player/share_template'
+
+    - if current_theme_css
+      %style
+        :plain
+          :root {
+            #{raw current_theme_css}
+          }

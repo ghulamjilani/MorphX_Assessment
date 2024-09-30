@@ -1,0 +1,495 @@
+- content_for(:after_include_javascripts) do
+  = javascript_include_tag 'home'
+  :javascript
+    window.Immerss.chatCss = "#{asset_url('chatcss/custom.css')}";
+    new window.ReplayView();
+- content_for(:extra_body_classes, ' bannerCollaps session_or_replay_or_recording ')
+- content_for(:page_title) do
+  - if @replay && @replay.session
+    = @replay.always_present_title.html_safe
+
+- content_for(:extra_body_classes, 'sessions resetMainContainer single_page_sessions_and_channels hidePageHeader header-top sp')
+
+- content_for(:additional_meta_tags) do
+  - if @replay
+    %meta{property: 'og:image', content: @replay.share_image_url}
+    %meta{property: 'og:image:url', content: @replay.share_image_url}
+    %meta{property: 'og:image:width', content: @replay.class::SHARE_IMAGE_WIDTH}
+    %meta{property: 'og:image:height', content: @replay.class::SHARE_IMAGE_HEIGHT}
+    %meta{property: 'og:image:type', content: 'image/jpg'}
+    %meta{property: 'og:description', content: strip_tags(@replay.share_description)}
+    %meta{property: 'og:title', content: @replay.share_title}
+    %meta{property: 'og:url', content: @replay.short_url || @replay.absolute_path}
+
+    %meta{name: 'twitter:card', content: 'summary_large_image'}
+    %meta{name: 'twitter:site', content: '@Immerss'}
+    %meta{name: 'twitter:title', content: @replay.share_title}
+    %meta{name: 'twitter:description', content: strip_tags(@replay.share_description)}
+    %meta{name: 'twitter:image', content: @replay.share_image_url}
+  %meta{property: 'og:type', content: :website}
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function () {
+      $('.ShowAboutText').click(function(e) {
+        $(this).toggleClass('active');
+      });
+      checkWindowWidth();
+      $(window).resize(function(e) {
+        checkWindowWidth();
+      });
+    });
+    function checkWindowWidth() {
+      if($(window).width() >= 640){
+        if (!$('.ShowAboutText').hasClass('active')){
+          toggleShowAboutTextBtn();
+        }
+      }
+    }
+    function toggleShowAboutTextBtn(){
+      $('.MVc-About').toggleClass('active');
+    }
+- @replay_interactor = ObtainRecordedAccessToSession.new(@replay.session, current_user)
+
+%div{class: ('full_covered_video' if @replay_interactor.could_be_purchased? || @replay.only_subscription)}
+  .session.replay
+    .container
+      #player-container.player-container-wrapp.MainForm_block_for_AffixSection{style: "width: #{video_container_width(@replay)}"}
+        .videoBlock
+          .mainVideoSection-wrapper
+            #main_panel_head.mainVideoSection-head
+              - if @replay.blocked? && can?(:edit_replay, @session.channel)
+                .video__blocked
+                  %p
+                    %span
+                      This video is blocked by platform administrator.
+                  %span Block Reason:
+                  = @replay.block_reason
+                  %br
+                  Please
+                  = link_to 'Contact Us', support_home_url
+                  for any questions.
+            .mainVideoSection
+              .mainVideoSection-body.scrollerInit
+                .toggleLeft
+                .toggleRight
+                #vue-optin
+                  = content_tag 'comp-wrapper', nil, data: { component: 'MopsShowController', props: {}}.to_json
+                #review_container
+                #moreVideos{style: 'display: none;'}
+                #video_player_container.main-video-container.draggableElement.skrollable.skrollable-before.ui-draggable.ui-draggable-handle{data: {'emit-events':''}}
+                  - if @replay
+                    - video_url = can?(:see_full_version_video, @replay) ? @replay.url : @replay.preview_url
+                    .responsive-video{style: "padding-top: #{aspect_ration_percentage(@replay.height, @replay.width)}%"}
+                      #jwplayer_data_contaioner{data: {url: video_url}}
+
+                .MVc-topLine{class: ('show' if can?(:see_full_version_video, @replay))}
+                  - if @session.channel.organization
+                    %a.company_logo_wrapp{href: @session.channel.organization.relative_path, target: '_blank'}
+                      .company_logo{style: "background-image: url('#{@session.channel.organization.logo_url}')"}
+                      .company_name= @session.channel.organization.name
+                  .btnsBar
+                    - if @session.private?
+                      .private
+                        = I18n.t('views.videos.show.private')
+                    .status
+                      .offAir= I18n.t('views.videos.show.replay')
+                  .unmuteButton.hidden
+                    %i.VideoClientIcon-volume_off
+                    %span= I18n.t('views.videos.show.tap_to_unmute')
+              .mainVideoSection-content_block{class: ('hide' if can?(:see_full_version_video, @replay))}
+                .MVc-topLine
+                  - if @replay
+                    - if @session.channel.organization
+                      %a.company_logo_wrapp{href: @session.channel.organization.relative_path, target: '_blank'}
+                        .company_logo{style: "background-image: url('#{@session.channel.organization.logo_url}')"}
+                        .company_name= @session.channel.organization.name
+                    .btnsBar
+                      - if @session.private?
+                        .private
+                          = I18n.t('views.videos.show.private')
+                      .status
+                        .offAir= I18n.t('views.videos.show.replay')
+                    .unmuteButton.hidden
+                      %i.VideoClientIcon-volume_off
+                      %span= I18n.t('views.videos.show.tap_to_unmute')
+                - if cannot?(:see_full_version_video, @replay)
+                  .MVc-bottomLine
+                    .MVc-bottomLine_item
+                      = I18n.t('sessions.show.player.preview_video')
+                    - if @replay_interactor.could_be_purchased?
+                      - if current_user
+                        .MVc-bottomLine_item
+                          = I18n.t('sessions.show.player.paid_replay')
+                          - if can?(:monetize_content_by_business_plan, @session.channel.organization)
+                            %a.buy_replay_btn.btn.btn-m.btn-white.noscript{'data-target': 'modal', 'data-disable-with': 'Please wait...', href: preview_purchase_channel_session_path(@session.slug, type: (@session.recorded_purchase_price.to_f == 0 ? ObtainTypes::FREE_VOD : ObtainTypes::PAID_VOD)), data: {remote: true}}
+                              = I18n.t('views.videos.show.buy_for' , number: number_to_currency(@session.recorded_purchase_price.to_f, precision: 2))
+                            - if cookies["preview_purchase_vod_#{@session.id}"]
+                              - content_for(:after_include_javascripts) do
+                                :javascript
+                                  $(document).ready(function() {
+                                    $('.MVc-bottomLine_item .buy_replay_btn').click();
+                                    return false;
+                                  });
+                              - cookies.delete("preview_purchase_vod_#{@session.id}")
+                          - else
+                            %a.buy_replay_btn.btn.btn-m.btn-white.noscript.disabled{disabled: true, href: 'javascript:void(0)'}
+                              = I18n.t('views.videos.show.buy_for' , number: number_to_currency(@session.recorded_purchase_price.to_f, precision: 2))
+                      - else
+                        .MVc-bottomLine_item
+                          = I18n.t('sessions.show.player.paid_replay')
+                          %a.btn.btn-m.btn-white.authOpenLogin{onclick: "set_preview_purchase_cookie('preview_purchase_vod_#{@session.id}');", href: '#loginPopup', data: {toggle: :modal}}
+                            = I18n.t('views.videos.show.buy_for' , number: number_to_currency(@session.recorded_purchase_price.to_f, precision: 2))
+                    - if @subscription
+                      - if can?(:subscribe, @subscription) || !current_user
+                        .MVc-bottomLine_item
+                          - if @replay.only_subscription
+                            = I18n.t('sessions.show.player.only_subscription_label')
+                          - else
+                            = I18n.t('sessions.show.player.subscription_label')
+                          - if can?(:monetize_content_by_business_plan, @session.channel.organization)
+                            %a.btn.btn-m.btn-red.sub_btn{href: preview_plans_stripe_subscription_path(@subscription), data: {remote: true}}
+                              = I18n.t('sessions.show.player.subscription_btn_label', price: number_to_currency(@subscription.plans.active.pluck(:amount).map(&:to_f).sort[0])).html_safe
+                          - else
+                            %a.btn.btn-m.btn-red.sub_btn.disabled{disabled: true, href: 'javascript:void(0)'}
+                              = I18n.t('sessions.show.player.subscription_btn_label', price: number_to_currency(@subscription.plans.active.pluck(:amount).map(&:to_f).sort[0])).html_safe
+                    - elsif !@replay_interactor.could_be_purchased?
+                      .MVc-bottomLine_item
+                        = I18n.t('sessions.show.player.contact_owner')
+              #flash_container
+                .mainVideoSection-fleshMessage{style: 'display: none;'}
+                  %a.mainVideoSection-fleshMessage-close x
+
+            .mainVideoSection-footer
+              .mainVideoSection-footer-line
+
+                #placement_748914.mainVideoSection-footer-ad
+
+                .mainVideoSection-footer-line-one
+                  %h4.text-ellipsis{title: @replay.always_present_title}
+                    %span
+                      = @replay.always_present_title
+                .mainVideoSection-footer-line-two
+                  .mflt-l
+                    .followingAndSubscribe
+                      %div
+                        = link_to '', spa_user_path(@session.organizer.slug), target: '_blank', class: 'avatar', style: "background-image: url('#{@session.organizer.small_avatar_url}')"
+                        = link_to @session.organizer.public_display_name, spa_user_path(@session.organizer.slug), class: 'userName', title: @session.organizer.public_display_name
+                      %div
+                        - if current_user != @session.organizer
+                          - if current_user
+                            %a.btn.btn-s{class: "followBtn user-subscribe-#{@session.organizer.id} #{current_user&.following?(@session.organizer) ? 'active' : ''}", data: {remote: true}, href: @session.organizer.toggle_follow_relative_path}
+                              - if current_user && current_user&.following?(@session.organizer)
+                                = I18n.t('views.videos.show.following')
+                              - else
+                                = I18n.t('views.videos.show.follow')
+                          - else
+                            %a.btn.btn-s.active.authOpenLogin{data: {toggle: :modal}, href: '#loginPopup'}
+                              = I18n.t('views.videos.show.follow')
+                        - if @session.organizer.paypal_donations_url.present?
+                          = link_to 'Donate', @session.organizer.paypal_donations_url, target: :_blank, class: 'margin-left-10 btn__donate btn btn__main btn-m'
+                  .mflt-r
+                    %span.viewsCount{:title => (current_user&.current_organization == @session.channel.organization || current_user&.can_use_debug_area ? "<div class='fs__16'><div class='display__flex flex__justify__space-between padding-b__5'>Live steams views:<span class='margin-l__10'> #{@session.views_count} </span></div><div class='display__flex flex__justify__space-between'>Replay views:<span class='margin-l__10'>#{@replay.views_count}</span></div></div>" : "Views")}
+                      %i.VideoClientIcon-Views
+                      = @replay.total_views_count
+                    .btn-grey.btn
+                      = render(partial: 'shared/player/rating_dropdown', locals: {model: @session, content_type: :video})
+                    - if can?(:share, @session)
+                      %a.btn-grey.btn{title: 'Share', data: {remote: true}, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, href: @session.preview_share_relative_path(vod_id: @replay.id), rel: :nofollow}
+                        %i.VideoClientIcon-share-mk4
+                        Share
+                    - elsif !current_user
+                      %a.btn-grey.btn.authOpenLogin{title: 'Share', data: {toggle: :modal}, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, href: '#loginPopup', rel: :nofollow}
+                        %i.VideoClientIcon-share-mk4
+                        Share
+                    - if current_user && can?(:have_in_wishlist, @replay)
+                      %a.btn-grey.btn{href: toggle_wishlist_items_path(model_id: @replay.id, model_type: 'Video'), data: {method: :post, remote: true}, class: ["add-to-wish-list-button", wishlist_class(@replay), "video-wishlist-#{@replay.id}"].join(' ')}
+                        %i.VideoClientIcon-bookmark
+                        Add to Favorite
+                    - elsif !current_user
+                      %a.btn-grey.btn.authOpenLogin{title: 'Save', data: {toggle: :modal}, href: '#loginPopup', rel: :nofollow}
+                        %i.VideoClientIcon-bookmark
+                        Add to Favorite
+                    - if can?(:clone, @session)
+                      .dropdown.dropdown-list.text-left.pull-right.NoMinWidth.clearfix.margin-left-15.margin-bottom-0
+                        %a.btn-grey-small.More-dropdown.dropdown-toggle.NoMinWidth{'data-toggle': :dropdown,  role: :button}
+                          %i.VideoClientIcon-dots-horizontal-triple
+                        %ul.dropdown-menu.full-width.dropdown-menu-withIcons
+                          %li.clone
+                            %i.icon-squares
+                            - if @session.cloneable_with_options?
+                              %a{data: {remote: true}, href: sessions_preview_clone_modal_path(@session.id)}
+                                = I18n.t('views.videos.show.clone')
+                            - else
+                              %a{href: clone_channel_session_path(@session.channel.id, @session.id)}
+                                = I18n.t('views.videos.show.clone')
+                .mainVideoSection-footer-line-three
+                  = I18n.t('views.videos.show.streamed_on')
+                  #{time_with_tz_in_chosen_format(Time.at(@session.start_at))}
+              - if Nokogiri::HTML.parse(@replay.always_present_description).inner_text.present? || Nokogiri::HTML.parse(@session.custom_description_field_value).inner_text.present?
+                .mainVideoSection-about.active
+                  - if Nokogiri::HTML.parse(@replay.always_present_description).inner_text.present? || Nokogiri::HTML.parse(@session.custom_description_field_value).inner_text.present?
+                    .MVc-AboutHead
+                      %a.MVc-AboutBody_toggle.fs-16.active{href:'#', onclick:"$('.mainVideoSection-about, .MVc-AboutBody_toggle, .MVc-AboutBody').toggleClass('active');return false"}
+                        %span.s_more
+                          \...view more
+                        %span.s_less
+                          view less
+                  .MVc-AboutBody
+                    - if Nokogiri::HTML.parse(@replay.always_present_description).inner_text.present?
+                      %p.margin-bottom-5= sanitize(simple_format(@replay.always_present_description, {}, sanitize: false))
+                    - if Nokogiri::HTML.parse(@session.custom_description_field_value).inner_text.present?
+                      .MVc-AboutBody__section
+                        .MVc-AboutHead.margin-top-20 Instructions
+                        %p.margin-bottom-5= sanitize(simple_format(@session.custom_description_field_value, {}, sanitize: false))
+                    - content_for(:after_include_javascripts) do
+                      :javascript
+                        $('.MVc-AboutBody a').attr('target','_blank');
+              .channelInfo
+                = render(partial: 'shared/player/subscription_dropdown', locals: {subscription: @subscription, channel: @session.channel})
+        .mainVideoSection-rightSidebar
+          .mainVideoSection-wrapperMobile
+          .mainVideoSection-rightSidebar_sectionWrapp.AffixSection
+            = render partial: 'shared/player/right_sidebar_loader'
+            - content_for(:after_include_javascripts) do
+              :javascript
+                window.loadSessions = function() {
+                  var data;
+                  data = $('#MV_Upcoming').data();
+                  $.ajax({
+                    type: 'GET',
+                    url: Routes.sessions_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#MV_Upcoming').tooltip();
+                  });
+                };
+                window.loadReplays = function() {
+                  var data;
+                  data = $('#PL_Replays').data();
+                  $.ajax({
+                    type: 'GET',
+                    url: Routes.replays_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#PL_Replays').tooltip();
+                  });
+                };
+                window.loadRecordings = function() {
+                  var data;
+                  data = $('#PL_Recordings').data();
+                  $.ajax({
+                    type: 'GET',
+                    url: Routes.recordings_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#PL_Recordings').tooltip();
+                  });
+                };
+                window.loadSessions();
+                window.loadReplays();
+                window.loadRecordings();
+
+            %section.MV_Chat_section
+              - if @session.allow_chat
+                .MV_Chat.chatReplay
+                  = render 'widgets/replay_chat/chat_templates'
+                  .tab-content-t.chat.chat-title
+                    %span Chat Replay
+                    %a.toggle_chat.active{href: '#'}
+                      = I18n.t('views.videos.show.expand')
+                #ch-vue-app-chat
+                  = content_tag 'comp-wrapper', nil, data: { component: 'ChatWrapper', props: {sessionId: @session.id, replay: true}}.to_json
+                -# .MV_Chat_iframe.hidden
+                -#   .chat.chat-container.additions_tabs_chat.standalone-chat
+            .smallScrolls
+              #ch-vue-booking
+                = content_tag 'comp-wrapper', nil, data: { component: 'BookingUsersRow', props: {users: [@replay.user], textMode: 'session'}}.to_json
+              %ul.nav.nav-tabs.nav-justified
+                %li#MV_UpcomingToggle.hidden
+                  %a{href: '#MV_Upcoming', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.live')
+                %li#PL_ReplaysToggle.active
+                  %a{href: '#PL_Replays', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.replays')
+                %li#PL_RecordingsToggle.hidden
+                  %a{href: '#PL_Recordings', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.uploads')
+              %section.tab-content
+                %section#MV_Upcoming.tab-pane.hidden{data: {channel_id: @channel.id, limit: 5, offset: 0}}
+                  .tile-cake-sidebar-wrapp.sessions
+                  %a.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: sessions_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    = I18n.t('views.videos.show.show_more')
+
+                %section#PL_Replays.tab-pane.active{data: {channel_id: @channel.id, limit: 6, offset: 0}}
+                  .tile-cake-sidebar-wrapp.replays
+                  %a.hidden.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: replays_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    = I18n.t('views.videos.show.show_more')
+
+                %section#PL_Recordings.tab-pane.hidden{data: {channel_id: @channel.id, limit: 6, offset: 0}}
+                  .tile-cake-sidebar-wrapp.recordings
+                  %a.hidden.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: recordings_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    = I18n.t('views.videos.show.show_more')
+
+              #placement_748915.ad-content
+              #placement_748916.ad-content
+
+        #main_container_content
+          .mainVideoSection-sub-wrapper
+            .mainVideoSection-sub
+          .row
+            -#.col-md-12
+            -#  .session-about-footer
+            -#    .tagList.tagListMK2
+            -#      .section-title.margin-bottom-10 Tags
+            -#      - @channel.tags.each do |tag|
+            -#        %span= tag.name
+
+          -# #ch-vue-booking
+          -#   = content_tag 'comp-wrapper', nil, data: { component: 'BookingUsersRow', props: {users: [@replay.user], textMode: 'session'}}.to_json
+          #ch-vue-app
+            = content_tag 'comp-wrapper', nil, data: { component: 'ReviewsCommentsSection', props: {model: {creator_id: @replay.organizer.id, id: @replay.id, type: 'Video', can_rate: @can_rate, show_comments: @replay.show_comments, show_reviews: @replay.show_reviews, allow_chat: @replay.session.allow_chat}}}.to_json
+          -# - if @reviews_count > 0
+          -#   #reviewsArea.ch-p_C_tiles.padding-bottom-30
+          -#     .fs-l.text-color-Darkgrey.padding-bottom-20 Reviews
+          -#     -# РЕВЬЮ СУВАТЬ СЮДОЙ!!!!
+          -#     .row.reviews
+          -#       = render(partial: 'channels/reviews', locals: {reviews: @reviews, channel: @channel})
+          -#     - if @reviews_count > 6
+          -#       .row.show_more
+          -#         .padding-top-20.text-center
+          -#           %a.btn.btn-m{href: reviews_channel_path(@channel, limit: 6, offset: 6), data: {remote: true}} Show More
+          -# OLD
+          -#= render 'shared/channel_reviews_section', channel: @channel
+          = render 'shared/you_may_also_like_sessions', sessions: @you_may_also_like_sessions
+
+  #modals_container.modals
+    #calendar_view.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+      .modal-dialog
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              = I18n.t('views.videos.show.calendar')
+            %section
+              #calendar
+
+    = render 'shared/modal_live_participants_portal'
+#subscription_modals
+
+.mobileFooterNav.smallScrolls
+  %div.active{data: { target: "about" }} About Video
+  - if @session.allow_chat
+    %div{data: { target: "chat" }} Chat replay
+  %div{data: { target: "polls" }} Polls
+  %div{data: { target: "products" }, style: 'display: none;'} Products
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function() {
+      let pollsShow = false;
+
+      let initialHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+      function handleResize() {
+        if (!document.body.classList.contains('mobile_device') || (window.innerWidth > 641)) {
+          return;
+        }
+
+        let currentHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        let menu = document.querySelector('.mobileFooterNav');
+
+        if (currentHeight < initialHeight) {
+          menu.style.display = 'none';
+          document.body.classList.add('mobileNav__hidden');
+        } else {
+          menu.style.display = 'flex';
+          document.body.classList.remove('mobileNav__hidden');
+        }
+      }
+
+      // Обработчик для обычного resize
+      window.addEventListener('resize', handleResize);
+
+      // Дополнительный обработчик для visualViewport, если он доступен
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', handleResize);
+      }
+
+       function updateElementSize() {
+            if (!document.body.classList.contains('mobile_device')) {
+              return false;
+            }
+
+           let fixedElement = document.querySelector('.mainVideoSection-body');
+           let contentElement = document.querySelector('#player-container');
+
+           // let width = fixedElement.offsetWidth;
+           let width = window.innerWidth;
+           let height = (width * 9) / 16;
+
+          console.log("width", width);
+           if( width <= 640 ) {
+             fixedElement.style.height = height + 'px';
+             contentElement.style.paddingTop = height + 'px';
+           }else {
+              fixedElement.style.height = 'auto';
+              contentElement.style.paddingTop = '0px';
+           }
+        }
+
+       window.addEventListener('load', updateElementSize);
+       window.addEventListener('resize', updateElementSize);
+      document.querySelector('.mobileFooterNav').addEventListener('click', function(e) {
+          let target = e.target;
+          let dataTarget = target.getAttribute('data-target');
+          if(dataTarget) {
+            let bodyClasses = [...document.body.classList];
+            bodyClasses = bodyClasses.filter(item => !item.startsWith('mobileNav__'));
+            bodyClasses.push('mobileNav__' + dataTarget);
+            document.body.className = bodyClasses.join(' ');
+            document.body.classList.remove('overflow-hidden')
+            document.querySelectorAll('.mobileFooterNav > div').forEach(div => div.classList.remove('active'));
+            target.classList.add('active');
+
+            if (dataTarget === 'polls') {
+              window.eventHub.$emit('poll-template:open')
+              pollsShow = true;
+            }else{
+              if(pollsShow) {
+                // alert("if", pollsShow)
+                window.eventHub.$emit('poll-template:close')
+                pollsShow = false;
+              }
+              else {
+              // alert("else", pollsShow)
+              }
+            }
+          }
+        });
+
+        setTimeout(() => {
+          var adb = window.AdButler || {};
+          adb.ads = adb.ads || [];
+
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748914, [1200,800], 'placement_748914', opt); }, opt: { place: 0, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748915, [600,600], 'placement_748915', opt); }, opt: { place: 1, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748916, [600,600], 'placement_748916', opt); }, opt: { place: 2, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+        }, 100)
+    });
+
+
+
+
+
+%script(type="application/xml" id="adsTmpl")
+  != render 'widgets/player/ads'
+

@@ -1,0 +1,14 @@
+%p
+  Please BEFORE refunding check whether creator received earnings from this payment
+= form_tag refund_service_admin_panel_payment_transaction_path(@payment_transaction.id), method: :post, 'data-confirm': 'Are you sure want to refund?' do
+  %table{border: 0, cellspacing: 0, cellpadding: 0}
+    %tbody
+      %tr.row
+        %th{style: 'width: 30%; border: none;'}= label_tag 'Amount in cents or leave blank if full refund needed'
+        %td{style: 'border: none;'}= number_field_tag :amount, nil, min: 0, step: 1
+      %tr.row
+        %th{style: 'width: 30%; border: none;'}= label_tag 'Reason (default empty)'
+        %td{style: 'border: none;'}= select_tag :reason, options_for_select(%w(duplicate fraudulent requested_by_customer)), include_blank: true
+  %br/
+  %div
+    = submit_tag 'Send Money Refund'

@@ -1,0 +1,57 @@
+.ip__contact {
+  @include flex(flex, center, space-between);
+  padding: .5rem 1.5rem;
+
+  &__wrapper {
+    &:hover {
+      background: $client__bg__hover;
+
+      .ip__contact__invite {
+        transform: translateX(0rem);
+      }
+    }
+  }
+
+  &__name {
+    font-size: 1.4rem;
+    width: 100%;
+    padding: 0 1.5rem;
+    @include text__ellipsis();
+  }
+
+  &__avatar {
+    display: flex;
+
+    &__image {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+    }
+  }
+
+  &__invited {
+    color: $client__tp__secondary;
+    font-size: 1.2rem;
+  }
+
+  &__invite {
+    transform: translateX(30rem);
+    transition: .3s;
+
+    &__button {
+      min-width: 5rem;
+      min-height: 2rem;
+      line-height: 0;
+      max-width: 5rem;
+      padding: 0;
+      background: $client__btn__tetriary;
+      color: $client__tp__btn__tetriary;
+      font-size: 1.2rem;
+      border: 1px solid $client__btn__tetriary;
+
+      &:hover {
+        color: $client__tp__btn__tetriary;
+      }
+    }
+  }
+}

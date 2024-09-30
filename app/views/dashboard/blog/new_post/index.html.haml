@@ -1,0 +1,10 @@
+- content_for(:page_title, 'New Post')
+.row
+  %aside.col-md-3.left-side-bar
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    = render 'dashboards/navigation/blog_tabs'
+
+  .col-md-9
+    #ch-vue-app
+      = content_tag 'comp-wrapper', nil, data: { component: 'NewPost', props: {}}.to_json

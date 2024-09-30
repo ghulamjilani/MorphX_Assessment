@@ -1,0 +1,9 @@
+en:
+  frontend:
+    app:
+      components:
+        reports:
+            reports_filter:
+              organizations: Organizations
+              channels: Channels
+              date: Date

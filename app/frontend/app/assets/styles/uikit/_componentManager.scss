@@ -1,0 +1,255 @@
+
+
+
+.componentSettings {
+  .MK2-modal {
+    &__dialog {
+      margin-bottom: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      padding: 0;
+      width: 80rem;
+      min-height: 50rem;
+      @include media(p-tablet) {
+        width: 90%;
+      }
+    }
+
+    &__header {
+      padding: 0 2rem;
+      width: 100%;
+      @include media(p-tablet) {
+        padding: 5rem 2rem 0rem 2rem;
+      }
+
+      img {
+        height: auto;
+      }
+    }
+
+    &__body {
+      padding: 3rem;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    &__footer {
+      padding: 3rem;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    form {
+      min-height: 35rem;
+    }
+
+  }
+  &__checkmarks {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    @include media(reverso-phone) {
+      // max-height: 22rem;
+      overflow-y: auto;
+    }
+
+    &__all {
+      padding-left: 3.5rem !important;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      &:hover {
+        background: var(--bg__hover);
+      }
+
+      &.active {
+        background: var(--bg__hover);
+      }
+    }
+
+    label {
+      padding-left: 2.5rem !important;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      &:hover {
+        background: var(--bg__hover);
+      }
+
+      &.active {
+        background: var(--bg__hover);
+      }
+    }
+
+    span {
+      // left: 1rem !important;
+    }
+  }
+
+  &__flexInput {
+    @include flex(flex, center, flex-start);
+    margin: 1rem 0;
+
+    label {
+      margin-right: 1rem;
+    }
+    .input__field__angle {
+      top: 0.7rem;
+    }
+  }
+  &__hint {
+    margin: 1.5rem 0;
+    cursor: pointer;
+  }
+
+  &__buttonSettings {
+    display: flex;
+    align-items: self-end;
+    justify-content: space-between;
+    width: 100%;
+    margin: 2rem 0;
+
+    .wrapper {
+      width: calc(33% - 2rem);
+      // margin-right: 2rem;
+      &:last-child {
+        margin-right: 0;
+      }
+
+      .input__field {
+        margin-bottom: 0.4rem;
+      }
+    }
+  }
+  &__crop {
+    margin-top: 2rem;
+    .videoBanner video {
+      border: 1px solid black;
+      width: 70rem;
+      max-width: 100%;
+      height: calc(70rem / 4.5);
+      object-fit: cover;
+    }
+  }
+}
+
+//this is components(componentsManager) not component(componentManager), so if you need components you are welcome, but if you need component(componentManager) check next styles pls
+.componentsManager{
+  &__saveBtn{
+    position: fixed;
+    left: 1rem;
+    z-index: 1999;
+    .btn{
+      position: fixed;
+      right: 3rem;
+      top: 6.9rem;
+      z-index: 9999999;
+      padding: 0;
+      min-width: 12.2rem;
+    }
+  }
+}
+
+.homePage .componentsManager {
+  padding-top: 4.7rem; // banner
+}
+
+
+.componentManager {
+  &__editing {
+    padding: 3rem;
+    margin: 3rem;
+    border: 1px dashed var(--btn__main);
+    position: relative;
+    box-shadow: inset 0 0 10px -5px rgba(0,0,0,0.3), 0 0 10px rgba(0,0,0,0.1);
+    .homePage__scroll{
+      display: none;
+    }
+  }
+  &__editingButtons{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .2rem 1rem .2rem .5rem;
+    border-left:1px dashed var(--btn__main);
+    border-bottom:1px dashed var(--btn__main);
+    .btn{
+      min-width: 0;
+      margin-left: .5rem;
+      &__pushRight{
+        margin-right: 2rem;
+      }
+    }
+  }
+  &__saveBtn{
+    position: fixed;
+    left: 1rem;
+    .btn{
+      position: fixed;
+      right: 1rem;
+      top: 6rem;
+      z-index: 9999999;
+    }
+  }
+  &__rawHtml {
+    padding: 2rem;
+  }
+}
+//addComponent BTN
+.addComponent{
+  text-align: center;
+  padding: 3rem;
+  margin: 3rem;
+  border: 1px dashed var(--btn__main);
+  box-shadow: inset 0 0 1rem -.5rem rgba(0,0,0,0.4), 0 0 2rem rgba(0,0,0,0.1);
+}
+
+.formManager {
+  &__row {
+    position: relative;
+    width: 100%;
+    min-height: 10rem;
+    border: 1px dotted black;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    @include flex(flex, center, false);
+    flex-wrap: wrap;
+
+    &__column {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8rem;
+    }
+    &__itemWrapper {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__item {
+    width: 15rem;
+    margin-right: 1rem;
+    &.checkboxMK2 {
+      width: auto;
+      margin-right: 2rem;
+    }
+  }
+
+  .dropdownMK2__with-label {
+    padding-top: 0 !important;
+  }
+
+  &__builder {
+    margin-top: 3rem;
+
+    &__save {
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+}

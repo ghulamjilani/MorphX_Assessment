@@ -1,0 +1,28 @@
+#email-modal-share.modal.fade{aria: {hidden: true, labelledby: 'myModalLabel'}, role: :dialog, tabindex: -1, style: 'display: none;'}
+  .modal-dialog
+    %form.email_share_form{action: email_shares_path, data: {remote: true}, method: 'POST'}
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          .unobtrusive-flash-container
+          %h4.groupTitle
+            Send a mail
+          %input{type: :hidden, name: :model_id, value: model_id}
+          %input{type: :hidden, name: :klass, value: klass}
+          %fieldset.inputs
+            %span.text-color-Darkgrey To
+            .email.input.required.autofocus.stringish.form-group
+              %input.full-width{name: :emails, autofocus: :autofocus, maxlength: 255, placeholder: 'Email', type: :text}
+
+          %fieldset.inputs
+            %span.text-color-Darkgrey Subject
+            .subject.input.required.autofocus.stringish.form-group
+              %input.full-width{name: :subject, autofocus: :autofocus, minlength: 10, maxlength: 255, value: "#{current_user.public_display_name} shared a #{klass.to_s.downcase} with you on #{Rails.application.credentials.global[:service_name]}." , type:'text'}
+
+          %fieldset.inputs
+            %span.text-color-Darkgrey Message
+            .subject.input.required.autofocus.stringish.form-group
+              %textarea.full-width{name: :body, maxlength: 500, autofocus: :autofocus}
+                = mail_body
+      .text-right.padding-top-10
+        %input.btn.btn-m{type: :submit, value: 'Send'}

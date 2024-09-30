@@ -1,0 +1,44 @@
+- content_for(:extra_body_classes, "hidePageHeader hideDefaultHeader landingPage resetMainContainer header-top")
+
+#landing-vue-app
+  = content_tag 'landing', nil, data: { component: 'landing' }.to_json
+
+- unless current_user
+  = render 'layouts/application/sign_in', hide_signup: Rails.application.credentials.frontend[:landing_sign_up]
+  - if params[:token].present?
+    = render 'layouts/application/sign_up', redirect_url: wizard_v2_business_path, action_url: wizard_v2_profile_path, form_method: :put, submit_text: 'Sign up and continue'
+    -# TODO: продумать как быть
+    -# - if Rails.application.credentials.global.dig(:wizard, :enabled)
+    -#   = render 'layouts/application/sign_up', redirect_url: wizard_v2_business_path, action_url: wizard_v2_profile_path, form_method: :put, submit_text: 'Sign up and continue'
+    -# - else
+    -#   = render 'layouts/application/sign_up'
+- content_for(:after_include_javascripts) do
+  - if current_user
+    :javascript
+      function redirectToBusiness () {
+        window.location.href = Routes.wizard_v2_business_path();
+        return false;
+      }
+      setTimeout(() => {
+        $('.start_wizard').click(redirectToBusiness);
+        $('.mf__landing__header').hide();
+        $('.hideDefaultHeader .navbar-default').show();
+
+      }, 500)
+  - else
+    :javascript
+      function openSignUpModal () {
+        window.eventHub.$emit("open-modal:auth", "sign-up")
+        // $('#signupPopup').modal('show');
+        $('.start_wizard_login')
+        return false;
+      }
+      function openSignInModal () {
+        window.eventHub.$emit("open-modal:auth", "login")
+        // $('#loginPopup').modal('show');
+        return false;
+      }
+      setTimeout(() => {
+        $('.start_wizard').click(openSignUpModal);
+        $('.start_wizard_login').click(openSignInModal);
+      }, 1500)

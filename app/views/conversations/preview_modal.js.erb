@@ -1,0 +1,6 @@
+window.modalBody = '<%= escape_javascript render("#{action_name}", format: :html) %>';
+$(document).one("shown.bs.modal", "#conversation-preview-modal" , function(){
+  $('li[data-conversation-id=<%= @conversation.id %>]').removeClass('active NT-new');
+});
+
+$(modalBody).modal();

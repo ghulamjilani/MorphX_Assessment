@@ -1,0 +1,14 @@
+production:
+  adapter: redis
+  url: <%= ENV['CABLE_REDIS_URL'] %>
+
+qa:
+  adapter: redis
+  url: <%= ENV['CABLE_REDIS_URL'] %>
+
+development:
+  adapter: redis
+  url: <%= ENV['CABLE_REDIS_URL'] %>
+
+test:
+  adapter: test

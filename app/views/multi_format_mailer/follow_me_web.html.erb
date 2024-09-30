@@ -1,0 +1,7 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  You have a new follower: <strong> <%= link_to @follower.public_display_name, @follower.absolute_path %></strong>.
+</p>

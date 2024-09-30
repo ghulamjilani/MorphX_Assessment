@@ -1,0 +1,4 @@
+en:
+  models:
+    video:
+      share_title: "%{title}"

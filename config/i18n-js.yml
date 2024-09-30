@@ -1,0 +1,7 @@
+js_available_locales: ["en"]
+
+translations:
+  - file: "config/locales/front_js/%{locale}.js"
+    prefix: "var I18n = {translations: {}, extend: function(a1, a2) {return a2;}};\n\n"
+    suffix: "\nexport default I18n.translations"
+    pretty_print: true

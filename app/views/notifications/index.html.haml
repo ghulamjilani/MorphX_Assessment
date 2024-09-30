@@ -1,0 +1,78 @@
+- content_for(:page_title, 'Notifications')
+- content_for(:extra_body_classes, 'header-top')
+
+- if display_notification_tabs?
+  .info-tabs.m-sendbox-h
+    %ul.nav.nav-tabs.nav-justified
+      %li.active
+        %a{href:'#NotificationsOpen', 'data-toggle': 'tab'} Open
+      %li
+        %a{href:'#NotificationsHistory', 'data-toggle': 'tab'} History
+.tab-content
+  #NotificationsOpen.tab-pane.active
+    %form.notifications.sectionBlock{action: destroy_selected_notifications_path, method: "POST", style: 'visibility: visible'}
+      .technicalPage__label Notifications
+      %input{type: "hidden", name: "_method", value: "DELETE"}
+      %input{type: "hidden", name: "authenticity_token", value: "#{form_authenticity_token}"}
+      - if @notifications.length != 0
+        .line
+        .btnsNavigationWrapper
+          .leftButtons
+            .div{style: 'display:inline-block;margin-left: 21px;'}
+              %label.checkbox.choice
+                %input.mark-all-notification{ type: "checkbox"}
+                %span Select all
+            %button.btn.btn-m.delete-selected.btn-borderred-secondary.text-center{type: "submit", disabled: "disabled"}
+              %i.VideoClientIcon-trash-emptyF
+              %span Clear Selected
+          .rightButtons.text-right
+            /
+              %a.pull-right.mt20{ href: destroy_read_notifications_path, data: {method: "delete"}, rel: 'tipsy', title: 'Clear all read notifications' }
+                Clear all read
+
+            %a.btn.btn-m.btn-borderred-secondary{ href: mark_all_as_read_notifications_path, data: {method: 'post'} }
+              %i.VideoClientIcon-checkmark.padding-right-10
+              Mark all as read
+
+            = link_to 'Clear all', destroy_all_notifications_path, method: :delete, class: 'btn btn-m btn-borderred-secondary clearAll'
+
+          -#%a.btn.btn-default.btn-xs.btn-primary{ href: destroy_all_notifications_path, data: {method: "delete"}  }
+          -#  Delete all
+      .invSection.Notifications-wrapp
+
+        - if @notifications.length.zero?
+          %section.whiteListMessage
+            = render partial:'haventNotifications'
+            You do not have notifications
+
+        - @notifications.each.with_index do |notification, index|
+          .media.notification-item{class: new_notification_class(notification)}
+            .blockL
+              %label.checkbox.choice
+                %input.mark-notification{ type: "checkbox", name: "notifications[#{index}][id]", value: "#{notification.id}" }
+                %span
+            .media-body{data: {read: notification_read?(notification).to_s, readurl: mark_as_read_notification_path(notification) }}
+              .row
+                .col-md-1.text-center.contentWrapper.notRead{class: active_notification_class(notification)}
+                  = user_with_avatar(notification.sender)
+                .col-md-11.responsiveNotifContent
+                  %h5
+                    %strong
+                      - if notification.sender.present?
+                        = link_to notification.sender.public_display_name + ':', notification.sender.relative_path
+                      - else
+                        = Rails.application.credentials.global[:service_name] + ':'
+                    = sanitize notification.subject
+                    .col-md-pull-right.sendingTime.notRead{class: active_notification_class(notification)}
+                      .timeStamp
+                        = time_with_tz_in_chosen_format(notification.created_at)
+                      .markAsRead{class: active_notification_class(notification)}
+                        %i.VideoClientIcon-checkmark.padding-right-10
+                        = link_to 'Mark as read', '', class: 'fs-14 bold', data: { "read-url" => mark_as_read_notification_path(notification), "unread-url" => mark_as_unread_notification_path(notification), "is-read" => notification_read?(notification)}
+                  = sanitize notification.body
+      - unless @notifications.length.zero?
+        - current_user.mark_reminder_notifications_as_read(@notifications.collect &:id)
+    .text-center
+      = paginate @notifications
+  #NotificationsHistory.tab-pane
+

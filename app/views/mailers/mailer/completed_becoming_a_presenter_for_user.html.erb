@@ -1,0 +1,13 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  We’re excited to have you!
+</p>
+
+<p>
+  If you have any questions about the setup please take a look
+  at our <%= link_to "Presenter FAQ’s", page_url(ContentPages::HELP_CENTER.parameterize(separator: '-'), anchor: 'for-presenters') %>
+  or contact our support team at <%= mail_to(Rails.application.credentials.global[:support_mail]) %>.
+</p>

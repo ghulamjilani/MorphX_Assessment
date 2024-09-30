@@ -1,0 +1,39 @@
+en:
+  views:
+    sessions:
+      preview_purchase_stripe:
+        interactive_session_details: Interactive Session Details
+        mins: mins
+        the_following_table_indicates_the_browsers_supported: The following table indicates the browsers supported.
+        chrome: Chrome
+        firefox: Firefox
+        safari: Safari
+        edge: Edge*
+        android: Android
+        ios: IOS
+        linux: Linux
+        mac_os: macOS
+        windows: Windows
+        price: Price
+        discount: Discount
+        tax: Tax
+        support_recent_and_two_previous_versions_browsers: "We support the most recent (N) and the two previous (N-2) versions of these browsers unless otherwise indicated."
+        support_chromium_edge_edge_is_not_supported: "* We support Chromium-based Edge only. Legacy Edge isn’t supported."
+        payment_method: Payment Method
+        total_amount: Total amount
+        credit_card: Credit Card
+        system_credit: System Credit
+        card_number: Card Number
+        add_card: ADD CARD
+        add_promotion_code: Add promotion code
+        apply: Apply
+        name_on_card: Name on Card
+        country: Country
+        zip_code: Zip Code
+        submit_payment: Submit Payment
+        pay_pal: PayPal
+        enter_code: Enter Code
+        jane_doe: Jane Doe
+        united_states: United States
+        processing: Processing...
+        process: Processing

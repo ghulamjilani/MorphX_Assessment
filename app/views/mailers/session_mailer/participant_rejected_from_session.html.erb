@@ -1,0 +1,11 @@
+<p>
+  You have been removed as a participant from <a href="<%= @url %>"><%= @session.always_present_title %></a> by <%= link_to @session.organizer.public_display_name, @session.organizer.absolute_path %>.
+</p>
+
+<p>
+  If you feel there is a mistake please contact the presenter directly.
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@session.channel.title) %>
+</p>

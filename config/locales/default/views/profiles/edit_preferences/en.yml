@@ -1,0 +1,14 @@
+en:
+  views:
+    profiles:
+      edit_preferences:
+        page_title: Preferences
+        fields:
+          time_zone: Time zone
+          time_notation: Time Notation
+          am_pm: am./pm.
+          24_hour: 24-hour
+          language: Language
+          currency: Currency
+        save_changes: Save Changes
+        cancel: Cancel

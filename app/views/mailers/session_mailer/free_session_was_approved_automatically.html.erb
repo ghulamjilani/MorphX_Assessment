@@ -1,0 +1,25 @@
+<p>
+  New free <%= @session.private? ? 'private' : '' %> session <%= link_to @session.always_present_title, @session.absolute_path %> has just been approved automatically after creation.
+</p>
+
+<% case @reason_type %>
+<% when FreeSessionPublishedAutomaticallyReasons::APPROVED_PRIVATE_AUTOMATICALLY_BECAUSE_OF_PREFERENCE %>
+  <p>
+    It happened because of the preferences set for <%= link_to @session.organizer.absolute_path, @session.organizer.public_display_name  %> presenter(can_create_free_private_sessions_without_permission=true).
+  </p>
+<% when FreeSessionPublishedAutomaticallyReasons::APPROVED_BECAUSE_OF_LIMIT %>
+  <p>
+    It happened because <%= link_to @session.organizer.absolute_path, @session.organizer.public_display_name  %> has not expired his/her limit(can_publish_n_free_sessions_without_admin_approval):
+  </p>
+  <p>
+    Current limit(max): <%= @session.organizer.can_publish_n_free_sessions_without_admin_approval %>
+  </p>
+  <p>
+    <% channel_ids = @session.organizer.presenter.channels.pluck(:id) %>
+    <% count = Session.where(id: channel_ids).where('immersive_purchase_price = 0 OR livestream_purchase_price = 0').count %>
+
+    Free sessions so far: <%= count %>
+  </p>
+<%  else %>
+  <% raise "can not interpret #{@reason}" %>
+<% end %>

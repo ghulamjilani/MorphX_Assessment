@@ -1,0 +1,12 @@
+en:
+  replay_tile:
+    replay: Replay
+    private: Private
+    by: By
+    purchased: Purchased
+    subscription: Subscription
+    streamed: Streamed
+    buy: Buy
+    views_count_popover:
+      live_steams_views: Live steams views
+      replay_views: Replay views

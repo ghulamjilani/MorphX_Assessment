@@ -1,0 +1,9 @@
+en:
+  controllers:
+    profiles:
+      initiate_verification_sms:
+        action_message: '%{service_name} verification code:'
+      destroy:
+        active_channel_subscriptions: 'Sorry, we cannot delete your account before all your subscriptions are canceled.'
+        active_business_subscriptions: 'Sorry, we cannot delete your account before your Business Subscription is canceled.'
+        success: 'Your account has been deleted.'

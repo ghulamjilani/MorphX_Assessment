@@ -1,0 +1,5 @@
+production:
+  user: ''
+  token: ''
+  source: 'production'
+  flush_interval: 60

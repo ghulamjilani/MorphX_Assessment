@@ -1,0 +1,235 @@
+<input type="hidden" value="{{id}}" name="subscription[plans_attributes][{{index}}][id]"
+       id="subscription_plans_attributes_{{index}}_id">
+<input type="hidden" value="{{im_color}}" name="subscription[plans_attributes][{{index}}][im_color]"
+       id="subscription_plans_attributes_{{index}}_im_color">
+<div class="right_side {{#if disabled}}disabledTile{{/if}}">
+    <div class="right_side__top">
+        <div class="tittle">
+            <div class="input-block required valid" aria-required="true">
+                <input class="no-border" placeholder="Plan name" type="text" value="{{im_name}}"
+                       name="subscription[plans_attributes][{{index}}][im_name]"
+                       id="subscription_plans_attributes_{{index}}_im_name" aria-invalid="false"
+                       {{#if disabled}}disabled readonly{{/if}}>
+                <i class="VideoClientIcon-edit-icon"></i>
+            </div>
+        </div>
+        <div class="subsWrapper">
+          <span>{{ i18n "views.dashboard.subscriptions.plan.subscribers" }}: {{stripe_subscriptions_count}}</span>
+        </div>
+    </div>
+    <div class="details">
+        <div class="detailsBlocks block_1 padding-left-0 subscriptionTerm">
+          <div class="blockTitle">{{ i18n "views.dashboard.subscriptions.plan.period_price" }} </div>
+            <span>{{ i18n "views.dashboard.subscriptions.plan.subscription" }}</span>
+            <div class="input-block input-block_1 daysInput required state-clear" aria-required="true">
+                {{#if (and (and (not id) (not im_enabled)))}}
+                    <input type="number" id="subscription_plans_attributes_{{index}}_interval_count"
+                           name="subscription[plans_attributes][{{index}}][interval_count]"
+                           min="1" class="no-border" style=" padding-left: 0; font-size: 14px;" value="{{interval_count}}">
+                    <select id="subscription_plans_attributes_{{index}}_interval"
+                            name="subscription[plans_attributes][{{index}}][interval]"
+                            class="styled-select styled-select_withCss" style=" padding-left: 0; font-size: 14px;">
+                        {{#each available_intervals}}
+                            <option value="{{this}}" {{#if (eq this ../interval)}}selected{{/if}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                {{else}}
+                    <span>{{interval_count}} {{interval}}</span>
+                    {{#unless disabled}}
+                        <input style="display:none;" type="text" value="{{interval}}"
+                           name="subscription[plans_attributes][{{index}}][interval]"
+                           id="subscription_plans_attributes_{{index}}_interval">
+                        <input style="display:none;" type="text" value="{{interval_count}}"
+                           name="subscription[plans_attributes][{{index}}][interval_count]"
+                           id="subscription_plans_attributes_{{index}}_interval_count">
+                    {{/unless}}
+                {{/if}}
+            </div>
+            <!-- <div class="input-block input-block_1 daysInput required state-clear subsDays" aria-required="true">
+              {{#if (and (and (not id) (not im_enabled)))}}
+                  {{!-- <input type="number" id="subscription_plans_attributes_{{index}}_interval_count"
+                          name="subscription[plans_attributes][{{index}}][interval_count]"
+                          min="1" class="no-border" style=" padding-left: 0; font-size: 14px;" value="{{interval_count}}"> --}}
+                  {{!-- <select id="subscription_plans_attributes_{{index}}_interval"
+                          name="subscription[plans_attributes][{{index}}][interval]"
+                          class="styled-select styled-select_withCss" style=" padding-left: 0; font-size: 14px;">
+                      {{#each available_intervals}}
+                          <option value="{{this}}" {{#if (eq this ../interval)}}selected{{/if}}>{{this}}</option>
+                      {{/each}}
+                  </select> --}}
+                  <select id="subscription_plans_attributes_{{index}}_interval" placeholder="Select..."
+                  class="styled-select styled-select_withCss pull-right margin-left-10">
+                    {{#each available_intervals}}
+                          <option value="{{this}}" {{#if (eq this ../interval)}}selected{{/if}}>{{this}}</option>
+                    {{/each}}
+                  </select>
+              {{else}}
+                <span>{{interval_count}} {{interval}}</span>
+                {{#unless disabled}}
+                    <input style="display:none;" type="text" value="{{interval}}"
+                        name="subscription[plans_attributes][{{index}}][interval]"
+                        id="subscription_plans_attributes_{{index}}_interval">
+                    <input style="display:none;" type="text" value="{{interval_count}}"
+                        name="subscription[plans_attributes][{{index}}][interval_count]"
+                        id="subscription_plans_attributes_{{index}}_interval_count">
+                {{/unless}}
+              {{/if}}
+            </div>
+            -->
+            <div>
+              <div class="input-block required state-clear priceSection" aria-required="true">
+                <span>{{ i18n "views.dashboard.subscriptions.plan.price" }}</span>
+                <div class="priceWrapper">
+                <input class="no-border" placeholder="Set Price..." pattern="\d+([,.]\d{1,2})?" type="text"
+                        name="subscription[plans_attributes][{{index}}][amount]"
+                        id="subscription_plans_attributes_{{index}}_amount" value="{{amount}}"
+                    {{#if (or disabled (and id amount))}}disabled readonly{{/if}}>
+                <i class="VideoClientIcon-dollarF"></i>
+                </div>
+                <div class="errorContainerWrapp"></div>
+              </div>
+              {{#if revenue_percent}}
+              <div class="input-block required state-clear priceSection" aria-required="true">
+                <span>You make</span>
+                <div class="priceWrapper">
+                <input class="no-border" placeholder="Set Price..." pattern="\d+([,.]\d{1,2})?" type="text"
+                        name="subscription[plans_attributes][{{index}}][revenue_amount]"
+                        id="subscription_plans_attributes_{{index}}_revenue_amount" value="{{revenue_amount}}"
+                    {{#if (or disabled (and id amount))}}disabled readonly{{/if}}>
+                <i class="VideoClientIcon-dollarF"></i>
+                </div>
+                <div class="errorContainerWrapp"></div>
+              </div>
+              {{/if}}
+            </div>
+            {{!-- <div class="dicountPrice">
+              <label class="checkbox checkbox-swith">
+                <input type="checkbox">
+                <span>Discount price</span>
+              </label>
+              <i class="VideoClientIcon-edit-icon"></i>
+            </div> --}}
+        </div>
+        <div class="detailsBlocks block_2 padding-left-0 secondSection subscriptionTerm {{#if disabled}}disabled{{/if}}">
+          <div class="secondSection__item">
+            <div class="blockTitle"> {{ i18n "views.dashboard.subscriptions.plan.include" }} <i class="GlobalIcon-info"></i></div>
+            <label class="checkbox checkbox-swith">
+              <input name="subscription[plans_attributes][{{index}}][im_livestreams]" type="hidden" value="0"
+                {{#if disabled}}disabled readonly{{/if}}>
+              <label class="checkbox checkbox-swith streams">
+                <input class="im_livestreams_checkbox" type="checkbox" value="1" {{#if im_livestreams}}checked{{/if}}
+                       name="subscription[plans_attributes][{{index}}][im_livestreams]"
+                       id="subscription_plans_attributes_{{index}}_im_livestreams"
+                  {{#if disabled}}disabled readonly{{/if}}>
+                <span>{{ i18n "views.dashboard.subscriptions.plan.im_livestreams" }}</span>
+              </label>
+            </label>
+            <label class="checkbox checkbox-swith">
+              <input name="subscription[plans_attributes][{{index}}][im_interactives]" type="hidden" value="0"
+                {{#if disabled}}disabled readonly{{/if}}>
+              <label class="checkbox checkbox-swith">
+                <input class="im_interactives_checkbox" type="checkbox" value="1" {{#if im_interactives}}checked{{/if}}
+                       name="subscription[plans_attributes][{{index}}][im_interactives]"
+                       id="subscription_plans_attributes_{{index}}_im_interactives"
+                  {{#if disabled}}disabled readonly{{/if}}>
+                <span>{{ i18n "views.dashboard.subscriptions.plan.im_interactives" }}</span>
+              </label>
+            </label>
+            <label class="checkbox checkbox-swith">
+              <input name="subscription[plans_attributes][{{index}}][im_replays]" type="hidden" value="0"
+                {{#if disabled}}disabled readonly{{/if}}>
+              <label class="checkbox checkbox-swith">
+                <input class="im_replays_checkbox" type="checkbox" value="1" {{#if im_replays}}checked{{/if}}
+                       name="subscription[plans_attributes][{{index}}][im_replays]"
+                       id="subscription_plans_attributes_{{index}}_im_replays"
+                  {{#if disabled}}disabled readonly{{/if}}>
+                <span>{{ i18n "views.dashboard.subscriptions.plan.im_replays" }}</span>
+              </label>
+            </label>
+            <label class="checkbox checkbox-swith">
+              <input name="subscription[plans_attributes][{{index}}][im_uploads]" type="hidden" value="0"
+                {{#if disabled}}disabled readonly{{/if}}>
+              <label class="checkbox checkbox-swith">
+                <input class="im_uploads_checkbox" type="checkbox" value="1" {{#if im_uploads}}checked{{/if}}
+                       name="subscription[plans_attributes][{{index}}][im_uploads]"
+                       id="subscription_plans_attributes_{{index}}_im_uploads"
+                  {{#if disabled}}disabled readonly{{/if}}>
+                <span>{{ i18n "views.dashboard.subscriptions.plan.im_uploads" }}</span>
+              </label>
+            </label>
+            <label class="checkbox checkbox-swith">
+              <input name="subscription[plans_attributes][{{index}}][im_channel_conversation]" type="hidden" value="0"
+                {{#if disabled}}disabled readonly{{/if}}>
+              <label class="checkbox checkbox-swith">
+                <input class="im_channel_conversation_checkbox" type="checkbox" value="1" {{#if im_channel_conversation}}checked{{/if}}
+                       name="subscription[plans_attributes][{{index}}][im_channel_conversation]"
+                       id="subscription_plans_attributes_{{index}}_im_channel_conversation"
+                  {{#if disabled}}disabled readonly{{/if}}>
+                <span>{{ i18n "views.dashboard.subscriptions.plan.im_channel_conversation" }}</span>
+              </label>
+            </label>
+          </div>
+          <div class="secondSection__item">
+            <div class="blockTitle"> {{ i18n "views.dashboard.subscriptions.plan.trial_subscription" }} </div>
+            <div class="labelsWrapp">
+            <label class="checkbox checkbox-swith">
+              <input class="free_trial" type="checkbox" {{#if (gt trial_period_days 0)}}checked{{/if}}
+                {{#if disabled}}disabled readonly{{/if}}>
+              <span>{{ i18n "views.dashboard.subscriptions.plan.free_trial" }}</span>
+            </label>
+            <label class="checkbox checkbox-swith">
+              <input name="subscription[plans_attributes][{{index}}][autorenew]" type="hidden" value="0"
+                  {{#if disabled}}disabled readonly{{/if}}>
+              <label class="checkbox checkbox-swith">
+                <input type="checkbox" value="1" {{#if autorenew}}checked{{/if}}
+                       name="subscription[plans_attributes][{{index}}][autorenew]"
+                       id="subscription_plans_attributes_{{index}}_autorenew"
+                    {{#if disabled}}disabled readonly{{/if}}>
+                <span>{{ i18n "views.dashboard.subscriptions.plan.auto_renewal" }}</span>
+              </label>
+            </label>
+            </div>
+            <div class="DayCountWrapp">
+              <span>{{ i18n "views.dashboard.subscriptions.plan.days_number" }}*</span>
+              <input placeholder="0" min="0" max="30" step="1" type="number" value="{{trial_period_days}}"
+                {{#if (or disabled (or (not trial_period_days) (eq trial_period_days '0')))}}class="disabled" disabled{{/if}}
+                     name="subscription[plans_attributes][{{index}}][trial_period_days]"
+                     id="subscription_plans_attributes_{{index}}_trial_period_days">
+            </div>
+            {{!-- Uncomment when files done
+            <label class="checkbox checkbox-swith">
+              <input name="subscription[plans_attributes][{{index}}][im_documents]" type="hidden" value="0"
+                {{#if disabled}}disabled readonly{{/if}}>
+              <label class="checkbox checkbox-swith">
+                <input class="im_documents_checkbox" type="checkbox" value="1" {{#if im_documents}}checked{{/if}}
+                       name="subscription[plans_attributes][{{index}}][im_documents]"
+                       id="subscription_plans_attributes_{{index}}_im_documents"
+                  {{#if disabled}}disabled readonly{{/if}}>
+                <span>Documents</span>
+              </label>
+            </label>
+            --}}
+          </div>
+        </div>
+    </div>
+    <div class="toggle_plan_btns text-right padding-top-10">
+      {{!-- <div class="toggle_plan_btns__wrapper">
+        <a class="btn btn-m enable"> <i class="GlobalIcon-check"></i> Enabled plan</a>
+        <a class="btn btn-borderred-grey btn-m recomend">Make Recommended</a>
+      </div> --}}
+      {{#unless (and disabled (not restorable))}}
+        <div class="btns-group padding-right-10 planStatus">
+          <a class="{{#unless im_enabled}}active{{/unless}} btn  btn-borderred-grey btn-s plan_off text-uppercase"
+             {{#if disabled}}disabled{{/if}} href="#">{{ i18n "views.dashboard.subscriptions.plan.plan_off" }}</a>
+          <a class="{{#if im_enabled}}active{{/if}} btn btn-borderred-grey btn-s plan_on text-uppercase"
+             {{#if (and disabled (not restorable))}}disabled{{/if}} href="#">{{ i18n "views.dashboard.subscriptions.plan.plan_on" }}</a>
+        </div>
+      {{/unless}}
+      <input name="subscription[plans_attributes][{{index}}][im_enabled]" type="hidden" value="0">
+      {{#unless disabled}}
+        <input name="subscription[plans_attributes][{{index}}][im_enabled]" type="checkbox" value="1"
+               class="im_enabled hidden" id="subscription_plans_attributes_{{index}}_im_enabled"
+               {{#if im_enabled}}checked{{/if}}>
+      {{/unless}}
+    </div>
+</div>

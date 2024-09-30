@@ -1,0 +1,21 @@
+en:
+  views:
+    videos:
+      show:
+        following: Following
+        follow: Follow
+        replay: Replay
+        private: Private
+        tap_to_unmute: tap to unmute
+        buy_for: Buy for %{number}
+        streamed_on: Streamed on
+        clone: Clone
+        more: more
+        less: less
+        chat: Chat
+        expand: Expand
+        live: Live
+        show_more: Show more
+        replays: Replays
+        uploads: Uploads
+        calendar: Calendar

@@ -1,0 +1,274 @@
+- if @channel
+  .ch-p_C
+    .ch-p_C_head.clearfix{class: ('channelList-long' if @owned_channels.length > 5)}
+      .ch-p_C_head_left
+        .channelSince.inline-block.vertical-midle
+          Channel:
+          %span.text-color-Darkgrey
+            Since
+            #{@channel.created_at.year}
+        .channelCategory.inline-block.vertical-midle
+          Category:
+          %span.text-color-Darkgrey= @channel.category.name
+      - if @owned_channels.size > 1
+        .ch-p_C_head_right
+          -#Channels list for MOBILE!!!!!!
+          .hide_on_desktop
+            %h4 choose channel
+            %select#channel_switch.styled-select_withCss.btn.btn-s.text-color-white.full-width
+              - @owned_channels.each do |channel|
+                %option{data: {url: channel.absolute_path}, selected: (channel == @channel)}= channel.title
+            - content_for(:after_include_javascripts) do
+              :javascript
+                $('body').on('change', '#channel_switch', function(e){
+                  const url = $(this).find('option:selected').data('url');
+                  window.location = url;
+                });
+          -#Channels list for desktop !!!!!!!
+          .hide_on_mobile.channelList
+            %span More Channels
+            .ChannelsImg-wrapp
+              - @owned_channels.each do |channel|
+                .ch_icon_dr__wrapp
+                  %a.avatarImg-XSD.border-radius-0{href: (channel == @channel ? '#' : channel.absolute_path), style: "background-image:url('#{channel.logo_url}')"}
+                  .ch_icon_dr__main
+                    .ch_icon_dr__head
+                      .ch_icon_dr__logo{style: "background-image:url('#{channel.image_gallery_url}')",}
+                    .ch_icon_dr__body= channel.title
+                    %a.ch_icon_dr__link{href:channel.relative_path, target: '_blank'} Go to Channel
+    .ch-p_C_body
+      .ch-p_C_banner{style: "background-image: url(#{@channel.image_gallery_url})"}
+        - if @channel.organization
+          %a.ChannelsName{href: @channel.organization.relative_path} Part of #{@channel.organization.name} Network
+        .ch-p_C_banner-rightBtnsGroup
+          - if can?(:share, @channel)
+            %a.btn.btn-m.btn-lightGrey-solid.ch-p_C_share.btn-circle.btn-blue-hover.border-radius-0{href: @channel.preview_share_relative_path, rel: :nofollow, method: :get, data: {remote: true}}
+              %i.VideoClientIcon-share-mk4
+          - if can?(:like, @channel)
+            - if signed_in?
+              %a.btn.btn-m.btn-lightGrey-solid.ch-p_C_like.btn-red-hover.padding-left-5.padding-right-5.border-radius-0{href: @channel.toggle_like_relative_path, class: "#{like_class(@channel)} channel-like-#{@channel.id}", method: :post, data: {remote: true}}
+                %i.icon-heart.margin-right-5.vertical-top
+                %div{class: "likes-counter-channel-#{@channel.id}", style: 'display: inline;'}
+                  = @channel.likes_count
+            - else
+              %a.btn.btn-m.btn-lightGrey-solid.ch-p_C_like.btn-red-hover.padding-left-5.padding-right-5.border-radius-0.authOpenLogin{href: '#signupPopup', data: {toggle: :modal}}
+                %i.icon-heart.margin-right-5.vertical-top
+                %div{class: "likes-counter-channel-#{@channel.id}", style: 'display: inline;'}
+                  = @channel.likes_count
+        - if @channel.slider_materials.size > 1
+          %a.btn.btn-s.btn-lightGrey-solid.ch-p_C_gallery{href: '#', data: {target: '#sessionsModalGallery', toggle: :modal, title: 'Open gallery'}}
+            %span.text-color-LightGrey Gallery
+        -#- @channel.images.most_relevant.each do |image|
+        -#  .gallery-item{style: "background-image: url(#{image.image_gallery_url})"}
+      .ch-p_C_body_info
+        .row
+          .col-md-7.ch-p_channelName_wrapp
+            .ch-p_channelName.text-ellipsis
+              = @channel.title
+              .ch-p_channelName_sub.text-ellipsis.display-block{rel: :tipsy, title: @channel.tagline}
+                = @channel.tagline
+          .col-md-5.text-right.padding-top-10.subscription_wrapp
+            - if @subscription
+              -#- if current_user
+              - if can?(:unsubscribe, @subscription)
+                .btn.btn-m.btn-grey-solid.btn-square Subscribed
+              - elsif can?(:subscribe, @subscription) || !current_user
+                %a.btn.btn-m{href: preview_plans_stripe_subscription_path(@subscription), data: {remote: true}} Subscribe
+              %a.btn.btn-m.btn-borderred-grey.giftBtn{href: preview_plans_stripe_subscription_path(@subscription, gift: true), data: {remote: true}}
+                %span.hide_on_desktop Buy as gift
+                %i.VideoClientIcon-gift-icon
+              - if params[:show_plans]
+                - content_for(:after_include_javascripts) do
+                  :javascript
+                    $.ajax({url: "#{preview_plans_stripe_subscription_path(@subscription)}"});
+              -#- else
+              -#  %a.btn.btn-m.btn-borderred-red.btn-square{data: {toggle: :modal, target: '#loginPopup'}, href: '#loginPopup'} SUBSCRIBE
+              -#  %a.btn.btn-m.btn-borderred-red.btn-square.no-padding.giftBtn{data: {toggle: :modal, target: '#loginPopup'}, href: '#loginPopup'}
+              -#    %i.icon-gift
+            - if can?(:edit, @channel) || can?(:clone, @channel) || can?(:create_session, @channel)
+              .dropdown.dropdown-list.NoMinWidth.clearfix.margin-bottom-0.margin-left-10.text-left
+                %a.More-dropdown.dropdown-toggle.NoMinWidth{href: '#', data: {toggle: :dropdown}}
+                  %i.VideoClientIcon-dots-horizontal-triple
+                %ul.dropdown-menu.dropdown-menu-withIcons
+                  - if can?(:edit, @channel)
+                    %li
+                      = link_to 'Edit Channel', edit_channel_path(@channel.slug)
+                      %i.VideoClientIcon-pencilF
+                    %li
+                      - if can?(:manage_creators, @channel)
+                        = link_to I18n.t('dictionary.creators'), edit_creators_channel_path(@channel.slug)
+                      - else
+                        = link_to I18n.t('dictionary.creators'), 'javascript:void(0)', disabled: true, onclick: '$.showFlashMessage("Your Business plan is not supporting this feature", {type: "error", timeout: 6000})'
+
+                      %i.VideoClientIcon-usersF
+                  - if can?(:create_session, @channel)
+                    %li
+                      = link_to 'New Session', new_channel_session_path(@channel.slug)
+                      %i.VideoClientIcon-plusF
+                  - if can?(:list, @channel)
+                    %li
+                      = link_to 'List', list_channel_path(@channel.id), method: :post, data: {confirm: I18n.t('channels.show.list_confirmation')}
+                      %i.icon-list
+                  - if can?(:unlist, @channel)
+                    %li
+                      = link_to 'Unlist', unlist_channel_path(@channel.id), method: :post, data: {confirm: I18n.t('channels.show.unlist_confirmation')}
+                      %i.VideoClientIcon-cross
+                  - if can?(:submit_for_review, @channel)
+                    %li
+                      = link_to 'Submit For Review', submit_for_review_channel_path(@channel.id), method: :post, data: {confirm: 'Are you sure you want to submit channel for review?'}
+                      %i.icon-bell
+                  - if can?(:archive, @channel)
+                    %li
+                      = link_to 'Archive', archive_channel_path(@channel.id), method: :post, data: {confirm: I18n.t('channels.show.archive_confirmation')}
+                      %i.VideoClientIcon-boxF
+        .ch-p_tags.padding-top-5
+          -#%span.padding-right-20
+          -#  Channel created
+          -#  %span.text-color-Darkgrey #{@channel.created_at.year}
+          -#%span.padding-right-20
+          -#  Category
+          -#  %span.text-color-Darkgrey= @channel.category.name
+          -#%span.padding-right-20
+          -#  Streams
+          -#  %span.text-color-Darkgrey= @streams_count
+
+      .ch-p_aboutTxt_wrapp.padding-top-20.margin-bottom-30
+        .ch-p_aboutTxt.smallScrolls<
+          = raw strip_tags(@channel.description.to_s)
+          %a.ch-p_aboutTxt_moreBtn{href: '#'} Read More
+
+      #ch-vue-app
+        - if @current_user
+          - user_data = {id: @current_user.id, first_name: @current_user.first_name, last_name: @current_user.last_name, email: @current_user.email, display_name: @current_user.public_display_name, public_display_name: @current_user.public_display_name, birthdate: @current_user.birthdate, gender: @current_user.gender, short_url: @current_user.short_url, referral_short_url: @current_user.referral_short_url, avatar_url: @current_user.avatar_url, created_at: @current_user.created_at, relative_path: @current_user.relative_path, timezone: @current_user.timezone, am_format: @current_user.time_format == User::TimeFormats::HOUR_12}
+        = content_tag 'comp-wrapper', nil, data: { component: 'channel', props: {channel_id: @channel.id, showSessions: @streams.length > 0, showVideos: @replays_count > 0, showRecordings: @recordings_count > 0, showCalendar: @channel.live_guide_is_visible, user: user_data}}.to_json
+
+      -# if @streams.length > 0
+        #streamsArea.ch-p_C_tiles
+          .fs-l.text-color-Darkgrey.padding-bottom-20
+            Live
+            - if @streams_count > 0
+              = form_tag streams_channel_path(@channel, limit: 6, offset: 0), method: :get, remote: true, class: 'pull-right search_replays' do
+                %input{name: :query, type: :text, placeholder: 'Search by title'}
+                %button{type: :submit}
+                  %i.VideoClientIcon-Search
+          .row.streams.margin-right-0.flex-wrapp
+            = render(partial: 'shared/tiles/session', collection: @streams, locals: {custom_class: 'col-md-4 padding-right-0 margin-bottom-40'})
+          - if @streams_count > 6
+            .row.show_more
+              .padding-top-20.padding-bottom-20.text-center
+                %a.btn.btn-m.btn-grey-solid{href: streams_channel_path(@channel, limit: 3, offset: 6), data: {remote: true}} Show More
+
+      -# if @replays_count > 0 || @recordings_count > 0
+        #videosArea.ch-p_C_tiles.padding-bottom-30
+          .fs-l.text-color-Darkgrey.padding-bottom-20
+            Videos
+            - if @replays_count > 0
+              = form_tag replays_channel_path(@channel, limit: 6, offset: 0), method: :get, remote: true, class: 'pull-right search_replays' do
+                %input{name: :query, type: :text, placeholder: 'Search by title'}
+                %button{type: :submit}
+                  %i.VideoClientIcon-Search
+          - if @replays_count > 0
+            .row.replays_wrapp.margin-right-0.flex-wrapp
+              = render(partial: 'shared/tiles/video', collection: @replays, locals: {custom_class: 'col-md-4 padding-right-0 margin-bottom-40'})
+            - if @replays_count > 6
+              .row.show_more.replays
+                .padding-top-20.padding-bottom-20.text-center
+                  %a.btn.btn-m.btn-grey-solid{href: replays_channel_path(@channel, limit: 3, offset: 6), data: {remote: true}} Show More
+          - if @recordings_count > 0
+            .row.recordings_wrapp.margin-right-0.flex-wrapp
+              = render(partial: 'shared/tiles/recording', collection: @recordings, locals: {custom_class: 'col-md-4 padding-right-0 margin-bottom-40'})
+            - if @recordings_count > 6
+              .row.show_more.recordings
+                .padding-top-20.padding-bottom-20.text-center
+                  %a.btn.btn-m.btn-grey-solid{href: recordings_channel_path(@channel, limit: 3, offset: 6), data: {remote: true}} Show More
+
+      - if @reviews_count > 0
+        #reviewsArea.ch-p_C_tiles.padding-bottom-30
+          .fs-l.text-color-Darkgrey.padding-bottom-20 Reviews
+          -# РЕВЬЮ СУВАТЬ СЮДОЙ!!!!
+          .row.reviews
+            = render(partial: 'channels/reviews', locals: {reviews: @reviews, channel: @channel})
+          - if @reviews_count > 6
+            .show_more
+              .padding-top-20.padding-bottom-20.text-center
+                %a.btn.btn-m{href: reviews_channel_path(@channel, limit: 6, offset: 6), data: {remote: true}} Show More
+
+  #requestSessionModal.modal.fade{data: {backdrop: :static}}
+    .modal-dialog
+      = form_tag request_session_channel_path(@channel.id), method: :post, class: 'form_V2', data: {remote: true} do
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix.technicalPage__label.margin-bottom-10
+              Request Session
+            %section
+              .unobtrusive-flash-container
+                .formWrapp
+                  .LoadingCover.profile_next_cover{style:'display:none'}
+                    .spinnerSlider
+                      .bounceS1
+                      .bounceS2
+                      .bounceS3
+                  %section
+                    .select-tag-block.required.firstLine
+                      .text-color-Darkgrey
+                        = label_tag :date, 'Date*'
+                      .text-right.birthdate_Datepicker_wrapp.element-right-position
+                        = text_field_tag :date, 1.day.from_now.beginning_of_hour.strftime('%d %B %Y'), class: 'birthdate_Datepicker text-right no-border', readonly: true, id: :birthdate_Datepicker
+                        -#%i.birthdate_Datepicker-show.VideoClientIcon-calendar-mk2.text-color-main.margin-right-5
+                    .select-tag-block.required
+                      .text-color-Darkgrey
+                        = label_tag :requested_at, 'Start Time*'
+                      %div
+                        %select.styled-select.styled-select_withCss.padding-left-20.pull-right.text-right.select-rightAlign.full-width{name: :requested_at}
+                          - t = Time.new(0)
+                          - while true
+                            %option{value: t}= t.strftime('%I:%M %p')
+                            - break if t.hour == 23 && t.min == 45
+                            - t += 15.minutes
+                    .select-tag-block.required
+                      .text-color-Darkgrey
+                        = label_tag :delivery_method
+                      %div
+                        = select_tag :delivery_method, options_for_select([['With Guests', 'Interactive'], ['With Viewers', 'Livestream']]), {class: 'styled-select styled-select_withCss padding-left-20 pull-right text-right select-rightAlign full-width'}
+                    .input-block.state-clear.noteSection.padding-bottom-5
+                      = label_tag :comment, 'Add a note*'
+                      = text_area_tag :comment
+                      .errorContainerWrapp
+        .padding-top-10.text-right.element-right-position
+          %button.btn.btn-m{type: :submit} Send
+
+  - if @channel.slider_materials.size > 1
+    #sessionsModalGallery.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+      .modal-dialog
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %section.carouselWrapp
+              #slideshow-1
+                .direction-nav
+                .slideshow.slider-for
+                  - @channel.slider_materials.each do |ci_data |
+                    .slide
+                      %div
+                        - if ci_data[:embedded]
+                          = ci_data[:embedded]
+                        - else
+                          %div.containSlide{style: "background-image: url(#{ci_data[:img_src]})"}
+
+              #slideshow-2{'data-itemCount': @channel.slider_materials.size}
+                .slideshow.slider-nav
+                  - @channel.slider_materials.each.with_index do |ci_data, index|
+                    .slide{'data-slide-number': index}
+                      %div{style: "background-image: url(#{ci_data[:img_src]});width:90px"}
+
+- else
+  .ch-p_C
+    .text-center.padding-top-50.padding-bottom-50
+      = image_tag('channels/noChannel.png', alt: 'Sadly there’s nothing to look at or to buy :(', class: 'img-responsive margin-top-50' )
+      .text-color-ultra-LightGrey{style:'color:#70abc0'}
+        = I18n.t('views.shared.landing.creator_has_not_published', creator_upper: I18n.t('dictionary.creator_upper'))
+        %br
+        Please check back soon
+
+#subscription_modals

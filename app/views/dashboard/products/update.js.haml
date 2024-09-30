@@ -1,0 +1,5 @@
+- if @error
+  $.showFlashMessage("#{@error}", {type: 'error'})
+- else
+  $("#product_tile_#{@product.id}").replaceWith("#{escape_javascript(render(partial: 'dashboard/products/product', locals: {product: @product, list: @list}))}");
+  $("#edit_product_modal_#{@product.id}").modal('hide');

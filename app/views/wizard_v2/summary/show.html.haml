@@ -1,0 +1,35 @@
+- content_for(:extra_body_classes, ' wizard finalStep ')
+-#Wizard Steps
+.stepLine-wrapper.step-count4.lastStep
+  -# %a.btn.btn-l.back
+  -#   Back
+  .banner__wrapper
+  .banner__container
+    .banner
+      = render 'banner'
+    .lastStep__container
+      .lastStep__container__top
+        %h2 #{current_user.public_display_name},
+        %span
+          = I18n.t('wizard.success_complited_wizard')
+          = I18n.t('wizard.welcome_to')
+          #{Rails.application.credentials.global[:service_name]}!
+          = I18n.t('wizard.thnx_for_joining')
+        %a.btn.btn-l.text-uppercase{href: spa_channel_path(current_user.organization.channels&.first&.slug)}
+          = I18n.t('wizard.view_channel')
+      .lastStep__container__bottom
+        %span
+          = I18n.t('wizard.lets_create_content')
+        %span.margin-bottom-50
+          = I18n.t('wizard.helpers')
+        .lastStep__container__bottom__FAQ
+          %a{href: "https://#{Rails.application.credentials.global[:host].to_s}/o/joybee-functionality/community/first-session-creation-on-behalf-of-creator", target: '_blank'}
+            = I18n.t('wizard.how_create_first_session')
+          %b
+          %a{href: "https://#{Rails.application.credentials.global[:host].to_s}/o/joybee-functionality/community/what-are-replays", target: '_blank'}
+            = I18n.t('wizard.what_replays')
+          %b
+          %a{href: "https://#{Rails.application.credentials.global[:host].to_s}/o/joybee-functionality/community/what-are-uploads", target: '_blank'}
+            = I18n.t('wizard.what_uploads')
+
+

@@ -1,0 +1,4 @@
+= simple_format I18n.t('subscriptions.receive_gift_text', user_name: @owner.public_display_name, plan_name: @plan.nickname, channel_name: @channel.title, url: @follow_link_url, host: Rails.application.credentials.global[:host], root_url: root_url)
+
+%p{class: "thank_you_message"}
+  = simple_format email_team_thank_you(@channel.title)

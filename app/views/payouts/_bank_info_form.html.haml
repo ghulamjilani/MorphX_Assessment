@@ -1,0 +1,78 @@
+.technicalPage__label.padding-bottom-0
+  - if bank_account.present?
+    = I18n.t('views.payouts.bank_info_form.edit_info')
+  - else
+    = I18n.t('views.payouts.bank_info_form.add_info')
+- if bank_account.present?
+  - form_path = payouts_connect_bank_account_path(bank_account.id)
+  - method = 'PUT'
+- else
+  - form_path = payouts_connect_bank_accounts_path
+  - method = 'POST'
+
+= form_tag form_path, method: method, id: :bank_account_payouts_form, class: 'form_V2', multipart: true do
+  %input{type: :hidden, name: 'payout_method_id', value: payout_method.id}
+  .row.BankDetails
+    .col-md-12
+      .col-md-12.padding-left-0
+        .bankDetailsWrapper
+          .input-block.RoutingNumber.required{class: ('state-clear' unless bank_account&.routing_number)}
+            %label{for: '', title: I18n.t('views.payouts.bank_info_form.routing_number_info')}
+              = I18n.t('views.payouts.bank_info_form.routing_number')
+              %a.VideoClientIcon-q5.text-color-main{data: { toggle: :modal, target: '#routing_number_info' }, href: '#routing_number_info'}
+              - content_for(:modals) do
+                .modal.fade{id: "routing_number_info", aria: { hidden: true }, data: { backdrop: :static }, role: :dialog, tabindex: -1}
+                  .modal-dialog
+                    .modal-content
+                      = render 'become_presenter_steps/close_modal'
+                      .modal-body
+                        %p.padding-top-20= I18n.t('views.payouts.bank_info_form.routing_number_info')
+
+            %input{type: :text, name: 'bank_account[routing_number]', value: bank_account&.routing_number, readonly: bank_account.present?}
+            .errorContainerWrapp
+          .input-block.AccountNumber.required{class: ('state-clear' unless bank_account&.last4)}
+            %label{for: '', title: I18n.t('views.payouts.bank_info_form.account_number_info')}
+              = I18n.t('views.payouts.bank_info_form.account_number')
+              %a.VideoClientIcon-q5.text-color-main{data: { toggle: :modal, target: '#account_number_info' }, href: '#account_number_info'}
+              - content_for(:modals) do
+                .modal.fade{id: "account_number_info", aria: { hidden: true }, data: { backdrop: :static }, role: :dialog, tabindex: -1}
+                  .modal-dialog
+                    .modal-content
+                      = render 'become_presenter_steps/close_modal'
+                      .modal-body
+                        %p.padding-top-20= I18n.t('views.payouts.bank_info_form.account_number_info')
+
+            %input{type: :text, name: 'bank_account[account_number]', value: ("*****#{bank_account&.last4}" if bank_account.present?), readonly: bank_account.present?}
+            .errorContainerWrapp
+        .input-block.holderName.required
+          %label{for: ''}= I18n.t('views.payouts.bank_info_form.account_holder_name')
+          %input{type: :text, name: 'bank_account[account_holder_name]', value: bank_account&.account_holder_name || [connect_account.individual.first_name, connect_account.individual.last_name].join(' ')}
+          .errorContainerWrapp
+          %input{type: :hidden, name: 'bank_account[account_holder_type]', value: :individual}
+        .bankDetailsWrapper
+          .select-block.required
+            %label{for: ''}= I18n.t('views.payouts.bank_info_form.currency')
+            = select_tag 'bank_account[currency]', options_for_select([[Payouts::Currencies::ALL[connect_account.individual.address.country.to_sym], Payouts::Currencies::ALL[connect_account.individual.address.country.to_sym]]], selected: (bank_account&.currency || Payouts::Currencies::ALL[connect_account.individual.address.country.to_sym])), readonly: bank_account.present?
+            .errorContainerWrapp
+          .select-block.required
+            %label{for: ''}= I18n.t('views.payouts.bank_info_form.country')
+            = select_tag 'bank_account[country]', options_for_select([[Payouts::Countries::ALL[connect_account.individual.address.country.to_sym], connect_account.individual.address.country]], selected: (bank_account&.country || connect_account.individual.address.country)), readonly: bank_account.present?
+            .errorContainerWrapp
+        .input-block
+          %label{for: :account_file, title: I18n.t('views.payouts.bank_info_form.account_file_info')}
+            = I18n.t('views.payouts.bank_info_form.account_file')
+            %a.VideoClientIcon-q5.text-color-main{data: { toggle: :modal, target: '#account_file_info' }, href: '#account_file_info'}
+            - content_for(:modals) do
+              .modal.fade{id: "account_file_info", aria: { hidden: true }, data: { backdrop: :static }, role: :dialog, tabindex: -1}
+                .modal-dialog
+                  .modal-content
+                    = render 'become_presenter_steps/close_modal'
+                    .modal-body
+                      %p.padding-top-20= I18n.t('views.payouts.bank_info_form.account_file_info')
+
+          %input{type: :file, name: :account_file, accept: I18n.t('views.payouts.bank_info_form.account_file_formats')}
+          .errorContainerWrapp
+  .text-right.pus
+    %a.btn.btn-l.btn-borderred-grey{href: edit_payouts_payout_method_path(payout_method.id)}= I18n.t('views.payouts.bank_info_form.back')
+    %button.btn.btn-l.margin-left-10{type: :submit, 'data-disable-with': I18n.t('views.payouts.bank_info_form.please_wait')}= I18n.t('views.payouts.bank_info_form.next')
+= yield(:modals)

@@ -1,0 +1,53 @@
+.member{id: "member-#{user.id}", data: {id: user.id}}
+  %div{class: "img-circle status offline_#{user.id} role_#{user.current_role}"}
+    offline
+  .panel-group{id: "accordion-#{user.id}"}
+    .panel.panel-default
+      .panel-heading
+        %h4.panel-title
+          %a{class: "btn user-control V-user-icon V-role_#{user.current_role}", href: "#collapseOne-#{user.id}",
+             data:{ tipName: user.public_display_name.truncate(15),
+                   user: 'Presenter',
+                   user_id: user.id,
+                   user_role: user.current_role,
+                   has_control:     true.to_s,
+                   mic_disabled:    (!!@room.try(:mic_disabled)).to_s,
+                   video_disabled:  (!!@room.try(:video_disabled)).to_s,
+                   toggle: "collapse", parent: "#accordion-#{user.id}"}}
+            = image_tag user.avatar_url, alt: user.public_display_name
+            %i.VideoClientIcon-angle-downF
+      .panel-collapse.in.control-list{id: "collapseOne-#{user.id}"}
+        .panel-body.SepNav
+          %a.btn.videoclient-chat{data: {mute: "videoclient-chat-off", tip: "Group chat", unmute: "videoclient-chat"}, id: "inCallButtonChat"}
+            %i.VideoClientIcon-q1
+            %i.icon-angle-left
+          - if is_owner?
+            - if video_player_enabled?
+              %a#media-player-btn{href: "#"}
+                %i.VideoClientIcon-q2
+                  %i.icon-angle-left
+            %a.manage-users{href: "#", data: {tip: "Manage users"}}
+              %i.VideoClientIcon-q3
+              %i.icon-angle-left
+          - else
+            - if can_ask_question?
+              %a#askQuestion.btn{data: {tip: "Ask question" }, style: "background-image: none;"}
+                %i.icon-megaphone
+            - if video_player_enabled?
+              %a#media-player-btn{href: "#"}
+                %i.VideoClientIcon-q2
+                  %i.icon-angle-left
+            - if !is_myself?(user)
+              = link_to '#', class: 'btn control chaaat member-list-chat-button', style: 'display:none', data: {name: 'Presenter' } do
+                %span{class: 'VideoClientIcon-q1'}
+          - if display_twitter_feed_in_video_client?
+            %a.twitter-feed{href: "#", data: {tip: 'Twitter Feed'}}
+              %i.VideoClientIcon-twitter2
+              %i.icon-angle-left
+          %a.poll{href: "#", data: {tip: 'Poll'}}
+            %i.VideoClientIcon-pollstatistics
+            %i.icon-angle-left
+          - if display_donations_tab?
+            %a.donations{href: "#", data: {tip: donate_title_as_singular}}
+              %i.icon-gift{style: 'font-size: 26px;'}
+              %i.icon-angle-left

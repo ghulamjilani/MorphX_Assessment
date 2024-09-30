@@ -1,0 +1,44 @@
+<div id="MoveTo" class="modal fade" data-backdrop="static" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a class="closeModal" data-dismiss="modal">
+                <i class="VideoClientIcon-iPlus"></i>
+            </a>
+
+            <div class="modal-body">
+                <form id="move_to_channel_form" action="">
+                    <div class="technicalPage__label">Move Video</div>
+                    <span>Select channel to move the video:</span>
+                    <div class="channels">
+                        {{#each channels}}
+                            <div class="channelWrapper">
+                                <label class="radio choice">
+                                    <input class="moveToChannelOption" name="channel_id" type="radio" {{#if (eq this.id ../current_channel_id)}}checked{{/if}} value="{{this.id}}">
+                                    <span>
+                                       <div class="channelSection" data-channel-id="{{this.id}}" id="channel_{{this.id}}">
+                                          <div class="rc-h">
+                                              <div class="channelLogo avatarImg-MD" style="background-image:url('{{this.logo_url}}')" href="{{this.absolute_path}}"></div>
+                                              <div class="channelTitle">
+                                                  <div href="{{this.absolute_path}}">{{this.title}}</div>
+                                              </div>
+                                              <div class="channelDateCreate">{{this.created_at}}</div>
+                                          </div>
+                                       </div>
+                                    </span>
+                                </label>
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="btnWrapper text-right margin-top-20">
+                        <div class="btn btn-l move_to_channel">
+                            Move
+                        </div>
+                    </div>
+                    {{#each video_ids}}
+                        <input name="video_ids[]" type="hidden" value="{{this}}">
+                    {{/each}}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

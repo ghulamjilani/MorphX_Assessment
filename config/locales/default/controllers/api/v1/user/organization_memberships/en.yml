@@ -1,0 +1,9 @@
+en:
+  controllers:
+    api:
+      v1:
+        user:
+          organization_memberships:
+            errors:
+              update_forbidden: You are not allowed to perform this action
+              cannot_update_own_membership: You are not allowed to change your own permissions

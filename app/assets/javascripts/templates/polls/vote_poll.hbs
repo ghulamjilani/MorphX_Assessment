@@ -1,0 +1,13 @@
+<div class="Votes-Question">{{tagline}}</div>
+<ul>
+    {{#each sides}}
+        <li id="side_{{id}}">
+            <a href="{{#unless ../is_voted}}/polls/vote?side_id={{id}}&poll_id={{../id}}{{/unless}}" class="vote" data-remote="true" data-method="post">
+              <div class="Votes-percent-line" style="width:{{percents}}%;background-color: {{color}}"></div>
+              <div class="coloredDots {{#if is_voted}} Voted {{else}} notvoted{{/if}}" style="background-color: {{color}}"></div>
+              <div class="Votes-variables">{{answer}}</div>
+              <div class="Votes-percent">{{percents}}%</div>
+          </a>
+        </li>
+    {{/each}}
+</ul>

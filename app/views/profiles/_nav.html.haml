@@ -1,0 +1,87 @@
+- if display_top_navigation?
+  %aside.col-md-3.left-side-bar
+    .user-info-account
+      %a.user-avatar.main{'data-target': "#publicLogoModal", 'data-toggle': :modal, 'data-backdrop': :static,
+           'data-keyboard': false, style: "background-image: url(\"#{current_user.medium_avatar_url}\")"}
+      - content_for(:after_include_javascripts) do
+        %script{type: 'text/javascript'}
+          :plain
+            (function(){
+                $(document).ready(function() {
+                  new Forms.Profiles.Views.Logo();
+                });
+              })();
+      .user-name
+        %span
+          = current_user.public_display_name
+        = link_to spa_user_path(current_user.slug) do
+          %i.VideoClientIcon-eye-icon
+          = I18n.t("views.profiles.nav.view_public_profile")
+      %ul.nav
+        %li{class: active_link_to_class(edit_general_profile_path)}
+          = link_to edit_general_profile_path do
+            %i.VideoClientIcon-user-mk3
+            = I18n.t("views.profiles.nav.personal_profile")
+        %li{class: active_link_to_class(edit_public_profile_path)}
+          = link_to edit_public_profile_path do
+            %i.VideoClientIcon-PeopleMK2
+            = I18n.t("views.profiles.nav.public_profile")
+        - unless current_user_never_gave_us_email_that_we_saved?
+          %li{class: active_link_to_class(edit_application_profile_path)}
+            = link_to edit_application_profile_path do
+              %i.VideoClientIcon-edit-icon
+              = I18n.t("views.profiles.nav.account")
+          %li{class: active_link_to_class(edit_preferences_profile_path)}
+            = link_to edit_preferences_profile_path do
+              %i.VideoClientIcon-tool-icon
+              = I18n.t("views.profiles.nav.preferences")
+          - if current_user.role == 'presenter'
+            %li{class: active_link_to_class(donations_profile_path)}
+              = link_to donations_profile_path do
+                %i.VideoClientIcon-coin-2
+                = I18n.t("views.profiles.nav.donations")
+          %li{class: [has_active_class([edit_billing_profile_path, payouts_payout_methods_path])]}
+            = link_to edit_billing_profile_path do
+              %i.VideoClientIcon-credit-card-icon
+              - if current_user.role == 'presenter'
+                = I18n.t("views.profiles.nav.payments_payouts")
+              - else
+                = I18n.t("views.profiles.nav.payment_method")
+          %li{class: active_link_to_class(edit_notifications_profile_path)}
+            = link_to edit_notifications_profile_path do
+              %i.VideoClientIcon-NotificationsMK2
+              = I18n.t("views.profiles.nav.notifications")
+
+#publicLogoModal.BAP-form-page.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        %h4.groupTitle.clearfix
+          Upload Avatar
+        %section.crop-wrapp
+          .unobtrusive-flash-container
+          .upload-area
+            .row
+              .upload-info.padding-top-80.padding-bottom-80
+                .dotsWrapp
+                  .dot1
+                  .dot2
+                  .dot3
+                  .dot4
+                  .dot5
+                  .dot6
+                  .dot7
+                  .dot8
+                = render partial: 'become_presenter_steps/loading_cover'
+                %span
+                  %input#presenter-logo.inputfile{name: "presenter-logo", type: :file, accept: '.jpg,.jpeg,.png,.bmp'}
+                  %label.btn.btn-s{for: 'presenter-logo'} Select file to upload
+                  %div.fs-12.hideForMobile or drag-n-drop your image here
+          .crop-container
+          .fs-13.sugSize
+            %span Suggested size:
+            280x280 px
+            %br
+            We recommend using high resolution image.
+          .loudThumbnailsList

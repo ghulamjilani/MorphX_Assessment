@@ -1,0 +1,425 @@
+<div class="custom-input">
+    <div class="radio_buttons input required control-group" id="session_private_input">
+        <div class="controls">
+            <label for="session_public" class="choice radio">
+                <input id="session_public" type="radio" value="0" name="session[private]" {{#unless private}}
+                       checked {{/unless}}>
+                <span>Public</span>
+            </label>
+            <label for="session_private" class="choice radio">
+                <input id="session_private" type="radio" value="1" name="session[private]" {{#if private}} checked {{/if}}
+                       [% if (!can_change_private) {%] class="disabled" onclick="return false" readonly [% } %]>
+                <span>Private</span>
+                <i class="VideoClientIcon-q5 text-color-Blue" rel="tipsy"
+                   title="Private Sessions are invite-only and not searchable. If this is selected, you must invite at least 1 user before you can proceed."></i>
+            </label>
+        </div>
+    </div>
+</div>
+
+<h4 class="groupTitle margin-top-30">Delivery Methods:</h4>
+
+<div id="delivery-methods">
+    <!-- Livestream Delivery Method -->
+    <fieldset>
+        <!-- Livestream Delivery Select -->
+        <div class="boolean input control-group" id="session_livestream_input">
+            <label class="choice checkbox" for="session_livestream" style="padding-left: 15px;">
+                <input id="session_livestream" name="session[livestream]" type="checkbox" value="1" {{#if livestream}} checked {{/if}}
+                       [% if (!can_change_livestream || max_number_of_immersive_participants == 1 && immersive) { %] class="disabled" onclick="return false" [% } %]>
+
+                <span>
+                    Livestream&nbsp;
+                    <i class="VideoClientIcon-q5 text-color-Blue" rel="tipsy"
+                       title="Want to reach a larger audience? Use livestream to broadcast your Session to an unlimited number of viewers."></i>
+                </span>
+            </label>
+        </div>
+
+        <!-- Livestream Free or Paid -->
+        <div class="controls" {{#unless livestream}} style="display: none;" {{/unless}}>
+            <div class="radio_buttons input required control-group" id="livestream_price_type_input">
+                <label for="livestream_free" class="choice radio">
+                    <input id="livestream_free" type="radio" value="true" name="session[livestream_free]"
+                           [% if (livestream_free) { %] checked [% } %]
+                           [% if (!can_change_livestream_access_cost) { %] readonly disabled [% } %]>
+                    <span>Free</span>
+                </label>
+
+                <label for="paid_livestream" class="choice radio">
+                    <input id="paid_livestream" type="radio" value="false" name="session[livestream_free]"
+                           [% if (!livestream_free) { %] checked [% } %]
+                           [% if (!can_change_livestream_access_cost) { %] readonly disabled [% } %]>
+                    <span>Set price</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Livestream Price -->
+        <div id="session_livestream_access_cost_input" class="custom-input number input numeric stringish control-group"
+             style="[% if (!livestream || livestream_free || max_number_of_immersive_participants == 1 && immersive) { %] display: none; [% } else { %] border-bottom: 0; padding-bottom: 0; [% } %]">
+            <div class="controls">
+                <div class="costblock">
+                    <div class="costblock-head">Set Price:</div>
+                    <div class="costblock-body b_al">
+                        <span class="Baks">$</span>
+
+                        <input id="session_livestream_access_cost" name="session[livestream_access_cost]" type="text"
+                               placeHolder="0" class="spinner" value="{{livestream_access_cost}}"
+                               [% if (!can_change_livestream_access_cost || livestream_free) { %] disabled [% } %]>
+
+                        <span class="help-block display-block">
+                            <strong [% if (!livestream || livestream_free) { %] style="display: none;" [% } %]>
+                                min&nbsp;
+                                <span id="livestream-min-cost"></span>
+                            </strong>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="costblock plusSG">
+                    <div class="costblock-head">Service Fee:</div>
+                    <div class="costblock-body" id="livestream-service-fee">{{livestreamServiceFee}}</div>
+                </div>
+
+                <div class="costblock RWSG">
+                    <div class="costblock-head">Total Purchase Price:</div>
+                    <div class="costblock-body" id="livestream-total-purchase-price">{{livestreamTotalPurchasePrice}}</div>
+                </div>
+
+                <div class="costblock RWSTotal">
+                    <div class="costblock-head">Your Earnings per seat:</div>
+                    <div class="costblock-body" id="livestream-earnings-per-seat" rel="tipsy" title="{{Immerss.revenueSplitTitle}}">{{livestreamEarningsPerSeat}}</div>
+                </div>
+
+              {{{Immerss.errorLiveStreamAccessCost}}}
+            </div>
+        </div>
+
+        <!-- Livestream Free Trial -->
+        <div id="livestream_free_trial_input" class="custom-input choice boolean input optional control-group"
+             style="{{#if hideLivestreamFreeTrialBlock}}display: none;{{else}}vertical-align: top;{{/if}}">
+
+            <input type="hidden" name="session[livestream_free_trial]" value="0">
+
+            <div class="controls">
+                <label for="livestream_free_trial" class="checkbox">
+                    <input id="livestream_free_trial" type="checkbox" name="session[livestream_free_trial]" value="1"
+                      {{#if livestream_free_trial}} checked {{/if}}
+                      [% if (started || livestream_free) { %] class="disabled" onclick="return false" readonly [% } %]>
+
+                    <span>Offer Free Trials</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Livestream Free Trial Slots -->
+        <div class="w80">
+            <div id="session_livestream_free_slots_input" class="custom-input number input numeric stringish control-group"
+                 style="{{#if hideLivestreamFreeTrialBlock}} display: none; {{else}} border-bottom: 0; padding-bottom: 0; {{/if}}">
+                <label class="control-label nowrap" for="session_livestream_free_slots"># of Free Trials:</label>
+
+                <div class="controls">
+                    <select id="session_livestream_free_slots" name="session[livestream_free_slots]" style="width: 100%;"
+                      {{#if can_change_livestream_free_slots}} class="styled-select" {{else}}
+                            class="disabled" onclick="return false" disabled readonly {{/if}}>
+                        <option value=""></option>
+                        [% min = Math.max(0, Immerss.freeTrialLivestreamParticipants) %]
+                        [% for (var i = min; i <= Immerss.maxNumberOfLivestreamFreeTrialSlots; i++) { %]
+                          <option value="[%= i %]" [% if (livestream_free_slots == i) { %] selected [% } %]>[%= i %]</option>
+                        [% }%]
+                    </select>
+                  {{{Immerss.errorLivestreamFreeSlots}}}
+                </div>
+            </div>
+        </div>
+
+        <!--select stream device type-->
+        <div class="steamDevice">
+            Select your Gear
+            <input id="service_type" type="text" name="session[service_type]" value="{{service_type}}" style="display: none;">
+            <div class="margin-left-30 padding-top-20 btns-group">
+                <a class="service_type_href btn btn-m btn-borderred-grey {{#if serviceTypeVidyo}} active {{/if}} vidyo" href="#" rel="tipsy" title="Webcame or Mobile device">
+                    <i class="VideoClientIcon-network-cam"></i>
+                </a>
+                <a class="service_type_href btn btn-m btn-borderred-grey {{#if serviceTypeRtmp}} active {{/if}} rtmp" href="#" rel="tipsy" title="For use with professional video equipment or encoding software such as OBS. (This is not for creating live videos from your computer's webcam or interactive group videos)">
+                    <i class="VideoClientIcon-glyph-8"></i>
+                </a>
+            </div>
+         </div>
+
+    </fieldset>
+
+    <!-- Immersive Delivery Method -->
+    <fieldset>
+        <!-- Immersive Delivery Select -->
+        <div id="session_immersive_input" class="boolean input control-group">
+            <label class="choice checkbox" for="session_immersive" style="padding-left: 15px;">
+                <input id="session_immersive" name="session[immersive]" type="checkbox" value="1"
+                       {{#unless can_change_immersive}} class="disabled" onclick="return false" {{/unless}}
+                       {{#if immersive}} checked {{/if}}>
+                <span>Interactive</span>
+            </label>
+        </div>
+
+        <!-- Immersive Free or Paid -->
+        <div class="controls" {{#unless immersive}} style="display: none;" {{/unless}}>
+            <div id="immersive_price_type_input" class="radio_buttons input required control-group">
+                <label for="immersive_free" class="choice radio">
+                    <input id="immersive_free" type="radio" value="true" name="session[immersive_free]"
+                           [% if (immersive_free) { %] checked [% } %]
+                           [% if (!can_change_immersive_access_cost) { %] readonly disabled [% } %]>
+                    <span>Free</span>
+                </label>
+
+                <label for="paid_immersive" class="choice radio">
+                    <input id="paid_immersive" type="radio" value="false" name="session[immersive_free]"
+                           [% if (!immersive_free) { %] checked [% } %]
+                           [% if (!can_change_immersive_access_cost) { %] readonly disabled [% } %]>
+                    <span>Set price</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Immersive Type -->
+      {{#if immersive}}
+          <input type="hidden" name="session[immersive_type]" value="[% if (max_number_of_immersive_participants == 1) { %][%= Immerss.oneOnOneType %][% } else { %][%= Immerss.groupType %][% } %]">
+      {{/if}}
+
+        <!-- Immersive Price -->
+        <div id="session_immersive_access_cost_input" class="custom-input number input numeric stringish control-group"
+             style="[% if (!immersive || immersive_free) { %] display: none; [% } %]">
+            <div class="controls">
+                <div class="costblock">
+                    <div class="costblock-head">Set Your Price:</div>
+                    <div class="costblock-body b_al">
+                        <span class="Baks">$</span>
+                        <input id="session_immersive_access_cost" name="session[immersive_access_cost]"
+                               class="spinner" value="{{immersive_access_cost}}" type="text" placeHolder="0"
+                               [% if (!can_change_immersive_access_cost || immersive_free) { %] readonly [% } %]>
+
+                        <span class="help-block display-block">
+                          <strong [% if (!immersive || max_number_of_immersive_participants == 1 || immersive_free) { %] style="display: none;" [% } %]>
+                              min&nbsp;
+                              <span id="immersive-min-cost"></span>
+                          </strong>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="costblock plusSG">
+                    <div class="costblock-head">Service Fee:</div>
+                    <div class="costblock-body" id="immersive-service-fee">{{immersiveServiceFee}}</div>
+                </div>
+
+                <div class="costblock RWSG">
+                    <div class="costblock-head">Total Purchase Price:</div>
+                    <div class="costblock-body" id="immersive-total-purchase-price">{{immersiveTotalPurchasePrice}}</div>
+                </div>
+
+                <div class="costblock RWSTotal">
+                    <div class="costblock-head">Your Earnings per seat:</div>
+                    <div class="costblock-body" id="immersive-earnings-per-seat" rel="tipsy" title="{{Immerss.revenueSplitTitle}}">{{immersiveEarningsPerSeat}}</div>
+                </div>
+
+                {{{Immerss.errorImmersiveAccessCost}}}
+            </div>
+        </div>
+
+        <!-- Immersive Participants -->
+        <div class="w80 margin-right-60">
+            <div id="session_max_number_of_immersive_participants_input" class="custom-input number input numeric stringish control-group"
+                 style="[% if (!immersive) { %] display: none; [% } else { %] border-bottom: 0; padding-bottom: 0; [% } %]">
+                <label class="control-label nowrap" for="session_max_number_of_immersive_participants">
+                  {{i18n "sessions.form.max_number_of_immersive_participants"}}
+                </label>
+
+                <div class="controls">
+                    <select id="session_max_number_of_immersive_participants" style="width: 100%" name="session[max_number_of_immersive_participants]"
+                            value="{{max_number_of_immersive_participants}}"
+                            {{#if can_change_max_number_of_immersive_participants}} class="styled-select" {{else}} class="disabled" onclick="return false" disabled readonly {{/if}}>
+                        [% var min_number = 1; %]
+                        [% for (var i = Math.max(1, immersive_participants_count); i <= max_number_of_immersive_participants_with_sources; i++) { %]
+                          <option value="[%= i %]" [% if (max_number_of_immersive_participants == i) { %] selected [% } %]>[%= i %]</option>
+                        [% } %]
+                    </select>
+                    {{{Immerss.errorMaxNumberOfParticipantsChanged}}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Immersive Free Trial -->
+        <div id="immersive_free_trial_input" class="custom-input choice boolean input optional control-group"
+             style="{{#if hideImmersiveFreeTrialBlock }} display: none; {{ else }} vertical-align: top; {{/if}}">
+
+            <input type="hidden" name="session[immersive_free_trial]" value="0">
+
+            <div class="controls">
+                <label for="immersive_free_trial" class="checkbox">
+                    <input id="immersive_free_trial" type="checkbox" name="session[immersive_free_trial]" value="1"
+                           {{#if livestream_free_trial}} checked {{/if}}
+                           [% if (!immersive || started || immersive_free) { %] class="disabled" onclick="return false" readonly [% } %]>
+
+                    <span>Offer Free Trials</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Immersive Free Trial Slots -->
+        <div class="w80">
+            <div id="session_immersive_free_slots_input" class="custom-input number input numeric stringish control-group"
+                 style="{{#if hideImmersiveFreeTrialBlock}} display: none; {{else}} border-bottom: 0; padding-bottom: 0; {{/if}}">
+                <label class="control-label nowrap" for="session_immersive_free_slots"># of Free Trials:</label>
+                <div class="controls">
+                    <select id="session_immersive_free_slots" name="session[immersive_free_slots]" style="width: 100%;"
+                            {{#if can_change_immersive_free_slots}} class="styled-select" {{else}} class="disabled" onclick="return false" disabled readonly {{/if}}>
+                        <option value=""></option>
+                        [% min = Math.max(0, Immerss.freeTrialImmersiveParticipants) %]
+                        [% for (var i = min; i <= max_number_of_immersive_participants; i++) { %]
+                          <option value="[%= i %]" [% if(immersive_free_slots == i) { %] selected [% } %]>[%= i %]</option>
+                        [% }%]
+                    </select>
+                    {{{Immerss.errorImmersiveFreeSlots}}}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Cancellation Rules -->
+    <fieldset [% if (!immersive && !livestream || max_number_of_immersive_participants == 1) { %] style="display: none;" [% } %]>
+        <div class="boolean input control-group">
+            <label class="choice checkbox" style="padding-left: 15px;">Cancellation Rules</label>
+        </div>
+
+        <div id="session_min_number_of_immersive_and_livestream_participants_input"
+             class="custom-input select input required control-group"
+             [% if (!immersive && !livestream || max_number_of_immersive_participants == 1) { %] style="display: none;" [% } %]>
+            <label for="session_min_number_of_immersive_and_livestream_participants" class="control-label">
+                Minimum number of Participants
+            </label>
+
+            <div class="controls">
+                <select id="session_min_number_of_immersive_and_livestream_participants"
+                        name="session[min_number_of_immersive_and_livestream_participants]" style="width: 80px;"
+                        {{#unless can_change_min_number_of_immersive_and_livestream_participants}} class="disabled" onclick="return false" disabled readonly {{/unless}}>
+                    <option value=""></option>
+                    [% for (var i = 2; i < 6; i++) { %]
+                      <option value="[%= i %]" [% if (min_number_of_immersive_and_livestream_participants == i) { %] selected [% } %]>[%= i %]</option>
+                    [% } %]
+                </select>
+           <span class="help-block">
+             <i class="VideoClientIcon-q5 text-color-Blue" rel="tipsy"
+                title="Set your expectations with a minimum number of participants you would like to see in this Session. For more details, see our <a href='[%= Routes.page_path('refund-and-cancellation-policy') %]'>Cancelation Policy</a>"></i>
+           </span>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Recorded Delivery Method -->
+    <fieldset class="fieldset-last">
+        <!-- Recorded Delivery Select -->
+        <div class="boolean input control-group" id="session_record_input">
+            <label class="choice checkbox" for="session_record" style="padding-left: 15px">
+                <input id="session_record" name="session[record]" type="checkbox" value="1" {{#if record}} checked {{/if}}
+                       {{#unless can_change_recorded_access_cost}} class="disabled" onclick="return false" {{/unless}}>
+                <span>
+                    Recorded&nbsp;
+                    <i class="VideoClientIcon-q5 text-color-Blue" rel="tipsy"
+                       title="Select this option to record this Session, and offer it for sale later within the Video on-Demand library."></i>
+                </span>
+            </label>
+        </div>
+
+        <!-- Recorded Free or Paid -->
+        <div class="controls" {{#unless record}} style="display: none;" {{/unless}}>
+            <div class="radio_buttons input required control-group" id="record_price_type_input">
+                <label for="recorded_free" class="choice radio">
+                    <input id="recorded_free" type="radio" value="true" name="session[recorded_free]"
+                           [% if (recorded_free) { %] checked [% } %]
+                           [% if (!can_change_recorded_access_cost) { %] readonly disabled [% } %]>
+                    <span>Free</span>
+                </label>
+
+                <label for="paid_record" class="choice radio">
+                    <input id="paid_record" type="radio" value="false" name="session[recorded_free]"
+                           [% if (!recorded_free) { %] checked [% } %]
+                           [% if (!can_change_recorded_access_cost) { %] readonly disabled [% } %]>
+                    <span>Set price</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Recorded Price -->
+        <div id="session_recorded_access_cost_input" class="custom-input number input numeric stringish control-group"
+             style="[% if (!record || recorded_free) { %] display: none; [% } else { %] border-bottom: 0; [% } %]">
+            <div class="controls">
+                <div class="costblock">
+                    <div class="costblock-head">Set Price:</div>
+                    <div class="costblock-body b_al">
+                        <span class="Baks">$</span>
+
+                        <input id="session_recorded_access_cost" name="session[recorded_access_cost]" type="text"
+                               class="spinner" value="{{recorded_access_cost}}" placeHolder="0"
+                               {{#unless can_change_recorded_access_cost}} disabled {{/unless}}>
+
+                        <span class="help-block display-block">
+                          <strong [% if (!record || recorded_free) { %] style="display: none;" [% } %]>
+                              min&nbsp;
+                              <span id="recorded-min-cost"></span>
+                          </strong>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="costblock plusSG">
+                    <div class="costblock-head">Service Fee:</div>
+                    <div class="costblock-body" id="recorded-service-fee">{{recordedServiceFee}}</div>
+                </div>
+
+                <div class="costblock RWSG">
+                    <div class="costblock-head">Total Purchase Price:</div>
+                    <div class="costblock-body" id="recorded-total-purchase-price">{{recordedTotalPurchasePrice}}</div>
+                </div>
+
+                <div class="costblock RWSTotal">
+                    <div class="costblock-head">Your Earnings per purchase:</div>
+                    <div class="costblock-body" id="recorded-earnings-per-seat" rel="tipsy"
+                         title="{{Immerss.revenueSplitTitle}}">{{recordedEarningsPerSeat}}</div>
+                </div>
+
+                {{{Immerss.errorRecordedAccessCost}}}
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Potential Revenue -->
+    <div class="abstract-session-right-sidebar-container hide">
+        <div id="abstract-session-right-sidebar" class="abstract-session-right-sidebar">
+            <h4>
+                {{i18n 'sessions.form.potential_revenue'}}&nbsp;
+                <i class="VideoClientIcon-q5 text-color-Blue" rel="tipsy" title="An estimate of this Session's earning potential."></i>
+                :
+            </h4>
+
+            {{#unless livestream_free}}
+                <div class="livestream-users-num" style="display: none;">
+                    <label class="control-label">{{i18n 'sessions.form.approximate_number_of_livestream_users'}}</label>
+                    <input id="users-livestream-num" value="{{approximateLivestreamUsersCount}}" name="users-livestream-num" min="0" type="number">
+                </div>
+            {{/unless}}
+
+            <div class="record-users-num clearfix" style="display: none;">
+                <span>{{i18n 'sessions.form.approximate_number_of_record_users'}}</span>
+                <div>
+                    <input id="users-record-num" value="{{approximateVodUsersCount}}" name="users-record-num" type="number" min="0">
+                </div>
+            </div>
+
+            <div class="revenues">
+                <span id="revenue-from" class="revenue-value">{{potentialRevenueFrom}}</span>
+                to
+                <strong id="revenue-to" class="revenue-value">{{potentialRevenueTo}}</strong>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+ru:
+  views:
+    layouts:
+      application:
+        messages_popup_wrapper:
+          messages:
+            mess_count: "Сообщения"
+            load_more: "Загрузить еще"
+            view_all: "Просмотреть все"
+            empty: "Сообщений нет"

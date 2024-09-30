@@ -1,0 +1,318 @@
+- content_for(:page_title, "#{params[:action].capitalize} Channel")
+- content_for(:tabs) do
+  #channel_form_region.form-body.Form-page-current
+- content_for(:after_include_javascripts) do
+  %script
+    $(document).ready(function(){ Forms.Channels.edit(); });
+- content_for(:modals) do
+  #channels_modals
+    #channel_avatar_modal.modal.fade{data: {keyboard: false, backdrop: :static}}
+      .modal-dialog
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Channel icon
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              #logo-upload-area.upload-area
+                .row
+                  .upload-info.padding-top-80.padding-bottom-80
+                    .dotsWrapp
+                      .dot1
+                      .dot2
+                      .dot3
+                      .dot4
+                      .dot5
+                      .dot6
+                      .dot7
+                      .dot8
+                    .LoadingCover.hidden
+                      .spinnerSlider
+                        .bounceS1
+                        .bounceS2
+                        .bounceS3
+                    %span
+                      %input#channel-logo.inputfile{name: 'channel-logo', type: :file}
+                      %label{for: 'channel-logo'}= I18n.t('forms.info.select_file')
+                      %div.fs-12.hideForMobile
+                        or drag-n-drop your image here
+              .crop-container
+              %div.fs-13.sugSize
+                %span Suggested size:
+                280x280 px
+                %br
+                We recommend using high resolution image.
+              .loudThumbnailsList
+
+
+            -#.text-right
+              %button.submitButton.mainButton Save
+
+    #chanelCoverModal.modal.fade{'aria-hidden': true, 'data-backdrop': :static, 'data-keyboard': false,
+                                  role: :dialog, tabindex: -1}
+      .modal-dialog
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              Upload Primary Image
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              .upload-area
+                .row
+                  .upload-info.padding-top-80.padding-bottom-80
+                    .dotsWrapp
+                      .dot1
+                      .dot2
+                      .dot3
+                      .dot4
+                      .dot5
+                      .dot6
+                      .dot7
+                      .dot8
+                    = render partial: 'become_presenter_steps/loading_cover'
+                    %span
+                      %input#channel-cover.inputfile{name: 'channel-cover', type: :file}
+                      %label.btn.btn-s{for: 'channel-cover'} Select files to upload
+                      %div.fs-12.hideForMobile
+                        or drag-n-drop your image here
+              .crop-container
+              .fs-13.sugSize
+                %span Suggested size:
+                2560x1440 px
+                %br
+                Choose high resolution images in order to create an awesome cover!
+
+
+
+    #channelGalleryModal.modal.fade{'aria-hidden': true, 'data-backdrop': :static, 'data-keyboard': false,
+                                     role: :dialog, tabindex: -1}
+      .modal-dialog
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              .modal-tabs.hide
+                %ul.nav.nav-tabs
+                  %li.active
+                    %a{href: '#DragDropOrChoose', 'data-toggle': 'tab'} Upload
+                  %li
+                    %a{href: '#addImageByUrlTab', 'data-toggle': 'tab'} Web Address (URL)
+            .tab-content
+              .unobtrusive-flash-container
+              %section.crop-wrapp.tab-pane.active#DragDropOrChoose
+                .upload-area
+                  .row
+                    .upload-info.padding-top-80.padding-bottom-80
+                      .dotsWrapp
+                        .dot1
+                        .dot2
+                        .dot3
+                        .dot4
+                        .dot5
+                        .dot6
+                        .dot7
+                        .dot8
+                      = render partial: 'become_presenter_steps/loading_cover'
+                      %span
+                        %input#channel-gallery.inputfile{name: 'channel-gallery', type: :file}
+                        %label.btn.btn-s{for:'channel-gallery'}= I18n.t('forms.info.select_file')
+                        %div.fs-12.hideForMobile
+                          or drag-n-drop your image here
+                .crop-container
+                .fs-13.sugSize
+                  %span Suggested size:
+                  1280x780 px
+                  %br
+                  Choose high resolution images in order to create an awesome gallery!
+
+
+                %hr/
+                .GalleryImage-wrapp
+                  .Gallery-list.clearfix{style: 'max-height: 350px;overflow-y: scroll;'}
+
+              %section#addImageByUrlTab.tab-pane
+                %form.form_V2
+                  .input-block.state-clear
+                    %label{for: 'AddImageByUrl'}
+                      = I18n.t('wizard.step2.add_image_by_url_label')
+                    %input#AddImageByUrl{type: :text}
+                    .errorContainerWrapp
+                  .text-right
+                    %button.mainButton{type: :button} Add
+                  .text-center= I18n.t('wizard.step2.add_image_by_url_info')
+
+                %hr/
+                .GalleryImage-wrapp
+                  .Gallery-list.clearfix{style: 'max-height: 350px;overflow-y: scroll;'}
+
+  #presenter_modals
+    #ReadyToInviteAdditional.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+      .modal-dialog
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              .modal-tabs
+                %ul.nav.nav-tabs
+                  %li.active
+                    %a{href: '.ReadyToInviteAdditional-tab2','data-toggle': 'tab'}
+                      = I18n.t('wizard.modals.presenter_info.email')
+                  %li
+                    %a{href: '.ReadyToInviteAdditional-tab3', 'data-toggle': 'tab'}
+                      = I18n.t('wizard.modals.presenter_info.search')
+            .unobtrusive-flash-container
+
+            .tab-content
+              %section.ReadyToInviteAdditional-tab2.tab-pane.active
+                %form#invite_by_email.form_V2{'data-remote': true}
+                  .input-block.state-clear
+                    %label{for: :invite_email}= I18n.t('wizard.modals.presenter_info.email_placeholder')
+                    %input#invite_email{type: :tex, name: 'emails'}
+                    .errorContainerWrapp
+                    -#%span{rel: "tipsy", class: "VideoClientIcon-q5", title: I18n.t('wizard.modals.presenter_info.email_tooltip')}
+                  .text-right
+                    %button.invite.btn.btn-m{type: :submit} Invite
+
+              %section.ReadyToInviteAdditional-tab3.tab-pane
+                %form#searchByName.form_V2{'data-remote': true}
+                  .input-block.state-clear
+                    %label{for: :query}= I18n.t('wizard.modals.presenter_info.search_placeholder', service_name: Rails.application.credentials.global[:service_name])
+                    %input#query{type: :text}
+                    .errorContainerWrapp
+                    -#%span{rel: "tipsy", title: I18n.t('wizard.modals.presenter_info.search_tooltip')}
+                      %i.VideoClientIcon-q5
+                  .text-right
+                    %button.search.btn.btn-m{type: :submit}
+                      Search
+                      %span.spinnerSlider.spinnerSmall.spinnerColor_white.spinerStatick
+                        .bounceS1
+                        .bounceS2
+                        .bounceS3
+
+                    %button.clear.btn.btn-m.btn-borderred-grey.btn-hover-red{type: :button} Clear
+                .UserImage-wrapp
+                  #searchResults.User-list.clearfix
+
+  #userAccountModal.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+    .modal-dialog
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          %h4.groupTitle.clearfix
+            = I18n.t('wizard.modals.user_info.title')
+          %section
+            - user_account = current_user.user_account || current_user.build_user_account
+            = form_for(user_account, url: '#', remote: true, html: {class: 'form_V2 BAP-formWrapp', autocomplete: :off, id: :user_account}) do |f|
+              .row
+                .col-md-12
+                  .ProfileImageAndCoverImage-wrapp
+                    %label.labelTitle
+                      Profile & Cover Image
+                    %a.ProfileImage-change.user_logo{'data-hover-text': 'Add Image', 'data-backdrop': :static,
+                      'data-keyboard': false, 'data-toggle': :modal, 'data-target': '#userLogoModal',
+                       style: "background-image: url('#{current_user.medium_avatar_url}')"}
+                    - if user_account && user_account.bg_image.present?
+                      %a.CoverImage-demo.user_cover{'data-hover-text': 'Change Image','data-target': '#userCoverModal',
+                        'data-toggle': :modal, 'data-backdrop': :static, 'data-keyboard': false,
+                         style: "background-image: url('#{user_account.bg_image_url}')"}
+                    - else
+                      %a.CoverImage-demo.user_cover{'data-hover-text': 'Add Image', 'data-target': '#userCoverModal',
+                        'data-toggle': :modal, 'data-backdrop': :static, 'data-keyboard': false}
+
+                  .input-block.state-clear{class: "#{user_account && user_account.tagline.present? ? 'event-focus valid' : ''}"}
+                    = f.label :tagline, for: 'my_account_tagline'
+                    = f.text_field :tagline, class: :tagline, 'max-length': 160, id: 'my_account_tagline'
+                    .counter_block{'max-length': 160} 0/160
+                    %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.user_info.tagline_tooltip')}
+                    .infoContainerWrapp= I18n.t("forms.info.min_tagline_length")
+                    .errorContainerWrapp
+
+                  .input-block.required{class: "#{user_account && user_account.bio.present? ? 'event-focus valid' : ''}"}
+                    = f.label :bio
+                    = f.text_area :bio, data: {autoresize: true}, rows: 1, 'max-length': 2000, placeholder: 'You have 2000 characters for your description'
+                    .counter_block{'max-length': 2000} 0/2000
+                    %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.user_info.bio_tooltip', count: 24)}
+                    .infoContainerWrapp= I18n.t("forms.info.min_description_length")
+                    .errorContainerWrapp
+
+                  .input-block.state-clear{class: "#{user_account && user_account.talent_list.present? ? 'event-focus valid' : ''}"}
+                    %label.fixed_top{for: ""} Tags
+                    .tag_list_wrapp
+                      = f.text_field :talent_list, class: :tag, value: user_account.talents.join(','), id: 'my_account_talent_list'
+                    .counter_block{'max-length': 20} 0/20
+                    %span.VideoClientIcon-q5{rel: :tipsy, title: I18n.t('wizard.modals.user_info.talent_list_tooltip')}
+                    .infoContainerWrapp= I18n.t("forms.info.min_tags_count")
+                    .errorContainerWrapp
+                  .mb50
+
+                  %div
+                    = f.label :available_by_request_for_live_vod, class:'checkbox choice' do
+                      = f.check_box :available_by_request_for_live_vod, checked: true
+                      %span I am available for private sessions on-demand
+                    .errorContainerWrapp
+
+                  .text-right
+                    .mb50
+                    %button.submitButton.btn.btn-s
+                      Save
+                      %span.spinnerSlider.spinnerSmall.spinnerColor_white.spinerStatick
+                        .bounceS1
+                        .bounceS2
+                        .bounceS3
+
+
+  -# For account info
+  #userLogoModal.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+    .modal-dialog
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          %h4.groupTitle.clearfix
+            Upload Logo
+          %section.crop-wrapp
+            .unobtrusive-flash-container
+            .upload-area
+              .row
+                .upload-info
+                  = render partial: 'become_presenter_steps/loading_cover'
+                  %span
+                    Drag-n-drop photos here or
+                    %input#user-logo.inputfile{name: 'user-logo', type: :file}
+                    %label{for: 'user-logo'}
+                      Select files to upload
+            .loudThumbnailsList
+            .crop-container
+            %div.fs-13.sugSize
+              %span Suggested size:
+              280x280 px
+              %br
+              Choose high resolution images in order to create an awesome avatar or logo!
+
+
+  #userCoverModal.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+    .modal-dialog
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          %h4.groupTitle.clearfix
+            Upload Cover
+          %section.crop-wrapp
+            .unobtrusive-flash-container
+            .upload-area
+              .row
+                .upload-info
+                  = render partial: 'become_presenter_steps/loading_cover'
+                  %span
+                    Drag-n-drop photos here or
+                    %input#user-cover.inputfile{name: 'user-cover', type: :file}
+                    %label{for: 'user-cover'}
+                      Select files to upload
+            .loudThumbnailsList
+            .crop-container
+            %div.fs-13.sugSize
+              %span Suggested size:
+              2560x1440 px
+              %br
+              Choose high resolution images in order to create an awesome cover!

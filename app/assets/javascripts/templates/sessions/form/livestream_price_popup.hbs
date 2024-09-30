@@ -1,0 +1,40 @@
+<div class="stb-h">Price breakdown</div>
+<div class="stb-b text-center padding-top-10">
+    <div class="stb-1">
+        <label>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            {{#if (and can_change_livestream_access_cost (not livestream_free))}}
+                <input type="hidden" name="session[livestream_access_cost]" value="{{livestream_access_cost}}">
+                <input id="livestream_total_cost" step="0.01" type="text" class="price_number"
+                       mincost="{{livestreamTotalMinCost}}" maxcost="{{livestreamTotalMaxCost}}"
+                       value="{{livestreamTotalPurchasePrice}}">
+            {{else}}
+                <input disabled value="{{livestreamTotalPurchasePrice}}">
+            {{/if}}
+            <div title="min ${{livestreamTotalMinCost}}">Session Price</div>
+        </label>
+    </div>
+    {{!--
+    <div class="stb-2">
+        <span>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            <div id="livestream_service_fee">{{livestreamServiceFee}}</div>
+        </span>
+        Service Fee
+    </div>
+    --}}
+    <div class="stb-sum">
+        <label>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            {{#if (and can_change_livestream_access_cost (not livestream_free))}}
+                <input id="livestream_revenue" step="0.01" type="text" class="price_number"
+                       mincost="{{livestreamRevenueMin}}" maxcost="{{livestreamRevenueMax}}"
+                       value="{{livestreamRevenue}}">
+            {{else}}
+                <input disabled value="{{livestreamRevenue}}">
+            {{/if}}
+
+            <div title="{{revenueSplitTitle}}">Your Earnings</div>
+        </label>
+    </div>
+</div>

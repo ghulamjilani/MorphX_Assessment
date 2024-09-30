@@ -1,0 +1,42 @@
+- session = video.session
+%section.tile-cake{id: "replay_tile_#{video.id}", data: {type: :replay, id: video.id}, class: (defined?(custom_class) ? custom_class : '' )}
+  .tile-img
+    .tile-imgContainer.owl-lazy{'data-src': video.poster_url || session.channel.image_preview_url}
+    %a.tile_link{href: video.relative_path}
+      %i.VideoClientIcon-play-icon1
+    .sessionStatus Replay
+    - if can?(:share, session)
+      = link_to session.preview_share_relative_path(vod_id: video.id), method: :get, rel: :nofollow, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, remote: true, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, class: 'social-sharing', title: 'Share' do
+        %i.VideoClientIcon-share-mk4
+    .sessionCost
+      - if !session.recorded_free?
+        %i.VideoClientIcon-dollar-currency-symbol
+        .sessionCost-tooltip.fs-12
+          .row
+            .col-xs-6.text-color-Darkgrey.padding-right-0 Buy
+            .col-xs-6.text-color-green.text-right
+              = number_to_currency(session.recorded_purchase_price.to_f, precision: 2)
+  .tile-body
+    %a.tile-name{href: video.relative_path, rel: 'tipsy', title: video.always_present_title}
+      = video.always_present_title
+    = link_to spa_channel_path(session.channel.slug), class: 'tile-owner text-ellipsis' do
+      By
+      = session.organizer.public_display_name
+    .padding-top-10.fs-14.star_ratingWrapper
+      = raw new_star_rating(numeric_rating_for(session))
+      - if session.raters_count > 0
+        %span.display-inline-block.vertical-midle.margin-right-10 (#{session.raters_count})
+      .display-inline-block.vertical-midle
+        .participants.text-ellipsis.display-inline-block.vertical-midle
+          -#%i.VideoClientIcon-user-mk2
+          %i.VideoClientIcon-Views.vertical-midle.fs-16
+          = short_number(video.views_count).html_safe
+      - if current_user
+        - if can?(:opt_out_as_recorded_member, session)
+          .display-inline-block.vertical-midle.text-color-green Purchased
+        - elsif can?(:access_replay_as_subscriber, session)
+          .display-inline-block.vertical-midle.text-color-red Subscription
+    %div
+      %span.ScheduledDate.text-ellipsis
+        Streamed:
+        = time_with_tz_in_chosen_format(session.start_at)

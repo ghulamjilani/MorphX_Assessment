@@ -1,0 +1,89 @@
+- display_googleplay_icon = nil unless defined?(display_googleplay_icon)
+- display_session_link    = nil unless defined?(display_session_link)
+- video                   = nil unless defined?(video)
+
+- raise ArgumentError, "cache_key could not be nil" if cache_key.nil?
+
+- cache(cache_key) do
+  - channel = session.channel
+  %section.thumbnails.thumbnail-kenburn.kontainer{'data-VideoID' => session.primary_record.try(:id)}
+    .immersme-DrDown
+      - if display_googleplay_icon
+        - if display_session_link
+          = SharedSessionVodImmerssButtonPresenter.new(session, current_user, current_ability, video).to_s
+        - else
+          = SharedSessionVodImmerssButtonPresenter.new(session, current_user, current_ability).to_s
+      - else
+        = SharedSessionLiveImmerssButtonPresenter.new(session, current_user, current_ability).to_s
+    .presentation-img-Wrapper
+
+
+      %a.sessionBoxImg{href: session_relative_path_with_video_anchor(session, video.try(:id)), style: ''}
+        %div.owl-lazy{'data-src': (video && video.poster_url ? video.poster_url : asset_path(channel.image_preview_url))}
+        - if defined?(display_googleplay_icon) && display_googleplay_icon
+          %span.playVidio
+            %i.icon-googleplay
+        .hiddenText
+          -#= sanitize(session.always_present_description, tags: %w(strong em a p br), attributes: %w(href))
+          .sessionBox_title
+            %span{title:session.always_present_title}
+              = session.title || session.always_present_title
+          .sessionBox_title_sub
+            by
+            %span.UserName #{session.organizer.public_display_name}
+
+        .sessionBoxImgOverlay
+
+      .social-sharing-block
+        =  degradable_link_to session.toggle_like_relative_path, method: :post, remote: true, class: ["like-block", like_class(session), "session-like-#{session.id}"].join(' '), title: 'Like' do
+          %i.VideoClientIcon-Favorites
+          %span{class: "likes-counter-session-#{session.id}"}
+            = session.likes_count unless session.likes_count.zero?
+
+        - if can?(:share, session)
+          = link_to session.preview_share_relative_path(VIDEO_ID_FOR_SHARING => video.try(:id)), method: :get, rel: 'nofollow', remote: true, class: "social-sharing", title: 'Share' do
+            %i.VideoClientIcon-share-mk4
+
+        - if can?(:have_in_wishlist, session)
+          = degradable_link_to toggle_wishlist_items_path(model_id: @session.id, model_type: 'Session'), method: :post, remote: true, class: ["add-to-wish-list-button", wishlist_class(session), "session-wishlist-#{session.id}"].join(' '), title: 'Add to Wishlist' do
+            %i.VideoClientIcon-add73
+        - else
+          %span.add-to-wish-list-button
+            %i.VideoClientIcon-add73
+
+      %span.userAvatar
+        = link_to spa_user_path(session.organizer.slug) do
+          = image_tag session.organizer.small_avatar_url
+          %span.UserName #{session.organizer.public_display_name}
+
+      .caption
+        %h4
+          %a.channel-link{href: session.relative_path}
+            %span{title: session.always_present_title}
+              = session.title || session.always_present_title
+          %em
+            = time_with_tz_in_chosen_format(session.start_at)
+            %span
+              = formatted_session_duration(video.try(:duration_in_minutes) || session.duration)
+          .clear
+
+
+      .actions
+        %ul.clearfix
+          %li.numberOfViews{class: view_class(session)}
+            %a{title:'number of views'}
+              %span.num-s
+                - #this is how we inject actual views counter into cached template
+                = ":views_replacement_placeholder:"
+              %i.VideoClientIcon-Views
+          %li{class: participant_class(session)}
+            %a{title:'number of participants'}
+              %span.num-s= short_number(session.total_participants_count)
+              %i.VideoClientIcon-People
+
+          %li.ratingWrapper
+            = raw star_rating(numeric_rating_for(session.channel))
+
+          -#%li{class: 'pull-right'}
+          -#  .btn-more-wrapper
+          -#    %a.btn-more.ensure-link-style read more +

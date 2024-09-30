@@ -1,0 +1,176 @@
+@import "../../mixin";
+
+.socialMK2{
+  margin-top: -10px;
+  a, .iconBlock{
+    $buttonSize: 38px;
+
+    height: $buttonSize;
+    width: $buttonSize;
+    margin: 0 0 0 3px;
+    padding: 2px;
+    vertical-align: middle;
+    display: inline-block;
+    span{
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      color: $siteColorMain;
+      text-align: center;
+      border-radius: 100%;
+      line-height: $buttonSize + 1;
+      opacity: 0.8;
+      padding: 0 !important;
+      &:hover{
+        opacity: 1;
+      }
+      i{
+        font-size: 18px;
+        line-height: normal;
+        color: #fff !important;
+      }
+    }
+    &.ensure-link-style{
+      background-color: $siteColorMain;
+    }
+    &[href*="facebook"], &.facebook{
+      span{
+        background-color: #3B5998 !important;
+      }
+    }
+    &[href*="reddit"], &.reddit-share{
+      span{
+        background-color: #FF4500 !important;
+      }
+    }
+    &[href*="tumblr"], &.tumblr-share{
+      span{
+        background-color: #314358 !important;
+      }
+    }
+    &[href*="pinterest"], &.pinterest-share{
+      span{
+        background-color: #BD081C !important;
+      }
+    }
+    &[href*="twitter"], &.twitter{
+      span {
+        background-color: #00ACEE !important;
+      }
+    }
+
+    &[href*="gplus"], &[href*="google"], &[href*="plus."], &[href*="youtube"], &.gplus, &.youtube{
+      span{
+        background-color: #e44d46 !important;
+        i.VideoClientIcon-google{
+          font-size: 15px;
+          line-height: 21px;
+        }
+      }
+    }
+
+    &[href*="linkedin"], &.linkedin{
+      span{
+        background-color: #007AB9 !important;
+      }
+    }
+    &[href*="instagram"], &.instagram{
+      span{
+        position: relative;
+        background:#ff3e60 ;
+        overflow: hidden;
+        i{
+          font-size: 22px;
+          line-height: 22px;
+          position: relative;
+        }
+      }
+    }
+  }
+}
+.socialList{
+  overflow: auto;
+  padding-bottom: 10px;
+  width: calc(100% - 7px);
+  .socialList-item{
+    margin-bottom: 7px;
+    padding-right: 10px;
+    input{
+      border:none;
+    }
+    .socialIcon{
+      &:hover{
+        color: #fff;
+      }
+    }
+    .btn{
+      min-width:115px ;
+      text-align: center;
+    }
+    i:before{
+      font-size: 12px;
+      line-height: 21px;
+    }
+    .errorContainer{
+      padding-left: 30px;
+    }
+  }
+  .socialIcon{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    font-size: 10px;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 20px;
+    i{
+      display: inline-block;
+      height: inherit;
+      width: inherit;
+      border-radius: inherit;
+      background: $siteColorMain;
+      vertical-align: top;
+      &.VideoClientIcon-google{
+        font-size: 14px;
+        line-height: 21px;
+      }
+      &.VideoClientIcon-facebookF{
+        background-color: $social-color-facebook;
+        line-height: 20px;
+        font-size: 12px;
+      }
+      &.VideoClientIcon-twitter2{
+        background-color:$social-color-twitter;
+        line-height: 20px;
+        font-size: 13px;
+      }
+      &.VideoClientIcon-instagram{
+        line-height: 21px;
+        font-size: 13px;
+        position: relative;
+        background: #ff3e60 ;
+        overflow: hidden;
+      }
+      &.VideoClientIcon-google{
+        background-color:$social-color-google;
+      }
+      &.VideoClientIcon-linkedinF{
+        background-color:$social-color-linkedin;
+        font-size: 13px;
+        line-height: 20px;
+      }
+      &.VideoClientIcon-youtube, &.VideoClientIcon-youtube{
+        background-color:$social-color-youtube;
+      }
+      &.VideoClientIcon-youtube{
+        font-size: 12px;
+        line-height: 20px;
+      }
+      &.GlobalIcon-telegram{
+        background: rgba(36, 156, 215, 1);
+      }
+    }
+  }
+}

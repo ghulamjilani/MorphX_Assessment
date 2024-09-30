@@ -1,0 +1,19 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  <%= I18n.t('mailer.session_cancelled_body_prefix', url: @session.absolute_path,
+             presenter_name: @session.organizer.public_display_name,
+             title: @session.always_present_title,
+             cancel_reason: @session.abstract_session_cancel_reason.name).html_safe %>
+
+  <%= I18n.t('mailer.session_cancelled_body_message', url: @session.absolute_path,
+             title: @session.always_present_title,
+             presenter_name: @session.organizer.public_display_name,
+             cancel_reason: @session.abstract_session_cancel_reason.name).html_safe %>
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@session.channel.title) %>
+</p>

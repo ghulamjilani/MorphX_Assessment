@@ -1,0 +1,14 @@
+#twitter {
+  overflow: hidden;
+  #twitterArea {
+    height: calc(100% - 4.1rem);
+    iframe {
+      &.twitter-hashtag-button {
+        height: 3rem;
+      }
+      &.twitter-timeline {
+        height: calc(100% - 3rem);
+      }
+    }
+  }
+}

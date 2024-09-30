@@ -1,0 +1,34 @@
+en:
+  views:
+    dashboards:
+      channel:
+        new_session: New Session
+        channel_review_confirmation: Are you sure you want to submit channel for review?
+        submit_for_review: Submit For Review
+        list_confirmation: List confirmation
+        list: List
+        unlist_confirmation: Unlist confirmation
+        unlist: Unlist
+        edit: Edit
+        your_business_plan_is_not_supporting_this_feature: Your Business plan is not supporting this feature
+        archive_confirmation: Archive confirmation
+        archive: Archive
+        category: Category
+        company: Company
+        status: Status
+        visibility: Visibility
+        default: Default
+        location: Location
+        followers: Followers
+        view_all: VIEW ALL
+        show_sessions: Show Sessions
+        hide_sessions: Hide Sessions
+        view: View
+        search_by_title: Search by title
+        show: Show
+        sort_by: Sort by
+        filters: Filters
+        start_at: Start At
+        from: From
+        to: To
+        no_upcoming_sessions: There are no upcoming sessions at the moment.

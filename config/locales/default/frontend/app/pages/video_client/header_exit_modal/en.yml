@@ -1,0 +1,10 @@
+en:
+  frontend:
+    app:
+      pages:
+        video_client:
+          header_exit_modal:
+            exit_session : "You're about to exit the session"
+            leave_session: Leave Session
+            end_session: End Session
+            cancel: Cancel

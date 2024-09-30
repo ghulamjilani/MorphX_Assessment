@@ -1,0 +1,387 @@
+
+.client__header {
+  .internet__count {
+    height: 2rem;
+    @include flex(flex, flex-end, center);
+    margin-right: 2rem;
+
+    div {
+      margin-left: .1rem;
+      width: .6rem;
+      height: 0;
+      background: rgb(66, 66, 66);
+
+      &:nth-child(1) {
+        height: 20%;
+      }
+
+      &:nth-child(2) {
+        height: 40%;
+      }
+
+      &:nth-child(3) {
+        height: 60%;
+      }
+
+      &:nth-child(4) {
+        height: 80%;
+      }
+
+      &:nth-child(5) {
+        height: 100%;
+      }
+    }
+
+    &__1 {
+      div:nth-child(-n+1) {
+        background-color: red;
+      }
+    }
+
+    &__2 {
+      div:nth-child(-n+2) {
+
+        background-color: brown;
+      }
+    }
+
+    &__3 {
+      div:nth-child(-n+3) {
+
+        background-color: yellow;
+      }
+    }
+
+    &__4 {
+      div:nth-child(-n+4) {
+
+        background-color: yellowgreen;
+      }
+    }
+
+    &__5 {
+      div:nth-child(-n+5) {
+
+        background-color: green;
+      }
+    }
+  }
+
+  // -webkit-touch-callout: none;
+  // -webkit-user-select: none;
+  // -khtml-user-select: none;
+  // -moz-user-select: none;
+  // -ms-user-select: none;
+  // user-select: none;
+  background: $client__bg__header;
+  color: $client__tp__main;
+  padding: 2rem 1.5rem 2rem 3rem;
+  @include media(reverso-desktop) {
+    padding: 0.5rem 1.5rem 0.5rem 3rem;
+  }
+  @include media(reverso-tablet) {
+    @include flex(flex, center, false);
+  }
+  @include media(xl-desktop) {
+    padding: .7rem 1.5rem .7rem 3rem;
+  }
+  @include media(tablet) {
+    padding: .3rem .5rem 0rem .5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+  }
+
+  &__selfView {
+    position: relative;
+    z-index: 99999;
+  }
+
+  &__recording {
+    padding-right: 1.5rem;
+
+    &__icon {
+      font-size: 1.6rem;
+      color: $client__tp__icons;
+      @include media(tablet) {
+        font-size: 1.2rem;
+      }
+
+      &__active {
+        color: $client__tp__active;
+      }
+    }
+  }
+
+  &__cover {
+    background: rgba(34, 33, 33, 0.8);
+    backdrop-filter: blur(20px);
+    z-index: 115;
+  }
+
+  &__status {
+    @include flex(flex, center, false);
+    padding-right: 1.5rem;
+
+    &__time {
+      color: $client__tp__main;
+      font-size: 1.4rem;
+      line-height: normal;
+      white-space: nowrap;
+      @include media(tablet) {
+        font-size: 1.1rem;
+      }
+
+      &__10 {
+        color: #BCB32A;
+      }
+
+      &__1 {
+        color: #F23535;
+      }
+    }
+
+    &__addTime_tooltip {
+      @include flex(flex, center, center);
+    }
+
+    &__addTime {
+      background-color: $client__tp__main__yellow;
+      border-color: $client__tp__main__yellow;
+      color: #303840;
+      min-width: 7.5rem;
+      line-height: normal;
+      padding: 0 .5rem;
+      margin-left: 1.5rem;
+      @include media(tablet) {
+        min-width: 6rem;
+        min-height: 1.5rem;
+      }
+      &.btn__main:hover, :focus {
+        color: #303840;
+      }
+    }
+
+    &__label {
+      padding-right: 1.5rem;
+
+      &__offline, &__live {
+        color: $client__tp__main;
+        min-width: 8rem;
+        max-width: 8rem;
+        min-height: 4rem;
+        padding: 0;
+        font-size: 1.6rem;
+        cursor: default;
+        @include media(tablet) {
+          font-size: 1.2rem;
+          min-height: 1.5rem;
+          line-height: 0;
+          height: 1.5rem;
+        }
+      }
+
+      &__offline {
+        background: $client__bg__content__secondary;
+        border: 1px solid $client__bg__content__secondary;
+        @include media(p-phone) {
+          min-width: 6rem;
+        }
+      }
+
+      &__live {
+        background: $client__btn__main;
+        border: 1px solid $client__btn__main;
+        color: $client__tp__main;
+
+        &:hover {
+          color: $client__tp__main;
+        }
+
+        @include media(tablet) {
+          min-width: 4rem;
+        }
+      }
+    }
+  }
+
+  &__info {
+    width: 100%;
+    overflow: hidden;
+    @include media(reverso-tablet) {
+      @include flex(flex, center, center);
+    }
+
+    &__title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding-right: 2rem;
+      @include text__ellipsis();
+      @include media(tablet) {
+        font-size: 1.2rem;
+        padding-left: 7rem;
+        position: relative;
+        top: 0rem;
+        padding-top: 0;
+        margin-top: -.4rem;
+      }
+      @include media(reverso-tablet) {
+        padding-right: 20rem;
+      }
+    }
+
+    &__exit {
+      &__modal {
+        z-index: 120;
+
+        &__wrapper {
+          position: absolute;
+          width: 100%;
+          height: calc(100% - 8rem);
+          @include flex(flex, center, center);
+        }
+
+        &__text {
+          background: $client__bg__modal;
+          width: 35rem;
+          height: 11.3rem;
+          @include flex(flex, center, center);
+          color: $client__tp__modal;
+          font-weight: bold;
+          font-size: 1.6rem;
+          border-radius: 10px;
+        }
+
+        &__buttons {
+          @include flex(flex, center, space-between);
+          margin-top: 2rem;
+
+          & > button {
+            min-height: 4rem;
+            min-width: 16.8rem;
+          }
+        }
+      }
+    }
+
+    &__icon {
+      font-size: 2.4rem;
+      color: $client__tp__icons;
+      padding: 0 4rem 3.5rem 1rem;
+      z-index: 999999;
+      margin: 0 -4rem -3.5rem -2rem;
+      position: relative;
+      cursor: pointer;
+      @include media(tablet) {
+        font-size: 1.6rem;
+        padding: 0 1.5rem;
+        margin: 0;
+      }
+    }
+
+    &__wrapper {
+      display: flex;
+      position: relative;
+      align-items: center;
+
+      &__invisible {
+        opacity: 0;
+      }
+
+      @include media(tablet) {
+        position: fixed;
+        right: 0;
+        top: 1rem;
+      }
+    }
+
+    &__panel {
+      position: absolute;
+      padding: 1.5rem 1.5rem 0;
+      background: $client__bg__tooltip;
+      border-radius: .6rem;
+      box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.4);
+      position: absolute;
+      z-index: 120;
+      transform: translateY(4rem);
+      right: 3rem;
+      width: 35rem;
+      top: 1rem;
+      @include flex(flex, center, space-between);
+      flex-direction: column;
+      @include media(p-phone) {
+        padding: .7rem;
+        width: 95%;
+        right: .5rem;
+      }
+
+      &__block {
+        @include flex(flex, center, space-between);
+        width: 100%;
+        padding-bottom: 1.5rem;
+      }
+
+      &__title {
+        width: 100%;
+        color: $client__tp__secondary;
+        padding-top: .3rem;
+        font-size: 1.4rem;
+      }
+
+      &__info {
+        font-size: 1.6rem;
+        color: $client__tp__main;
+        font-weight: bold;
+        width: 100%;
+        padding-bottom: 1rem;
+      }
+
+      &__link {
+        width: 75%;
+        font-size: 1.4rem;
+        @include text__ellipsis();
+        color: #fff;
+      }
+
+      &__button {
+        min-height: 2rem;
+        min-width: 6rem;
+        font-size: 1.2rem;
+        line-height: normal;
+        padding: 0;
+      }
+
+      &__icon {
+        color: $client__tp__icons;
+        font-size: 1.2rem;
+        cursor: pointer;
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
+        @include media(p-phone) {
+          top: 1rem;
+          right: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.userinroom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.asktounmute {
+  position: fixed;
+  @include center(vh);
+  z-index: 9999;
+  height: auto;
+  @include media(phone){
+    top: 45%;
+  }
+}

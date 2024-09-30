@@ -1,0 +1,16 @@
+en:
+  views:
+    shared:
+      player:
+        _rating_dropdown:
+          out_of: "%{from} out of %{to}"
+          your_rating_for_this_is: Your rating for this %{content_type} is %{from}/5
+          awesome: Awesome %{num}!!
+          very_good: Very good %{num}
+          satisfactory: Satisfactory %{num}
+          bad: Bad %{num}
+          awful: Awful %{num}
+          based_on_ratings: based on %{num} Ratings
+          based_on_rating: based on %{num} Rating
+          how_would_you_rate_the_content: How would you rate the content?
+          submit: Submit

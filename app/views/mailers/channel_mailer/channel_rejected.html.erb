@@ -1,0 +1,17 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  We are sorry to inform you that your channel <%= @channel.title %> has been declined.
+  <br>
+  <%= @channel.rejection_reason %>
+</p>
+
+<p>
+  We will be in touch to discuss.
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format I18n.t('mailer.thank_you_message', service_name: Rails.application.credentials.global[:service_name]) %>
+</p>

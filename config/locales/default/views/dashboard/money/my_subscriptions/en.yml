@@ -1,0 +1,25 @@
+en:
+  views:
+    dashboard:
+      money:
+        my_subscriptions:
+          page_title: My Subscriptions
+          date: Date
+          interval: Interval
+          channel: Channel
+          plan: Plan
+          amount: Amount
+          status: Status
+          next_invoice: Next Invoice
+          actions: Actions
+          trialing: trialing
+          free_trial: Free Trial
+          unknown: Unknown
+          canceled: Canceled
+          active_until: Active until
+          trial_until: Free Trial until
+          cancel_subscription: Cancel Subscription
+          you_want_unsubscribe: Are you sure want to unsubscribe?
+          processing: Processing...
+          cancel: Cancel
+          no_subscriptions: No subscriptions yet

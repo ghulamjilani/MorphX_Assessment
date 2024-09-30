@@ -1,0 +1,31 @@
+.userPage {
+  &__wrapper {
+    width: 125rem;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 5rem;
+    overflow: hidden;
+  }
+
+  .mChannel__tiles__items {
+    justify-content: flex-start;
+
+    .cardMK2 {
+      width: calc(33% - 1.6rem);
+      margin: 1rem 2.7rem 4.7rem 0;
+
+      &:nth-of-type(3n) {
+        margin: 1rem 0 4.7rem;
+      }
+
+      @include media(phone) {
+        width: 100%;
+        margin: 1rem 0 4.7rem;
+      }
+    }
+  }
+
+  .channel__info__owner a {
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,533 @@
+
+<!-- ID Modal -->
+{{#if false}}
+    <div aria-hidden="true" class="modal fade" id="ID-modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="groupTitle clearfix">
+                        Category List
+                    </h4>
+                    <section>
+                        modal content
+                    </section>
+                    <div class="text-right padding-right-10">
+                        <a class="btn btn-m" href="#">Done</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+<!-- Invitations Modal -->
+<div id="InviteViewersAndCoHosts" class="modal fade InviteViewersAndCoHosts modalWithNotification" aria-hidden="true" role="dialog" tabindex="-1">
+</div>
+
+<!--&lt;!&ndash; Recorded Modal &ndash;&gt;-->
+<!--<div aria-hidden="false" class="modal fade" id="recorded_modal" role="dialog" tabindex="-1">-->
+<!--<div class="modal-dialog">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-body">-->
+<!--<h4 class="groupTitle clearfix">-->
+<!--Recording Session-->
+<!--<a href="#" data-dismiss="modal">-->
+<!--<i class="VideoClientIcon-iPlus text-color-Darkgrey"></i>-->
+<!--</a>-->
+<!--</h4>-->
+<!--<section>-->
+<!--<div class="row clearfix">-->
+<!--<div class="col-sm-6">Price</div>-->
+
+<!--</div>-->
+<!--</section>-->
+<!--<div class="text-right padding-right-10">-->
+<!--<a data-dismiss="modal" class="btn btn-m" href="#">Done</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!-- Liveshare Modal -->
+{{#if false}}
+    <div aria-hidden="true" class="modal fade" id="liveShare_modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="groupTitle clearfix">
+                        LiveShare
+                        <a href="#" data-dismiss="modal">
+                            <i class="VideoClientIcon-iPlus text-color-Darkgrey"></i>
+                        </a>
+                    </h4>
+                    <section>
+                        <div class="modal-bodyTitle">Share you session on</div>
+                        <div class="row padding-top-10">
+                            <div class="col-sm-6 socialMK2 no-margin">
+                                <div class="iconBlock facebook">
+                                <span>
+                                    <i class="VideoClientIcon-facebookF VideoClientIcon-dots-horizontal-triple"></i>
+                                </span>
+                                </div>
+                                Facebook
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a class="btn btn-m btn-borderred-grey">Connect</a>
+                            </div>
+                        </div>
+                        <div class="row padding-top-10">
+                            <div class="col-sm-6 socialMK2 no-margin">
+                                <div class="iconBlock youtube">
+                                <span>
+                                    <i class="VideoClientIcon-youtube VideoClientIcon-dots-horizontal-triple"></i>
+                                </span>
+                                </div>
+                                Youtube
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a href="#" class="btn btn-m btn-borderred-grey {{#if has_youtube_access}}active{{/if}}">
+                                    {{#if has_youtube_access}}Connected{{else}}Connect{{/if}}
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="text-right padding-right-10">
+                        <a class="btn btn-m" href="#">Save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+<!-- Donation Modal -->
+{{#if false}}
+    <div aria-hidden="true" class="modal fade" id="Donation_modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="groupTitle clearfix">
+                        Donation
+                        <a href="#" data-dismiss="modal">
+                            <i class="VideoClientIcon-iPlus text-color-Darkgrey"></i>
+                        </a>
+                    </h4>
+                    <section>
+                        <div>
+                            <div class="inlile-block padding-top-5">
+                                goal
+                            </div>
+                            <div class="pull-right">
+                                <input min="0" step="1" type="number" value="29.99">
+                            </div>
+                        </div>
+                        <hr class="full-width">
+                        <div class="row clearfix text-center">
+                            <div class="col-sm-3">
+                                Tier-1
+                                <input class="full-width" min="0" step="1" type="number" value="29.99">
+                            </div>
+                            <div class="col-sm-3">
+                                Tier-2
+                                <input class="full-width" min="0" step="1" type="number" value="29.99">
+                            </div>
+                            <div class="col-sm-3">
+                                Tier-3
+                                <input class="full-width" min="0" step="1" type="number" value="29.99">
+                            </div>
+                            <div class="col-sm-3">
+                                Tier-4
+                                <input class="full-width" min="0" step="1" type="number" value="29.99">
+                            </div>
+                        </div>
+                        <hr class="full-width">
+                        <div>
+                            <label class="checkbox checkbox-swith full-width right-position">
+                                <input type="checkbox">
+                                <span class="full-width">Show Backers</span>
+                            </label>
+                        </div>
+                    </section>
+                    <div class="text-right padding-right-10">
+                        <a class="btn btn-m" href="#">save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+<!-- Trials Modal -->
+{{#if false}}
+    <div aria-hidden="true" class="modal fade" id="Trials_modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="groupTitle clearfix">
+                        Trials
+                        <a href="#" data-dismiss="modal">
+                            <i class="VideoClientIcon-iPlus text-color-Darkgrey"></i>
+                        </a>
+                    </h4>
+                    <section>
+                        <div class="fs-12">
+                            interactive
+                        </div>
+                        <hr class="full-width margin-top-0">
+                        <div class="row">
+                            <div class="col-sm-6 padding-top-5">
+                                <label class="checkbox choice">
+                                    <input type="checkbox">
+                                    <span>Offer Free Trials</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select class="styled-select_withCss full-width text-right select-rightAlign">
+                                    <option>none</option>
+                                    <option>99</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="fs-12 padding-top-10">
+                            Livestream
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 padding-top-5">
+                                <label class="checkbox choice">
+                                    <input type="checkbox">
+                                    <span>Offer Free Trials</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <select class="styled-select_withCss full-width text-right select-rightAlign">
+                                    <option>none</option>
+                                    <option>99</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="text-right padding-right-10">
+                        <a class="btn btn-m" href="#">Done</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+<!-- Twitter Modal -->
+{{#if false}}
+    <div aria-hidden="true" class="modal fade" id="Twitter_modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="groupTitle clearfix">
+                        Twitter #-tag
+                        <a href="#" data-dismiss="modal">
+                            <i class="VideoClientIcon-iPlus text-color-Darkgrey"></i>
+                        </a>
+                    </h4>
+                    <section>
+                        <input class="tag-it tagit-hidden-field" type="text" value="#ololo"><ul class="tagit ui-widget ui-widget-content ui-corner-all"><li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable"><span class="tagit-label">#ololo</span><a class="tagit-close"><i class="text-icon">×</i><span class="ui-icon ui-icon-close"></span></a></li><li class="tagit-new"><input type="text" class="ui-widget-content ui-autocomplete-input" placeholder="Add tags"></li></ul>
+                    </section>
+                    <div class="text-right padding-right-10">
+                        <a class="btn btn-m" href="#">save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+<!-- Polls Modal -->
+{{#if false}}
+    <div aria-hidden="true" class="modal fade" id="Polls_modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="groupTitle clearfix">
+                        Polls
+                        <a href="#" data-dismiss="modal">
+                            <i class="VideoClientIcon-iPlus text-color-Darkgrey"></i>
+                        </a>
+                    </h4>
+
+                    <section>
+                        <div class="input-block state-clear">
+                            <label for="sessionTitle">Question</label>
+                            <textarea data-autoresize="true" rows="1"></textarea>
+                            <div class="counter_block">
+                                0/2000
+                            </div>
+                            <div class="errorContainerWrapp">
+                                <div class="errorContainer">
+                                    This is a required field
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-block state-clear">
+                            <label for="sessionTitle">Answer 1</label>
+                            <textarea data-autoresize="true" rows="1"></textarea>
+                            <div class="counter_block">
+                                0/2000
+                            </div>
+                            <div class="errorContainerWrapp">
+                                <div class="errorContainer">
+                                    This is a required field
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-block state-clear">
+                            <label for="sessionTitle">Answer 2</label>
+                            <textarea data-autoresize="true" rows="1"></textarea>
+                            <div class="counter_block">
+                                0/2000
+                            </div>
+                            <div class="errorContainerWrapp">
+                                <div class="errorContainer">
+                                    This is a required field
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-block state-clear">
+                            <label for="sessionTitle">Answer 3</label>
+                            <textarea data-autoresize="true" rows="1"></textarea>
+                            <div class="counter_block">
+                                0/2000
+                            </div>
+                            <div class="errorContainerWrapp">
+                                <div class="errorContainer">
+                                    This is a required field
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="text-right padding-right-10">
+                        <a class="btn btn-m btn-borderred-grey" href="#">Cancel</a>
+                        <a class="btn btn-m margin-left-10" href="#">Save</a>
+                    </div>
+                    <section>
+                        <div>Existing Polls</div>
+                        <hr class="full-width margin-top-0">
+                        <div class="polsList">
+                            <div class="polsList-item">
+                                <label class="checkbox choice">
+                                    <input type="checkbox">
+                                    <span>pols name</span>
+                                </label>
+                                <a class="removePols" href="#">
+                                    <i class="VideoClientIcon-cross"></i>
+                                </a>
+                            </div>
+                            <div class="polsList-item">
+                                <label class="checkbox choice">
+                                    <input type="checkbox">
+                                    <span>pols name</span>
+                                </label>
+                                <a class="removePols" href="#">
+                                    <i class="VideoClientIcon-cross"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+<!--Description session modal-->
+{{!--
+<div aria-hidden="true" class="modal fade" id="Description_modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4 class="groupTitle clearfix">
+                    Description
+                    <a href="#" data-dismiss="modal">
+                        <i class="VideoClientIcon-iPlus text-color-Darkgrey"></i>
+                    </a>
+                </h4>
+
+                <section>
+                    <div class="input-block {{#if description}}state-derty{{else}}state-clear{{/if}} inputIntrovertCotoromuPlevatNaVseh">
+                        <label for="session_description">Description</label>
+                        <textarea id="session_description" name="session[description]" data-autoresize="true" maxlength="2000"
+                                  rows="1">{{description}}</textarea>
+                        <div class="counter_block">{{#if description }}[%= description.length %]{{else}}0{{/if}}/2000</div>
+                        <div class="errorContainerWrapp">
+                            <div class="errorContainer"></div>
+                        </div>
+                    </div>
+                </section>
+                <div class="text-right padding-right-10">
+                    <a class="btn btn-m" data-dismiss="modal" href="#">Done</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+--}}
+<div class="modal fade" data-backdrop="static" id="session_thumbnail_modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="unobtrusive-flash-container"></div>
+            <div class="modal-body">
+              <a class="closeModal" data-dismiss="modal">
+                <i class="VideoClientIcon-iPlus"></i>
+              </a>
+              <h4 class="groupTitle clearfix">
+                  Thumbnail
+              </h4>
+              <section class="crop-wrapp">
+                  <div class="upload-area " id="thumbnail_upload_area">
+                      <div class="row">
+                          <div class="upload-info padding-bottom-80 padding-top-80" style="">
+                              <div class="dotsWrapp hidden">
+                                  <div class="dot1"></div>
+                                  <div class="dot2"></div>
+                                  <div class="dot3"></div>
+                                  <div class="dot4"></div>
+                                  <div class="dot5"></div>
+                                  <div class="dot6"></div>
+                                  <div class="dot7"></div>
+                                  <div class="dot8"></div>
+                              </div>
+                              <div class="LoadingCover hidden">
+                                  <div class="spinnerSlider">
+                                      <div class="bounceS1"></div>
+                                      <div class="bounceS2"></div>
+                                      <div class="bounceS3"></div>
+                                  </div>
+                              </div>
+                              <span>
+                                  <input class="inputfile" id="session_thumbnail" name="session_thumbnail" type="file">
+                                  <label for="session_thumbnail">Select file to upload</label>
+                                  <div class="fs-12 hideForMobile">
+                                    or drag-n-drop your image here
+                                  </div>
+                                </span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="crop-container"></div>
+                  <div class="fs-12">
+                      Thumbnail proportional 16:9
+                      <br>
+                      Suggested size: 849x479 px
+                      <br>
+                      We recommend using high resolution image.
+                  </div>
+              </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="show_video_source_modal" class="modal fade" aria-hidden="true" role="dialog" tabindex="-1">
+    <div class="unobtrusive-flash-container"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a class="closeModal" data-dismiss="modal">
+                <i class="VideoClientIcon-iPlus"></i>
+            </a>
+
+            <div class="modal-body">
+                <h4 class="title clearfix">
+                    Video Source
+                </h4>
+                
+                <section>
+                    <div class="source-types">
+                        <div class="source-type ipcam selected">
+                          <div class="ipCam img"></div>
+                            <label>IP Camera</label>
+                        </div>
+                        <div class="source-type rtmp selected">
+                            <div class="encoder img"></div>
+                            <label>Encoder</label>
+                        </div>
+                    </div>
+                    
+                    <div class="data-wrapper">
+                        <div class="vs-data name">
+                            <div class="vs-data-item-wrap">
+                                <div class="vs-data-item-label bold">Name</div>
+                                <div class="vs-data-item-data">
+                                    <span></span>
+                                    <i class="VideoClientIcon-squaresF"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vs-data source_url">
+                            <div class="vs-data-item-wrap">
+                                <div class="vs-data-item-label bold">URL</div>
+                                <div class="vs-data-item-data">
+                                    <span></span>
+                                    <i class="VideoClientIcon-eye show-hide"></i>
+                                    <i class="VideoClientIcon-squaresF"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vs-data server">
+                            <div class="vs-data-item-wrap">
+                                <div class="vs-data-item-label vs-data-item-data bold">URL</div>
+                                <div v-if="editVideoSourceData.sever" class="vs-data-item-data">
+                                    <span></span>
+                                    <i class="VideoClientIcon-eye show-hide"></i>
+                                    <i class="VideoClientIcon-squaresF"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemsWrapp">
+                          <div class="vs-data port">
+                              <div class="vs-data-item-wrap">
+                                  <div class="vs-data-item-label bold">Port</div>
+                                  <div class="vs-data-item-data">
+                                      <span></span>
+                                      <i class="VideoClientIcon-squaresF"></i>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="vs-data stream_name">
+                              <div class="vs-data-item-wrap">
+                                  <div class="vs-data-item-label bold">Stream Key</div>
+                                  <div class="vs-data-item-data">
+                                      <span></span>
+                                      <i class="VideoClientIcon-squaresF"></i>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="itemsWrapp">
+                          <div class="vs-data username">
+                              <div class="vs-data-item-wrap">
+                                  <div class="vs-data-item-label bold">Username</div>
+                                  <div class="vs-data-item-data">
+                                      <span></span>
+                                      <i class="VideoClientIcon-squaresF top-0"></i>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="vs-data password">
+                              <div class="vs-data-item-wrap">
+                                  <div class="vs-data-item-label bold">Password</div>
+                                  <div class="vs-data-item-data">
+                                      <span class="password"></span>
+                                      <i class="VideoClientIcon-eye show-hide"></i>
+                                      <i class="VideoClientIcon-squaresF"></i>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <div class=" clearfix section-Viewers-Guests_submit bottomPushContainer">
+                    <a href="#" class="btn btn-m done pull-right" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

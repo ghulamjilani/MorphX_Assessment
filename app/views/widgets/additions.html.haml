@@ -1,0 +1,53 @@
+!!!
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: 'en'}
+  / <![endif]
+  %head
+    = include_gon(namespace: 'Immerss', camel_case: true, init: true)
+    = javascript_include_tag 'views/widgets/additions'
+    = stylesheet_link_tag 'widgets/core'
+    = render 'layouts/application/config'
+    %title
+      = Rails.application.credentials.global[:service_name]
+    = csrf_meta_tags
+    = action_cable_meta_tag
+
+    - content_for :embed_vue_pack, flush: true do
+      = javascript_pack_tag 'embed', defer: true
+      = stylesheet_pack_tag 'embed', media: 'all'
+
+    = yield :embed_vue_pack
+
+    %meta{charset: 'utf-8'}/
+    %meta{content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name: 'viewport'}
+    %meta{content: '', name: 'description'}
+    %meta{content: '', name: 'author'}
+    = favicon_link_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png", rel: 'shortcut icon'
+  %body{class: mobile_Check}
+    .main-content
+
+    %script(type="application/xhtml+xml" id="playlistTmpl")
+      != render 'widgets/additions/playlist'
+    %script(type="application/xhtml+xml" id="playlistReplayItemTmpl")
+      != render 'widgets/additions/playlist_replay_item'
+    %script(type="application/xhtml+xml" id="playlistStreamItemTmpl")
+      != render 'widgets/additions/playlist_stream_item'
+    %script(type="application/xhtml+xml" id="replaysCollectionTmpl")
+      != render 'widgets/additions/replays_collection'
+    %script(type="application/xhtml+xml" id="streamsCollectionTmpl")
+      != render 'widgets/additions/streams_collection'
+    %script(type="application/xhtml+xml" id="showMoreTmpl")
+      != render 'widgets/additions/show_more'
+
+    -# = render 'widgets/webrtcservice/chat_templates'
+    -# = render 'widgets/replay_chat/chat_templates'
+
+    - if current_theme_css
+      %style
+        :plain
+          :root {
+            #{raw current_theme_css}
+          }
+    = render 'layouts/application/organization_custom_styles'

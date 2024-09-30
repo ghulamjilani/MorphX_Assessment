@@ -1,0 +1,46 @@
+- content_for(:extra_body_classes, 'header-top')
+- content_for(:page_title, 'Business plan')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    = render 'dashboards/navigation/company_and_business_plan_tabs'
+  .col-md-9.main-content-section
+    #ch-vue-app
+      = content_tag 'comp-wrapper', nil, data: { component: 'business-plan', props: {}}.to_json
+      %table.table.table-hover.table-dashed-border.table-striped.responsiveTable.full-width
+        %thead
+          %tr
+            %th Date
+            %th Interval
+            %th Plan
+            %th Amount
+            %th Status
+            %th Current Period
+            %th Canceled At
+            %th{width: '10%'}
+        %tbody
+          - @subscriptions.each do |ms|
+            %tr
+              %td{data: {th: 'Date'}}
+                = time_with_tz_in_chosen_format ms.created_at
+              %td{data: {th: 'Interval'}}
+                = ms.stripe_plan.formatted_interval
+              %td{data: {th: 'Plan'}}
+                = ms.stripe_plan.nickname
+              %td{data: {th: 'Amount'}}
+                = ms.stripe_plan.formatted_price
+              %td{data: {th: 'Status'}}
+                = ms.status.capitalize
+              %td{data: {th: 'Current Period'}}
+                = time_with_tz_in_chosen_format(ms.current_period_end)
+              %td{data: {th: 'Canceled At'}}
+                - if ms.canceled_at
+                  = time_with_tz_in_chosen_format(ms.canceled_at)
+              %td{data: {th: ''}}
+                - if %w(trialing).include?(ms.status)
+                  %a.btn.btn-m.btn-borderred-red.btn-square.full-width{href: stripe_service_subscription_path(ms, cancel_trial: 1), title: 'Cancel Trial', data: {method: :put, confirm: 'Are you sure want to cancel trial and activate subscription?', disable_with: 'Processing...'}} Cancel Trial
+                - if %w(trialing active).include?(ms.status)
+                  %a.btn.btn-m.btn-borderred-red.btn-square.full-width{href: stripe_service_subscription_path(ms), title: 'Cancel Subscription', data: {method: :delete, confirm: 'Are you sure want to unsubscribe?', disable_with: 'Processing...'}} Cancel Subscription
+        .text-center
+          = paginate @subscriptions

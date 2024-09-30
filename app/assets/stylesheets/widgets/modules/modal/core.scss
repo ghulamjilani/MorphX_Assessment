@@ -1,0 +1,129 @@
+@import "signUp_In/core";
+.modal{
+  //width: 96%; I've removed share by email icon because we allow this kind of share only for signed in users, but iframe doesn't support auth
+  width: 86%;
+  font-size: 13px;
+  max-width: 420px;
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg__content);
+  z-index: 9999;
+  border-radius: 3px;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  @include media(phone){
+    font-size: 3.5vw;
+  }
+}
+.modal-cover{
+  position: absolute;
+  left: 0;
+  top:0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.7);
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.share-container{
+  &:not(.modalShow){
+    display: none;
+  }
+}
+.close_modal{
+  display: block;
+  position: absolute;
+  top:-40px;
+  right: -20px;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 13px;
+  background: rgba(0,0,0,0.9);
+  line-height: 30px;
+  text-align: center;
+  i{
+    display: inline-block;
+    transform: rotate(-45deg);
+  }
+}
+.sharetools-menu{
+  a{
+    width: 3em;
+    height: 3em;
+    border-radius: 100%;
+    color: #fff;
+    background-color: $siteColorMain;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1em;
+    margin-right: 0.8em;
+    margin-left: 0;
+    line-height: 3em;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 2em;
+    &:last-child{
+      margin-right: 0;
+    }
+    &:hover{
+      opacity: 0.9;
+    }
+  }
+  .fb-share{
+    background-color: #3B5998
+  }
+  .twitter-share{
+    background-color: #41acea
+  }
+  .linkedin-share{
+    background-color: #007ab6
+  }
+  .pinterest-share{
+    background-color: #334f8d
+  }
+  .tumblr-share{
+    background-color: #34465d
+  }
+  .reddit-share{
+    background-color: #ff5700
+  }
+  .g-share{
+    background-color: #e44d46
+  }
+  .mail-share{
+    background-color: $siteColorMain;
+    i{
+      font-size: 2em;
+      line-height: 1.5em;
+    }
+  }
+}
+.link_Share_block{
+  text-align: right;
+  label{
+    width: calc(100% - 100px);
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+  }
+  input{
+    width: 100%;
+    border: none;
+    color: var(--tp__active);
+    background: transparent;
+    font-size: 16px;
+    @include media(phone){
+      padding-left: 0;
+    }
+  }
+  a.btn{
+    width: 90px;
+    vertical-align: bottom;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+}

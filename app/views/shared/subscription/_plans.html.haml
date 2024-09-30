@@ -1,0 +1,83 @@
+- content_for(:extra_body_classes, 'dashboards')
+#subscription_list.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        %h4.groupTitle.clearfix
+          = I18n.t('subscriptions.plan_info.subscription_plans')
+        %section.padding-bottom-5
+          %p.subscriptionTitle= subscription.description
+          .subscription_list-wrapper
+            - plans.each do |plan|
+              - next unless plan.im_enabled
+              .subscription_list-item
+                .longTile_mk3
+                  .right_side
+                    .tittle
+                      = plan.im_name
+                    .details
+                      .fl_currency
+                        = as_currency(plan.amount)
+                      .secondLine
+                        .fl_subscription.fl_plan.subscriptionTerm
+                          %i.GlobalIcon-empty-calendar
+                          = pluralize(plan.interval_count, plan.interval.capitalize)
+                        - if !plan.trial_period_days.to_i.zero? # && can?(:have_trial, plan.channel_subscription.channel)
+                          .fl_plan
+                            %i.GlobalIcon-check-circle
+                            = I18n.t('subscriptions.plan_info.trial_days_included', days: plan.trial_period_days.to_i)
+                        - else
+                          .fl_plan.disabled
+                            %i.GlobalIcon-check-circle
+                            = I18n.t('subscriptions.plan_info.free_trial')
+                      .thirdLine
+                        - if plan.im_livestreams
+                          .fl_plan
+                            %i.GlobalIcon-stream-video
+                            = I18n.t('subscriptions.plan_info.include_streams')
+                        - else
+                          .fl_plan.disabled
+                            %i.GlobalIcon-stream-video
+                            = I18n.t('subscriptions.plan_info.include_streams')
+                        - if plan.im_interactives
+                          .fl_plan
+                            %i.GlobalIcon-users
+                            = I18n.t('subscriptions.plan_info.include_interactives')
+                        - else
+                          .fl_plan.disabled
+                            %i.GlobalIcon-users
+                            = I18n.t('subscriptions.plan_info.include_interactives')
+                        - if plan.im_replays
+                          .fl_plan
+                            %i.GlobalIcon-play
+                            = I18n.t('subscriptions.plan_info.include_replays')
+                        - else
+                          .fl_plan.disabled
+                            %i.GlobalIcon-play
+                            = I18n.t('subscriptions.plan_info.include_replays')
+                        - if plan.im_uploads
+                          .fl_plan
+                            %i.GlobalIcon-upload
+                            = I18n.t('subscriptions.plan_info.include_uploads')
+                        - else
+                          .fl_plan.disabled
+                            %i.GlobalIcon-upload
+                            = I18n.t('subscriptions.plan_info.include_uploads')
+                        - if plan.im_channel_conversation
+                          .fl_plan
+                            %i.GlobalIcon-message-square
+                            = I18n.t('subscriptions.plan_info.include_channel_conversation')
+                        - else
+                          .fl_plan.disabled
+                            %i.GlobalIcon-message-square
+                            = I18n.t('subscriptions.plan_info.include_channel_conversation')
+                    .buyBtn.text-right
+                      - if current_user
+                        - if params[:gift]
+                          %a.btn.btn-m.btn-bordered.Buy_btn{href: preview_purchase_stripe_subscription_path(subscription, plan_id: plan.id, gift: true), data: {remote: true}} Buy
+                        - else
+                          %a.btn.btn-m.btn-bordered.Buy_btn{href: preview_purchase_stripe_subscription_path(subscription, plan_id: plan.id), data: {remote: true}} Buy
+                      - else
+                        %a.btn.btn-m.btn-bordered.Buy_btn.authOpenLogin{onclick: "redirect_back_to_after_signup('#{subscription.channel.relative_path + "?show_plans=1"}');$('input[name=redirect_to]').val('#{subscription.channel.relative_path + "?show_plans=1"}'); eventHub.$emit('open-modal:auth', 'sign-up', {action: 'close-and-reload', data: {link: '#{preview_purchase_stripe_subscription_path(subscription, plan_id: plan.id)}', plan: #{plan.id}}}); $('#subscription_modals #subscription_list').modal('hide');", data: {toggle: :modal, target: '#loginPopup'}, href: '#loginPopup'}
+                          Buy

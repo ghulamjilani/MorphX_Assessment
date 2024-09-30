@@ -1,0 +1,28 @@
+.preview-cancel.modalWithNotification.modal.fade{'aria-hidden' => 'true', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .unobtrusive-flash-container
+        .sm-head
+          = render partial: 'become_presenter_steps/close_modal'
+          %h1.heading
+            Cancel Session
+
+
+          %div
+            = simple_format @message
+            %br
+
+            = semantic_form_for(@session, url: cancel_session_path(@session.id), method: :post, html: {}) do |f|
+              = f.inputs do
+                = f.input :abstract_session_cancel_reason_id,
+                  as: :select,
+                  label: false,
+                  input_html: { class: 'styled-select full-width'},
+                  collection: AbstractSessionCancelReason.all.map{ |reason| [reason.name, reason.id] },
+                  required: true,
+                  wrapper_html: { class: 'custom-input' },
+                  include_blank: true
+
+              .bottomPushContainer.text-right
+                = f.action :submit, label: 'Cancel Session', as:  :button, button_html: { class: 'btn btn-l'}, data: {disable_with: 'Please wait…'}

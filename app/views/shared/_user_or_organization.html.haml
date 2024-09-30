@@ -1,0 +1,227 @@
+%section.page-banner
+  %img.companies-banner.visible-xs-block{src: banner_background_src}
+  - #FIXME - "style" is broken here
+  .companies-banner{style: banner_background_src}
+  .container-wrapp
+    .container
+      .row
+        .col-md-6.text-left
+          .inline-block.vertical-midle
+            %i.VideoClientIcon-placeholder-filled-point.inline-block.vertical-midle
+            %span= country_name
+          - if object.is_a?(User)
+            .inline-block.vertical-midle
+              %i.VideoClientIcon-speaking.inline-block.vertical-midle
+              %span= format_lang(object.language)
+        .col-md-6.text-right.socialMK2.page-bannersocial
+          - if @instagram_social_link.present?
+            %a{href: @instagram_social_link.link_as_url, target: '_blank'}
+              %span
+                %i.VideoClientIcon-instagram.fs-14
+
+          - if @facebook_social_link.present?
+            %a{href: @facebook_social_link.link_as_url, target: '_blank'}
+              %span
+                %i.VideoClientIcon-facebookF.fs-14
+
+          - if @twitter_social_link.present?
+            %a{href: @twitter_social_link.link_as_url, target: '_blank'}
+              %span
+                %i.VideoClientIcon-twitter2.fs-14
+
+          - if @gplus_social_link.present?
+            %a{href: @gplus_social_link.link_as_url, target: '_blank'}
+              %span
+                %i.VideoClientIcon-google.fs-14
+
+          - if @linkedin_social_link.present?
+            %a{href: @linkedin_social_link.link_as_url, target: '_blank'}
+              %span
+                %i.VideoClientIcon-linkedin-1F.fs-14
+
+          - if @youtube_social_link.present?
+            %a{href: @youtube_social_link.link_as_url, target: '_blank'}
+              %span
+                %i.VideoClientIcon-youtube.fs-14
+
+          - if @telegram_social_link.present?
+            %a{href: @telegram_social_link.link_as_url, target: '_blank'}
+              %span
+                %i.GlobalIcon-telegram.fs-14
+
+          - if @website_url.present?
+            %a.siteLink{href: @website_url, target: '_blank'}= @website_url
+%section.PageHeader_MK2
+  .container
+    .row
+      .col-md-2.-wrapper
+        %img.generalAvatar{src: general_avatar_src}
+        .link_Wrapp
+          = link_to object.preview_share_relative_path, method: :get, rel: 'nofollow', remote: true, class: "hide-network-chanel", title: 'Share' do
+            %i.VideoClientIcon-share
+          = degradable_link_to new_message_path(receiver: object), class: "#{'disabled' unless can?(:contact, object)}", rel: "tipsy", title:  "Send Message", remote: true do
+            %i.VideoClientIcon-message
+      .col-md-10
+        .company-name
+          .pull-right
+
+            %a.follower_link.ensure-link-style{rel: 'tip', title: 'follower'}
+              %i.VideoClientIcon-follower
+              = object.count_user_followers
+            - if object.is_a?(User)
+              %a.following_link.ensure-link-style{rel: 'tip', title: 'following'}
+                %i.VideoClientIcon-following
+                = object.following_users_count
+
+            - if !user_signed_in? || !current_user.fast_following?(object)
+              = degradable_link_to object.toggle_follow_relative_path, method: :post, remote: true, class: "list-button margin-right-0 hide-network-chanel #{object.class.name.downcase}-subscribe-#{object.id}" do
+                FOLLOW
+            - else
+              = degradable_link_to object.toggle_follow_relative_path, method: :post, remote: true, class: "active list-button margin-right-0 hide-network-chanel #{object.class.name.downcase}-subscribe-#{object.id}" do
+                FOLLOWING
+          %span
+            = object.respond_to?(:name) ? object.name : object.public_display_name
+          .rating-ver2-wrap.inline-block.vertical-midle
+            = raw ver2_star_rating numeric_rating_for(object)
+            %span
+              = "(#{rates_quantity object })"
+
+        - if object.is_a?(Organization)
+          %h4.companies-short-description.row
+            .col-md-6.companies-short-description-left
+              = tagline
+            .col-md-6.text-right
+              Company
+              %span.inline-block.vertical-midle.ml20.mr20
+                (Established #{object.created_at.strftime('%b %Y')})
+              .dropdown.dropdown-list.pull-right.NoMinWidth.clearfix.ExecutivesDropDown
+                %a.executivesTeam{href: '#', 'data-toggle': :dropdown}
+                  %i.VideoClientIcon-group3
+                %ul.dropdown-menu.full-width.text-left
+                  .title
+                    Network members
+                  .subTitle
+                    Network owner
+                  %li
+                    = link_to spa_user_path(object.user.slug), class: :row do
+                      .col-md-2
+                        .avatarImg-SD{style: "background-image: url('#{object.user.small_avatar_url}')"}
+                      .col-md-10= object.user.public_display_name
+                  - if @representative_users
+                    - @representative_users.each do |user|
+                      .subTitle
+                        Presenters
+                      %li
+                        = link_to spa_user_path(user.slug), class: :row do
+                          .col-md-2
+                            .avatarImg-SD{style: "background-image: url('#{user.small_avatar_url}')"}
+                          .col-md-10= user.public_display_name
+
+              - if can?(:edit, object)
+                .dropdown.dropdown-list.pull-right.NoMinWidth.clearfix
+                  %a.btn-grey-small.More-dropdown.dropdown-toggle.NoMinWidth{href: '#', 'data-toggle': :dropdown}
+                    %i.VideoClientIcon-dots-horizontal-triple
+                  %ul.dropdown-menu.full-width.dropdown-menu-withIcons
+                    %li
+                      %i.VideoClientIcon-EditF
+                      = link_to 'Edit', edit_organization_path(object.id)
+
+    .company-full-description.RM-block
+      .RM-block-text
+        = simple_format description
+      .GO_LINE.GO_LINE_DOWN
+        %i.VideoClientIcon-navigate-down-arrow
+        %i.VideoClientIcon-navigate-down-arrow
+        %i.VideoClientIcon-navigate-down-arrow
+.container.SessionWrapp
+  .LoadingCover
+    .bounceS1
+    .bounceS2
+    .bounceS3
+
+.container.channels-company-list
+  - if @channels.present?
+    %section.ChannelsList
+      .channels-accordion
+        - @channels.each_with_index do |channel, index|
+          .channel-item-wrapp
+            .channel-item.row
+              .col-md-6.session-cover
+                -#- organizer_image = channel.organizer.is_a?(User) ? channel.organizer.medium_avatar_url : channel.organizer.logo.medium_url
+                -#= link_to '', channel.organizer.relative_path, class: 'avatarImg-XD', style: "background-image: url(#{organizer_image})"
+                %a.channel-item-image{href: channel.relative_path, style: "background-image: url('#{(channel.main_image.channel_material.fetch(:img_src) rescue nil)}')", 'data-channel-id': channel.id}
+                  %span.channel.OnHoverText Go to the channel
+              .col-md-6
+                .channel-item-H.clearfix.row
+                  .col-md-8.col-xs-6.channel-item-HTitle
+                    = link_to channel.title, channel.relative_path
+                  .col-md-4.col-xs-6.channel-item-category.text-right
+                    .btns-group
+                      .btn.btn-s.btn-borderred-grey.disabled= channel.count_user_followers
+                      = degradable_link_to channel.toggle_subscribe_relative_path, method: :post, remote: true, class: "#{'active ' if current_user && current_user.fast_following?(channel)}btn btn-s btn-red channel-subscribe-#{channel.id}" do
+                        - if !user_signed_in? || !current_user.fast_following?(channel)
+                          Subscribe
+                        - else
+                          Subscribed
+
+                .channel-item-content-wrapper
+                  .channel-item-B
+                    = simple_format channel.description
+                  .channel-item-F
+                    .row.text-left
+                      .col-md-7.padding-left-20.fs-14
+                        %span Category
+                        = channel.category.name
+                      -#.col-md-5.padding-right-20.fs-14
+                      -#  %span Presentation Style
+                      -#  = channel.channel_type.description
+
+  .row
+    .col-md-12
+      -#- if object.respond_to?(:tags) && object.tags.present?
+      -#  %section.tags
+      -#    .section-title Tags
+      -#    .tagList.tagListMK2
+      -#      - object.tags.each do |actsastaggableon_tag|
+      -#        %span= actsastaggableon_tag.name
+      - if object.reviews_with_comment.present?
+        %section.Reviews
+          .section-title
+            Reviews
+            - if object.reviews_with_comment.size > 2
+              %a.pull-right.ReviewsToggle{href:'#'}
+                %Span#R-SA  See all
+                %Span#R-SL  See less
+                %i.VideoClientIcon-navigate-down-arrow
+          .row
+            - object.reviews_with_comment.last(4).each do |combination|
+              - rate_created_at = combination[:rate_created_at]
+              - comment         = combination[:comment]
+              - session         = combination[:rateable]
+              - stars_quantity  = combination[:stars_quantity]
+              - rater           = combination[:rater]
+
+              .col-md-6.reviews-tile-wrapper
+                .reviews-tile
+                  .row
+                    .col-md-3.text-center
+                      = image_tag rater.avatar_url, class: 'reviews-author-avatar', alt: rater.public_display_name
+
+                      .reviews-author-name
+                        = rater.public_display_name
+                      %ul.starRating.clearfix{class: "rating-#{stars_quantity.to_i}", title: "#{stars_quantity.to_i}/5"}
+                        %li
+                          %i.VideoClientIcon-starF
+                        %li
+                          %i.VideoClientIcon-starF
+                        %li
+                          %i.VideoClientIcon-starF
+                        %li
+                          %i.VideoClientIcon-star-emptyF
+                        %li
+                          %i.VideoClientIcon-star-emptyF
+                      .reviews-date
+                        = time_ago_in_words(rate_created_at).gsub('about', '') + ' ago'
+                    .col-md-9
+                      .reviews-body-text
+                        = simple_format comment

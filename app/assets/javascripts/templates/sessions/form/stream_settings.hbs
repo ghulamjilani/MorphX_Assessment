@@ -1,0 +1,128 @@
+<div class="streamSettings_H padding-bottom-20">
+    {{!--
+        if active need remove class .btn-borderred-grey
+        session[device_type]
+    --}}
+    <a id="camera_setting_webrtcservice" data-target="#Camera_section" href="#Camera_section"
+        data-value="desktop_basic" data-type="immersive" data-service-type="webrtcservice"
+        class=" btn btn-m btn-borderred-secondary btn-hover-secondary {{#if (eq device_type 'desktop_basic')}}active{{else}}btn-borderred-secondary{{/if}} streamSettings_H_first btn-stream-source btn-stream-source-camera">Camera</a>
+    <a id="camera_setting_webrtc" data-target="#Camera_section" href="#Camera_section"
+        data-value="desktop_basic" data-type="livestream" data-service-type="webrtc"
+        class=" btn btn-m btn-borderred-secondary btn-hover-secondary {{#if (eq device_type 'desktop_basic')}}active{{else}}btn-borderred-secondary{{/if}} streamSettings_H_first btn-stream-source btn-stream-source-camera">Camera</a>
+    {{#unless organization.multiroom_enabled}}
+        <a id="encoder_setting" data-target="#Encoder_section" href="#Encoder_section"
+            data-value="studio_equipment" data-service-type="rtmp"
+            class="btn btn-m btn-borderred-secondary btn-hover-secondary {{#if (eq device_type 'studio_equipment')}}active{{else}}btn-borderred-secondary{{/if}} streamSettings_H_btn btn-stream-source btn-stream-source-encoder">Encoder</a>
+        <a id="ipcamera_setting" data-target="#IP_Camera" href="#IP_Camera"
+            data-value="ipcam" data-service-type="ipcam"
+            class="btn btn-m btn-borderred-secondary btn-hover-secondary {{#if (eq device_type 'ipcam')}}active{{else}}btn-borderred-secondary{{/if}} streamSettings_H_btn btn-stream-source btn-stream-source-ipcam">IP Camera</a>
+    {{/unless}}
+    <a id="mobile_setting"
+        href="#MobileApp"
+        data-target="#MobileApp" data-value="mobile" data-type="immersive" data-service-type="mobile"
+        class="btn btn-m btn-borderred-secondary btn-hover-secondary {{#if (eq device_type 'mobile')}}active{{else}}btn-borderred-secondary{{/if}} streamSettings_H_btn btn-stream-source btn-stream-source-mobile">Mobile App</a>
+        {{!-- TEMPORARY DISABLED MOBILE SESSIONS --}}
+        {{!-- onclick="mobileDisabledNotification(); return false;"--}}
+    {{#if organization.multiroom_enabled}}
+        {{#if (or organization.owned (gt organization.sources.length 1))}}
+            <a id="multiroom_setting"
+                href="#Multiroom"
+                data-target="#Multiroom"
+                class="btn btn-m btn-borderred-secondary btn-hover-secondary {{#if (or (eq device_type 'studio_equipment') (eq device_type 'ipcam'))}}active{{else}}btn-borderred-secondary{{/if}} streamSettings_H_btn btn-stream-source">Other Equipment</a>
+        {{else if (and (eq organization.sources.length 1) (not organization.owned true))}}
+            {{#if (eq organization.sources.0.current_service 'rtmp')}}
+                <a id="encoder_setting" data-target="#Encoder_section" href="#Encoder_section"
+                    data-value="studio_equipment" data-service-type="rtmp"
+                    class="btn btn-m btn-borderred-secondary btn-hover-secondary {{#if (eq device_type 'studio_equipment')}}active{{else}}btn-borderred-secondary{{/if}} streamSettings_H_btn btn-stream-source btn-stream-source-encoder">Encoder</a>
+            {{else}}
+                <a id="ipcamera_setting" data-target="#IP_Camera" href="#IP_Camera"
+                    data-value="ipcam" data-service-type="ipcam"
+                    class="btn btn-m btn-borderred-secondary btn-hover-secondary {{#if (eq device_type 'ipcam')}}active{{else}}btn-borderred-secondary{{/if}} streamSettings_H_btn btn-stream-source btn-stream-source-ipcam">IP Camera</a>
+            {{/if}}
+        {{/if}}
+    {{/if}}
+    <span><a href="#" class="streamSettings_toggle {{#if (or (eq device_type 'ipcam') (eq device_type 'studio_equipment'))}}active{{/if}}"></a></span>
+</div>{{!--/.streamSettings_H --}}
+<div class="streamSettings_B" {{#unless (or (eq device_type 'ipcam') (eq device_type 'studio_equipment'))}}style="display: none"{{/unless}}>
+    <div id="Camera_section" class="row source-details Camera_section {{#if (eq device_type 'desktop_basic')}}active{{else}}hidden{{/if}}">
+        <div class="inputs margin-right-20">
+            <div class="padding-top-20">
+                    <span class="">
+                        Video
+                    </span>
+                <div class="">
+                <select id="videoSource" class="full-width text-right">
+                </select>
+                </div>
+            </div>
+            <div class="padding-top-30">
+                    <span class="">
+                        Microphone
+                    </span>
+                <div class="">
+                <select id="audioSource" class="full-width text-right">
+                </select>
+                </div>
+            </div>
+            <div class="padding-top-30">
+                    <span class="">
+                        Speakers
+                    </span>
+                <div class="">
+                    <select id="audioOutput" class="full-width text-right">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="livePreviev visible-md text-center">
+            <!--<div class="responsive-video">-->
+            <!--&lt;!&ndash;placeholder&ndash;&gt;-->
+            <!--<img src="https://placeimg.com/250/143/any" alt="" class="videoBlock display-block">-->
+            <!--&lt;!&ndash;placeholder&ndash;&gt;-->
+            <!--</div>-->
+            <div id="live_preview" class="LivePreviewWrapp visible-md">
+                {{>live_preview_template}}
+            </div>
+            <!--<a href="#" class="Preview_btn">Preview</a>-->
+        </div>
+    </div>
+    {{#if (or (eq false organization.multiroom_enabled) (eq organization.sources.length 1))}}
+        <div id="Encoder_section" class="margin-left-0 margin-right-0 row source-details Encoder_section {{#if (eq device_type 'studio_equipment')}}active{{else}}hidden{{/if}}">
+            {{#if wa_rtmp}}
+                {{>encoder_template}}
+            {{else}}
+            <div class="col-md-12">
+                <p class="padding-top-40 text-color-Darkgrey text-center fs-16">{{i18n 'sessions.form.encoder_info' }}</p>
+                <div class="text-center padding-top-20"><a id="enable_encoder" href="#" class="btn btn-m mw120 btn-borderred-secondary">Enable</a></div>
+            </div>
+            {{/if}}
+
+        </div>
+        <div id="IP_Camera" class="row IP_Camera {{#if (eq device_type 'ipcam')}}active{{else}}hidden{{/if}} source-details">
+            {{#if wa_ipcam}}
+                {{>ipcam_info_template}}
+            {{else}}
+            <div class="col-md-12">
+                <p class="padding-top-40 text-color-Darkgrey text-center fs-16">{{i18n 'sessions.form.ipcam_info' }}</p>
+                <div class="text-center padding-top-20"><a id="enable_ipcam" href="#" class="btn btn-m mw120 btn-borderred-secondary">Enable</a></div>
+            </div>
+            {{/if}}
+        </div>
+    {{/if}}
+    <div id="MobileApp" class="row MobileApp {{#if (eq device_type 'mobile')}}active{{else}}hidden{{/if}} source-details">
+        <div class="col-md-12">
+            <p class="text-color-Darkgrey text-center fs-16">{{i18n 'sessions.form.mobile_info' }}</p>
+        </div>
+    </div>
+    {{#if organization.multiroom_enabled}}
+        <div id="Multiroom" class="Multiroom {{#if (or (eq device_type 'studio_equipment') (eq device_type 'ipcam'))}}active{{else}}hidden{{/if}} source-details">
+            {{>source_settings_template}}
+        </div>
+    {{/if}}
+    <div class="input-block">
+        <input type="hidden" id="ffmpegservice_account_id" name="session[ffmpegservice_account_id]" value="">
+        <div class="errorContainerWrapp">
+            <div class="errorContainer"></div>
+        </div>
+    </div>
+</div>{{!--/.streamSettings_B --}}

@@ -1,0 +1,40 @@
+.mops-modal {
+  .MK2-modal__dialog {
+    width: 50rem;
+    max-width: 80vw;
+  }
+  .MK2-modal__backdrop{
+    position: absolute;
+  }
+  .componentManager__rawHtml {
+    padding: 0;
+  }
+}
+.mopsShowController {
+  .MK2-modal {
+    position: absolute;
+    // top: auto;
+    width: 100%;
+  }
+  .btn {
+    line-height: 2.85rem;
+    border-radius: 4rem;
+    font-size: 1.3rem;
+    min-width: 12rem;
+    min-height: 3rem;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+    padding: 0 2rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .input__field__bottom {
+    min-height: 2.6rem;
+  }
+  .label {
+    user-select: none;
+  }
+}

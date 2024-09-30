@@ -1,0 +1,549 @@
+//font colors helpers
+$fontColors: (
+        "h1" : 'var(--tp__h1)',
+        "h2" : 'var(--tp__h2)',
+        "h3" : 'var(--tp__h3)',
+        "main" : 'var(--tp__main)',
+        "secondary" : 'var(--tp__secondary)',
+        "disabled" : 'var(--tp__disabled)',
+        "icons" : 'var(--tp__icons)',
+        "active" : 'var(--tp__active)',
+        "label" : 'var(--tp__labels)',
+        "activeSecondary" : 'var(--tp__btn__bordered)',
+);
+//generate colors classes
+@each $fontName, $fontColor in $fontColors {
+  .color__#{$fontName} {
+    color: #{$fontColor};
+  }
+}
+
+//bg colors helpers
+$bgColors: (
+        "main" : 'var(--bg__main)',
+        "secondary" : 'var(--bg__secondary)',
+        "content" : 'var(--bg__content)',
+        "contentSecondary" : 'var(--bg__content__secondary)',
+);
+//generate colors classes
+@each $bgName, $bgColor in $bgColors {
+  .bg__#{$bgName} {
+    background: #{$bgColor};
+  }
+}
+
+//inline align width
+$contentAligns: top, bottom, sub, super, middle, text-top;
+@each $contentAlign in $contentAligns {
+  .content__#{$contentAlign} {
+    vertical-align: $contentAlign;
+  }
+}
+
+//text align helpers
+$aligns: center, left, right;
+@each $align in $aligns {
+  .text__#{$align} {
+    text-align: #{$align};
+  }
+}
+
+//block align helpers
+//TODO:VADIM PEREPISATTT v MIXIN
+.margin__center {
+  margin: 0 auto;
+}
+
+//text font-style helpers
+$fontStyles: normal, italic, oblique, inherit;
+@each $fontStyle in $fontStyles {
+  .text__#{$fontStyle} {
+    font-style: #{$fontStyle};
+  }
+}
+
+//font weight
+$fontWeights: bold, lighter, normal;
+@each $fontWeight in $fontWeights {
+  .text__#{$fontWeight} {
+    font-weight: #{$fontWeight};
+  }
+}
+
+//font transform
+$fontTransforms: capitalize, lowercase, uppercase;
+@each $fontTransform in $fontTransforms {
+  .text__#{$fontTransform} {
+    text-transform: #{$fontTransform};
+  }
+}
+
+// break non-whitespace text //TODO:VADIM etot class ispolzyetsia?
+.break-word {
+  word-break: break-word;
+}
+//TODO:VADIM PEREPISATTT v MIXIN
+
+$whiteSpaces: nowrap, break-spaces, none, normal;
+@each $whiteSpace in $whiteSpaces {
+  .white-space__#{$whiteSpace} {
+    white-space: #{$whiteSpace};
+  }
+}
+
+//font sizes
+$fontSizes: 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 24, 28, 30, 32;
+@each $fontSize in $fontSizes {
+  .fs__#{$fontSize} {
+    font-size: #{$fontSize*0.1}rem;
+  }
+}
+
+//lineHeight sizes
+$lineHeights: (s:1, m:1.5, xm:2, l:1.8, xl:2.2, xxl:2.5);
+@each $name, $lineHeight in $lineHeights {
+  .lh__#{$name} {
+    line-height: #{$lineHeight}rem;
+  }
+}
+
+//avatar/logo sizes
+$sizes: (xxs: 3, xs: 2.6, s:3, m:4, l:6, xl:10, sl:15, xxl:20);
+@each $name, $size in $sizes {
+  .logo__#{$name} {
+    width: #{$size}rem;
+    height: #{$size}rem;
+    max-height: #{$size}rem;
+    min-height: #{$size}rem;
+    max-width: #{$size}rem;
+    min-width: #{$size}rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 50%;
+    }
+  }
+}
+
+//width
+$widthHelpers: (full:100%, half:50%, quarter:25%);
+@each $name, $widthHelper in $widthHelpers {
+  .#{$name}__width {
+    width: #{$widthHelper};
+  }
+}
+
+//responsive width
+@each $name, $widthHelper in $widthHelpers {
+  .#{$name}__width__phone {
+    @include media(phone) {
+      width: #{$widthHelper};
+    }
+  }
+  .#{$name}__width__tablet {
+    @include media(tablet) {
+      width: #{$widthHelper};
+    }
+  }
+}
+
+//display
+$displays: block, inline-block, flex, inline;
+@each $display in $displays {
+  .display__#{$display} {
+    display: #{$display};
+  }
+}
+
+//flex position
+$AlignItems: stretch, center, start, end;
+@each $AlignItem in $AlignItems {
+  .flex__align__#{$AlignItem} {
+    @include flex($flex_align:$AlignItem)
+  }
+}
+
+//flex justify
+$justifyItems: start, center, space-between, space-around, space-evenly;
+@each $justifyItem in $justifyItems {
+  .flex__justify__#{$justifyItem} {
+    @include flex($flex_justify:$justifyItem)
+  }
+}
+
+//align-items
+$alignItems: stretch, center, start, end;
+@each $alignItem in $alignItems {
+  .align__items__#{$alignItem} {
+    align-items: #{$alignItem};
+  }
+}
+
+//gap
+$sizes: (1: 1rem, 2: 2rem);
+@each $name, $size in $sizes {
+  .gap__#{$name} {
+    gap: #{$size};
+  }
+}
+
+//paddings and margins
+$spaceamounts: (0, 5, 10, 15, 20, 25, 30);
+
+@each $space in $spaceamounts {
+  .margin-b__#{$space} {
+    margin-bottom: #{$space * 0.1}rem;
+  }
+}
+
+@each $space in $spaceamounts {
+  .margin-r__#{$space} {
+    margin-right: #{$space * 0.1}rem;
+  }
+}
+
+@each $space in $spaceamounts {
+  .margin-l__#{$space} {
+    margin-left: #{$space * 0.1}rem;
+  }
+}
+
+@each $space in $spaceamounts {
+  .margin-t__#{$space} {
+    margin-top: #{$space * 0.1}rem;
+  }
+}
+
+@each $space in $spaceamounts {
+  .padding-t__#{$space} {
+    padding-top: #{$space * 0.1}rem;
+  }
+}
+
+@each $space in $spaceamounts {
+  .padding-b__#{$space} {
+    padding-bottom: #{$space * 0.1}rem;
+  }
+}
+
+@each $space in $spaceamounts {
+  .padding-l__#{$space} {
+    padding-left: #{$space * 0.1}rem;
+  }
+}
+
+@each $space in $spaceamounts {
+  .padding-r__#{$space} {
+    padding-right: #{$space * 0.1}rem;
+  }
+}
+
+// rotate
+$rotateGrads: 45, 90, 180;
+@each $rotateGrad in $rotateGrads {
+  .rotate__#{$rotateGrad} {
+    transform: rotate(#{$rotateGrad}deg);
+    -webkit-transform: rotate(#{$rotateGrad}deg);
+    display: inline-block;
+  }
+}
+
+.no {
+  &__padding {
+    padding: 0 !important;
+  }
+
+  &__margin {
+    margin: 0 !important;
+  }
+}
+
+//position
+.position {
+  &__center {
+    @include center(vh)
+  }
+
+  &__vertical {
+    @include center(v)
+  }
+
+  &__horizontal {
+    @include center(h)
+  }
+}
+
+//position
+$positions: absolute, relative, fixed;
+@each $position in $positions {
+  .position__#{$position} {
+    position: #{$position};
+  }
+}
+
+//floats
+.pull {
+  &__left {
+    float: left;
+  }
+
+  &__right {
+    float: right;
+  }
+
+  &__clear {
+    @include clearfix;
+  }
+}
+
+
+//hide content
+.hide {
+  display: none !important;
+  //show only for mobile
+  @include media(tablet) {
+    &__mobile {
+      display: none !important;
+    }
+  }
+  //show only for desctop
+  @include media(reverso-tablet) {
+    &__desctop {
+      display: none !important;
+    }
+  }
+}
+
+
+.text__ellipsis {
+  @include text__ellipsis();
+
+  &__1row {
+    @include text__ellipsis(1);
+  }
+
+  &__2row {
+    @include text__ellipsis(2);
+  }
+
+  &__3row {
+    @include text__ellipsis(3);
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file
+.spinnerSlider {
+  position: absolute;
+  left: 50%;
+  margin-left: -3.5rem;
+  top: 50%;
+  margin-top: -1rem;
+  width: 7rem;
+  text-align: center;
+  @include transition200();
+
+  > div {
+    background: rgba(0, 0, 0, 0.2);
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelayS 1.4s infinite ease-in-out;
+    animation: bouncedelayS 1.4s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  .bounceS1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+
+  .bounceS2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file to animation mixins
+@-webkit-keyframes bouncedelayS {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file to animation mixins
+@keyframes bouncedelayS {
+  0%, 80%, 100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file to animation mixins
+@keyframes bouncedelayDot {
+  0%, 100% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+  30%, 70% {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file to animation mixins
+@keyframes placeholderBounce {
+  0% {
+    height: 0%;
+  }
+  25% {
+    height: 100%;
+  }
+  50% {
+    height: 0%;
+  }
+  100% {
+    height: 0%;
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file to animation mixins
+@keyframes waveLoading {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file to animation mixins
+@keyframes fadeInAnimation {
+  0%, 80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file to animation mixins
+@-moz-keyframes fadeInAnimation {
+  0%, 70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file to animation mixins
+@-webkit-keyframes fadeInAnimation {
+  0%, 70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#dragScroll {
+  cursor: grabbing;
+}
+
+
+//TODO:VADIM PEREPISATTT v remove from this file
+.animatedScroll {
+  @include media(tablet) {
+    &::-webkit-scrollbar, &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-corner, &::-webkit-scrollbar-button {
+      display: none;
+    }
+  }
+  @include media(reverso-tablet) {
+    transition: color 0.3s;
+    color: transparent;
+    &::-webkit-scrollbar {
+      width: 1.3rem;
+      height: 1.3rem;
+      background: none;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-clip: content-box;
+      border: .4rem solid transparent;
+      border-radius: .7rem;
+      box-shadow: inset 0 0 0 1rem;
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-button {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+    &::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
+    &:hover {
+      color: #baccdb;
+    }
+  }
+}
+
+//TODO:VADIM PEREPISATTT v remove from this file
+.customPaginate {
+  @include flex(flex, center, space-between);
+
+  &__text {
+    font-size: 1.5rem;
+    color: var(--tp__main);
+    padding-right: 1rem;
+  }
+
+  a {
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &__arrow {
+    @include flex(flex, center, center);
+    background: var(--bg__label);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-left: 1rem;
+    transition: .3s;
+    color: #fff;
+  }
+
+  &__disable {
+    pointer-events: none;
+    background: transparent;
+    cursor: not-allowed;
+    color: var(--tp__icons);
+    opacity: 0.3;
+  }
+}
+
+
+.separateLine{
+  width: 100%;
+  display: block;
+  margin: 2rem 0;
+  height: 1px ;
+  background: var(--border__separator);
+}

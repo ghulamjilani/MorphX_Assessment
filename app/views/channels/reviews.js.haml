@@ -1,0 +1,10 @@
+$('#reviewsArea .reviews').append("#{escape_javascript(render(partial: 'channels/reviews', locals: {reviews: @reviews, channel: @channel}))}");
+- if @total_pages > 0
+  $('#reviewsArea').removeClass('hidden');
+window.initializeDateTimes()
+$('#reviewsArea a[data-remote]').css('visibility', 'visible')
+
+- if @total_pages == @current_page
+  $('#reviewsArea .show_more').remove();
+- else
+  $('#reviewsArea .show_more a').attr('href', "#{escape_javascript(reviews_channel_path(@channel, limit: @limit, offset: (@offset + @limit)))}");

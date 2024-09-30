@@ -1,0 +1,24 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          review-form:
+            review_form:
+              feedback: Feedback
+              pls_rate_session: Please rate this session
+              your_experience: How was your experience?*
+              review_does_not_affect_session_statistics: this review does not affect session statistics, this review is to improve the quality of the platform
+              rate_the_content: Rate the content*
+              video_quality: Video Quality
+              sound_quality: Sound Quality
+              edit: Edit
+              leave: Leave
+              done: Done
+              send: Send
+              rating_reviews_not_available: The rating and reviews are not available prior to session start
+              have_confirm_email: You have to confirm your email address before continuing
+              rating_first_then_review: Choose a rating first, then add a review.
+              review_successfully_updated: Review successfully updated
+              something_wrong_try_later: Something went wrong please try again later
+              review_successfully_created: Review successfully created

@@ -1,0 +1,9 @@
+en:
+  models:
+    session:
+      share_title: "%{organizer_share_title} on %{channel_title} channel%{title}"
+      errors:
+        switch_type_after_start: "Session type cannot be changed after session is started"
+        duration_change_limit_reached: Change limit reached
+        max_interactive_participants_service_limit: "exceeds your interactive service limit: %{limit}"
+        max_interactive_participants_subscription_limit: "exceeds your business subscription limit: %{limit}"

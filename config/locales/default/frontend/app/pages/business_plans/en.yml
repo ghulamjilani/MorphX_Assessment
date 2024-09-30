@@ -1,0 +1,102 @@
+en:
+  frontend:
+    app:
+      pages:
+        business_plans:
+          banner:
+            choose_the_best_plan: Choose the best plan for your business
+            discover: Discover everything you need with 14-day Free Trial.
+            monthly: Monthly
+            yearly: Yearly
+            you_can_save: (Save %{maxDiscount}%)
+          plans:
+            tera_bytes: TB
+            giga_bayes: GB
+            starter: Starter
+            discover_your_potential: Discover your potential
+            pro: Pro
+            start_your_business: Start your business
+            premium: Premium
+            grow_your_business: Grow your business
+            enterprise: Enterprise
+            usage_charges: "+ overage charges"
+            buy: Buy
+            or_purchase_now: or Purchase Now
+            or_start_trial: or Start Free Trial
+            no_trial: No Trial
+            unlimited: Customizable
+            live: Live
+            interactive: Interactive
+            videos: Videos
+            replays: Replays
+            over: Over
+            min: min
+            contact: Contact Sales
+            video_playback: Video Playback
+            amount: "$%{num}/mo"
+            billed_annually: per month billed annually
+          info:
+            video_creation_content_management: Video Creation & Content Management
+            channel: Channel
+            hours: hours
+            unlimited_channel: Unlimited Channel
+            max_session_duration_up_to: Max Session Duration up to
+            ios_and_android_apps: iOS and Android apps
+            interactive_conference: Interactive Conference
+            facility_management: Facility management (Multiroom)
+            featured_section: Featured Section
+            storage_space: Storage Space
+            customizable: Customizable
+            monetization_options: Monetization Options
+            sell_in_multiple_currencies: Sell in multiple currencies
+            subscriptions_for_channel: Subscriptions for Channel
+            ppv: PPV
+            gifting: Gifting
+            stream_shopping: In-Stream Shopping
+            online_store: Online Store
+            user_management: User Management
+            user: User
+            add: Add
+            admin: Admin
+            unlimited: Unlimited
+            admins: Admins
+            admins_&_creators: Admins & Creators
+            and: and
+            creator: Creator
+            creators: Creators
+            organization: Organization
+            admins_creators: Creators & Admins
+            organization_members_management: Organization members management
+            social_features: Social Features
+            integration_constant: Integration Constant contact, Mail Chimp, Zapier
+            audience_chat: Audience Chat
+            personalized_community_blog: Articles(Personalized Community Blog)
+            other_video_features: Other Video Features
+            free_streaming: Ad-free Streaming
+            support_multiple_languages: Support multiple languages
+            full_uploads: Full 1080 HD Uploads
+            transcoding: Transcoding and Multi-Bitrate Streaming
+            player: Embeddable fully featured responsive HTML5 Player with Live-streaming,
+              Chat, Playlist, E-Commerce Support
+            ip_camera: IP Camera Support
+            encoder: 'Encoder Support: teredek, professional equipment'
+            analytics: Analytics
+            real_time: Real-Time Analytics
+            statistics: Statistics Reporting
+            support_level: Support Level
+            two_hours_chat_support: 24/7 Live Streaming Support.Chat Support responsive within 2 hours during US business hours and overnight hours
+            four_hours_chat_support: Support responsive within 4 hours during US business hours
+            twenty_four_hours_chat_support: Support responsive within 24 hours during US business hours
+            unlim_hours_chat_support: 24/7 Live Streaming Support.Chat Support responsive within 2 hours during US business hours and overnight
+            free_trial_period: Free Trial Period
+            pricing_change: Introductory pricing subject to change
+          tooltips:
+            video_creation_tooltip: Create channels and successfully manage your video content
+            storage_space_tooltip: Choose storage volume suitable for your purposes
+            monetization_tooltip: Draw income from multiple variants of monetization
+            management_tooltip: Determine the user roles to manage the content of your organization
+            featuresTooltip: Implement social interaction features like audience chat, community blog and others
+            other_features_tooltip: Make use of additional video features to drive more subscribers to your channels
+            analytics_tooltip: Obtain advantage of real-time analytics and reporting options for your convenience
+            support_tooltip: Get excess to chat support available during US business hours for your requests
+            trial_tooltip: Free trial period is included! So give it a try and check the Unite functionality!

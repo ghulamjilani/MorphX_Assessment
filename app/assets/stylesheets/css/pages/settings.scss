@@ -1,0 +1,89 @@
+@import "../../mixin";
+
+.PersonalLinks{
+  .input-block{
+    label{
+      padding-left: 30px;
+    }
+    input{
+      width: calc(100% - 30px);
+      margin-left: 30px;
+    }
+  }
+  label i:before{
+    position: absolute;
+    left: 2px;
+    bottom: 1px;
+    font-size: 15px;
+    color: var(--tp__icons);
+  }
+  i.VideoClientIcon-linkedinF:before{
+    bottom: 3px;
+  }
+}
+.profiles .form-control:focus{
+  border-bottom: none!important;
+  color: var(--tp__main);
+  box-shadow: none;
+  border-bottom: 0.2rem solid var(--border__content__sections)!important;
+}
+.account-edit-page-content{
+  .AccountSection{
+    @include flex(flex, center, space-between);
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border__separator);
+    img{
+      margin-right: 3rem;
+      max-height: 4rem;
+    }
+    .btn{
+      font-size: 1.3rem;
+      font-weight: bold;
+      width: 12rem;
+    }
+    @include media(p-phone){
+      flex-direction: column;
+      align-items: flex-start;
+      > :last-child{
+        padding-top: 2rem;
+        width: 100%;
+        .btn{
+          width: 100%;
+        }
+      }
+    }
+    @include media(phone){
+      .connected_service_name{
+        width: 100%;
+      }
+    }
+  }
+  .passwordArea{
+    .help-block{
+      position: relative;
+      font-size: 12px;
+      color: var(--tp__inputs__validation);
+      vertical-align: top;
+    }
+    .errorContainerWrapp{
+      span{
+        color: var(--tp__inputs__validation);
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .sectionsWrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    border-bottom: 1px solid var(--border__separator);
+    .feed_item.no-border{
+      border-bottom: none;
+    }
+    .connected-status{
+      white-space: nowrap;
+    }
+  }
+}

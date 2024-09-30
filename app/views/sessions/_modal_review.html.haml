@@ -1,0 +1,82 @@
+#review-modal.modal.fade.AddReview{aria: {hidden: true}, role: :dialog, tabindex: -1, session_id: @session.id}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .unobtrusive-flash-container
+        .bodyWrapper
+          = render partial: 'become_presenter_steps/close_modal'
+          .imgSide
+            = render partial: 'leaveFeedBackSvg'
+          .bodyContent
+            .technicalPage__label
+              = review_action_title
+
+            %fieldset.inputs
+              = semantic_form_for(@comment, url: review_comment_path(@session.id), html: {id: 'form-session-feedback', data: {id: @session.id}}, method: :post, remote: true) do |f|
+                = f.input :klass, :as => :hidden, input_html: {name: 'klass', value: @session.class.name}
+                .feedContent
+                  .fs-16.bold.padding-bottom-20 Please rate your overall experience:
+
+                  .col-md-6
+                    .custom-input.string.input.required.stringish.control-group
+                      %label.control-label
+                        Presenter Performance
+                        %abbr{title: :required}
+                      .controls
+                        = rating_with_tooltip_for(@session, Session::RateKeys::PRESENTER_PERFORMANCE, disable_after_rate: false, ignore_average_rating: true)
+
+                  .col-md-6
+                    .custom-input.string.input.required.stringish.control-group
+                      %label.control-label
+                        Quality of Content
+                        %abbr{title: :required}
+                      .controls
+                        = rating_with_tooltip_for(@session, Session::RateKeys::QUALITY_OF_CONTENT, disable_after_rate: false, ignore_average_rating: true)
+
+                  .row
+                    .col-md-12.padding-top-30
+                      .field-well.chWr
+                        .clearfix.margin-bottom-0{style: 'border-bottom: 0; padding: 0'}
+                          .input.optional.control-group
+                            .controls.controls-row
+                              = f.input :overall_experience_comment,
+                                        required: true,
+                                        input_html: comment_input_html_params, rows: 1,
+                                        as:  :text,
+                                        label: false,
+                                        input_html: {placeholder: 'Please enter comments here about your experience with the presenter:'},
+                                        wrapper_html: {class: 'margin-bottom-0'}
+
+                .feedContent
+                  .fs-16.bold Please rate your session:
+                  %div.padding-bottom-20
+                    %small (The following will not affect overall presenter review rating)
+
+                  .col-md-6
+                    .custom-input.string.input.required.stringish.control-group
+                      %label.control-label Video Quality
+                      .controls
+                        = rating_with_tooltip_for(@session, Session::RateKeys::VIDEO_QUALITY, disable_after_rate: false, ignore_average_rating: true)
+
+                  .col-md-6
+                    .custom-input.string.input.required.stringish.control-group
+                      %label.control-label Sound Quality
+                      .controls
+                        = rating_with_tooltip_for(@session, Session::RateKeys::SOUND_QUALITY, disable_after_rate: false, ignore_average_rating: true)
+
+                  .row
+                    .col-md-12.padding-top-30
+                      .field-well.chWr
+                        .clearfix.margin-bottom-0{style: 'border-bottom: 0; padding: 0'}
+                          .input.optional.control-group
+                            .controls.controls-row
+                              = f.input :technical_experience_comment,
+                                        required: false,
+                                        input_html: comment_input_html_params,
+                                        as:  :text,
+                                        label: false,
+                                        input_html: {placeholder: 'Tell us more:'},
+                                        wrapper_html: {class: 'margin-bottom-0'}
+
+                .confirmBtn
+                  = comment_submit_button(f)

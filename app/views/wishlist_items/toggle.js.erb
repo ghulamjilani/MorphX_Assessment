@@ -1,0 +1,7 @@
+
+$('.AddtoWishListBTN').html('<%= raw %{<i class="#{wishlist_icon_class}"></i> WishList }%>');
+$(".<%= params[:model_type].downcase %>-wishlist-<%= @model.id %>").toggleClass("selected", <%= @has_in_wishlist_now %>).toggleClass("active", <%= @has_in_wishlist_now %>);
+
+//if you're in wishlist-dashboard and clicked on toggle-in-wishlist
+//remove this session right away(requested by Alex)
+$('body.dashboards').find("#<%= params[:model_type].downcase %><%= @model.id %>").remove();

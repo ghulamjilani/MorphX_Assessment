@@ -1,0 +1,16 @@
+en:
+  views:
+    dashboards:
+      participate_tab_sessions:
+        mins: mins
+        private: Private
+        public: Public
+        one_on_one: One on One
+        group: Group
+        edit: Edit
+        publish_confirmation: Publish confirmation
+        publish: Publish
+        cancel_interactive: Cancel Interactive
+        cancel_livestream: Cancel Livestream
+        cancel_on_demand: Cancel On-Demand
+        cancel: Cancel

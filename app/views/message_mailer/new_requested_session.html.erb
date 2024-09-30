@@ -1,0 +1,7 @@
+<h3><%= @subject %></h3>
+
+<%= simple_format @message.body %>
+
+<p>
+  Visit <%= link_to 'your inbox', message_url(@message.conversation.id, box: 'inbox') %> for more info.
+</p>

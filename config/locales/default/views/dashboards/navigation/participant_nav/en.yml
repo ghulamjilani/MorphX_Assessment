@@ -1,0 +1,10 @@
+en:
+  views:
+    dashboards:
+      navigation:
+        participant_nav:
+          channels: Channels
+          videos: Videos
+          contacts: Contacts
+          saved: Saved
+          browsing_history: Browsing History

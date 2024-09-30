@@ -1,0 +1,31 @@
+.preview-clone.modal.fade{'aria-hidden' => 'true', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+        %h1.heading
+          = "Clone #{@session.title} with the following options:"
+
+        %form{action: clone_channel_session_path(@session.channel_id, @session.id), method: 'GET'}
+          %div
+
+            - cond1 = @session.session_invited_immersive_participantships.present? || @session.session_invited_livestream_participantships.present?
+            - cond2 = @session.dropbox_materials.present?
+
+            - raise 'session should be instantly clonned instead' if !cond1 && !cond2
+
+            - if cond1
+              %div{class: 'custom-input choice boolean input optional control-group', id: "session_invites_input"}
+                .controls
+                  %input{type: "checkbox", name: "session[#{SessionsHelper::Clone::INVITES}]", id: "session_#{SessionsHelper::Clone::INVITES}", value: "1", checked: 'checked'}
+
+                  %label.checkbox{for: "session_#{SessionsHelper::Clone::INVITES}"} with invites
+            - if cond2
+              %div{class: 'custom-input choice boolean input optional control-group', id: "session_#{SessionsHelper::Clone::INVITES}_input"}
+                .controls
+                  %input{type: "checkbox", name: "session[#{SessionsHelper::Clone::DROPBOX_ASSETS}]", id: "session_#{SessionsHelper::Clone::DROPBOX_ASSETS}", value: "1", checked: 'checked'}
+
+                  %label.checkbox{for: "session_#{SessionsHelper::Clone::DROPBOX_ASSETS}"} with Dropbox assets
+            %div
+              %input{type: 'submit', value: 'Clone', class: 'btn btn-m'}

@@ -1,0 +1,12 @@
+#participate_between.FlashBox.padding-bottom-10{style: "display: block"}
+  .FlashBox-h
+    .FlashBox-Title.hidden \#{abstract_session.title}
+    .FlashBox-B
+      As a precaution we wanted to let you know that you have another session scheduled for that time period. Would you like to continue with a purchase?
+    .FlashBox-F{style: 'padding-top: 0;'}
+      .FlashBox-btnBox
+        %a.btn.btn-s.margin-left-5.btn-borderred-secondary{href: "#", onclick: "$('#participate_between').remove();return false;"}
+          Cancel
+        %a.btn.btn-s.active{href: "#", onclick: "$(window.modalBody).modal();$('#participate_between').remove();$('body').addClass('modal-open');return false;"}
+          %i.VideoClientIcon-checkmark
+          Proceed

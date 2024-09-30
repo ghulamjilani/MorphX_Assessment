@@ -1,0 +1,399 @@
+- content_for(:extra_body_classes, "hidePageHeader landingPage resetMainContainer header-top")
+#landing
+  .welcome-screen
+    %h1.title
+      = t('home_page.landing.title', service_name: Rails.application.credentials.global[:service_name])
+      .first-img
+      .second-img
+      .third-img
+      .fourth-img
+      .fifth-img
+      .sixth-img
+        -# .banner
+        -#     %img.main-logo{src: asset_path('landing/banner.png')}
+        -#     %img.letter-r{src: asset_path('landing/r.png')}
+        -#     %img.letter-a{src: asset_path('landing/a.png')}
+        -#     %img.letter-e{src: asset_path('landing/e.png')}
+        -#     %img.letter-t{src: asset_path('landing/t.png')}
+        -#     %img.letter-e-gray{src: asset_path('landing/e-gray.png')}
+        -#     %img.letter-c{src: asset_path('landing/c.png')}
+        -#     %img.letter-and{src: asset_path('landing/and.png')}
+    %p.text
+      Build your community & earn money streaming
+    %p.sub-text
+      %span
+        Create a seamless transition between a traditional studio experience and an interactive digital one.
+    %button.become_btn.button-wrap.start_wizard
+      = I18n.t('views.home.services.joybee_landing.become_creator', creator: I18n.t('dictionary.creator'))
+  .build-and-grow.container
+    %h2
+      Build & Grow Your Business
+    %ul.build-list.buildBusiness
+      %li.grow
+        .icon
+        .title
+          Grow
+        %p
+          Grow your community faster with a
+          %br
+          built-in audience and easily invite
+          %br
+          new members into your world.
+        .content-wrp.start_wizard
+          .content
+            .sub
+              Social Hub
+            %img{src: asset_path('landing/followers-img.png')}
+          .empty-wrap
+          .slide.growNowSlide
+            Grow now
+      %li.middle
+        .icon
+        .title
+          Streaming
+          %span.and
+            and
+          %span.and2
+            &
+          more
+        %p
+          Post videos as often as you want, stream
+          %br
+          any time, and create live, interactive
+          %br
+          experiences with your customers.
+        .content-wrp.start_wizard
+          .content
+            %img{src: asset_path('landing/streaming.png')}
+          .empty-wrap
+          .slide
+            Stream now
+      %li.earn
+        .icon
+        .title
+          Earn
+        %p
+          Build your business with customizable
+          %br
+          subscription plans tailored to fit YOUR
+          %br
+          customer’s needs.
+        .content-wrp.start_wizard
+          .content
+            .sub
+              Subscription Plans
+            %span
+              Yoga classes for all levels by Ricky Tran
+            %img.plan1{src: asset_path('landing/plan.png')}
+            %img.plan2{src: asset_path('landing/plan2.jpg')}
+            %img.plan2tablet{src: asset_path('landing/plan2tablet.jpg')}
+          .empty-wrap
+          .slide
+            Earn now
+    .unlock-wrapper
+
+      %ul.unlock-potential
+        %li.left
+          .icon
+          .title
+            Easy Monetization
+          %p
+            Upload your videos and add
+            %br
+            monetization options easily to
+            %br
+            start earning right away.
+        %li.middle
+          %h2
+            Unlock Your Potential
+          .icon
+          .title
+            Create Experiences
+          %p
+            It’s more than just streaming. #{Rails.application.credentials.global[:service_name].upcase} lets you
+            %br
+            create live interactive experiences to truly
+            %br
+            connect with your customers.
+        %li.right
+          .icon
+          .title
+            Embrace Freedom
+          %p
+            Let us run and host your channels for you
+            %br
+            so you can focus on what really matters -
+            %br
+            your classes and your customers.
+    .sub-unlock
+      Try features like two-way conversations in streams, chatting, polling, merchandise sales, and more.
+    .design-list
+      %ul
+        %li
+        %li.middle
+          .title
+            Design Your Success
+          %p
+            Create as many channels as you want and
+            %br
+            share your expertise - while making money.
+          %button.ready_btn.start_wizard I'm ready to create
+        %li
+    .switcher
+      .item-wrap.left.start_wizard
+        .item
+          %img{src: asset_path('landing/yoga-meditation.png')}
+          %span
+            Yoga ᛫ Meditation
+        .empty-wrap
+        .setup-channel
+          Set up your channel
+      .item-wrap.middle.start_wizard
+        .item
+          %img{src: asset_path('landing/do-it2.png')}
+          %span
+            Doing what you like
+        .empty-wrap
+        .setup-channel
+          Set up your channel
+      .item-wrap.right.start_wizard
+        .item
+          %img{src: asset_path('landing/fitness.png')}
+          %span
+            Fitness
+        .empty-wrap
+        .setup-channel
+          Set up your channel
+
+  - if Rails.application.credentials.global.dig(:service_subscriptions, :enabled)
+    .BpLandingWrapper
+      .BPlanding__head
+        %h3 Choose the best plan for your business
+        .BPlanding__switchBtn
+          %a.month.active{href:'#'} Montly
+          %a.year{href:'#'} Yearly
+
+      .BPlanding__plans
+        .BPlanding__plans__tiles__wrapp
+          -#.BPlanding__plans__tiles
+            .BPlanding__plans__tiles__head
+              .planTile__wrapp
+                .planTile.planTile__type1
+              Free
+            .BPlanding__plans__tiles__body
+              %div Give it a try
+              %div.tl__cost $0.00
+              %div.tl__overcharge
+              %div.tl__storage 0 T
+            .BPlanding__plans__tiles__footer
+              %a.btn.btn-m.btn-borderred-grey Try
+          - @plan_packages.each_with_index do |package, index|
+            .BPlanding__plans__tiles{class: ('BPlanding__plans__tiles__recommended' if package.recommended?)}
+              .BPlanding__plans__tiles__head
+                .planTile__wrapp
+                  %div{class: "planTile planTile__type#{index + 2}"}
+                    .cube__wrapp
+                      .cube.cube__front
+                      .cube.cube__back
+                      .cube.cube__right
+                      .cube.cube__left
+                      .cube.cube__top
+                      .cube.cube__bottom
+                = package.name
+              - package.plans.each do |plan|
+                .interval{class: plan.interval, style: ('display: none' if plan.interval != 'month')}
+                  .BPlanding__plans__tiles__body
+                    %div= package.description
+                    %div.tl__cost= plan.formatted_price
+                    %div.tl__overcharge + overage charges
+                    %div.tl__storage= "#{package.storage.to_i} GB"
+                  .BPlanding__plans__tiles__footer
+                    %a.btn.btn-m.btn-borderred-grey{href: '/pricing'} Read More
+          .BPlanding__plans__tiles
+            .BPlanding__plans__tiles__head
+              .planTile__wrapp
+                .planTile.planTile__type6
+                  .cube__wrapp
+                    .cube.cube__front
+                    .cube.cube__back
+                    .cube.cube__right
+                    .cube.cube__left
+                    .cube.cube__top
+                    .cube.cube__bottom
+              Enterprise
+            .BPlanding__plans__tiles__body
+              %div Contact sales
+              %div.tl__cost ...
+              %div.tl__overcharge + overage charges
+              %div.tl__storage Over
+            .BPlanding__plans__tiles__footer
+              %a.btn.btn-m.btn-borderred-grey{data: {toggle: :modal, target: '#contactUs'}, href: '#contactUs'} Contact Sales
+
+  .community
+    .container
+      .images
+        %img.first-img{src: asset_path('landing/round-face.png')}
+        %img.third-img.start_wizard{src: asset_path('landing/shape3.png')}
+        %img.fifth-img{src: asset_path('landing/tara.png')}
+        %img.sixth-img{src: asset_path('landing/shape5.png')}
+        %img.seventh-img{src: asset_path('landing/girl.png')}
+      .text
+        .title
+          Join Our Community
+        %p
+          Connect with other amazing teachers around the world and learn
+          %br
+          = I18n.t('views.home.services.joybee_landing.from_each_other', creator: I18n.t('dictionary.creator'))
+        %button.button-wrap.start_wizard Join now
+  .start-creating.container
+    .title
+      Sign up and start creating
+    .sub-title
+      Give it a try! Free 1 month trial!
+    %ul.list
+      %li.item.left.start_wizard
+        .logo-unity
+        .text-wrap
+          .cost
+            Bronze - $49/mo
+          .desc
+            Full access to #{Rails.application.credentials.global[:service_name].upcase}:
+            %br
+            go live, shoppable galleries,
+            %br.hide
+            syndication
+          %ul
+            %li
+              • Unlimited streaming and storage
+            %li
+              • Profile and channel set-up
+              %br
+              assistance, plus ongoing support
+      %li.item.middle.start_wizard
+        .logo-unity
+        .text-wrap
+          .cost
+            Gold - $99/mo
+          .desc
+            All the features of the Bronze
+            %br
+            package +
+          %ul
+            %li
+              • The ability for you to invite
+              %br
+              influencers to your channel
+            %li
+              • Full channel set-up and guaranteed
+              %br
+              6 hour support response
+      %li.item.right.start_wizard
+        .logo-unity
+        .text-wrap
+          .cost
+            Platinum - $199/mo
+          .desc
+            All the features of the Gold
+            %br
+            package +
+          %ul
+            %li
+              • Set-up and management of a
+              %br
+              commissionable link program
+            %li
+              • A fully managed, white-glove
+              %br
+              influencer campaign per quarter
+    %button.ready_btn.start_wizard I'm ready to create
+- unless current_user
+  = render 'layouts/application/sign_in', redirect_url: spa_pricing_index_path
+  = render 'layouts/application/sign_up', redirect_url: spa_pricing_index_path, action_url: wizard_v2_profile_path, form_method: :put, submit_text: 'Sign up and continue'
+#contactUs.v-modal__body.modal.fade{role: :dialog, data: {backdrop: "static"}}
+  .modal-dialog
+    .modal-content
+      = render 'become_presenter_steps/close_modal'
+      .modal-body
+        .imgSide
+          %img{src: asset_path('contactUsJoybee.png')}
+        .contactUsWrapper
+          %h4.technicalPage__label.groupTitle.padding-bottom-0.clearfix
+            Talk with our sales team
+          = form_tag lets_talk_path, method: :post, class: 'form_V2', id: :lets_talk, data: {remote: true} do
+            .formContainer.lax{'data-lax-opacity_large':'vh 0, (vh*0.6) 0, (vh*0.5) 1', "data-lax-anchor":"self"}
+              .input-block.state-clear.required
+                %label Name
+                %input#FirstName{type: :text, required: true}
+                .errorContainerWrapp
+                  .errorContainer
+              .input-block.state-clear.required
+                %label{for: :email} Email
+                %input#Email{type: :email, name: :email, required: true}
+                .errorContainerWrapp
+                  .errorContainer
+              .input-block
+                %label{for: :phone} Phone (optional)
+                %input#Phone{type: :tel, name: :phone}
+              .input-block.state-clear
+                %label{for: :company} Company Name (optional)
+                %input#Company{type: :text, name: :company}
+              .input-block.state-clear.required
+                %label{for: :about} Message
+                %textarea#About{name: :about, required: true, 'max-length': 2000, maxlength: 2000}
+                .counter_block 0/2000
+                .errorContainerWrapp
+                  .errorContainer
+              - if recaptcha_form_field_enabled?
+                .input-block.state-clear.recapthaWrapp
+                  = recaptcha_tags
+            .text-right.padding-top-20.clearfix.outsideButton
+              %button.btn.btn-l.btn-red.btn-square.padding-left-50.padding-right-50{type: :submit}
+                Send
+
+#joybee_subscription_modal.modal.fade{data: {backdrop: :static}, 'aria-hidden': true, role: :dialog, tabindex: -1, class: 'plan-payment-modal'}
+- content_for(:after_include_javascripts) do
+  - if current_user
+    - if current_user.user_info_ready?
+      - if can?(:access_wizard_by_business_plan, current_user)
+        :javascript
+          function redirectToBusiness () {
+            window.location.href = Routes.wizard_v2_business_path();
+            return false;
+          }
+          $('.start_wizard').click(redirectToBusiness);
+      - else
+        :javascript
+          function redirectToBusiness () {
+            window.location.href = Routes.spa_pricing_index_path();
+            return false;
+          }
+          $('.start_wizard').click(redirectToBusiness);
+    - else
+      :javascript
+        $('.start_wizard').click(function(){
+          window.eventHub.$emit("open-modal:auth", "more-info")
+          return false
+        });
+  - else
+    :javascript
+      function openSignUpModal () {
+        window.eventHub.$emit("open-modal:auth", "sign-up", {action: 'redirect-to-wizard'})
+        // $('#signupPopup').modal('show');
+        return false;
+      }
+      $('.start_wizard').click(openSignUpModal);
+  :javascript
+    $('.BPlanding__switchBtn a').on('click', function(e) {
+      if ($(e.currentTarget).hasClass('month')) {
+        $('.BPlanding__switchBtn a.month').addClass('active');
+        $('.BPlanding__switchBtn a.year').removeClass('active');
+        $('.interval.month').show();
+        $('.interval.year').hide();
+      } else {
+        $('.BPlanding__switchBtn a.year').addClass('active');
+        $('.BPlanding__switchBtn a.month').removeClass('active');
+        $('.interval.year').show();
+        $('.interval.month').hide();
+      }
+      return false;
+    });

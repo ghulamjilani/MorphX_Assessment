@@ -1,0 +1,4 @@
+<% if flash.now[:error] %>
+  $('#InviteViewersAndCoHosts').modal('show');
+  $('#InviteViewersAndCoHosts').find('a.done, a.close_invite_modal').removeClass('disabled').attr('disabled', false)
+<% end %>

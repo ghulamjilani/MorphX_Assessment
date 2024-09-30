@@ -1,0 +1,58 @@
+.myFeed {
+  #sessions .TileSlider .vhl-item {
+    width: auto !important;
+  }
+  .homePage__title {
+    width: 100%;
+    display: block;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border__separator);
+    text-align: left;
+    padding: 0 0 0.5rem 0;
+  }
+  .RUWS__container {
+    padding: 0;
+  }
+  .RUWS__container .cardMK2 {
+    width: 100%;
+    @include media(reverso-phone) {
+      width: calc(50% - 1rem);
+    }
+    @include media(reverso-tablet) {
+      width: calc(25% - 1rem);
+    }
+    padding: 0 1rem 0 0;
+    &:nth-child(4n) {
+      padding-right: 0;
+    }
+  }
+  .comments__showMore {
+    margin: 1rem auto;
+  }
+  .homePage__title__wrapper {
+    @include media(desktop) {
+      padding: 2rem 0rem 0 0rem;
+    }
+    @include media(phone) {
+      padding: 2rem 0rem 0 0rem;
+    }
+  }
+  .vhl-navigation {
+    margin-top: -9rem;
+  }
+}
+
+.emptyFeed {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+  // min-height: 15rem;
+  padding: 3rem 3rem 4rem;
+  background: var(--bg__content);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 0.7rem 0 var(--sh__main);
+
+  p {
+    margin-top: 5rem;
+  }
+}

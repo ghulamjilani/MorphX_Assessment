@@ -1,0 +1,257 @@
+.shareModalMK2 {
+  z-index: 20002;
+
+  .MK2-modal {
+    &__dialog {
+      padding: 1.5rem 2rem;
+      max-width: 114rem;
+      @include media(desktop) {
+        width: 90%;
+      }
+    }
+
+    &__header {
+      width: 100%;
+    }
+
+    &__body {
+      .unobtrusive-flash-container {
+        position: fixed;
+        right: 2rem;
+        width: 40rem;
+        max-width: 80%;
+        top: 8rem;
+
+        .alert {
+          overflow: hidden;
+          margin-bottom: 1rem;
+          border-radius: 1rem;
+          box-shadow: 0 4px 7px 0 var(--sh__main);
+          background: var(--bg__tooltip);
+
+          .bodyFlashMessage {
+            padding: 1.5rem 4rem 1.5rem 5.5rem;
+          }
+
+          button {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            color: var(--tp__icons);
+          }
+        }
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    width: 100%;
+    @include media(tablet) {
+      display: block;
+    }
+  }
+
+  &__share {
+    width: 33%;
+    padding-right: 1.5rem;
+    @include media(tablet) {
+      width: 100%;
+      padding-right: 0;
+    }
+
+    button {
+      min-width: 9rem;
+      min-height: 3rem;
+      line-height: 2.6rem;
+      line-height: 2.85rem;
+      border-radius: 4rem;
+      -webkit-border-radius: 4rem;
+      font-size: 1.3rem;
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+      font-weight: bold;
+      padding: 0 2rem;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &__title {
+      font-weight: 400;
+      margin: .5rem 0 1rem;
+      font-size: 1.8rem;
+    }
+
+    &__social {
+      margin: 1.5rem 0;
+      @include flex(flex, center, space-between);
+      @include media(p-phone-tablet) {
+        justify-content: flex-start;
+        a:not(:last-child) {
+          margin-right: 2rem;
+        }
+      }
+      @include media(p-phone) {
+        justify-content: space-between;
+        a {
+          margin-right: 0;
+        }
+      }
+
+      &__icon {
+        border-radius: 50%;
+        background: var(--tp__secondary);
+        color: var(--bg__main);
+        @include flex(flex, center, center);
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    &__link {
+      color: var(--tp__active);
+      @include flex(flex, center, space-between);
+
+      span {
+        @include text__ellipsis();
+        padding-right: 1.5rem;
+        font-size: 1.4rem;
+      }
+    }
+
+    &__embed {
+      margin-top: 2rem;
+      font-size: 1.4rem;
+      @include flex(flex, center, space-between);
+    }
+  }
+
+  &__embed {
+    width: 58%;
+    padding: 0 0 0 1.5rem;
+    @include flex(flex, false, false);
+    @include media(tablet) {
+      width: 100%;
+      flex-direction: column;
+      padding: 0 1.5rem 0 0;
+    }
+
+    &__options {
+      font-size: 1.4rem;
+      width: 34%;
+      display: flex;
+      flex-direction: column;
+      padding: 0 1.5rem;
+      @include media(tablet) {
+        width: 100%;
+      }
+
+      &__title {
+        margin: .5rem 0 1rem;
+      }
+
+      label {
+        margin-bottom: .5rem;
+      }
+    }
+
+    &__code {
+      font-size: 1.4rem;
+      width: 66%;
+      padding: 0 1.5rem;
+      @include media(tablet) {
+        width: calc(100% - 9rem);
+      }
+
+      button {
+        min-width: 9rem;
+        min-height: 3rem;
+        line-height: 2.6rem;
+        line-height: 2.85rem;
+        border-radius: 4rem;
+        -webkit-border-radius: 4rem;
+        font-size: 1.3rem;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: bold;
+        padding: 0 2rem;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &__textarea {
+        color: var(--tp__main);
+        background: var(--bg__content);
+        height: 16rem;
+        min-height: 11.4rem;
+        margin: 0;
+        width: calc(100% - 0.5rem);
+        min-width: calc(100% - 0.5rem);
+        max-width: calc(100% - 0.5rem);
+        border: none;
+      }
+
+      &__iframe {
+        @include flex(flex, flex-start, false);
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  .MK2-modal__body {
+    width: 100%;
+  }
+
+  &__embedBlock {
+    width: 100%;
+  }
+
+  .unite_embed_shopIframeWrapp.noProducts {
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 100%;
+      background-image: url("https://assets.unite.live/assets/embed/shop-6a3f3602cf79e6207d6b77e59260fb99edd281208daded631ce0d2e78227bea8.png");
+      height: 100%;
+      background-color: #ededed;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 999;
+      background-size: cover;
+      background-position: top center;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.shareModalMK2Small {
+  .MK2-modal {
+    &__dialog {
+      padding: 1.5rem 2rem;
+      max-width: 42rem;
+      @include media(tablet) {
+        width: 90%;
+      }
+    }
+
+    &__header {
+      width: 100%;
+    }
+  }
+
+  .shareModalMK2__share {
+    width: 100%;
+  }
+}
+
+.shareModal__embedBlock#embedBlock {
+  #unite_embed {
+    background: var(--bg__content);
+  }
+}

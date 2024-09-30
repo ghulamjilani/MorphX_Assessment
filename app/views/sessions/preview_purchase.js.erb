@@ -1,0 +1,19 @@
+$('#payment-modal').remove();
+
+window.modalBody = '<%= escape_javascript render("#{action_name}_stripe", format: :html) %>';
+
+<%- if @another_session %>
+$('.unobtrusive-flash-container:visible').html("<%= escape_javascript(render partial: 'sessions/session_conflict_notification', locals: {another_session: @another_session}) %>")
+<% else %>
+$(modalBody).modal();
+<% end %>
+$('body').on('shown.bs.modal', '#payment-modal', function() {
+    <%= yield(:after_include_javascripts) %>
+    initializeDateTimes();
+    initializeJoinTimer();
+    <%- unless @another_session %>
+    $('body').addClass('modal-open');
+    <% end %>
+
+    new window.PaymentModalView({el: '#payment-modal', stripe_key: '<%= Rails.application.credentials.global.dig(:stripe, :public_key) %>', amount: '<%= @charge_amount %>'})
+});

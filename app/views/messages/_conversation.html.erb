@@ -1,0 +1,47 @@
+<div class="m-sendbox-list clearfix <%= 'active' if conversation.is_unread?(current_user) %>">
+  <div class="slb1">
+    <label class="checkbox choice">
+      <input type="checkbox" name="">
+            <span>
+            </span>
+    </label>
+  </div>
+  <div class="slb12">
+    <% last_message = conversation.last_message %>
+
+    <div class="avatarImg-MD" style="background-image: url('<%= last_message.sender.avatar_url %>')"></div>
+    <strong><a href="<%= last_message.sender.relative_path %>"><%= last_message.sender.public_display_name %></a></strong>
+  </div>
+    <div class="slb13">
+      <div class="m-sendbox-head">
+        <div class="pull-right">
+          <span>
+
+            <%= time_ago_in_words(conversation.updated_at).gsub('about', '') + ' ago' %>
+
+            <% unless @box.eql? 'trash' %>
+            </span>
+          <span>
+            <%= link_to(message_path(conversation, location: @box, box: @box, page: params[:page]), data: {confirm: 'Are you sure?'}, object: conversation.subject, method: :delete) do %>
+              <i class="icon-remove"></i>
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+      </div>
+
+      <div class="m-sendbox-body">
+        <div class="subject">
+          <%- if conversation.is_unread?(current_user) %>
+              <span class="label label-info">new</span>
+          <%- end %>
+          <%= link_to(truncate(conversation.subject, length: 100), message_path(conversation.id, box: @box, page: params[:page])) %>
+        </div>
+
+        <div class="briefing">
+          Last message: <%= formatted_body(conversation.last_message.body, 100) %>
+        </div>
+      </div>
+    </div>
+
+</div>

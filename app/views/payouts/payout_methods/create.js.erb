@@ -1,0 +1,5 @@
+$('#add_account_info').removeClass('hide');
+$('#create_account').addClass('hide');
+$('#add_account_info').html("<%= escape_javascript(render(partial: 'payouts/account_info_form', locals: {connect_account: @connect_account, payout_method: @payout_method, type: params[:account][:type], country: params[:account][:country]})) %>");
+InitPersonalInfoValidation();
+prepareTitles();

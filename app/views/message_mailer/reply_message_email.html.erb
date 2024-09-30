@@ -1,0 +1,10 @@
+<h3>You have a new reply: <%= @subject %></h3>
+<p>
+  You have received a new reply:
+</p>
+<blockquote>
+  <%= simple_format @message.body %>
+</blockquote>
+<p>
+  Visit <%= link_to 'your inbox', messages_url %> for more info.
+</p>

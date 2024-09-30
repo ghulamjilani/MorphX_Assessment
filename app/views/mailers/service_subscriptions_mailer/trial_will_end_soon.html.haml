@@ -1,0 +1,11 @@
+%p Dear #{@user.public_display_name},
+%p Your #{@plan.trial_period_days}-days Trial finishes in 1 day.
+%p Your Business Plan will be activated #{@subscription.current_period_end.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z')}.
+
+Business Plan: #{@plan_package.name}
+Planned payment: #{@plan.formatted_price}/#{@plan.formatted_interval}
+
+%p
+  If you have any questions, feel free to
+  = link_to 'contact us', support_home_url
+  any time.

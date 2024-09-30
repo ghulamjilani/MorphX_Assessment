@@ -1,0 +1,5 @@
+%p= I18n.t('mailers.service_subscriptions_mailer.notify_platform_owner.body', owner_url: @user.absolute_path, owner_name: @user.public_display_name, interval_type: @interval_type, plan_name: @plan_package.name).html_safe
+%br/
+%p
+  If you have any questions, feel free to
+  = link_to 'contact us', support_home_url

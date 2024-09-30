@@ -1,0 +1,26 @@
+.input__calendar {
+  &__range-fields {
+    display: flex;
+    align-items: center;
+  }
+
+  &__input-field {
+    position: relative;
+
+    label {
+      top: 0;
+    }
+
+    input {
+      padding-top: 0 !important;
+    }
+  }
+
+  &__icon {
+    bottom: -0.3rem;
+  }
+
+  &__input-spacer {
+    padding: 0 0.5rem;
+  }
+}

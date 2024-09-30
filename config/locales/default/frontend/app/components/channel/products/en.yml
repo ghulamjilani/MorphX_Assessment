@@ -1,0 +1,7 @@
+en:
+  frontend:
+    app:
+      components:
+        channel:
+          products:
+            title: Store

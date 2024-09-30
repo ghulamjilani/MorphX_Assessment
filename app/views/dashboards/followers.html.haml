@@ -1,0 +1,19 @@
+- content_for(:page_title, "Followers")
+- content_for(:extra_body_classes, 'header-top')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+
+  .col-md-9.main-content-section
+    .row
+      .col-md-12.folowersBoxWrapper
+        %h3 Who Is Following #{current_user.public_display_name}
+        %ul.flexiboxWrapper
+          - @followers.each do |user|
+            %li.flexibox
+              %div
+                = render 'shared/user_and_his_follow_stats', user: user
+
+        - if @followers.length.zero?
+          %span
+            = I18n.t("dashboards.followers.you_currently_have_no_followers")

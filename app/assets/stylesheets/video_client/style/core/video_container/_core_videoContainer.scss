@@ -1,0 +1,38 @@
+.main-section{
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  padding: $header-height 0 0 0;
+  z-index: 1;
+  left: 0;
+  top: 0;
+}
+
+.showVideo{
+  .main-section{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.videoWrapper{
+  position: absolute;
+  top: $header-height;
+  right: $header-height;
+  width:calc(100% - #{$header-height}) ;
+  height:calc(100% - #{$header-height}) ;
+  //background: #ccc;
+  z-index: 99;
+
+  .video-display-name-wrapper{
+    .video-display-name{
+      padding: 3px 3% 3px 3% !important;
+    }
+    .volume-indicator{
+      display: none !important;
+    }
+  }
+}

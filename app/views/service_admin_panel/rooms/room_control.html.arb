@@ -1,0 +1,270 @@
+# frozen_string_literal: true
+
+columns do
+  column do
+    panel 'Live stream' do
+      para do
+        strong { 'Stream status' }
+        span do
+          if resource&.ffmpegservice_account&.stream_up?
+            status_tag 'ok', label: 'UP'
+          else
+            status_tag('DOWN')
+          end
+        end
+      end
+      para do
+        strong { 'Stream url' }
+        span do
+          input value: resource.stream_m3u8_url, style: 'width: 100%'
+        end
+      end
+      para do
+        div class: 'streamVideo'
+      end
+    end
+  end
+  column do
+    panel 'Room' do
+      para do
+        strong { 'Room status' }
+        span do
+          case resource.status
+          when Room::Statuses::ACTIVE
+            status_tag 'ok', label: Room::Statuses::ACTIVE
+          when Room::Statuses::CLOSED
+            status_tag 'error', label: Room::Statuses::CLOSED
+          when Room::Statuses::AWAITING
+            status_tag 'warning', label: Room::Statuses::AWAITING
+          else
+            status_tag(Room::Statuses::CANCELLED)
+          end
+        end
+      end
+
+      table_for resource do
+        column :start do |object|
+          link_to_if object.awaiting?, 'Start', [:start_session, :service_admin_panel, object]
+        end
+        column :stop do |object|
+          link_to_if (object.active? || object.awaiting?), 'Stop', [:stop_session, :service_admin_panel, object]
+        end
+        column :cam do |object|
+          link_to (object.video_disabled ? 'Enable' : 'Disable'), [:cam_room_toggle, :service_admin_panel, object]
+        end
+        column :mic do |object|
+          link_to (object.mic_disabled ? 'Enable' : 'Disable'), [:mute_room_toggle, :service_admin_panel, object]
+        end
+        column :backstage do |object|
+          link_to (object.backstage ? 'Disable' : 'Enable'), [:backstage_room_toggle, :service_admin_panel, object]
+        end
+        column :unpin_all do |object|
+          link_to 'Unpin All', [:unpin_room, :service_admin_panel, object]
+        end
+        column :duration do |object|
+          obj = link_to '---', [:change_duration, :service_admin_panel, object]
+          obj += " (#{object.abstract_session.duration}) "
+          obj += link_to '+++', [:change_duration, :service_admin_panel, object, { increase: true }]
+        end
+        column :screen_share do |object|
+          link_text = object.is_screen_share_available? ? 'Disable' : 'Enable'
+          link_to(link_text, [:toggle_share, :service_admin_panel, object])
+        end
+      end
+    end
+
+    panel 'Presenter' do
+      table_for resource.room_members.where(abstract_user: resource.presenter_user) do
+        column('room member id', &:id)
+        column :join do |object|
+          object.joined? ? status_tag('ok', label: 'TRUE') : status_tag('error', label: 'FALSE')
+        end
+        column :email do |object|
+          link_to object.user.email, [:service_admin_panel, object], target: '_blank'
+        end
+        column :display_name
+        column :cam do |object|
+          link_to((object.video_disabled ? 'Enable' : 'Disable'),
+                  [:cam_member_toggle, :service_admin_panel, resource, { member_id: object.id }])
+        end
+        column :mic do |object|
+          link_to((object.mic_disabled ? 'Enable' : 'Disable'),
+                  [:mute_member_toggle, :service_admin_panel, resource, { member_id: object.id }])
+        end
+        column :backstage do |object|
+          link_to((object.backstage ? 'Disable' : 'Enable'),
+                  [:backstage_member_toggle, :service_admin_panel, resource, { member_id: object.id }])
+        end
+        column :pin do |object|
+          link_to((object.pinned ? 'Unpin' : 'Pin'),
+                  [:pin_member_toggle, :service_admin_panel, resource, { member_id: object.id }])
+        end
+        column 'Actions' do |object|
+          link_to 'Sign in', [:sign_in_as_presenter, :service_admin_panel, object.user], target: '_blank'
+        end
+      end
+    end
+
+    if resource.abstract_session.is_a?(Session)
+      panel 'Co-presenters' do
+        table_for resource.abstract_session.co_presenters.preload(:user) do
+          column :join do |object|
+            @room_member = resource.room_members.find_by(abstract_user: object)
+            @room_member ? status_tag('ok', label: 'TRUE') : status_tag('error', label: 'FALSE')
+          end
+          column :email do |object|
+            link_to object.user.email, [:service_admin_panel, object], target: '_blank'
+          end
+          column :display_name
+          column :cam do |object|
+            @room_member = resource.room_members.find_by(abstract_user: object)
+            if @room_member
+              link_to((@room_member.video_disabled ? 'Enable' : 'Disable'),
+                      [:cam_member_toggle, :service_admin_panel, resource,
+                       { member_id: @room_member.id }])
+            end
+          end
+          column :mic do |object|
+            @room_member = resource.room_members.find_by(abstract_user: object)
+            if @room_member
+              link_to((@room_member.mic_disabled ? 'Enable' : 'Disable'),
+                      [:mute_member_toggle, :service_admin_panel, resource,
+                       { member_id: @room_member.id }])
+            end
+          end
+          column :backstage do |object|
+            @room_member = resource.room_members.find_by(abstract_user: object)
+            if @room_member
+              link_to((@room_member.backstage ? 'Disable' : 'Enable'),
+                      [:backstage_member_toggle, :service_admin_panel, resource,
+                       { member_id: @room_member.id }])
+            end
+          end
+          column :pin do |object|
+            @room_member = resource.room_members.find_by(abstract_user: object)
+            if @room_member
+              link_to((@room_member.pinned ? 'Unpin' : 'Pin'),
+                      [:pin_member_toggle, :service_admin_panel, resource,
+                       { member_id: @room_member.id }])
+            end
+          end
+          column 'Actions' do |object|
+            link_to 'Sign in', [:sign_in_as_presenter, :service_admin_panel, object.user], target: '_blank'
+          end
+        end
+      end
+    end
+
+    panel "Room Members (#{resource.room_members.count})" do
+      table_for resource.room_members.order(created_at: :asc) do
+        column :id
+        column :abstract_user
+        column :guest, &:guest?
+        column :kind
+        column :joined
+        column :email do |object|
+          link_to(object.abstract_user.email, [:service_admin_panel, object], target: '_blank') if object.user
+        end
+        column :display_name
+        column :cam do |object|
+          link_to((object.video_disabled ? 'Enable' : 'Disable'),
+                  [:cam_member_toggle, :service_admin_panel, resource, { member_id: object.id }])
+        end
+        column :mic do |object|
+          link_to((object.mic_disabled ? 'Enable' : 'Disable'),
+                  [:mute_member_toggle, :service_admin_panel, resource, { member_id: object.id }])
+        end
+        column :backstage do |object|
+          link_to((object.backstage ? 'Disable' : 'Enable'),
+                  [:backstage_member_toggle, :service_admin_panel, resource, { member_id: object.id }])
+        end
+        column :pin do |object|
+          unless object.kind == RoomMember::Kinds::PRESENTER
+            link_to((object.pinned ? 'Unpin' : 'Pin'),
+                    [:pin_member_toggle, :service_admin_panel, resource,
+                     { member_id: object.id }])
+          end
+        end
+        column :ban do |object|
+          unless object.kind == RoomMember::Kinds::PRESENTER
+            link_to((object.banned ? 'Unban' : 'Ban'),
+                    [:ban_member_toggle, :service_admin_panel, resource,
+                     { member_id: object.id }])
+          end
+        end
+        column 'Sign in' do |object|
+          if object.user
+            link_to('Sign in', [:sign_in_as_presenter, :service_admin_panel, object.user],
+                    target: '_blank')
+          end
+        end
+      end
+    end
+
+    panel 'Interactive Access Tokens' do
+      strong do
+        'Add interactive access tokens'
+      end
+      para do
+        span do
+          link_to '[Shared]', create_shared_interactive_access_token_service_admin_panel_room_path(resource.id)
+        end
+        span { ' | ' }
+        span do
+          link_to '[Shared with guests]',
+                  create_shared_guest_interactive_access_token_service_admin_panel_room_path(resource.id)
+        end
+        span { ' | ' }
+        span do
+          link_to '[Individual]', create_individual_interactive_access_token_service_admin_panel_room_path(resource.id)
+        end
+        span { ' |' }
+        span do
+          link_to('[Individual with guests]',
+                  create_individual_guest_interactive_access_token_service_admin_panel_room_path(resource.id))
+        end
+      end
+      table_for resource.interactive_access_tokens.order(id: :asc) do
+        column :id
+        column :guests
+        column :individual
+        column :token do |object|
+          link_to object.token, object.absolute_url
+        end
+        column :regenerate do |object|
+          link_to 'Regenerate', refresh_token_service_admin_panel_interactive_access_token_path(object.id)
+        end
+        column :delete do |object|
+          link_to 'Delete', destroy_token_service_admin_panel_interactive_access_token_path(object.id), method: :delete
+        end
+      end
+    end
+  end
+end
+script do
+  raw %{
+        $(function() {
+          var element, player;
+          element = document.createElement('div');
+          element.className = 'video-js theoplayer-skin theo-seekbar-above-controls';
+          $(".streamVideo").html(element);
+          player = new THEOplayer.Player(element, {
+              license: "#{Rails.application.credentials.frontend[:services][:theo_player][:license]}",
+              libraryLocation: location.origin + "/javascripts/theo/",
+              ui: {
+                  width: '100%',
+                  height: '100%',
+                  fluid: true
+              }
+          });
+          player.source = {
+              sources: [
+                  {
+                      src: '#{resource.stream_m3u8_url}',
+                      type: 'application/x-mpegurl'
+                  }
+              ]
+          };
+        });
+      }
+end

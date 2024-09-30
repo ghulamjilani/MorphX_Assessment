@@ -1,0 +1,69 @@
+.postWrapper {
+  padding: 3rem;
+  background: var(--bg__content);
+  @include boxShadow__main(var(--sh__main));
+  border-radius: 1rem;
+  transition: .3s;
+  margin-bottom: 3rem;
+  @include media(tablet) {
+    padding: 3rem 3rem 2rem;
+  }
+  @include media(phone) {
+    padding: 3rem 1.5rem 2rem;
+  }
+
+  &__hide {
+    opacity: 0.5;
+  }
+  &:last-of-type {
+    .ql-mention-list {
+      max-height: 14.6rem;
+      overflow-y: auto;
+    }
+  }
+}
+
+.community {
+  max-width: 125rem;
+  margin: 0 auto;
+
+  &__header {
+    @include flex(flex, center, space-between);
+    padding-bottom: 1.5rem;
+    @include media(phone) {
+      flex-direction: column;
+      align-items: normal;
+    }
+
+    &__result {
+      color: var(--tp__h1);
+      font-weight: bold;
+      font-size: 1.8rem;
+      @include media(phone) {
+        padding-bottom: 2rem;
+      }
+    }
+
+    &__filters {
+      @include media(phone) {
+        @include flex(flex, center, space-between);
+      }
+
+      &__icon {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.postPlaceholder {
+  position: relative;
+
+  .spinnerSlider {
+    left: 25%;
+  }
+
+  svg {
+    width: 100%;
+  }
+}

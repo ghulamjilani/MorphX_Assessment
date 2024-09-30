@@ -1,0 +1,9 @@
+$('#search_product_modal').remove();
+$('body').append("#{escape_javascript(render(partial: 'dashboard/products/search_result_form', locals: {result: @result, product: @product, list: @list}))}");
+$('#search_product_modal').modal('show');
+product_form = new window.ProductForm({el: '#search_product_modal'});
+product_form.render();
+:plain
+  setTimeout(function(){
+    document.querySelectorAll('#product_short_description')[1].dispatchEvent(new Event('blur'));
+  }, 150);

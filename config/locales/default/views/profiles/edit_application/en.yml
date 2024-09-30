@@ -1,0 +1,41 @@
+en:
+  views:
+    profiles:
+      edit_application:
+        page_title: Account
+        title: Social Accounts
+        connected_apps: Connected Apps
+        integrations: Integrations
+        change_email: Change Email
+        to_change_your_email_address_please_confirm_your_email: To change your email address, please confirm your email address by clicking on the link we just emailed you
+        new_email: 'New Email:'
+        change_password: Change Password
+        current_password: Current password
+        fields:
+          contact_email: Contact Email
+          current_password: Current password
+          new_password: New password
+          confirm_new_password: Confirm new password
+        weak_password: Weak Password
+        strong_password: Use at least <b>6 characters,</b> including one <b>uppercase</b> letter, one <b>lowercase</b> letter, and one <b>numeric</b> character
+        save_changes: Save changes
+        please_wait: Please wait…
+        connected: Connected
+        not_connected: Not connected
+        disconnect: Disconnect
+        linked_on_profile: 'Linked on %{service_name} profile:'
+        confirm: 'Yes'
+        connect: Connect
+        facebook: Facebook
+        linkedin: LinkedIn
+        twitter: Twitter
+        google: Google
+        instagram: Instagram
+        zoom_video_communication: Zoom Video Communication
+        note_zoom_is_supported_only_for: 'Note: Zoom is supported only for paid zoom accounts'
+        read_more: Read more
+        sorry_to_see_you_go_but_you_can: We'd be sorry to see you go, but you can
+        please_cancel_any_active_subscription_before_deleting: "Please cancel any active subscription first, before deleting the account.\nProceed to subscriptions?"
+        are_you_sure_you_want_to_delete_your_account: Are you sure you want to delete your account?
+        delete_account: delete account
+        at_any_time: at any time.

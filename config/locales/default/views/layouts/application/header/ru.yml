@@ -1,0 +1,18 @@
+ru:
+  views:
+    layouts:
+      application:
+        header:
+          sign_up: "Регистрация"
+          search: "Поиск"
+          start_creating: "СОЗДАТЬ ОРГАНИЗАЦИЮ"
+          confirm_email: "Пожалуйста, подтвердите почту"
+          user:
+            dashboard: "Панель управления"
+            settings: "Настройки"
+            help: "Помощь"
+            logout: "Выход из системы"
+          sessions_create:
+            go_live: "Начать трансляцию"
+            fast_interactive: "Интерактивная сессия"
+            upload: "Загрузить видео"

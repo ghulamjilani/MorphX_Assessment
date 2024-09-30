@@ -1,0 +1,96 @@
+<form class="form_V2" autocomplete="off" id="channel_form" accept-charset="UTF-8" data-remote="true" method="post" style="visibility: visible;">
+    <section>
+        <input name="utf8" type="hidden" value="✓">
+
+        <h3>{{ i18n "wizard.step2.title" }}</h3>
+
+        <p>
+            {{ i18n "wizard.step2.description" }}
+        </p>
+
+        <div class="responsive-video margin-bottom-20">
+            <iframe src="https://player.vimeo.com/video/203373443?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+
+        <div data-BAP-preview="true"
+             title="{{i18n "wizard.step2.name_tooltip" }}"
+             class="input-block required state-clear {{#if title}} event-focus valid {{/if}}">
+            <label for="channel_title">Channel Name</label>
+            <input value="{{title}}" type="text" name="channel[title]" id="channel_title">
+            <div class="errorContainerWrapp"></div>
+        </div>
+
+        <div class="select-block multiple-select required {{#if category_id}} event-focus valid {{/if}}">
+            <label for="channel_category_id">Category</label>
+            <select name="channel[category_id]" id="channel_category_id">
+                <option value="" disabled {{#unless category_id}} selected {{/unless}}>Select Category</option>
+              {{ channelCategoriesOptions category_id }}
+            </select>
+
+            <div class="errorContainerWrapp"></div>
+        </div>
+
+        <div class="input-block required {{#if description}} event-focus valid {{/if}}">
+            <label for="channel_description">Description</label>
+            <textarea data-autoresize="" rows="1" name="channel[description]" id="channel_description" max-length="2000"
+                      placeholder="You have 2000 characters for your description">{{description}}</textarea>
+
+            <div class="counter_block">0/2000</div>
+            <div class="infoContainerWrapp">{{i18n "forms.info.min_description_length"}}</div>
+            <div class="errorContainerWrapp"></div>
+        </div>
+
+        <div class="input-block required state-clear {{#if tag_list}} event-focus valid {{/if}}">
+            <label for="" class="fixed_top">Tags</label>
+            <div class="tag_list_wrapp">
+                <input value="{{tag_list}}" class="tag" type="text" name="channel[tag_list]" id="channel_tag_list">
+            </div>
+
+            <div class="counter_block" max-length="20">0/20</div>
+            <div class="infoContainerWrapp">{{i18n "forms.info.min_tags_count"}}</div>
+            <div class="errorContainerWrapp"></div>
+        </div>
+    </section>
+    <section>
+        <div class="ProfileImageAndCoverImage-wrapp">
+            <label class="labelTitle">
+                Primary Image
+                <span class="text-color-Blue">*</span>
+            </label>
+            <div class="CoverImage semitransparent_LoadingCover">
+                <a class="CoverImage-demo channel" data-hover-text="{{#if cover.image_src}}Change{{else}}Browse{{/if}} Image" data-target="#chanelCoverModal"
+                   data-toggle="modal" {{#if cover.image_src}} style="background-image: url('{{cover.image_src}}')" {{/if}}>
+                </a>
+                <div class="spinnerSlider hidden">
+                    <div class="bounceS1"></div>
+                    <div class="bounceS2"></div>
+                    <div class="bounceS3"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="mb50"></div>
+        <div class="GalleryImage-wrapp">
+            <label class="labelTitle margin-bottom-0">
+                Gallery
+            </label>
+
+            <div class="Gallery-list clearfix">
+                <div class="tile add_block">
+                    <div class="text-right">
+                        <a href="#" style="visibility: hidden;">x</a>
+                    </div>
+                    <div class="Gallery-listImage">
+                        <a class="addGalleryImage" data-target="#channelGalleryModal" data-toggle="modal">
+                            <i class="VideoClientIcon-iPlus"></i>
+                        </a>
+                    </div>
+                    <span style="visibility: hidden;">Add image...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="text-right">
+        <button name="button" type="button" class="submitButton btn btn-l">Next</button>
+    </div>
+</form>

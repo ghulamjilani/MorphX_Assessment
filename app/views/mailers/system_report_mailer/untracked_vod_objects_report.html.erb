@@ -1,0 +1,56 @@
+<h1>Untracked VOD S3 objects report</h1>
+
+<h3>Untracked User folders:</h3>
+<% if @users.present? %>
+  <ul>
+    <% @users.each do |path| %>
+      <li><%= path %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>NONE</p>
+<% end %>
+
+<h3>Untracked Channel folders:</h3>
+<% if @channels.present? %>
+  <ul>
+    <% @channels.each do |path| %>
+      <li><%= path %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>NONE</p>
+<% end %>
+
+<h3>Untracked Room folders:</h3>
+<% if @rooms.present? %>
+  <ul>
+    <% @rooms.each do |path| %>
+      <li><%= path %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>NONE</p>
+<% end %>
+
+<h3>Untracked Video folders:</h3>
+<% if @videos.present? %>
+  <ul>
+    <% @videos.each do |path| %>
+      <li><%= path %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>NONE</p>
+<% end %>
+
+<h3>Untracked Recording folders:</h3>
+<% if @recordings.present? %>
+  <ul>
+    <% @recordings.each do |path| %>
+      <li><%= path %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>NONE</p>
+<% end %>

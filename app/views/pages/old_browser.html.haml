@@ -1,0 +1,310 @@
+- content_for(:custom_title, "Your browser is not supported")
+%p
+  - safari = link_to('Safari', 'http://www.apple.com/safari/', target: '_blank')
+  - chrome = link_to('Chrome', 'https://www.google.com/chrome/', target: '_blank')
+  - firefox = link_to('Firefox', 'https://www.mozilla.org/en-US/firefox/new/', target: '_blank')
+  - ie = link_to('Internet Explorer', 'http://windows.microsoft.com/en-us/internet-explorer/download-ie', target: '_blank')
+  = raw "To use #{Rails.application.credentials.global[:service_name]}, we recommend using the latest version of #{chrome}, #{firefox}, #{ie} or #{safari}."
+
+
+-# browser.bot?
+-# = browser.bot?
+-# %br/
+-# browser.chrome?
+-# = browser.chrome?
+-# %br/
+-# browser.core_media?
+-# = browser.core_media?
+-# %br/
+-# browser.duck_duck_go?
+-# = browser.duck_duck_go?
+-# %br/
+-# browser.edge?                # Newest MS browser
+-# = browser.edge?                # Newest MS browser
+-# %br/
+-# browser.electron?            # Electron Framework
+-# = browser.electron?            # Electron Framework
+-# %br/
+-# browser.firefox?
+-# = browser.firefox?
+-# %br/
+-# browser.full_version
+-# = browser.full_version
+-# %br/
+-# browser.ie?
+-# = browser.ie?
+-# %br/
+-# browser.known?               # has the browser been successfully detected?
+-# = browser.known?               # has the browser been successfully detected?
+-# %br/
+-# browser.unknown?             # the browser wasn't detected.
+-# = browser.unknown?             # the browser wasn't detected.
+-# %br/
+-# browser.meta                 # an array with several attributes
+-# = browser.meta                 # an array with several attributes
+-# %br/
+-# browser.name                 # readable browser name
+-# = browser.name                 # readable browser name
+-# %br/
+-# browser.nokia?
+-# = browser.nokia?
+-# %br/
+-# browser.opera?
+-# = browser.opera?
+-# %br/
+-# browser.opera_mini?
+-# = browser.opera_mini?
+-# %br/
+-# browser.phantom_js?
+-# = browser.phantom_js?
+-# %br/
+-# browser.quicktime?
+-# = browser.quicktime?
+-# %br/
+-# browser.safari?
+-# = browser.safari?
+-# %br/
+-# browser.safari_webapp_mode?
+-# = browser.safari_webapp_mode?
+-# %br/
+-# browser.samsung_browser?
+-# = browser.samsung_browser?
+-# %br/
+-# browser.to_s            # the meta info joined by space
+-# = browser.to_s            # the meta info joined by space
+-# %br/
+-# browser.uc_browser?
+-# = browser.uc_browser?
+-# %br/
+-# browser.version         # major version number
+-# = browser.version         # major version number
+-# %br/
+-# browser.webkit?
+-# = browser.webkit?
+-# %br/
+-# browser.webkit_full_version
+-# = browser.webkit_full_version
+-# %br/
+-# browser.yandex?
+-# = browser.yandex?
+-# %br/
+-# browser.wechat?
+-# = browser.wechat?
+-# %br/
+-# browser.qq?
+-# = browser.qq?
+-# %br/
+-# browser.weibo?
+-# = browser.weibo?
+-# %br/
+-# browser.sputnik?
+-# = browser.sputnik?
+-# %br/
+-# browser.sougou_browser?
+-# = browser.sougou_browser?
+-# %br/
+
+
+-# browser.bot.name
+-# = browser.bot.name
+-# %br/
+-# browser.bot.search_engine?
+-# = browser.bot.search_engine?
+-# %br/
+-# browser.bot?
+-# = browser.bot?
+-# %br/
+-# browser.bot.why? # shows which matcher detected this user agent as a bot.
+-# = browser.bot.why? # shows which matcher detected this user agent as a bot.
+-# %br/
+-# browser.device
+-# = browser.device
+-# %br/
+-# browser.device.id
+-# = browser.device.id
+-# %br/
+-# browser.device.name
+-# = browser.device.name
+-# %br/
+-# browser.device.unknown?
+-# = browser.device.unknown?
+-# %br/
+-# browser.device.blackberry_playbook?
+-# = browser.device.blackberry_playbook?
+-# %br/
+-# browser.device.console?
+-# = browser.device.console?
+-# %br/
+-# browser.device.ipad?
+-# = browser.device.ipad?
+-# %br/
+-# browser.device.iphone?
+-# = browser.device.iphone?
+-# %br/
+-# browser.device.ipod_touch?
+-# = browser.device.ipod_touch?
+-# %br/
+-# browser.device.kindle?
+-# = browser.device.kindle?
+-# %br/
+-# browser.device.kindle_fire?
+-# = browser.device.kindle_fire?
+-# %br/
+-# browser.device.mobile?
+-# = browser.device.mobile?
+-# %br/
+-# browser.device.nintendo?
+-# = browser.device.nintendo?
+-# %br/
+-# browser.device.playstation?
+-# = browser.device.playstation?
+-# %br/
+-# browser.device.ps3?
+-# = browser.device.ps3?
+-# %br/
+-# browser.device.ps4?
+-# = browser.device.ps4?
+-# %br/
+-# browser.device.psp?
+-# = browser.device.psp?
+-# %br/
+-# browser.device.silk?
+-# = browser.device.silk?
+-# %br/
+-# browser.device.surface?
+-# = browser.device.surface?
+-# %br/
+-# browser.device.tablet?
+-# = browser.device.tablet?
+-# %br/
+-# browser.device.tv?
+-# = browser.device.tv?
+-# %br/
+-# browser.device.vita?
+-# = browser.device.vita?
+-# %br/
+-# browser.device.wii?
+-# = browser.device.wii?
+-# %br/
+-# browser.device.wiiu?
+-# = browser.device.wiiu?
+-# %br/
+-# browser.device.samsung?
+-# = browser.device.samsung?
+-# %br/
+-# browser.device.switch?
+-# = browser.device.switch?
+-# %br/
+-# browser.device.xbox?
+-# = browser.device.xbox?
+-# %br/
+-# browser.device.xbox_360?
+-# = browser.device.xbox_360?
+-# %br/
+-# browser.device.xbox_one?
+-# = browser.device.xbox_one?
+-# %br/
+-# browser.platform
+-# = browser.platform
+-# %br/
+-# browser.platform.id
+-# = browser.platform.id
+-# %br/
+-# browser.platform.name
+-# = browser.platform.name
+-# %br/
+-# browser.platform.version  # e.g. 9 (for iOS9)
+-# = browser.platform.version  # e.g. 9 (for iOS9)
+-# %br/
+-# browser.platform.adobe_air?
+-# = browser.platform.adobe_air?
+-# %br/
+-# browser.platform.android?
+-# = browser.platform.android?
+-# %br/
+-# browser.platform.android?(4.2)   # detect Android Jelly Bean 4.2
+-# = browser.platform.android?(4.2)   # detect Android Jelly Bean 4.2
+-# %br/
+-# browser.platform.android_app?     # detect webview in an Android app
+-# = browser.platform.android_app?     # detect webview in an Android app
+-# %br/
+-# browser.platform.android_webview? # alias for android_app?
+-# = browser.platform.android_webview? # alias for android_app?
+-# %br/
+-# browser.platform.blackberry?
+-# = browser.platform.blackberry?
+-# %br/
+-# browser.platform.blackberry?(10) # detect specific BlackBerry version
+-# = browser.platform.blackberry?(10) # detect specific BlackBerry version
+-# %br/
+-# browser.platform.chrome_os?
+-# = browser.platform.chrome_os?
+-# %br/
+-# browser.platform.firefox_os?
+-# = browser.platform.firefox_os?
+-# %br/
+-# browser.platform.ios?     # detect iOS
+-# = browser.platform.ios?     # detect iOS
+-# %br/
+-# browser.platform.ios?(9)  # detect specific iOS version
+-# = browser.platform.ios?(9)  # detect specific iOS version
+-# %br/
+-# browser.platform.ios_app?     # detect webview in an iOS app
+-# = browser.platform.ios_app?     # detect webview in an iOS app
+-# %br/
+-# browser.platform.ios_webview? # alias for ios_app?
+-# = browser.platform.ios_webview? # alias for ios_app?
+-# %br/
+-# browser.platform.linux?
+-# = browser.platform.linux?
+-# %br/
+-# browser.platform.mac?
+-# = browser.platform.mac?
+-# %br/
+-# browser.platform.unknown?
+-# = browser.platform.unknown?
+-# %br/
+-# browser.platform.windows10?
+-# = browser.platform.windows10?
+-# %br/
+-# browser.platform.windows7?
+-# = browser.platform.windows7?
+-# %br/
+-# browser.platform.windows8?
+-# = browser.platform.windows8?
+-# %br/
+-# browser.platform.windows8_1?
+-# = browser.platform.windows8_1?
+-# %br/
+-# browser.platform.windows?
+-# = browser.platform.windows?
+-# %br/
+-# browser.platform.windows_mobile?
+-# = browser.platform.windows_mobile?
+-# %br/
+-# browser.platform.windows_phone?
+-# = browser.platform.windows_phone?
+-# %br/
+-# browser.platform.windows_rt?
+-# = browser.platform.windows_rt?
+-# %br/
+-# browser.platform.windows_touchscreen_desktop?
+-# = browser.platform.windows_touchscreen_desktop?
+-# %br/
+-# browser.platform.windows_vista?
+-# = browser.platform.windows_vista?
+-# %br/
+-# browser.platform.windows_wow64?
+-# = browser.platform.windows_wow64?
+-# %br/
+-# browser.platform.windows_x64?
+-# = browser.platform.windows_x64?
+-# %br/
+-# browser.platform.windows_x64_inclusive?
+-# = browser.platform.windows_x64_inclusive?
+-# %br/
+-# browser.platform.windows_xp?
+-# = browser.platform.windows_xp?
+-# %br/
+-# browser.platform.kai_os?
+-# = browser.platform.kai_os?

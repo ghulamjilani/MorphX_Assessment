@@ -1,0 +1,224 @@
+.modal.fade{'aria-hidden': true, role: 'dialog', tabindex: '-1', id: 'plan-payment-modal', class: 'plan-payment-modal'}
+  .modal-dialog
+    .modal-content
+      .unobtrusive-flash-container
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body.clearfix
+        .PayFormWrapper
+          .left_b.subscription_plan
+            %h6 Subscription Plan Info
+            .content
+              %section
+                .img_wrapp
+                  .img{style: "background-image:url(#{image_url})"}
+                  .subscription_img.cssBackgroundBlendFallback
+                    .centerCircle
+                      .outsideCircle
+                .name.text-center= plan.im_name
+                .details.text-center
+                  .inline-block
+                    %i.VideoClientIcon-calendar-icon
+                    = pluralize(plan.interval_count, plan.interval.capitalize)
+                  - if !plan.trial_period_days.to_i.zero? && can?(:have_trial, plan.channel_subscription.channel)
+                    .inline-block
+                      .trialDays.text-color-Darkgrey
+                        %i.GlobalIcon-check-circle
+                        = I18n.t('subscriptions.plan_info.trial_days', days: plan.trial_period_days.to_i)
+                  - else
+                    .inline-block
+                      %i.GlobalIcon-check-circle
+                      FREE TRIAL
+                  .line
+                  - if plan.im_livestreams
+                    .inline-block
+                      %i.GlobalIcon-stream-video
+                      Online Streams
+                  - else
+                    .inline-block.disabled
+                      %i.GlobalIcon-stream-video
+                      Online Streams
+                  - if plan.im_interactives
+                    .inline-block
+                      %i.GlobalIcon-users
+                      = I18n.t('subscriptions.plan_info.include_interactives')
+                  - else
+                    .inline-block.disabled
+                      %i.GlobalIcon-users
+                      = I18n.t('subscriptions.plan_info.include_interactives')
+                  - if plan.im_replays
+                    .inline-block
+                      %i.GlobalIcon-play
+                      Replays
+                  - else
+                    .inline-block.disabled
+                      %i.GlobalIcon-play
+                      Replays
+                  - if plan.im_uploads
+                    .inline-block
+                      %i.GlobalIcon-upload
+                      = I18n.t('subscriptions.plan_info.include_uploads')
+                  - else
+                    .inline-block.disabled
+                      %i.GlobalIcon-upload
+                      = I18n.t('subscriptions.plan_info.include_uploads')
+                  - if plan.im_channel_conversation
+                    .inline-block
+                      %i.GlobalIcon-message-square
+                      = I18n.t('subscriptions.plan_info.include_channel_conversation')
+                  - else
+                    .inline-block.disabled
+                      %i.GlobalIcon-message-square
+                      = I18n.t('subscriptions.plan_info.include_channel_conversation')
+            %section.GiftSubscription.margin-top-20
+              %span.text-color-Darkgrey.bold
+                %i.VideoClientIcon-gift-icon.text-color-secondary.padding-right-10
+                Gift subscription for a friend
+              .serchEmailWrapp.clearfix
+                %input#EmailForGift{type: :email, placeholder: 'Enter recipient email'}
+                  .errorContainerWrapp
+                %button.btn.btn-m.btn-borderred-grey.full-width.margin-top-20
+                  Confirm email
+              .userSearch.smallScrolls
+              -#  .userTile.text-ellipsis
+              -#    .avatarImg-SD{style:'background-image: url(http://placekitten.com.s3.amazonaws.com/homepage-samples/200/200.jpg)'}
+              -#    John Doe
+            #gift_subscription_info.padding-top-10.hidden
+              You are buying a
+              %span.text-color-Darkgrey
+                = pluralize(plan.interval_count, plan.interval.capitalize)
+              gift subscription plan for
+              %span.recipient.text-color-Darkgrey John Doe (john.doe@email.com)
+
+            - if !plan.trial_period_days.to_i.zero?
+              #recipient_trial_disclaimer.padding-top-10
+                *Trial period is not included with gift subscriptions
+
+          - unless current_user.confirmed?
+            - content_for(:after_include_javascripts) do
+              :plain
+                  var len = $('#preview-purchase-missing-confirmed-email-container').length;
+                  if ( len == 0) {
+                    console.log('failed');
+                  }
+
+                  window.previewPurchaseMissingConfirmedEmailView = new PreviewPurchaseMissingConfirmedEmailView({email: "#{current_user.email || current_user.unconfirmed_email}", el: '#preview-purchase-missing-confirmed-email-container'});
+                  window.previewPurchaseMissingConfirmedEmailView.render();
+
+          .right_b
+            .LoadingCover.hidden{style: 'margin-top: 30px; height: 30px'}
+              .spinnerSlider
+                .bounceS1
+                .bounceS2
+                .bounceS3
+
+            %h6 Payment Method
+            .content
+              .disabledButton
+                Credit Card
+              -#%ul.nav.nav-tabs.nav-justified.creditChoice{role:'tablist'}
+              -#  %li.active{role:'presentation'}
+              -#    %a.Payment_AddCreditCard.Payment_AddCreditCard{href: '#', 'aria-controls': 'Payment_AddCreditCard', role: :tab, data: {toggle: :tab, target: '#Payment_AddCreditCard'}}
+              -#      Credit Card
+              .tab-content
+                #Payment_AddCreditCard.tab-pane.active{role: :tabpanel}
+                  - if current_user.has_payment_info? && current_user.with_stripe_data!
+                    - if current_user.credit_cards && current_user.credit_cards.length > 0
+                      = form_tag stripe_plan_subscriptions_path(plan.id), method: :post, id: 'payment-form-existing-card', class: 'form_V2', style: 'visibility: visible;' do
+                        = hidden_field_tag :session_id, plan.id
+                        = hidden_field_tag :charge_amount, @charge_amount
+                        = hidden_field_tag :obtain_type, @obtain_type
+                        = hidden_field_tag :description, "Buy subscription ##{plan.im_name}"
+                        = hidden_field_tag :gift, false
+                        = hidden_field_tag :recipient, nil
+                        .row
+                          .col-md-12
+                            #ExistingCreditCard
+                              .select-block.state-derty
+                                %label Card Number
+                                %select{name: :stripe_card, required: true}
+                                  - current_user.credit_cards.each do |card|
+                                    %option{value: card['id'], data: {country: card['address_country'], zip: card['address_zip']}}= '*' * 12 + card['last4']
+                              -#.input-block.CVC
+                              -#  %input{type:'text', placeholder:'CVC'}
+                              %a#add_card.btn.btn-m.btn-square.btn-borderred-grey{href: '#'} ADD CARD
+                              -# - if !plan.trial_period_days.to_i.zero? && can?(:have_trial, plan.channel_subscription.channel)
+                              -#   .will_billed_info.text-color-secondary{style: 'margin-top: 20px;'}
+                              -#     = I18n.t('subscriptions.plan_info.billed_after_trial', amount: as_currency(plan.amount), period: plan.period, days: plan.trial_period_days.to_i).html_safe
+                        .submitBox
+                          .col-md-12.margin-bottom-20
+                            .amountWrap
+                              .amount
+                                %div.padding-bottom-10
+                                  .pull-right #{as_currency(plan.amount)}
+                                  Price
+                                %div.discount.hidden
+                                  .pull-right $0.00
+                                  .text Discount
+                                %div.tax
+                                  .pull-right $0.00
+                                  Tax
+                              %hr.full-width{style: 'margin: 10px 0 15px;'}
+                              .TotalAmount.fs-16
+                                .pull-right #{as_currency(plan.amount)}
+                                Total amount
+
+
+                          %button.btn.btn-m.full-width{data: {disable_with: 'Processing'}} Submit Payment
+
+                  = form_tag stripe_plan_subscriptions_path(plan.id), method: :post, id: 'payment-form', class: "form_V2 #{'hidden' if current_user.credit_cards && current_user.credit_cards.length > 0}" do
+                    = hidden_field_tag :session_id, plan.id
+                    = hidden_field_tag :charge_amount, @charge_amount
+                    = hidden_field_tag :obtain_type, @obtain_type
+                    = hidden_field_tag :description, "Buy subscription ##{plan.im_name}"
+                    = hidden_field_tag :stripe_token, nil
+                    = hidden_field_tag :gift, false
+                    = hidden_field_tag :recipient, nil
+                    .row
+                      .col-md-12
+                        #card-element
+                          // A Stripe Element will be inserted here.
+                          // #cardexp-element
+                          // #cardcvc-element
+                      .col-md-12.mb10
+                        // Used to display form errors.
+                        #card-errors.error{role: :alert}
+                    .row.margin-top-10
+                      .col-md-12
+                        .input-block.state-clear.required
+                          %label.fixed_top{for: :name_on_card} Name on Card
+                          %input#name_on_card{type: :text, name: :name_on_card, placeholder: 'Jane Doe'}
+                          .errorContainerWrapp
+                    .row
+                      .col-md-6.country_col
+                        .select-block.state-derty.required
+                          %label.fixed_top{for: :country} Country
+                          = country_select nil, :country, {selected: current_user.account.try(:country) || 'US', prompt: true}, {id: :card_country, name: :country, class: 'styled-select styled-select_withCss full-width', placeholder: 'United States'}
+                          .errorContainerWrapp
+                      .col-md-6
+                        #zip_code_block.input-block.state-clear.required
+                          %label.fixed_top{for: :zip_code} Zip Code
+                          %input#zip_code{type: :text, name: :zip_code, placeholder: '08934'}
+                          .errorContainerWrapp
+                      -# - if !plan.trial_period_days.to_i.zero? && can?(:have_trial, plan.channel_subscription.channel)
+                      -#   .col-md-12.will_billed_info.text-color-secondary{style: 'margin-top: 20px;'}
+                      -#     = I18n.t('subscriptions.plan_info.billed_after_trial', amount: as_currency(plan.amount), period: plan.period, days: plan.trial_period_days.to_i).html_safe
+                    .row
+                      .col-md-12.margin-bottom-20.margin-top-10
+                        .amountWrap
+                          .amount
+                            %div.padding-bottom-10
+                              .pull-right #{as_currency(plan.amount)}
+                              Price
+                            %div.discount.hidden
+                              .pull-right $0.00
+                              .text Discount
+                            %div.tax
+                              .pull-right $0.00
+                              Tax
+                          %hr.full-width{style: 'margin: 10px 0 15px;'}
+                          .TotalAmount.fs-16
+                            .pull-right #{as_currency(plan.amount)}
+                            Total amount
+
+                    .submitBox
+                      %button.btn.btn-m.full-width{data: {disable_with: 'Processing'}} Submit Payment

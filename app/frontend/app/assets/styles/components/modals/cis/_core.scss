@@ -1,0 +1,223 @@
+#cis {
+  .MK2-modal__dialog {
+    padding: 0;
+    margin: 8rem auto 0;
+    @include media(p-tablet) {
+      width: 90%;
+    }
+  }
+
+  .MK2-modal__body {
+    padding: 0;
+  }
+
+  .unobtrusive-flash-container {
+    position: fixed;
+    right: 2rem;
+    max-width: 40rem;
+
+    .alert {
+      overflow: hidden;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 7px 0 var(--sh__main);
+      background: var(--bg__tooltip);
+
+      .bodyFlashMessage {
+        padding: 1.5rem 4rem 1.5rem 5.5rem;
+      }
+
+      button {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        color: var(--tp__icons);
+      }
+    }
+  }
+}
+
+.cis {
+  width: 65rem;
+  overflow: hidden;
+  @include flex(flex, false, false);
+  @include media(p-tablet) {
+    width: 100%;
+  }
+
+  &__image {
+    background: rgba(178, 178, 178, 0.15);
+    @include media(p-tablet) {
+      display: none;
+    }
+  }
+
+  &__form {
+    padding: 4rem 3rem;
+    width: 100%;
+    max-width: calc(100% - 25rem);
+    @include media(p-tablet) {
+      max-width: 100%;
+    }
+    @include media(p-phone) {
+      padding: 4rem 1.5rem 2rem;
+    }
+
+    &__header {
+      color: var(--tp__h1);
+      font-size: 2.2rem;
+      font-weight: bold;
+      padding-bottom: 4rem;
+    }
+
+    &__row {
+      @include flex(flex, center, space-between);
+      padding: 1.5rem 0rem;
+
+      &__left {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: var(--tp__main);
+      }
+
+      &__right {
+        @include flex(flex, center, false);
+      }
+    }
+
+    #title {
+      color: var(--tp__inputs__active);
+      font-size: 1.6rem;
+    }
+
+    .dropdownMK2__toggle {
+      font-size: 1.6rem;
+    }
+
+    .dropdownMK2__menu {
+      width: 100%;
+      left: auto;
+      top: 7.5rem;
+    }
+
+    .dropdownMK2__item {
+      padding: 0 1rem;
+
+      & > a {
+        padding: 1rem;
+        @include text__ellipsis();
+      }
+    }
+
+    &__duration {
+      padding-bottom: 1rem;
+
+      &__title {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: var(--tp__main);
+        padding-bottom: 2rem;
+      }
+
+      &__range {
+        @include media(p-phone) {
+          padding: 0 1.5rem;
+        }
+      }
+    }
+
+    &__buttons {
+      @include flex(flex, center, false);
+      background: var(--btn__secondary);
+      border-radius: 1rem;
+    }
+
+    &__button {
+      min-width: 9rem;
+      min-height: 2rem;
+      background: var(--btn__secondary);
+      color: var(--tp__btn__secondary);
+      border: 1px solid var(--btn__secondary);
+      line-height: normal;
+      font-weight: bold;
+      font-size: 1.2rem;
+
+      &:active, &:focus {
+        background: var(--btn__secondary);
+        color: var(--tp__btn__secondary);
+      }
+
+      &:hover {
+        background: var(--bg__label);
+        color: var(--tp__btn__main);
+      }
+
+      &__active {
+        background: var(--bg__label);
+        color: var(--tp__btn__main);
+        border: 1px solid var(--bg__label);
+
+        &:hover, &:active, &:focus {
+          background: var(--bg__label);
+          color: var(--tp__btn__main);
+        }
+      }
+    }
+
+    &__actions {
+      position: relative;
+      z-index: 2;
+      margin: 0 auto 5rem;
+      width: 65rem;
+      text-align: right;
+      padding-top: 2rem;
+      @include media(p-tablet) {
+        width: 90%;
+      }
+
+      &__start, &__cancel {
+        border-radius: 4rem;
+        min-width: 12rem;
+        font-weight: bold;
+        min-height: 4rem;
+        font-size: 1.4rem;
+      }
+
+      &__cancel {
+        margin-right: 1.5rem;
+      }
+
+      &__start {
+        min-width: 14rem;
+      }
+    }
+
+    &__icon {
+      color: var(--tp__icons);
+      margin-right: 1rem;
+    }
+
+    &__participants, &__duration {
+      #participants {
+        font-size: 1.6rem;
+        width: 9rem;
+        padding: 0 0 .3rem;
+        -moz-appearance: textfield;
+      }
+
+      .input__field__bottom {
+        display: none;
+      }
+    }
+
+    &__text {
+      font-size: 1.4rem;
+      color: var(--tp__inputs__validation);
+      padding: 1rem;
+    }
+  }
+
+  .selectArrow.up {
+    top: 30%;
+  }
+}

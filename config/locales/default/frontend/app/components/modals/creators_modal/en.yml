@@ -1,0 +1,10 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          creators_modal:
+            creators: Creators
+            search_by_name: Search  by name
+            following: Following
+            unfollow: Unfollow

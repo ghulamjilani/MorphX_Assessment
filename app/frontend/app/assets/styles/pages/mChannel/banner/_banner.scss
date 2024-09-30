@@ -1,0 +1,77 @@
+.mChannel {
+  &__banner {
+    @include media(phone) {
+      min-width: 100%;
+    }
+
+    &__img {
+      height: 0;
+      padding-top: 27.85%;
+      background-repeat: no-repeat;
+      background-position: 0 center;
+      position: relative;
+      background-color: rgba(179, 179, 179, 0.15); //#676767;//placeholder color
+      background-position-x: center;
+      @include media(reverso-phone) {
+        background-size: calc(100% + 14rem);
+      }
+      @include media(phone) {
+        background-size: cover;
+        background-position-y: 0 !important; //for brake inline styles
+        border-radius: 0;
+        //margin-top: 1rem;
+      }
+    }
+
+    &__social {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      border-radius: $CONTENT_BORDER_RADIUS;
+      background: rgba(77, 77, 77, 0.5); //fixed color!!!
+      padding: .75rem 1.5rem;
+      @include media(p-tablet){
+        top: 1rem;
+        bottom: auto;
+      }
+      a {
+        color: #fff;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 1.6rem;
+
+        &:not(:last-child) {
+          padding-right: 3rem;
+          @include media(phone){
+            padding-right: 2rem;
+          }
+        }
+
+        i {
+          font-size: 1.6rem;
+
+          &.GlobalIcon-linkedin:before {
+            font-size: 1.6rem;
+            position: relative;
+            // :(
+            top: -2px;
+            // :(
+          }
+
+          &.GlobalIcon-youtube:before {
+            font-size: 1.8rem;
+            position: relative;
+            top: 1px;
+          }
+        }
+      }
+    }
+
+    &__back {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      background: var(--btn__tetriary);
+    }
+  }
+}

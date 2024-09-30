@@ -1,0 +1,53 @@
+// BASIC COLOR
+$red: #B02B2C;
+$green: #00897B;
+$blue: #4bacfe;
+$black: #36393D;
+$grey: #76838f;
+
+// flash
+$error: #dc4747 !default;
+$warning: #f2a654 !default;
+$success: #46be8a !default;
+$info: #57c7d4 !default;
+$flash-text-color: #fff !default;
+$flash-background-color: $grey !default;
+
+// status_tag
+$status-tag-text-color: #fff !default;
+$status-tag-background-color: #cacaca !default;
+$status-tag-background-valid-color: $success !default;
+$status-tag-background-error-color: $error !default;
+
+$border-color: #e4eaec;
+
+
+// body
+$body-background:#04343f;
+
+// header
+$header-border-color: #e6e6e6 !default;
+$header-background:#04343f;
+
+// nav action
+$header-nav-action-hover-background: #f5f5f5 !default;
+$header-nav-action-active-background: #f0f0f0 !default;
+
+//sidebar
+$sidebar-border-color: $header-border-color !default;
+$sidebar-background:#04343f;
+
+$sidebar-item-hover-background:#002027;
+$sidebar-nested-item-hover-background:#002027;
+
+// text
+$text-color: #04343f;
+$text-color-important: #526069 !default;
+$text-color-alternative: #ffffff !default;
+
+// buttons
+$button-color: #04343f !default;
+
+$box-shadow: 0 0 4px 0 rgba(0,0,0,0.1) !default;
+
+$primary-color: #f9343d;

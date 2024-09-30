@@ -1,0 +1,36 @@
+<% raise ArgumentError, @user.inspect if @follow_link_url.blank? %>
+
+<% if @user.can_receive_abstract_session_invitation_without_invitation_token? %>
+  <p>
+    <%= simple_format I18n.t('mailer.without_invitation_token.you_invited_message',
+                             abstract_session_link: "<a href=\"#{@session.absolute_path}\" target=\"_blank\">#{@session.always_present_title}</a>",
+                             presenter_link: "<a href=\"#{@session.organizer.absolute_path}\" target=\"_blank\">#{@session.organizer.public_display_name}</a>",
+                             start_at: @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z'),
+                             role: 'participant',
+                             kind_of_abstract_session: 'session') %>
+  </p>
+
+  <p>
+  <%= simple_format I18n.t('mailer.without_invitation_token.follow_link_message',
+                           url: @follow_link_url,
+                           kind_of_abstract_session: 'session') %>
+  </p>
+<% else %>
+  <p>
+    <%= simple_format I18n.t('mailer.with_invitation_token.you_invited_message',
+                             abstract_session_link: "<a href=\"#{@session.absolute_path}\" target=\"_blank\">#{@session.always_present_title}</a>",
+                             presenter_link: "<a href=\"#{@session.organizer.absolute_path}\" target=\"_blank\">#{@session.organizer.public_display_name}</a>",
+                             start_at: @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z'),
+                             role: 'participant',
+                             kind_of_abstract_session: 'session') %>
+
+  <p>
+    <%= simple_format I18n.t('mailer.with_invitation_token.follow_link_message',
+                             url: @follow_link_url,
+                             kind_of_abstract_session: 'session') %>
+  </p>
+<% end %>
+
+<p class="thank_you_message">
+  <%= simple_format I18n.t('mailer.thank_you_message', service_name: Rails.application.credentials.global[:service_name]) %>
+</p>

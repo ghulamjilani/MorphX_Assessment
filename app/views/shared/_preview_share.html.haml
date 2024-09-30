@@ -1,0 +1,288 @@
+- short_url = short_share_url(share_model)
+- full_url = full_share_url(share_model)
+- share_msg = share_default_message(share_model)
+:ruby
+  session = nil
+  if show_share_video?(share_model)
+    if share_model.is_a?(Video)
+      session = share_model.session
+      channel_videos_presence = Video.available.where.not(id: share_model.id).for_channel_and_user(session.channel.id, current_user&.id || -1).exists?
+    elsif share_model.is_a?(Recording)
+      session = share_model.channel.sessions.build
+      channel_videos_presence = Recording.available.where.not(id: share_model.id).where(channel_id: share_model.channel.id).exists?
+    else
+      session = share_model
+      channel_videos_presence = Video.available.for_channel_and_user(session.channel.id, current_user&.id || -1).where(sessions: { recorded_free: true }).exists?
+    end
+  end
+
+#social-modal.shareModal.modal.fade{aria: {hidden: true}, role: :dialog, tabindex: -1, data: { type: share_model.class.name.downcase, id: share_model.id }}
+  .modal-dialog
+    .modal-content
+      .modal-body.clearfix{class: ('withEmbed' if show_share_video?(share_model)) }
+        .unobtrusive-flash-container
+        .sm-head
+          = render partial: 'become_presenter_steps/close_modal'
+          .row
+            .col-md-5.share-section
+              %h4.heading
+                = I18n.t('views.shared.preview_share.share')
+              - if Rails.application.credentials.global.dig(:socials, :share, :enabled)
+                .sharetools-menu.socialMK2
+                  - if Rails.application.credentials.global.dig(:socials, :share, :facebook)
+                    = link_to "https://www.facebook.com/sharer.php?u=#{full_url}", class: 'fb-share', target: '_blank' do
+                      %span
+                        %i.VideoClientIcon-facebookF
+                      -#Facebook
+                    :javascript
+                      $('.fb-share').click(function(e) {
+                          e.preventDefault();
+                          $.ajax({
+                            type: "POST",
+                            data: { _method: 'POST'},
+                            url: "#{increment_share_counter_path(share_model, 'facebook')}",
+                            success: function() { }
+                          });
+                          var width  = 550,
+                              height = 450,
+                              left   = ($(window).width()  - width)  / 2,
+                              top    = ($(window).height() - height) / 2,
+                              opts   = 'width='  + width  +
+                                      ',height=' + height +
+                                      ',top='    + top    +
+                                      ',left='   + left +
+                                      ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+                          window.open($(this).attr('href'), 'fbShareWindow', opts);
+                          return false;
+                      });
+
+                  - if Rails.application.credentials.global.dig(:socials, :share, :twitter)
+                    = link_to "https://twitter.com/intent/tweet?url=#{full_url}&text=#{share_model.share_title}", class: 'twitter-share', target: '_blank' do
+                      %span
+                        %i.VideoClientIcon-twitter2
+                      -#Twitter
+                    :javascript
+                      $('.twitter-share').click(function(e) {
+                          e.preventDefault();
+                          $.ajax({
+                            type: "POST",
+                            data: { _method: 'POST'},
+                            url: "#{increment_share_counter_path(share_model, 'twitter')}",
+                            success: function() { }
+                          });
+                          var width  = 575,
+                              height = 400,
+                              left   = ($(window).width()  - width)  / 2,
+                              top    = ($(window).height() - height) / 2,
+                              opts   = 'status=1' +
+                                      ',width='  + width  +
+                                      ',height=' + height +
+                                      ',top='    + top    +
+                                      ',left='   + left +
+                                      ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+                          window.open($(this).attr('href'), 'twitter', opts);
+                          return false;
+                      });
+
+                  - if Rails.application.credentials.global.dig(:socials, :share, :linkedin)
+                    = link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{full_url}&title=#{share_model.share_title}&summary=#{share_model.share_description}&source=#{Rails.application.credentials.global[:host]}", target: '_blank', class: 'linkedin-share' do
+                      %span
+                        %i.VideoClientIcon-linkedin-1F
+                      -#LinkedIn
+                    :javascript
+                      $('.linkedin-share').click(function(e) {
+                          e.preventDefault();
+                          $.ajax({
+                            type: "POST",
+                            data: { _method: 'POST'},
+                            url: "#{increment_share_counter_path(share_model, 'linkedin')}",
+                            success: function() { }
+                          });
+                          var width  = 520,
+                              height = 570,
+                              left   = ($(window).width()  - width)  / 2,
+                              top    = ($(window).height() - height) / 2,
+                              opts   = 'status=1' +
+                                      ',width='  + width  +
+                                      ',height=' + height +
+                                      ',top='    + top    +
+                                      ',left='   + left +
+                                      ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+                          window.open($(this).attr('href'), 'linkedin', opts);
+                          return false;
+                      });
+
+                  - if Rails.application.credentials.global.dig(:socials, :share, :pinterest)
+                    = link_to "http://pinterest.com/pin/create/button/?url=#{full_url}&description=#{share_model.share_title}&media=#{share_model.share_image_url}", target: '_blank', class: 'pinterest-share' do
+                      %span
+                        %i.VideoClientIcon-pinterestF
+                      -#Pinterest
+                    :javascript
+                      $('.pinterest-share').click(function(e) {
+                          e.preventDefault();
+                          $.ajax({
+                            type: "POST",
+                            data: { _method: 'POST'},
+                            url: "#{increment_share_counter_path(share_model, 'pinterest')}",
+                            success: function() { }
+                          });
+                          var width  = 750,
+                              height = 695,
+                              left   = ($(window).width()  - width)  / 2,
+                              top    = ($(window).height() - height) / 2,
+                              opts   = 'status=1' +
+                                      ',width='  + width  +
+                                      ',height=' + height +
+                                      ',top='    + top    +
+                                      ',left='   + left +
+                                      ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+                          window.open($(this).attr('href'), 'pinterest', opts);
+                          return false;
+                      });
+
+                  - if Rails.application.credentials.global.dig(:socials, :share, :tumblr)
+                    = link_to "https://www.tumblr.com/widgets/share/tool?canonicalUrl=#{full_url}", target: '_blank', class: 'tumblr-share' do
+                      %span
+                        %i.VideoClientIcon-tumblrF
+                      -#Tumblr
+                    :javascript
+                      $('.tumblr-share').click(function(e) {
+                          e.preventDefault();
+                          $.ajax({
+                            type: "POST",
+                            data: { _method: 'POST'},
+                            url: "#{increment_share_counter_path(share_model, 'tumblr')}",
+                            success: function() { }
+                          });
+                          var width  = 775,
+                              height = 500,
+                              left   = ($(window).width()  - width)  / 2,
+                              top    = ($(window).height() - height) / 2,
+                              url    = this.href,
+                              opts   = 'status=1' +
+                                      ',width='  + width  +
+                                      ',height=' + height +
+                                      ',top='    + top    +
+                                      ',left='   + left +
+                                      ',toolbar=0,location=0,menubar=0,directories=0,scrollbars=0';
+                          window.open($(this).attr('href'), 'pinterest', opts);
+                          return false;
+                      });
+
+                  - if Rails.application.credentials.global.dig(:socials, :share, :reddit)
+                    - "http://reddit.com/submit?url={url}&title={title}"
+                    = link_to "https://ssl.reddit.com/submit?url=#{full_url}&title=#{share_model.share_title}", target: '_blank', class: 'reddit-share' do
+                      %span
+                        %i.VideoClientIcon-reddit-alien
+                      -#Reddit
+                    :javascript
+                      $('.reddit-share').click(function(e) {
+                          //e.preventDefault();
+                          $.ajax({
+                            type: "POST",
+                            data: { _method: 'POST'},
+                            url: "#{increment_share_counter_path(share_model, 'reddit')}",
+                            success: function() { }
+                          });
+                          return true;
+                      });
+
+                  - if Rails.application.credentials.global.dig(:socials, :share, :email)
+                    - options = user_signed_in? ? {class: 'modal_email_show ensure-link-style', style: 'cursor: pointer'} : {class: 'ensure-link-style', data: {dismiss: :modal, target: '#signupPopup', toggle: :modal}}
+                    = link_to '#', options do
+                      %span
+                        %i.VideoClientIcon-mailF
+                      -#Email
+              .link_Share_block
+                %label= I18n.t('views.shared.preview_share.full_permalink')
+                %input{type: :text, value: CGI.unescape(full_url), readonly: true, size: 70}
+                %a.btn.btn-s.btn-borderred-grey{href: '#', onclick: 'copyToClipboard(this); return false'}
+                  = I18n.t('views.shared.preview_share.copy')
+
+              - if short_url
+                .link_Share_block
+                  %label= I18n.t('views.shared.preview_share.short_permalink')
+                  %input{type: :text, value: CGI.unescape(short_url), readonly: true, size: 70}
+                  %a.btn.btn-s.btn-borderred-grey{href: '#', onclick: 'copyToClipboard(this); return false'}
+                    = I18n.t('views.shared.preview_share.copy')
+
+              - if current_user
+                .link_Share_block
+                  %label= I18n.t('views.shared.preview_share.referral_permalink')
+                  %input{type: :text, value: CGI.unescape(share_model.absolute_path(UTM.build_params({utm_content: current_user.utm_content_value}), current_user)), readonly: true, size: 70}
+                  %a.btn.btn-s.btn-borderred-grey{href: '#', onclick: 'copyToClipboard(this); return false'}
+                    = I18n.t('views.shared.preview_share.copy')
+              - if defined?(interactive_access_tokens) && interactive_access_tokens.present?
+                - interactive_access_tokens.each do |interactive_access_token|
+                  = render 'shared/preview_share/interactive_access_token', interactive_access_token: interactive_access_token
+              - if share_model.is_a?(Recording) ?  true : (session && CanReadSession.new(current_user, session).can?)
+                %h4.heading.padding-top-20
+                  %label.checkbox.checkbox-swith.right-position.full-width
+                    %input#embedSwitch{type: :checkbox}
+                    %span.full-width
+                      = I18n.t('views.shared.preview_share.embed')
+            - if share_model.is_a?(Recording) ?  true : (session && CanReadSession.new(current_user, session).can?)
+              .col-md-7.embed-section
+                .row
+                  .col-md-4
+                    .embed-section-head
+                      = I18n.t('views.shared.preview_share.embed_options')
+                    .row
+                      .col-md-12
+                        %label.checkbox.choice
+                          %input.template-option.mod-option{ type: :checkbox, checked: session.upcoming?, data: { tmpl: 'video', mod: 'live' } }
+                          %span
+                            = I18n.t('views.shared.preview_share.show_live')
+                      .col-md-12
+                        %label.checkbox.choice
+                          %input.template-option.mod-option{ type: :checkbox, checked: session.upcoming?, data: { tmpl: 'additions', mod: 'chat' } }
+                          %span
+                            = I18n.t('views.shared.preview_share.show_chat')
+                    .row
+                      .col-md-12
+                        %label.checkbox.choice
+                          %input.template-option{ type: :checkbox, checked: :checked,  data: { tmpl: 'shop' } }
+                          %span
+                            = I18n.t('views.shared.preview_share.show_product_list')
+                      .col-md-12
+                        %label.checkbox.choice
+                          %input.template-option.mod-option{ type: :checkbox, checked: :checked, data: { tmpl: 'additions', mod: 'playlist' } }
+                          %span
+                            = I18n.t('views.shared.preview_share.show_playlist')
+                      .col-md-12
+                        %label.checkbox.choice
+                          %input.template-option.mod-option{ type: :checkbox, data: { tmpl: 'additions', mod: 'single' } }
+                          %span
+                            = I18n.t('views.shared.preview_share.show_single_item')
+                  .col-md-8
+                    .embed-section-head
+                      = I18n.t('views.shared.preview_share.code')
+                    .copyToClipboardWrapp
+                      %label.clearfix.embedIframeLabel
+                        %a.btn.btn-s.btn-borderred-grey.pull-right{onclick:"copyToClipboardTextArea(this); return false"}
+                          = I18n.t('views.shared.preview_share.copy')
+                      %textarea#embedIframe.full-width.no-border{rows: '6'}
+                    .embed-section-head.single_item_head.margin-top-20
+                      = I18n.t('views.shared.preview_share.single_frame_code')
+                    .copyToClipboardWrapp.single_item_wrapp
+                      %label.clearfix.embedIframeLabel
+                        %a.btn.btn-s.btn-borderred-grey.pull-right{onclick:"copyToClipboardTextArea(this); return false"}
+                          = I18n.t('views.shared.preview_share.copy')
+                      %textarea#singleEmbedIframe.full-width.no-border{rows: '3'}
+
+                  .widgetEmbeds.hidden{data: { 'channel-js-url': asset_url('/assets/embeds/channel.js'), 'has-live': session.channel.live_public_sessions.exists?.to_s, 'has-products': show_share_shop?(share_model).to_s, 'has-more-videos': channel_videos_presence.to_s, 'single-iframe-url': embedv2_widget_url(id: share_model.id, class: share_model.class.to_s.downcase) }}
+                    %script(type="application/xhtml+xml" data-template="video")
+                      = render 'widgets/embeds/video', share_model: share_model
+                    %script(type="application/xhtml+xml" data-template="video,additions")
+                      = render 'widgets/embeds/video_additions', share_model: share_model
+                    %script(type="application/xhtml+xml" data-template="video,additions,shop")
+                      = render 'widgets/embeds/video_shop_additions', share_model: share_model
+                    %script(type="application/xhtml+xml" data-template="video,shop")
+                      = render 'widgets/embeds/video_shop', share_model: share_model
+        .sm-body#embeddedCodePreview
+
+- if user_signed_in?
+  = render 'shared/email_preview_share',
+    mail_body: (share_msg + "\n " + CGI.unescape(full_url)).squish,
+    klass: share_model.class.to_s,
+    model_id: share_model.id

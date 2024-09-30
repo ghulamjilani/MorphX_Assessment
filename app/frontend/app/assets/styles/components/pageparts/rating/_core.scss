@@ -1,0 +1,66 @@
+.rating__star {
+  font-size: 1.4rem;
+
+  &__edit {
+    cursor: pointer;
+  }
+
+  &__wrapp {
+    color: var(--tp__icons);
+    user-select: none;
+  }
+
+  &__count {
+    vertical-align: middle;
+  }
+
+  $sizes: (0, 1, 2, 3, 4, 5);
+  @each $name, $size in $sizes {
+    &__#{$name} {
+      .GlobalIcon-star:nth-child(-n+#{$name}) {
+        color: var(--bg__label);
+      }
+    }
+  }
+
+  .half {
+    display: inline-flex;
+  }
+
+  .half > span:first-child {
+    overflow: hidden;
+    width: 1.2rem;
+    z-index: 1;
+    color: #f97d00;
+  }
+
+  .half > span:last-child {
+    position: relative;
+    margin-left: -1.2rem;
+  }
+}
+
+.rating__smile {
+  user-select: none;
+  filter: grayscale(1);
+  cursor: pointer;
+
+  &:hover {
+    filter: none;
+  }
+
+  &__wrapp {
+    width: 12rem;
+    @include flex(flex, false, space-between);
+    @include media(desktop) {
+      width: 10rem;
+    }
+    @include media(p-phone) {
+      margin: 0 auto;
+    }
+  }
+
+  &__active {
+    filter: none;
+  }
+}

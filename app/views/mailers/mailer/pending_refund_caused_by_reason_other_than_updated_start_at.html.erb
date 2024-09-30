@@ -1,0 +1,41 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  <%= raw cancelled_or_opted_out_reason_text(@pending_refund) %>
+</p>
+
+<pre>
+-- Transaction Information --
+Amount:             <%= number_to_currency(@pending_refund.amount / 100.0) %>
+Payment provider:   <%= @pending_refund.payment_transaction.try(:provider) %>
+Payment ID:         <%= @pending_refund.payment_transaction.try(:pid) %>
+<% if @pending_refund.payment_transaction.present? && @pending_refund.payment_transaction.credit_card? %>
+Card Type:          <%= @pending_refund.payment_transaction.card_type %>
+Credit Card Number: <%= '*'*12 + @pending_refund.payment_transaction.credit_card_last_4.to_s %>
+<%# elsif @pending_refund.payment_transaction.present? && @pending_refund.payment_transaction.paypal? %>
+<!--PayPal Email: <%#= @pending_refund.braintree_transaction.paypal_payer_email %>-->
+<% else %>
+  <% Rails.logger.info "can not interpret #{@pending_refund.inspect}" %>
+<% end %>
+</pre>
+
+<p>Please choose your preferred refund method below:</p>
+
+<ul>
+  <% if @pending_refund.payment_transaction.present? %>
+    <li>
+      If you would like money refunded back on your credit card, follow <%= link_to 'this link', pending_refund_get_money_url(@pending_refund) %>
+    </li>
+  <% end %>
+  <% if eligible_for_system_credit_refund?(@pending_refund, @user) %>
+    <li>
+      <%= raw I18n.t('views.mailer.conf_insruct.pending_refund.would', service_name: Rails.application.credentials.global[:service_name], link: (link_to 'this link', pending_refund_get_system_credit_url(@pending_refund))) %>
+    </li>
+  <% end %>
+</ul>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@direct_from_name) %>
+</p>

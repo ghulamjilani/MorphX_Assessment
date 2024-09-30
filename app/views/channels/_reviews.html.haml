@@ -1,0 +1,18 @@
+- reviews.each do |review|
+  .reviews-tile
+    .reviews-tile-l
+      %img.reviews-author-avatar{alt: review.user.public_display_name, src: review.user.avatar_url}
+    .reviews-tile-r
+      %div
+        .inline-block.reviews-author-name
+          = link_to review.user.public_display_name, spa_user_path(review.user.slug)
+        .inline-block.reviews-date= time_ago_in_words(review.created_at).gsub('about', '') + ' ago'
+      %div
+        %ul.starRating.text-left.clearfix{title: "#{review.stars_quantity.round(2)}/5"}
+          - 5.times do |index|
+            %li
+              %i{class: (review.stars_quantity >= index + 1) ? 'VideoClientIcon-starF' : (review.stars_quantity >= index + 0.5) ? 'VideoClientIcon-star-half-altF' : 'VideoClientIcon-star-emptyF'}
+    - if review.overall_experience_comment.present?
+      %div.reviews-body-wrapp
+        .reviews-body-text
+          %span= simple_format(review.overall_experience_comment, {}, wrapper_tag: 'div')

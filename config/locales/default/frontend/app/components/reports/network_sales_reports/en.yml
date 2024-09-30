@@ -1,0 +1,25 @@
+en:
+  frontend:
+    app:
+      components:
+        reports:
+            network_sales_reports:
+              export_csv: Export CSV
+              organization: Organization
+              organizations: Organizations
+              channel: Channel
+              channels: Channels
+              product_type: Product type
+              content: Content
+              creator: Creator/Host
+              cost: Cost $
+              number: Number
+              gross_income: Gross Income $
+              platform_comission: Platform Comission $(Rev Share)
+              income: Income $
+              refund: Refund $
+              refund_platform: Refund Platform $
+              refund_owner: Refund Owner $
+              owner_income: Owner's Income $
+              total: Total
+              date: Date

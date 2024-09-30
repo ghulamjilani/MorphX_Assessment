@@ -1,0 +1,4 @@
+en:
+  models:
+    session:
+      share_title: "%{always_present_title}"

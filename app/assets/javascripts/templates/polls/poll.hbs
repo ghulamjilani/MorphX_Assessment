@@ -1,0 +1,39 @@
+<div class="Votes-block hidden" id="poll_{{id}}" data-poll-id="{{id}}">
+    <div class="Votes-h">
+        <h6>Poll Results - Total of {{totalVotes}} votes</h6>
+    </div>
+    <div class="Votes-b {{#if is_voted}} votedIn {{else}} didNotVote{{/if}}">
+        <div class="Votes-Question">{{tagline}}</div>
+        <ul>
+          {{#each sides}}
+              <li id="side_{{id}}">
+                  <a href="{{#if ../is_voted}}#{{else}}/polls/vote?side_id={{id}}&poll_id={{../id}}{{/if}}" class="vote" {{#unless ../is_voted}}data-remote="true" data-method="post"{{/unless}}>
+                    <div class="Votes-percent-line" style="width:{{percents}}%; background-color: {{color}}"></div>
+                    <div class="coloredDots {{#if is_voted}} Voted {{else}} notvoted{{/if}}" style="background-color: {{color}}"></div>
+                    <div class="Votes-variables">{{answer}}</div>
+                    <div class="Votes-percent">{{percents}}%</div>
+                </a>
+              </li>
+          {{/each}}
+        </ul>
+    </div>
+    <!--<div class="Votes-f">-->
+        <!--<div class="Votes-share">-->
+            <!--Share your vote on-->
+            <!--<div class="pull-right">-->
+                <!--<a href="/polls/{{!-- local_poll.id --}}/share/twitter">-->
+                    <!--<i class="VideoClientIcon-Twitter"></i>-->
+                <!--</a>-->
+                <!--<a href="/polls/{{!-- local_poll.id --}}/share/facebook">-->
+                    <!--<i class="VideoClientIcon-FacebookF"></i>-->
+                <!--</a>-->
+                <!--<a href="/polls/{{!-- local_poll.id --}}/share/linkedin">-->
+                    <!--<i class="VideoClientIcon-Linkedin"></i>-->
+                <!--</a>-->
+                <!--<a href="/polls/{{!-- local_poll.id --}}/share/googleplus">-->
+                    <!--<i class="VideoClientIcon-Googleplus"></i>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>

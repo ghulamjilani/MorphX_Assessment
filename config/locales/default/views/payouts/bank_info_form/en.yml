@@ -1,0 +1,28 @@
+en:
+  views:
+    payouts:
+      account_info_form:
+        add_info: Add personal info
+        edit_info: Edit personal info
+        please_wait: Please wait…
+        first_name: First Name
+        last_name: Last Name
+        email: Email
+        ssn: SSN Last 4
+        industry: Industry
+        dob: Date of birth
+        phone: Phone Number
+        website: Business Website
+        address_line_1: Address Line 1
+        address_line_2: Address Line 2
+        city: City
+        zip: ZIP
+        state: State
+        province: Province
+        country: Country
+        identity_doc: Identity Document
+        provided: Provided
+        passport_info: The uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+        additional_doc: Verify home address
+        back: Back
+        next: Next

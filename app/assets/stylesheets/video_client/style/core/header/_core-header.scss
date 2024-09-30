@@ -1,0 +1,116 @@
+@import "partials/flashMessage";
+
+.V-header{
+  @include clearfix();
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: visible;
+  height: $header-height;
+  transform: translateY($header-height * -1);
+  -webkit-transform: translateY($header-height * -1);
+  @include transition($transitionProperty);
+  background: #3a3a3a;
+  z-index:199;
+  .logo{
+    background-color: #272727;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: #{$header-height * 0.6}  auto;
+    width: $header-height;
+    height: $header-height;
+    float: left;
+  }
+}
+
+@import "partials/oneThird";
+@import "partials/twoThird";
+@import "partials/threeThird";
+
+
+.showVideo{
+  .V-header{
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+$oneThirdWidth:32.2rem;
+$threeThirdWidth:19rem;
+
+.oneThird, .twoThird, .threeThird{
+  float: left;
+}
+.oneThird{
+  width:$oneThirdWidth ;
+  padding-left: 0rem;
+  padding-top: 0.7rem;
+  height: 100%;
+  section{
+    display: inline-block;
+    vertical-align: top;
+  }
+  section.play{
+    width: 6.5rem;
+  }
+  .timeCounterWrapp{
+    min-width: 10.5rem;
+  }
+  .inCallButtonAutostart-wrapp{
+    width: 4rem;
+    height: $header-height - 0.7;
+    float: left;
+
+  }
+}
+
+.twoThird{
+  width: calc(100% - #{$oneThirdWidth + $threeThirdWidth + $header-height});
+  background: $twoThirdBG;
+  height: $header-height;
+}
+.threeThird{
+  width: $threeThirdWidth;
+}
+
+
+a.linkSwitch{
+  width: 2.3rem;
+  height: 2.3rem;
+  @include transition200();
+  position: relative;
+  margin-left: 0.6rem;
+  &:after{
+    content: '';
+    width: 1.2rem;
+    height: 1.2rem;
+    position: absolute;
+    left: -1px;
+    top: 0.5rem;
+    border-radius: 1rem;
+    background: #ccc;
+    @include transition200();
+  }
+  &:before{
+    content: '';
+    width: 2.3rem;
+    height: 0.3rem;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 0 0 0.2rem #000;
+    position: absolute;
+    border-radius: 1rem;
+    opacity: 0.4;
+    top: 0.9rem;
+    left: 0rem;
+  }
+  &.on{
+    opacity: 1;
+    &:after{
+      left: 1.3rem;
+      background: $siteColorMain;
+    }
+  }
+}

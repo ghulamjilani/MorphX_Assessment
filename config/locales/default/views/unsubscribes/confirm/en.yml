@@ -1,0 +1,7 @@
+en:
+  views:
+    unsubscribes:
+      confirm:
+        confirmed: You have been unsubscribed from this kind of email notifications
+        go_home: Return to Home
+        notification_settings: Notification Settings

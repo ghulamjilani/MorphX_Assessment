@@ -1,0 +1,78 @@
+ru:
+  pricing_page:
+    banner:
+      choose_the_best_plan: Выберите лучший план для Вашего бизнеса!
+      discover: Получите все необходимое с 14-дневной бесплатной Trial-версией.
+      monthly: В месяц
+      yearly: В год
+    plans:
+      starter: Starter
+      discover_your_potential: Раскройте свой потенциал
+      pro: Pro
+      start_your_business: Начните свой бизнес
+      premium: Premium
+      grow_your_business: Расширьте свой бизнес
+      enterprise: Enterprise
+      usage_charges: "+ плата за использование"
+      buy: Купить
+      or_purchase_now: или Приобрести сейчас
+      no_trial: Без пробного периода
+      unlimited: Без ограничений
+      live: Live
+      replays: Реплеи
+      Более: Over
+      min: мин
+      contact: Отдел продаж
+    info:
+      video_creation_content_management: Создание видео и управление контентом
+      channel: канала
+      hours: часов
+      unlimited_channel: Неограниченное количество каналов
+      max_session_duration_up_to: Максимальная продолжительность сессии до
+      ios_and_android_apps: iOS и Android приложения
+      interactive_conference: Интерактивная конференция
+      facility_management: Управление устройствами (Multiroom)
+      featured_section: Раздел Рекомендованное/Избранное
+      storage_space: Пространство хранения
+      customizable: Настраиваемый
+      monetization_options: Возможности монетизации
+      sell_in_multiple_currencies: Продажа в многочисленных валютах
+      subscriptions_for_channel: Подписки на канал
+      ppv: Разовая плата за просмотр
+      gifting: Подписка/видео в подарок
+      stream_shopping: Возможность покупки в течение просмотра
+      online_store: Интернет-магазин
+      user_management: Управление пользователями
+      user: Пользователь
+      add: Возможность добавления
+      admin: администратора
+      unlimited: не ограничено
+      admins: администратор
+      admins_&_creators: Админы и Криэйторы
+      and: и
+      creator: Криэйтор
+      creators: Криэйторы
+      organization: Organization
+      admins_creators: Возможность добавления администраторов и криэйторов
+      organization_members_management: Управление членами организации
+      social_features: соц сети
+      integration_constant: Интеграция с Constant contact, Mail Chimp, Zapier
+      audience_chat: Чат с аудиторией
+      personalized_community_blog: Персонализированный блог сообщества
+      other_video_features: Другой функционал видео
+      free_streaming: Потоковая передача без рекламы
+      support_multiple_languages: Поддержка многочисленных языков
+      full_uploads: Загрузка Full 1080 HD видео
+      transcoding: Транскодирование и мульти-битрейт потоковая передача
+      player: Встраиваемый полнофункциональный адаптивный HTML5-плеер
+        с потоковой передачей в реальном времени, чатом, списком воспроизведения и поддержкой E-Commerce
+      ip_camera: Поддержка IP камеры
+      encoder: 'Поддержка Encoder: teredek, professional equipment'
+      analytics: Аналитика
+      real_time: Аналитика в режиме реального времени
+      statistics: Отчеты по статистике
+      support_level: Уровень технической поддержки
+#      two_hours_chat_support: Техническая поддержка в режиме чата отвечает на обращения в течение 2 часов в рабочие часы по часовому поясу США
+#      four_hours_chat_support: Техническая поддержка в режиме чата отвечает на обращения в течение 4 часов в рабочие часы по часовому поясу США
+      unlim_hours_chat_support: техническая поддержка потоковой передачи отвечает на обращения в течение 1 часа
+      free_trial_period: Бесплатный trial период

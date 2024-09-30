@@ -1,0 +1,15 @@
+en:
+  frontend:
+    app:
+      uikit:
+        m_tile:
+          private: Private
+          following: Following
+          purchased: Purchased
+          live: Live
+          replay: Replay
+          upload: Upload
+          channel: Channel
+          user: User
+          organization: Organization
+          viewed: Viewed

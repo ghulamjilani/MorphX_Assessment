@@ -1,0 +1,584 @@
+@import "../../../../mixin";
+.dashboards .edit_contacts_main, .dashboards .mailing_main{
+  padding: 20px 20px 40px;
+  @include media(p-phone){
+    padding: 20px 10px 40px;
+  }
+  
+  input.error{
+    border-color: var(--border__form__error);
+  }
+
+  span.error{
+    color: var(--border__form__error);
+  }
+
+  .edit-contact-form{
+    display: inline;
+  }
+
+  .emailTemplate{
+    .select{
+      .select2-container{
+        width: 280px;
+        padding-right: 0;
+        a{
+          padding-left: 0;
+        }
+      }
+      margin-bottom: 20px;
+    }
+  }
+  .new_userAndImport_users{
+    display: flex;
+    padding-bottom: 30px;
+    & > div{
+      width: 50%;
+    }
+    form{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .form_V2{
+      padding: 0;
+      //.input-block{
+      //  padding-bottom: 0;
+      //}
+    }
+    p{
+      margin: 0;
+    }
+    @include media(desktop-p-phone){
+      flex-direction: column;
+      & > div{
+        width: 100%;
+      }
+      form{
+        justify-content: space-between;
+        flex-direction: row;
+      }
+    }
+    @include media(p-phone){
+      flex-direction: column;
+      & > div:first-child{
+        padding-bottom: 30px;
+      }
+      form{
+        flex-direction: column;
+      }
+      & > div{
+        width: 100%;
+      }
+      p{
+        padding-bottom: 15px;
+      }
+      button, label{
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
+  #new_user{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    & > div{
+      display: flex;
+      align-items: baseline;
+    }
+    & > div:first-child{
+      width: 55%;
+      .input-block{
+        width: 54%;
+      }
+    }
+    input{
+      padding-bottom: 10px;
+      &::placeholder{
+        color: var(--tp__inputs);
+      }
+    }
+    @include media(desktop-p-phone){
+      span{
+        width: 50%;
+      }
+      button{
+        width: 150px;
+      }
+    }
+    @include media(p-phone){
+      flex-direction: column;
+      span{
+        width: 100%;
+      }
+      & > div:first-child{
+        padding-bottom: 20px;
+      }
+      & > div, & > div:first-child{
+        flex-direction: column;
+        width: 100%;
+        .input-block, button{
+          width: 100%;
+          margin-left: 0;
+        }
+      }
+    }
+    @include media(desktop-p-phone){
+      padding-bottom: 20px;
+      & > div:first-child{
+        .input-block{
+          width: 60%;
+        }
+      }
+    }
+  }
+  .btn-grey-solid, .btn-borderred-grey{
+    font-size: 13px;
+    font-weight: bold;
+    width: 150px;
+  }
+  p{
+    font-size: 15px;
+    color:var(--tp__main);
+  }
+  .email_wrapp{
+    background: rgba(9, 95, 115, 0.05);
+    border: 1px solid rgba(9, 95, 115, 0.2);
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .ql-toolbar, .ql-container{
+    background: var(--bg__content);
+    a{
+      color: var(--tp__active);
+    }
+  }
+  textarea#textraText{
+    height: 0!important;
+    margin-bottom: 0;
+  }
+  .email_preview{
+    display: flex;
+    align-items: baseline;
+    @include media(phone){
+      flex-direction: column;
+      p{
+        padding-top: 20px;
+      }
+    }
+  }
+  code{
+    background: none;
+    color: var(--tp__active);
+    padding: 0;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+  }
+  .filters_for_contacts{
+    border-top: 1px solid var(--border__separator);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & > div{
+      display: flex;
+      align-items: baseline;
+    }
+    .selectAll{
+      width: 25%;
+      @include media(reverso-desktop){
+        width: 22%;
+      }
+    }
+    .responsive{
+      width: 50%;
+      justify-content: space-between;
+    }
+    .select{
+      .v-dropdown.btn-group{
+        height: max-content;
+      }
+      @include media(p-tablet){
+        .v-dropdown{
+          min-width: 100%;
+          .v-dropdown-toggle{
+            min-width: 100%;
+            max-width: 100%;
+          }
+        }
+      }
+      @include media(reverso-p-tablet){
+        .v-dropdown-toggle{
+          max-width: 160px;
+          min-width: 160px;
+        }
+      }
+    }
+    .search{
+      position: relative;
+      margin-right: 55px;
+      input{
+        width: 250px;
+        max-width: 250px;
+        padding-right: 25px;
+        padding-bottom: 5px;
+      }
+      i{
+        cursor: pointer;
+        @include center(v);
+        right: 0;
+        font-size: 20px;
+        color: var(--tp__active);
+      }
+      @include media(p-tablet){
+        input{
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+    .select{
+      display: flex;
+      .select2-container{
+        padding-right: 0;
+        margin-top: 1px;
+        a{
+          padding-left: 0;
+        }
+        .select2-chosen{
+          margin-top: 5px;
+        }
+        b:after{
+          @include center(v);
+        }
+      }
+    }
+    .custom-paginate{
+      width: 25%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      a{
+        background: var(--bg__label);
+        border: none;
+        margin-left: 10px;
+        &:disabled, &[disabled] {
+          background-color: rgba(0, 0, 0, 0.05);
+          color:var(--tp__main);
+        }
+        i{
+          @include center(vh);
+          display: inline-block;
+          font-size: 17px;
+        }
+      }
+    }
+    @include media(desktop){
+      flex-direction: column;
+      position: relative;
+      padding-top: 20px;
+      .selectAll{
+        order: 2;
+        width: 100%;
+      }
+      .responsive{
+        width: 60%;
+        .search{
+          margin-right: 30px;
+        }
+        .select2-container{
+          width: 200px;
+        }
+      }
+      .custom-paginate{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 70%;
+      }
+    }
+    @include media(p-phone){
+      .custom-paginate{
+        position: relative;
+        order: 3;
+        justify-content: space-around;
+      }
+    }
+    @include media(phone-p-tablet){
+      .responsive{
+        width: 100%;
+      }
+      .search, .select{
+        width: 50%;
+      }
+      #userStatus{
+        width: 100%;
+        max-width: 100%;
+      }
+      .select2-container{
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+    @include media(phone){
+      .responsive{
+        width: 100%;
+        flex-direction: column;
+      }
+      #userStatus, .select2-container{
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+      }
+      .search, .select{
+        width: 100%;
+        margin-right: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  }
+  .contacts-table{
+    thead{
+      background: rgba(0, 0, 0, 0.05);
+      border-top: 1px solid var(--border__separator);
+      border-bottom: 1px solid var(--border__separator);
+      & > tr > th{
+        &.all{
+          display: flex;
+          align-items: baseline;
+        }
+        white-space: nowrap;
+        color:var(--tp__main);
+      }
+    }
+    tbody{
+      & > tr{
+        border-bottom: 1px solid var(--border__separator);
+        
+        @include media(phone){
+          &.editing{
+            td:first-child{
+              padding-left: 34px;
+            }
+            input{
+              width: 100%;
+            }
+          }
+        }
+        td{
+          padding: 10px;
+          @include media(p-tablet){
+            div{
+              display: inline;
+            }
+          }
+          &.remove{
+            .edit_link{
+              margin-right: 5px;
+            }
+            a {
+              display: inline-block;
+              @include media(p-tablet){
+                span {
+                  display: none;
+                }
+              }
+            }
+          }
+          @include media(phone){
+            padding-left: 0;
+          }
+          @include media(p-phone){
+            .display-data{
+              word-break: break-word;
+            }
+          }
+        }
+        td.preventEmailOverflow{
+          @include media(p-phone){
+            display: flex!important;
+            flex-wrap: wrap;
+            max-width: 100%;
+          }
+        }
+        td:first-child{
+          padding-left: 0;
+        }
+        @include media(reverso-p-tablet){
+          .preventEmailOverflow{
+            max-width: 200px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+        }
+        @include media(phone){
+          .phone-inline div{
+            display: inline;
+          }
+        }
+        @include media(phone-p-tablet){
+          td.remove > div{
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+    @include media(phone){
+      border-top: 1px solid var(--border__separator);
+      .hideForPhone{
+        display: none;
+      }
+      tbody td{
+        display: block!important;
+        &:before{
+          content: attr(data-th);
+          font-weight: bold;
+          display: inline-block;
+          vertical-align: middle;
+          width: 40%;
+        }
+        &:first-child:before{
+          width: calc(40% - 14px);
+        }
+      }
+      .remove > div{
+        display: inline;
+      }
+    }
+    @include media(p-phone){
+      tbody td{
+        &:before{
+          width: 25%;
+        }
+      }
+    }
+  }
+  .mailing-table{
+    @include media(phone){
+      tbody td:not(:first-child){
+        padding-left: 15px;
+      }
+    }
+  }
+  span{
+    //color:#6F7073;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .pagination{
+    display: none;
+  }
+  .submit{
+    font-size: 14px;
+    width: 150px;
+    font-weight: bold;
+  }
+  .remove_link:hover{
+    cursor: pointer;
+    & > span, & > i{
+      color: var(--siteColorMain);
+    }
+  }
+  .select2-container{
+    border: none;
+    border-bottom: 1px solid var(--border__separator);
+    border-radius: 0;
+    width: 150px;
+    background: transparent;
+    text-align: left;
+    span{
+      color: var(--tp__main);
+      font-weight: normal;
+    }
+  }
+  #bulk_delete{
+    display: none;
+  }
+}
+#email-preview-modal{
+  .email_preview_wrapp {
+    color: #303840;
+    a{
+      color: var(--tp__active);
+    }
+    *{
+      max-width: 100%;
+      width: 95%;
+      text-align: left;
+      margin: 0 auto;
+    }
+    img{
+      width: auto;
+      height: auto;
+    }
+  }
+  .personName{
+    min-width: unset!important; /*need to override inline styles for email letter*/
+  }
+  .bossImage{
+    max-height: 10rem;
+  }
+}
+/* customization / fix for text color and background pasted from other sites */
+.email_wrapp{
+  .ql-toolbar{
+    .ql-stroke, .ql-picker-label{
+      color: var(--tp__icons);
+      stroke: var(--tp__icons);
+    }
+    .ql-picker-label:hover{
+      color: var(--tp__active)!important;
+      .ql-stroke{
+        stroke: var(--tp__active)!important;
+      }
+    }
+    .ql-fill{
+      fill: var(--tp__icons);
+    }
+    button:hover{
+      color: var(--tp__active)!important;
+      .ql-stroke, .ql-picker-label{
+        color: var(--tp__active)!important;
+        stroke: var(--tp__active)!important;
+      }
+      .ql-fill{
+        fill: var(--tp__active)!important;
+      }
+    }
+    .ql-picker-options{
+      border-color: var(--border__separator);
+      background-color: var(--bg__content);
+      color: var(--tp__secondary);
+    }
+  }
+  .ql-snow .ql-tooltip{
+    border-color: var(--border__tooltip);
+    background-color: var(--bg__content);
+    color: var(--tp__secondary);
+    input{
+      border-color: var(--border__separator);
+      color: var(--tp__secondary);
+      background-color: var(--bg__content);
+    }
+    .ql-action{
+      color: var(--tp__active);
+    }
+  }
+  .ql-editor{
+    strong, span, em{
+      color: var(--tp__main)!important;
+      background-color: transparent!important;
+    }
+    a{
+      background-color: transparent!important;
+    }
+  }
+  /* ////////////// */
+}

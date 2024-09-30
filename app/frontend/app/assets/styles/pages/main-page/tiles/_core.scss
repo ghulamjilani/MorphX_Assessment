@@ -1,0 +1,131 @@
+#sessions {
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 132rem;
+    margin: 0 auto;
+    max-width: 100%;
+    @include media(desktop) {
+      max-width: 96%;
+    }
+  }
+
+  h3.title {
+    color: var(--tp__h1);
+    font-size: 2.6rem;
+    margin-bottom: 0;
+    text-transform: capitalize;
+    font-weight: bold;
+    padding: 0 2.1rem;
+    margin-top: 3rem;
+    @include media(reverso-p-phone) {
+      margin-top: 6rem;
+    }
+
+    a {
+      color: var(--tp__main);
+      font-size: 1.4rem;
+      margin-left: 1.2rem;
+    }
+
+    @include media(phone) {
+      text-align: center;
+      a {
+        display: block;
+        margin: 1rem;
+      }
+    }
+  }
+
+  .TileSlider {
+    &__Wrapper {
+      min-height: 21.9rem;
+      position: relative;
+      padding: 0 2.5rem;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .vhl-item {
+      padding-right: 1.6rem !important;
+      padding-left: 1.5rem !important;
+      width: 29rem !important;
+    }
+
+    .vhl-container {
+      margin-right: 0px;
+    }
+
+    .cardMK2 {
+      // width: 100%;
+    }
+
+    .vhl-btn-right, .vhl-btn-left {
+      @include center('v');
+      width: 4rem;
+      height: 4rem;
+      background: none;
+      box-shadow: none;
+
+      svg {
+        fill: var(--tp__icons);
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+    }
+
+    .vhl-btn-right {
+      right: -0rem;
+      @include media(reverso-desktop) {
+        right: -1rem;
+      }
+      @include media(tablet-desktop) {
+        right: -1.5rem;
+      }
+    }
+
+    .vhl-btn-left {
+      left: -1.5rem;
+    }
+
+    &__arrow {
+      .vhl-btn-right, .vhl-btn-left {
+        top: 33%;
+      }
+    }
+  }
+
+  .CreatorsSection, .ChannelsSection {
+    .vhl-btn-right, .vhl-btn-left {
+      top: 50%;
+      transform: translateY(-100%);
+    }
+  }
+}
+
+.RUWS__container { // ReplaysUploadsWithoutScroll
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 100%;
+  min-height: 21.9rem;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 3rem;
+  @include media(reverso-tablet) {
+    padding: 0 2rem;
+  }
+  .cardMK2 {
+    padding: 0 1.5rem;
+    margin-bottom: 4.7rem;
+    box-sizing: content-box;
+    width: 100%;
+    @include media(reverso-phone) {
+      width: calc(50% - 3rem);
+    }
+    @include media(reverso-tablet) {
+      width: calc(25% - 3rem);
+    }
+  }
+}

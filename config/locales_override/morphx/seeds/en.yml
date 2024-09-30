@@ -1,0 +1,8 @@
+en:
+  seeds:
+    plan_features:
+      creators_count: "%{creators_upper} count"
+    credentials:
+      invite_and_manage_users: "Invite and manage users with %{creator_upper} roles Type. Manage access to the Channels"
+      creator_is_user: "%{creator_upper} is a user who can host a session"
+      blog_creator: "Blog %{creator_upper} is an admin who can create and manage his own blog posts."

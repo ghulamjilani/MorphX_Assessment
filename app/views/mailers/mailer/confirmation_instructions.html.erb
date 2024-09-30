@@ -1,0 +1,196 @@
+<!--<style>-->
+<!--  @media all and (max-width: 600px) {-->
+<!--    .back{background-color: #0cf1d3 !important;}-->
+<!--    .clor{color: #00f400 !important;}-->
+<!--  }-->
+<!--</style>-->
+<tr>
+  <td align="center">
+    <table role="presentation" class="back" border="0" cellpadding="0" cellspacing="0" width="520">
+      <tr>
+        <td style="text-align: center;">
+          <p class="clor"
+            style="
+            font-style: normal;
+                font-weight: 900;
+                font-size: 18px;
+                line-height: 18px;
+                color: #095f73;">Hello <%= @resource.full_name.present? ? @resource.full_name : @resource.email %>,</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+      <tr><td></td></tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500"
+           style="background-color: #095f73;border-radius: 20px;padding: 25px 0 25px 0;">
+      <tr>
+        <td style="text-align: center;">
+          <p
+            style="
+            font-style: normal;
+                padding: 0 10px;
+                font-weight: 900;
+                font-size: 32px;
+                line-height: 32px;
+                color: #ffffff;"><%= I18n.t("views.mailer.conf_insruct.welcome", service_name: Rails.application.credentials.global[:service_name]) %></p></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0">
+      <tr><td></td></tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="600"
+           style="border: 1px solid rgba(9,95,115,0.3);border-radius: 20px;">
+      <tr align="center">
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 10px 0 10px 0">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="text-align: center;">
+            <tr>
+              <td style="padding: 0 67px;">
+                <p style="
+                font-style: normal;
+                    font-weight: normal;
+                    font-size: 15px;
+                    color: #000000;
+                    line-height: 150%;">
+                  <%= I18n.t("views.mailer.conf_insruct.success", service_name: Rails.application.credentials.global[:service_name]) %>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 17px 0 17px 0">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation" class="mediaButton" border="0" cellpadding="0" cellspacing="0" width="240"
+                 style="cursor: pointer;background-color: #f23535;border-radius: 25px;padding: 15px 0 15px 0;">
+            <tr style="">
+              <td style="text-align: center;">
+                <%= link_to 'Verify your email!', confirmation_url(@resource, confirmation_token: @token), style:'font-style: normal;
+                      text-decoration: none;
+                      font-weight: 600;
+                      padding: 0 10px;
+                      font-size: 18px;
+                      line-height: 18px;
+                      color: #ffffff;' %>
+                </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 12px 0 12px 0">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" align="center" width="500" style="text-align: center;">
+            <tr>
+              <td style="padding: 0 67px;">
+                <p style="
+                font-style: normal;
+                    font-weight: normal;
+                    font-size: 14px;
+                    color: #000000;
+                    line-height: 150%;">
+                  or copy and paste this link into your browser:
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 2px 0 2px 0">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" align="center" width="500" style="text-align: center;">
+            <tr>
+              <td>
+                <p style="
+                font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #095f73;
+                    line-height: 150%;">
+                  <%= confirmation_url(@resource, confirmation_token: @token) %>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 20px 0 20px 0">
+      <tr><td></td></tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" align="center" width="500" style="text-align: center;">
+      <tr>
+        <td style="padding: 0 6px;">
+          <p style="
+          font-style: normal;
+              font-weight: normal;
+              font-size: 13px;
+              color: #999999;
+              line-height: 150%;">
+            <%= I18n.t("views.mailer.conf_insruct.create", service_name: Rails.application.credentials.global[:service_name]) %>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>

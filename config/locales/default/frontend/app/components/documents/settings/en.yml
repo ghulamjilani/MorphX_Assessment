@@ -1,0 +1,12 @@
+en:
+  frontend:
+    app:
+      components:
+        documents:
+          settings:
+            settings: Settings
+            visibility_label: Visibility on Channel page
+            only_ppv: Only PPV
+            only_subscription: Only Subscribers
+            cancel: Cancel
+            done: Done

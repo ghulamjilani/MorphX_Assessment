@@ -1,0 +1,444 @@
+.cm__tools {
+  position: relative;
+  border-radius: 10rem;
+  padding: 0 1rem;
+  @include flex(flex, center, center);
+  background: $client__bg__content__secondary;
+  border-radius: 10rem;
+  display: flex;
+  margin-right: 1.5rem;
+  @include media(tablet) {
+    padding: 1rem;
+  }
+
+  &__double {
+    margin-left: .5rem;
+  }
+
+  &__angle {
+    color: $client__tp__icons;
+    margin-left: .5rem;
+    cursor: pointer;
+
+    &__active {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__dotsH {
+    transform: rotate(90deg);
+  }
+
+  &__select {
+    background: $client__bg__dropdowns;
+    border-radius: .6rem;
+    @include boxShadow__main(rgba(0, 0, 0, 0.4));
+    padding: 1rem 0;
+    position: absolute;
+    z-index: 99;
+    transform: translateY(-100%) translateY(-2rem);
+    width: 20rem;
+
+    &__check {
+      position: absolute;
+      right: 1.2rem;
+    }
+
+    &__ipad {
+      right: 1rem;
+    }
+
+    &__mobile {
+      transform: translateY(-100%) translateY(3rem);
+    }
+
+    &__share {
+      width: 25rem;
+      @include media(tablet) {
+        left: -6rem;
+      }
+    }
+
+    &__item {
+      @include flex(flex, center, false);
+      padding: 1.1rem 2rem;
+      color: $client__tp__secondary__dropdowns;
+      font-size: 1.4rem;
+      cursor: pointer;
+
+      &__specific {
+        @include flex(flex, center, space-between);
+      }
+
+      &:hover {
+        background: $client__btn__bgLabel;
+        color: $client__tp__main;
+        font-weight: bold;
+      }
+    }
+
+    &__active {
+      background: $client__btn__bgLabel;
+      color: $client__tp__main !important;
+      font-weight: bold;
+      cursor: pointer;
+
+      &__icon {
+        color: $client__tp__active;
+      }
+    }
+
+    &__icon {
+      margin-right: 1.5rem;
+    }
+
+    &__horizontal {
+      padding-top: .1rem;
+      transform: rotate(90deg);
+    }
+
+    .toggleMK2 {
+      background: $client__tgl__on__disabled;
+
+      .slider {
+        background: $client__tgl__on__disabled;
+
+        &::before {
+          background: $client__tgl__switch__off;
+        }
+      }
+    }
+  }
+
+  &__wrapper {
+    bottom: 3rem;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 3rem;
+    transition: all .6s;
+    z-index: 96;
+    @include media(tablet) {
+      bottom: .5rem;
+      position: fixed;
+      z-index: 101;
+      padding: 0 .3rem;
+    }
+
+    &__ipad {
+      bottom: 7rem;
+    }
+
+    &__hide {
+      @include media(reverso-tablet) {
+        bottom: -12rem;
+      }
+    }
+
+    &__row {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  &__center {
+    position: relative;
+  }
+
+  &__dots {
+    &__list {
+      background: $client__bg__dropdowns;
+      border-radius: .6rem;
+      @include boxShadow__main(rgba(0, 0, 0, 0.4));
+      padding: 1rem 0;
+      position: absolute;
+      z-index: 99;
+      transform: translateY(-100%) translateY(-2rem);
+      right: -10rem;
+      width: 20rem;
+
+      &__item {
+        padding: 1rem 0 1rem 2rem;
+        color: $client__tp__secondary__dropdowns;
+        font-size: 1.4rem;
+        cursor: pointer;
+
+        &:hover {
+          background: $client__bg__hover;
+          color: $client__tp__main;
+        }
+      }
+    }
+  }
+
+  &__list {
+    position: absolute;
+    background: $client__bg__dropdowns;
+    padding: 0 0 1rem;
+    font-size: 1.2rem;
+    color: $client__tp__main;
+    transform: translateY(-100%) translateY(-2rem);
+    left: 1rem;
+    border-radius: .6rem;
+    z-index: 99;
+    width: 30rem;
+    @include media(tablet) {
+      left: 5rem;
+    }
+
+    .radioMK2 {
+      width: 1.4rem;
+      margin-right: 1.5rem;
+
+      .checkmark {
+        border: 1px solid #CCCCCC;
+        background: #FFFFFF;
+
+        &::after {
+          @include center(vh);
+        }
+      }
+    }
+
+    .radioMK2 input:checked ~ .checkmark {
+      background-color: $client__tp__active;
+      border: 3px solid $client__tp__active;
+    }
+
+    &__main, &__current, &__available {
+      padding: 1.1rem 2rem;
+      @include flex(flex, center, flex-start);
+      cursor: pointer;
+      font-size: 1.4rem;
+      color: $client__tp__secondary__dropdowns;
+    }
+
+    &__main {
+      font-size: 1.8rem;
+      font-weight: bold;
+      border-bottom: 1px solid #E5E5E5;
+      color: $client__tp__btn__tetriary;
+      @include media(tablet) {
+        font-size: 1.6rem;
+      }
+
+      &__icon {
+        color: $client__tp__inputs__placeholder;
+        margin-right: 1.5rem;
+        font-size: 1.6rem;
+      }
+    }
+
+    &__current {
+      background: $client__btn__bgLabel;
+      color: $client__tp__main;
+      font-weight: bold;
+
+      &__icon {
+        color: $client__tp__active;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 2rem;
+    color: $client__tp__icons;
+    position: relative;
+    cursor: pointer;
+    @include media(tablet) {
+      padding: 0 1rem;
+    }
+    @include media(p-phone) {
+      padding: 0 .8rem;
+      font-size: 2.1rem;
+    }
+
+    &__active {
+      color: $client__tp__main;
+
+      &__circle {
+        color: $client__tp__active;
+      }
+    }
+
+    &__message {
+      position: relative;
+      display: flex;
+
+      &__new {
+        position: absolute;
+        background: $client__Main__Orange;
+        border-radius: 50%;
+        width: 1.2rem;
+        height: 1.2rem;
+        top: .6rem;
+        right: .6rem;
+        z-index: 2;
+        border: 3px solid $client__bg__content;
+        border-radius: 50%;
+        @include media(tablet) {
+          border: none;
+          border-radius: none;
+          width: .7rem;
+          height: .7rem;
+          right: -.2rem;
+          top: -.2rem;
+        }
+      }
+    }
+
+    &__mic {
+      @include media(p-phone) {
+        min-width: 4.5rem;
+        text-align: center;
+      }
+    }
+  }
+
+  .GlobalIcon-screen-share.active {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 1.2rem;
+      height: 1.2rem;
+      background: $client__bg__green;
+      top: -0.3rem;
+      right: -.5rem;
+      border: 3px solid $client__bg__content;
+      border-radius: 50%;
+      animation: bounce 1s infinite ease-in-out;
+      animation-direction: alternate;
+      @include media(tablet) {
+        right: 0.4rem;
+      }
+    }
+  }
+
+  &__right {
+    @include flex(flex, center, false);
+  }
+
+  &__exit {
+    @include media(p-phone) {
+      margin-left: 0;
+    }
+    @include flex(flex, center, false);
+
+    a {
+      line-height: 3.85rem;
+      padding: 0;
+      min-width: 9rem;
+      min-height: 4rem;
+      background: $client__btn__bgLabel;
+      color: $client__tp__main;
+      border: none;
+      font-size: 1.6rem;
+
+      &:hover {
+        background: $client__btn__bgLabel;
+        color: $client__tp__main;
+      }
+
+      @include media(tablet) {
+        min-width: 7rem;
+        @include flex(flex, center, center);
+      }
+    }
+  }
+
+  &__mobile {
+    width: 4rem;
+    height: 4rem;
+    background: $client__bg__content;
+    border-radius: 10rem;
+    @include flex(flex, center, center);
+    margin: 0 .25rem;
+
+    &__icon {
+      color: $client__tp__icons;
+      font-size: 2rem;
+
+      &__active {
+        color: $client__tp__main;
+      }
+    }
+
+    &__select {
+      left: 0;
+      transform: translateY(-100%) translateY(3rem);
+      width: 100%;
+
+      &__presenter {
+        transform: translateY(-100%) translateY(7rem);
+      }
+    }
+
+    &__list {
+      transform: translateY(-100%);
+      width: 100%;
+      left: 0;
+      top: 0;
+    }
+
+    &__sidebar {
+      transform: translateY(-100%) translateY(3rem);
+      width: 20rem;
+      right: 0;
+
+      &__pin {
+        transform: translateY(-100%) translateY(1rem);
+      }
+    }
+  }
+  .MK2options__options {
+    top: initial;
+    bottom: 6rem;
+    left: 0px;
+    right: 0;
+    width: 20rem;
+
+    i {
+      margin-left: 2rem;
+    }
+
+    .btn__reset:hover {
+
+    }
+  }
+}
+
+.mobile.landscape {
+  .cm__tools__mobile__list {
+    width: calc(100% - 2rem);
+    left: 1rem;
+    background: transparent;
+    transform: translateY(-100%);
+    top: 0;
+    @include flex(flex, flex-end, space-between);
+
+    &__block {
+      max-height: 15rem;
+      overflow: auto;
+      background: $client__bg__dropdowns;
+      border-radius: 1rem;
+    }
+  }
+
+  .cm__tools__mobile__select {
+    width: 30rem;
+    left: 1rem;
+  }
+}
+
+@keyframes bounce {
+  from {
+    filter: saturate(10%);
+  }
+  to {
+    filter: saturate(200%);
+  }
+}

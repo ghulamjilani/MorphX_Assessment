@@ -1,0 +1,67 @@
+.tabsMK2 {
+  &__titles {
+    @include flex(flex, center, flex-start);
+    margin-bottom: 2rem;
+    border-bottom: .1rem solid var(--border__separator);
+    @include media(phone) {
+       flex-direction: column;
+    }
+  }
+
+  &__title {
+    // width: 50%;
+    text-align: center;
+    padding: 0 4rem 1.5rem;
+    color: var(--tp__main);
+    font-size: 1.6rem;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+    @include media(tablet) {
+      width: 100%;
+      border-bottom: .1rem solid var(--border__separator);
+      text-align: center;
+      padding: 1rem 1rem .4rem;
+    }
+
+    &__disable {
+      color: var(--tp__disabled) !important;
+      cursor: not-allowed !important;
+
+      &:hover {
+        &::before {
+          height: .3rem;
+          background-color: var(--border__separator);
+        }
+      }
+    }
+
+    &::before {
+      content: '';
+      width: calc(100% - .1rem);
+      position: absolute;
+      left: 0;
+      bottom: -.1rem;
+      height: 0px;
+      background-color: var(--tp__active);
+    }
+
+    &:hover {
+      &::before {
+        height: .3rem;
+      }
+    }
+
+    &__active {
+      color: var(--tp__active);
+
+      &::before {
+        height: .3rem;
+      }
+    }
+  }
+
+  &__active {
+    color: red;
+  }
+}

@@ -1,0 +1,6 @@
+after_sign_in_path = "<%= @after_sign_in_path %>";
+if (after_sign_in_path === window.location.href || after_sign_in_path === '') {
+  window.location.reload();
+} else {
+  window.location.href = after_sign_in_path;
+}

@@ -1,0 +1,77 @@
+//body:not(.showVideo) {
+//  $StartDurationForSunshine: 5s;
+//  .animatedObject {
+//    .sunshine {
+//      span {
+//        opacity: 0.2;
+//        position: fixed;
+//        top: 0;
+//        width: 85.3rem;
+//        height: 77.3rem;
+//        display: block;
+//        background-image: url(asset_path("video_client/shun_laight.png"));
+//        background-repeat: repeat-x;
+//        background-size: contain;
+//        background-position: top left;
+//
+//        -moz-animation-name: bounce_Sunshine;
+//        -webkit-animation-name: bounce_Sunshine;
+//        -o-animation-name: bounce_Sunshine;
+//        -ms-animation-name: bounce_Sunshine;
+//        animation-name: bounce_Sunshine;
+//
+//        -moz-animation-duration: $StartDurationForSunshine;
+//        -moz-animation-iteration-count: infinite;
+//        -moz-animation-direction: ease;
+//        -moz-animation-fill-mode: forwards;
+//
+//        -webkit-animation-duration: $StartDurationForSunshine;
+//        -webkit-animation-iteration-count: infinite;
+//        -webkit-animation-direction: ease;
+//        -webkit-animation-fill-mode: forwards;
+//
+//        -o-animation-duration: $StartDurationForSunshine;
+//        -o-animation-iteration-count: infinite;
+//        -o-animation-direction: ease;
+//        -o-animation-fill-mode: forwards;
+//
+//        -ms-animation-duration: $StartDurationForSunshine;
+//        -ms-animation-iteration-count: infinite;
+//        -ms-animation-direction: ease;
+//        -ms-animation-fill-mode: forwards;
+//
+//        animation-duration: $StartDurationForSunshine;
+//        animation-iteration-count: infinite;
+//        animation-direction: ease;
+//        animation-fill-mode: forwards;
+//      }
+//      .first-half {
+//        right: 0;
+//        -moz-animation-delay: $StartDurationForSunshine * 0.1;
+//        -webkit-animation-delay: $StartDurationForSunshine * 0.1;
+//        -o-animation-delay: $StartDurationForSunshine * 0.1;
+//        -ms-animation-delay: $StartDurationForSunshine * 0.1;
+//        animation-delay: $StartDurationForSunshine * 0.1;
+//      }
+//      .second-half {
+//        right: -22rem;
+//        -moz-animation-delay: $StartDurationForSunshine * 0.6;
+//        -webkit-animation-delay: $StartDurationForSunshine * 0.6;
+//        -o-animation-delay: $StartDurationForSunshine * 0.6;
+//        -ms-animation-delay: $StartDurationForSunshine * 0.6;
+//        animation-delay: $StartDurationForSunshine * 0.6;
+//      }
+//    }
+//  }
+//  @include keyframes(bounce_Sunshine) {
+//    0% {
+//      opacity: 0.2
+//    }
+//    50% {
+//      opacity: 1
+//    }
+//    100% {
+//      opacity: 0.2
+//    }
+//  }
+//}

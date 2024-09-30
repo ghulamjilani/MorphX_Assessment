@@ -1,0 +1,26 @@
+en:
+  views:
+    dashboard:
+      money:
+        earnings:
+          page_title: Money
+          from: From
+          to: To
+          sort_by: Sort by
+          newest: Newest
+          oldest: Oldest
+          bigger: Bigger $
+          smaller: Smaller
+          status: Status
+          all: All
+          paid: Paid
+          pending: Pending
+          declined: Declined
+          apply: Apply
+          date: Date
+          type: Type
+          description: Description
+          customer_name: Customer Name
+          revenue: Revenue
+          payout_status: Payout Status
+          no_earnings: No earnings yet

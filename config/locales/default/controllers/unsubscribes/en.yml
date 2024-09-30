@@ -1,0 +1,4 @@
+en:
+  controllers:
+    unsubscribes:
+      invalid_token: Unsubscribe link does not seem to be valid. Please check your email.

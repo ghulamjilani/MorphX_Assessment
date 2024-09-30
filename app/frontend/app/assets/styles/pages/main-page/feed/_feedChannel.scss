@@ -1,0 +1,98 @@
+.feedChannel {
+  // background: var(--bg__content__secondary);
+  // padding: 1rem;
+  margin: 2rem 0 0 0;
+  border-radius: $CONTENT_BORDER_RADIUS;
+  &__top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  &__logo {
+    background-color: #9A9A9A;
+    border-radius: $CONTENT_BORDER_RADIUS;
+    flex: 0 0 8rem;
+    height: 8rem;
+    background-size: cover;
+    img{
+      width: 100%;
+      border-radius: inherit;
+      display: block;
+    }
+  }
+  &__description{
+    padding: 0 2rem;
+  }
+  &__subscribe {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    @include media(tablet){
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    &>div{
+      margin-right: 3rem;
+      color: var(--tp__icons);
+    }
+    &__content i {
+      color: var(--tp__icons);
+      margin-left: .5rem;
+      &.active {
+        color: var(--tp__main);
+      }
+    }
+  }
+  &__name{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color:var(--tp__h1);
+    span{
+      color:var(--tp__icons);
+      font-size: 1.4rem;
+      font-weight: normal;
+    }
+  }
+
+  h3{
+    font-size: 2.2rem;
+    color: var(--tp__main);
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+  .vhl-item{
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+  .vhl-btn-right, .vhl-btn-left {
+    @include center('v');
+    width: 4rem;
+    height: 4rem;
+    background: none;
+    box-shadow: none;
+
+    svg {
+      fill: var(--tp__icons);
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
+
+  .vhl-btn-right {
+    right: -0rem;
+    @include media(reverso-desktop) {
+      right: -1rem;
+    }
+    @include media(tablet-desktop) {
+      right: -1.5rem;
+    }
+  }
+
+  .vhl-btn-left {
+    left: -1.5rem;
+  }
+
+}

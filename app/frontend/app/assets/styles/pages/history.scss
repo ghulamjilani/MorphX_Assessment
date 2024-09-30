@@ -1,0 +1,80 @@
+@import "../../../../../assets/stylesheets/mixin.scss";
+
+.history {
+  &__wrapper {
+    background: var(--bg__content);
+    @include boxShadow__main(var(--sh__main));
+    border-radius: 1rem;
+  }
+
+  &__header {
+    border-bottom: 1px solid var(--border__content__sections);
+    padding: 3rem;
+    @include flex(flex, center, space-between);
+
+    button {
+      width: 11rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      height: 3rem;
+      @include media(p-phone) {
+        width: 100%;
+        margin-top: 1rem;
+      }
+    }
+
+    @include media(p-phone) {
+      flex-direction: column;
+    }
+  }
+
+  &__filter {
+    width: 24rem;
+    height: 2.7rem;
+    @include media(p-phone) {
+      width: 100%;
+    }
+
+    .dropdownMK2__menu {
+      overflow: visible;
+    }
+
+    .vc-popover-content-wrapper {
+      overflow: visible;
+    }
+  }
+
+  &__section__wrapper {
+    padding: 0 3rem 2rem;
+  }
+
+  &__section__header {
+    background: var(--bg__content__secondary);
+    border-radius: 1rem;
+    @include flex(flex, center, space-between);
+    padding: 1.5rem 2rem;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  &__delete {
+    color: var(--tp__secondary);
+    font-weight: bold;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  &__body {
+    padding-top: 2rem;
+  }
+
+  &__body__no-results {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .input__calendar__input-field label {
+    margin-top: -1.5rem;
+  }
+}

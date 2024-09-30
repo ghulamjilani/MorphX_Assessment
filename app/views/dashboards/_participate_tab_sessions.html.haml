@@ -1,0 +1,93 @@
+%div.channel
+  - sessions.each.with_index do |session, index|
+    .abstract-session-title.participate
+      .row{'data-type': session.humanize_type, 'data-start-at': session.start_at.to_i}
+        .col-md-2
+          .row
+            = image_tag asset_path(session.medium_cover_url)
+
+        .col-md-7
+          .row
+            .col-md-12
+              %h6
+                = link_to (session.title || session.always_present_title), (session.records&.first&.absolute_path || session.relative_path)
+          .row
+            .col-md-7
+              %div
+                %i.VideoClientIcon-calendarF
+                = time_with_tz_in_chosen_format(session.start_at)
+              %div
+                %i.VideoClientIcon-clockF
+                = session.duration
+                = I18n.t('views.dashboards.participate_tab_sessions.mins')
+            .col-md-5
+              %div
+                - if session.private?
+                  = I18n.t('views.dashboards.participate_tab_sessions.private')
+                - else
+                  = I18n.t('views.dashboards.participate_tab_sessions.public')
+              %div
+                = session.immersive_type == Session::ImmersiveTypes::ONE_ON_ONE ? I18n.t('views.dashboards.participate_tab_sessions.one_on_one') : I18n.t('views.dashboards.participate_tab_sessions.group')
+        .col-md-3
+          = dropdown_with_icons do
+            - if can?(:edit, session)
+              %li
+                %i.VideoClientIcon-editF
+                = link_to I18n.t('views.dashboards.participate_tab_sessions.edit'), edit_channel_session_path(session.channel.slug, session.slug)
+
+            - if session.can_rate?(current_user)
+              %li
+                %i.icon-ok
+                = link_to review_action_title(session), modal_review_channel_session_path(session.channel.id, session.id), remote: true
+
+            - if can?(:publish, session)
+              %li
+                %i.icon-ok
+                = link_to I18n.t('views.dashboards.participate_tab_sessions.publish'),
+                          publish_channel_session_path(session.channel.slug, session.slug),
+                          method: :post,
+                          data: {confirm: I18n.t('views.dashboards.participate_tab_sessions.publish_confirmation')}
+
+            - if can?(:clone, session)
+              %li
+                %i.VideoClientIcon-squaresF
+                = clone_link(session)
+
+            -# - if can?(:live_opt_out, session)
+              -# %li
+              -#   - cancel_title = I18n.t('views.dashboards.participate_tab_sessions.cancel_interactive') if can?(:opt_out_as_immersive_participant, session)
+              -#   - cancel_title = I18n.t('views.dashboards.participate_tab_sessions.cancel_livestream') if can?(:opt_out_as_livestream_participant, session)
+
+              -#   %i.VideoClientIcon-cross
+              -#   = link_to cancel_title,
+              -#             sessions_preview_live_opt_out_modal_path(session.id),
+              -#             method: :get,
+              -#             remote: true
+
+            - if can?(:vod_opt_out, session)
+              %li
+                %i.VideoClientIcon-cross
+                = link_to I18n.t('views.dashboards.participate_tab_sessions.cancel_on_demand'),
+                  sessions_preview_vod_opt_out_modal_path(session.id),
+                  method: :get,
+                  remote: true
+
+            - if can?(:cancel, session)
+              %li
+                %i.VideoClientIcon-cross
+                = link_to I18n.t('views.dashboards.participate_tab_sessions.cancel'),
+                          sessions_preview_cancel_modal_path(session.id),
+                          method: :get,
+                          remote: true
+
+          %p.CRsessionPresenter
+            %strong
+              = I18n.t('dictionary.creator_upper')
+            = link_to session.organizer.public_display_name, spa_user_path(session.organizer.slug)
+
+          .sessiontimerAndJoin
+
+          - presenter = SessionInvitationButtonsPresenter.new(model_invited_to: session, current_user: current_user, ability: current_ability)
+          = raw presenter.to_s_for_dashboard
+
+          = raw join_room(abstract_session: session, link_css_classes: 'btn btn-m btn-grey-solid full-width display-block tablet-width', initialization_type: JoinInitializationTypes::DASHBOARD).html_link

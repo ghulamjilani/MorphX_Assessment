@@ -1,0 +1,14 @@
+en:
+  frontend:
+    app:
+      components:
+        documents:
+          uploader:
+            upload_documents: Upload Documents
+            select_file: Select file to upload
+            or_drop_file: or Drag-n-drop your file
+            supported_file_formats: Supported file formats
+            max_files: Max. number of files
+            max_size: Max. file size
+            file_format_not_supported: File format not supported
+            file_too_large: File size is too large

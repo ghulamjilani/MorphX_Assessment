@@ -1,0 +1,174 @@
+.chrome_plugin_install, .extention_init{
+  &>div:not(.active):not(.animatedObject-wrapper){
+    display: none;
+  }
+}
+.chrome_plugin_install{
+  position: relative;
+}
+
+$durationGO-GO_TOP:2.5s;
+.GO_LINE{
+  i{
+    display: block;
+    margin-top: -0.8rem;
+    font-size: 2.2rem;
+  }
+}
+
+.GO_LINE.GO_LINE_UP > i{
+
+  -moz-transform: translateY(4rem);
+  -webkit-transform: translateY(4rem);
+  -o-transform: translateY(4rem);
+  -ms-transform: translateY(4rem);
+  transform: translateY(4rem);
+}
+.GO_LINE.GO_LINE_DOWN > i{
+  -moz-transform: translateY(-4rem);
+  -webkit-transform: translateY(-4rem);
+  -o-transform: translateY(-4rem);
+  -ms-transform: translateY(-4rem);
+  transform: translateY(-4rem);
+}
+.GO_LINE > i{
+  -moz-animation-name:bounce_GO_LINE;
+  -webkit-animation-name:bounce_GO_LINE;
+  -o-animation-name:bounce_GO_LINE;
+  -ms-animation-name:bounce_GO_LINE;
+  animation-name:bounce_GO_LINE;
+
+  -moz-animation-duration:$durationGO-GO_TOP;
+  -moz-animation-iteration-count:infinite;
+  -moz-animation-direction:linear;
+  -moz-animation-fill-mode: forwards;
+
+  -webkit-animation-duration:$durationGO-GO_TOP;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-direction:linear;
+  -webkit-animation-fill-mode: forwards;
+
+  -o-animation-duration:$durationGO-GO_TOP;
+  -o-animation-iteration-count:infinite;
+  -o-animation-direction:linear;
+  -o-animation-fill-mode: forwards;
+
+  -ms-animation-duration:$durationGO-GO_TOP;
+  -ms-animation-iteration-count:infinite;
+  -ms-animation-direction:linear;
+  -ms-animation-fill-mode: forwards;
+
+  animation-duration:$durationGO-GO_TOP;
+  animation-iteration-count:infinite;
+  animation-direction:linear;
+  animation-fill-mode: forwards;
+  opacity: 0;
+
+}
+.GO_LINE.GO_LINE_UP > i:nth-child(1), .GO_LINE.GO_LINE_DOWN > i:nth-child(3){
+  -moz-animation-delay:$durationGO-GO_TOP * 0.1;
+  -webkit-animation-delay:$durationGO-GO_TOP * 0.1;
+  -o-animation-delay:$durationGO-GO_TOP * 0.1;
+  -ms-animation-delay:$durationGO-GO_TOP * 0.1;
+  animation-delay:$durationGO-GO_TOP * 0.1;
+}
+
+.GO_LINE.GO_LINE_UP > i:nth-child(2), .GO_LINE.GO_LINE_DOWN > i:nth-child(2){
+  -moz-animation-delay:$durationGO-GO_TOP * 0.2;
+  -webkit-animation-delay:$durationGO-GO_TOP * 0.2;
+  -o-animation-delay:$durationGO-GO_TOP * 0.2;
+  -ms-animation-delay:$durationGO-GO_TOP * 0.2;
+  animation-delay:$durationGO-GO_TOP * 0.2;
+}
+
+.GO_LINE.GO_LINE_UP > i:nth-child(3), .GO_LINE.GO_LINE_DOWN > i:nth-child(1){
+  -moz-animation-delay:$durationGO-GO_TOP * 0.3;
+  -webkit-animation-delay:$durationGO-GO_TOP * 0.3;
+  -o-animation-delay:$durationGO-GO_TOP * 0.3;
+  -ms-animation-delay:$durationGO-GO_TOP * 0.3;
+  animation-delay:$durationGO-GO_TOP * 0.3;
+}
+
+
+@include keyframes(bounce_GO_LINE) {
+  0%{}
+
+  50%{opacity: 1;}
+
+  85%{
+    opacity: 0;
+    color:$siteColorMain;
+    -moz-transform: translateY(0rem);
+    -webkit-transform: translateY(0rem);
+    -o-transform: translateY(0rem);
+    -ms-transform: translateY(0rem);
+    transform: translateY(0rem);
+  }
+}
+body:not(.showVideo) {
+  .step3 {
+    aside.position_s-w {
+      .col-md-3 {
+        padding-top: 4rem;
+      }
+    }
+  }
+  .position_s-w {
+    position: fixed;
+    bottom: 1rem;
+    left: 5rem;
+  }
+  .position_s-e {
+    position: fixed;
+    bottom: 1rem;
+    right: 5rem;
+  }
+  .position_n-w {
+    position: fixed;
+    top: 1rem;
+    left: 5rem;
+  }
+  .position_n-e {
+    position: fixed;
+    top: 1rem;
+    right: 5rem;
+  }
+
+  .step1, .step2, .step3, .step4 {
+    padding-top: 7.8rem;
+  }
+  .step3 {
+    .yyykor-wrapp {
+      animation: none !important;
+      -webkit-animation: none !important;
+      height: 35rem;
+    }
+  }
+  .step4 {
+    color: var(--tp__main);
+    padding-top: 30vh;
+    .lobbyLogo{
+      fill: $video-volor-white;
+      width: 25%;
+      margin: 5vh auto 7vh;
+      img{
+        width: 100%;
+      }
+    }
+    .lobbyImg{
+      fill: $video-volor-white;
+      width: 5%;
+      margin: 5vh auto 1vh;
+    }
+  }
+}
+
+//flash message
+.animatedObject-wrapper .flashmessageWrapp{
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 0;
+  z-index: 99;
+  %section.flashMessage{}
+}

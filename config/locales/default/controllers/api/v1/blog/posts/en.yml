@@ -1,0 +1,11 @@
+en:
+  controllers:
+    api:
+      v1:
+        blog:
+          posts:
+            errors:
+              create_forbidden: You are not allowed to create posts in this channel
+              read_forbidden: You are not allowed to access this posts
+              update_forbidden: You are not allowed to edit this post
+              destroy_forbidden: You are not allowed to destroy this post

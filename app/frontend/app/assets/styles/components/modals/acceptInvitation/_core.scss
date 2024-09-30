@@ -1,0 +1,31 @@
+.acceptInvitation {
+  .MK2-modal__dialog {
+    width: 74rem;
+  }
+
+  &__title {
+    color: var(--tp__h1);
+    font-size: 1.6rem;
+  }
+
+  &__delivery {
+    &__name {
+      color: var(--tp__main);
+      font-size: 1.4rem;
+    }
+
+    &__button {
+      margin: 1rem 0 2rem;
+      font-weight: normal;
+    }
+
+    &__livestream {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border__separator);
+
+      &__button {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

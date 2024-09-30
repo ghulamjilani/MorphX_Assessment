@@ -1,0 +1,15 @@
+.chanelHrLine.bannerCollapsedBlockHide
+  .container
+    .row
+      .otherPresenters.col-md-8
+        - if @presenter_users
+          - @presenter_users.each do |user|
+            -#- next if user == channel.organizer && !channel.organization
+            %a.avatarImg-SD{'data-toggle': :tooltip, href: user.relative_path, title: user.public_display_name, style: "background-image: url('#{user.avatar_url}')"}
+      .col-md-4.pull-right
+        %ul#main_tabs.btns-group.full-width.nav-tabs{role: :tablist}
+          %li.full-width.active
+            %a.btn.btn-m.btn-borderred-grey.full-width{data: {toggle: :tab, target: '#session-Sessions'}, href: '#'} Live Sessions
+          - if @replays.present? || @recordings.present?
+            %li.full-width
+              %a.btn.btn-m.btn-borderred-grey.full-width{data: {toggle: :tab, target: '#session-Videos'}, href: '#'} Videos

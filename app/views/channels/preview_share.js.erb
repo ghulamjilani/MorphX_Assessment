@@ -1,0 +1,5 @@
+window.modalBody = '<%= escape_javascript render("channels/#{action_name}", format: :html) %>';
+$(document).one("shown.bs.modal", "#social-modal", function() {
+  $('#social-modal .tag-it').tagit({caseSensitive: false, allowDuplicates: false, allowSpaces:false, singleField: true, singleFieldDelimiter: ',', placeholderText: 'Enter recipient emails, separated by commas'});
+});
+$(modalBody).filter('#social-modal').modal('show');

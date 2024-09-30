@@ -1,0 +1,30 @@
+<div class="i__embed_f-l">
+    {{title}}
+</div>
+<div class="i__embed_f-r">
+    <span>
+        <i class="embed_fonteye-1"></i>
+        {{views_count}}
+    </span>
+    {{!--<span>
+        <i class="embed_fonteye-1"></i>
+        {{views_count}}
+    </span>--}}
+    <span>
+        <a href="{{absolute_path}}" target="_blank" class="{{#unless userId}}showLoginForm{{/unless}}">
+            <i class="embed_fontstar"></i>
+            {{rating}}/5
+        </a>
+    </span>
+    <a href="#" class="shareIcon">
+        <i class="embed_fontshare-mk4"></i>
+    </a>
+    {{#if (or description custom_description)}}
+        <a href="#" class="showDescriptionBtr" onclick="$('.description').toggleClass('active');$(this).toggleClass('active');return false">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+    {{/if}}
+</div>

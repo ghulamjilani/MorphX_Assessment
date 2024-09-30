@@ -1,0 +1,14 @@
+- if @error
+  $.showFlashMessage("#{@error}", {type: 'error'})
+- else
+  if ($("#product_tile_#{@product.id}").length) {
+  $.showFlashMessage('Product already in list!', {type: 'info'});
+  } else {
+  $("#productsArea").prepend("#{escape_javascript(render(partial: 'dashboard/products/product', locals: {product: @product, list: @list}))}");
+  }
+  $("#search_product_modal").modal('hide');
+  $(".products-item-list .total_count").html("Added Products (#{@list.products.reload.count})");
+  $('#new_product')[0].reset();
+  $('#new_product .input-block:not(.specs)').addClass('state-clear');
+  $('#new_product .product-image').attr('style', "background-image: url(#{image_url('product/default_product.jpg')});");
+

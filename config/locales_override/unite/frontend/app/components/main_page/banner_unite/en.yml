@@ -1,0 +1,10 @@
+en:
+  frontend:
+    app:
+      components:
+        main_page:
+          banner_unite:
+            title: "It’s Your Voice, Your Values, Your Platform"
+            text: "%{service_name} is a worldwide, multi-media platform for conscious creators and their communities"
+            register_today: Register Today
+            unmute: Unmute

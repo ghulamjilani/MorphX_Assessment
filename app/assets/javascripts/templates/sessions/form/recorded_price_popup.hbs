@@ -1,0 +1,39 @@
+<div class="stb-h">Price breakdown</div>
+<div class="stb-b text-center padding-top-10">
+    <div class="stb-1">
+        <label>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            {{#if can_change_recorded_access_cost}}
+                <input type="hidden" name="session[recorded_access_cost]" value="{{recorded_access_cost}}">
+                <input id="recorded_total_cost" step="0.01" type="text" class="price_number"
+                       mincost="{{recordedTotalMinCost}}" maxcost="{{recordedTotalMaxCost}}"
+                       value="{{recordedTotalPurchasePrice}}">
+            {{else}}
+                <input disabled value="{{recordedTotalPurchasePrice}}">
+            {{/if}}
+            <div title="min ${{recordedTotalMinCost}}">Session Price</div>
+        </label>
+    </div>
+    {{!--
+    <div class="stb-2">
+        <span>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            <div id="recorded_service_fee">{{recordedServiceFee}}</div>
+        </span>
+        Service Fee
+    </div>
+    --}}
+    <div class="stb-sum">
+        <label>
+            <i class="VideoClientIcon-dollar-currency-symbol"></i>
+            {{#if can_change_recorded_access_cost}}
+                <input id="recorded_revenue" step="0.01" type="text" class="price_number"
+                       mincost="{{recordedRevenueMin}}" maxcost="{{recordedRevenueMax}}"
+                       value="{{recordedRevenue}}">
+            {{else}}
+                <input disabled value="{{recordedRevenue}}">
+            {{/if}}
+            <div title="{{revenueSplitTitle}}">Your Earnings</div>
+        </label>
+    </div>
+</div>

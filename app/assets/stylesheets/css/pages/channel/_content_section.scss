@@ -1,0 +1,223 @@
+body .ch-p_C{
+  //width: calc(100% - 420px); //FORRRR DESIGN size pixelsCheck
+  width: calc(100% - 300px);
+  display: inline-block;
+  vertical-align: top;
+  font-size: $font-size-m;
+  padding-left: 30px;
+  .ch-p_aboutTxt_moreBtn{
+    background: var(--bg__main);
+  }
+}
+.ch-p_C_head{
+  min-height: 40px;
+  background-color: var(--bg__content);
+  @include boxShadow__main(var(--sh__main));
+  padding: 0 10px 5px;
+  font-size: 12px;
+  @include clearfix();
+  .channelList{
+    text-align: right;
+  }
+  &.channelList-long{
+    @include media(reverso-tablet){
+      max-height: 40px;
+      height: 40px;
+      white-space:nowrap;
+      overflow: hidden;
+      @include media(reverso-tablet){
+        .ChannelsImg-wrapp{
+          overflow: hidden; //dont touch!!
+        }
+      }
+      &:hover{
+        max-height: none;
+        height: auto;
+        white-space: normal;
+        overflow: visible;
+        .ch-p_C_head_right{
+          .ChannelsImg-wrapp{
+            overflow: hidden;
+          }
+          .channelList{
+            &:after{
+              display: none;
+            }
+          }
+        }
+        .ch_icon_dr__wrapp{
+          margin-bottom: 2px;
+        }
+        .ChannelsImg-wrapp{
+          max-width: calc(100% - 110px);
+          width: auto !important;
+        }
+      }
+    }
+    .channelList{
+      padding-right: 10px;
+      position: relative;
+      &:after{
+        content: '\f105';
+        font-family:'VideoClientIcon';
+        font-weight: normal;
+        font-style: normal;
+        text-decoration: inherit;
+        -webkit-font-smoothing: antialiased;
+        position: absolute;
+        top: -3px;
+        right: 0;
+        font-size: 17px;
+      }
+    }
+    &:hover{
+      overflow: visible;
+      .ch-p_C_head_right{
+        .ChannelsImg-wrapp{
+          width: calc(100% - 110px);
+          overflow: visible;
+        }
+        .channelList{
+          &:after{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+.ch-p_C_head_left{
+  text-transform: uppercase;
+  color: var(--tp__main);
+  display: inline-block;
+  vertical-align: top;
+  max-width: 50%;
+  padding-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  //@include transition200();
+  span{
+    color: var(--tp__main);
+  }
+  @include media(tablet){
+    white-space: normal;
+    max-width: 100%;
+    &>div {
+      width: 100%;
+      margin: 0;
+    }
+  }
+  &>div{
+    margin-right: 29px;
+
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}
+.ch-p_C_head_right{
+  padding-top: 10px;
+  width: calc(50% - 4px);
+  display: inline-block;
+  vertical-align: top;
+  font-size: 14px;
+  float: right;
+  @include media(tablet){
+    float: none;
+    width: 100%;
+    .styled-select_withCss{
+      width: 100%;
+      height: max-content;
+      font-size: 16px;
+      border-radius: 0;
+      color: #636b6f!important;
+      border-bottom: 1px solid $font-color-main-ultra-light;
+      margin-bottom: 20px;
+      &:active{
+        box-shadow: none;
+      }
+    }
+  }
+  a{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 2px;
+    .ChannelsImg{
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      display: inline-block;
+      vertical-align: bottom;
+      background-color: #ccc;
+    }
+  }
+  .ChannelsImg-wrapp{
+    display: inline-block;
+    vertical-align: top;
+    max-width: 145px;
+    //height: 20px;
+  }
+  .ch_icon_dr__wrapp{
+    margin-left: 2px;
+  }
+  .ch_icon_dr__main{
+    left: auto;
+    right: -20px;
+  }
+}
+.ch-p_C_body{
+  #live-guide-row{
+    background: transparent;
+  }
+  .second-header-line{
+    .navig-left, .navig-right{
+      background-color: var(--bg__main);
+    }
+  }
+}
+.ch-p_C_banner{
+  padding-bottom: 27.5%;
+  background-size: cover;
+  background-position: top center;
+  position: relative;
+  background-color: $contentPlaceholderBackground;
+  .ChannelsName{
+    position: absolute;
+    background-color: #fff;
+    height: 30px;
+    top:10px;
+    left: 10px;
+    font-size: 12px;
+    line-height: 30px;
+    padding:0px 10px;
+    color:#202020;
+  }
+  .ch-p_C_banner-rightBtnsGroup{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    a{
+      margin-left: 10px;
+      height: 30px;
+    }
+  }
+  .ch-p_C_like{
+    &.active{
+      color: $siteColorMainRed;
+    }
+  }
+  .ch-p_C_gallery{
+    position: absolute;
+    bottom:10px;
+    right: 10px;
+    span{
+      color: var(--tp__crutch);
+    }
+  }
+}
+.ch-p_channelName{
+  padding-top: 12px;
+  line-height: 1.2;
+}

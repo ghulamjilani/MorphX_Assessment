@@ -1,0 +1,260 @@
+- content_for(:additional_meta_tags) do
+  -#<!-- Core build with no theme, formatting, non-essential modules -->
+  %script{src: "//cdn.quilljs.com/1.3.6/quill.js"}
+  %link{href: "//cdn.quilljs.com/1.3.6/quill.snow.css", rel: "stylesheet"}
+- content_for(:extra_body_classes, 'wizard channel_form_page')
+- content_for(:page_title, "Edit channel - #{@channel.title}")
+
+.wizard_channel
+  .sectionBlock_wrapp
+    .channel_avatar_block.avatar_block.hidden{data: { title:'Channel icon identifies the channel. It will be automatically generated from the Channel cover or you can select your own.'} }
+      .LoadingCover.profile_next_cover{style:'display:none'}
+      - logo_url = (@channel.logo || @channel.main_image.persisted?) ? @channel.logo_url : @channel.image_gallery_url
+      #channel_logo.avatar{style: "background-image:url('#{logo_url}')", logoID: @channel.logo.try(:id)}
+      = link_to '#channel_avatar_modal', data: {toggle: :modal} do
+        .LoadingCover.profile_next_cover{style:'display:none'}
+        %i.VideoClientIcon-pencilF
+
+    - form_url = @channel.persisted? ? channel_path(@channel) : channels_path
+    - form_method = @channel.persisted? ? :put : :post
+    = form_for @channel, url: form_url, method: form_method, html: {id: :channel_form, class: 'form_V2 channel_form'} do |f|
+      .formWrapp
+        .LoadingCover.profile_next_cover{style:'display:none'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        = hidden_field_tag :dashboard, (request.env['HTTP_REFERER'].present? && request.env['HTTP_REFERER'].include?('dashboard'))
+        = f.hidden_field :id
+        %section.sectionBlock
+          .input-block.required{class: ('state-clear' if @channel.title.blank?)}
+            = f.label :title, I18n.t('views.channels.edit.channel_name')
+            = f.text_field :title
+            .errorContainerWrapp
+          .input-block.margin-bottom-10{class: ('state-clear' if @channel.tagline.blank?)}
+            = f.label :tagline, I18n.t('views.channels.edit.tagline')
+            = f.text_area :tagline, rows: 1, 'max-length': 160, data: {autoresize: true}
+            .counter_block{'max-length': 160}= "#{@channel.tagline.to_s.length}/160"
+            .infoContainerWrapp= I18n.t('forms.info.min_tagline_length')
+            .errorContainerWrapp
+          .input-block.margin-bottom-10
+            = f.label :description, I18n.t('views.channels.edit.description')
+            = f.hidden_field :description
+            #descriptionToolbar
+              %span.ql-formats
+                %button.ql-bold
+                %button.ql-italic
+              %span.ql-formats
+                %button.ql-list{value: :ordered}
+                %button.ql-list{value: :bullet}
+              %span.ql-formats
+                %button.ql-link
+            #descriptionEditor
+              = raw(sanitize(@channel.description.to_s.html_safe))
+          .select-block.padding-top-20.padding-bottom-20.required.flexible
+            .text-color-Darkgrey
+              = f.label :category, I18n.t('views.channels.edit.category')
+            %div.categoryWrapper
+              = f.select(:category_id, ChannelCategory.order(featured: :desc, name: :asc).map{|c| [c.name, c.id]}, {prompt: I18n.t('wizard.choose_category')}, {class: 'styled-select styled-select_withCss padding-left-20 pull-right text-right select-rightAlign full-width'})
+            .errorContainerWrapp
+
+          .input-block.required{class: (@channel.tag_list.length > 0 ? '' : 'state-clear')}
+            = f.label :tag_list, I18n.t('views.channels.edit.tags')
+            = f.text_field :tag_list, value: @channel.tag_list.to_s, class: 'tag-it'
+            .errorContainerWrapp
+
+          .select-block.padding-top-20.padding-bottom-20.flexible
+            .text-color-Darkgrey
+              = f.label :list_ids, I18n.t('views.channels.edit.lists')
+            %div.categoryWrapper
+              = f.select(:list_ids, @channel.organization.lists.order(name: :asc).map{|c| [c.name, c.id]}, {include_blank: I18n.t('views.channels.edit.choose_list')}, {class: 'styled-select styled-select_withCss padding-left-20 pull-right text-right select-rightAlign full-width'})
+            .errorContainerWrapp
+          .input-block
+            %label.checkbox.checkbox-swith
+              = f.check_box :is_default, style: 'display:none;', class: 'checkbox checkbox-swith'
+              %span= I18n.t('views.channels.edit.default_channel')
+
+          - if @channel.persisted?
+            .input-block
+              %label.checkbox.checkbox-swith
+                = f.check_box :live_guide_is_visible, style: 'display:none;', class: 'checkbox checkbox-swith'
+                %span= I18n.t('views.channels.edit.show_calendar_for_this_channel')
+          - else
+            .row
+              .col-xs-12.publicly-calendar-row
+                = f.label :list_automatically_after_approved_by_admin, class: 'text-color-Blue checkbox choice' do
+                  = f.check_box :list_automatically_after_approved_by_admin
+                  %span= I18n.t('views.channels.edit.list_publicly_upon_approval')
+                %label.checkbox.checkbox-swith
+                  = f.check_box :live_guide_is_visible, style: 'display:none;', class: 'checkbox checkbox-swith'
+                  %span= I18n.t('views.channels.edit.show_calendar_for_this_channel')
+            .errorContainerWrapp
+          .input-block
+            %label.checkbox.checkbox-swith
+              = f.check_box :display_empty_blog, style: 'display:none;', class: 'checkbox checkbox-swith'
+              %span= I18n.t('models.channel.attributes.display_empty_blog')
+          - im_config = Rails.application.credentials.dig(:global, :instant_messaging)
+          - if im_config && im_config.dig(:enabled) && im_config.dig(:conversations, :channels, :enabled)
+            .input-block
+              %label.checkbox.checkbox-swith
+                = f.check_box :im_conversation_enabled, style: 'display:none;', class: 'checkbox checkbox-swith'
+                %span= I18n.t('models.channel.attributes.im_conversation_enabled')
+          - if Rails.application.credentials.dig(:global, :is_document_management_enabled)
+            .input-block
+              %label.checkbox.checkbox-swith
+                = f.check_box :show_documents, style: 'display:none;', class: 'checkbox checkbox-swith'
+                %span= I18n.t('models.channel.attributes.show_documents')
+          .CR
+            .CR__title= I18n.t('views.channels.edit.comments_reviews')
+            %label.checkbox.checkbox-swith
+              = f.check_box :show_comments, style: 'display:none;', class: 'checkbox checkbox-swith'
+              %span= I18n.t('views.channels.edit.show_comments')
+            %label.checkbox.checkbox-swith
+              = f.check_box :show_reviews, style: 'display:none;', class: 'checkbox checkbox-swith'
+              %span= I18n.t('views.channels.edit.show_reviews')
+            .CR__icon
+              %i.GlobalIcon-info
+              %div= I18n.t('views.channels.edit.suggest_use_one_option')
+
+        %section.sectionBlock
+          .row
+            .col-xs-12.text-color-Darkgrey.margin-bottom-10
+              = I18n.t('views.channels.edit.channel_cover')+'*'
+          .row
+            .col-xs-12.ChannelCover_wrapp.padding-bottom-10
+              #channel_cover.ChannelCover{style: "background-image: url(#{@channel.image_gallery_url})", coverID: @channel.cover.try(:id)}
+                = link_to (@channel.cover.try(:id) ? 'Edit' : 'Add'), '#channel_cover_modal', data: {toggle: :modal}
+        .clearfix.row
+          .col-xs-12.cancelAndSaveButtons
+            = f.submit 'Save', id: :channel_save_btn, class: 'btn btn-l pull-right'
+            = link_to 'Cancel', url_for(:back) || sessions_presents_dashboard_path, class: 'btn btn-l pull-right btn-borderred-light margin-right-15'
+
+  = content_for(:wizard_modals) do
+    #channel_avatar_modal.modal.fade{data: {keyboard: false, backdrop: :static}}
+      .modal-dialog
+        .modal-content
+          = render partial: 'become_presenter_steps/close_modal'
+          .modal-body
+            %h4.groupTitle.clearfix
+              = I18n.t('views.channels.edit.channel_icon')
+            %section.crop-wrapp
+              .unobtrusive-flash-container
+              #logo-upload-area.upload-area
+                .row
+                  .upload-info.padding-top-80.padding-bottom-80
+                    .dotsWrapp
+                      .dot1
+                      .dot2
+                      .dot3
+                      .dot4
+                      .dot5
+                      .dot6
+                      .dot7
+                      .dot8
+                    = render partial: 'become_presenter_steps/loading_cover'
+                    %span
+                      %input#channel-logo.inputfile{name: 'channel-logo', type: :file}
+                      %label{for: 'channel-logo'}= I18n.t('forms.info.select_file')
+                      %div.fs-12.hideForMobile
+                        = I18n.t('views.channels.edit.or_drop_image')
+              .crop-container
+              %div.fs-13.sugSize
+                %span= I18n.t('views.channels.edit.suggested_size')+':'
+                = I18n.t('views.channels.edit.size_px', width: 280, height: 280)
+                %br
+                = I18n.t('views.channels.edit.we_recommend_using_high_resolution_image')
+
+              .loudThumbnailsList
+
+            -#.text-right
+              %button.submitButton.mainButton Save
+    #channel_cover_modal.modal.fade{data: {keyboard: false, backdrop: :static}}
+      .modal-dialog
+        .modal-content.createChanelCloseButton
+          = render partial: 'become_presenter_steps/close_modal'
+          .unobtrusive-flash-container
+          .modal-body
+            %h4.groupTitle.clearfix
+              = I18n.t('views.channels.edit.channel_cover')+'*'
+            %section.crop-wrapp
+              #cover-upload-area.upload-area
+                .row
+                  .upload-info{style: @channel.cover.try(:id) ? "background-image: url(#{@channel.image_gallery_url})" : ''}
+                    .dotsWrapp{class: @channel.cover.try(:id) ? 'hidden' : ''}
+                      .dot1
+                      .dot2
+                      .dot3
+                      .dot4
+                      .dot5
+                      .dot6
+                      .dot7
+                      .dot8
+                    = render partial: 'become_presenter_steps/loading_cover'
+
+                    %span
+                      %input#channel-cover.inputfile{name: 'channel-cover', type: :file}
+                      %label{for: 'channel-cover'}= I18n.t('forms.info.select_file')
+                      %div.fs-12.hideForMobile
+                        = I18n.t('views.channels.edit.or_drop_image')
+              .crop-container
+              .fs-13.sugSize
+                %span= I18n.t('views.channels.edit.suggested_size')+':'
+                = I18n.t('views.channels.edit.size_px', width: 970, height: 270)
+                %br
+                = I18n.t('views.channels.edit.we_recommend_using_high_resolution_image')
+            .saveCrop
+              %a.btn.btn-m{href: '#', data: {dismiss: :modal}}
+                = I18n.t('views.channels.edit.done')
+              -#.loudThumbnailsList
+              -#HIDDEN GALLERY
+          .modal-body.margin-top-60.hidden
+            %h4.groupTitle.clearfix.margin-bottom-10
+              = I18n.t('views.channels.edit.gallery')
+            .info-tabs
+              %ul.nav.nav-tabs.nav-justified
+                %li.active
+                  %a{href: '#uploadTab', data: {toggle: :tab}}
+                    = I18n.t('views.channels.edit.upload')
+                %li
+                  %a{href: '#webAddressTab', data: {toggle: :tab}}
+                    = I18n.t('views.channels.edit.web_address_url')
+              %section.tab-content
+                #uploadTab.tab-pane.active
+                  .gallery_tile_list
+                    - if @channel.persisted?
+                      - @channel.images.each do |image|
+                        .gallery_tile{data: {type: :image, id: image.id}}
+                          = image_tag image.image_preview_url
+                          %a.remove_gallery_image{href: '#'}
+                            %i.VideoClientIcon-cancel-solid
+                    #gallery-upload-area.add_tile.text-center
+                      %input#channel-gallery.inputfile{name: 'channel-gallery', type: :file, accept: '.jpg,.jpeg,.png,.bmp'}
+                      %label.text-center{for: 'channel-gallery'}
+                        %i.VideoClientIcon-cancel-solid
+                        .fs-12.sugSize
+                          %span= I18n.t('views.channels.edit.upload_or_drop')
+                          %br
+                          %span= I18n.t('views.channels.edit.your_images_here')
+                #webAddressTab.tab-pane
+                  .gallery_tile_list
+                    - if @channel.persisted?
+                      - @channel.channel_links.each do |link|
+                        .gallery_tile{data: {type: :link, id: link.id}, style: 'height: 115px;'}
+                          = raw link.embedded_html(197)
+                          %a.remove_gallery_image{href: '#'}
+                            %i.VideoClientIcon-cancel-solid
+                  %form#addFromUrl.form_V2
+                    .row.padding-top-20.padding-bottom-10
+                      .col-xs-9
+                        %input.full-width{type: :text, placeholder: 'URL'}
+                        .fs-12
+                          = I18n.t('views.channels.edit.url_embed_image_or_video_vimeo_and_youtube')
+                      .col-xs-3.text-right.padding-left-0
+                        %button.btn.btn-m{type: :submit}
+                          = I18n.t('views.channels.edit.embed')
+
+  = content_for(:after_include_javascripts) do
+    :javascript
+      $(document).ready(function() {
+        window.Channel.edit()
+      });

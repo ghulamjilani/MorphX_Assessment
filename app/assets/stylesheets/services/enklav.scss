@@ -1,0 +1,36 @@
+@import "mixin";
+.Enklav{
+  .header .LogoWrapp{
+    width: auto;
+    #logo-header{
+      width: max-content;
+      vertical-align: baseline;
+    }
+  }
+  .LogoWrapp{
+    max-height: 5rem;
+    img{
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .mobileHeader{
+    .LogoWrapp img{
+      @include media(p-tablet){
+        height: 3.5rem;
+      }
+    }
+  }
+}
+@include media(reverso-desktop){
+  body.Enklav:not(.header-top){
+    .header .LogoWrapp {
+      width: max-content;
+    }
+  }
+}
+.Enklav.landingPage{
+  .mobileHeader{
+    min-height: 5rem;
+  }
+}

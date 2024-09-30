@@ -1,0 +1,87 @@
+- content_for(:extra_body_classes, "dashboards-mailing dashboards")
+- content_for(:page_title, 'Mailing')
+
+.row
+  %aside.col-md-3.left-side-bar
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    = render 'dashboards/navigation/contacts_and_mailing_tabs'
+    .col-md-12.main-content-section.mailing_main
+      .technicalPage__label Mailing
+      %p Write welcome emails for your contacts:
+
+      %form{action: send_email_dashboard_mailing_index_path, method: 'POST'}
+        .emailTemplate
+          %div.select
+            %select.styled-select.margin-right-50{name: 'template'}
+              - @templates.each do |template|
+                %option{value: template[:id]}= template[:title]
+
+        %div
+          %div.email_wrapp
+            .input-block
+              %h5 Email Subject:
+              %input#welcome_subject{type:"text", size:"80", placeholder:"Enter email subject...", name: "subject", required: "required"}
+            .input-block.padding-top-10
+              %h5 Your message:
+              #textraTextEditor
+                = @custom_content
+              %textarea#textraText{"data-autoresize":"true", "rows":"5", maxlength:"2000", placeholder:"You have 2000 characters", name:"custom_content"}
+                = @custom_content
+            %div.email_preview
+              %a.btn.btn-m.btn-borderred-grey.margin-right-20{ "data-target" => "#email-preview-modal", "data-toggle" => "modal"} Email Preview
+              %p
+                %code
+                  [username]
+                shortcode will be automatically replaced with user's name
+        .row.margin-left-0.margin-right-0
+          %p.margin-top-30.margin-bottom-30 People who get this email:
+          #ch-vue-app
+            = content_tag 'comp-wrapper', nil, data: { component: 'Contacts', props: {}}.to_json
+          %button.btn.btn-l.margin-top-20.margin-bottom-40.submit#send-email-button{type:"submit", disabled: true} Send Email
+
+#email-preview-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .technicalPage__label
+          Email Preview
+        %section.email_preview_wrapp
+          = @email_preview.html_safe
+    .text-right.padding-top-10
+      %a.btn.btn-m{"data-dismiss":"modal", href:"#"} Close
+
+:css
+   textarea{
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      padding: 10px;
+      width: 100%;
+    }
+  #textraTextEditor.ql-container.ql-snow + textarea{
+      /*border-radius: 10px;*/
+      /*border: 1px solid #ccc;*/
+      /*margin-bottom: 20px;*/
+      /*padding: 10px;*/
+      height: 0 ;
+      visibility: hidden;
+      overflow:hidden;
+    }
+   #textraTextEditor:not(.ql-container.ql-snow){
+    opacity: 0
+   }
+  .email_preview_wrapp table{
+    border-collapse: separate;
+    box-sizing: border-box;
+    border-spacing: 0px;
+    border-color: grey;
+  }
+  #welcome_subject{
+    border-color: #ccc;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+%link{:href => "https://cdn.quilljs.com/1.0.0/quill.snow.css", :rel => "stylesheet"}
+%script{:src => "//cdn.quilljs.com/1.3.6/quill.min.js"}

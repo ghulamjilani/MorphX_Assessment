@@ -1,0 +1,65 @@
+%p
+  Request #:
+  %br
+  = @request_uuid
+- if @params[:type].present?
+  %p
+    Request Type:
+    %br
+    = @params[:type]
+%p Customer inquiry
+- if @params[:first_name]
+  %p
+    First name:
+    %br
+    = @params[:first_name]
+- if @params[:last_name]
+  %p
+    Last name:
+    %br
+    = @params[:last_name]
+- if @params[:name]
+  %p
+    Name:
+    %br
+    = @params[:name]
+- if @params[:company]
+  %p
+    Company:
+    %br
+    = @params[:company]
+%p
+  Email:
+  %br
+  = @params[:email]
+%p
+  Phone:
+  %br
+  = @params[:phone]
+- if @params[:about]
+  %p
+    About:
+    %br
+    = @params[:about]
+
+- if @params[:plan]
+  %p Studio plan with revenue split info
+
+  %p Plan: #{@params[:plan]}
+  %p Configured Autonomous Camera: #{@params[:configured_autonomous_camera]}
+  %p Multi Instructor Capability: #{@params[:multi_instructor_capability]}
+  %table
+    %thead
+      %tr
+        %th ROI Calculator
+        %th How Many
+        %th Price Per
+    %tbody
+      %tr
+        %td Single classes sold each month
+        %td= @params[:single_classes_count]
+        %td $#{@params[:single_classes_cost]}
+      %tr
+        %td New subscriptions added each month
+        %td= @params[:new_subscriptions_count]
+        %td $#{@params[:new_subscriptions_cost]}

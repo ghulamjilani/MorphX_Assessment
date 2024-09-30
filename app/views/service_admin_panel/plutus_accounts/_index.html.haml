@@ -1,0 +1,14 @@
+%table.index_table.index{border: "0", cellpadding: "0", cellspacing: "0"}
+  %tr
+    %th.nobg ID
+    %th Name
+    %th Type
+    %th Debit Balance
+    %th Credit Balance
+  - @plutus_accounts.each do |account|
+    %tr{class: "#{cycle("even", "odd")}"}
+      %td= link_to(account.id, service_admin_panel_plutus_account_path(account.id))
+      %td= link_to(account.name, service_admin_panel_plutus_account_path(account.id))
+      %td= h account.type.sub('Plutus::','')
+      %td= h account.debits_balance
+      %td= h account.credits_balance

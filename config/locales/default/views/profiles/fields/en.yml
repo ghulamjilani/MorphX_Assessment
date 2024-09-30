@@ -1,0 +1,22 @@
+en:
+  views:
+    profiles:
+      fields:
+        title: Personal Profile
+        donations_title: Paypal Donations
+        email: Email
+        donations: Donations URL
+        to_change_your_email_address_please_confirm_your_email: To change your email address, please confirm your email address by clicking on the link we just emailed you
+        first_name: First name
+        last_name: Last name
+        display_name: Display name
+        use_display_name: Use Display Name
+        use_full_name: Use Full Name
+        custom_url: Custom %{url} URL
+        gender: Gender
+        birthdate: Birthdate
+        phone_number: Phone number
+        field_is_required: This field is required.
+        country: Country
+        city: City
+        state_province: State/Province

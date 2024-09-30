@@ -1,0 +1,9 @@
+= link_to spa_user_path(user.slug), target: "_blank" do
+  = image_tag(user.avatar_url, width: 28, height: 28, alt: user.public_display_name, class: 'img-circle')
+  %div.folInfo
+    %strong
+      #{user.first_name} #{user.last_name}
+    %span
+      = pluralize user.following_users_count, 'Follow'
+    %span
+      = pluralize user.count_user_followers, 'Follower'

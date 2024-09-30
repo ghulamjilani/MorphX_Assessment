@@ -1,0 +1,122 @@
+.roleEdit {
+  &__pageTitle {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--tp__h3);
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border__separator);
+
+    &__show {
+      border-bottom: none;
+    }
+  }
+
+  &__lowerTitle {
+    @include flex(flex, center, space-between);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--tp__h3);
+    padding: 3rem 0;
+    @include media(p-phone) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__section {
+    padding: 2rem 3rem;
+    background: var(--bg__content);
+    box-shadow: 0 0.1rem 0.4rem var(--sh__main);
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    @include media(phone) {
+      padding: 2rem 1rem;
+    }
+
+    input {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .input__field__bottom__counter {
+      font-size: 1.4rem;
+      color: var(--tp__labels);
+    }
+
+    &__title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--tp__h1);
+      padding-bottom: 2rem;
+      padding-top: 4rem;
+    }
+
+    &__title.top {
+      padding-top: 0;
+    }
+
+    &__item {
+      padding: 2rem 3rem 2rem 2rem;
+      background: var(--bg__content__secondary);
+      border-radius: 1rem;
+
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+
+      &:last-child {
+        margin-bottom: 1rem;
+      }
+
+      &__roleName {
+        color: var(--tp__h2);
+        font-size: 1.4rem;
+        font-weight: bold;
+
+        span {
+          @include flex(flex, center, space-between);
+          padding-bottom: 1rem;
+          border-bottom: 1px solid var(--border__content__sections);
+        }
+      }
+
+      &__roleDesc {
+        font-size: 1.3rem;
+        color: var(--tp__secondary);
+        padding-top: 1rem;
+      }
+    }
+  }
+
+  &__buttons {
+    margin-top: 3rem;
+    @include flex(flex, center, flex-end);
+
+    &__top {
+      margin-top: 0;
+    }
+
+    &__show {
+      width: 100%;
+    }
+
+    button {
+      min-height: 4rem;
+      min-width: 12rem;
+
+      &:last-child {
+        margin-left: 1rem;
+      }
+    }
+
+    @include media(p-phone) {
+      width: 100%;
+      &__top {
+        margin-top: 2rem;
+      }
+      button {
+        width: 50%;
+      }
+    }
+  }
+}

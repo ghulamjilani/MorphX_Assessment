@@ -1,0 +1,7 @@
+en:
+  views:
+    layouts:
+      application:
+        header:
+          sessions_create:
+            fast_interactive: Conference Session

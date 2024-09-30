@@ -1,0 +1,20 @@
+<div class="formNav">
+    <div class="formNav-b">
+        <!--<a data-formtarget="user_info" href="#user_info" id="user_info_tab" class="{{#if user_ready}}StepSuccess{{else}}StepOnWork active{{/if}}">{{i18n "wizard.navigation.step_1"}}</a>-->
+        <a data-formtarget="user_info" href="#user_info" id="user_info_tab" class="{{#if user_ready}}StepSuccess{{else}}StepOnWork active{{/if}}">{{i18n "wizard.navigation.step_1"}}</a>
+        <a data-formtarget="channel" href="#channel" id="channel_tab" class="{{#if user_ready}}StepOnWork{{#unless channel_ready}} active{{/unless}}{{/if}} {{#if channel_ready}}StepSuccess{{/if}}">{{i18n "wizard.navigation.step_2"}}</a>
+        <a data-formtarget="presenters" href="#presenters" id="presenters_tab" class="{{#if channel_ready}}StepOnWork active{{/if}}">{{i18n "wizard.navigation.step_3"}}</a>
+    </div>
+</div>
+<div class="text-center hidden-sm hidden" id="formStatus">
+    <div id="progress">
+        <span class="text-color-Blue">{{progress}}%</span>
+        Completed
+        <br>
+        In a rush?
+        <strong>
+            Finish Later
+        </strong>
+    </div>
+    <span id="on_save" class="hidden text-color-Blue">Saving...</span>
+</div>

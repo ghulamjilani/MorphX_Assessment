@@ -1,0 +1,34 @@
+en:
+  wizard:
+    step1:
+      birthday_tooltip: Providing your birthday helps make sure you get the right Unite experience for your age. Your birthday will not be shared. For more details please visit our <a target='_blank' class='text-color-Blue' href='%{path}'>Privacy Policy</a>.
+      description: |-
+        Congratulations on taking the first step in a quick three step process to create your very own live interactive network.
+        Unite is proud to work with influencers like yourself, who want to extend their reach and grow their revenue. An Unite influencer can be an individual or a brand. We provide you with all the tools necessary to create and deliver your live content, as well as engage your audience the way only live video can. Let’s take a few minutes to set up your profile!
+    step2:
+      title: Your Unite Channel is your window to the world, make sure it's a good view!
+    step3:
+      list_tooltip: Once your network is approved, your channel will be listed publicly on our home page and on our Unite Live Guide.
+  components:
+    tips:
+      uploads:
+        text: "Uploads is any video content that you upload to your channel. Select the needed channel and click the Add Videos button.Choose the file or drag-n-drop several videos at once. When you have the slider at 100% and turned green, press Done. You can get more information from the link in our blog:"
+        link: "https://joybee.live/o/joybee-functionality/community/what-are-uploads"
+      replays:
+        text: "In our platform, the recorded sessions are called replays. Turning on the Record option in the Video Settings section while creating the session allows users to save their session and makes it available for their subscribers to watch it later. You can get more information from the link in our blog:"
+        link: "https://joybee.live/o/joybee-functionality/community/what-are-replays"
+      subscriptions:
+        text: "You can activate your subscriptions option to make them visible on the channel. Click New Subscription. Here you can select and configure the suggested plans for different channels to make them available to your users. You can get more information from the link in our blog:"
+        link: "https://joybee.live/o/joybee-functionality/community/how-to-create-subscriptions-for-your-users-on-behalf-of-a-creator"
+      ip-cam:
+        text: "To configure and connect IP-camera choose IP-camera tab. Click “Enable” button. Choose “Yes, proceed”, paste your IP-camera’s URL. Read more info at this link:"
+        link: "https://joybee.live/o/joybee-functionality/community/how-to-configure-and-connect-an-ip-camera"
+      main-info:
+        text: "For completing the Main Info section, select the values for the Channel and Host fields from the drop-down list. Give the title to your session.</br></br> Read more info at this link:"
+        link: "https://joybee.live/o/joybee-functionality/community/first-session-creation-on-behalf-of-creator"
+      obs:
+        text: "To configure and connect OBS choose Encoder tab, click “Enable” button. Open your OBS Settings window, choose Stream tab at the right.</br></br> Read more info at this link:"
+        link: "https://joybee.live/o/joybee-functionality/community/how-to-create-a-session-using-obs"
+      recurrence:
+        text: "You also can create auto sessions: just turn on the Recurrence option. Mark the weekdays next to the Repeat on option.</br></br> Read more info at this link:"
+        link: "https://joybee.live/o/joybee-functionality/community/session-auto-creation"

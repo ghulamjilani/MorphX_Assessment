@@ -1,0 +1,18 @@
+en:
+  views:
+    layouts:
+      application:
+        header:
+          sign_up: Sign Up
+          search: Search
+          start_creating: "START CREATING"
+          confirm_email: Please confirm your email address
+          user:
+            dashboard: Dashboard
+            settings: Settings
+            help: Help
+            logout: Logout
+          sessions_create:
+            go_live: Go Live
+            fast_interactive: Easy Conference
+            upload: Upload Video

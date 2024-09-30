@@ -1,0 +1,116 @@
+#ToDo.NT-wrapper.smallScrolls{style: 'display:none'}
+  .NT-header
+    %p
+      %span= remainig_todo_task_count
+      = pluralize_no_digits(remainig_todo_task_count, "To-Do", "To-Do's")
+  .NT-body
+    %ul.BTN-row-1
+      %li
+        %strong Complete the remaining To-Do's and earn $20.00 credit.
+        /
+          %div{style: 'font-weight: normal; font-size: 12px; margin-top: 5px'}
+            = n_more_todo_tasks_message
+      %li
+        %a.disabled.ensure-link-style
+          .td-h{style: 'text-decoration: line-through;'}
+            Sign up
+            %div{style: 'font-weight: normal; font-size: 12px; margin-top: 5px'}
+              = I18n.t('views.layouts.application.todo.complete', service_name: Rails.application.credentials.global[:service_name])
+          .td-b
+            = "#{time_ago_in_words(current_user.created_at)} ago"
+          .td-st
+            %i.VideoClientIcon-checkmark
+      %li
+        = referred_five_friends_a_tag do
+          .td-h{style: referred_five_friends_completed? ? 'text-decoration: line-through;' : ''}
+            = TodoAchievement::Types::REFERRED_FIVE_FRIENDS
+            %div{style: 'font-weight: normal; font-size: 12px; margin-top: 5px'}
+              = I18n.t('views.layouts.application.todo.keep', service_name: Rails.application.credentials.global[:service_name])
+          .td-b
+            - if referred_five_friends_completed?
+              = "#{time_ago_in_words(referred_five_friends_completed_at)} ago"
+          .td-st
+            - if referred_five_friends_completed?
+              %i.VideoClientIcon-checkmark
+            - else
+              %i.VideoClientIcon-angle-rightF
+      %li
+        %a.ensure-link-style
+          .td-h{style: share_a_session_completed? ? 'text-decoration: line-through;' : ''}
+            = TodoAchievement::Types::SHARE_A_SESSION
+            %div{style: 'font-weight: normal; font-size: 12px; margin-top: 5px'}
+              Find an interesting session? Tell your friends by sharing the session through one or more of your social media accounts. 
+          .td-b
+            - if share_a_session_completed?
+              = "#{time_ago_in_words(share_a_session_completed_at)} ago"
+          .td-st
+            - if share_a_session_completed?
+              %i.VideoClientIcon-checkmark
+            - else
+              %i.VideoClientIcon-angle-rightF
+      %li
+        %a.ensure-link-style
+          .td-h{style: participate_in_a_session_completed? ? 'text-decoration: line-through;' : ''}
+            = TodoAchievement::Types::PARTICIPATE_IN_A_SESSION
+            %div{style: 'font-weight: normal; font-size: 12px; margin-top: 5px'}
+              Discover talented individuals who share your passion and interest by participating in one of their sessions. 
+          .td-b
+            - if participate_in_a_session_completed?
+              = "#{time_ago_in_words(participate_in_a_session_completed_at)} ago"
+          .td-st
+            - if participate_in_a_session_completed?
+              %i.VideoClientIcon-checkmark
+            - else
+              %i.VideoClientIcon-angle-rightF
+      %li
+        %a.ensure-link-style
+          .td-h{style: review_a_session_completed? ? 'text-decoration: line-through;' : ''}
+            = TodoAchievement::Types::REVIEW_A_SESSION
+            %div{style: 'font-weight: normal; font-size: 12px; margin-top: 5px'}
+              After participating in a session rate the session, and give a review telling the community about your experience.
+          .td-b
+            - if review_a_session_completed?
+              = "#{time_ago_in_words(review_a_session_completed_at)} ago"
+          .td-st
+            - if review_a_session_completed?
+              %i.VideoClientIcon-checkmark
+            - else
+              %i.VideoClientIcon-angle-rightF
+    %div.oneBTN
+      = link_to "View all To-do's", main_app.page_url('checklist'), rel: 'nofollow'
+
+- unless referred_five_friends_completed?
+  #PreviewInvitationInstructionsForReferredFriend.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "1"}
+    .modal-dialog
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          %h4.groupTitle.clearfix
+            Preview Email
+          %section
+            %iframe{seamless: true, style: 'height: 410px; border: 0; width: 100%', name: "messageBody"}
+
+  #ReferFiveFriendsModal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+    .modal-dialog
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          .unobtrusive-flash-container
+          %h4.groupTitle.clearfix
+            = TodoAchievement::Types::REFERRED_FIVE_FRIENDS
+          %section
+            = semantic_form_for(User.new, method: :post, url: main_app.refer_friends_path, remote: true) do |f|
+              .input-line.clearfix
+                .custom-input.control-group.clearfix
+                  %label.control-label
+                    Add Email
+                    %abbr{title: "required"} *
+                  .full-width.select-date
+                    %input.full-width{type: 'text', name: "emails"}
+                    %div
+                      %small Separate multiple emails with commas.
+
+              .clearfix{style: 'margin-top: 20px'}
+                %input.mainButton{type: "submit", 'data-disable-with' => 'Please wait…', value: 'Send'}
+                or
+                %a{'data-target' => '#PreviewInvitationInstructionsForReferredFriend', 'data-toggle' => 'modal'} Preview Email

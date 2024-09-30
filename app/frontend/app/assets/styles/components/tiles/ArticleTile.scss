@@ -1,0 +1,60 @@
+.ArticleTile {
+  background: var(--bg__content);
+  box-shadow: 0px 1px 4px var(--sh__main);
+  border-radius: 1rem;
+  position: relative;
+  width: 29rem;
+  height: 29rem;
+  min-height: 29rem;
+  padding-bottom: 8.5rem;
+
+  .cardMK2 {
+    &__imgContainer {
+      border-radius: 1rem 1rem 0 0;
+    }
+
+    &__tile-body{
+      padding: 0 1rem 0;
+    }
+    &__imgContainer {
+      padding-top: 50%;
+    }
+    &__tile-body.orgSection {
+      height: 5.7rem;
+    }
+    &__tileBody__bottomSection {
+      position: absolute;
+      bottom: 1rem;
+      width: calc(100% - 2rem);
+    }
+  }
+
+  .dateCounts {
+    @include flex(flex, center, space-between);
+    .counts {
+      @include flex(flex, center, flex-end);
+      font-size: 1.4rem;
+      i {
+        color: var(--tp__icons);
+        margin: 0 0.4rem;
+      }
+      .GlobalIcon-message-square {
+        padding-top: 0.4rem;
+      }
+    }
+  }
+
+
+}
+#blog {
+  .vhl-item {
+    width: 29rem !important; // override slider inline styles
+  }
+}
+
+.search-wrap {
+  .ArticleTile {
+    width: 100%;
+    height: auto;
+  }
+}

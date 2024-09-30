@@ -1,0 +1,48 @@
+- content_for(:extra_body_classes, "dashboards-subscriptions header-top dashboards")
+- content_for(:page_title, I18n.t('views.dashboard.subscriptions.index.page_title'))
+
+
+.row
+  %aside.col-md-3.left-side-bar
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9.MainForm_block_for_AffixSection
+    .Subscription_list
+      .info-tabs
+        -# %ul.nav.nav-tabs.nav-justified{role: :tablist}
+        -#   %li.active{role: :presentation}
+        -#     %a{href: '#', 'aria-controls': 'Subscriptions_pane', role: :tab, 'data-toggle': :tab}  Subscriptions
+        -#   %li{role: :presentation}
+        -#     %a.disabled{href: '#', 'aria-controls': '', role: :tab} Packages (coming soon)
+        -#   %li{role: :presentation}
+        -#     %a.disabled{href: '#', 'aria-controls': '', role: :tab} Courses (coming soon)
+        .tips-vue-app.padding-bottom-15
+          = content_tag 'comp-wrapper', nil, data: { component: 'Tips', props: {type: 'subscriptions', dashboard: true}}.to_json
+        .tab-content.padding-right-0.padding-left-0
+          .tab-pane#Subscriptions_pane.active
+            .tips-vue-app.tips__subscription
+              = content_tag 'comp-wrapper', nil, data: { component: 'InfoIcon', props: {type: 'subscriptions'}}.to_json
+            - @subscriptions.each do |subscription|
+              %a.longTile_mk1{href: (subscription.enabled? ? edit_dashboard_subscription_path(subscription.id) : 'javascript:void(0)')}
+                .left_side
+                  .img{style: "background-image: url(#{subscription.channel.image_mobile_preview_url})"}
+                .right_side
+                  .tittle
+                    = subscription.channel.title
+                    - if subscription.channel.archived?
+                      = content_tag("span", "("+I18n.t('views.dashboard.subscriptions.form.channel')+")", class: " tp__h2 bold fs-18")
+                      = '('+I18n.t('views.dashboard.subscriptions.index.archived')+')'
+                    .status.active=subscription.enabled ? I18n.t('views.dashboard.subscriptions.index.enabled') : I18n.t('views.dashboard.subscriptions.index.disabled')
+                  .details
+                    %span
+                      %i.VideoClientIcon-listF
+                      = subscription.plans.active.count
+                      = I18n.t('views.dashboard.subscriptions.index.plans')
+                    %span
+                      %i.VideoClientIcon-user-mk2
+                      = subscription.stripe_subscriptions.active.count
+
+            -#New  Subscription BTN
+            .text-right
+              %a.btn.btn-m.btn-square.btn-withIcon.btn-bordered-blue{href: new_dashboard_subscription_path}
+                %i.VideoClientIcon-iPlus.fs-13
+                = I18n.t('views.dashboard.subscriptions.index.new_subscription')

@@ -1,0 +1,9 @@
+<p>
+  Requested free session
+  "<a href="<%= @session.absolute_path(UTM.build_params({utm_content: @user.utm_content_value})) %>"><%= @session.always_present_title %></a>"
+  has been declined.
+</p>
+
+<% raise("missing rejection message #{@session.id}") if @session.requested_free_session_declined_with_message.blank? %>
+
+<%= simple_format(@session.requested_free_session_declined_with_message) %>

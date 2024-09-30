@@ -1,0 +1,23 @@
+<% if @offset == 0 %>
+$('#<%= @type %>_<%= @channel.id %>.body .sessions').html("<%= escape_javascript(render(partial: 'dashboards/session', collection: @sessions)) %>");
+<% else %>
+$('#<%= @type %>_<%= @channel.id %>.body .sessions').append("<%= escape_javascript(render(partial: 'dashboards/session', collection: @sessions)) %>");
+<% end %>
+$('#<%= @type %>_<%= @channel.id %>.body a[data-remote]').css('visibility', 'visible');
+
+<% if @total.zero? %>
+$('#<%= @type %>_<%= @channel.id %> .filtersMK2__options__total').text(<%= @total %> + " results viewed");
+$('#<%= @type %>_<%= @channel.id %> .alert-message.message').show()
+<% else %>
+$('#<%= @type %>_<%= @channel.id %> .filtersMK2__options__total').text(<%= @total %> + " results viewed");
+$('#<%= @type %>_<%= @channel.id %> .alert-message.message').hide()
+<% end %>
+
+<% if @total > @offset + @limit %>
+$('#<%= @type %>_<%= @channel.id %> .show_more').attr('href', "<%= sessions_dashboard_channel_path(@channel.id, {limit: @limit, offset: @offset + @limit, type: @type}).html_safe %>");
+$('#<%= @type %>_<%= @channel.id %> .show_more').removeClass('hidden');
+<% else %>
+$('#<%= @type %>_<%= @channel.id %> .show_more').addClass('hidden');
+<% end %>
+window.initializeJoinTimer();
+$('#<%= @type %>_<%= @channel.id %> .LoadingCover').addClass('hidden');

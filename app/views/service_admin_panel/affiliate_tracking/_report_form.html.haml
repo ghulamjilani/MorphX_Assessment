@@ -1,0 +1,36 @@
+%form#new_q.filter_form{'accept-charset': 'UTF-8', action: service_admin_panel_affiliate_tracking_generate_report_path(format: :csv), method: :get}
+  -##refc_user_input.select.input.optional.filter_form_field.filter_select
+  -#  %label.label{for: :q_refc_user} REF USER
+  -#  %select#refc_user{name: 'q[refc_user]'}
+  -#    %option{value: ''} Any
+  -#    - @refc_users.each do |user|
+  -#      %option{value: user.my_referral_code_text}= user.display_name
+  #refc_user_input.numeric.input.optional.numeric.stringish.filter_form_field.filter_numeric.select_and_search
+    %label.label{for: :refc_user} REF USER ID
+    %select{id: "", name: ""}
+      %option{selected: true, value: :refc_user_equals} Equals
+      %option{value: :refc_user_greater_than} Greater than
+      %option{value: :refc_user_less_than} Less than
+    %input#refc_user{name: :refc_user_equals, step: :any, type: :text}/
+  #campaign_input.numeric.input.optional.numeric.stringish.filter_form_field.filter_string
+    %label.label{for: :campaign} Campaign
+    %input#campaign{name: :campaign, step: :any, type: :text}/
+  #refc_input.numeric.input.optional.numeric.stringish.filter_form_field.filter_string
+    %label.label{for: :refc} Ref Code
+    %input#refc{name: :refc, step: :any, type: :text}/
+  #registered_input.check_boxes.input.optional.filter_form_field.filter_check_boxes
+    %fieldset.choices
+      %label{for: :registered}
+        %input#registered{name: :registered, type: :checkbox, value: :true}/
+        Registered
+  #not_registered_input.check_boxes.input.optional.filter_form_field.filter_check_boxes
+    %fieldset.choices
+      %label{for: :not_registered}
+        %input#not_registered{name: :not_registered, type: :checkbox, value: :true}/
+        Not Registered
+  #created_at_input.date_range.input.optional.stringish.filter_form_field.filter_date_range
+    %label.label Created at
+    %input#created_at_gteq_datetime.datepicker{maxlength: '10', name: :created_at_start, placeholder: :From, size: '12', type: :text, value: ''}/
+    %input#created_at_lteq_datetime.datepicker{maxlength: '10', name: :created_at_end, placeholder: :To, size: '12', type: :text, value: ''}/
+  .buttons
+    %input{name: :commit, type: :submit, value: 'Generate CSV'}/

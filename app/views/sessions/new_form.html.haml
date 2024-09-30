@@ -1,0 +1,555 @@
+- content_for(:extra_body_classes, "hidePageHeader resetMainContainer header-top session-form")
+-#.sc = session create : name space
+.sc-wrapp.form_V2
+  %a.mobileShow.mobile_device.hide{href:'#'} &#9776; Options and Invite
+  #scMainContainer.sc.container
+    .sc-title
+      Who is streaming?
+      .ChanelAvatars
+        %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")', title:'name'}
+        %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")',  title:'name'}
+        %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")',  title:'name'}
+        %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")',  title:'name'}
+    .sc-body.clearfix
+      .sc-left_sidebar.text-center
+      .sc-main_sections.MainForm_block_for_AffixSection
+        .padding-bottom-20.clearfix
+          .btns-group.full-width
+            %a.btn.btn-l.btn-borderred-grey.display-block.full-width.active
+              Me
+            %a.btn.btn-l.btn-borderred-grey.display-block.full-width
+              Me with Guests
+        .padding-bottom-20
+          #time-range
+            #custom-handle.ui-slider-handle
+              0
+        %section
+          .input-block.state-derty
+            %label{for:'sessionTitle'} title
+            %input#sessionTitle{type:'text', value:'Prefilled Session Title'}
+            .counter_block
+              0/?
+            .errorContainerWrapp
+              .errorContainer
+                This is a required field
+
+          .input-block.state-clear
+            %label{for:'sessionTitle'} Description
+            %textarea{'data-autoresize':'true', 'rows':'1'}
+            .counter_block
+              0/2000
+            .errorContainerWrapp
+              .errorContainer
+                This is a required field
+        %section.padding-bottom-0
+          .row.clearfix
+            .col-sm-6.padding-top-5
+              Interactive Participants
+            .col-sm-6
+              %select.styled-select_withCss.full-width.text-right.select-rightAlign
+                %option test1 ololol
+                %option test2
+                %option test3
+          .row.clearfix.padding-bottom-10
+            .col-sm-7
+              Price
+            .col-sm-5.text-right.position-relative.tooltipWrapp
+              .btns-group.full-width.greenActive.transperantBg.margin-bottom-0
+                %a.btn.btn-s.btn-borderred-grey.active.full-width.btn-hover-green{href:'#'} free
+                %a.btn.btn-s.btn-borderred-grey.full-width.btn-hover-green{href:'#', 'data-tooltip-toggle':'#InteractivePrice'} Set Price
+              #InteractivePrice.tooltipBody.setPrice.text-left.hide
+                .stb-h
+                  Price breakdown
+                .stb-b.text-center.padding-top-10
+                  .stb-1.minSymbol
+                    %label
+                      %input{type:'number', value:'10', min:"0", step:"1"}
+                      Session Price
+                  .stb-2.sumSymbol
+                    %span $4.00
+                    Service Fee
+                  .stb-sum
+                    %label
+                      %input{type:'number', value:'14', min:"0", step:"1"}
+                      Your Earnings
+          %hr.no-margin
+          .row.clearfix.padding-top-10
+            .col-sm-7
+              %label.checkbox.choice{title:'tooooooltip!!!!'}
+                %input#AllowLivestream{type: 'checkbox'}
+                %span Allow Livestream
+            .col-sm-5.text-right.position-relative.AllowLivestream-show.tooltipWrapp
+              .btns-group.full-width.greenActive.transperantBg
+                %a.btn.btn-s.btn-borderred-grey.active.full-width.btn-hover-green{href:'#'} free
+                %a.btn.btn-s.btn-borderred-grey.full-width.btn-hover-green{href:'#', 'data-tooltip-toggle':'#LivestreamPrice'} Set Price
+              #LivestreamPrice.tooltipBody.setPrice.text-left.hide
+                .stb-h
+                  Price breakdown
+                .stb-b.text-center.padding-top-10
+                  .stb-1.minSymbol
+                    %label
+                      %input{type:'number', value:'10', min:"0", step:"1"}
+                      Session Price
+                  .stb-2.sumSymbol
+                    %span $4.00
+                    Service Fee
+                  .stb-sum
+                    %label
+                      %input{type:'number', value:'14', min:"0", step:"1"}
+                      Your Earnings
+        %section
+          .row.clearfix
+            .col-sm-7
+              Privacy
+            .col-sm-5.text-right
+              .btns-group.transperantBg
+                %a.btn.btn-s.btn-borderred-grey.active{href:''} Public
+                %a.btn.btn-s.btn-borderred-grey{href:''} Private
+          .row.clearfix
+            .col-sm-6
+              Age
+            .col-sm-6.text-right
+              .btns-group.transperantBg
+                %a.btn.btn-s.btn-borderred-grey.active{href:''} 13 +
+                %a.btn.btn-s.btn-borderred-grey{href:''} 18 +
+                %a.btn.btn-s.btn-borderred-grey{href:''} 21 +
+              .text-right
+                %label.checkbox.choice.right-position
+                  %input{type: 'checkbox'}
+                  %span adult content?
+
+        %div.text-center
+          %a.btn.btn-l.btn-borderred-grey.btn-transperant.margin-left-10.margin-right-10.margin-bottom-20{href:'#'}
+            Start Now
+          %a.btn.btn-l.margin-left-10.margin-right-10.margin-bottom-20{href:'#'}
+            Start Later
+
+        %section
+          .row.padding-top-5.padding-bottom-5
+            .col-sm-4
+              Date
+            .col-sm-8.text-right
+              september 4
+              %a{href:'#'}
+                %i.VideoClientIcon-calendar-icon.text-color-main
+
+          .row
+            .col-sm-4.padding-top-5.padding-bottom-5
+              Start Time
+            .col-sm-8
+              %select.styled-select_withCss.full-width.text-right.select-rightAlign
+                %option test1 ololol
+                %option test2
+                %option test3
+          .row
+            .col-sm-4.padding-top-5.padding-bottom-5
+              Preparation Time
+            .col-sm-8
+              %select.styled-select_withCss.full-width.text-right.select-rightAlign
+                %option test1 ololol
+                %option test2
+                %option test3
+
+
+
+      .sc-right_sidebars.pushy-left
+        .AffixSection
+          .addNewMemberWrapp
+            %a.addNewMember{"data-target": "#InviteGuestsAndCoHosts", "data-blurMarker":"addMembersACTIVE",  "data-toggle": "modal", href:'#'}
+              %i.VideoClientIcon-iPlus
+            Invite
+          .memberList.padding-bottom-10
+            %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")', title:'name'}
+            %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")', title:'name'}
+            %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")', title:'name'}
+            %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")', title:'name'}
+            %a.avatarImg-SD{href:"#", style: 'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")', title:'name'}
+            %a.dottedCircle{href:"#", title:'Show all'}
+              %i.VideoClientIcon-dots-horizontal-triple
+          %section
+            .sc-right_sidebars-title
+              Options
+            %hr.margin-top-0.margin-bottom-5
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Auto-Start
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Record
+              %a{href:'#'}
+                %i.VideoClientIcon-settings
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Liveshare
+              %a{href:'#'}
+                %i.VideoClientIcon-settings
+            %hr.margin-top-5.margin-bottom-5
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span E-commerce
+              %a{href:'#'}
+                %i.VideoClientIcon-settings
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Donations
+              %a{href:'#'}
+                %i.VideoClientIcon-settings
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Trials
+              %a{href:'#'}
+                %i.VideoClientIcon-settings
+            %hr.margin-top-5.margin-bottom-5
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Chat
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Twitter
+              %a{href:'#'}
+                %i.VideoClientIcon-settings
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Polls
+              %a{href:'#'}
+                %i.VideoClientIcon-settings
+            .sc-r-block
+              %label.checkbox.checkbox-swith.right-position
+                %input{type: 'checkbox'}
+                %span Instructions
+              %a{href:'#'}
+                %i.VideoClientIcon-settings
+
+    .sc-modals
+      %a{"data-target": "#record_modal", "data-blurMarker":"rightPanelACTIVE",  "data-toggle": "modal", href:'#'} open record_modal
+      %br
+      %a{"data-target": "#liveShare_modal", "data-blurMarker":"rightPanelACTIVE",  "data-toggle": "modal", href:'#'} open liveShare_modal
+      %br
+      %a{"data-target": "#eCommerce_modal", "data-blurMarker":"rightPanelACTIVE",  "data-toggle": "modal", href:'#'} open eCommerce_modal
+      %br
+      %a{"data-target": "#Donation_modal", "data-blurMarker":"rightPanelACTIVE",  "data-toggle": "modal", href:'#'} open Donation_modal
+      %br
+      %a{"data-target": "#Trials_modal", "data-blurMarker":"rightPanelACTIVE",  "data-toggle": "modal", href:'#'} open Trials_modal
+      %br
+      %a{"data-target": "#Instructions_modal", "data-blurMarker":"rightPanelACTIVE",  "data-toggle": "modal", href:'#'} open Instructions_modal
+      %br
+      %a{"data-target": "#Twitter_modal", "data-blurMarker":"rightPanelACTIVE",  "data-toggle": "modal", href:'#'} open Twitter_modal
+      %br
+      %a{"data-target": "#Polls_modal", "data-blurMarker":"rightPanelACTIVE",  "data-toggle": "modal", href:'#'} open Polls_modal
+      #ID-modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                Category List
+              %section
+                modal content
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} save
+      #InviteGuestsAndCoHosts.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                Invite guests and co-hosts
+              %section
+                %div.padding-bottom-20
+                  .fs-12.padding-bottom-5 Co-Hosts
+                  %div.Co-HostsWrapp
+                    %a.avatarImg-SD{href:'#', style:'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")'}
+                %div.padding-bottom-10
+                  .fs-12.padding-bottom-5 Users
+                  %div.UsersWrapp
+                    %a.avatarImg-SD{href:'#', style:'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")'}
+                .input-block.state-clear.margin-bottom-10
+                  %label{for:'InviteByEmail'} Invite by email
+                  %input.InviteByEmail{type:'email', value:''}
+                .contactList
+                  .contactList-h
+                    .pull-right
+                      %label.checkbox.choice.right-position
+                        %input{type: 'checkbox'}
+                        %span.fs-12 select all
+                    .fs-12
+                      Contact list
+                  .contactList-b
+                    .contactList-item.clearfix
+                      %a.avatarImg-SD{href:'#', style:'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")'}
+                      Petr Petrovich petrychello@petrycho.com
+                      %label.checkbox.choice
+                        %input{type: 'checkbox'}
+                        %span Co-Host
+                    .contactList-item.active
+                      %a.avatarImg-SD{href:'#', style:'background-image: url("http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg")'}
+                      Petr Petrovich petrychello@petrycho.com
+                      %label.checkbox.choice
+                        %input{type: 'checkbox'}
+                        %span Co-Host
+
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} invite
+      #record_modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                Record
+              %section
+                .row.clearfix
+                  .col-sm-6
+                    %label.checkbox.choice{title:'tooooooltip!!!!'}
+                      %input{type: 'checkbox'}
+                      %span Auto-record Session
+                  .col-sm-6.text-right.position-relative
+                    .btns-group.full-width.greenActive.transperantBg.no-margin
+                      %a.btn.btn-s.btn-borderred-grey.active.full-width.btn-hover-green{href:''} free
+                      %a.btn.btn-s.btn-borderred-grey.full-width.btn-hover-green{href:''} Set Price
+                    .setPrice.text-left
+                      .stb-h
+                        Price breakdown
+                      .stb-b.text-center.padding-top-10
+                        .stb-1.minSymbol
+                          %label
+                            %input{type:'number', value:'29.99', min:"0", step:"1"}
+                            Session Price
+                        .stb-2.sumSymbol
+                          %span $4.00
+                          Service Fee
+                        .stb-sum
+                          %label
+                            %input{type:'number', value:'25.99', min:"0", step:"1"}
+                            Your Earnings
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} save
+      #liveShare_modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                LiveShare
+              %section
+                .modal-bodyTitle
+                  Share you session on
+                .row.padding-top-10
+                  .col-sm-6.socialMK2.no-margin
+                    .iconBlock.facebook
+                      %span
+                        %i.VideoClientIcon-facebookF.VideoClientIcon-dots-horizontal-triple
+                    Facebook
+                  .col-sm-6.text-right
+                    %a.btn.btn-m.btn-borderred-grey connect
+
+                .row.padding-top-10
+                  .col-sm-6.socialMK2.no-margin
+                    .iconBlock.youtube
+                      %span
+                        %i.icon-youtube-1.VideoClientIcon-dots-horizontal-triple
+                    youtube
+
+                  .col-sm-6.text-right
+                    %a.btn.btn-m.btn-borderred-grey.active connected
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} save
+
+
+      #eCommerce_modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                E-commerce
+              %section
+                .row
+                  .col-sm-6.padding-top-5
+                    Live Session
+                  .col-sm-6
+                    %select.styled-select_withCss.full-width.text-right.select-rightAlign
+                      %option test1 ololol
+                      %option test2
+                      %option test3
+                %hr.full-width
+                .row
+                  .col-sm-6.padding-top-5
+                    Replays
+                  .col-sm-6
+                    %select.styled-select_withCss.full-width.text-right.select-rightAlign
+                      %option test1 ololol
+                      %option test2
+                      %option test3
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} Create new list
+
+              %section
+                %div
+                  Existing Pols
+                %hr.full-width.margin-top-0
+                .polsList
+                  .polsList-item
+                    %label.checkbox.choice
+                      %input{type: 'checkbox'}
+                      %span pols name
+                    %a.removePols{href:'#'}
+                      %i.VideoClientIcon-cross
+
+                  .polsList-item
+                    %label.checkbox.choice
+                      %input{type: 'checkbox'}
+                      %span pols name
+                    %a.removePols{href:'#'}
+                      %i.VideoClientIcon-cross
+
+      #Donation_modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                Donation
+              %section
+                %div
+                  .inline-block.padding-top-5
+                    goal
+                  .pull-right
+                    %input{type:'number', value:'29.99', min:"0", step:"1"}
+                %hr.full-width
+                .row.clearfix.text-center
+                  .col-sm-3
+                    Tier-1
+                    %input.full-width{type:'number', value:'29.99', min:"0", step:"1"}
+                  .col-sm-3
+                    Tier-2
+                    %input.full-width{type:'number', value:'29.99', min:"0", step:"1"}
+                  .col-sm-3
+                    Tier-3
+                    %input.full-width{type:'number', value:'29.99', min:"0", step:"1"}
+                  .col-sm-3
+                    Tier-4
+                    %input.full-width{type:'number', value:'29.99', min:"0", step:"1"}
+                %hr.full-width
+                %div
+                  %label.checkbox.checkbox-swith.full-width.right-position
+                    %input{type: 'checkbox'}
+                    %span.full-width Show Backers
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} save
+
+
+      #Trials_modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                Trials
+              %section
+                .fs-12
+                  interactive
+                %hr.full-width.margin-top-0
+                .row
+                  .col-sm-6.padding-top-5
+                    %label.checkbox.choice
+                      %input{type: 'checkbox'}
+                      %span Offer Free Trials
+                  .col-sm-6
+                    %select.styled-select_withCss.full-width.text-right.select-rightAlign
+                      %option none
+                      %option 99
+                .fs-12.padding-top-10
+                  Livestream
+                %hr.full-width.margin-top-0
+                .row
+                  .col-sm-6.padding-top-5
+                    %label.checkbox.choice
+                      %input{type: 'checkbox'}
+                      %span Offer Free Trials
+                  .col-sm-6
+                    %select.styled-select_withCss.full-width.text-right.select-rightAlign
+                      %option none
+                      %option 99
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} save
+      #Instructions_modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                Instructions
+              %section
+                .row
+                  .col-sm-6.padding-top-5
+                    Information Type
+                  .col-sm-6
+                    %select.styled-select_withCss.full-width.text-right.select-rightAlign
+                      %option none
+                      %option Instructions
+                      %option hz
+                .input-block.state-clear
+                  %label{for:'sessionTitle'} Instructions
+                  %textarea{'data-autoresize':'true', 'rows':'1'}
+                  .counter_block
+                    0/2000
+                  .errorContainerWrapp
+                    .errorContainer
+                      This is a required field
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} save
+
+
+      #Twitter_modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                Twitter #-tag
+              %section
+                %input.tag-it{type:'text', value: '#ololo'}
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} save
+      #Polls_modal.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-body
+              %h4.groupTitle.clearfix
+                Polls
+              %section
+                .input-block.state-clear
+                  %label{for:'sessionTitle'} Question
+                  %textarea{'data-autoresize':'true', 'rows':'1'}
+                  .counter_block
+                    0/2000
+                  .errorContainerWrapp
+                    .errorContainer
+                      This is a required field
+                .input-block.state-clear
+                  %label{for:'sessionTitle'} Answer 1
+                  %textarea{'data-autoresize':'true', 'rows':'1'}
+                  .counter_block
+                    0/2000
+                  .errorContainerWrapp
+                    .errorContainer
+                      This is a required field
+                .input-block.state-clear
+                  %label{for:'sessionTitle'} Answer 2
+                  %textarea{'data-autoresize':'true', 'rows':'1'}
+                  .counter_block
+                    0/2000
+                  .errorContainerWrapp
+                    .errorContainer
+                      This is a required field
+                .input-block.state-clear
+                  %label{for:'sessionTitle'} Answer 3
+                  %textarea{'data-autoresize':'true', 'rows':'1'}
+                  .counter_block
+                    0/2000
+                  .errorContainerWrapp
+                    .errorContainer
+                      This is a required field
+              .text-right.padding-right-10
+                %a.btn.btn-m{href:'#'} Save

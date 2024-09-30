@@ -1,0 +1,35 @@
+if($('body').hasClass('channel_landing') && !$('.followersModal').hasClass('in')){
+    if (<%= @following %>){
+      $('.ch-p_Contact').removeClass('hide');
+      $('.ch-p_Follow').addClass('hide');
+    } else {
+        $('.ch-p_Follow').removeClass('hide');
+        $('.ch-p_Contact').addClass('hide');
+    }
+    $('#followers_count').text("<%= @user.count_user_followers %>");
+} else {
+  <% @text =  @following ? 'Following' : 'Follow' %>
+  var followLink = $("a.user-subscribe-<%= @user.id %>");
+  if (followLink.length === 0) {
+    console.log("can not find follow button");
+  } else {
+    if (<%= @following %>){
+        followLink.addClass('active')
+    }else{
+        followLink.removeClass('active')
+    }
+
+    if (followLink.find('i').length == 0){ //new design include i tag
+        followLink.text("<%= @text %>");
+    }else{
+        followLink.html('<i class="VideoClientIcon-checkmark"></i><i class="GlobalIcon-clear"></i>'+"<%= @text %>");
+    }
+
+    if ($('body.users-show').length == 1) {
+      // defined in users/show.html.haml
+      window.usersShowFollowersView.options.followers_count = <%= @user.count_user_followers %>;
+      window.usersShowFollowersView.collection = <%= @user.reload.last_followers_as_json.html_safe %>;
+      window.usersShowFollowersView.render();
+    }
+  }
+}

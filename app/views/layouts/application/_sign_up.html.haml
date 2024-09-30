@@ -1,0 +1,131 @@
+-# - action_url ||= devise_invitation_token_in_signup_modal.present? ? main_app.user_invitation_path : '/users'
+-# - form_method ||= devise_invitation_token_in_signup_modal.present? ? :put : :post
+-# - redirect_url ||= request.original_url
+-# - submit_text ||= 'Sign Up'
+-# #signupPopup.modal.fade.loginOrSignUpModal{role: :dialog, data: {backdrop: "static"}, class: modal_additional_class(LandingHelper::SIGN_UP_MODAL)}
+-#   .modal-dialog
+-#     .unobtrusive-flash-container
+-#     .modal-content
+-#       - unless devise_invitation_token_in_signup_modal.present?
+-#         = render 'become_presenter_steps/close_modal'
+-#       .modal-body
+-#         .text-left
+-#           = image_tag 'services/' + Rails.application.credentials.global[:project_name].to_s.downcase + '/logo_small.png', id: 'logo-modal', alt: Rails.application.credentials.global[:service_name], class: "img-responsive #{Rails.application.credentials.global[:project_name].to_s.downcase}"
+-#         .signUp-message
+-#           = I18n.t('views.layouts.application.sign_up.welcome', service_name: Rails.application.credentials.global[:service_name])
+-#           .soclog
+-#             = render 'shared/row_social', devise_invitation_token: devise_invitation_token_in_signup_modal, redirect_path_after_social_signup: redirect_url
+-#           %a.btn.btn-m.full-width.new_user-wrappShow.showSignUpFormAgain Sign Up with Email
+-#         #new_user-wrapp.new_user-wrapp
+-#           = semantic_form_for(resource, as: resource_name, url: action_url, method: form_method, html: {id: 'new_user', class: 'form-signup formSize rf form_V2', autocomplete: :off, novalidate: true, data: {remote: true, type: :json} }) do |f|
+-#             = f.hidden_field :tzinfo
+-#             - f.object.email_confirmation = f.object.email if controller_name == 'invitations' && action_name == 'edit'
+-#             %input{name: :redirect_to, type: :hidden, value: redirect_url}/
+
+-#             - if devise_invitation_token_in_signup_modal.present?
+-#               = f.input :invitation_token, as: :hidden
+-#             .borderedInput.required
+-#               = f.input :first_name,
+-#                         input_html: {placeholder: 'First Name', class: 'form-control nameInput', minlength: 2},
+-#                         label: false,
+-#                         wrapper_html: false,
+-#                         required: true
+-#               .errorContainerWrapp
+
+-#             .borderedInput.required
+-#               = f.input :last_name,
+-#                         label: false,
+-#                         input_html: {placeholder: 'Last Name', class: 'form-control lastNameInput', minlength: 2},
+-#                         wrapper_html: false,
+-#                         required: true
+-#               .errorContainerWrapp
+
+-#             .borderedInput.user_birthdate_inputWrapp.required
+-#               %input{name: 'user[birthdate(1i)]', type: :hidden}
+-#               %input{name: 'user[birthdate(2i)]', type: :hidden}
+-#               %input{name: 'user[birthdate(3i)]', type: :hidden}
+-#               %input#birthday_date.birthday_date{name: 'birthdate', class: 'form-control birthDayInput', type: :text, placeholder: 'Birthday', readonly: true}
+-#               %i.VideoClientIcon-calendar-icon.birthday_date_icon
+-#               .errorContainerWrapp
+
+-#             .borderedInput.user_gender_inputWrapp.signupGenderInput.required
+-#               %select.GenderSelect.styled-select_withCss.full-width{name: 'user[gender]', class: 'form-control genderInput'}
+-#                 %option{disabled: true, hidden: true, selected: true, style: 'color:red !important', val: ''} Gender
+-#                 %option{value: 'male'} Male
+-#                 %option{value: 'female'} Female
+-#                 %option{value: 'hidden'} Private
+-#               .errorContainerWrapp
+
+-#             - if browser.safari?
+-#               .safariDetected
+-#                 .borderedInput.required{data: {class: 'form-control emailInput'}}
+-#                   = f.input :email,
+-#                             label: false,
+-#                             input_html: sign_up_email_input_html_value,
+-#                             wrapper_html: false,
+-#                             required: true
+-#                   .errorContainerWrapp
+-#             - else
+-#               .borderedInput.required{data: {class: 'form-control emailInput'}}
+-#                 = f.input :email,
+-#                           label: false,
+-#                           input_html: sign_up_email_input_html_value,
+-#                           wrapper_html: false,
+-#                           required: true
+-#                 .errorContainerWrapp
+
+-#             .borderedInput.signUpPass.required
+-#               = f.input :password,
+-#                         as: :password,
+-#                         label: false,
+-#                         input_html: {placeholder: :Password, class: 'form-control inputUp passInput strength-password', autocomplete: 'new-password'},
+-#                         wrapper_html: false
+-#               .password-Strength-2-tooltip
+-#                 Use at least
+-#                 %b
+-#                   6 characters,
+-#                 including one
+-#                 %b
+-#                   uppercase
+-#                 letter, one
+-#                 %b
+-#                   lowercase
+-#                 letter, and one
+-#                 %b
+-#                   numeric
+-#                 character
+-#               .errorContainerWrapp
+-#               - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+-#                 .eye.showSignupMacPassword
+-#                 .caps.showSignupMacCaps
+-#                 .passStrength-2-Wrap
+-#                   .passStrength-2-indicator
+-#                     %div.indicator-item
+-#                     %div.indicator-item
+-#                     %div.indicator-item
+-#                   .passStrength-2-Message Weak Password
+-#               - else
+-#                 .eye.showSignupPassword
+-#                 .caps.showSignupCaps
+-#                 .passStrength-2-Wrap
+-#                   .passStrength-2-indicator
+-#                     %div.indicator-item
+-#                     %div.indicator-item
+-#                     %div.indicator-item
+-#                   .passStrength-2-Message Weak Password
+
+-#             = f.button(submit_text, class: 'signupBtn btn btn-m full-width')
+
+-#             - if omniauth_enabled? && action_url != '/users/invitation'
+-#               %a.toggle-modals.showSignUpSocialMedia.showSocialMediaAgain{href:'#'} More Sign Up Options
+
+-#         .ofsetModalTxt.text-center
+-#           %p.fontBot
+-#             = I18n.t('views.layouts.application.sign_up.agree', service_name: Rails.application.credentials.global[:service_name])
+-#             = link_to 'Terms of Use', Rails.application.class.routes.url_helpers.page_path(ContentPages::TERMS_CONDITIONS.parameterize(separator: '-')), target: '_blank', class: 'text-color-Blue termsOf'
+-#             and
+-#             = link_to 'Privacy Policy', Rails.application.class.routes.url_helpers.page_path(ContentPages::PRIVACY_POLICY.parameterize(separator: '-')), target: '_blank', class: 'text-color-Blue'
+-#           - if action_url != '/users/invitation'
+-#             %p.already
+-#               Already have an account?
+-#               = link_to 'Log In', '#loginPopup', data: {toggle: :modal, target: '#loginPopup'}, class: 'text-color-Blue already_have_account', onclick: "$('#signupPopup').modal('hide');$('#loginPopup').modal('show')"

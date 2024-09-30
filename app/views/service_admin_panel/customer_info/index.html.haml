@@ -1,0 +1,34 @@
+.index_content
+  %table{border: 0, cellpadding: 0, cellspacing: 0, class: 'index_table'}
+    %thead
+      %tr
+        %th.col.col-created_at created_at
+        %th.col.col-customer_id customer_id
+        %th.col.col-device device
+        %th.col.col-os os
+        %th.col.col-browser browser
+        %th.col.col-city city
+        %th.col.col-region region
+        %th.col.col-country country
+        %th.col.col-loc loc
+        %th.col.col-org org
+        %th.col.col-postal postal
+        %th.col.col-timezone timezone
+        %th.col.col-ip ip
+    %tbody
+      - @items.each_with_index do |item, index|
+        %tr{id: "widget_visitor_#{item.id}", class: index.even? ? :even : :odd}
+          %td.col.col-created_at= item.created_at
+          %td.col.col-customer_id= item.customer_id
+          %td.col.col-device= item.device
+          %td.col.col-os= item.os
+          %td.col.col-browser= item.browser
+          %td.col.col-city= item.city
+          %td.col.col-region= item.region
+          %td.col.col-country= item.country
+          %td.col.col-loc= item.loc
+          %td.col.col-org= item.org
+          %td.col.col-postal= item.postal
+          %td.col.col-timezone= item.timezone
+          %td.col.col-ip= item.ip
+= paginate @items

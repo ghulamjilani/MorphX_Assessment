@@ -1,0 +1,6 @@
+ru:
+  frontend:
+    app:
+      uikit:
+        m_blocking_message:
+          wrong: "Что-то не так, попробуйте позже"

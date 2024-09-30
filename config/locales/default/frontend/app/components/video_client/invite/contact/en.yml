@@ -1,0 +1,9 @@
+en:
+  frontend:
+    app:
+      components:
+        video_client:
+          invite:
+            contact:
+              invite: Invite
+              invited: Invited

@@ -1,0 +1,1 @@
+./bin/rspec --exclude-pattern="spec/jobs/**/*_spec.rb,spec/integration/**/*_spec.rb,spec/factories_spec.rb,spec/factories/**/*_spec.rb,spec/models/**/*_spec.rb,spec/controllers/**/*_spec.rb"

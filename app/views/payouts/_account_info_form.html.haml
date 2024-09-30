@@ -1,0 +1,129 @@
+.technicalPage__label
+  - if connect_account.present?
+    = I18n.t('views.payouts.account_info_form.edit_info')
+  - else
+    = I18n.t('views.payouts.account_info_form.add_info')
+- if connect_account.present?
+  - form_path = payouts_connect_account_path(payout_method.connect_account.id)
+  - method = 'PUT'
+- else
+  - form_path = payouts_connect_accounts_path
+  - method = 'POST'
+
+= form_tag form_path, method: method, id: :account_info_payouts_form, multipart: true, class: 'form_V2' do
+  %input{type: :hidden, name: 'payout_method_id', value: payout_method.id}
+  .row
+    .col-md-12.AccountDetails
+      .col-md-4.padding-left-0
+        - individual = connect_account&.individual
+        .input-block.required{class: ('state-clear' unless (individual || @user.first_name))}
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.first_name')
+          %input{type: :text, name: 'account_info[first_name]', value: (individual&.first_name || @user.first_name)}
+          .errorContainerWrapp
+        .input-block.required
+          - dob = connect_account ? Date.new(connect_account.individual.dob.year, connect_account.individual.dob.month, connect_account.individual.dob.day) : nil
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.dob')
+          %input#birthday_date{type: :text, name: 'account_info[date_of_birth]', placeholder: 'MM/DD/YYYY', value: (dob&.strftime('%m/%d/%Y') || @user.birthdate&.strftime('%m/%d/%Y'))}
+          - content_for(:after_include_javascripts) do
+            :javascript
+              $('#birthday_date').datepicker({
+                dateFormat: 'mm/dd/yy',
+                showOn: 'focus',
+                minDate: '-90Y',
+                maxDate: '-13Y',
+                yearRange: '-90:-13',
+                changeYear: true,
+                changeMonth: true,
+                setDate: "#{dob&.strftime('%m/%d/%Y')}"
+               })
+          .errorContainerWrapp
+        .input-block.required{class: ('state-clear' unless individual)}
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.phone')
+          %input{type: :text, name: 'account_info[phone]', value: individual&.phone}
+          .errorContainerWrapp
+        .input-block.required
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.website')
+          %input{type: :text, name: 'account_info[business_website]', value: connect_account&.business_profile&.url || @user.absolute_path}
+          .errorContainerWrapp
+        - address = individual&.address
+        .input-block.required{class: ('state-clear' unless address)}
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.address_line_1')
+          %input{type: :text, name: 'account_info[address_line_1]', value: address&.line1}
+          .errorContainerWrapp
+        .input-block.required{class: ('state-clear' unless address)}
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.city')
+          %input{type: :text, name: 'account_info[city]', value: address&.city}
+          .errorContainerWrapp
+        .input-block.required{class: ('state-clear' unless address)}
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.zip')
+          %input{type: :text, name: 'account_info[zip]', value: address&.postal_code}
+          .errorContainerWrapp
+        .input-block
+          %label{for: :passport_file, title: I18n.t('views.payouts.account_info_form.passport_info')}= I18n.t('views.payouts.account_info_form.identity_doc')
+          - if individual&.verification&.document&.front || individual&.verification&.document&.back
+            %span= I18n.t('views.payouts.account_info_form.provided')
+          - else
+            %input{type: :file, name: :passport_file}
+          .errorContainerWrapp
+      .col-md-4.padding-left-0
+        .input-block.required{class: ('state-clear' unless (individual || @user.last_name))}
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.last_name')
+          %input{type: :text, name: 'account_info[last_name]', value: (individual&.last_name || @user.last_name)}
+          .errorContainerWrapp
+        .input-block.required
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.email')
+          %input{type: :text, name: 'account_info[email]', value: (connect_account&.email || @user.email)}
+          .errorContainerWrapp
+        - if country == 'US'
+          .input-block.state-clear.required
+            %label{for: ''}= I18n.t('views.payouts.account_info_form.ssn')
+            %input{type: :text, name: 'account_info[ssn_last_4]'}
+            .errorContainerWrapp
+        .select-block.required
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.industry')
+          = select_tag 'account_info[mcc]', options_for_select(MerchantCategory.all.order(name: :asc).pluck(:name, :mcc), selected: connect_account&.business_profile&.mcc)
+          .errorContainerWrapp
+        - address = individual&.address
+        .input-block{class: ('state-clear' unless address)}
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.address_line_2')
+          %input{type: :text, name: 'account_info[address_line_2]', value: address&.line2}
+          .errorContainerWrapp
+        - if country == 'US'
+          .select-block.required
+            %label{for: ''}= I18n.t('views.payouts.account_info_form.state')
+            = select_tag 'account_info[state]', options_for_select(Payouts::Countries::STATES[:'US'].map{|k,v| [v, k]}, selected: address&.state)
+            .errorContainerWrapp
+        - elsif country == 'ES'
+          .select-block.required
+            %label{for: ''}= I18n.t('views.payouts.account_info_form.province')
+            = select_tag 'account_info[state]', options_for_select(Payouts::Countries::STATES[:'ES'].map{|k,v| [v, k]}, selected: address&.state)
+            .errorContainerWrapp
+        .select-block.required
+          %label{for: ''}= I18n.t('views.payouts.account_info_form.country')
+          = select_tag 'account_info[country]', options_for_select([[Payouts::Countries::ALL[country.to_sym], country]], selected: country)
+          .errorContainerWrapp
+        - if country != 'US'
+          .input-block
+            %label{for: :additional_document_file}= I18n.t('views.payouts.account_info_form.additional_doc')
+            - if individual&.verification&.additional_document&.front
+              %span= I18n.t('views.payouts.account_info_form.provided')
+            %input{type: :file, name: :additional_document_file}
+            .errorContainerWrapp
+        -#.input-block.state-clear
+          %label{for: ''} Photo ID - Front
+          %input{type: :file, name: 'account_info[photo_id_front]'}
+          .errorContainerWrapp
+        -#.input-block.state-clear
+          %label{for: ''} Photo ID - Back
+          %input{type: :file, name: 'account_info[photo_id_back]'}
+          .errorContainerWrapp
+        -#.input-block.state-clear.required
+          %label{for: ''} Industry
+          %input{type: :text, name: 'account_info[industry]'}
+          .errorContainerWrapp
+    .text-right.pus
+      - if connect_account.present?
+        %a.btn.btn-l.btn-borderred-grey{href: payouts_payout_methods_path}= I18n.t('views.payouts.account_info_form.back')
+      - else
+        %a.btn.btn-l.btn-borderred-grey.back{href:'#'}= I18n.t('views.payouts.account_info_form.back')
+      %button.btn.btn-l.margin-left-10{type: :submit, 'data-disable-with': "Please wait…"}= I18n.t('views.payouts.account_info_form.next')

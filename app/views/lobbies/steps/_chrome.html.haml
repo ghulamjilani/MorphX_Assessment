@@ -1,0 +1,14 @@
+.step4.active
+  .font-bold.fs20
+    Welcome to
+  %section.lobbyLogo
+    = image_tag("services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/footerLogo.png")
+
+  .mb20
+  .font-bold.fs-22.inRow Please wait
+  .loadSpin.inRow
+    %span.smallCircleG#circleG_1
+    %span.smallCircleG#circleG_2
+    %span.smallCircleG#circleG_3
+  %section.lobbyImg
+    = image_tag("services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png")

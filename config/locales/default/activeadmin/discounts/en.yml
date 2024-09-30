@@ -1,0 +1,38 @@
+en:
+  activeadmin:
+    discounts:
+      hints:
+        amount_off_cents: Discount in cents, integer > 0 or null. <b>Only ONE of [amount_off_cents, percent_off_precise] should be filled!!</b>
+        expires_at: The date until the discount is active. Empty value means permanent discount.
+        is_valid: Active or not
+        min_amount_cents: |-
+          Minimum purchase price in cents to which this coupon can be applied;
+          <br/>
+          * integer, value greater than 0
+          <br/>
+          * 0, null - any price
+        name: "<b>Case-sensitive</b> Name(Code) of discount (users will use it in purchase forms) --- eg.: OCT30"
+        percent_off_precise: Discount in %, floating point number, from 0.1 or null. <b>Only ONE of [amount_off_cents, percent_off_precise] should be filled!!</b>
+        target_ids: |-
+          Session IDs (target_types: Livestream, Immersive, Replay(<b>NOT A VIDEO ID!!!! ONLY SESSION ID</b>), Session)
+          <br/>
+          <b>OR</b>
+          <br/>
+          Channel IDs (only for target_type "Channel") separated by "," or ", ".
+          <br/>
+          Empty field means that discount available for ALL items from target_type.'
+        target_type: |-
+          * <b>Livestream</b> - can be used only to purchase livestream, in the target_ids specify the session IDs(only specific session with Livestream delivery method) or null (any session with Livestream delivery method)
+          <br/>
+          * <b>Interactive</b> - the same as Livestream but for Immersive(Interactive) type of delivery method
+          <br/>
+          * <b>Replay</b> - the same as Livestream and Immersive(Interactive) but for Replay
+          <br/>
+          * <b>Session</b> - any session type [Livestream, Immersive, Replay], in the target_ids specify the session IDs, so only this sessions from this list can be purchased with this discount
+          <br/>
+          * <b>Channel</b> - all session purchases for a specific channel(s). In the target_ids you can specify IDs of channel(s), so only sessions from provided channel(s) can be purchased with this discount.
+          <br/>
+          * <b>Recording(comming soon)</b> - applies only to the purchase of a recording (video from a Google disk), in the target_ids specify the id of the recording (s) or null (any recording).
+        usage_count_per_user: Number of how many times one uniq user can apply this discount. 0 or blank value means unlimited usages.
+        usage_count_total: Number of how many times this discount can be applied. 0 or blank value means unlimited usages.
+

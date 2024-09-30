@@ -1,0 +1,24 @@
+.DocumentsSettings {
+  width: 70rem;
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+
+  .cm__tools__select__item__specific {
+    padding: 1rem 1rem 1rem 0;
+
+    .color__icons {
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+
+    label {
+      @include flex(flex, center);
+      cursor: pointer;
+    }
+  }
+
+  .input__field__bottom__counter {
+    font-size: 1.3rem;
+    color: var(--tp__secondary);
+  }
+}

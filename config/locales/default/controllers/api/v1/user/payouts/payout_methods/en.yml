@@ -1,0 +1,9 @@
+en:
+  controllers:
+    api:
+      v1:
+        user:
+          payouts:
+            payout_methods:
+              errors:
+                no_connect_account: You need to create Payout Connect Account first

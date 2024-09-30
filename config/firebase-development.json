@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "immerss-portal-qa",
+  "private_key_id": "4760f19251987b0ae52bc6b757d4d944b165c18f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCy28cncPhukVHm\n08wv49u7VAT8c84o1GOu8D7N28zfzIO5XCah0WVo7UZRQT6u0Z8vQaqsGVzLBFew\nEj74Zzrbik/Tj9RMmZ0sczsqCszCVVwE+Q+yqE4e5Tu60ZQPtknJS8Iez9a+yQDd\nL3QNnYUUt1mm9zfZtPKFNnMPTEmQ/14RaQmBaJb6Zxg7ptADcUeWG1F95a7z6kZl\nJ5kmJBKYkUORI9T72amcb2Qc39tzk3nUIGMJcGlbZnCleWOA44bMire5bN7ZcFvD\nKXnXPHssaTxE0+D33PTqwwbYJPeKkUAyiIgWwFZ0fQn0dZ0RVSv9TE3rZHnuIQHM\np3V2MXTHAgMBAAECggEAL/zOlLL3PLcpqcxWoty4Ni0HP3KUtBiz/BpCR3o7ICqf\nhuqGBPGJC1tp++ANANuGIag1MgKGBoROQJPMqFoODRwxabpTxA+M/4GVNKT8JgG/\n9CecwhrtBtYLLgcP+h0289arKRgrbjnAzRdvxD1omNPOroDyz6sATKR8v3SA4nFm\nfkZG3p/2MndDtgi1caRSwfrx4byCpwEZ8+p+ErKSPThASPJD8QgyHh7MGOTBM+zV\nWylToVqxTkpbQi+8wEHc5pRIoC0wQGUpnyLJR8oFJfUFDffAFvtNtZ5Vnvw9u472\nLwzSaTs3THUjHG9vNQdXPvNXVNLLk5/grEVwreYsSQKBgQDl1woODmufv3Ph9il4\n7oHp/uxnAO4C5Xx8BZO4z/tlv4mMiLBVY92xdM3xENlBCY9hicav0iuWLM2C5FP3\n2WmxfFeARie1E4mG08vGk1//pgriL/PwyyWtdn2M0cvqPQz0bJk3JBUC2yK5mGDN\n7/RnXaVZ8LWlZUqP/TO5zcpGiQKBgQDHN0QYw+6ToA5pwV/K89wxVXBNi7Az/LqE\nguCCIQ1twkn5L8vhjry6zjAj17lwQ02FBnGuk4DbaH1CKQaDMGcSURe/dGiSbDRM\n7yCLw+AFc2y6lFexePaozgU1k+pRzIymPkfBjBk33mK+HMjwhbCE0ke5oZgL8ph9\nwt8SHLQMzwKBgDC7z937IMbWiXO4BkMmD1XWP7n3cIAcuLBzXkcpklyYqEmsEfeJ\nHVCrO5+JuwcXR9eepwpQvf0xssG2ODetWcPQYZ1JQtIaOmbkMakBRrGmO1iKYmcE\nLBEDtstNELeyCjUpcbNHa00Xud0wehYwctoX+R+A8oMHXy/4uCcFg4ZBAoGBAIGz\n9M0e+/z3j4rBUQoFPY6NLwH9+anPWOyffWab+G9GuPzZZqejVDNXvTYI5P43g4gh\nivB7rsCrRipGJaxSXjkpvQl01ATJGEAizJDS5c8GuHq9zF6LACUlhXS9qii5wbUX\nBYb5HQ4n5ygZ+6XFlQjVE8fDcwgMWcY/kxbqwzs3AoGBAL3epR66zcgLN4rxSTYK\nJK8O11i7RFC9+M3aJhr+GgRT+AAU+iE0mE/ePIoV7j6V3vzqdzoHG1/H8f3YuJtG\nZN6Tw3eZ3psrBKB8LZl5maUk/HpUzjs7hSr8YMdOngz+dYvO3VqJdWelcB6ONVzE\ne7buePJtZNjzqaNsv9onZfep\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-3jzvg@immerss-portal-qa.iam.gserviceaccount.com",
+  "client_id": "114988593571922680096",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-3jzvg%40immerss-portal-qa.iam.gserviceaccount.com"
+}

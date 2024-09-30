@@ -1,0 +1,3 @@
+$('#subscription_modals').html("<%= escape_javascript(render(partial: 'shared/subscription/plans', locals: {subscription: @subscription, plans: @plans})) %>");
+$('#subscription_modals #subscription_list').modal('show');
+$('a[data-remote]').css('visibility', 'visible');

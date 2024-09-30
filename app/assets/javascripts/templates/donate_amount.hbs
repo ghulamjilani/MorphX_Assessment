@@ -1,0 +1,99 @@
+<div class="blueBg">
+  <h1 class="heading">
+    {{donate_title_as_singular}}
+    <a class="ensure-link-style">
+      <i class="GlobalIcon-clear"></i>
+    </a>
+  </h1>
+  {{#if display_amount}}
+    <div class="goalCount text-center fs-14">
+      <b class="fs-18">{{ raised_amount }}</b>
+
+      {{#if goal_amount}}
+        of {{ goal_amount }}
+      {{/if}}
+    </div>
+    <div class="ContributorsCount text-center">
+      {{ raised_by_message }}
+    </div>
+    {{#if goal_reached_in_percent}}
+      <div class="donateCount">
+        <span>{{ goal_reached_in_percent }}%</span>
+        <div style="width: {{ goal_reached_in_percent }}%"></div>
+      </div>
+    {{/if}}
+  {{/if}}
+  {{{ about_campaign_info }}}
+</div>
+
+<div id="section-with-options-and-form" class="donationsContainer" style="padding-left: 10px; {{#if can_make_donations}}display: block{{else}}display: none{{/if}}">
+  <div class="donations_wrapper">
+    <div class="clear">
+      <div class="margin-bottom-10">
+        <label>
+          <input name="donation_type" type="radio" value="{{first_fixed_donation_option}}">
+          ${{first_fixed_donation_option}}
+        </label>
+      </div>
+      <div class="margin-bottom-10">
+        <label>
+          <input name="donation_type" type="radio" value="{{second_fixed_donation_option}}">
+          ${{second_fixed_donation_option}}
+        </label>
+      </div>
+      <div class="margin-bottom-10">
+        <label>
+          <input name="donation_type" type="radio" value="{{third_fixed_donation_option}}">
+          ${{third_fixed_donation_option}}
+        </label>
+      </div>
+      <div class="margin-bottom-10">
+        <span>
+          <input name="donation_type" type="radio" value="custom">
+          <span>
+            <input class="donation-type-Another-amount" name="custom" placeholder="Another amount" type="number">
+          </span>
+        </span>
+      </div>
+      <form action="{{form_action_attribute_value}}" class="paypal-button2" method="post" target="_blank">
+        <div class="hide" id="errorBox"></div>
+        <input name="amount" type="hidden" value="{{first_fixed_donation_option}}">
+        <input name="button" type="hidden" value="donate">
+        <input name="notify_url" type="hidden" value="{{success_ipn_callback_url}}">
+        <input name="currency_code" type="hidden" value="USD">
+        <input name="item_name" type="hidden" value="{{paypal_item_name}}">
+        <input name="item_number" type="hidden" value="{{paypal_item_number}}">
+        <input name="quantity" type="hidden" value="1">
+        <input name="type" type="hidden" value="button">
+        <input name="env" type="hidden" value="{{env}}">
+        <input name="cmd" type="hidden" value="_donations">
+        <input name="business" type="hidden" value="{{business}}">
+        <input name="bn" type="hidden" value="JavaScriptButton_donate">
+      </form>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <input class="paypal-button full-width mainButton" type="button" value="{{donate_title_as_singular}}">
+      </div>
+    </div>
+  </div> <!--closes .donations_wrapper -->
+</div>
+
+<div class="ContributorsList">
+  <div class="ContributorsList-h fs-16">
+    Contributors
+  </div>
+  <div class="ContributorsList-b">
+    {{#each contributors}}
+      <div class="div">
+        <div class="pull-right">{{this.amount}}</div>
+        <span>{{this.name}}</span>
+      </div>
+    {{/each}}
+  </div>
+</div>
+<!--
+<div class="tools" style="margin-left; 4px; padding-top: 6px; float: right !important; display: none">
+  <a class="action" style="cursor: pointer" title="Make *Raised so far* amount hidden for participants">Hide counter</a>
+</div>
+-->

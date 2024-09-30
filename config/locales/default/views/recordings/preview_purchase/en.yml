@@ -1,0 +1,19 @@
+en:
+  views:
+    recordings:
+      preview_purchase:
+        session_info: Session Info
+        price: Price
+        discount: Discount
+        tax: Tax
+        total_amount: Total amount
+        payment_method: Payment Method
+        credit_card: Credit Card
+        payPal_logo: PayPal Logo
+        system_credit: System Credit
+        submit_payment: Submit Payment
+        add_card: ADD CARD
+        name_on_card: Name on Card
+        country: Country
+        zip_code: Zip Code
+        processing: Processing

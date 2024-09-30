@@ -1,0 +1,38 @@
+%p Hello, #{@user.public_display_name},
+
+- if @booking.user == @user
+  %p This is a friendly reminder that your scheduled session on #{@booking.session.channel.title} with #{@booking.session.organizer.public_display_name} is happening tomorrow! We want to ensure that you don't miss out on this exciting opportunity.
+- else
+  %p This is a friendly reminder that your scheduled session on #{@booking.session.channel.title} with #{@booking.user.public_display_name} is happening tomorrow!
+
+%p Session Details:
+%p Date: #{@booking.session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p (timezone %Z)')}
+%p Duration: #{pluralize(@booking.session.duration, 'minute')}
+
+%p
+  Please mark your calendar and join the session promptly at the scheduled start time.
+  We've included a direct links to the session page for your convenience:
+  %br/
+  %a{href: @booking.session.absolute_path} Link to Session page
+
+%p To access your session and prepare for an enriching experience, make sure to visit your dashboard:
+%p
+  - if @booking.user == @user
+    %a{href: sessions_participates_dashboard_url} Link to Dashboard/Participate
+  - else
+    %a{href: spa_dashboard_booking_index_url} Link to Dashboard/Booking
+
+- if @booking.user == @user
+  %p We hope you're looking forward to this incredible session as much as we are. It's a fantastic opportunity to connect with #{@booking.session.organizer.public_display_name} and gain valuable insights.
+
+%p If you have any questions or require further assistance, feel free to contact our support team. We're here to ensure your experience is exceptional.
+
+- if @booking.user == @user
+  %p Thank you for choosing our platform to connect with our amazing creators. We can't wait to see you tomorrow!
+- else
+  %p Thank you for choosing our platform, we can't wait to see you tomorrow!
+
+%p
+  Best regards,
+  %br/
+  #{Rails.application.credentials.global[:service_name].capitalize} Team

@@ -1,0 +1,7 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  <%= simple_format I18n.t('mailer.channel_approved.body', channel_link: %(<a href="#{@channel.absolute_path}">#{@channel.title}</a>)) %>
+</p>

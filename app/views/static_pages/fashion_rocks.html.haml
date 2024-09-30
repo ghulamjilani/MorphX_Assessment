@@ -1,0 +1,958 @@
+!!!
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: :en, xmlns: 'http://www.w3.org/1999/xhtml', 'xmlns:fb': 'http://ogp.me/ns/fb#', prefix: 'og: http://ogp.me/ns#'}
+  / <![endif]
+  %head
+    // ServerTime should be first place
+    :javascript
+      (function(){
+        window.serverTime = new Date(#{(Time.now.to_f*1000).round});
+        window.serverTimeToI = #{Time.now.to_i};
+        window.environment = '#{ Rails.env }';
+        window.envHOST = '#{ENV['HOST']}';
+       })();
+    %title= page_title
+    = csrf_meta_tags
+    %meta{charset: 'utf-8'}/
+    %meta{content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name: 'viewport'}
+    %meta{name: 'google-site-verification', content: "#{ENV['GOOGLE_SITE_VERIFY']}"}
+
+    %meta{content: Rails.application.credentials.global[:host], name: 'author'}
+    %link{href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap',  rel: :stylesheet}
+
+    = yield(:additional_meta_tags)
+
+    = stylesheet_link_tag 'application', media: 'all'
+    %link{rel:'stylesheet', href:'/demo/fashion_rocks/core.css'}
+    = favicon_link_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png", rel: 'shortcut icon'
+
+  %body.home-index.home.header-top{class: "#{enhanced_body_class} #{mobile_Check}"}
+
+    .header.responsive.fixed-top
+      .navbar.navbar-default{:role => "navigation"}
+        / Brand and toggle get grouped for better mobile display
+        .nav-wrapper
+          %a.closeMobileNav{:href => "#", :style => "display: none"}
+            %i.VideoClientIcon-cross
+          %ul.nav.navbar-nav.navbar-left
+            %li.nav-links.hideForMobile
+              %a.LogoWrapp{:href => "/static_pages/unitedmasters"}
+                %img#logo-header.img-responsive{:alt => Rails.application.credentials.global[:service_name], :src => "/demo/fashion_rocks/logo.png"}/
+            %li.hidden-xs-i.hideForMobile.headerBtns.vertical-baseline
+              %a{href:'https://unite.live/unitedmasters/um-events-248', target:"_blank"}
+                Events
+            %li.hidden-xs-i.hideForMobile.headerBtns.vertical-baseline
+              %a{href:'https://unite.live/unitedmasters/um-music?rord=new', target:"_blank"}
+                Music
+            %li.hidden-xs-i.hideForMobile.headerBtns.vertical-baseline
+              %a{href:'https://unite.live/unitedmasters/um-featured-10', target:"_blank"}
+                Features
+            %li.hidden-xs-i.hideForMobile.headerBtns.vertical-baseline
+              %a{href:'https://unite.live/unitedmasters/um-podcasts-776', target:"_blank"}
+                Podcasts
+            %li.hidden-xs-i.hideForMobile.headerBtns.vertical-baseline
+              %a{href:'https://unite.live/unitedmasters/um-new', target:"_blank"}
+                New on UnitedMasters
+            %li.hidden-xs-i.hideForMobile.headerBtns.vertical-baseline
+              %a.text-color-red{href:'#'}
+                LIVE NOW
+
+    .unobtrusive-flash-container
+      .site-overlay
+    .main-content#container
+      .container
+        .slider-inner
+          .slider-inner-wrapp
+            .sl1
+              .sl__bg
+                -#%img{src:'/demo/fashion_rocks/baner/banner.jpg'}
+                %video{autoplay:'autoplay', muted:'muted', loop:'loop'}
+                  %source{type:'video/mp4', src:'/demo/fashion_rocks/baner/v1.mp4'}
+              .sl__cover
+                %svg.knockout-text-container{:height => "100%", :width => "100%"}
+                  %rect.knockout-text-bg{:fill => "#000", "fill-opacity" => "1", :height => "100%", :mask => "url(#knockout-text)", :width => "100%", :x => "0", :y => "0"}
+                  %mask#knockout-text
+                    %rect{:fill => "#fff", :height => "100%", :width => "100%", :x => "0", :y => "0"}
+                    %text.nbw.active{:fill => "#000", "text-anchor" => "middle", :x => "50%", :y => "90%"} FSHN
+            .sl2
+            .sl3
+            .sl4
+
+        #sessions
+          .LiveSessionsSection
+            .container
+              %h3.title
+                Live Sessions
+              .row.padding-left-20.padding-right-20
+                .col-md-12
+                  .TileSliderWrapp.owlSlider
+                    .spinnerSlider
+                      .bounceS1
+                      .bounceS2
+                      .bounceS3
+                    .TileSlider.owl-carousel
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/UM SelectCon2020.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-music/01-oct-08-00-unitedmasters-select-con', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              12 Hr 30 Min
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-music/01-oct-08-00-unitedmasters-select-con', target:"_blank"}
+                            UnitedMasters Select Con
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/rita-ora', target:"_blank"}
+                            BY STEVE STOUTE
+                          %div
+                            .ScheduledDate  Scheduled: Mar. 29, 6:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/Tobe Nwigwe - The Ivory Tour Live.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-featured-10/02-oct-09-00-tobe-nwinwe-release-houston-tribute', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              24 Hr 30 Min
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-featured-10/02-oct-09-00-tobe-nwinwe-release-houston-tribute', target:"_blank"}
+                            Tobe Nwinwe Release Houston Tribute
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/russell-faibisch', target:"_blank"}
+                            BY TOBE NWINWE
+                          %div
+                            .ScheduledDate  Scheduled: Mar. 30, 6:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/TikTok Platform Panel Discussion Session.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-featured-10/03-oct-09-00-platform-explained-tiktok', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              40 Days
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-featured-10/03-oct-09-00-platform-explained-tiktok', target:"_blank"}
+                            Platform Explained: TikTok
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            BY COREY SHERIDAN
+                          %div
+                            .ScheduledDate  Scheduled: Apr. 12, 4:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/Steve Stoute _ Angelica Nwandu Entrepreneurship Tips Session.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-events-248/04-oct-09-00-a-conversation-with-steve-stoute', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              40 Days
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-events-248/04-oct-09-00-a-conversation-with-steve-stoute', target:"_blank"}
+                            A conversation with Steve Stoute
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            BY STEVE STOUTE
+                          %div
+                            .ScheduledDate  Scheduled: Apr. 12, 4:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/Know the Deal Panel Discussion Session.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-events-248/07-oct-09-00-panel-discussion-know-the-deal', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              12 Hr 30 Min
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-events-248/07-oct-09-00-panel-discussion-know-the-deal', target:"_blank"}
+                            PANEL DISCUSSION - Know the Deal
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/russell-faibisch', target:"_blank"}
+                            BY KRISTINA SALEN
+                          %div
+                            .ScheduledDate  Scheduled: Mar. 29, 6:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/BeatClub Introducing Panel Discussion Session.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-music/08-oct-09-00-introducing-beatclub' , target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          .sessionStatus.sessionStatus-red.started
+                            %span Live
+                            .liveViewers
+                              %i.VideoClientIcon-Views
+                              82
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-music/08-oct-09-00-introducing-beatclub', target:"_blank"}
+                            Introducing: BeatClub
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            BY NLE CHOPPA
+                          %div
+                            .ScheduledDate  Started: 4:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/Artist Management Panel Discussion Session.jpg'}
+                          %a.tile_link{target:"_blank", href:'https://unite.live/unitedmasters/um-events-248/12-oct-09-00-artist-management-from-the-ground-up'}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{target:"_blank",  href:'https://unite.live/unitedmasters/um-events-248/12-oct-09-00-artist-management-from-the-ground-up'}
+                            ARTIST MANAGEMENT: From the Ground UP
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            BY MAISHA LEEK
+                          %div
+                            .ScheduledDate  Started: 4:00 PM
+          .RecentSessionsSection
+            .container
+              %h3.title
+                SPOTLIGHT
+                %span.SubHeader Missed out on a great session? Relive it here.
+              .col-md-12
+                .TileSliderWrapp.owlSlider
+                  .spinnerSlider
+                    .bounceS1
+                    .bounceS2
+                    .bounceS3
+                  .TileSlider.owl-carousel
+                    %section.tile-cake.session-tile
+                      .tile-img
+                        .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/Holywatr - Hammer (Audio).mp4_snapshot_00.00.148.jpg'}
+                        %a.tile_link{href:'https://unite.live/unitedmasters/um-featured-10/25-sep-10-33-holywatr-hammer-audio?video_id=12320', target:"_blank"}
+                          %i.VideoClientIcon-movie-player-play-button
+                        .sessionStatus Replay
+                        %a.social-sharing{href:'#'}
+                          %i.VideoClientIcon-share-mk4
+                        -#.sessionCost
+                        -#  %i.VideoClientIcon-dollar-currency-symbol
+                      .tile-body
+                        %a.tile-name{href:'https://unite.live/unitedmasters/um-featured-10/25-sep-10-33-holywatr-hammer-audio?video_id=12320', target:"_blank"}
+                          Holywatr - Hammer (NEW RELEASE)
+                        %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                          BY UNITEDMASTERS
+                        .padding-top-10.fs-14.star_ratingWrapper
+                          %div.display-inline-block.vertical-midle
+                            %ul.starRating.clearfix
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-star-emptyF
+                          .display-inline-block.vertical-midle.margin-right-10 (12)
+                          .display-inline-block.vertical-midle
+                            .participants.text-ellipsis.display-inline-block.vertical-midle
+                              %i.VideoClientIcon-Views.vertical-sub.fs-16
+                              8
+                        %div
+                          .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+                    %section.tile-cake.session-tile
+                      .tile-img
+                        .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/NikkiEra.jpg'}
+                        %a.tile_link{href:'https://unite.live/unitedmasters/um-featured-10/25-sep-09-53-unitedmasters-live-session?video_id=12319', target:"_blank"}
+                          %i.VideoClientIcon-movie-player-play-button
+                        .sessionStatus Replay
+                        %a.social-sharing{href:'#'}
+                          %i.VideoClientIcon-share-mk4
+                        -#.sessionCost
+                        -#  %i.VideoClientIcon-dollar-currency-symbol
+                      .tile-body
+                        %a.tile-name{href:'https://unite.live/unitedmasters/um-featured-10/25-sep-09-53-unitedmasters-live-session?video_id=12319', target:"_blank"}
+                          Nikki Era - Heaven
+                        %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                          BY UNITEDMASTERS
+                        .padding-top-10.fs-14.star_ratingWrapper
+                          %div.display-inline-block.vertical-midle
+                            %ul.starRating.clearfix
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-star-emptyF
+                          .display-inline-block.vertical-midle.margin-right-10 (12)
+                          .display-inline-block.vertical-midle
+                            .participants.text-ellipsis.display-inline-block.vertical-midle
+                              %i.VideoClientIcon-Views.vertical-sub.fs-16
+                              8
+                        %div
+                          .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+                    %section.tile-cake.session-tile
+                      .tile-img
+                        .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/SWANG - My Bii (feat. Asian Doll) [Audio].mp4_snapshot_00.00.167.jpg'}
+                        %a.tile_link{href:'https://unite.live/unitedmasters/um-featured-10/25-sep-09-46-unitedmasters-live-session?video_id=12318', target:"_blank"}
+                          %i.VideoClientIcon-movie-player-play-button
+                        .sessionStatus Replay
+                        %a.social-sharing{href:'#'}
+                          %i.VideoClientIcon-share-mk4
+                        -#.sessionCost
+                        -#  %i.VideoClientIcon-dollar-currency-symbol
+                      .tile-body
+                        %a.tile-name{href:'https://unite.live/unitedmasters/um-featured-10/25-sep-09-46-unitedmasters-live-session?video_id=12318', target:"_blank"}
+                          SWANG - My Bii (feat. Asian Doll)
+                        %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                          BY UNITEDMASTERS
+                        .padding-top-10.fs-14.star_ratingWrapper
+                          %div.display-inline-block.vertical-midle
+                            %ul.starRating.clearfix
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-star-emptyF
+                          .display-inline-block.vertical-midle.margin-right-10 (12)
+                          .display-inline-block.vertical-midle
+                            .participants.text-ellipsis.display-inline-block.vertical-midle
+                              %i.VideoClientIcon-Views.vertical-sub.fs-16
+                              8
+                        %div
+                          .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+                    %section.tile-cake.session-tile
+                      .tile-img
+                        .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/YSB Tril .jpg'}
+                        %a.tile_link{href:'https://unite.live/unitedmasters/um-featured-10/25-sep-08-29-ysb-tril-do-the-most-new-release?video_id=12314'}
+                          %i.VideoClientIcon-movie-player-play-button
+                        .sessionStatus Replay
+                        %a.social-sharing{href:'#'}
+                          %i.VideoClientIcon-share-mk4
+                        .sessionCost
+                          %i.VideoClientIcon-dollar-currency-symbol
+                      .tile-body
+                        %a.tile-name{href:'https://unite.live/unitedmasters/um-featured-10/25-sep-08-29-ysb-tril-do-the-most-new-release?video_id=12314'}
+                          YSB Tril - Do The Most
+                        %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                          BY UNITEDMASTERS
+                        .padding-top-10.fs-14.star_ratingWrapper
+                          %div.display-inline-block.vertical-midle
+                            %ul.starRating.clearfix
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-star-emptyF
+                          .display-inline-block.vertical-midle.margin-right-10 (12)
+                          .display-inline-block.vertical-midle
+                            .participants.text-ellipsis.display-inline-block.vertical-midle
+                              %i.VideoClientIcon-Views.vertical-sub.fs-16
+                              8
+                        %div
+                          .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+                    %section.tile-cake.session-tile
+                      .tile-img
+                        .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/r1-min.jpg'}
+                        %a.tile_link{href:'#'}
+                          %i.VideoClientIcon-movie-player-play-button
+                        .sessionStatus Replay
+                        %a.social-sharing{href:'#'}
+                          %i.VideoClientIcon-share-mk4
+                        .sessionCost
+                          %i.VideoClientIcon-dollar-currency-symbol
+                      .tile-body
+                        %a.tile-name{href:'#'}
+                          Sed posuere consectetur est at lobortis.
+                        %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                          BY UNITEDMASTERS
+                        .padding-top-10.fs-14.star_ratingWrapper
+                          %div.display-inline-block.vertical-midle
+                            %ul.starRating.clearfix
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-starF
+                              %li
+                                %i.VideoClientIcon-star-emptyF
+                          .display-inline-block.vertical-midle.margin-right-10 (12)
+                          .display-inline-block.vertical-midle
+                            .participants.text-ellipsis.display-inline-block.vertical-midle
+                              %i.VideoClientIcon-Views.vertical-sub.fs-16
+                              8
+                        %div
+                          .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+              -#.col-md-12
+              -#  .TileSliderWrapp.owlSlider
+              -#    .spinnerSlider
+              -#      .bounceS1
+              -#      .bounceS2
+              -#      .bounceS3
+              -#    .TileSlider.owl-carousel
+              -#      %section.tile-cake.session-tile
+              -#        .tile-img
+              -#          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/v_2_1.jpg'}
+              -#          %a.tile_link{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-events/02-mar-00-00-session-2?video_id=9146', target:"_blank"}
+              -#            %i.VideoClientIcon-movie-player-play-button
+              -#          .sessionStatus Replay
+              -#          %a.social-sharing{href:'#'}
+              -#            %i.VideoClientIcon-share-mk4
+              -#          .sessionCost
+              -#            %i.VideoClientIcon-dollar-currency-symbol
+              -#        .tile-body
+              -#          %a.tile-name{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-events/02-mar-00-00-session-2?video_id=9146'}
+              -#            Bruno Mars Versace On The Floor
+              -#          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+              -#            BY UNITEDMASTERS
+              -#          .padding-top-10.fs-14.star_ratingWrapper
+              -#            %div.display-inline-block.vertical-midle
+              -#              %ul.starRating.clearfix
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-star-emptyF
+              -#            .display-inline-block.vertical-midle.margin-right-10 (12)
+              -#            .display-inline-block.vertical-midle
+              -#              .participants.text-ellipsis.display-inline-block.vertical-midle
+              -#                %i.VideoClientIcon-Views.vertical-sub.fs-16
+              -#                8
+              -#          %div
+              -#            .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+              -#      %section.tile-cake.session-tile
+              -#        .tile-img
+              -#          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/r8-min.jpg'}
+              -#          %a.tile_link{href:'#'}
+              -#            %i.VideoClientIcon-movie-player-play-button
+              -#          .sessionStatus Replay
+              -#          %a.social-sharing{href:'#'}
+              -#            %i.VideoClientIcon-share-mk4
+              -#          .sessionCost
+              -#            %i.VideoClientIcon-dollar-currency-symbol
+              -#        .tile-body
+              -#          %a.tile-name{href:'#'}
+              -#            Belanciaga Sprint Summer 2019
+              -#          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+              -#            BY UNITEDMASTERS
+              -#          .padding-top-10.fs-14.star_ratingWrapper
+              -#            %div.display-inline-block.vertical-midle
+              -#              %ul.starRating.clearfix
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-star-emptyF
+              -#            .display-inline-block.vertical-midle.margin-right-10 (12)
+              -#            .display-inline-block.vertical-midle
+              -#              .participants.text-ellipsis.display-inline-block.vertical-midle
+              -#                %i.VideoClientIcon-Views.vertical-sub.fs-16
+              -#                8
+              -#          %div
+              -#            .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+              -#      %section.tile-cake.session-tile
+              -#        .tile-img
+              -#          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/v3-min.jpg'}
+              -#          %a.tile_link{target:"_blank", href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-fashion/14-mar-19-49-victorias-secret-sprint-summer-2019?video_id=9258'}
+              -#            %i.VideoClientIcon-movie-player-play-button
+              -#          .sessionStatus Replay
+              -#          %a.social-sharing{href:'#'}
+              -#            %i.VideoClientIcon-share-mk4
+              -#          .sessionCost
+              -#            %i.VideoClientIcon-dollar-currency-symbol
+              -#        .tile-body
+              -#          %a.tile-name{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-fashion/14-mar-19-49-victorias-secret-sprint-summer-2019?video_id=9258', target:"_blank"}
+              -#            Victorias Secret Sprint Summer 2019
+              -#          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+              -#            BY UNITEDMASTERS
+              -#          .padding-top-10.fs-14.star_ratingWrapper
+              -#            %div.display-inline-block.vertical-midle
+              -#              %ul.starRating.clearfix
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-star-emptyF
+              -#            .display-inline-block.vertical-midle.margin-right-10 (12)
+              -#            .display-inline-block.vertical-midle
+              -#              .participants.text-ellipsis.display-inline-block.vertical-midle
+              -#                %i.VideoClientIcon-Views.vertical-sub.fs-16
+              -#                8
+              -#          %div
+              -#            .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+              -#      %section.tile-cake.session-tile
+              -#        .tile-img
+              -#          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/r6-min.jpg'}
+              -#          %a.tile_link{href:'#'}
+              -#            %i.VideoClientIcon-movie-player-play-button
+              -#          .sessionStatus Replay
+              -#          %a.social-sharing{href:'#'}
+              -#            %i.VideoClientIcon-share-mk4
+              -#          .sessionCost
+              -#            %i.VideoClientIcon-dollar-currency-symbol
+              -#        .tile-body
+              -#          %a.tile-name{href:'#'}
+              -#            FASHION ROCKS: MUSIC & STYLE WITH LADYHOOD
+              -#          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+              -#            BY UNITEDMASTERS
+              -#          .padding-top-10.fs-14.star_ratingWrapper
+              -#            %div.display-inline-block.vertical-midle
+              -#              %ul.starRating.clearfix
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-star-emptyF
+              -#            .display-inline-block.vertical-midle.margin-right-10 (12)
+              -#            .display-inline-block.vertical-midle
+              -#              .participants.text-ellipsis.display-inline-block.vertical-midle
+              -#                %i.VideoClientIcon-Views.vertical-sub.fs-16
+              -#                8
+              -#          %div
+              -#            .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+              -#      %section.tile-cake.session-tile
+              -#        .tile-img
+              -#          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/r7-min.jpg'}
+              -#          %a.tile_link{href:'#'}
+              -#            %i.VideoClientIcon-movie-player-play-button
+              -#          .sessionStatus Replay
+              -#          %a.social-sharing{href:'#'}
+              -#            %i.VideoClientIcon-share-mk4
+              -#          .sessionCost
+              -#            %i.VideoClientIcon-dollar-currency-symbol
+              -#        .tile-body
+              -#          %a.tile-name{href:'#'}
+              -#            Fashion Rocks First Time In Asia
+              -#          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+              -#            BY UNITEDMASTERS
+              -#          .padding-top-10.fs-14.star_ratingWrapper
+              -#            %div.display-inline-block.vertical-midle
+              -#              %ul.starRating.clearfix
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-star-emptyF
+              -#            .display-inline-block.vertical-midle.margin-right-10 (12)
+              -#            .display-inline-block.vertical-midle
+              -#              .participants.text-ellipsis.display-inline-block.vertical-midle
+              -#                %i.VideoClientIcon-Views.vertical-sub.fs-16
+              -#                8
+              -#          %div
+              -#            .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+              -#      %section.tile-cake.session-tile
+              -#        .tile-img
+              -#          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/r1-min.jpg'}
+              -#          %a.tile_link{href:'#'}
+              -#            %i.VideoClientIcon-movie-player-play-button
+              -#          .sessionStatus Replay
+              -#          %a.social-sharing{href:'#'}
+              -#            %i.VideoClientIcon-share-mk4
+              -#          .sessionCost
+              -#            %i.VideoClientIcon-dollar-currency-symbol
+              -#        .tile-body
+              -#          %a.tile-name{href:'#'}
+              -#            Sed posuere consectetur est at lobortis.
+              -#          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+              -#            BY UNITEDMASTERS
+              -#          .padding-top-10.fs-14.star_ratingWrapper
+              -#            %div.display-inline-block.vertical-midle
+              -#              %ul.starRating.clearfix
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-starF
+              -#                %li
+              -#                  %i.VideoClientIcon-star-emptyF
+              -#            .display-inline-block.vertical-midle.margin-right-10 (12)
+              -#            .display-inline-block.vertical-midle
+              -#              .participants.text-ellipsis.display-inline-block.vertical-midle
+              -#                %i.VideoClientIcon-Views.vertical-sub.fs-16
+              -#                8
+              -#          %div
+              -#            .ScheduledDate  Streamed: Mar. 8, 12:00 PM
+          .LiveSessionsSection
+            .container
+              %h3.title
+                Events
+              .row.padding-left-20.padding-right-20
+                .col-md-12
+                  .TileSliderWrapp.owlSlider
+                    .spinnerSlider
+                      .bounceS1
+                      .bounceS2
+                      .bounceS3
+                    .TileSlider.owl-carousel
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/NBA 2K21.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-events-248?recording_id=459', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              Events
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-events-248?recording_id=459', target:"_blank"}
+                            Featuring artists in NBA 2K21
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/rita-ora', target:"_blank"}
+                            BY UNITEDMASTERS
+                          %div
+                            .ScheduledDate  Concert Date: Mar. 29, 6:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/selectcon.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-events-248/22-oct-15-00-unitedmasters-selectcon', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              Events
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-events-248/22-oct-15-00-unitedmasters-selectcon', target:"_blank"}
+                            UnitedMasters SelectCon
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/russell-faibisch', target:"_blank"}
+                            BY UNITEDMASTERS
+                          %div
+                            .ScheduledDate  Concert Date: Mar. 30, 6:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/NBA 2K20.png'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-events-248?recording_id=459', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              Events
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-events-248?recording_id=459', target:"_blank"}
+                            Featuring music in NBA 2K20
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            BY UNITEDMASTERS
+                          %div
+                            .ScheduledDate  Concert Date: Apr. 12, 4:00 PM
+                      %section.tile-cake.session-tile
+                        .tile-img
+                          .tile-imgContainer.owl-lazy{alt: '', 'data-src': '/demo/fashion_rocks/tileBG/NFL.jpg'}
+                          %a.tile_link{href:'https://unite.live/unitedmasters/um-events-248?recording_id=462', target:"_blank"}
+                          %a.social-sharing{href:'#'}
+                            %i.VideoClientIcon-share-mk4
+                          %a.timeCount.timer{href:'#'}
+                            %span.time-to-start
+                              Events
+                          .sessionCost
+                            %i.VideoClientIcon-dollar-currency-symbol
+                        .tile-body
+                          %a.tile-name{href:'https://unite.live/unitedmasters/um-events-248?recording_id=462', target:"_blank"}
+                            Soundtrack placement in NFL
+                          %a.tile-owner.text-ellipsis{href:'https://unite.live/russell-faibisch', target:"_blank"}
+                            BY UNITEDMASTERS
+                          %div
+                            .ScheduledDate  Concert Date: Mar. 29, 6:00 PM
+
+          .ChannelsSection
+            .container
+              %h3.title
+                Channels
+                %span.SubHeader Explore Original Music, Fashion & Brand Content
+              .row.padding-left-20.padding-right-20
+                .col-md-12
+                  .TileSliderWrapp.owlSlider
+                    .spinnerSlider
+                      .bounceS1
+                      .bounceS2
+                      .bounceS3
+                    .TileSlider.owl-carousel.ChannelTileSlider
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c3-min.jpg'}
+                          %a.tile_link{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-events', target:"_blank"}
+                          %a.channelName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-events', target:"_blank"} UM Events
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c2-min.jpg'}
+                          %a.tile_link{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-music', target:"_blank"}
+                          %a.channelName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-music', target:"_blank"} UM Music
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c6-min.jpg'}
+                          %a.tile_link{href: '#'}
+                          %a.channelName.text-ellipsis{href: '#'} UM Podcasts
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c4-min.jpg'}
+                          %a.tile_link{href: '#'}
+                          %a.channelName.text-ellipsis{href: '#'} UM New
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c2-min.jpg'}
+                          %a.tile_link{href: '#'}
+                          %a.channelName.text-ellipsis{href: '#'} UM Featured
+                .col-md-12
+                  .TileSliderWrapp.owlSlider
+                    .spinnerSlider
+                      .bounceS1
+                      .bounceS2
+                      .bounceS3
+                    .TileSlider.owl-carousel.ChannelTileSlider
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c1-min.jpg'}
+                          %a.tile_link{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-fashion', target:"_blank"}
+                          %a.channelName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-fashion', target:"_blank"} UM New
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c4-min.jpg'}
+                          %a.tile_link{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-shop', target:"_blank"}
+                          %a.channelName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-shop', target:"_blank"} UM Featured
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c5-min.jpg'}
+                          %a.tile_link{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-culture', target:"_blank"}
+                          %a.channelName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new/fr-culture', target:"_blank"} UM New
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c4-min.jpg'}
+                          %a.tile_link{href: '#'}
+                          %a.channelName.text-ellipsis{href: '#'} UM New
+                      %section.tile-cake.tile-cake-Channels
+                        .tile-img
+                          %a.channelTile-presenterName.text-ellipsis{href: 'https://unite.live/unitedmasters-721?sord=new&vord=new&rord=new', target:"_blank"}
+                            .avatarImg-SD{style: "background-image: url('/demo/fashion_rocks/company_logo.png')"}
+                            owned by UnitedMasters
+                          .tile-imgContainer.owl-lazy{'data-src': '/demo/fashion_rocks/tileBG/c2-min.jpg'}
+                          %a.tile_link{href: '#'}
+                          %a.channelName.text-ellipsis{href: '#'}  UM Featured
+
+          .CreatorsSection
+            .container
+              %h3.title
+                Connect
+                %span.SubHeader
+                  With Your Favourite Creators Channels
+              .col-md-12
+                .TileSliderWrapp.owlSlider
+                  .spinnerSlider
+                    .bounceS1
+                    .bounceS2
+                    .bounceS3
+                  .TileSlider.CreatorsTileSlider.owl-carousel
+                    %section.tile-cake.tile-cake-Creators
+                      .tile-img
+                        %a.tile-imgContainer.owl-lazy.display-block{href: 'https://unite.live/steve-stoute?vord=new', 'data-src': '/demo/fashion_rocks/tileBG/cr_3.png', target:"_blank"}
+                        %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/steve-stoute?vord=new', target:"_blank"} Steve Stoute
+                        .text-center
+                          %a.substrate{href: '#'}
+                          .text-center
+                            %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+
+                    %section.tile-cake.tile-cake-Creators
+                      .tile-img
+                        %a.tile-imgContainer.owl-lazy.display-block{href: 'https://unite.live/nle-choppa?rord=new', 'data-src': '/demo/fashion_rocks/tileBG/cr_1.png'}
+                        %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/nle-choppa?rord=new',} NLE Choppa
+                        .text-center
+                          %a.substrate{href: '#'}
+                          .text-center
+                            %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+                    %section.tile-cake.tile-cake-Creators
+                      .tile-img
+                        %a.tile-imgContainer.owl-lazy.display-block{href: 'https://unite.live/tobe-nwigwe', target:"_blank", 'data-src': '/demo/fashion_rocks/tileBG/cr_2.png'}
+                        %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/tobe-nwigwe', target:"_blank"} Tobe Nwigwe
+                        .text-center
+                          %a.substrate{href: '#'}
+                          .text-center
+                            %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+                    %section.tile-cake.tile-cake-Creators
+                      .tile-img
+                        %a.tile-imgContainer.owl-lazy.display-block{href: 'https://unite.live/kristina-salen?vord=new', 'data-src': '/demo/fashion_rocks/tileBG/cr_4.png'}
+                        %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/kristina-salen?vord=new'} Kristina Salen
+                        .text-center
+                          %a.substrate{href: '#'}
+                          .text-center
+                            %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+                    %section.tile-cake.tile-cake-Creators
+                      .tile-img
+                        %a.tile-imgContainer.owl-lazy.display-block{href: 'https://unite.live/katie_longmyer', 'data-src': '/demo/fashion_rocks/tileBG/cr_5.png'}
+                        %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/katie_longmyer'} Katie Longmyer
+                        .text-center
+                          %a.substrate{href: '#'}
+                          .text-center
+                            %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+                    %section.tile-cake.tile-cake-Creators
+                      .tile-img
+                        %a.tile-imgContainer.owl-lazy.display-block{href: 'https://unite.live/maisha-leek?rord=new', 'data-src': '/demo/fashion_rocks/tileBG/cr_6.png'}
+                        %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/maisha-leek?rord=new'} Maisha Lee
+                        .text-center
+                          %a.substrate{href: '#'}
+                          .text-center
+                            %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+                    %section.tile-cake.tile-cake-Creators
+                      .tile-img
+                        %a.tile-imgContainer.owl-lazy.display-block{href: 'https://unite.live/corey-sheridan?vord=new', 'data-src': '/demo/fashion_rocks/tileBG/cr_7.png'}
+                        %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/corey-sheridan?vord=new'} Corey Sheridan
+                        .text-center
+                          %a.substrate{href: '#'}
+                          .text-center
+                            %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+          -#.VideosSection
+          -#  .container
+          -#    %h3.title
+          -#      Brands
+          -#      %span.SubHeader Connect with your favorite  Brands
+          -#    .row.padding-left-20.padding-right-20
+          -#      .TileSliderWrapp.owlSlider
+          -#        .spinnerSlider
+          -#          .bounceS1
+          -#          .bounceS2
+          -#          .bounceS3
+          -#        .TileSlider.owl-carousel.BrandsTileSlider
+          -#
+          -#          %section.tile-cake.tile-cake-Brands
+          -#            .tile-img
+          -#              .tile-imgContainer.owl-lazy.display-block{'data-src': '/demo/fashion_rocks/tileBG/b1-min.jpg'}
+          -#              %a.tile_link{href: 'https://unite.live/chassidy-rimes/chloe', target:"_blank"}
+          -#              %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/chassidy-rimes/chloe', target:"_blank"} Cloe
+          -#              .text-center.followBtn_wrapp
+          -#                %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+          -#          %section.tile-cake.tile-cake-Brands
+          -#            .tile-img
+          -#              .tile-imgContainer.owl-lazy.display-block{'data-src': '/demo/fashion_rocks/tileBG/b2-min.jpg'}
+          -#              %a.tile_link{href: 'https://unite.live/senaida-harbert/gucci', target:"_blank"}
+          -#              %a.CreatorsName.text-ellipsis.display-block{href: 'https://unite.live/senaida-harbert/gucci', target:"_blank"} Gucci
+          -#              .text-center.followBtn_wrapp
+          -#                %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+          -#          %section.tile-cake.tile-cake-Brands
+          -#            .tile-img
+          -#              .tile-imgContainer.owl-lazy.display-block{'data-src': '/demo/fashion_rocks/tileBG/b_3.jpg'}
+          -#              %a.tile_link{href: '#'}
+          -#              %a.CreatorsName.text-ellipsis.display-block{href: '#'} Off White
+          -#              .text-center.followBtn_wrapp
+          -#                %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+          -#          %section.tile-cake.tile-cake-Brands
+          -#            .tile-img
+          -#              .tile-imgContainer.owl-lazy.display-block{'data-src': '/demo/fashion_rocks/tileBG/b_4.jpg'}
+          -#              %a.tile_link{href: '#'}
+          -#              %a.CreatorsName.text-ellipsis.display-block{href: '#'} Adidas
+          -#              .text-center.followBtn_wrapp
+          -#                %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+          -#          %section.tile-cake.tile-cake-Brands
+          -#            .tile-img
+          -#              .tile-imgContainer.owl-lazy.display-block{'data-src': '/demo/fashion_rocks/tileBG/b5-min.jpg'}
+          -#              %a.tile_link{href: '#'}
+          -#              %a.CreatorsName.text-ellipsis.display-block{href: '#'} Nike
+          -#              .text-center.followBtn_wrapp
+          -#                %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+          -#          %section.tile-cake.tile-cake-Brands
+          -#            .tile-img
+          -#              .tile-imgContainer.owl-lazy.display-block{'data-src': '/demo/fashion_rocks/tileBG/b6-min.jpg'}
+          -#              %a.tile_link{href: '#'}
+          -#              %a.CreatorsName.text-ellipsis.display-block{href: '#'} Versace
+          -#              .text-center.followBtn_wrapp
+          -#                %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+          -#          %section.tile-cake.tile-cake-Brands
+          -#            .tile-img
+          -#              .tile-imgContainer.owl-lazy.display-block{'data-src': '/demo/fashion_rocks/tileBG/b1-min.jpg'}
+          -#              %a.tile_link{href: '#'}
+          -#              %a.CreatorsName.text-ellipsis.display-block{href: '#'} brand name
+          -#              .text-center.followBtn_wrapp
+          -#                %a.btn.btn-s.margin-top-5.margin-bottom-5{href:'#'} Follow
+  %footer
+    .footerNav.clearfix
+      %h6 UnitedMasters © 2020 All Rights Reserved.
+  = include_gon(namespace: 'Immerss', camel_case: true, init: true) # should be included before application.js
+  = javascript_include_tag 'application'
+  :javascript
+    $(function () {
+      count = 0;
+      wordsArray = ["SHOP", "UNTD", "MSTRS", "VIDEO" ];
+      setInterval(function () {
+        count++;
+        $(".nbw").fadeOut(400, function () {
+          $(this).text(wordsArray[count % wordsArray.length]).fadeIn(400);
+        });
+      }, 3000);
+    });

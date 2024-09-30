@@ -1,0 +1,83 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="groupTitle clearfix">
+                Product Info
+                <a href="#" class="close_modal" data-dismiss="modal"></a>
+            </div>
+            <section>
+                <div class="product_info_form_container">
+                    <div class="row">
+                        <form class="new_product form_V2 padding-top-0" style="visibility: visible;">
+                            <input name="product[id]" type="hidden">
+                            <input name="product[product_image_attributes][remote_original_url]" type="hidden">
+                            <div class="col-md-4">
+                                <label class="product-image">
+                                    <span class="NoimgWrapp">
+                                        <input name="product[product_image_attributes][original]" class="inputfile hidden" type="file">
+                                        Image
+                                        <br>
+                                        (click to upload)
+                                    </span>
+                                    <img class="product_image display-block full-width" src="{{image_url}}">
+                                </label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="state-clear input-block required">
+                                    <label>Product URL</label>
+                                    <input name="product[url]" value="{{url}}" type="text">
+                                    <div class="errorContainerWrapp"></div>
+                                </div>
+
+                                <div class="state-clear input-block required">
+                                    <label>Product Name</label>
+                                    <input name="product[title]" value="{{title}}" type="text">
+                                    <div class="errorContainerWrapp"></div>
+                                </div>
+
+                                <div class="input-block">
+                                    <label>Short Description</label>
+                                    <textarea name="product[short_description]" value="{{short_description}}" max-length="500" rows="5" placeholder="Max 500 characters for short description" data-autoresize=""></textarea>
+                                    <div class="counter_block">0/500</div>
+                                    <div class="errorContainerWrapp"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="input-block">
+                                            <label>Product Specs</label>
+                                            <input name="product[specifications]" value="{{specifications}}" max-length="255" placeholder="eg. Size: 4, 4.5, 5, 6.5" class="with_counter full-width fs-20 padding-left-10 padding-right-10" type="text">
+                                            <div class="counter_block">0/255</div>
+                                            <div class="errorContainerWrapp"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="input-block-custom">
+                                            <label>Price</label>
+                                            <div class="bg_blue">
+                                                <input name="product[price]" value="{{price}}" placeholder="$0.00" class="full-width text-color-white bg_blue priceInput fs-20 bordernone inlile-block vertical-midle" min="0" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-block">
+                                    <label>Long Description</label>
+                                    <textarea name="product[description]" max-length="5000" rows="5" placeholder="Max 5000 characters for product description" data-autoresize="">{{description}}</textarea>
+                                    <div class="counter_block">0/5000</div>
+                                    <div class="errorContainerWrapp"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="pull-right padding-right-15">
+                                <button class="save_product btn btn-m" type="button">Add Product</button>
+                                <button class="cancel btn btn-m" type="button">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

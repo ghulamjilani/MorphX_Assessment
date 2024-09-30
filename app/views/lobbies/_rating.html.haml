@@ -1,0 +1,143 @@
+%fieldset.inputs
+  = semantic_form_for(Comment.new, url: review_comment_path(@abstract_session.id), method: :post, remote: true) do |f|
+    .row
+      .col-md-12
+        %h4{style: "text-align: center"} Please rate your overall experience:
+
+    .row
+      .col-md-3
+      .col-md-3.col-xs-6{style: 'text-align: center'}
+        %h5.control-label
+          Presenter Performance
+          %abbr{title: "required"} *
+        .controls
+          = rating_with_tooltip_for(@abstract_session, Session::RateKeys::PRESENTER_PERFORMANCE, disable_after_rate: false, ignore_average_rating: true)
+
+      .col-md-3.col-xs-6{style: 'text-align: center'}
+        %h5.control-label
+          Quality of Content
+          %abbr{title: "required"} *
+        .controls
+          = rating_with_tooltip_for(@abstract_session, Session::RateKeys::QUALITY_OF_CONTENT, disable_after_rate: false, ignore_average_rating: true)
+
+    .row
+      .col-md-12
+        %h4.control-label Please enter comments here about your experience with the presenter:
+        .commentArea
+          = f.input :overall_experience_comment,
+                    required: true,
+                    input_html: comment_input_html_params,
+                    as:  :text,
+                    label: false,
+                    wrapper_html: {style: 'margin-bottom: 0px'}
+
+        %hr{style: 'margin-bottom: 10px'}
+
+    .row
+      .col-md-12
+        %h4{style: "text-align: center"}
+          Please rate your session:
+          %div
+            %small{style: 'color: #fff'}
+              The following will not affect overall presenter review rating
+
+    .row
+      .col-md-3
+      .col-md-3.col-xs-6{style: 'text-align: center'}
+        %h5.control-label
+          Video Quality
+        .controls
+          = rating_with_tooltip_for(@abstract_session, Session::RateKeys::VIDEO_QUALITY, disable_after_rate: false, ignore_average_rating: true)
+
+      .col-md-3.col-xs-6{style: 'text-align: center'}
+        %h5.control-label
+          Sound Quality
+        .controls
+          = rating_with_tooltip_for(@abstract_session, Session::RateKeys::SOUND_QUALITY, disable_after_rate: false, ignore_average_rating: true)
+
+    .row
+      .col-md-12
+        %h4.control-label Tell us more:
+        .commentArea
+          = f.input :technical_experience_comment,
+                    required: false,
+                    input_html: comment_input_html_params,
+                    as:  :text,
+                    label: false,
+                    wrapper_html: {style: 'margin-bottom: 0px'}
+
+        %p.margin-bottom-20{style: 'margin-top: 10px'}
+          = comment_submit_button(f)
+
+%script
+  :plain
+    $(function() {
+      $('#new_comment').bind('ajax:success', function(){ window.close();});
+
+      // no need to check :visible because it is hidden at first
+      var $stars = $('.star');
+      if ($stars.length == 0) {
+        throw new Error("$star container could not be fould");
+      }
+
+      $stars.each(function() {
+        var $star = this;
+
+        var $readonly = ($($star).attr('data-readonly') == 'true');
+        var $half     = ($($star).attr('data-enable-half') == 'true');
+        var $halfShow = ($($star).attr('data-half-show') == 'true');
+        var $single   = ($($star).attr('data-single') == 'true');
+        var $cancel   = ($($star).attr('data-cancel') == 'true');
+
+
+        var onclickFunc = function(score, evt) {
+          var target = this;
+          if (score == null) { score = 0; }
+          var data = {
+            score: score,
+            dimension: $(target).attr('data-dimension'),
+            session_id: $(target).attr('data-id'),
+            klass: $(this).attr('data-classname')
+          };
+
+          var request = $.ajax({url: '#{ Rails.application.class.routes.url_helpers.review_rate_path(@abstract_session.id) }',
+                                method: 'POST',
+                                dataType: 'script',
+                                data: data});
+          request.done(function(x1) {
+            if ($(target).attr('data-disable-after-rate') == 'true') {
+              $(target).raty('set', { readOnly: true, score: score });
+            }
+          });
+          request.error(function(x) {
+            alert('Something went wrong');
+          });
+        };
+
+        $($star).raty({
+          score: function() {
+            return $(this).attr('data-rating')
+          },
+          number: function() {
+            return $(this).attr('data-star-count')
+          },
+          half:        $half,
+          halfShow:    $halfShow,
+          single:      $single,
+          path:        $($star).attr('data-star-path'),
+          cancel:      $cancel,
+          cancelPlace: $($star).attr('data-cancel-place'),
+          cancelHint:  $($star).attr('data-cancel-hint'),
+          noRatedMsg:  $($star).attr('data-no-rated-message'),
+          round:       $($star).attr('data-round'),
+          space:       $($star).attr('data-space'),
+          target:      $($star).attr('data-target'),
+          targetText:  $($star).attr('data-target-text'),
+          targetType:  $($star).attr('data-target-type'),
+          targetFormat: $($star).attr('data-target-format'),
+          targetScoret: $($star).attr('data-target-score'),
+          readOnly: $readonly,
+          click: onclickFunc
+        });
+      });
+    });

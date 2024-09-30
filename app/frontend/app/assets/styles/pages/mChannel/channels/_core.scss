@@ -1,0 +1,177 @@
+.channel {
+  &__list {
+    @include media(reverso-phone) {
+      @include flex(flex, flex-start, center);
+      flex-wrap: wrap;
+    }
+    color: #A6A6A6;
+
+    &__wrapp {
+      color: #A6A6A6;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+
+    &__label {
+      padding-bottom: 6rem;
+
+      span {
+        font-weight: bold;
+        font-size: 4rem;
+        line-height: 150%;
+        background-color: rgba(148, 113, 107, 1);
+        background-image: linear-gradient(45deg, rgba(183, 152, 145, 1), rgba(148, 113, 107, 1));
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+      }
+    }
+
+    .subscriptionPlanCost {
+      color: var(--tp__active);
+    }
+  }
+
+  &__tile {
+    @include flex(flex, center);
+    flex-direction: column;
+    @include media(reverso-p-tablet) {
+      width: 100%;
+      margin: 0 0rem 3rem;
+    }
+    @include media(reverso-tablet) {
+      margin: 0 2rem 3rem;
+      width: calc(32% - 4rem);
+      &__single {
+        width: 75%;
+      }
+    }
+    @include media(tablet) {
+      margin: 0 auto 3rem;
+      width: 45%;
+    }
+    @include media(phone){
+      width: 100%;
+      .ChannelsTile{
+        height: auto;
+      }
+    }
+
+    &__wrapper {
+      width: 100%;
+    }
+
+    &__img {
+      &__title {
+        width: 100%;
+        white-space: normal;
+        padding: 0 .5rem;
+        padding-bottom: 1rem;
+        @include media(tablet) {
+          &:hover {
+            opacity: 1;
+          }
+        }
+        @include media(reverso-phone) {
+          @include text__ellipsis(2);
+        }
+        @include media(phone) {
+          font-size: 4vw;
+          line-height: 4vw;
+        }
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+
+      &__discover {
+        @include media(tablet) {
+          &:hover {
+            opacity: 1;
+          }
+        }
+        @include media(phone) {
+          margin-top: .5rem;
+        }
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+
+      border-radius: 2rem;
+      padding-bottom: 32.85%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      width: 100%;
+      height: 0;
+      position: relative;
+      font-weight: bold;
+      font-size: 2.8rem;
+      line-height: 130%;
+      color: #FAFAFA;
+      @include media(tablet-desktop) {
+        padding-bottom: 40%;
+      }
+      @include media(p-phone) {
+        padding-bottom: 50%;
+      }
+      @include media(phone) {
+        font-size: 1.4rem;
+      }
+
+      &:before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+        @include transition();
+      }
+
+      &:hover {
+        &:before {
+          -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+        }
+      }
+
+      @include media(tablet) {
+        &:hover {
+          &:before {
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+          }
+        }
+      }
+
+      & > div {
+        z-index: 9;
+        @include center(vh);
+        width: 100%;
+        padding: 1rem;
+        @include media(reverso-desktop) {
+          font-size: 1.6vw;
+        }
+        @include media(tablet-desktop) {
+          font-size: 1.6vw;
+        }
+      }
+
+      .cardMK2__chips__live {
+        top: 2.5rem;
+        padding: 1.5rem;
+      }
+    }
+  }
+}

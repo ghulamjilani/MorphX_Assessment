@@ -1,0 +1,60 @@
+{{#if isDropboxAuthenticated}}
+    <div class="control-group clearfix">
+      <label for="" class="control-label AddDBM-label">
+          Dropbox materials
+          <a href="#dropbox-materials-modal" role="button" class="btn btn-primary open-modal controls form-control AddDBM" data-toggle="modal">
+            <i class="VideoClientIcon-dropbox"></i>
+            Add
+          </a>
+      </label>
+    </div>
+
+    <div id="dropbox-materials-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>Your Dropbox files</h3>
+        </div>
+        <div class="modal-body">
+            <div class="unobtrusive-flash-container"></div>
+
+            <div class="select-all-cont">
+                <label>
+                    <span>Select all</span>
+                    <input type="checkbox" class="select-all">
+                </label>
+            </div>
+            <div class="clear"></div>
+            <div class="new-right my_dropbox_div">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Type</td>
+                        <td>Modified</td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <div class="new-right loading" style="display: none;"><p>Fetching your Dropbox files. Please wait.</p></div>
+                <div class="not-authenticated" style="display: none;">
+                    Looks like your dropbox account is unlinked. You have to link Dropbox account on <a href="/profile/edit_application">Account</a> page to use this feature.
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <a class="mainButton bigBtn close-modal" data-dismiss="modal">Done</a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{{else}}
+  {{#if dropboxAuthUrl}}
+      <div class="allow-dropbox-use">
+          Link your Dropbox <a href="{{dropboxAuthUrl}}">Account</a> to utilize this feature.
+      </div>
+  {{/if}}
+{{/if}}
+<div class="materials-preview">
+
+</div>

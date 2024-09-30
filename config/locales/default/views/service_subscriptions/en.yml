@@ -1,0 +1,5 @@
+en:
+  views:
+    service_subscriptions:
+      payment_modal:
+        buy_modal: "Buy %{service_name} Subscription %{name}"

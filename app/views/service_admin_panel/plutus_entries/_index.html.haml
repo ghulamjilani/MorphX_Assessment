@@ -1,0 +1,36 @@
+%table.index_table.index{border: "0", cellpadding: "0", cellspacing: "0"}
+  %tr
+    %th.nobg ID
+    %th Description
+    %th Debits
+    %th Credits
+    %th Date
+    %th
+  - @plutus_entries.each do |entry|
+    %tr{class: "#{cycle("even", "odd")}"}
+      %td= link_to(entry.id, service_admin_panel_plutus_entry_path(entry))
+      %td= h entry.description
+      %td
+      %td
+      %td= h entry.created_at
+      %td
+    - entry.debit_amounts.each do |debit_amount|
+      %tr{class: "#{cycle("odd", "odd")}"}
+        %td
+        %td
+          #{h "#{debit_amount.account.try( :name)}"}
+        %td= h debit_amount.amount
+        %td
+        %td
+        %td
+          = link_to 'Edit', edit_service_admin_panel_plutus_debit_amount_path(debit_amount)
+    - entry.credit_amounts.each do |credit_amount|
+      %tr{class: "#{cycle("odd", "odd")}"}
+        %td
+        %td
+          #{h "#{credit_amount.account.try( :name)}"}
+        %td
+        %td= h credit_amount.amount
+        %td
+        %td
+          = link_to 'Edit', edit_service_admin_panel_plutus_credit_amount_path(credit_amount)

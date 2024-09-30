@@ -1,0 +1,7 @@
+@import "mixins";
+#unite_embed{
+  @include EmbedCore();
+  @include EmbedIframeReset();
+  @include EmbedIframeVideo(100%);
+  //@include Covered();//revert if need for clientSide
+}

@@ -1,0 +1,36 @@
+en:
+  pricing_page:
+    modals:
+      payment_details: Payment Details
+      free: Free
+      day_trial: "-day Trial"
+      credit_card: Credit Card
+      cardholder_name: Cardholder Name*
+      country: Country*
+      zip_code: Zip Code*
+      you_wont_be_charged: You won’t be charged right now.
+      first_question: Will my card be charged immediately?
+      first_answer: The payment will be made after Free Trial period expires. The card will be charged on
+      second_question: Can I cancel my subscription any time?
+      second_answer: Yep, you can cancel your subscription in your Dashboard in Company management.
+      third_question: What’s included in Free Trial?
+      storage_space: Storage Space
+      channels: Channels
+      max_session_dur: Max Session Duration up to 45 minutes
+      note: Note
+      note_add: Some rate plan functionality is limited in the Free Trial (for example, inability to create sessions after trial ends, etc).
+      price: Price
+      tax: Tax
+      buy: Buy
+      complete_purchase: Complete Purchase
+      total_amount: Total amount
+      addition: "By making this purchase, you authorize to charge your credit, debit card and agree to our"
+      addition_part_2: write off funds from you, and agree to our
+      and: and
+      coupon_placeholder: Add promotion code
+      coupon: coupon
+      apply: Apply
+      savings: Savings
+      coupon_activated_text_repeating: You have applied a coupon that provides a %{discount} discount for %{duration_in_months} months, after this period you will be charged the full cost according to the purchased subscription.
+      coupon_activated_text_forever: You have applied a coupon that provides a %{discount} discount for all time.
+      coupon_activated_text_once: You have applied a coupon that provides a %{discount} discount, from the next payment you will be charged the full cost according to the purchased subscription.

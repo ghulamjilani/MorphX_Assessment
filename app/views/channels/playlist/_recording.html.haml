@@ -1,0 +1,15 @@
+.tile-cake-sidebarrr.recording-tile{data: {id: recording.id, type: :recording}, id: "player_recording_#{recording.id}"}
+  .tile-img
+    = link_to recording.relative_path do
+      .img{style: "background-image: url('#{recording.poster_url}')"}
+    - unless recording.purchase_price.to_i.zero?
+      %i.VideoClientIcon-dollar-currency-symbol
+    - if (current_user ? current_user.voted_as_when_voted_for(recording) : false)
+      %i.icon-heart
+  %a.tile-body.switch_recording{href: recording.relative_path}
+    .tile-name{rel: 'tipsy', title: recording.always_present_title}
+      = recording.title
+    .text-color-ultra-LightGrey
+      .participants
+        = recording.views_count
+        views

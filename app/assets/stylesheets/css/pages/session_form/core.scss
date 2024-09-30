@@ -1,0 +1,433 @@
+@import "../../../mixin";
+@import "main_sections/main_sections";
+//@import "right_sidebars/right_sidebars";
+@import "modals/modal";
+//@import "summary/summary";
+
+
+.formColor-light{
+  color: var(--tp__main);
+}
+.formColor-Dark{
+  color: $form_main-grey;
+}
+
+
+.session-form{
+  .main-content{
+    padding-bottom: 0;
+  }
+  .select2-container.styled-select_withCss{
+    min-width: 150px;
+    max-width: 100%;
+  }
+  .tagit{
+    background: transparent;
+    border:none;
+    .tagit-choice{
+      color: #678399;
+      background: #38c2f1;
+      border-color: #38c2f1;
+      line-height: 26px;
+      border-radius: 15px;
+      font-size: 15px;
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      white-space: nowrap;
+      max-width: 100%;
+      margin-bottom: 0;
+      font-weight: normal;
+      &:hover{
+        background: #38c2f1;
+      }
+      span{
+        color: #678399 !important;
+        background: transparent;
+      }
+      a.tagit-close{
+        color: #678399;
+        background: transparent;
+        top: 5px !important;
+        right: 0;
+        display: block;
+        width: 20px;
+        height: 20px;
+        &:before{
+          content: '\ea0f';
+          color: #678399;
+          font-size: 10px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 19;
+          font-family: 'VideoClientIcon';
+          text-shadow: none;
+          text-align: center;
+          width: 100%;
+          line-height: 20px;
+        }
+        .ui-icon-close{
+          display: none;
+        }
+      }
+    }
+    .tagit-new input{
+      background: transparent;
+      color: #678399;
+      font-size: 15px;
+      border-radius: 0;
+      line-height: 26px;
+      padding:  0 5px;
+      border-bottom:1px solid $font-color-main-light !important;
+    }
+  }
+  .state-clear:not(.event-focus) textarea{
+    background-image: none !important;
+  }
+  .checkbox.choice{
+    span{
+      color: var(--tp__main);
+    }
+  }
+  .videoSection{
+    background: var(--bg__label);
+    border-radius: 5px;
+    color: $font-colorWhite;
+    .videoBlock-text{
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top:50%;
+      width: max-content;
+      padding: 13px 15px;
+      transform: translate(-50%, -50%);
+      font-size: 15px;
+    }
+  }
+  .responsive-video{
+    margin: 4px 0;
+  }
+  .LivePreviewWrapp{
+    margin-bottom: 26px;
+    button.theo-live-control.vjs-control.vjs-button{
+      position: absolute;
+      top: -5em;
+      left: 1em;
+    }
+    .theo-settings-control-button, .theo-chromecast-button, .theo-airplay-button, .vjs-fullscreen-control{
+      display: none;
+    }
+    .start_stream_first{
+      font-size: 10px;
+      line-height: 10px;
+      span{
+        font-size: 12px;
+        padding: 24px 0 20px;
+        display: inline-block;
+        color: #fff;
+        width: 100%
+      }
+    }
+
+  }
+  //.modal-backdrop{
+  //  opacity: 0.9;
+  //  background: #f8f8f8;
+  //}
+  @include media(phone){
+    .mobileHeader .join-timer{
+      display: none !important;
+    }
+  }
+}
+
+
+.session_form{
+  color: #306690;
+}
+.addMembersACTIVE, .allBlur, body.session-form.modal-open:not(.rightPanelACTIVE){
+  .sc .sc-body, .header.responsive.fixed-top, footer{
+    filter:blur(4px);
+  }
+  //.addNewMember{
+  //  z-index: 9999999999;
+  //  position: relative;
+  //  background: $siteColorMain!important;
+  //  i{
+  //    color: #fff !important;
+  //  }
+  //}
+  //.addNewMemberWrapp{
+  //  color: #fff;
+  //}
+}
+
+.sc-wrapp{
+  height: 100%;
+  // background:  var(--bg__main);
+  color: var(--tp__main);
+  &.form_V2{
+    padding: 50px 0 120px 0;
+  }
+  &.form_V2 .input-block{
+    input:not([type='hidden']), textarea{
+      border-bottom-color: var(--border__separator);
+      color: var(--tp__main);
+    }
+    label{
+      color: var(--tp__main)  !important;
+    }
+    .counter_block{
+      color: var(--tp__main);
+    }
+  }
+  section{
+    background: var(--bg__content);
+    border-radius: 3px;
+    padding:8px 20px 8px;
+    margin-bottom: 20px;
+    @include boxShadow__main(var(--sh__main));
+    hr{
+      border-color: #baccdb;
+    }
+  }
+  .sc{
+    position: relative;
+    & > .LoadingCover{
+      position: fixed;
+      z-index: 1;
+      top: 50%;
+      width: 100%;
+      left: 0;
+      text-align: center;
+      .LoadingText{
+        position: static;
+        width: 90%;
+        margin-left: 5%;
+        padding-bottom: 20px
+      }
+      .spinnerSlider{
+        position: static;
+        margin-left: 0;
+        margin: 0 auto;
+      }
+      &:after{
+        bottom: -60px;
+        background: transparent;
+      }
+      &:not(.hide) + .blurOnLoadingCover{
+        filter:blur(7px);
+      }
+    }
+  }
+}
+
+.polsList{
+  max-height: 300px;
+  overflow: auto;
+  .polsList-item{
+    position: relative;
+    padding-right: 30px;
+    a{
+      position: absolute;
+      right: 0;
+      top:5px;
+    }
+  }
+}
+.tooltipWrapp{
+  z-index: 29;
+}
+.tooltipShow{
+  z-index: 39;
+}
+
+.dropdown.dropdown-list{
+  .VideoClientIcon-angle-down{
+    position: absolute;
+    right: 0;
+    top:calc(50% - 2px);
+    width: 20px;
+    height: 20px;
+    &:after{
+      content: "\f107";
+      font-family: "VideoClientIcon";
+      font-weight: bold;
+      font-size: 14px;
+      color: var(--tp__icons);
+      line-height: 26px;
+      font-style: normal;
+    }
+  }
+}
+
+#start_at_section{
+  color: var(--tp__main);
+  margin-right: -8px;
+  @include media(reverso-tablet){
+    .col-sm-5{
+      padding-left: 25px;
+    }
+  }
+  input, select{
+    color: var(--tp__main)  !important;
+  }
+}
+.RecurrenceOptions{
+  .RepeatOn{
+    text-align: right;
+    font-size: 0;
+    label{
+      display: inline-block;
+      font-size: 0;
+      margin-right: 10px;
+      position: relative;
+      overflow: hidden;
+      &:last-child{
+        margin-right: 0;
+      }
+      input:checked + span{
+        background-color: var(--bg__label);
+        border-color: var(--bg__label);
+        color: #fff;
+      }
+
+    }
+    @include media(tablet){
+      text-align: left;
+    }
+    input{
+      position: absolute;
+      left: -50px;
+      top: 0;
+    }
+    label span{
+      display: inline-block;
+      vertical-align: top;
+      background:var(--bg__content);
+      border:1px solid $font-color-main-light;
+      text-align: center;
+      margin-bottom: 0;
+      padding: 4px 14px;
+      line-height: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--tp__main);
+      cursor: pointer;
+      @include transition200();
+    }
+  }
+  .RecurrenceOptions_datePicker_wrapp{
+    text-align: right;
+    position: relative;
+    a{
+      display: inline-block;
+    }
+    input{
+      background: transparent;
+      border: none;
+      text-align: left;
+      padding: 0;
+      color: var(--tp__main);
+      font-size: 16px;
+      text-decoration: none;
+      z-index: 10;
+      padding-right: 29px;
+      position: relative;
+
+      &[disabled]{
+        opacity: 0.4;
+        cursor: no-drop;
+        &+.VideoClientIcon-calendar-icon{
+          opacity: 0.3;
+          color: var(--tp__main);
+        }
+      }
+    }
+    i{
+      z-index: 5;
+      position: absolute;
+      right: 0;
+      top: 4px;
+    }
+    @include media(tablet){
+      input{
+        width: 100%;
+      }
+    }
+  }
+  .occurenceNumber{
+    text-align: right;
+    color: var(--tp__main);
+    input{
+      border:none;
+      color: var(--tp__main);
+      margin-bottom: 0;
+      height: 20px;
+      line-height: 20px;
+      min-width: 90px;
+      border-bottom: 1px solid #e5e5e5;
+      text-align: left;
+      &[disabled]{
+        opacity: 0.4;
+        cursor: no-drop;
+        &+span{
+          opacity: 0.4;
+          cursor: no-drop;
+        }
+      }
+    }
+  }
+  @include media(tablet){
+    .RecurrenceOptions_On{
+      .col-xs-4{
+        padding-top: 4px;
+      }
+    }
+  }
+}
+.Date_trigger{
+  @include media(tablet){
+    width: 100%;
+    position: relative;
+    input{
+      width: 100%;
+    }
+    i{
+      position: absolute !important;
+      top: 1px;
+      right: 0px;
+    }
+  }
+}
+.SelectChannelLine{
+  margin-top: 0;
+  border-color: #9aafbf;
+}
+.SelectChannel{
+  padding-bottom: 0;
+  padding-top: 0;
+  height: 26px;
+  @include media(tablet){
+    padding-right: 8px;
+  }
+}
+
+.withGuest{
+  .select2-container{
+    .select2-chosen{
+      margin-right: 22px !important;
+      font-size: 15px;
+    }
+  }
+}
+.sessionAboutEdit{
+  position: absolute;
+  right: 19px;
+  top:0;
+}

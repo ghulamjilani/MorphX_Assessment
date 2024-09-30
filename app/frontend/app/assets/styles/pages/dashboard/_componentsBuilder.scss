@@ -1,0 +1,51 @@
+.componentsBuilder {
+  &__list {
+    @include flex(flex, center, false);
+    flex-wrap: wrap;
+  }
+
+  &__listItem {
+    @include flex(flex, center, center);
+    text-align: center;
+    width: 15rem;
+    flex-basis: 15rem;
+    height: 15rem;
+    border: 1px solid var(--border__content__sections);
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1.5rem;
+    cursor: pointer;
+  }
+
+  &__viewModal {
+
+    &__header {
+      @include flex(flex, center, false);
+      h3 {
+        margin-right: 3rem;
+      }
+      .toggleMK2 {
+        margin: 0 1rem;
+      }
+    }
+
+    &.MK2-modal {
+      z-index: 1999;
+    }
+
+    .MK2-modal__dialog {
+      min-width: 80%;
+      min-height: 80%;
+    }
+
+    .componentsManager__saveBtn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      .btn {
+        position: absolute;
+      }
+    }
+  }
+}

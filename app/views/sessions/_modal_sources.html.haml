@@ -1,0 +1,24 @@
+%button.btn.btn-sm.pull-right.btn-invite{"data-target" => "#session-sources-modal", "data-toggle" => "modal", type:'button'}
+  %i.VideoClientIcon-paper-planeF
+  See All
+
+#session-sources-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+        %h1.heading{style: 'font-size: 31px'}
+          sources
+
+        %fieldset.inputs
+          .url.input.required.autofocus.stringish.form-group
+            %input.form-control{id: 'session_sources_new_input', autofocus: "autofocus", maxlength: "255", placeholder: "Source", type: "source"}
+          .text-center
+            = link_to_has_many(:session_sources, 'Add source', f, :span, 'mainButton bigBtn invite_btn')
+        .clearfix
+        %br
+        .session_sources_list.users_list.list-group
+          .invited
+            = f.semantic_fields_for(:session_sources) do |builder|
+              = render 'session_source_fields', f: builder

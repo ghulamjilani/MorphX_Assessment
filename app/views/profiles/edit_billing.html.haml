@@ -1,0 +1,131 @@
+- content_for(:extra_body_classes, 'header-top')
+- content_for(:page_title, 'Payments & Payouts')
+.row#profilePage
+  = render 'profiles/nav'
+  .col-md-9
+    .info-tabs
+      %ul.nav.nav-tabs.nav-justified
+        %li.active
+          %a{href: edit_billing_profile_path}= I18n.t('views.profiles.edit_billing.payments')
+        - if can?(:manage_payment_method, current_user.current_organization)
+          %li
+            %a{href: payouts_payout_methods_path}= I18n.t('views.profiles.edit_billing.payouts')
+    .technicalPage.account-edit-page-content.main-section-form.Billing-settings
+      .tab-content
+        #payments.tab-pane.active
+          .PaymentMethods
+            .technicalPage__label= I18n.t('views.profiles.edit_billing.payment_methods')
+            .technicalPage__desc= I18n.t('views.profiles.edit_billing.add_and_manage_your_payment_methods')
+            - if @sources.size.zero?
+              -#%span= I18n.t('settings.billing.no_cards')
+            - else
+              .table-responsive
+                %table.full-width.responsiveTable
+                  %colgroup
+                    %col{style:'width:279px'}
+                    %col{style:'width:331px'}
+                    %col
+                  %thead
+                    %tr
+                      %td
+                        = I18n.t('views.profiles.edit_billing.method')
+                      %td
+                        = I18n.t('views.profiles.edit_billing.details')
+                  %tbody
+                    - @sources.each do |source|
+                      - credit_card = (source.is_a?(Stripe::Source) ? source.card : source)
+                      %tr
+                        %td{data: {th: I18n.t('views.profiles.edit_billing.method')}}
+                          = image_tag "cards/#{credit_card.brand.downcase}.svg"
+                          #{credit_card.brand}
+                          %span
+                            - if current_user.stripe_customer.default_source == credit_card.id
+                              = I18n.t('views.profiles.edit_billing.default')
+                        %td{data: {th: I18n.t('views.profiles.edit_billing.details')}, title: I18n.t('views.profiles.edit_billing.expires', exp: "#{credit_card.exp_month}/#{credit_card.exp_year}")}
+                          = I18n.t('views.profiles.edit_billing.account_card_currency', number: "#{'*' * 12 + credit_card.last4}")
+                        %td{data: {th: I18n.t('views.profiles.edit_billing.options')}}
+                          .dropdown.dropdown-list
+                            %a.dropdown-toggle.full-width.witch-icon-angle{"data-toggle" => "dropdown", href: "#"}
+                              = I18n.t('views.profiles.edit_billing.options')
+                              %i.icon-angle-down
+                              %i.icon-angle-up{style: "display: none"}
+                            %ul.dropdown-menu
+                              - unless current_user.stripe_customer.default_source == credit_card.id
+                                %li
+                                  = link_to I18n.t('views.profiles.edit_billing.make_default'),
+                                    payment_method_path(credit_card.id, {primary: 1}),
+                                    method: :put,
+                                    data: {disable_with: I18n.t('views.profiles.edit_billing.please_wait')}
+                              %li
+                                = link_to I18n.t('views.profiles.edit_billing.remove'),
+                                  payment_method_path(credit_card.id),
+                                  method: :delete,
+                                  class: 'no-border',
+                                  data: {confirm: I18n.t('views.profiles.edit_billing.confirm_delete_this_payment_method'), disable_with: I18n.t('views.profiles.edit_billing.please_wait')}
+            .text-left
+              %a.btn.btn-l.AddPaymentMethod{href:'#'}= I18n.t('views.profiles.edit_billing.add_payment_method')
+          -#.paymentMethod.hide
+            .row
+              .col-md-12
+                .technicalPage__label= I18n.t('views.profiles.edit_billing.choose_payment_method')
+              .col-md-12.payoutMethodsCard
+                %label.col-md-9.choice.radio
+                  %input{type: :radio, name: :payment_method, value: :Bank}
+                  %span= I18n.t('views.profiles.edit_billing.credit_debit_card')
+                  .cards
+                    .visa
+                    .mastercard
+                    .americanExpress
+                    .discover
+                  %ul
+                    %li= I18n.t('views.profiles.edit_billing.safe_money_transfer_using_your_bank')
+                    %li= I18n.t('views.profiles.edit_billing.visa_mastercard_american_express_discover')
+                -#%label.col-md-9.choice.radio
+                  %input{type: :radio, name: :payout_method, value: :Bank}
+                  %span= I18n.t('views.profiles.edit_billing.paypal')
+                  .payPall
+                  %ul
+                    %li= I18n.t('views.profiles.edit_billing.safe_payment_online_credit_card_needed')
+              .text-right.pus
+                %a.btn.btn-l.btn-borderred-grey.BackToBackPaymentList{href:'#'}= I18n.t('views.profiles.edit_billing.back')
+                %button.btn.btn-l.margin-left-10{type: :submit}= I18n.t('views.profiles.edit_billing.add_card')
+          .AddNewCard.hide
+            .technicalPage__label= I18n.t('views.profiles.edit_billing.add_credit_card')
+            -#%span.credit-card= I18n.t('views.profiles.edit_billing.credit_card')
+            = form_tag payment_methods_path, method: :post, id: :add_card_form, class: 'form_V2' do
+              = hidden_field_tag :stripe_token, nil
+              %div.cardWrapper
+                #card-element
+                  // A Stripe Element will be inserted here.
+                  // #cardexp-element
+                  // #cardcvc-element
+                %div
+                  // Used to display form errors.
+                  #card-errors.error{role: :alert}
+                .input-block.state-clear.required
+                  %label{for: :name_on_card}= I18n.t('views.profiles.edit_billing.name_on_card')
+                  %input#name_on_card{type: :text, name: :name_on_card}
+                  .errorContainerWrapp
+              .countryAndZipp
+                .country_col
+                  .select-block.state-derty.required
+                    %label{for: :country}= I18n.t('views.profiles.edit_billing.country')
+                    = country_select nil, :country, {selected: current_user.account.try(:country) || 'US', prompt: true}, {id: :card_country, name: :country, class: 'styled-select_withCss full-width', placeholder: 'United States'}
+                    .errorContainerWrapp
+                #zip_code_block.input-block.state-clear.required
+                  %label{for: :zip_code}= I18n.t('views.profiles.edit_billing.zip_code')
+                  %input#zip_code{type: :text, name: :zip_code}
+                  .errorContainerWrapp
+              .row
+                .col-md-6
+                  %label.checkbox.choice
+                    %input{type: :checkbox,  name: :primary, value: '1'}
+                    %span
+                      = I18n.t('views.profiles.edit_billing.primary_payment_method')
+              .text-right.pus
+                %a.btn.btn-l.btn-borderred-grey.BackToBackPaymentList{href:'#'}= I18n.t('views.profiles.edit_billing.back')
+                %button.btn.btn-l.margin-left-10{type: :submit}= I18n.t('views.profiles.edit_billing.add_card')
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    InitBilling();

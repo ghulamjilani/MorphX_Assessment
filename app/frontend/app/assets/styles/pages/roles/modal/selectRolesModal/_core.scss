@@ -1,0 +1,66 @@
+.selectRolesModal {
+  .MK2-modal__dialog {
+    width: 70rem;
+    overflow: visible;
+  }
+
+  .MK2-modal__body {
+    padding: 0;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 0 0 3rem;
+    color: var(--tp__h1);
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  &__role {
+    @include flex(flex, flex-start, false);
+    margin-bottom: 1.5rem;
+
+    &__disabled {
+      label, span {
+        pointer-events: none;
+        filter: brightness(0.7);
+      }
+    }
+
+    label {
+      padding-top: 2.1rem;
+    }
+
+    &__name {
+      display: inline-block;
+      padding: 0 1rem;
+      font-size: 1.4rem;
+      color: #FFF; /*static color for role name*/
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    &__body {
+      padding-left: 2.5rem;
+    }
+
+    &__description {
+      font-size: 1.2rem;
+      color: var(--tp__secondary);
+      line-height: 1.8rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border__separator);
+    }
+
+    @include media(reverso-phone) {
+      width: 45%;
+      &:nth-child(2n + 1) {
+        margin-right: 5rem;
+      }
+      &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+  }
+}

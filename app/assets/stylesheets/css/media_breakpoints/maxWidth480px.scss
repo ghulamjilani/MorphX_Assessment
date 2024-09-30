@@ -1,0 +1,430 @@
+@media all and (max-width: 480px) {
+//    helper
+  @import "mixin";
+  body.responsivDebag:after{
+    position: fixed;
+    display: block;
+    content: 'max-width:480px';
+    background: #ffffff;
+    padding:2px;
+    top: 1px;
+    left: 1px;
+    z-index: 9999;
+  }
+  body{
+    font-size: 13px;
+  }
+  #live-guide-header-container #date-select-wrapper{
+    float: none;
+    input{
+      width: 80% !important;
+    }
+    .ui-datepicker-trigger{
+      width: 20%;
+      line-height: 14px;
+    }
+  }
+  #channel-widget-container .schedule-header-opts #timezone-wrapper {
+    float: none;
+    padding: 10px 0 0;
+    text-align: center;
+  }
+  #live-guide-header-container{
+    #week-days-container{
+      padding: 0 40px;
+      position: relative;
+    }
+    .jumpTo{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 40px !important;
+      background: #e6e6e6;
+      margin: 0 !important;
+      &.prev_week{
+        left: 0;
+        right: auto;
+        border-right: 1px solid #cccccc;
+      }
+      &.next_week{
+       right: 0;
+        left: auto;
+       border-left: 1px solid #cccccc;
+      }
+    }
+    .week_day{
+      float: none;
+      display: block;
+      width: 100%;
+      margin: 4px 0;
+    }
+  }
+  #live-guide-header-container{
+    padding-bottom: 20px;
+  }
+  .time-container {
+    font-size: 11px;
+  }
+  #channel-table{
+    tfoot > tr:last-child td{
+      height: 30px !important;
+      #schedule-scroll-h{
+        height: 28px;
+      }
+      .scroll{
+        height: 26px;
+        &:before{
+          top: 8px;
+        }
+        &:after{
+          top: 8px;
+        }
+      }
+    }
+  }
+  #channel-form-footer .material-img div {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 75%;
+  }
+  #channel-form-footer .material-actions {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 2%;
+    text-align: left;
+    vertical-align: middle;
+    width: 100%;
+  }
+  .home #search-block > .inner{
+    width: 98%;
+    .col-md-10, .col-xs-12{
+      padding: 0;
+    }
+    .input-group{
+      width: 100%;
+      span{
+        width: 100%;
+        display: block;
+        left: 0;
+        &.input-group-text{
+          margin-bottom: 3px;
+        }
+        input{
+          width: 100%;
+          margin: 0;
+        }
+      }
+    }
+  }
+  #search-container{
+    bottom: 0 !important;
+  }
+  .responsive .navbar-brand img{
+    width: 70%;
+  }
+
+  //#profilePage aside.left-side-bar .user-avatar form.profile{
+  //  opacity: 1;
+  //  visibility: visible;
+  //  bottom: 0;
+  //}
+  .main-content{
+    padding-bottom: 10px;
+  }
+  .row-buttons{
+    padding-bottom: 10px;
+  }
+  //#profilePage .accordion-group{
+  //  padding-left: 0;
+  //}
+  .invSection{
+    padding-bottom: 10px;
+  }
+  .Notifications-wrapp .media .media-body{
+    padding-right: 0;
+  }
+  .media h4.media-heading span{
+    position: static;
+    display: block;
+  }
+  .media h4.media-heading{
+    padding-right: 45px;
+  }
+  .Notifications-wrapp .media .media-body .media-heading .btn {
+    background-color: $siteColorMain;
+    border: medium none;
+    color: #fff;
+    opacity: 1 !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.2s ease-in-out 0s;
+    visibility: visible !important;
+  }
+  body.messages .m-rth-wrapp {
+    padding-right: 0px;
+    position: relative;
+    .m-object{
+      padding-right: 150px;
+    }
+  }
+  #notification-info-block{
+    text-align: center;
+    span{
+      display: block;
+      margin-left: 0 !important;
+    }
+  }
+  .left-side-bar{
+    padding-bottom: 60px;
+  }
+  .folowersBoxWrapper{
+    li{
+      width: 98%;
+    }
+  }
+  .socialMK2{
+    a{
+      display: inline-block;
+      height: 30px;
+      padding: 0 !important;
+      vertical-align: middle;
+      width: 30px;
+      margin: 0 5px;
+      span{
+        line-height: 26px;
+      }
+    }
+  }
+  footer{
+    .footerNav{
+      li{
+        display: block;
+      }
+      a{
+        width: 100%;
+      }
+    }
+  }
+  .fht-thead{
+    display: none !important;
+  }
+  .responsiveTable{
+    td{
+      &:before {
+        content: attr(data-th);
+        width: 33%;
+        font-size: 14px;
+        white-space: break-spaces;
+      }
+    }
+  }
+  .combined_notification_val{
+    input{
+      width: 100%;
+    }
+  }
+  .datetime{
+    margin: 10px 0;
+  }
+  .PublicProfileURL a{
+    white-space: pre-wrap;
+    word-break: break-all;
+
+  }
+  .sessiont-h-b{
+    padding: 10px 0 5px;
+  }
+  .modal-body {
+    padding: 20px 10px;
+  }
+  .styled-select-large {
+    width: 100% !important;
+  }
+  .w80, .w120, .w260, .w435{
+    float: none;
+    margin: 0 0 10px;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .mr20{
+    margin-right: 0 !important;
+  }
+  .style-select {
+    float: none;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  .create-update-abstract-session #delivery-methods fieldset{
+    padding: 10px !important;
+  }
+  input.ui-spinner-input{
+    width: 100%;
+  }
+  #channel_form{
+    & > div{
+      padding: 0 15px;
+    }
+  }
+  div.modal-dialog {
+    max-width: 90%;
+    width: 90%;
+  }
+  .personslists > label {
+    border-bottom: medium none;
+    padding-bottom: 5px;
+  }
+  body .main-content .btn-invite{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    float: none !important;
+  }
+  .time_select .select2-container, .time_select .select2-container + select + .select2-container{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .header-search-wrapper{
+    .header-search-input{
+      width: 0;
+      font-size: 12px !important;
+    }
+    .header-search-submit{
+      float: right;
+    }
+  }
+  .session #carousel .flex-direction-nav a {
+    top: -160px;
+  }
+  .slider-inner .slider-inner-wrapp {
+    height: 300px !important;
+  }
+  body.home.home-index #announcements{
+    position: relative;
+    background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
+    z-index: 299;
+  }
+  .slider-inner{
+    height: auto;
+  }
+  #announcements{
+    min-height: 0;
+  }
+  .SearchWrapper button{
+    margin-right: 3%;
+  }
+  .social-sharing-block{
+    a{
+      margin-top: 15px !important;
+    }
+  }
+  .abstract-sessions {
+    max-height: none;
+  }
+  .CRsession{
+    iframe{
+      width: 100% !important;
+      height: auto !important;
+    }
+  }
+  .SearchWrapper input[type="text"]{
+    font-size: 13px;
+    width: 75%;
+  }
+  #channel-table tfoot{
+    display: none;
+  }
+  #presenter-page-Followers li{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .footerSocial li{
+    display: inline-block !important;
+    width: auto !important;
+  }
+  .session-info{
+    .imri{
+      text-align: left;
+    }
+  }
+  .presenterInfo{
+    .prset{
+      text-align: center;
+      padding: 0;
+      a{
+        display: block;
+      }
+      img{
+        margin-right: 0;
+      }
+    }
+  }
+  .presenterInfo{
+    & > a{
+      width: 100%;
+      text-align: center;
+      margin: 5px 0;
+      display: block;
+    }
+  }
+  div.modal-body .mainButton{
+    min-width: 0;width: 100%;
+  }
+  .sessiont-h-t{
+    padding-bottom: 10px !important;
+  }
+  .right-sidebarWrapper{
+    min-height: 0 !important;
+  }
+  .DashboardNavToggle{
+    display: block !important;
+    &.btn-withIcon.btn-l{
+      i{
+        @include center(v);
+      }
+      .VideoClientIcon-angle-downF{
+        right: 15px;
+        left: unset;
+        font-size: 15px;
+      }
+    }
+    ~ .AffixSection{
+      display: none;
+    }
+    &.DashboardNavToggleActive{
+      .VideoClientIcon-angle-downF{
+        display: none;
+      }
+      .VideoClientIcon-angle-upF{
+        right: 15px;
+        left: unset;
+        font-size: 15px;
+        display: block !important;
+      }
+      ~ .AffixSection{
+        display: block !important;
+        margin-top: 10px;
+      }
+    }
+  }
+  .ProductsList .ProductsList-item{
+    width: calc(100% - 20px);
+  }
+  .pr_list_wrapp{
+    .btn.btn-m.col-xs-12{
+      margin-bottom: 20px;
+    }
+    .pr-body{
+      padding-right: 5px;
+    }
+    .pr-info {
+      width: calc(100% - 50px);
+    }
+  }
+  .Fetch_wrapp{
+    padding-left: 15px !important;
+  }
+}

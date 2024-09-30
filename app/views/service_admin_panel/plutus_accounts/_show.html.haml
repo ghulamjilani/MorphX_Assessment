@@ -1,0 +1,41 @@
+.plutus_container
+  %h1
+    = h @plutus_account.name
+    Account
+  %table.index_table.index{border: "0", cellpadding: "0", cellspacing: "0"}
+    %tr
+      %th.nobg ID
+      %th Name
+      %th Type
+      %th Debit Balance
+      %th Credit Balance
+    %tr.odd
+      %td= h @plutus_account.id
+      %td= h @plutus_account.name
+      %td= h @plutus_account.type.sub('Plutus::','')
+      %td= h @plutus_account.debits_balance
+      %td= h @plutus_account.credits_balance
+  %br/
+  %h1 Credit Entries
+  %table.index_table.index{border: "0", cellpadding: "0", cellspacing: "0"}
+    %tr
+      %th.nobg ID
+      %th Description
+      %th Date
+    - @plutus_account.credit_entries.each do |entry|
+      %tr{class: "#{cycle("even", "odd")}"}
+        %td= h entry.id
+        %td= h entry.description
+        %td= h entry.created_at
+  %br/
+  %h1 Debit Entries
+  %table.index_table.index{border: "0", cellpadding: "0", cellspacing: "0"}
+    %tr
+      %th.nobg ID
+      %th Description
+      %th Date
+    - @plutus_account.debit_entries.each do |tr|
+      %tr{class: "#{cycle("even", "odd")}"}
+        %td= h tr.id
+        %td= h tr.description
+        %td= h tr.created_at

@@ -1,0 +1,162 @@
+{{!--<div aria-hidden="true" class="modal fade InviteViewersAndCoHosts" id="InviteViewersAndCoHosts" role="dialog" tabindex="-1">--}}
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="wait" style="display: none; position: absolute; height: 98%; width: 100%; background: rgba(0,0,0,0.2); z-index: 10; border-radius: 7pt;">
+        <div style="padding: 20px; margin: auto; text-align: center; background: #fff; width: 30%; border-radius: 7pt; margin-top: 100px;">
+          Please Wait
+        </div>
+      </div>
+      <div class="modal-body">
+            <div class="unobtrusive-flash-container">
+              <div class="alert alert-danger" style="display:block">
+                <div class="bodyFlashMessage">
+                  Users will be invited only after the session has been created.
+                </div>
+              </div>
+            </div>
+            <div class="sm-head">
+              <h4 style="width: 100%" class="groupTitle margin-bottom-0 fs-18 clearfix">
+                {{#if (and livestream (and immersive co_host))}}
+                {{!Invite Viewers & Guests & Co-Hosts}}
+                {{!TODO: remove title... across design (only for modal without tabs)}}
+                {{else if immersive_and_livestream}}
+                  Invite Viewers & Participants
+                {{else if (and livestream co_host)}}
+                  Invite Viewers
+                {{else if (and immersive co_host)}}
+                  Invite Participants
+                {{else if livestream}}
+                  Invite Viewers
+                {{else if immersive}}
+                  Invite Participants
+                {{/if}}
+                {{!TODO: remove cross too... across design}}
+                {{!#unless (and livestream (and immersive co_host))}}
+                {{!/unless}}
+                <button style="float: right" type="button" data-dismiss="modal" class="close">×</button>
+              </h4>
+              {{#if co_host}}
+              <!--<ul class="btns-group full-width nav-tabs" role="tablist">-->
+              <!--<li class="full-width {{#unless co_host_tab}}active{{/unless}}">-->
+              <!--<a class="btn btn-m btn-borderred-botom full-width" data-target="#section-Viewers-Guests" data-toggle="tab" href="#">-->
+              <!--{{#if immersive_and_livestream}}Viewers & Participants{{else if livestream}}Viewers{{else if immersive}}Participants{{/if}}</a>-->
+              <!--</li>-->
+              <!--</ul>-->
+              {{/if}}
+              <section>
+                <div class="tab-content">
+                  <div class="UsersWrapp hidden participants"></div>
+                  <div class="fs-14 padding-bottom-5 text-color-Darkgrey UsersWrappTitle hidden">Invited Co-Hosts</div>
+                  <div class="UsersWrapp hidden co-hosts"></div>
+
+                  {{! Participants TAB }}
+                  <div class="tab-pane {{#if (or (not co_host) (not co_host_tab))}}active{{/if}}" id="section-Viewers-Guests" data-type="participant">
+                    <div class="margin-bottom-20 row add_or_filter_by_email">
+                      <div class="col-md-9 InviteByEmail-wrapp">
+                        <input class="full-width InviteByEmail" id="InviteByEmail" data-state="{{default_state}}" type="email"
+                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
+                               placeholder="Invite by email or search">
+                        <button class="clear_field">x</button>
+                      </div>
+                      <div class="col-md-3 padding-left-0 padding-top-10">
+                        <a href="#" class="btn btn-m btn-borderred-grey full-width add_to_contacts">Add to Contacts</a>
+                      </div>
+
+                    </div>
+
+                    <div class="contactList">
+                      <div class="contactList-h">
+                        {{#if immersive_and_livestream}}
+                          <div class="pull-right">
+                            <label class="checkbox checkbox-swith right-position">
+                              <input name="link_as_viewer_and_guest" type="checkbox" {{#if role_selection}}checked{{/if}}>
+                              <span class="fs-14 text-color-Darkgrey">Role selection</span>
+                            </label>
+                          </div>
+                        {{/if}}
+                        <div class="fs-14 text-color-Darkgrey">Contact list</div>
+                      </div>
+
+                      <div class="contactList-b full-width clearfix text-color-LightGrey">
+                        <div class="contactList-b-h">
+                          <div class="row">
+                            <div class="col-xs-8">
+                              {{#if immersive_and_livestream}}
+                                <label class="{{#if role_selection}}disabled{{/if}} checkbox selectAll choice ">
+                                  <input {{#if role_selection}}disabled{{/if}} type="checkbox">
+                                  <span class="fs-12 text-color-Darkgrey">Select All</span>
+                                </label>
+                              {{else}}
+                                <label class="checkbox selectAll choice">
+                                  <input type="checkbox">
+                                  <span class="fs-12 text-color-Darkgrey">Select All</span>
+                                </label>
+                              {{/if}}
+                            </div>
+                            {{#if immersive_and_livestream}}
+                              <div class="col-xs-2 text-center title_viewer {{#unless role_selection}}hidden{{/unless}}">Viewer</div>
+                              <div class="col-xs-2 text-center title_guest {{#unless role_selection}}hidden{{/unless}}">Participant</div>
+                            {{/if}}
+                          </div>
+                        </div>
+                        <div id="new_contacts_list_area"></div>
+                        <hr class="full-width margin-top-0 margin-bottom-10" style="display: none;">
+                        {{!-- Contact list goes here --}}
+                        <div id="contacts_list_area"></div>
+                      </div>
+                      <p style="text-align: right">Scroll down to load more</p>
+                    </div>
+                  </div>
+                  {{! Participants TAB END }}
+                  {{#if co_host}}
+                  {{! CO-HOSTS TAB }}
+                    <div class="tab-pane {{#if co_host_tab}}active{{/if}}" id="section-Co-Hosts" data-type="co-presenter">
+                      <div class="margin-bottom-20 row add_or_filter_by_email">
+                        <div class="col-md-9 InviteByEmail-wrapp">
+                          <input class="full-width InviteByEmail" id="InviteByEmail" data-state="co-presenter" type="email"
+                                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
+                                 placeholder="Invite by email or search">
+                          <button class="clear_field">x</button>
+                        </div>
+                        <div class="col-md-3 padding-left-0 padding-top-10">
+                          <a href="#" class="btn btn-m btn-borderred-grey full-width add_to_contacts">Add to Contacts</a>
+                        </div>
+                      </div>
+                      <div class="contactList">
+                        <div class="contactList-h">
+                          <div class="fs-14 text-color-Darkgrey">Contact list</div>
+                        </div>
+
+                        <div class="contactList-b full-width clearfix text-color-LightGrey">
+                          <div class="contactList-b-h">
+                            <div class="row">
+                              <div class="col-md-12">
+                                {{!--
+                                                <label class="checkbox selectAll choice padding-left-10 padding-top-5">
+                                                    <input type="checkbox">
+                                                    <span class="fs-12 text-color-Darkgrey">Select All</span>
+                                                </label>
+                                                --}}
+                              </div>
+                            </div>
+                          </div>
+                          <div id="new_contacts_list_area"></div>
+                          <hr class="full-width margin-top-0 margin-bottom-10" style="display: none;">
+                          {{!-- Contact list goes here --}}
+                          <div id="contacts_list_area"></div>
+                        </div>
+                        <p style="text-align: right">Scroll down to load more</p>
+                      </div>
+                    </div>
+                  {{! CO-HOSTS TAB END }}
+                  {{/if}}
+                </div>
+              </section>
+              <div class=" clearfix section-Viewers-Guests_submit bottomPushContainer">
+                <a href="#" class="btn btn-m done pull-right" {{#unless url}}data-dismiss="modal"{{/unless}}>Done</a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{!--</div>--}}

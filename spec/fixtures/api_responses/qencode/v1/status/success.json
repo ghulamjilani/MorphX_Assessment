@@ -1,0 +1,568 @@
+{
+  "error": 0,
+  "statuses": {
+    "9a06b338532f5467844d3f45a1121fbd": {
+      "status": "completed",
+      "percent": 100,
+      "error": 0,
+      "error_description": null,
+      "images": [
+        {
+          "tag": "image-0-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/0\/19201080.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/0\/19201080.jpg",
+          "meta": {
+            "height": 1080,
+            "width": 1920,
+            "time": 0.10022,
+            "time_fraction": 0.01,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-1-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/1\/19201080.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/1\/19201080.jpg",
+          "meta": {
+            "height": 1080,
+            "width": 1920,
+            "time": 0.5011,
+            "time_fraction": 0.05,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-10-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/0\/920500.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/0\/920500.jpg",
+          "meta": {
+            "height": 500,
+            "width": 920,
+            "time": 0.10022,
+            "time_fraction": 0.01,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-11-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/1\/920500.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/1\/920500.jpg",
+          "meta": {
+            "height": 500,
+            "width": 920,
+            "time": 0.5011,
+            "time_fraction": 0.05,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-12-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/2\/920500.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/2\/920500.jpg",
+          "meta": {
+            "height": 500,
+            "width": 920,
+            "time": 1.5033,
+            "time_fraction": 0.15,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-13-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/3\/920500.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/3\/920500.jpg",
+          "meta": {
+            "height": 500,
+            "width": 920,
+            "time": 7.0154,
+            "time_fraction": 0.7,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-14-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/4\/920500.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/4\/920500.jpg",
+          "meta": {
+            "height": 500,
+            "width": 920,
+            "time": 9.022,
+            "time_fraction": 0.99,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-15-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/0\/410230.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/0\/410230.jpg",
+          "meta": {
+            "height": 230,
+            "width": 410,
+            "time": 0.10022,
+            "time_fraction": 0.01,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-16-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/1\/410230.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/1\/410230.jpg",
+          "meta": {
+            "height": 230,
+            "width": 410,
+            "time": 0.5011,
+            "time_fraction": 0.05,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-17-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/2\/410230.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/2\/410230.jpg",
+          "meta": {
+            "height": 230,
+            "width": 410,
+            "time": 1.5033,
+            "time_fraction": 0.15,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-18-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/3\/410230.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/3\/410230.jpg",
+          "meta": {
+            "height": 230,
+            "width": 410,
+            "time": 7.0154,
+            "time_fraction": 0.7,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-19-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/4\/410230.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/4\/410230.jpg",
+          "meta": {
+            "height": 230,
+            "width": 410,
+            "time": 9.022,
+            "time_fraction": 0.99,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-2-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/2\/19201080.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/2\/19201080.jpg",
+          "meta": {
+            "height": 1080,
+            "width": 1920,
+            "time": 1.5033,
+            "time_fraction": 0.15,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-3-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/3\/19201080.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/3\/19201080.jpg",
+          "meta": {
+            "height": 1080,
+            "width": 1920,
+            "time": 7.0154,
+            "time_fraction": 0.7,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-4-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/4\/19201080.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/4\/19201080.jpg",
+          "meta": {
+            "height": 1080,
+            "width": 1920,
+            "time": 9.022,
+            "time_fraction": 0.99,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-5-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/0\/10560.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/0\/10560.jpg",
+          "meta": {
+            "height": 60,
+            "width": 105,
+            "time": 0.10022,
+            "time_fraction": 0.01,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-6-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/1\/10560.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/1\/10560.jpg",
+          "meta": {
+            "height": 60,
+            "width": 105,
+            "time": 0.5011,
+            "time_fraction": 0.05,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-7-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/2\/10560.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/2\/10560.jpg",
+          "meta": {
+            "height": 60,
+            "width": 105,
+            "time": 1.5033,
+            "time_fraction": 0.15,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-8-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/3\/10560.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/3\/10560.jpg",
+          "meta": {
+            "height": 60,
+            "width": 105,
+            "time": 7.0154,
+            "time_fraction": 0.7,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "image-9-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/4\/10560.jpg",
+            "format": "image",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/images\/4\/10560.jpg",
+          "meta": {
+            "height": 60,
+            "width": 105,
+            "time": 9.022,
+            "time_fraction": 0.99,
+            "format": "jpeg"
+          },
+          "output_format": "thumbnail",
+          "error": false,
+          "error_description": null
+        }
+      ],
+      "videos": [
+        {
+          "tag": "video-0-0-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "playlist": "playlist.m3u8",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/27d68060845bb474a17585a0af04d195",
+            "format": "hls",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/27d68060845bb474a17585a0af04d195\/playlist.m3u8",
+          "bitrate": 165,
+          "meta": {
+            "resolution_width": 640,
+            "resolution_height": 360,
+            "framerate": "25\/1",
+            "height": 360,
+            "width": 640,
+            "codec": "h264",
+            "dar": "30:17",
+            "aspect_ratio": 0.99264705882353,
+            "sar": "135:136",
+            "bitrate": "181858",
+            "audio_codec": "aac"
+          },
+          "duration": "10.04",
+          "size": "0.20726",
+          "output_format": "hls",
+          "error": false,
+          "error_description": null
+        },
+        {
+          "tag": "video-0-1-0",
+          "profile": null,
+          "user_tag": null,
+          "storage": {
+            "type": "amazon_s3",
+            "playlist": "playlist.m3u8",
+            "bucket": "morphx-dev-vod",
+            "key": "\/35\/channels\/15\/1b75d0902f9d95f98b32ff77bb8583af",
+            "format": "hls",
+            "expire": null,
+            "timestamp": "2022-08-09 11:47:51"
+          },
+          "url": "https:\/\/morphx-dev-vod.s3.amazonaws.com\/35\/channels\/15\/1b75d0902f9d95f98b32ff77bb8583af\/playlist.m3u8",
+          "bitrate": 166,
+          "meta": {
+            "resolution_width": 640,
+            "resolution_height": 360,
+            "framerate": "25\/1",
+            "height": 360,
+            "width": 640,
+            "codec": "h264",
+            "dar": "30:17",
+            "aspect_ratio": 0.99264705882353,
+            "sar": "135:136",
+            "bitrate": "182435",
+            "audio_codec": "aac"
+          },
+          "duration": "10",
+          "size": "0.206902",
+          "output_format": "hls",
+          "error": false,
+          "error_description": null
+        }
+      ],
+      "audios": [],
+      "duration": "10.022",
+      "source_size": "0.268097",
+      "api_version": "v1",
+      "status_url": "https:\/\/api.qencode.com\/v1\/status"
+    }
+  }
+}

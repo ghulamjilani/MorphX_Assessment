@@ -1,0 +1,39 @@
+{
+  "status":200,
+  "body":"OK",
+  "ident":"594",
+  "from":"video_transfer",
+  "filename":"ddc2870aa1cefa15f84b4ffb2b50765f.mp4",
+  "file_info":{
+    "programs":[],
+    "streams": [
+      {
+        "codec_type":"video",
+        "width":1364,
+        "height":768
+      },
+      {
+        "codec_type":"audio"
+      }
+    ]
+  },
+  "transfer_server": {
+    "status":200,
+    "body":"OK",
+    "filename":"ddc2870aa1cefa15f84b4ffb2b50765f.mp4",
+    "file_info":{
+      "programs":[],
+      "streams":[
+        {
+          "codec_type":"video",
+          "width":1364,
+          "height":768
+        },
+        {
+          "codec_type":"audio"
+        }
+      ]
+    },
+    "from":"video_transfer"
+  }
+}

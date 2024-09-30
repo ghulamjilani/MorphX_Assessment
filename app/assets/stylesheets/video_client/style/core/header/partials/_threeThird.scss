@@ -1,0 +1,74 @@
+@import "mixin";
+.threeThird{
+  background: #272727;
+  font-size: 0;
+  text-align: right;
+  @include clearfix();
+  a{
+    color: #fff;
+    &:hover{
+      color: $siteColorMain;
+    }
+    @include transition();
+  }
+  section{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    height: $header-height;
+    line-height: $header-height;
+  }
+  .SignalLevel{
+    display: inline-block;
+    vertical-align: middle;
+    width: $header-height;
+    text-align: center;
+    line-height: 1.6rem;
+    span{
+      width: 0.3rem;
+      background: #6d6d6d;
+      display: inline-block;
+      vertical-align: bottom;
+      @include transition();
+      &:nth-child(1){
+        height: 0.5rem;
+      }
+      &:nth-child(2){
+        height: 1rem;
+        margin-left: -0.1rem;
+      }
+      &:nth-child(3){
+         height: 1.6rem;
+        margin-left: -0.1rem;
+      }
+    }
+    &.level-1, &.level-2, &.level-3{
+      span:nth-child(1){
+        background: $video-volor-bluu;
+      }
+    }
+    &.level-2, &.level-3{
+      span:nth-child(2){
+        background: $video-volor-bluu;
+      }
+    }
+    &.level-3{
+      span:nth-child(3){
+        background: $video-volor-bluu;
+      }
+    }
+  }
+  section.light{
+    background: #3a3a3a;
+    a{
+      display: inline-block;
+      text-align: center;
+      width: $header-height;
+      padding-top: 2px;
+    }
+  }
+  .VideoClientIcon-log-out.rotate180{
+    display: inline-block;
+    position: relative;
+  }
+}

@@ -1,0 +1,13 @@
+%h2
+  Please be careful when using this feature.
+  %br/
+  When upgrading to a plan with a lower price, any difference in cost will not be refunded to the customer, but will remain as a credit on their account.
+= form_tag upgrade_service_admin_panel_stripe_db_service_subscription_path(resource.id), method: :post, 'data-confirm': 'Are you sure want to Upgrade?' do
+  %table{border: 0, cellspacing: 0, cellpadding: 0}
+    %tbody
+      %tr.row
+        %th{style: 'width: 10%; border: none;'}= label_tag 'Switch to Another Service Plan'
+        %td{style: 'border: none;'}= select_tag :plan_id, options_for_select(@available_plans.map{|plan| [[plan.plan_package.name, plan.formatted_interval, plan.formatted_price].join(' '), plan.id]}), include_blank: false
+  %br/
+  %div
+    = submit_tag 'Upgrade Subscription Plan'

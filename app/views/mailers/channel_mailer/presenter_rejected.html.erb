@@ -1,0 +1,13 @@
+<p>
+  <%= I18n.t('mailer.channel.removed_as_creator_hi', user_name: @user.public_display_name) %>
+</p>
+<p>
+  <%= I18n.t('mailer.channel.removed_as_creator_body', brand_url: @brand_url, brand_name: @brand_name, channel_url: @channel.absolute_path, channel_name: @channel.title).html_safe %>
+</p>
+<p>
+  <%= I18n.t('mailer.channel.removed_as_creator_mistake') %>
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format I18n.t('mailer.thank_you_message', service_name: Rails.application.credentials.global[:service_name]) %>
+</p>

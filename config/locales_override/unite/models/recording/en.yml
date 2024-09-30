@@ -1,0 +1,4 @@
+en:
+  models:
+    recording:
+      share_title: "%{title}"

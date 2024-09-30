@@ -1,0 +1,18 @@
+<p>
+  Congats!
+  <br>
+  Your video "<%= @recording.title %>"  from <%= @recording.created_at.strftime('%m.%d.%Y') %> is now processed and ready to watch . <a href="<%= @recording.short_url %>"><%= @recording.short_url %></a> 
+</p>
+
+<p>
+  Here is what you may want to do now:
+</p>
+  Head over to the video and set your price, check your privacy settings, or set the visibility.
+<br>
+  Customize the look of your player and control what links or text appears after your video
+<br>
+  Easily share your video on social media or embed it into your side in minutes.
+<br>
+<%= link_to "Go to Uploads", uploads_dashboard_url , class: 'goToUploadsReplays' %>
+
+

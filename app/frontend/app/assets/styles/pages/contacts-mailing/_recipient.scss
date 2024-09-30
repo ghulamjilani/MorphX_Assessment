@@ -1,0 +1,122 @@
+.CM__recipient {
+  border-bottom: 1px solid var(--border__separator);
+  margin-bottom: 3rem;
+
+  &__wrapper {
+    position: relative;
+
+    .selectArrow {
+      cursor: pointer;
+      bottom: 1rem;
+      transform: none;
+      top: auto;
+
+      &.up {
+        top: auto;
+        transform: rotate(-180deg);
+      }
+    }
+
+    #search {
+      padding: 1rem 2rem;
+    }
+
+    .CM__recipient__table__wrapper {
+      span {
+        right: 2rem;
+      }
+    }
+
+    .CM__loader {
+      margin: 0;
+    }
+  }
+
+  &__label {
+    color: var(--tp__labels);
+    font-size: 1.4rem;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    .tagsMK2__tag {
+      z-index: 2;
+      position: relative;
+    }
+  }
+
+  &__table {
+    padding-top: 0;
+    min-height: auto;
+    overflow: auto;
+    height: 22rem;
+
+    .checkboxMK2 {
+      padding-left: 2.5rem;
+    }
+
+    table {
+      position: absolute;
+      top: 1.5rem;
+      left: 0;
+    }
+
+    .CM__table__body__tr {
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--bg__hover);
+      }
+    }
+
+    &__all {
+      margin-left: 1.9rem;
+    }
+
+    &__head {
+      border-bottom: 1px solid var(--border__separator);
+
+      &__th {
+        color: var(--tp__secondary);
+        font-weight: normal;
+        text-align: left;
+        padding-bottom: 1.5rem;
+      }
+
+      &__contacts {
+        @include media(phone) {
+          display: flex;
+        }
+      }
+
+      &__first {
+        padding-left: 2rem;
+      }
+    }
+
+    &__wrapper {
+      border-radius: .6rem;
+      top: calc(100% + .3rem);
+      position: absolute;
+      width: calc(100% + 4rem);
+      z-index: 2;
+      left: -2rem;
+      background: var(--bg__dropdowns);
+      box-shadow: 0px 1px 5px 2px var(--sh__main);
+    }
+  }
+
+  &__quill {
+    .ql-toolbar {
+      background: var(--bg__header);
+      border: 1px solid var(--border__separator);
+    }
+
+    .quill-container {
+      border: 1px solid var(--border__separator);
+    }
+  }
+}

@@ -1,0 +1,136 @@
+.MReview {
+  @include flex(flex, flex-start, flex-start);
+  position: relative;
+  width: 100%;
+
+  &__hidden {
+    opacity: .8;
+  }
+
+  &__left {
+    cursor: pointer;
+  }
+
+  &__head {
+    font-size: 1.6rem;
+    @include flex(flex, baseline, false);
+    position: relative;
+    flex-wrap: wrap;
+    &__line{
+      padding-right: 4rem;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+    }
+    &__hidden {
+      font-size: 1.2rem;
+      position: absolute;
+      top: 4px;
+      right: 1.6rem;
+      visibility: hidden;
+
+      &.visible {
+        visibility: visible;
+      }
+    }
+
+    &__created {
+      padding-left: 1rem;
+      color: var(--tp__secondary);
+
+      @include media(p-phone) {
+        margin-left: 0;
+        padding-left: 0;
+        margin-right: auto;
+      }
+    }
+
+    &__name {
+      // @include text__ellipsis(2);
+      word-break: break-word;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--tp__main);
+
+      @include media(p-phone) {
+        width: 80%;
+      }
+
+    }
+  }
+
+  &__wrap__options {
+    position: absolute;
+    top: 0;
+    right: -5px;
+  }
+
+  &__options {
+    position: absolute;
+    box-shadow: 0 4px 7px 0 var(--sh__main);
+    width: 10rem;
+    display: flex;
+    flex-direction: column;
+    top: 3rem;
+    background-color: var(--bg__dropdowns);
+    border-radius: .6rem;
+    z-index: 99;
+    right: -1rem;
+
+    &__icon {
+      color: var(--tp__icons);
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    &__button {
+      min-width: 10rem;
+      color: var(--tp__secondary);
+      padding: .8rem 2rem;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--bg__hover);
+        color: var(--tp__main);
+      }
+    }
+  }
+
+  &__rating {
+    width: 100%;
+    font-size: 1.2rem;
+    .rating__star__count{
+      font-size: 1.4rem;
+    }
+    @include media(p-phone) {
+      width: auto;
+    }
+  }
+
+  &__right {
+    width: calc(100% - 6rem);
+    padding: .5rem 0 0 1.5rem;
+
+    @include media(p-phone) {
+      padding: 0 0 0 1rem;
+    }
+
+    &__body {
+      width: 100%;
+      word-break: break-word;
+      color: var(--tp__secondary);
+      font-size: 1.4rem;
+      padding-top: 1rem;
+
+      &__dashboard {
+        line-clamp: unset;
+        -webkit-line-clamp: unset;
+      }
+    }
+
+    &__reviewable {
+      color: var(--tp__main);
+      font-weight: bold;
+    }
+  }
+}

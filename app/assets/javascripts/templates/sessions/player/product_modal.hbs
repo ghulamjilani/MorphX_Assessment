@@ -1,0 +1,49 @@
+<div class="modal fade productGalleryModal" id="productGallery{{id}}" role="dialog" tabindex="-1" aria-hidden="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <section class="carouselWrapp">
+                    <div id="ProductsSlideshow-1">
+                        <div class="direction-nav"></div>
+                        <div class="slideshow slider-for">
+                            <div class="slide">
+                                <img src="{{image_url}}">
+                            </div>
+                        </div>
+                    </div>
+                    {{#if false}}
+                        <div id="ProductsSlideshow-2">
+                            <div class="slideshow slider-nav">
+                                <div class="slide">
+                                    <div style="background-image: url('{{image_url}}')"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/if}}
+                </section>
+                <div class="ProductModalDescription">
+                    <div class="row padding-top-20">
+                        <div class="col-md-7">
+                            <div class="text-ellipsis ProductModalDescription-name text-color-Darkgrey fs-14">
+                                {{title}}
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="pull-right ProductModalDescription-buy">
+                                <a onclick="window.open('{{url}}', '{{title}}', 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;"
+                                   href="{{url}}" class="btn btn-m">BUY</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ProductModalDescription-text text-color-LightGrey fs-12 padding-top-20">
+                        {{#if description}}
+                            {{description}}
+                        {{else}}
+                            {{short_description}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

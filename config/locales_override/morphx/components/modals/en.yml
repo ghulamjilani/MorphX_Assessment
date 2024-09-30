@@ -1,0 +1,6 @@
+en:
+  components:
+    modals:
+      template:
+        owner_creator_footer_template:
+          creator_at: "%{creator_upper} at"

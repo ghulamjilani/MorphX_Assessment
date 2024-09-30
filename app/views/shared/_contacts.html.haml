@@ -1,0 +1,11 @@
+- users.each do |user|
+  .list-group-item{"data-name" => user.public_display_name || user.email, "data-email" => user.email}
+    = image_tag(user.avatar_url, alt: user.public_display_name, class: 'some-class', width: 16, height: 16)
+    %strong
+      = user.public_display_name || user.email
+    .buttons
+      = link_to '#',
+        class: defined?(link_class) ? link_class : 'modal_add_contact',
+        data: { email: user.email, target_input: target_input } do
+        %i.VideoClientIcon-iPlus
+%span.fallback{style: ( 'display:none;' unless users.size.zero? )}= I18n.t('no_results.no_contacts')

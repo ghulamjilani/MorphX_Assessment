@@ -1,0 +1,234 @@
+//shadow color
+$mainShadowColor:var(--sh__main);
+
+
+@mixin btn-mod($size:3rem, $fontSize:1.3rem, $minWidth:12rem) {
+  line-height: $size - .15;
+  border-radius: 4rem;
+  -webkit-border-radius: 4rem;
+  font-size: $fontSize;
+  min-width: $minWidth;
+  min-height: $size;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold;
+  padding: 0 2rem;
+  cursor: pointer;
+  position: relative;
+  .spinnerSlider {
+    top: 50%;
+
+    div {
+      height: 1.6rem;
+      width: 1.6rem;
+    }
+  }
+}
+
+@mixin btn-mod-BG-and-borders($bg:var(--btn__main), $border:var(--btn__main)) {
+  background: $bg;
+  border: 1px solid $border; //only in px
+}
+
+@mixin transition($who:all, $transition : 0.2s, $transition_style: cubic-bezier(0.4, 0.0, 0.2, 1)) {
+  -webkit-transition: $who $transition $transition_style;
+  -moz-transition: $who $transition $transition_style;
+  -o-transition: $who $transition $transition_style;
+  transition: $who $transition $transition_style;
+}
+
+@mixin media($point) {
+  @if $point == reverso-xxl-desktop {
+    @media all and (min-width: 2000px) {
+      @content;
+    }
+  }
+  @if $point == reverso-xl-desktop {
+    @media all and (min-width: 1312px) {
+      @content;
+    }
+  }
+  @if $point == xl-desktop {
+    @media all and (max-width: 1312px) {
+      @content;
+    }
+  }
+  @if $point == reverso-desktop {
+    @media all and (min-width: 1251px) {
+      @content;
+    }
+  }
+  @if $point == desktop {
+    @media all and (max-width: 1250px) {
+      @content;
+    }
+  }
+  @if $point == tablet-desktop {
+    @media all and (min-width: 992px) and (max-width: 1250px) {
+      @content;
+    }
+  }
+  @if $point == tablet {
+    @media all and (max-width: 991px) { //991px если оставить 891px то айфоны типа 12 max pro не попадают м мобильный брейкпоинт в лендскейпе поскольку имеют 968 относительных PX ширины
+      @content;
+    }
+  }
+  @if $point == reverso-tablet {
+    @media all and (min-width: 992px) { //992px
+      @content;
+    }
+  }
+  @if $point == p-tablet {
+    @media all and (max-width: 767px) {
+      @content;
+    }
+  }
+  @if $point == reverso-p-tablet {
+    @media all and (min-width: 768px) {
+      @content;
+    }
+  }
+  @if $point == p-tablet-tablet {
+    @media all and (min-width: 882px) and (max-width: 991px) {
+      @content;
+    }
+  }
+  @if $point == tablet-p-tablet {
+    @media all and (min-width: 768px) and (max-width: 891px) { //992px
+      @content;
+    }
+  }
+  @if $point == tablet-phone {
+    @media all and (min-width: 641px) and (max-width: 892px) { //992px
+      @content;
+    }
+  }
+  @if $point == reverso-phone {
+    @media all and (min-width: 641px) {
+      @content;
+    }
+  }
+  @if $point == phone {
+    @media all and (max-width: 640px) {
+      @content;
+    }
+  }
+  @if $point == p-phone {
+    @media all and (max-width: 480px) {
+      @content;
+    }
+  }
+  @if $point == reverso-p-phone {
+    @media all and (min-width: 481px) {
+      @content;
+    }
+  }
+  @if $point == p-phone-tablet {
+    @media all and (min-width: 481px) and (max-width: 991px) { //992px
+      @content;
+    }
+  } @else {
+    @media all and ($point) {
+      @content;
+    }
+  }
+}
+
+//hyphens
+@mixin hyphens($mode: auto) {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  // Non standard for webkit
+  word-break: break-word;
+
+  -webkit-hyphens: $mode;
+  -moz-hyphens: $mode;
+  -ms-hyphens: $mode; // IE10+
+  -o-hyphens: $mode;
+  hyphens: $mode;
+}
+
+// CENTERING
+@mixin center($position) {
+  position: absolute;
+  @if $position == 'v' {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  } @else if $position == 'h' {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%);
+  } @else if $position == 'vh' {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin text__ellipsis($ellipsisRows:false) {
+  @if ($ellipsisRows) {
+    display: -webkit-box;
+    -webkit-line-clamp: $ellipsisRows;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  } @else {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin flex($flex_type:flex, $flex_align:false, $flex_justify:false, $flex_direction:false, $flex_wrap:false, $justify_content:false, $align_items:false) {
+  display: $flex_type;
+  @if $flex_align {
+    align-items: $flex_align;
+  }
+  @if $flex_justify {
+    justify-content: $flex_justify;
+  }
+  @if $flex_direction{
+    flex-direction: $flex_direction
+  }
+  @if $flex_wrap{
+    flex-wrap:$flex_wrap
+  }
+  @if $justify_content{
+    justify-content:$justify_content
+  }
+  @if $align_items{
+    align-items:$align_items
+  }
+}
+
+@mixin boxShadow__main($boxShadow__color:$mainShadowColor){
+  box-shadow: 0 4px 7px 0 $boxShadow__color;
+}
+
+@mixin bg_cover() {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@mixin transition200($who: all, $time: 0.2s , $animationType: cubic-bezier(0.4, 0.0, 0.2, 1)) {
+  -webkit-transition: $who $time $animationType;
+  transition: $who $time $animationType;
+}

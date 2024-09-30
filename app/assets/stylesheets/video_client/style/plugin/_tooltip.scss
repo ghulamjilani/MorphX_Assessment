@@ -1,0 +1,82 @@
+@import "../core/mixin";
+
+.tinytooltip {
+  display: block;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 5px;
+}
+.tinytooltip .arrow {
+  background: transparent;
+  height: 10px;
+  display: block;
+  z-index: 3000;
+  position: relative;
+  margin-bottom: -1px;
+  &:after{
+    content: '';
+    border:10px solid transparent;
+    border-left-color: var(--tp__active);
+    transform: rotate(-90deg);
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    bottom: 0;
+  }
+}
+.tinytooltip .message {
+  background: #ccc;
+  padding: 8px;
+  border: 2px solid $siteColorMain;
+  border-radius: 3px;
+  display: block;
+  color: #1e1e1e;
+  font-size: 11px;
+  line-height: 11px;
+  text-align: center;
+  z-index: 2000;
+  position: relative;
+}
+
+[rel=css_tooltip]:hover{
+  position: relative;
+  &:before{
+    content: attr(css_tooltip_text);
+    background: #ccc;
+    padding: 8px;
+    border: 2px solid $siteColorMain;
+    border-radius: 3px;
+    display: block;
+    color: #1e1e1e;
+    font-size: 11px;
+    line-height: 11px;
+    text-align: center;
+    z-index: 2000;
+    position: absolute;
+    top:calc(100% + 9px);
+    left:50%;
+    transform: translateX(-50%);
+  }
+  &:after{
+    content: '';
+    border:10px solid transparent;
+    border-left-color: var(--tp__active);
+    transform: rotate(-90deg);
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    bottom: -10px;
+  }
+  &.ban_kick{
+    &:before{
+      transform: translateX(-80%);
+    }
+  }
+}
+.btnMasivGroup{
+  [rel=css_tooltip]:hover{
+    &:after{
+      left: 14%;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+en:
+  frontend:
+    app:
+      uikit:
+        m_blocking_message:
+          wrong: "Something went wrong please try again later"

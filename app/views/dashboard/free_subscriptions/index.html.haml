@@ -1,0 +1,59 @@
+- content_for(:extra_body_classes, "dashboards-subscriptions header-top dashboards")
+- content_for(:page_title, 'Free Subscriptions')
+
+
+.row
+  %aside.col-md-3.left-side-bar
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+
+  .col-md-9.main-content-section
+    .row
+      .col-md-12
+        = form_tag(dashboard_free_subscriptions_path, method: :post, multipart: true, class: 'form_V2') do
+          %section
+            .row
+              .col-md-3
+                = file_field_tag :file, class: 'padding-top-10', accept: '.csv'
+              .col-md-1
+                .padding-top-10 Or
+              .col-md-3
+                .input-block{class: 'state-clear'}
+                  = email_field_tag :email, nil, placeholder: 'Email'
+            .row.select-tag-block
+              .col-md-1.text-color-Darkgrey
+                = label_tag :months, 'Duration'
+              .col-md-6
+                = select_tag :months, options_for_select([['1 Month', '1'], ['3 Months', '3'], ['6 Months', '6'], ['1 Year', '12']]), class: 'fs-16 padding-top-5 styled-select styled-select_withCss full-width'
+            .row.select-tag-block
+              .col-md-1.text-color-Darkgrey
+                = label_tag :channel_id, 'Channel'
+              .col-md-6
+                = select_tag :channel_id, options_for_select(current_user.current_organization.channels.map {|ch| [ch.title, ch.id]}), class: 'fs-16 padding-top-5 styled-select styled-select_withCss full-width'
+            = submit_tag 'Invite', class: 'btn btn-l'
+    .row
+      .col-md-12
+        .session-table.fht-table-wrapper
+          %table.table.table-hover.table-dashed-border.table-striped.responsiveTable.full-width
+            %thead
+              %tr
+                %th First Name
+                %th Last Name
+                %th Email
+                %th Channel
+                %th Start Date
+                %th End Date
+                %th Duration
+                %th Last Login
+            %tbody
+              - @subscriptions.each_with_index do |free_subscription, i|
+                %tr
+                  %td{"data-th":"First Name"}= free_subscription.user.first_name
+                  %td{"data-th":"Last Name"}= free_subscription.user.last_name
+                  %td{"data-th":"Email"}= free_subscription.user.email
+                  %td{"data-th":"Channel"}= link_to(free_subscription.channel.title, free_subscription.channel.relative_path)
+                  %td{"data-th":"Start Date"}= free_subscription.starts_at.in_time_zone(current_user.timezone)&.strftime('%d %b %I:%M %p %Z')
+                  %td{"data-th":"End Date"}= free_subscription.end_at&.in_time_zone(current_user.timezone)&.strftime('%d %b %I:%M %p %Z')
+                  %td{"data-th":"Duration"}= free_subscription.duration_in_months.present? ? pluralize(free_subscription.duration_in_months, 'Month') : 'Unlimited'
+                  %td{"data-th":"Last Login"}= free_subscription.user.last_sign_in_at&.in_time_zone(current_user.timezone)&.strftime('%d %b %I:%M %p %Z')
+          .text-center
+            = paginate @subscriptions

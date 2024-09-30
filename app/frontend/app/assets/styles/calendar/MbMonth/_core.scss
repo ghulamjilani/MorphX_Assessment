@@ -1,0 +1,201 @@
+.mb-month {
+  position: relative;
+
+  .loading {
+    position: absolute;
+    z-index: 1;
+    top: 3rem;
+    left: 0.1rem;
+    right: 0.2rem;
+    bottom: 0;
+    border-radius: 2rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    //background: var(--bg__content);
+    //border: 1px solid var(--border__separator);
+    //box-shadow: inset -.5rem -.5rem 1rem var(--sh__main), inset .5rem .5rem 1rem var(--sh__main);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .spinnerSlider > div {
+      background-color: #b5b5b5;
+    }
+  }
+
+  html .low & {
+    .sc-table {
+      .sc-thead {
+        .sc-cell {
+          &:last-child {
+            padding-right: 1.1rem;
+          }
+        }
+      }
+    }
+
+    .sc-tbody {
+      max-height: 18rem;
+      overflow-y: scroll;
+    }
+  }
+
+  html .overlay & {
+    height: calc(100% - 4rem);
+
+    @media only screen and (max-width: 76.7rem) {
+      height: calc(100% - 10.8rem);
+      overflow-y: auto;
+    }
+
+    .sc-table {
+      height: 100%;
+
+      .sc-thead {
+        &.tbody-has-scrool-bar {
+          .sc-cell {
+            &:last-child {
+              padding-right: 1rem;
+            }
+          }
+        }
+      }
+
+      .sc-tbody {
+        height: calc(100% - 3.6rem);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+
+        .sc-row {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .sc-table {
+    width: 100%;
+    text-align: center;
+    background-blend-mode: soft-light, normal;
+    border: 2px solid var(--border__separator);
+    box-sizing: border-box;
+    box-shadow: inset -.5rem -.5rem 1rem var(--sh__main), inset .5rem .5rem 1rem var(--sh__main);
+    border-radius: 2rem;
+    overflow: hidden;
+
+    position: relative;
+
+    .displayNoItemsWrap {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      padding-top: 10%;;
+      background-color: #4747470d;
+
+      .displayNoItems {
+        @include center(vh);
+        display: inline-block;
+        max-width: 38rem;
+        width: 70%;
+        background: var(--bg__content);
+        font-size: 1.6rem;
+        color: var(--tp__main);
+        padding: 2rem;
+        border: 2px solid var(--bg__label);
+        border-radius: 1rem;
+      }
+    }
+
+    .sc-row {
+      width: 100%;
+      display: flex;
+    }
+
+    .sc-cell {
+      flex: 1;
+      overflow: hidden;
+
+      &:not(.today).past {
+        background-color: rgba(168, 168, 168, 0.11);
+      }
+    }
+
+    .sc-thead {
+      background-color: var(--bg__label);
+      padding-left: 1rem;
+
+      .sc-row {
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.7);
+
+        .sc-cell {
+          line-height: 2em;
+          border-right: 1px solid rgba(0, 0, 0, 0.2);
+          text-align: left;
+          padding-left: .8rem;
+
+          &.today {
+            color: var(--tp__h1);
+          }
+
+          &:last-child {
+            border: none;
+          }
+        }
+      }
+    }
+
+    .sc-tbody {
+      padding-left: 1rem;
+
+      .sc-row {
+        border-bottom: 1px solid #E5E5E5;
+
+        &:last-child {
+          border: none;
+        }
+
+        .sc-cell {
+          min-height: 6.4rem;
+          border-right: 1px solid #E5E5E5;
+          text-align: left;
+
+          &:last-child {
+            border: none;
+          }
+
+          &.today {
+            .date {
+              span {
+                color: #0e7790;
+              }
+            }
+          }
+
+          .date {
+            color: var(--tp__main);
+            text-align: right;
+            font-weight: bold;
+            padding-right: 1rem;
+          }
+
+          .more-btn {
+            cursor: pointer;
+            color: white;
+            background: var(--bg__label);
+            margin: .5rem 0 .5rem .5rem;
+            width: 4rem;
+            height: 2rem;
+            border-radius: 1rem;
+            font-weight: 500;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

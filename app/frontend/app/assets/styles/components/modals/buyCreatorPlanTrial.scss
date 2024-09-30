@@ -1,0 +1,53 @@
+.buyCreatorPlanTrial {
+  padding: 0;
+
+  .buyCreatorPlan__left-part__planWrapper__head {
+    min-height: 4rem;
+  }
+
+  .buyCreatorPlan__left-part__planWrapper__body {
+    padding-bottom: 0;
+
+    &__plants {
+      .plant2 {
+        right: 4rem;
+      }
+    }
+
+    &__description {
+      margin-top: 2rem;
+      text-align: left;
+      min-width: 33rem;
+      max-width: 33rem;
+      @include media(p-tablet) {
+        min-width: 100%;
+        max-width: 100%;
+      }
+
+      > b {
+        display: block;
+        font-size: 1.4rem;
+        padding-bottom: 1.5rem;
+      }
+
+      div {
+        color: var(--tp__secondary);
+        font-size: 1.4rem;
+
+        &:not(:last-child) {
+          padding-bottom: 1rem;
+        }
+      }
+    }
+  }
+
+  .MK2-modal__dialog {
+    padding: 0;
+  }
+
+  .MK2-modal__body {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+  }
+}

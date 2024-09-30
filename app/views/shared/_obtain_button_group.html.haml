@@ -1,0 +1,81 @@
+- immersive_interactor  = ObtainImmersiveAccessToSession.new(session, current_user)
+- livestream_interactor = ObtainLivestreamAccessToSession.new(session, current_user)
+- recorded_interactor   = ObtainRecordedAccessToSession.new(session, current_user)
+- recording_interactor  = ObtainAccessToRecording.new(recording, current_user)
+
+- display_immerss_me = immersive_interactor.could_be_obtained_and_not_pending_invitee? || livestream_interactor.could_be_obtained_and_not_pending_invitee? || (recorded_interactor.could_be_obtained? && session.room.vod_is_fully_ready == true)
+
+- if !display_immerss_me
+  - # do nothing
+- else
+  .dropdown.dropdown-list.full-width
+    %a.mainButton.bigBtn.dropdown-toggle.full-width.ensure-link-style{'data-toggle' => 'dropdown', style: 'font-size: 10px'}
+      = "#{Rails.application.credentials.global[:service_name]} Me <i class='VideoClientIcon-angle-downF'></i><i class='VideoClientIcon-angle-upF' style='display: none'></i>".html_safe
+
+    %ul.dropdown-menu.full-width
+      - if immersive_interactor.could_be_obtained_and_not_pending_invitee?
+        - if immersive_interactor.can_have_free_trial?
+          %li
+            = degradable_link_to preview_purchase_channel_session_path(session.slug, type: ObtainTypes::FREE_IMMERSIVE),
+                                 remote: true,
+                                 class: 'clearfix' do
+              .pull-left Interactive
+              %span.pull-right Free Trial
+              .clearfix
+              .text-right.small-font
+                = "available (#{session.immersive_free_slots - session.session_participations.where(free_trial: true).count} of #{session.immersive_free_slots})"
+
+        - if immersive_interactor.can_take_for_free?
+          %li
+            = degradable_link_to preview_purchase_channel_session_path(session.slug, type: ObtainTypes::FREE_IMMERSIVE),
+                                 remote: true,
+                                 class: 'clearfix' do
+              .pull-left Interactive
+              %span.pull-right= as_currency(session.immersive_purchase_price)
+              .clearfix
+              .text-right.small-font
+                = "available (#{session.line_slots_left} of #{session.max_number_of_immersive_participants})"
+
+        - if immersive_interactor.could_be_purchased?
+          %li
+            = degradable_link_to preview_purchase_channel_session_path(session.slug, type: ObtainTypes::PAID_IMMERSIVE),
+                                 remote: true,
+                                 class: 'clearfix' do
+              .pull-left Interactive
+              %span.pull-right= as_currency(session.immersive_purchase_price)
+              .clearfix
+              .text-right.small-font
+                = "available (#{session.line_slots_left} of #{session.max_number_of_immersive_participants})"
+
+      - if livestream_interactor.could_be_obtained_and_not_pending_invitee?
+        - if livestream_interactor.can_have_free_trial?
+          %li
+            = degradable_link_to preview_purchase_channel_session_path(session.slug, type: ObtainTypes::FREE_LIVESTREAM),
+                                 remote: true,
+                                 class: 'clearfix' do
+              .pull-left Livestream
+              %span.pull-right Free Trial
+
+        - if livestream_interactor.can_take_for_free?
+          %li
+            = degradable_link_to preview_purchase_channel_session_path(session.slug, type: ObtainTypes::FREE_LIVESTREAM),
+                                 remote: true,
+                                 class: 'clearfix' do
+              .pull-left Livestream
+              %span.pull-right= as_currency(session.livestream_purchase_price)
+
+        - if livestream_interactor.could_be_purchased?
+          %li
+            = degradable_link_to preview_purchase_channel_session_path(session.slug, type: ObtainTypes::PAID_LIVESTREAM),
+                                 remote: true,
+                                 class: 'clearfix' do
+              .pull-left Livestream
+              %span.pull-right= as_currency(session.livestream_purchase_price)
+
+      - if recorded_interactor.could_be_obtained? && (session.room.vod_is_fully_ready == true || Rails.env.development?)
+        %li
+          = degradable_link_to preview_purchase_channel_session_path(session.slug, type: ObtainTypes::PAID_VOD),
+                               remote: true,
+                               class: 'clearfix' do
+            .pull-left On-Demand
+            %span.pull-right= as_currency(session.recorded_purchase_price)

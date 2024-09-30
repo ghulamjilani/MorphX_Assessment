@@ -1,0 +1,316 @@
+- @poll = {} unless @poll
+- content_for(:extra_body_classes, 'sessions-edit-create-form')
+%input{type: :hidden, name: 'session[invited_users_attributes]', value: @users.to_json}
+
+.create-update-abstract-session
+  = f.inputs do
+    %h4.groupTitle General information
+    .FormBoxWithTooltip
+      - readonly = f.object.session_participations.present? || f.object.livestreamers.present?
+      = f.input :title,
+                label: 'Session Title',
+                wrapper_html: {class: 'custom-input'},
+                input_html: readonly ? { class: 'maxlength-tooltip', readonly: true } : { class: 'maxlength-tooltip', placeholder: 'Type in your session title...' }
+      %i.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: "Choose a title that best describes your Session. This will help users on #{Rails.application.credentials.global[:service_name]} and search engines find your content."}
+
+    .special-block
+      %a#sessionDescriptionLink{href: 'javascript: void(0);'}
+        Session Description
+        %span.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: 'Use this field to describe your Session. By default, it will display the description you entered when you created your Channel.'}
+        %i.VideoClientIcon-angle-downF
+        %i.VideoClientIcon-angle-upF
+
+      = render 'shared/bootsy', {f: f, form_name: :session, field: :description, label: '', required: true, maxlength: LONG_TEXTAREA_MAX_LENGTH }
+
+    .input-line.clearfix
+      .custom-input.style-select
+        %label.control-label
+          Presenter:
+          %abbr{title: :required} *
+        .select-level{style: 'display:inline-block; width:auto; vertical-align: top;'}
+          = f.input :presenter_id,
+                    as: :select,
+                    collection: @presenters.collect(&:values),
+                    include_blank: false,
+                    required: true,
+                    label: false,
+                    input_html: {class: 'styled-select'}
+        %span.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: 'Who will be a presenter for this Session?'}
+
+    - if f.object.display_level?
+      .input-line.clearfix
+        .custom-input.style-select
+          %label.control-label
+            Skill Level:
+          .select-level{style: 'display: inline-block; width: 120px; vertical-align: top;'}
+            = f.input :level,
+                      as: :select,
+                      collection: Session.valid_levels,
+                      include_blank: true,
+                      label: false,
+                      input_html: level_session_form_field_input_html_value(f.object)
+          %span.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: 'What level of prior knowledge do participants need for this Session?'}
+
+    .custom-input
+      = f.input :age_restrictions,
+                as: :radio,
+                collection: age_restrictions_collection,
+                label: 'Age Restrictions',
+                input_html: adult_session_form_field_input_html_value(f.object)
+      -#.info.none You have claimed that this session contains no materials of adult nature
+      -#.info.adult
+      -#.info.major
+
+    .custom-input
+      #session_adult_input.boolean.input.control-group
+        %label.choice.checkbox{for: :session_adult}
+          %input{name: 'session[adult]', type: :hidden, value: 0}
+          %input#session_adult{name: 'session[adult]', type: :checkbox, value: 1, checked: f.object.adult}
+          %span{style: 'text-transform: none;'} Media contains sensitive or adult content
+
+    %h4.groupTitle.margin-top-20 Options:
+    - immersive_type_errors = f.object.errors[:immersive_type]
+    - if immersive_type_errors.present?
+      .error
+        %span.help-inline= immersive_type_errors.join(', ')
+
+    - session_json = @session.to_json(methods: Session.underscorjs_additional_methods).html_safe
+    - content_for(:after_include_javascripts) do
+      :javascript
+        (function(){
+          var session = new Session(#{session_json});
+
+          $(document).ready(function() {
+            window.deliveryMethodsView = new DeliveryMethodsView({
+              model: session,
+              lists: #{@lists.to_json},
+              studios: #{@studios.to_json},
+              studio_rooms: #{@studio_rooms.to_json},
+              ffmpegservice_accounts: #{@ffmpegservice_accounts.to_json}
+            });
+            deliveryMethodsView.render();
+
+
+            var immersive_is_allowed = function() { return (deliveryMethodsView.model.get('immersive') == 1) };
+            var livestream_is_allowed = function() { return (deliveryMethodsView.model.get('livestream') == 1) };
+
+            models     = _.map(#{@users.to_json}, function(item) { return new InvitedUser(item) });
+            collection = new window.InvitedUserCollection(models);
+            window.sessionInviteUserModalView = new SessionInviteUserModalView({
+              contacts: #{@contacts.to_json},
+              users: collection,
+              immersive_is_allowed: immersive_is_allowed,
+              livestream_is_allowed: livestream_is_allowed
+            });
+            sessionInviteUserModalView.render();
+
+            new DropboxAssetsView();
+          });
+        })();
+
+    #delivery-methods-placeholder.margin-bottom-20
+
+    %h4.groupTitle.margin-top-30 Invites
+
+    .row
+      .col-md-6
+        .custom-input.users.personslists
+          %label.control-label Participants
+
+          %button.btn.btn-sm.pull-right.btn-invite{data: {target: '#invite-user-modal', toggle: :modal}, type: :button}
+            %i.VideoClientIcon-paper-planeF
+            Invite
+
+          #invite-user-modal.modal.fade{aria: {hidden: true, labelledby: 'myModalLabel'}, role: :dialog, tabindex: -1}
+            .modal-dialog
+              .modal-content
+                = render partial: 'become_presenter_steps/close_modal'
+                .modal-body
+                  .unobtrusive-flash-container
+                  %h1.heading
+                    Participants
+                  #session-invite-user-modal-placeholder
+
+      - unless Rails.env.production?
+        .col-md-6
+          .custom-input.sources.personslists
+            %label.control-label Sources
+            = render 'sessions/modal_sources', f: f
+
+  .special-block
+    %a#customDescriptionFieldValueLink{href: 'javascript: void(0);'}
+      Additional Info.
+      %span.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: "Want your participants to be prepared for your Session? Give them any additional information they need for an engaging experience, e.g. a recipe, extra equipment, or special instructions."}
+      %i.VideoClientIcon-angle-downF
+      %i.VideoClientIcon-angle-upF
+    .control-group
+      .margin-top-10.margin-bottom-10
+        %select.styled-select{name: 'session[custom_description_field_label]', style: 'width:200px'}
+          - CustomDescriptionFieldLabel.order(description: :asc).each do |obj|
+            - if obj.description.downcase == 'description' || obj.description == f.object.custom_description_field_label
+              %option{value: obj.description, selected: 'seleted'}= obj.description
+            - else
+              %option{value: obj.description}= obj.description
+      = render 'shared/bootsy', {f: f, form_name: :session, field: :custom_description_field_value, label: '', required: false, maxlength: LONG_TEXTAREA_MAX_LENGTH }
+
+  -# if %w(new create).include?(params[:action])
+    .special-block
+      - # Slava I need you here :)
+      %a{id: "pollLink", href: "javascript: void(0);"}
+        Poll
+        %span.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: ""}
+        %i.VideoClientIcon-angle-downF
+        %i.VideoClientIcon-angle-upF
+      .control-group
+        .margin-top-10.margin-bottom-10.poll-fields
+          -#%label.control-label Poll Category
+          -#.row.mb20
+            .col-md-3
+              .controls
+                = select_tag 'session[poll][categoryId]', options_for_select(@poll_categories, @poll['categoryId']), include_blank: true, class: 'styled-select full-width', placeholder: 'Chose Category'
+          %label.control-label Poll Question
+          .controls.mb20
+            = text_field_tag 'session[poll][question]', @poll['question']
+          %label.control-label Poll Image Url
+          .controls.mb20
+            = text_field_tag 'session[poll][image_url]', @poll['image_url']
+          %label.control-label Poll Answers
+          - if @poll['sides']
+            %ol
+              - @poll['sides'].each_with_index do |side, i|
+                %li.controls
+                  = text_field_tag "session[poll][sides][][answer]", side['answer']
+                  - if side['id']
+                    = hidden_field_tag "session[poll][sides][#{i}][id]", side['id']
+          - else
+            %ol
+              - # we need at least 2 answers
+              - 2.times do
+                %li.controls{type: '1'}
+                  = text_field_tag "session[poll][sides][][answer]", nil
+        - # allow only on creating poll
+        - if @poll.blank?
+          = link_to '#', class: 'add_answer mainButton btn-withIcon' do
+            Add answer
+            %i.VideoClientIcon-plusF
+
+  .special-block
+    %a#twitterWidgetHashtag{href: 'javascript: void(0);'}
+      Twitter Hashtag
+      %span.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: 'Please provide hashtag'}
+      %i.VideoClientIcon-angle-downF
+      %i.VideoClientIcon-angle-upF
+    .control-group
+      .margin-top-10.margin-bottom-10
+        = f.input :twitter_feed_title,
+                    label: 'Twitter Hashtag',
+                    wrapper_html: {class: 'custom-input'},
+                    input_html: { class: 'maxlength-tooltip', placeholder: 'Type in your twitter hashtag...' }
+
+  %h4.groupTitle
+    Supporting Materials
+    %span.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: 'If you have any additional required files for your Session, upload them here via Dropbox. Your participants will be able to use these files before or during your Session.'}
+  #dropbox-materials
+
+%div
+  = f.input :start_now, as: :hidden
+
+  -# Nav tabs
+  %ul.nav.nav-tabs{role: :tablist}
+    %li{role: :presentation, class: f.object.start_now ? :active : nil}
+      %a{href: '#start_now', aria: {controls: :start_now}, role: :tab, data: {toggle: :tab}} Start Now
+    %li{role: :presentation, class: f.object.start_now ? nil : :active}
+      %a{href: '#schedule', aria: {controls: :schedule}, role: :tab, data: {toggle: :tab}} Schedule
+    -#%li{role: :presentation}
+      %a{href: '#cancel', aria: {controls: :cancel}, role: :tab, data: {toggle: :tab}} Cancel
+
+  -# Tab panes
+  .tab-content
+    #start_now.tab-pane{role: :tabpanel, class: f.object.start_now ? :active : nil}
+      .input-line.clearfix
+        .custom-input.style-select
+          .w120.select-period.select-duration
+            - duration_attributes = [:duration,
+                                 as: :select,
+                                 collection: f.object.valid_durations.collect { |i| ["#{i} mins", i] },
+                                 required: true,
+                                 input_html: {style: 'width: 100%'},
+                                 wrapper_html: {class: 'custom-input'}]
+            - duration_attributes.last[:input_html] = { disabled: true } if !f.object.can_change_duration?
+            = f.input *duration_attributes
+
+      %button.btn.btn-primary{style: 'float: right', type: :submit, data: {form: :session_form}} Create Session
+
+    #schedule.tab-pane{role: :tabpanel, class: f.object.start_now ? nil : :active}
+      .input-line.clearfix
+        .custom-input.style-select
+          %label.start-at.control-label
+            Date
+            %abbr{title: :required} *
+          .w120.select-date
+            - if f.object.can_change_start_at?
+              %input#datepicker1.styled-datepicker{type: :text}
+            - else
+              %input.styled-datepicker.disabled.readonly{type: :text, readonly: true, style: 'background-color: #f4f4f4; border-color: #ddd', disabled: true}
+
+        .custom-input.style-select
+          - start_at_attributes = [:start_at,
+                                   as: :time_select,
+                                   minute_step: 15,
+                                   wrapper_html: {class: 'style-select'},
+                                   ampm: current_user.try(:am_format?),
+                                   label: 'Start Time',
+                                   disabled: f.object.start_now,
+                                   include_blank: false]
+          - start_at_attributes.last[:input_html] = { disabled: true } if !f.object.can_change_start_at?
+          = f.input *start_at_attributes
+
+      .input-line.clearfix
+        .custom-input.style-select
+          .w120.select-period.select-duration
+            - duration_attributes = [:duration,
+                                 as: :select,
+                                 collection: @session.valid_durations.collect { |i| ["#{i} mins", i] },
+                                 required: true,
+                                 input_html: {style: 'width: 100%'},
+                                 disabled: f.object.start_now,
+                                 wrapper_html: {class: 'custom-input'}]
+            - duration_attributes.last[:input_html] = { disabled: true } if !f.object.can_change_duration?
+            = f.input *duration_attributes
+      .custom-input
+        #session_autostart_input.boolean.input.control-group
+          %label.choice.checkbox{for: :session_autostart}
+            %input{name: 'session[autostart]', type: :hidden, value: 0}
+            %input#session_autostart{name: 'session[autostart]', type: :checkbox, value: 1, checked: f.object.autostart}
+            %span{style: 'text-transform: none;'} Autostart
+
+        .custom-input.style-select
+          .w120.select-period.select-prep-time
+            = f.input :pre_time,
+                  as: :select,
+                  label: 'Prep-Time',
+                  collection: Session::PRE_TIME.map{ |t| ["#{t} mins", t]},
+                  include_blank: false,
+                  disabled: f.object.start_now,
+                  input_html: f.object.can_change_start_at? ? {style: 'width: 100%'} : {style: 'width: 100%', disabled: true}
+          %span.margin-top-25.VideoClientIcon-q5.text-color-main{rel: :tipsy, title: 'The amount of time you would like to prepare before your Session starts, e.g. adjust your camera, take a deep breath, or check your clothing.'}
+
+      %button.btn.btn-primary{style: 'float: right', type: :submit, data: {form: :session_form}} Create Session
+
+      - content_for(:after_include_javascripts) do
+        :javascript
+          $(document).ready(function() {
+            $('.styled-datepicker').val("#{f.object.start_at.strftime('%m/%d/%Y')}");
+            $('#datepicker1').attr('readonly', 'readonly')
+              .datepicker({
+                showOn: "button",
+                setDate: "#{f.object.start_at.strftime('%m/%d/%Y')}",
+                onSelect: function() {
+                  var date = $('#datepicker1').datepicker('getDate');
+
+                  $('[id*=start_at_1i]').val( date.getFullYear() );  //hidden year
+                  $('[id*=start_at_2i]').val( date.getMonth() + 1 ); //hidden month(starts with 0)
+                  $('[id*=start_at_3i]').val( date.getDate() );      //hidden day
+                }
+              })
+          });

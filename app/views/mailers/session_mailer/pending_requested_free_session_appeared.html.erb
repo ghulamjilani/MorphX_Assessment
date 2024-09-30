@@ -1,0 +1,7 @@
+<p>
+  New session <%= link_to @session.always_present_title, @session.absolute_path %> has just appeared with "requested free session" option.
+</p>
+
+<p>
+  You can adjust its status by following <%= link_to 'this link', service_admin_panel_session_url(@session.id) %>
+</p>

@@ -1,0 +1,13 @@
+[Unit]
+Description=router of the cluster
+Requires=mongodb-config-1.service mongodb-config-2.service mongodb-config-3.service mongodb-shard-1.service
+
+[Service]
+ExecStart=/opt/bitnami/mongodb/bin/router.sh
+Type=forking
+PIDFile=/opt/bitnami/mongodb/tmp/mongodb-router.pid
+LimitNOFILE=64000
+LimitNPROC=64000
+
+[Install]
+WantedBy=multi-user.target

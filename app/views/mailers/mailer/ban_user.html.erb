@@ -1,0 +1,1 @@
+<%= simple_format I18n.t("mailer.banned.#{@abstract_session.class.to_s.downcase}.body", abstract_session_link: @abstract_session_link, reason: @reason) %>

@@ -1,0 +1,46 @@
+= cache("shared/channel/#{channel.cache_key}/#{current_user.try(:cache_key)}") do
+  %section.thumbnails.thumbnail-kenburn.kontainer.channel-tile
+    .presentation-img-Wrapper
+      %a.sessionBoxImg{href: channel.relative_path, style: ''}
+        %div{style: "background-image: url(#{asset_path(channel.image_preview_url)});"}
+        - if defined?(display_googleplay_icon) && display_googleplay_icon
+          %span.playVidio
+            %i.icon-googleplay
+        %div.hiddenText
+          .sessionBox_title
+            %span{title: channel.always_present_title}
+              = channel.always_present_title
+          .sessionBox_title_sub
+            by
+            %span.UserName #{channel.organizer.public_display_name}
+        .sessionBoxImgOverlay
+      .social-sharing-block
+        =  degradable_link_to channel.toggle_like_relative_path, method: :post, remote: true, class: ["like-block", like_class(channel), "channel-like-#{channel.id}"].join(' '), title: 'Like' do
+          %i.VideoClientIcon-Favorites
+          %span{class: "likes-counter-channel-#{channel.id}"}
+            = channel.likes_count unless channel.likes_count.zero?
+
+        - if can?(:share, channel)
+          = link_to channel.preview_share_relative_path, method: :get, rel: 'nofollow', remote: true, class: "social-sharing", title: 'Share' do
+            %i.VideoClientIcon-share-mk4
+      %span.userAvatar
+        = link_to spa_user_path(channel.organizer.slug) do
+          = image_tag channel.organizer.small_avatar_url
+          %span.UserName #{channel.organizer.public_display_name}
+
+      .caption
+        %h4
+          %a.channel-link{href: channel.relative_path}
+            %span{title: channel.always_present_title}
+              = channel.always_present_title
+          .clear
+      .actions
+        %ul.clearfix
+          %li.numberOfViews
+            %a{title:'number of views'}
+              %span.num-s
+                - #this is how we inject actual views counter into cached template
+                = ":views_replacement_placeholder:"
+              %i.VideoClientIcon-Views
+          %li.ratingWrapper
+            = raw star_rating(numeric_rating_for(channel))

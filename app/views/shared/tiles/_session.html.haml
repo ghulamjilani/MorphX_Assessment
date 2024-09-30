@@ -1,0 +1,82 @@
+- attributes = url_attrs(session)
+%section.tile-cake.session-tile{id: "session_tile_#{session.id}", class: (defined?(custom_class) ? custom_class : '' )}
+  .tile-img
+    .tile-imgContainer.owl-lazy{alt: '', 'data-src': session.small_cover_url}
+    %a.tile_link{href: session.relative_path}
+    - if can?(:share, session)
+      = link_to session.preview_share_relative_path, method: :get, rel: :nofollow, remote: true, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, class: 'social-sharing', title: 'Share' do
+        %i.VideoClientIcon-share-mk4
+    %a.timeCount.timer{href: session.relative_path, data: attributes, class: attributes[:status] == 'upcoming' ? '' : 'hidden'}
+      %span.time-to-start{data: {id: session.id, roomid: session.room.try(:id), seconds: attributes[:start_at]}}
+        = time_with_tz_in_chosen_format(session.start_at)
+    .sessionStatus.sessionStatus-red{class: attributes[:status] == 'running' || attributes[:status] == 'started' && session.autostart ? '' : 'hidden'}
+      %span Live
+      .liveViewers
+        %i.VideoClientIcon-Views
+        = session.room&.watchers_count || 0
+    .sessionCost
+      - if session.immersive_delivery_method? && !session.immersive_free? || session.livestream_delivery_method? && !session.livestream_free?
+        %i.VideoClientIcon-dollar-currency-symbol
+        .sessionCost-tooltip.fs-12
+          - unless session.livestream_purchase_price.nil?
+            .row
+              .col-xs-6.text-color-Darkgrey.padding-right-0
+                - if session.livestream_purchase_price.zero?
+                  Watch
+                - else
+                  Buy
+              .col-xs-6.text-color-green.text-right
+                - if session.livestream_purchase_price.zero?
+                  Free
+                - else
+                  = number_to_currency(session.livestream_purchase_price.to_f, precision: 2)
+          - unless session.immersive_purchase_price.nil?
+            .row
+              .col-xs-6.text-color-Darkgrey.padding-right-0 Participate
+              .col-xs-6.text-color-green.text-right
+                - if session.immersive_purchase_price.zero?
+                  Free
+                - else
+                  = number_to_currency(session.immersive_purchase_price.to_f, precision: 2)
+            .padding-bottom-5.text-color-LightGrey
+              - if session.line_slots_left.to_i > 0
+                (#{session.line_slots_left} out of #{session.max_number_of_immersive_participants} spots left)
+              - else
+                (Sold Out)
+  .tile-body
+    %a.tile-name{href: session.relative_path, rel: 'tipsy', title: session.title || session.always_present_title}
+      = session.title || session.always_present_title
+    = link_to spa_channel_path(session.channel.slug), class: 'tile-owner text-ellipsis' do
+      By
+      = session.organizer.public_display_name
+    %div
+      %span.ScheduledDate
+        Scheduled for
+        = time_with_tz_in_chosen_format(session.start_at)
+        - if current_user
+          - purchased = can?(:join_as_participant, session) || can?(:join_as_livestreamer, session) && session.livestream_purchase_price > 0
+          - if purchased
+            - if can?(:access_as_subscriber, session)
+              %span.text-color-red Subscribed
+            - else
+              %span.text-color-green Purchased
+
+    - if current_user
+      - if can?(:toggle_remind_me_session, session)
+        - reminder_set = current_user.session_reminders.exists?(session: session)
+        -#.remind_me
+          = link_to toggle_remind_me_session_path(session.slug), remote: true, method: :post, style:'visibility: visible;',
+                    class: "session_reminder btn btn-s btn-borderred-red #{reminder_set ? 'active' : ''}" do
+            %i.VideoClientIcon-Notifications
+            %span= reminder_set ? 'Reminder Set' : 'Set reminder'
+      -#%a.btn.btn-s.joinbtn{href: attributes[:type] == 'livestream' ? session.relative_path : '#', onclick: (attributes[:onclick] unless attributes[:type] == 'livestream'), data: attributes, class: attributes[:status] == 'running' || attributes[:status] == 'started' ? '' : 'hidden'} Join
+    -# - else
+    -#   - if session.upcoming? && !session.in_progress? && !session.running?
+    -#     .remind_me
+    -#       = link_to '#loginPopup', 'data-toggle': :modal, class: 'btn btn-s btn-borderred-red' do
+    -#         %i.VideoClientIcon-Notifications
+    -#         %span Set reminder
+      -#- if can?(:view_free_livestream, session)
+      -#  %a.btn.btn-s.joinbtn{href: session.relative_path, class: attributes[:status] == 'running' || attributes[:status] == 'started' ? '' : 'hidden', data: {view_free_livestream: can?(:view_free_livestream, session)}} Join
+      -#- else
+      -#  %a.btn.btn-s.joinbtn{href: '#loginPopup', 'data-toggle': :modal, class: attributes[:status] == 'running' || attributes[:status] == 'started' ? '' : 'hidden'} Join

@@ -1,0 +1,106 @@
+-# %a.btn-withIcon.btn-grey-solid.btn.btn-l.DashboardNavToggle.ensure-link-style{style: 'display:none;'}
+-#   Dashboard nav
+-#   %i.VideoClientIcon-angle-downF
+-#   %i.VideoClientIcon-angle-upF{style:'display:none'}
+-# .sidebarFlash
+-#   .unobtrusive-flash-container
+.AffixSection.clearfix
+  #ch-vue-app-sidebar
+    = content_tag 'comp-wrapper', nil, data: { component: 'SideBar', props: {}}.to_json
+-# .AffixSection.clearfix
+-#   %ul.nav
+-#     %li{class: active_link_to_class(company_dashboard_path)}
+-#       %a{href: company_dashboard_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.company')
+
+-#     %li{class: [ has_active_class([sessions_presents_dashboard_path, sessions_co_presents_dashboard_path, sessions_participates_dashboard_path, dashboard_path])]}
+-#       %a{href: sessions_presents_dashboard_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.channels')
+
+-#     %li{class: [ has_active_class([replays_dashboard_path, uploads_dashboard_path])]}
+-#       %a{href: replays_dashboard_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.videos')
+
+-#     - if Rails.application.credentials.dig(:global, :is_document_management_enabled) && current_user.current_organization&.active_subscription_or_split_revenue? && current_user.has_any_organization_credential?(current_user.current_organization, :manage_documents)
+-#       %li{class: active_link_to_class(spa_dashboard_documents_path)}
+-#         %a{href: spa_dashboard_documents_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.documents')
+
+-#     - if can?(:manage_channel_subscription, current_user.current_organization)
+-#       %li{class: active_link_to_class(dashboard_subscriptions_path)}
+-#         - if can?(:monetize_content_by_business_plan, current_user.current_organization)
+-#           %a{href: dashboard_subscriptions_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.subscriptions')
+-#         - else
+-#           %a.disabled{href: 'javascript:void(0)', disabled: true, title: 'Not allowed by your Business Plan'}= I18n.t('views.dashboards.navigation.presenter_nav.subscriptions')
+
+-#     - if current_user.current_organization&.user == current_user && current_user.current_organization.enable_free_subscriptions
+-#       %li{class: active_link_to_class(spa_dashboard_free_subscriptions_path)}
+-#         %a{href: spa_dashboard_free_subscriptions_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.free_subscriptions')
+
+-#     - if current_user.current_organization.present?
+-#       %li{class: [has_active_class([spa_dashboard_user_management_users_path, spa_dashboard_user_management_roles_path])]}
+-#         - if can?(:manage_team, current_user.current_organization)
+-#           %a{href: spa_dashboard_user_management_users_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.user_management')
+-#         - elsif can?(:manage_roles, current_user.current_organization)
+-#           %a{href: spa_dashboard_user_management_roles_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.user_management')
+-#         - elsif current_user.current_organization.user == current_user
+-#           %a.disabled{href: 'javascript:void(0)', disabled: true, title: 'Not allowed by your Business Plan'}= I18n.t('views.dashboards.navigation.presenter_nav.user_management')
+
+-#     %li{class: active_link_to_class(spa_dashboard_contacts_path)}
+-#       - if current_user.current_organization&.active_subscription_or_split_revenue? && can?(:manage_contacts_and_mailing_by_business_plan, current_user.current_organization)
+-#         %a{href: spa_dashboard_contacts_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.contacts_mailing')
+-#       - else
+-#         %a{href: spa_dashboard_contacts_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.contacts')
+
+-#     - if can?(:manage_product, current_user.current_organization)
+-#       %li{class: active_link_to_class(dashboard_lists_path)}
+-#         - if can?(:access_products_by_business_plan, current_user.current_organization)
+-#           %a{href: dashboard_lists_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.product_lists')
+-#         - else
+-#           %a.disabled{href: 'javascript:void(0)', disabled: true, title: 'Not allowed by your Business Plan'}= I18n.t('views.dashboards.navigation.presenter_nav.product_lists')
+
+-#     - if can?(:access_multiroom_by_business_plan, current_user.current_organization) && can?(:multiroom_config, current_user.current_organization)
+-#       %li{class: [has_active_class([dashboard_studios_path])]}
+-#         %a{href: dashboard_studios_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.studios')
+-#       %li{class: [has_active_class([dashboard_video_sources_path])]}
+-#         %a{href: dashboard_video_sources_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.video_sources')
+
+-#     %li{class: active_link_to_class(wishlist_dashboard_path)}
+-#       %a{href: wishlist_dashboard_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.saved')
+
+-#     - if can?(:manage_blog_post, current_user.current_organization) || can?(:moderate_blog_post, current_user.current_organization)
+-#       %li{class: has_active_class(dashboard_blog_tabs_paths)}
+-#         - if can?(:manage_blog_by_business_plan, current_user.current_organization)
+-#           - if can?(:manage_blog_post, current_user.current_organization)
+-#             %a{href: new_spa_dashboard_blog_post_path, remote: true}
+-#               = I18n.t('views.dashboards.navigation.presenter_nav.community')
+-#           - elsif can?(:moderate_blog_post, current_user.current_organization)
+-#             %a{href: spa_dashboard_blog_posts_path, remote: true}
+-#               = I18n.t('views.dashboards.navigation.presenter_nav.community')
+-#         - else
+-#           %a.disabled{href: 'javascript:void(0)', disabled: true, title: 'Not allowed by your Business Plan'}
+-#             = I18n.t('views.dashboards.navigation.presenter_nav.community')
+
+-#     - if current_user.current_organization&.active_subscription_or_split_revenue? && can?(:moderate_comments_and_reviews, current_user.current_organization)
+-#       %li{class: [has_active_class([spa_dashboard_reviews_path])]}
+-#         %a{href: spa_dashboard_reviews_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.reviews')
+
+-#       %li{class: [has_active_class([spa_dashboard_comments_path])]}
+-#         %a{href: spa_dashboard_comments_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.comments')
+
+-#     %li{class: [has_active_class([earnings_dashboard_money_index_path, payouts_dashboard_money_index_path, products_earnings_dashboard_money_index_path, purchases_dashboard_money_index_path, my_subscriptions_dashboard_money_index_path])]}
+-#       - if current_user.current_organization && can?(:refund, current_user.current_organization)
+-#         %a{href: earnings_dashboard_money_index_path, remote: true}= my_money_dashboard_nav_title
+-#       - else
+-#         %a{href: purchases_dashboard_money_index_path, remote: true}= my_money_dashboard_nav_title
+
+-#     - if Rails.application.credentials.frontend.dig(:dashboard, :menu, :history)
+-#       %li{class: active_link_to_class(dashboard_history_index_path)}
+-#         %a{href: dashboard_history_index_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.browsing_history')
+
+-#     - if Rails.application.credentials.frontend.dig(:dashboard, :menu, :statistics) && can?(:view_statistics, current_user.current_organization)
+-#       %li{class: [has_active_class([dashboard_statistics_path])]}
+-#         %a{href: dashboard_statistics_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.statistics')
+
+-#     %li{class: active_link_to_class(edit_referral_dashboard_path)}
+-#       %a{href: edit_referral_dashboard_path, remote: true}= I18n.t('views.dashboards.navigation.presenter_nav.referrals')
+
+-#   = render 'dashboards/navigation/followers_and_followings'
+= render partial: 'shared/follow', locals: {object: current_user, id: 'following',  followers: false}
+= render partial: 'shared/follow', locals: {object: current_user, id: 'followers', followers: true}

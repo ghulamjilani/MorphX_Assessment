@@ -1,0 +1,29 @@
+
+var triggeredNotFromLobby = $('body').hasClass('sessions') || $('body').hasClass('dashboards');
+if (triggeredNotFromLobby) {
+  <% # updating reviews tab first %>
+  <%= render template: 'reviews/rate' %>
+  <% if @comment.valid? %>
+    var container = $(".modal[aria-hidden=false]");
+    if (container.length == 0) {
+      alert("can not find active modal window");
+    } else {
+      container.modal('hide');
+    }
+    if ($('body').hasClass('sessions')) {
+      $('[href*=modal_review]').hide();
+    }
+  <% else %>
+    <% # do nothing - err is displayed via unobtrusive_flash %>
+  <% end %>
+} else {
+  // FYI: success message is displayed via unobtrusive_flash
+
+  //NOTE: waiting for response from Alex on how to handle it
+  //it is still "Please wait" until that response is executed, that's why
+  //var $reviewButton = $('button:contains(eview), button:contains(Please)'); // add vs post review vs Review etc
+  //if ($reviewButton.length != 1) {
+  //  throw new Error("$reviewButton container could not be fould");
+  //}
+  //$reviewButton.html('Update Review');
+}

@@ -1,0 +1,4 @@
+.link_Share_block
+  %label= interactive_access_token.title
+  %input{type: :text, value: CGI.unescape(interactive_access_token.absolute_url), readonly: true, size: 70}
+  %a.btn.btn-s.btn-borderred-grey{href: '#', onclick: 'copyToClipboard(this); return false'} copy

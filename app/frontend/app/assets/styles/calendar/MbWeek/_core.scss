@@ -1,0 +1,151 @@
+.mb-week {
+  width: 100%;
+
+  html .low & {
+    .sc-table {
+      .sc-thead {
+        padding-right: 1rem;
+      }
+
+      .sc-tbody {
+        max-height: 30rem;
+        overflow-y: scroll;
+      }
+    }
+  }
+
+  html .overlay & {
+    height: calc(100% - 4rem);
+
+    @media only screen and (max-width: 76.7rem) {
+      height: calc(100% - 10.8rem);
+      overflow-y: auto;
+
+      .sc-table {
+        .sc-tbody {
+          overflow: auto;
+        }
+      }
+    }
+
+    .sc-table {
+      height: 100%;
+
+      .sc-thead {
+        .sc-cell {
+          line-height: 2em;
+
+          &:last-child {
+            padding-right: 1rem;
+          }
+        }
+      }
+
+      .sc-tbody {
+        height: calc(100% - 3.6rem);
+        overflow-y: scroll;
+
+        .sc-row {
+          height: auto;
+          min-height: 100%;
+        }
+      }
+    }
+  }
+
+  .sc-table {
+    width: 100%;
+    text-align: center;
+    background-blend-mode: soft-light, normal;
+    border: 0.2rem solid #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: inset -.5rem -.5rem 1rem var(--sh__main), inset .5rem .5rem 1rem var(--sh__main);
+    border-radius: 2rem;
+    overflow: hidden;
+
+    .sc-row {
+      width: auto;
+      display: flex;
+    }
+
+    .sc-cell {
+      flex: 1;
+      overflow: hidden;
+
+      &.today {
+        .date {
+          span {
+            color: #0e7790;
+            font-weight: 500;
+            padding: 1vw;
+            border-radius: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+
+      &:not(.today).past {
+        background-color: var(--bg__main);
+      }
+
+      .date {
+        display: none;
+        padding: 2.5vw;
+        @media screen and (max-width: 80rem) {
+          display: block;
+        }
+      }
+    }
+
+    .sc-thead {
+      background-color: var(--bg__label);
+      padding-left: 1rem;
+
+      .sc-row {
+        text-align: left;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.7);
+
+        .sc-cell {
+          padding-left: .8rem;
+          line-height: 2em;
+          border-right: 0.1rem solid rgba(0, 0, 0, 0.2);
+
+          &:last-child {
+            border: none;
+          }
+
+          &.today {
+            color: white;
+          }
+
+          .fulldate {
+            display: inline;
+
+            @media screen and (max-width: 80rem) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .sc-tbody {
+      padding-left: 1rem;
+      height: 18rem;
+
+      .sc-row {
+        min-height: 100%;
+
+        .sc-cell {
+          min-height: 6.4rem;
+          border-right: 0.1rem solid #f2f2f2;
+
+          &:last-child {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}

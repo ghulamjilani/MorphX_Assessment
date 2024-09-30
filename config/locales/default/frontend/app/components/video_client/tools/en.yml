@@ -1,0 +1,34 @@
+en:
+  frontend:
+    app:
+      components:
+        video_client:
+          tools:
+            invite_participants: Invite Participants
+            leave: Leave
+            manage_participants: Manage Participants
+            participants_screen_share: Participants Screen Share
+            participants: Participants
+            settings: Settings
+            start_share: Share Screen
+            stop_share: Stop Share
+            layouts:
+              grid: Grid
+              horizontal: Horizontal
+              presenter_only: Presenter Only
+              vertical: Vertical
+            tooltips:
+              camera_off: Camera Off
+              camera_on: Camera On
+              chat: Chat
+              exit: Exit
+              full_screen: Full Screen
+              layout: Layout
+              mic_off: Mic Off
+              mic_on: Mic On
+              participants: Participants
+              share_unavailable: Share is unavailable
+              start_share: Share Screen
+              stop_share: Stop Share
+              video_background: Video Background
+              create_polls: Create Polls

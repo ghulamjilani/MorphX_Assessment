@@ -1,0 +1,17 @@
+development:
+  environment: 'sandbox'
+  merchant_id: 'y4996t6yt5nkwqhb'
+  public_key: '8dbqych9tgwq4x65'
+  private_key: 'ntjb48pjv9vfj5s3'
+
+test:
+  environment: 'sandbox'
+  merchant_id: 'y4996t6yt5nkwqhb'
+  public_key: '8dbqych9tgwq4x65'
+  private_key: 'ntjb48pjv9vfj5s3'
+
+qa:
+  environment: 'sandbox'
+  merchant_id: 'y4996t6yt5nkwqhb'
+  public_key: '8dbqych9tgwq4x65'
+  private_key: 'ntjb48pjv9vfj5s3'

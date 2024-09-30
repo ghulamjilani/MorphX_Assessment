@@ -1,0 +1,520 @@
+$circleButtonSPAN_pr1:$MainVideoButton-size * 0.138;
+$circleButtonSPAN_pr2:$MainVideoButton-size * 0.454;
+$circleButtonSPAN_pr3:$MainVideoButton-size * 0.7272;
+$circleButtonSPAN_Border-width:0.2rem;
+
+
+$animation-del:1s;
+$animation-del-int:0.2;
+
+
+
+.MainVideoButton{
+  display: inline-block;
+  margin: 0 auto 1.5rem;
+  vertical-align: top;
+  cursor: pointer;
+  position: relative;
+  z-index: 9;
+  width: $MainVideoButton-size;
+  height: $MainVideoButton-size;
+  border-radius: $MainVideoButton-size * 0.5;
+  -webkit-border-radius: $MainVideoButton-size * 0.5;
+  border: 0.2rem solid transparent;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count:infinite;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-name: pulse-1-light-border;
+  animation-name: pulse-1-light-border;
+  -webkit-animation-delay:$animation-del ;
+  -moz-animation-delay:$animation-del;
+  -o-animation-delay:$animation-del ;
+  animation-delay:$animation-del ;
+
+  .playButton{
+    display: none;
+    z-index: 19;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+    vertical-align: middle;
+    width: $MainVideoButton-size;
+    height: $MainVideoButton-size;
+    border-radius: $MainVideoButton-size * 0.5;
+    -webkit-border-radius: $MainVideoButton-size * 0.5;
+    border: 0.2rem solid $MainVideoButton-color-blue;
+    background-color: $MainVideoButton-color-blue;
+    position: absolute;
+    left: -0.2rem;
+    top: -0.2rem;
+    span{
+      color: #ffffff;
+      font-size: $MainVideoButton-size * 0.7;
+      line-height: $MainVideoButton-size - 4;
+      display: block;
+      padding: 0.1rem 0 0 0.2rem;
+      &.VideoClientIcon-pause2{
+        padding: 0.1rem 0 0 0rem;
+      }
+    }
+  }
+  .circleButton{
+    padding: $MainVideoButton-size / 6;
+    position: relative;
+    z-index: 9;
+    height: $MainVideoButton-size;
+
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-name: pulse-1-light-border;
+    animation-name: pulse-1-light-border;
+    -webkit-animation-delay:$animation-del ;
+    -moz-animation-delay:$animation-del;
+    -o-animation-delay:$animation-del ;
+    animation-delay:$animation-del ;
+    span{
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+      position: absolute;
+      top: ( $MainVideoButton-size * 0.5 );
+      left: ( $MainVideoButton-size * 0.5 );
+      -webkit-animation-duration: 3s;
+      animation-duration: 3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count:infinite;
+      -webkit-animation-iteration-count:infinite;
+      @include transition();
+      &:nth-child(1){
+        width: $circleButtonSPAN_pr1;
+        height: $circleButtonSPAN_pr1;
+        border-radius: $circleButtonSPAN_pr1 * 0.5;
+        -webkit-border-radius: $circleButtonSPAN_pr1 * 0.5;
+        background-color: $MainVideoButton-color-grey;
+        margin-top:-(($circleButtonSPAN_pr1 * 0.5) + ($circleButtonSPAN_Border-width ));
+        margin-left:-(($circleButtonSPAN_pr1 * 0.5) + ($circleButtonSPAN_Border-width ));
+        -webkit-animation-name: pulse-2-light;
+        animation-name: pulse-2-light;
+        -webkit-animation-delay:$animation-del ;
+        -moz-animation-delay:$animation-del ;
+        -o-animation-delay:$animation-del ;
+        animation-delay:$animation-del ;
+      }
+      &:nth-child(2){
+        width: $circleButtonSPAN_pr2;
+        height: $circleButtonSPAN_pr2;
+        border-radius: $circleButtonSPAN_pr2 * 0.5;
+        -webkit-border-radius: $circleButtonSPAN_pr2 * 0.5;
+        margin-top:-(($circleButtonSPAN_pr2 * 0.5) + ($circleButtonSPAN_Border-width ));
+        margin-left:-(($circleButtonSPAN_pr2 * 0.5) + ($circleButtonSPAN_Border-width ));
+
+        border-color: transparent $MainVideoButton-color-DarkGrey;
+        border-style: solid;
+        border-width: $circleButtonSPAN_Border-width;
+
+        -webkit-animation-name: pulse-1-light;
+        animation-name: pulse-1-light;
+        -webkit-animation-delay:$animation-del ;
+        -moz-animation-delay:$animation-del ;
+        -o-animation-delay:$animation-del ;
+        animation-delay:$animation-del ;
+      }
+      &:nth-child(3){
+        width: $circleButtonSPAN_pr3;
+        height: $circleButtonSPAN_pr3;
+        border-radius: $circleButtonSPAN_pr3 * 0.5;
+        -webkit-border-radius: $circleButtonSPAN_pr3 * 0.5;
+        margin-top:-(($circleButtonSPAN_pr3 * 0.5) + ($circleButtonSPAN_Border-width ));
+        margin-left:-(($circleButtonSPAN_pr3 * 0.5) + ($circleButtonSPAN_Border-width ));
+
+        border-color: transparent $MainVideoButton-color-DarkGrey;
+        border-style: solid;
+        border-width: $circleButtonSPAN_Border-width;
+
+        -webkit-animation-name: pulse-1-light;
+        animation-name: pulse-1-light;
+        -webkit-animation-delay:$animation-del ;
+        -moz-animation-delay:$animation-del;
+        -o-animation-delay:$animation-del ;
+        animation-delay:$animation-del ;
+      }
+    }
+  }
+  &.INTRdefault, .INTR-BRB{
+    .playButton{
+      -webkit-animation-duration: 3s;
+      animation-duration: 3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count:infinite;
+      -webkit-animation-iteration-count:infinite;
+      -webkit-animation-name: pulse-4-widh-border-background;
+      animation-name:  pulse-4-widh-border-background;
+    }
+  }
+  &.INTR-BRB{
+    .playButton{
+      background: #787878 !important;
+      border-color: #787878 !important;
+    }
+  }
+
+  &.PlayINTR{
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-name: pulse-3;
+    animation-name: pulse-3;
+    -webkit-animation-delay:$animation-del - ($animation-del-int * 1);
+    -moz-animation-delay:$animation-del - ($animation-del-int * 1);
+    -o-animation-delay:$animation-del - ($animation-del-int * 1);
+    animation-delay:$animation-del - ($animation-del-int * 1);
+    .circleButton{
+      span{
+        &:nth-child(1){
+          -webkit-animation-name: pulse-2;
+          animation-name: pulse-2;
+          -webkit-animation-delay:$animation-del - ($animation-del-int * 4);
+          -moz-animation-delay:$animation-del - ($animation-del-int * 4);
+          -o-animation-delay:$animation-del - ($animation-del-int * 4);
+          animation-delay:$animation-del - ($animation-del-int * 4);
+        }
+        &:nth-child(2){
+          -webkit-animation-name: pulse-1;
+          animation-name: pulse-1;
+          -webkit-animation-delay:$animation-del - ($animation-del-int * 3);
+          -moz-animation-delay:$animation-del - ($animation-del-int * 3);
+          -o-animation-delay:$animation-del - ($animation-del-int * 3);
+          animation-delay:$animation-del - ($animation-del-int * 3);
+        }
+        &:nth-child(3){
+          -webkit-animation-name: pulse-1;
+          animation-name: pulse-1;
+          -webkit-animation-delay:$animation-del - ($animation-del-int * 2);
+          -moz-animation-delay:$animation-del - ($animation-del-int * 2);
+          -o-animation-delay:$animation-del - ($animation-del-int * 2);
+          animation-delay:$animation-del - ($animation-del-int * 2);
+        }
+      }
+    }
+  }
+  &:hover, &.INTRdefault, &.INTR-BRB{
+    .playButton{
+      display: block;
+      .VideoClientIcon-pause2{
+        display: none;
+      }
+    }
+    &.PlayINTR{
+      .playButton{
+        display: block;
+        .VideoClientIcon-pause2{
+          display: block !important;
+        }
+        .VideoClientIcon-play3{
+          display: none !important;
+        }
+      }
+    }
+  }
+  &.waitResponse{
+    border-color: transparent $MainVideoButton-color-blue !important;
+    -webkit-animation-name: spinnerRotate;
+    animation-name: spinnerRotate;
+    -webkit-animation-delay:$animation-del - ($animation-del-int * 1);
+    -moz-animation-delay:$animation-del - ($animation-del-int * 1);
+    -o-animation-delay:$animation-del - ($animation-del-int * 1);
+    animation-delay:$animation-del - ($animation-del-int * 1);
+    .playButton{
+      display: none !important;
+    }
+    span{
+      border-color:transparent $MainVideoButton-color-blue !important;
+      &:nth-child(1){
+        background-color:$MainVideoButton-color-blue !important ;
+      }
+      &:nth-child(2){
+        -webkit-animation-name: spinnerRotate;
+        animation-name: spinnerRotate;
+        -webkit-animation-delay:$animation-del - ($animation-del-int * 4);
+        -moz-animation-delay:$animation-del - ($animation-del-int * 4);
+        -o-animation-delay:$animation-del - ($animation-del-int * 4);
+        animation-delay:$animation-del - ($animation-del-int * 4);
+      }
+      &:nth-child(3){
+        -webkit-animation-name: spinnerRotate;
+        animation-name: spinnerRotate;
+        -webkit-animation-delay:$animation-del - ($animation-del-int * 2);
+        -moz-animation-delay:$animation-del - ($animation-del-int * 2);
+        -o-animation-delay:$animation-del - ($animation-del-int * 2);
+        animation-delay:$animation-del - ($animation-del-int * 2);
+      }
+    }
+  }
+}
+.slideWrapper{
+  @include transition();
+  -webkit-transform: translateX(-3.4rem);
+  -ms-transform: translateX(-3.4rem);
+  transform: translateX(-3.4rem);
+  opacity: 0;
+  display: inline-block;
+}
+.recordBytton{
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 0.9rem;
+  color: $MainVideoButton-color-LightGrey;
+  line-height: 0;
+  font-size: 2.2rem;
+  opacity: 0.6;
+  z-index: 1;
+  @include transition();
+}
+.record{
+  .slideWrapper{
+    -webkit-transform: translateX(0rem);
+    -ms-transform: translateX(0rem);
+    transform: translateX(0rem);
+    opacity: 1;
+  }
+  .recordBytton{
+    &:hover:not(.disabled){
+      color:#fff;
+    }
+    &.active{
+      color: $video-volor-red;
+      -webkit-animation-duration: 2s;
+      animation-duration: 2s;
+      -webkit-animation-fill-mode:both;
+      animation-fill-mode: both;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count:infinite;
+      -webkit-animation-iteration-count:infinite;
+      -webkit-animation-name: pulse-5-red;
+      animation-name:  pulse-5-red;
+    }
+  }
+}
+section.state{
+  width: 10rem;
+  span{
+    color: #fff;
+    font-size: 1.4rem;
+    text-align: center;
+    vertical-align: top;
+    height: $MainVideoButton-size;
+    line-height: $MainVideoButton-size;
+    min-width: 7rem;
+    padding: 0 1rem;
+    display: none;
+    &.live{
+      background: $video-volor-red;
+      text-transform: uppercase;
+    }
+    &.GreenRoom{
+      background: $video-volor-green;
+    }
+    &.offAir{
+      background: $video-volor-grey;
+    }
+  }
+  &.live{
+    .live{
+      display: inline-block;
+    }
+  }
+  &.offAir{
+    .offAir{
+      display: inline-block;
+    }
+  }
+  &.GreenRoom{
+    .GreenRoom{
+      display: inline-block;
+    }
+  }
+}
+.timeCounterWrapp{
+  &>.timeCounter{
+    top: -3px;
+  }
+}
+.timeCounter{
+  display: inline-block;
+  line-height: 1rem;
+  position: relative;
+  vertical-align: baseline;
+  cursor: pointer;
+}
+.timeCountericon{
+  position: relative;
+  cursor: pointer;
+  z-index: 99;
+  i{
+    &.VideoClientIcon-three-quarters-of-an-hour{
+      font-size: 2.1rem;
+    }
+  }
+  .hoverSection{
+    position: absolute;
+    left: -8rem;
+    top: -0.7rem;
+    height: $header-height;
+    white-space: nowrap;
+    background: #fff;
+    display: none;
+    z-index: 99;
+    .timeCounter{
+      height: 70%;
+      position: relative;
+      top: 15%;
+      line-height: 2.4rem;
+      padding: 0 1.5rem;
+      span{
+        line-height: 2.5rem;
+      }
+    }
+    &  *{
+      height: $header-height;
+      line-height: $header-height;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: top;
+      color: $video-volor-grey;
+      @include transition();
+    }
+    a{
+      padding: 0 0.8rem;
+      position: relative;
+      z-index: 99;
+      cursor: pointer !important;
+      i.VideoClientIcon-add{
+        margin-left: 0.2rem;
+      }
+      &:hover{
+        background: $siteColorMain;
+        color: #fff;
+        i{
+          color: #fff;
+        }
+      }
+    }
+  }
+  &:hover{
+    .hoverSection{
+      display: block;
+    }
+  }
+
+}
+
+@-webkit-keyframes pulse-1 {
+  0% {border-color: transparent $MainVideoButton-color-blue;}
+  100% { border-color: transparent $MainVideoButton-color-DarkBlue; }
+}
+@keyframes pulse-1 {
+  0% {border-color: transparent $MainVideoButton-color-blue;}
+  100% { border-color: transparent $MainVideoButton-color-DarkBlue; }
+}
+@-webkit-keyframes pulse-2 {
+  0% {background-color:  $MainVideoButton-color-blue;}
+  100% { background-color:  $MainVideoButton-color-DarkBlue; }
+}
+@keyframes pulse-2{
+  0% {background-color:  $MainVideoButton-color-blue;}
+  100% { background-color:  $MainVideoButton-color-DarkBlue; }
+}
+@-webkit-keyframes pulse-3 {
+  0% {border-color:  $MainVideoButton-color-blue;}
+  100% { border-color:  $MainVideoButton-color-DarkBlue; }
+}
+@keyframes pulse-3 {
+  0% {border-color:  $MainVideoButton-color-blue;}
+  100% { border-color:  $MainVideoButton-color-DarkBlue; }
+}
+
+@-webkit-keyframes pulse-2-light {
+  0% {background-color:$MainVideoButton-color-LightGrey;}
+  100% { background-color:$MainVideoButton-color-grey; }
+}
+@keyframes pulse-2-light{
+  0% {background-color:  $MainVideoButton-color-LightGrey;}
+  100% { background-color:  $MainVideoButton-color-grey; }
+}
+@-webkit-keyframes pulse-1-light {
+  0% {border-color:transparent  $MainVideoButton-color-LightGrey;}
+  100% { border-color:transparent  $MainVideoButton-color-grey; }
+}
+@keyframes pulse-1-light {
+  0% {border-color:transparent  $MainVideoButton-color-LightGrey;}
+  100% { border-color:transparent  $MainVideoButton-color-grey; }
+}
+@-webkit-keyframes pulse-4-widh-border-background {
+  0% {background-color:  $MainVideoButton-color-blue;border-color:$MainVideoButton-color-blue }
+  100% { background-color:  $MainVideoButton-color-DarkBlue;border-color:$MainVideoButton-color-DarkBlue; }
+}
+@keyframes pulse-4-widh-border-background{
+  0% {background-color:  $MainVideoButton-color-blue;border-color:$MainVideoButton-color-blue}
+  100% { background-color:  $MainVideoButton-color-DarkBlue;border-color:$MainVideoButton-color-DarkBlue; }
+}
+@-webkit-keyframes pulse-5-red{
+  0% {color:  $video-volor-red;}
+  50% { color:  #fff;}
+  100% {color:  $video-volor-red;}
+}
+@keyframes pulse-5-red{
+  0% {color:  $video-volor-red;}
+  50% { color:  #fff;}
+  100% {color:  $video-volor-red;}
+}
+@-webkit-keyframes pulse-1-light-border {
+  0% {border-color:$MainVideoButton-color-LightGrey;}
+  100% { border-color:$MainVideoButton-color-grey; }
+}
+@keyframes pulse-1-light-border {
+  0% {border-color: $MainVideoButton-color-LightGrey;}
+  100% { border-color: $MainVideoButton-color-grey; }
+}
+
+@-webkit-keyframes spinnerRotate{
+  from{-webkit-transform:rotate(0deg);transform: rotate(0deg);}
+  to{-webkit-transform:rotate(360deg);transform: rotate(360deg);}
+}
+@keyframes spinnerRotate{
+  from{-moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);}
+  to{-moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);}
+}
+
+.hiddenButtonsVideo a{
+  position: relative;
+  &#inCallButtonStopStreaming i {
+    font-size: 2.5rem;
+    padding-left: 0;
+  }
+}

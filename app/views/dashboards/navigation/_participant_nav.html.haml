@@ -1,0 +1,24 @@
+.sidebarFlash
+  .unobtrusive-flash-container
+.AffixSection.clearfix
+  #ch-vue-app-sidebar
+    = content_tag 'comp-wrapper', nil, data: { component: 'SideBar', props: {}}.to_json
+-# .AffixSection.clearfix
+-#   %ul.nav
+-#     %li{class: has_active_class(dashboard_channel_tabs_paths)}
+-#       %a{href: default_dashboard_tab_path, remote: true}= I18n.t('views.dashboards.navigation.participant_nav.channels')
+-#     %li{class: [ has_active_class([replays_dashboard_path, uploads_dashboard_path])]}
+-#       %a{href: replays_dashboard_path, remote: true}= I18n.t('views.dashboards.navigation.participant_nav.videos')
+-#     %li{class: active_link_to_class(spa_dashboard_contacts_path)}
+-#       %a{href: spa_dashboard_contacts_path, remote: true}= I18n.t('views.dashboards.navigation.participant_nav.contacts')
+-#     %li{class: active_link_to_class(wishlist_dashboard_path)}
+-#       %a{href: wishlist_dashboard_path, remote: true}= I18n.t('views.dashboards.navigation.participant_nav.saved')
+-#     %li{class: [has_active_class([purchases_dashboard_money_index_path, my_subscriptions_dashboard_money_index_path])]}
+-#       %a{href: purchases_dashboard_money_index_path, remote: true}= my_money_dashboard_nav_title
+-#     - if Rails.application.credentials.frontend.dig(:dashboard, :menu, :history)
+-#       %li{class: active_link_to_class(dashboard_history_index_path)}
+-#         %a{href: dashboard_history_index_path, remote: true}= I18n.t('views.dashboards.navigation.participant_nav.browsing_history')
+
+-#   = render "dashboards/navigation/followers_and_followings"
+= render partial: 'shared/follow', locals: {object: current_user, id: 'following',  followers: false}
+= render partial: 'shared/follow', locals: {object: current_user, id: 'followers', followers: true}

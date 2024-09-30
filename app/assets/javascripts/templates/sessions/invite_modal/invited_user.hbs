@@ -1,0 +1,13 @@
+{{!--INFO: statusList for data-status Pending - Accepted - Declined--}}
+<div class='InviteViewersAndCoHosts-user'>
+    <a class="avatarImg-SD" data-status="{{status}}" href="#" data-email="{{email}}" style="background-image: url('{{avatar_url}}')"
+       data-avatarDot-color="{{#if (eq this.state 'livestream')}}yellow{{else if (eq this.state 'co-presenter')}}red{{else}}blue{{/if}}"></a>
+    <a href="{{#if slug}}/{{slug}}{{else}}mailto:{{email}}{{/if}}" target="_blank" class='user-info-tile'>
+        <span class='avatarImg-SD' style="background-image: url('{{avatar_url}}')"></span>
+        <div class='user-info-tile_name text-ellipsis text-color-Darkgrey fs-14'>{{display_name}}</div>
+        <div class='user-info-tile_formatted_state text-color-LightGrey fs-12'>Role: <span class="text-color-Darkgrey">{{formatted_state}}</span></div>
+
+        {{!--INFO: statusList for .user-info-tile_status Pending - Accepted - Declined--}}
+        <span class='user-info-tile_status {{status}} text-color-LightGrey fs-12'>Invitation: <span>{{status}}</span></span>
+    </a>
+</div>

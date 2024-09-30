@@ -1,0 +1,45 @@
+@import "mixin";
+
+.textPage{
+  h4{
+    color: var(--tp__main);
+    margin: 30px 0  15px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid $font-color-main-ultra-light;
+    padding-bottom: 5px;
+  }
+  p{
+    text-align: justify;
+  }
+  li{
+    padding-bottom: 10px;
+  }
+  hr{
+    margin-top: 0;
+  }
+  a{
+    color: var(--tp__active);
+  }
+  &.TermsConditions{
+    ol{
+
+      & > li{
+        color: var(--tp__main);
+        font-weight: bold;
+        font-size: 18px;
+        p{
+          font-size: 15px;
+          font-weight: normal;
+          strong{
+            font-size: 15px;
+            color: var(--tp__main);
+          }
+        }
+      }
+    }
+  }
+}
+.lower-alpha-list{
+  list-style-type: lower-alpha;
+}

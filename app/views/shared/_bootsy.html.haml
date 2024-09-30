@@ -1,0 +1,15 @@
+- errors = f.object.errors[field]
+- alert_unsaved = true if alert_unsaved.nil?
+- maxlength ||= maxlength
+- discard_html_tags_length = true if discard_html_tags_length.nil?
+%div.custom-input.string.input.stringish.control-group{class: ("#{'error' if !errors.empty?} #{'required' if required}"), id: "#{form_name}_#{field}_input"}
+  %label.control-label{for: "channel_title"}
+    = label
+    - if required
+      %abbr{title: "required"} *
+  .controls.form-control{style: 'border: 0; z-index:9'}
+    = f.bootsy_area field, class: ('error' if !errors.empty?), editor_options: {alert_unsaved: alert_unsaved}, maxlength: maxlength, data: {discard_html_tags_length: discard_html_tags_length}
+  = yield :bootsy_tooltip
+  - if !errors.empty?
+    %span.help-inline
+      = errors.join(' and ')

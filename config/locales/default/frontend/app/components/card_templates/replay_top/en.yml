@@ -1,0 +1,8 @@
+en:
+  frontend:
+    app:
+      components:
+        card_templates:
+          replay_top:
+            replay: Replay
+            private: Private

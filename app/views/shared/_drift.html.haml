@@ -1,0 +1,2 @@
+- if show_drift?
+  = render "shared/drifts/#{Rails.application.credentials.global[:project_name].to_s.downcase}" rescue ""

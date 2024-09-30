@@ -1,0 +1,37 @@
+<div class="ban-reasons">
+  <form method="post" action="{{url}}" accept-charset="UTF-8" class="formtastic" data-remote="true">
+    <input type="hidden" value="✓" name="utf8">
+    <input type="hidden" value="{{token}}" name="authenticity_token">
+
+    <h1 class="heading">{{ i18n 'video.select_ban_reason' }}
+      <a class="close-ban-reason ensure-link-style">
+        <i class="GlobalIcon-clear"></i>
+      </a>
+    </h1>
+    <fieldset class="inputs">
+      <div class="row">
+        <div class="select input control-group">
+          <label class="control-label" for="reason_id">Reason:</label>
+        </div>
+        <div class="controls">
+          <select name="reason_id" id="reason_id">
+            <option value="2">Inappropriate behavior</option>
+            <option value="3">Impolite or inappropriate conversation</option>
+            <option value="4">Inappropriate Display name or avatar</option>
+            <option value="5">Use of profanities</option>
+            <option value="6">Spamming or flooding the room with comments</option>
+            <option value="7">Promoting commercial or affiliated products, services, or websites</option>
+            <option value="8">Posting to commercial URLs or other chat rooms</option>
+            <option value="9">Posting to porn sites</option>
+            <option value="10">Hate speech or inappropriate political or religious conversations</option>
+            <option value="11">Presenter's digression</option>
+            <option value="12">Multiple complains from other users</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+    <div class="row-buttons">
+      <button class="btn btn-block btn-bordered" value="submit" type="submit" name="button" data-disable-with="Please wait…">Ban</button>
+    </div>
+  </form>
+</div>

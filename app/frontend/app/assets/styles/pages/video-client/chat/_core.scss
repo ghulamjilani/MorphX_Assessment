@@ -1,0 +1,138 @@
+@import "message/core";
+@import "notification/core";
+
+.chatMK2 {
+  background: $client__bg__hover;
+  width: 40rem;
+  @include flex(flex, false, space-between);
+  flex-direction: column;
+  padding: 2rem 1.5rem 3rem;
+  z-index: 110;
+  @include media(reverso-tablet) {
+    margin-top: 0.5rem;
+  }
+  @include media(tablet) {
+    position: fixed;
+    width: 100%;
+    z-index: 101;
+    top: auto;
+    bottom: 0;
+    height: calc(100% - 20rem);
+  }
+
+  &__header {
+    position: relative;
+    @include flex(flex, center, space-between);
+    font-size: 1.8rem;
+    padding-bottom: 3rem;
+
+    &__title {
+      font-weight: bold;
+      color: $client__tp__main;
+    }
+
+    &__close {
+      color: $client__tp__secondary;
+      cursor: pointer;
+    }
+
+    &__keyboard {
+      display: none;
+    }
+  }
+
+  &__body {
+    @include media(reverso-tablet) {
+      @include flex(flex, false, flex-start);
+      flex-direction: column;
+    }
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar, ::-webkit-scrollbar {
+      border-radius: .3rem;
+    }
+
+    &__keyboard {
+      margin-bottom: 10rem;
+    }
+  }
+
+  &__footer {
+    margin-top: 1rem;
+    border-radius: .3rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.7rem 1.5rem 1em;
+    color: $client__tp__inputs;
+
+    &__keyboard {
+      border-radius: .3rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.7rem 1.5rem 1em;
+      color: #FFFFFF;
+      position: fixed;
+      bottom: 0;
+      width: calc(100% - 3rem);
+      left: 1.5rem;
+    }
+
+    &__icon {
+      color: $client__tp__icons;
+    }
+
+    .input__field__bottom__smile {
+      color: $client__tp__main__yellow;
+    }
+
+    .input__field__bottom__counter {
+      color: $client__tp__labels;
+    }
+
+    #chatMK2__footer__input {
+      color: $client__tp__inputs;
+      font-size: 1.6rem;
+      padding-right: 2.5rem;
+
+      &::placeholder {
+        color: $client__tp__inputs__placeholder;
+      }
+    }
+
+    .input__field__bottom.bottom__right {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      justify-content: space-between;
+      padding-top: .3rem;
+      @include media(tablet) {
+        justify-content: flex-end;
+      }
+    }
+
+    .input__field__icon {
+      top: 36%;
+    }
+
+    &__emoji {
+      position: absolute;
+      z-index: 10;
+      bottom: 11rem;
+    }
+  }
+
+  .cm__loader {
+    background-color: #282828;
+    width: fit-content;
+    height: fit-content;
+    top: 70px;
+    left: 50%;
+    // height: fit-content;
+    // padding-top: 50vh;
+    .spinnerSlider {
+      top: 20%;
+
+      & > div {
+        background-color: var(--tp__active);
+      }
+    }
+  }
+}

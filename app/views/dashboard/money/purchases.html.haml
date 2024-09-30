@@ -1,0 +1,83 @@
+- content_for(:page_title, I18n.t('views.dashboard.money.purchases.page_title'))
+- content_for(:extra_body_classes, 'dashboards header-top')
+
+-#- content_for(:system_credit_info) do
+  - if current_user.system_credit_balance > 0
+    = %(System Credit: <strong style="margin-right: 0px; padding-right: 7px; border-right: 1px solid #000">#{as_currency(current_user.system_credit_balance)}</strong>).html_safe
+  - if current_user.has_owned_channels?
+    = %(Presenter Balance: <strong>#{as_currency(current_user.presenter_credit_balance)}</strong>).html_safe
+
+    - if current_user.presenter_credit_balance < 0
+      %a.btn.xs{data: {toggle: :modal, target: '#replenishBalanceModal'}, role: :button} Replenish Balance
+
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+
+  .col-md-9.main-content-section
+    = render 'dashboards/navigation/my_money_tabs'
+    .row
+      .col-md-12
+        - if @log_transactions.count > 0
+          .session-table.fht-table-wrapper
+            %table.table.table-hover.table-dashed-border.table-striped.responsiveTable.full-width
+              %colgroup.fht-thead
+                %col{style:'min-width:20%;max-width:20%;'}
+                %col{style:'min-width:20%;max-width:20%;'}
+                %col{style:'min-width:20%;max-width:20%;'}
+                %col{style:'min-width:20%;max-width:20%;'}
+                %col{style:'min-width:20%;max-width:20%;'}
+              %thead
+                %tr
+                  %th=I18n.t('views.dashboard.money.purchases.date')
+                  %th=I18n.t('views.dashboard.money.purchases.type')
+                  %th=I18n.t('views.dashboard.money.purchases.description')
+                  %th=I18n.t('views.dashboard.money.purchases.amount')
+                  %th=I18n.t('views.dashboard.money.purchases.payment_method')
+              %tbody
+                - @log_transactions.each do |log_transaction|
+                  %tr
+                    %td{data: {th: I18n.t('views.dashboard.money.purchases.date')}}
+                      = time_with_tz_in_chosen_format log_transaction.created_at
+                    %td{data: {th: I18n.t('views.dashboard.money.purchases.type')}}
+                      - if log_transaction.abstract_session.is_a?(StripeDb::ServicePlan)
+                        #{t('views.dashboard.money.purchases.sub', service_name: Rails.application.credentials.global[:service_name])}
+                      - else
+                        = log_transaction.type.humanize
+                    %td{data: {th: I18n.t('views.dashboard.money.purchases.description')}}
+                      - if log_transaction.abstract_session.is_a?(StripeDb::ServicePlan)
+                        = log_transaction.abstract_session.nickname
+                      - elsif log_transaction.abstract_session.is_a?(StripeDb::ServiceSubscription)
+                        = log_transaction.abstract_session.stripe_plan.nickname
+                      - else
+                        - if log_transaction.abstract_session.is_a?(Session)
+                          - url = (log_transaction.abstract_session.records.first&.absolute_path || log_transaction.abstract_session.absolute_path)
+                        - elsif log_transaction.abstract_session.respond_to?('absolute_path')
+                          - url = log_transaction.abstract_session.absolute_path
+                        - else
+                          - url = log_transaction.abstract_session&.channel&.absolute_path
+                        - if log_transaction.type == 'purchased_recorded_session' && log_transaction.abstract_session&.records&.first&.title
+                          - if log_transaction.abstract_session&.records&.first
+                            = link_to log_transaction.abstract_session.records.first.title, url, target: '_blank'
+                          - else
+                            Replay
+                        - elsif log_transaction.type == 'booking'
+                          = log_transaction.abstract_session&.name || 'Booking'
+                        - elsif log_transaction.abstract_session
+                          = link_to log_transaction.abstract_session.title, url, target: '_blank'
+                        - else
+                          Session
+                    %td{data: {th: I18n.t('views.dashboard.money.purchases.amount')}}
+                      = as_currency(log_transaction.amount)
+                    %td{data: {th: I18n.t('views.dashboard.money.purchases.payment_method')}}
+                      - if log_transaction&.payment_transaction.is_a?(SystemCreditEntry)
+                        =I18n.t('views.dashboard.money.purchases.system_credit')
+                      - elsif log_transaction&.payment_transaction&.credit_card?
+                        #{log_transaction.payment_transaction.card_type} (#{log_transaction.payment_transaction.credit_card_last_4})
+                      - elsif log_transaction&.payment_transaction&.provider == "paypal"
+                        =I18n.t('views.dashboard.money.purchases.pay_pal')
+
+          .text-center
+            = paginate @log_transactions
+        - else
+          =I18n.t('views.dashboard.money.purchases.no_purchases')

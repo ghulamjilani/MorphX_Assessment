@@ -1,0 +1,1158 @@
+@import "../../core/mixin";
+@import "../../core/helpers";
+
+//TODO: redo html/css
+.header {
+  @include flex(flex, center, space-between);
+  height: 100%;
+  @include media(p-tablet) {
+    flex-direction: column;
+    justify-content: flex-start;
+    transform: translate3d(28rem, 0, 0);
+    width: 28rem;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    transition: transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+    background: var(--bg__main);
+    overflow-y: auto;
+  }
+
+  &__container {
+    background: var(--bg__header);
+    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);
+    height: 5rem;
+    z-index: 1029;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    @include media(reverso-p-tablet) {
+      height: 7rem;
+      padding: 1rem 1rem 1rem 1.7rem;
+    }
+  }
+
+  &__left, &__right {
+    @include flex(flex, center, false);
+    @include media(p-tablet) {
+      width: 100%;
+      justify-content: center;
+      padding: 0 2rem;
+    }
+  }
+
+  &__left {
+    width: 100%;
+    @include media(p-tablet) {
+      padding: 1.5rem 0;
+    }
+  }
+
+  &__right {
+    flex-shrink: 0;
+    @include media(p-tablet) {
+      flex-direction: column;
+    }
+  }
+
+  &__back {
+    width: 3rem;
+    height: 3rem;
+    min-width: 3rem;
+    min-height: 3rem;
+    border-radius: 100%;
+    color: var(--bg__main);//для контраста, чтобы иконка не сливалась с фоном, мы устанавливаем цвет который всегда будет в контрасте на платформе
+    background: var(--tp__main);//нужен темный почти черный фон в светлой теме, лучше всего подойдет цвет текста
+    position: relative;
+    margin-right: 2rem;
+    cursor: pointer;
+    &__icon{
+      font-size: 1.2rem;
+      @include center(vh);
+    }
+  }
+
+  &__logo {
+    max-height: 3.5rem;
+
+    img {
+      opacity: 0;
+      width: 0;
+    }
+
+    img.active {
+      max-height: 3.5rem;
+      width: auto;
+      opacity: 1;
+      max-width: 14.5rem;
+      object-fit: contain;
+    }
+
+    @include media(tablet) {
+      display: none;
+    }
+  }
+
+  &__logo.tabletLogo {
+    @include media(tablet) {
+      display: block;
+    }
+    @include media(reverso-tablet) {
+      display: none;
+    }
+  }
+
+  &__search {
+    width: 100%;
+    max-width: 23.5rem;
+    margin-left: 1rem;
+    font-size: 1.8rem;
+    background: var(--bg__content);
+    border-radius: 2.5rem;
+    display: flex;
+    height: 4rem;
+    padding: 1rem 0 1rem 1.8rem;
+    position: relative;
+    transition: .5s ease;
+    @include media(tablet) {
+      padding: 1rem 2rem;
+      margin-left: 2rem;
+      max-width: 2rem;
+      height: 4rem;
+    }
+
+    input {
+      width: 95%;
+      border: none;
+      color: var(--tp__main);
+      font-size: 1.5rem;
+      background: transparent;
+    }
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+
+      &.GlobalIcon-clear {
+        color: var(--tp__icons);
+      }
+
+      &.GlobalIcon-Search {
+        font-size: 1.8rem;
+        color: var(--btn__main);
+        padding-right: 1rem;
+        //TODO: remove after spa translate
+        &:before {
+          position: relative;
+          display: inline-block;
+          // top: -4px;
+        }
+      }
+    }
+
+    @include media(tablet) {
+      &__searchButton {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: auto;
+        transform: translate(0, -50%);
+      }
+      &__clearButton {
+        padding-right: 1.5rem;
+      }
+    }
+    @include media(p-tablet) {
+      display: none;
+    }
+  }
+
+  &__search.mouseover, &__search.notEmpty {
+    max-width: 32rem;
+  }
+
+  &__navWrapper {
+    @include flex(flex, center, false);
+    @include media(p-tablet) {
+      flex-direction: column-reverse;
+      width: 100%;
+    }
+  }
+
+  &__loginSignUp {
+    font-size: 1.6rem;
+
+    &:hover {
+      color: var(--tp__btn__main__hover);
+      opacity: 0.9;
+      outline: none;
+    }
+
+    &:active {
+      box-shadow: 0.4rem 0.4rem 1rem 0 rgba(0, 0, 0, 0.2) inset;
+    }
+
+    &__confirm13 {
+      margin-top: 2rem;
+      display: block;
+    }
+  }
+
+  &__unauthorizedUser {
+    @include flex(flex, center, false);
+    @include media(p-tablet) {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      width: 100%;
+      > :nth-child(n) {
+        width: 100%;
+        margin-right: 0;
+      }
+      .btn {
+        margin: 1rem 0;
+      }
+    }
+  }
+
+  &__responsiveNav {
+    display: flex;
+    align-items: center;
+    @include media(p-tablet) {
+      @include flex(flex, center, center);
+      width: 100%;
+      margin: 1rem 0;
+      text-align: center;
+      > :first-child a {
+        margin: 0;
+      }
+      button, a {
+        width: 100%;
+        margin-bottom: 2rem;
+        margin-right: 1rem;
+      }
+      &.hideOnMobile {
+        display: none;
+      }
+    }
+  }
+
+  &__responsiveJoin {
+    width: 100%;
+    margin: 1rem 0 2rem;
+
+    .header__joinButton {
+      display: block;
+      width: 100%;
+      @include media(reverso-p-tablet) {
+        display: none;
+      }
+    }
+
+    @include media(reverso-p-tablet) {
+      display: none;
+    }
+  }
+
+  &__wizardButton:not(.btn) {
+    font-size: 1.6rem;
+    padding: 1rem;
+    color: var(--btn__main);
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &:hover {
+      color: var(--btn__main) !important;
+    }
+  }
+
+  &__confirmEmail {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 1rem 0.5rem;
+    z-index: 999;
+    font-size: 1.4rem;
+    border-radius: 2rem;
+    @include flex(flex, center, center);
+
+    span {
+      color: #fff;
+      margin-right: 1rem;
+    }
+
+    button {
+      white-space: nowrap;
+    }
+  }
+
+  &__placeholder {
+    width: 20rem;
+    @include flex(flex, center, space-between);
+    position: absolute;
+    right: 0;
+    @include center('v');
+    padding-right: 1.5rem;
+    @include media(p-tablet) {
+      display: none;
+    }
+
+    &__wrapper {
+      position: relative;
+      height: 100%;
+    }
+
+    &__guest {
+      height: 100%;
+
+      svg {
+        animation: placeholderBounce 2s infinite;
+      }
+    }
+
+    &__current {
+      height: 4rem;
+
+      svg {
+        animation: waveLoading 2s infinite;
+        opacity: 0;
+      }
+
+      svg:nth-child(1) {
+        animation-delay: .25s;
+      }
+
+      svg:nth-child(2) {
+        animation-delay: .5s;
+      }
+
+      svg:nth-child(3) {
+        animation-delay: .75s;
+      }
+
+      svg:nth-child(4) {
+        animation-delay: 1s;
+      }
+
+      // svg{
+      //   height: 0%;
+      //   animation: placeholderBounce 2s infinite;
+      //   -webkit-animation-delay:1s;
+      //   -moz-animation-delay:1s;
+      //   -o-animation-delay:1s;
+      //   animation-delay:1s;
+      // }
+    }
+  }
+
+  &__desctopConfirmEmail {
+    position: fixed;
+    width: 51rem;
+    right: 1.5rem;
+    bottom: 2rem;
+    @include media(p-tablet) {
+      display: none;
+    }
+  }
+
+  &__mobileConfirmEmail {
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.4rem;
+    border-radius: 0.5rem;
+    flex-direction: column;
+    @include media(reverso-p-tablet) {
+      display: none;
+    }
+
+    span {
+      margin: 0;
+    }
+
+    button {
+      margin: 0.5rem 0;
+      width: 100%;
+    }
+  }
+
+  &__joinButton {
+    min-width: 16rem; /**/
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    position: relative;
+
+    .active {
+      transform: rotate(180deg);
+      display: inline-block;
+    }
+  }
+
+  &__sessionsList {
+    max-height: 49rem;
+    max-width: 36.5rem;
+    padding-right: 1rem;
+    overflow-y: auto;
+    @include media(p-tablet) {
+      overflow-y: auto;
+    }
+
+    &__Wrapper {
+      overflow-y: hidden;
+      position: fixed;
+      width: 40rem;
+      right: 12rem;
+      top: 9rem;
+      max-height: 58rem;
+      padding: 2rem;
+      background: var(--bg__dropdowns);
+      box-shadow: 0px 4px 10px var(--sh__main);
+      border-radius: 0.5rem;
+
+      label {
+        line-height: 2.7rem;
+        padding-top: 0.4rem;
+        font-size: 2.2rem;
+        display: block;
+        font-weight: bold;
+        color: var(--tp__main);
+        border-bottom: 1px solid var(--border__separator);
+        margin-bottom: 2rem;
+        text-transform: capitalize;
+      }
+
+      @include media(p-tablet) {
+        position: relative;
+        right: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 2rem 0;
+        label {
+          font-size: 1.4rem;
+          margin-bottom: 2rem;
+        }
+      }
+    }
+
+    &__item {
+      position: relative;
+      background: var(--bg__content__secondary);
+      border-radius: 1rem;
+      padding: 1rem 1rem 1rem 1.2rem;
+      @include flex(flex, flex-start, center);
+      @include media(p-tablet) {
+        min-height: 17.5rem;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+
+      .GlobalIcon-clear {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: var(--tp__icons);
+        cursor: pointer;
+      }
+
+      .avatar {
+        margin-right: 1.2rem;
+        cursor: pointer;
+
+        img {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &__body {
+        width: 100%;
+
+        b {
+          cursor: pointer;
+          font-size: 1.6rem;
+          color: var(--tp__main);
+          &:hover {
+            color: var(--tp__active);
+          }
+        }
+
+        span {
+          font-size: 1.6rem;
+          color: var(--tp__secondary);
+        }
+
+        @include media(p-tablet) {
+          b, span {
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+      &__bottom {
+        @include flex(flex, flex-start, flex-start);
+        flex-direction: column;
+
+        .buy {
+          @include flex(flex, center, space-between);
+          padding-top: 1.2rem;
+          width: 100%;
+          @include media(p-tablet) {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+
+        label {
+          font-size: 1.4rem;
+          font-weight: bold;
+          color: var(--tp__h1);
+          margin-bottom: 1rem;
+          border: none;
+          @include media(p-tablet) {
+            font-size: 1.2rem;
+          }
+        }
+
+        a {
+          font-size: 1.4rem;
+          color: var(--tp__h1);
+          font-weight: bold;
+        }
+
+        span {
+          font-size: 1.2rem;
+          color: var(--tp__secondary);
+        }
+
+        .costAndJoin {
+          @include flex(flex, center, false);
+
+          div {
+            margin-right: 0.5rem;
+          }
+
+          button {
+            max-width: 6rem;
+            min-width: 6rem;
+            min-height: 2rem;
+            max-height: 2rem;
+            line-height: 1.15;
+            padding: 0 1.5rem;
+          }
+        }
+
+        .AcceptDecline {
+          display: none;
+        }
+
+        @include media(p-tablet) {
+          left: -5rem;
+          top: 3rem;
+          position: relative;
+          align-items: flex-start;
+          flex-direction: column;
+          span {
+            margin-bottom: 1.5rem;
+          }
+          .costAndJoin {
+            flex-direction: row-reverse;
+
+            button {
+              margin-right: 0.5rem;
+            }
+          }
+          .AcceptDecline {
+            @include flex(flex, center, false);
+
+            button {
+              min-width: 8rem;
+              max-width: 8rem;
+              min-height: 2rem;
+              max-height: 2rem;
+              line-height: 1.85rem;
+
+              &:first-child {
+                margin-right: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__sessionLinks {
+      position: relative;
+      display: flex !important;
+      align-items: center;
+      flex-direction: row-reverse;
+      padding-left: 0.7rem !important;
+
+      .chips {
+        > div {
+          font-size: 1rem;
+          padding: 1rem;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    @include media(p-tablet) {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    &__next_session {
+      font-size: 1.6rem;
+      color: var(--tp__active);
+      @include media(p-tablet) {
+        padding-right: 2rem;
+      }
+    }
+
+    &__sessionsList {
+      @include media(p-tablet) {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+  }
+
+  &__link {
+    padding: 1rem;
+    font-size: 1.9rem;
+    margin-left: 1rem;
+  }
+
+  &__counter {
+    position: relative;
+
+    &:before {
+      content: attr(data-count);
+      color: var(--tp__btn__main);
+      background-color: var(--bg__label);
+      position: absolute;
+      top: -.5rem;
+      font-weight: bold;
+      right: -.5rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      padding: 0 0.6rem;
+    }
+  }
+
+  &__dropdown {
+    display: none;
+    right: 0;
+    width: 27rem;
+    position: absolute;
+    border-radius: .5rem;
+    background: var(--bg__dropdowns);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    top: 4rem;
+
+    > *:first-child {
+      border-top-left-radius: .5rem;
+      border-top-right-radius: .5rem;
+    }
+
+    > *:last-child {
+      border-bottom-left-radius: .5rem;
+      border-bottom-right-radius: .5rem;
+    }
+
+    &:before {
+      content: '';
+      height: 1.5rem;
+      width: 100%;
+      position: absolute;
+      top: -1.5rem;
+    }
+
+    span { /*/*/
+      //**/
+      position: absolute;
+      left: 1.7rem;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    a {
+      margin: 0;
+      position: relative;
+      text-decoration: none;
+      display: block;
+      color: var(--tp__main);
+      font-size: 1.6rem;
+      line-height: 1.6rem;
+      padding-top: 1.7rem;
+      padding-bottom: 1.7rem;
+      padding-left: 5.5rem;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--border__separator);
+      }
+
+      &:hover {
+        color: #fff;
+        background: var(--tp__active);
+      }
+
+      i:not(.header__organization__icon) {
+        position: absolute;
+        left: 2rem;
+        top: 50%;
+        font-size: 2rem;
+        transform: translateY(-50%);
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &__showDropdown {
+    position: relative;
+
+    &:hover {
+      @include media(reverso-p-tablet) {
+        .showDrop {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__accountMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    background-color: var(--bg__dropdowns);
+    color: var(--tp__main);
+    @include media(reverso-p-tablet) {
+      display: none;
+    }
+
+    a {
+      margin: 0;
+      position: relative;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      font-size: 1.6rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      padding-left: 5.5rem;
+    }
+
+    i:not(.header__organization__icon) {
+      position: absolute;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__toggleModalsButton {
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--tp__active);
+  }
+
+  .UserAvatarDropdown {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+
+    a {
+      display: block;
+      font-size: 1.5rem;
+      @include media(reverso-p-tablet) {
+        @include text__ellipsis();
+      }
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+
+    @include media(p-tablet) {
+      flex-direction: column;
+      margin-left: 0;
+      margin-bottom: 1rem;
+      a {
+        word-break: break-word;
+        text-align: center;
+      }
+    }
+
+    .arrow {
+      padding-left: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  &__accountMenu {
+    @include media(reverso-p-tablet) {
+      display: none;
+    }
+  }
+
+  &__headerFix {
+    height: 7rem;
+    @include media(p-tablet) {
+      height: 5rem;
+    }
+  }
+
+  &__organization {
+    @include flex(flex, center, false);
+    &__limitHeight{
+      max-height: 47vh;
+      overflow: auto;
+    }
+    &__wrapper {
+      width: 100%;
+    }
+
+    &__logo {
+      width: 2rem;
+      height: 2rem;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 0.3rem 0 -0.3rem;
+      position: absolute;
+      left: 2rem;
+      top: 50%;
+      font-size: 2rem;
+      transform: translateY(-50%);
+    }
+
+    &__icon {
+      color: #37A67D;
+      margin-right: 1.5rem;
+    }
+
+    &__name {
+      @include text__ellipsis();
+      width: 100%;
+    }
+
+    &__submenu {
+      background: var(--bg__hover);
+    }
+  }
+}
+
+.header__logo.unite {
+  max-height: none;
+  .header__logo_medium {
+    max-height: 2.4rem;
+  }
+  .header__logo_small {
+    max-height: 4.6rem;
+  }
+}
+
+/* hide join/nex session/start creating button  when user focus header search*/
+.focusHeaderSearch {
+  @include media(desktop) {
+    display: none !important;
+  }
+}
+
+/* //////// */
+.messageModal {
+  .MK2-modal__dialog {
+    padding-top: 0;
+    width: 74rem;
+  }
+
+  .MK2-modal__body {
+    width: 100%;
+  }
+
+  &__item {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border__separator);
+  }
+}
+
+.mobileHeader {
+  display: flex;
+  height: 5rem;
+  align-items: center;
+  padding: 0 1rem;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  @include boxShadow__main(var(--sh__main));
+  @include media(reverso-p-tablet) {
+    display: none;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: .5s ease;
+    @include media(p-tablet) {
+      justify-content: flex-start;
+      width: 100%;
+    }
+  }
+
+  .header__logo {
+    @include media(p-tablet) {
+      display: block;
+    }
+  }
+
+  &__customLogo {
+    @include media(p-tablet) {
+      max-width: 14.5rem;
+      height: 4rem;
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 0.5rem;
+      img {
+        max-width: inherit;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+      }
+    }
+  }
+
+  &__search {
+    position: relative;
+    padding: 1rem 2rem;
+    margin-left: 1rem;
+    background: var(--bg__content);
+    width: 2rem;
+    height: 4rem;
+    border-radius: 4rem;
+    transition: .5s ease;
+
+    input {
+      border: none;
+      background: transparent;
+      color: var(--tp__main);
+      font-size: 1.5rem;
+      width: 0;
+    }
+  }
+
+  &__search.MbSearch {
+    @include media(p-tablet) {
+      width: 100%;
+      margin-right: 1rem;
+      input {
+        width: 98%;
+      }
+    }
+  }
+
+  &__join_btn_menu_toggle_wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  &__toggleMenu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    span {
+      width: 2rem;
+      height: 0.2rem;
+      display: block;
+      background-color: var(--tp__main);
+
+      &:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+.userAvatar { /*****/
+  border-radius: 50%;
+  background-color: var(--bg__content);
+  height: 3rem;
+  width: 3rem;
+  background-size: cover;
+  @include media(p-tablet) {
+    height: 10rem;
+    width: 10rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.closeMobileNav {
+  @include media(reverso-p-tablet) {
+    display: none;
+  }
+}
+
+@include media(p-tablet) {
+  .respSearch {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: auto;
+    font-size: 2rem;
+    color: var(--btn__main);
+    transform: translate(-50%, -50%);
+  }
+}
+
+.infoDR {
+  display: none;
+  z-index: 99;
+  position: fixed;
+  height: calc(100% - 20rem);
+  top: 5rem;
+  border: var(--border__separator);
+  right: 1rem;
+  width: 44rem;
+  max-height: 57.6rem;
+  background-color: var(--bg__dropdowns);
+  @include boxShadow__main(var(--sh__main));
+  color: var(--tp__main);
+  font-size: 1.8rem;
+
+  &__body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: calc(100% - 13.2rem);
+    border-bottom: 1px solid var(--border__separator);
+    border-top: 1px solid var(--border__separator);
+  }
+
+  &__no_items {
+    padding: 0.7rem 0;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  &__messagesBody {
+    height: calc(100% - 9.2rem);
+  }
+
+  &__buttons, &__footer {
+    display: flex;
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  b {
+    display: block;
+    padding: 1rem 2rem 0.5rem;
+    color: var(--tp__links__hover);
+  }
+
+  button {
+    cursor: pointer;
+    width: 50%;
+    min-height: 4rem;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--siteColorMain);
+
+    &:first-child {
+      border-right: 1px solid var(--border__separator);
+    }
+
+    &:hover {
+      color: var(--tp__btn__main);
+      background: var(--btn__main);
+      transition: .2s ease;
+    }
+  }
+}
+
+.closeMenu {
+  position: absolute;
+  padding: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+.showNav{
+  border-bottom: 1px solid var(--border__separator);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  &:not(.active) {
+    display: none;
+  }
+}
+
+/*width of Login SignUP Forgot Password modals in responsive*/
+.MK2-modal.loginSignUPForgotPassModals {
+  z-index: 20003;
+
+  .MK2-modal__dialog {
+    max-width: 45rem;
+    @include media(p-phone) {
+      max-width: 96%;
+      margin: 8rem auto;
+    }
+  }
+  .MK2-modal__body{
+    overflow-x: hidden;
+  }
+}
+
+/* перебивка Стилей монолита для списка сессий в хэдере*/
+body.vue-header {
+  .header__sessionsList__item__bottom {
+    a {
+      color: var(--tp__main);
+      font-size: 1.4rem !important;
+    }
+  }
+
+  .costAndJoin {
+    .btn {
+      max-width: 6rem !important;
+      min-width: 6rem !important;
+      min-height: 2rem !important;
+      max-height: 2rem !important;
+      line-height: 1.15 !important;
+      padding: 0 1.5rem !important;
+    }
+  }
+}
+
+/* ///////////////////////// */

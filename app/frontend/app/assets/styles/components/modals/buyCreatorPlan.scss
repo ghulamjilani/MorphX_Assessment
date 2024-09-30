@@ -1,0 +1,235 @@
+.buyCreatorPlan {
+  padding: 0;
+
+  .MK2-modal__dialog {
+    padding: 0;
+  }
+
+  .MK2-modal__body {
+    padding: 0;
+    flex-direction: row;
+    @include media(p-tablet) {
+      flex-direction: column;
+    }
+  }
+
+  &__left-part, &__right-part {
+    padding: 4rem 3rem;
+
+    label {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: var(--tp__h1);
+      margin-bottom: 4rem;
+      display: block;
+    }
+  }
+
+  &__left-part {
+    &__planWrapper {
+      min-width: 33rem;
+      max-width: 33rem;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 1rem;
+      @include media(p-tablet) {
+        min-width: 100%;
+        max-width: 100%;
+      }
+
+      &__head {
+        min-height: 7.5rem;
+        background: var(--bg__label);
+        opacity: 0.8;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+      }
+
+      &__body {
+        padding-bottom: 7rem;
+        margin-top: 4rem;
+        position: relative;
+
+        .planTile__wrapp {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: -8.5rem;
+        }
+
+        b, span {
+          display: block;
+        }
+
+        &__plants {
+          .plant1 {
+            position: absolute;
+            width: 7rem;
+            left: 2rem;
+            bottom: -0.5rem;
+          }
+
+          .plant2 {
+            position: absolute;
+            width: 2rem;
+            right: 10rem;
+            bottom: 0;
+          }
+
+          .plant3 {
+            position: absolute;
+            width: 6rem;
+            right: 2rem;
+            bottom: -0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  &__right-part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include media(p-tablet){
+      width: 100%;
+      align-items: stretch;
+    }
+    &__terms {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-top: 3rem;
+      max-width: 33rem;
+      @include media(p-tablet) {
+        max-width: 100%;
+      }
+
+      span {
+        color: var(--tp__secondary);
+      }
+
+      a {
+        color: var(--tp__active);
+      }
+    }
+
+    &__nav {
+      margin-bottom: 4rem;
+      @include flex(flex, baseline, flex-start);
+      flex-wrap: wrap;
+
+      label {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #FFF;
+        padding: 1.5rem 1rem;
+        border-radius: 0.5rem;
+        margin: 0 0 1rem;
+        background: var(--bg__label);
+      }
+
+      i {
+        font-size: 1.5rem;
+        padding: 1rem;
+        cursor: pointer;
+        color: var(--tp__icons);
+
+        &:hover {
+          color: var(--tp__active);
+        }
+      }
+    }
+
+    &__inputs {
+      display: flex;
+      align-items: baseline;
+
+      .wrapper {
+        width: 50%;
+
+        &:first-child {
+          margin-right: 2rem;
+        }
+
+        &:last-child {
+          position: relative;
+          top: -1rem;
+        }
+
+      }
+
+      &__alwaysRow {
+        flex-direction: row !important;
+
+        .wrapper {
+          width: initial;
+        }
+      }
+
+      @include media(p-tablet) {
+        flex-direction: column;
+        .wrapper {
+          width: 100%;
+
+          &:first-child {
+            margin-bottom: 2rem;
+          }
+        }
+      }
+    }
+
+    &__table {
+      padding: 1.5rem;
+      border: 1px solid var(--border__content__sections);
+      background: var(--bg__content__secondary);
+      border-radius: 1rem;
+      margin-bottom: 2.5rem;
+
+      &__line {
+        @include flex(flex, center, space-between);
+
+        &__hr {
+          border-bottom: 1px solid var(--border__content__sections);
+        }
+      }
+    }
+
+    &__addCard {
+      margin-top: 2.5rem;
+    }
+
+    &__text {
+      color: var(--tp__secondary);
+      font-size: 1.2rem;
+      max-width: 34rem;
+      margin-bottom: 2rem;
+    }
+
+    &__savedCard {
+      margin-top: -5.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__applyButton.btn__bordered {
+    border-color: var(--btn__main);;
+    color: var(--btn__main);
+
+    &:hover {
+      color: var(--tp__btn__bordered__hover);
+      background: var(--btn__main);
+    }
+  }
+
+  &__couponInput {
+    &.active #coupon {
+      color: #37A67D; // from figma
+      opacity: 0.8;
+    }
+  }
+
+  &__couponActivated {
+    color: #37A67D;
+    font-size: 1.2rem;
+  }
+}

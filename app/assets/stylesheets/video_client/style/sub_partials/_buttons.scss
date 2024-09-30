@@ -1,0 +1,79 @@
+.mainButton{
+  background: $siteColorMain none repeat scroll 0 0;
+  border: medium none;
+  color: #ffffff !important;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  padding:0.2rem 0.5rem;
+  margin: 0 0.3rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: middle;
+  white-space: nowrap;
+  line-height: 1.7rem;
+  &.bigBtn{
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    padding: 0.5rem 3rem 0.5rem;
+    line-height: 1.42857;
+    border-radius: 0.3rem;
+  }
+}
+.greyBtn{
+  background: #f9f9f9 none repeat scroll 0 0;
+  border: medium none;
+  color: #444444 !important;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  padding:0.2rem 0.5rem;
+  margin: 0 0.3rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: baseline;
+  white-space: nowrap;
+  line-height: 1.7rem;
+}
+.lightGreyBtn{
+  background: #6c6c6c none repeat scroll 0 0;
+  border: medium none;
+  color: #fff;
+  ursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  padding:0.2rem 0.5rem;
+  margin: 0 0.3rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: middle;
+  white-space: nowrap;
+  line-height: 1.7rem;
+}
+.greanBtn{
+  background: #35c084 none repeat scroll 0 0;
+  border: medium none;
+  color: #fff !important;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  padding:0.2rem 0.5rem;
+  margin: 0 0.3rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: baseline;
+  white-space: nowrap;
+  line-height: 1.7rem;
+}
+
+.btnGroup{
+  font-size: 0;
+}

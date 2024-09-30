@@ -1,0 +1,22 @@
+.DocumentsPreviewModal {
+
+  .MK2-modal__dialog {
+      width: 96%;
+      max-width: 96%;
+  }
+
+  &__preview{
+      height: 70vh;
+  }
+
+}
+
+.DocumentPreview {
+  &__mobileButton {
+    display: none;
+    margin: 0 auto 2rem auto;
+    @include media(tablet) {
+      display: flex;
+    }
+  }
+}

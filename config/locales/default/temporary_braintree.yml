@@ -1,0 +1,9 @@
+en:
+  braintree:
+    cvv_is_required_expiration_date_is_required_credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code_addresses_must_have_at_least_one_field_filled_in_postal_code_is_required_street_address_is_required: |-
+      CVV is required.
+      Expiration date is required.
+      Credit card number is required.
+      Addresses must have at least one field filled in.
+      Postal code is required.
+      Street address is required.

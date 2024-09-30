@@ -1,0 +1,12 @@
+%p
+  - hours_count = ((Time.now - @abstract_session.end_at) / 3600).to_i
+  = "#{pluralize(hours_count, 'hour')} after"
+  = link_to @abstract_session.always_present_title, @abstract_session.absolute_path
+  = @abstract_session.class.to_s.downcase
+  is over VOD delivery method is still not ready for consumption and users are not eligible to buy Video on Demand.
+%p Talk to your teammates(see who received a copy of this message) to find the best solution in this particular case. Boo-Boo Refund? Wait a bit longer? Ignore?
+
+%p
+  %small
+    :plain
+      # of check for this #{@abstract_session.class.to_s.downcase}: #{@abstract_session.eventual_vod_availability_check_count}

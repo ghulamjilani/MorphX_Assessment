@@ -1,0 +1,76 @@
+@import "app/assets/styles/pages/history.scss";
+@import "app/assets/styles/components/blog/newPost/core";
+@import "app/assets/styles/components/blog/managePost/core";
+@import "app/assets/styles/components/crop/core";
+
+@import "app/assets/styles/uikit/core";
+@import "app/assets/styles/pages/businessPlan/core";
+@import "app/assets/styles/core/helpers";
+@import "app/assets/styles/components/modals/cis/core";
+@import "app/assets/styles/components/rangeSlider/core";
+@import "app/assets/styles/components/modals/channel/about/core";
+@import "app/assets/styles/components/modals/channel/header/core";
+@import "app/assets/styles/components/modals/channel/footer/core";
+@import "app/assets/styles/pages/mChannel/channels/core";
+@import "app/assets/styles/components/blog/dashboard/core";
+@import "app/assets/styles/pages/search/tiles/core";
+@import "app/assets/styles/components/tiles/core";
+@import "app/assets/styles/components/auth/modals";
+@import "app/assets/styles/components/replay-layout/core";
+@import "app/assets/styles/components/tips/core";
+@import "app/assets/styles/components/tooltip/_core.scss";
+@import "app/assets/styles/components/pageparts/_core.scss";
+@import "app/assets/styles/uikit/_review.scss";
+@import "app/assets/styles/components/pageparts/review/_core.scss";
+@import "app/assets/styles/components/pageparts/rating/_core.scss";
+@import "app/assets/styles/components/modals/reviewForm/_core.scss";
+@import "app/assets/styles/components/modals/share/_core.scss";
+@import "app/assets/styles/components/blog/comment/_core.scss";
+@import "app/assets/styles/core/_quill.scss";
+@import "app/assets/styles/components/flash/_core.scss";
+@import "app/assets/styles/components/chat-group/_core.scss";
+@import "app/assets/styles/components/chat-dialog/_core.scss";
+@import "app/assets/styles/components/modals/subscriptions/plans/_core.scss";
+@import "app/assets/styles/components/modals/subscriptions/planInfo/_core.scss";
+@import "app/frontend/app/assets/styles/components/mops/modal.scss";
+@import "app/frontend/app/assets/styles/components/booking/_core.scss";
+@import "app/frontend/app/assets/styles/components/polls/_core.scss";
+
+body.mb-schedule-overlay {
+  //TODO:remove to FILES
+  overflow: hidden;
+}
+
+.MK2-modal.loginSignUPForgotPassModals {
+  //TODO:remove to FILES
+  z-index: 20003;
+
+  .MK2-modal__dialog {
+    max-width: 45rem;
+    @include media(p-phone) {
+      max-width: 96%;
+      margin: 8rem auto;
+    }
+  }
+  .MK2-modal__body{
+    overflow-x: hidden;
+  }
+}
+
+.flash-container__header {
+  //TODO:remove to FILES
+  position: fixed;
+  right: 3rem;
+  top: 8rem;
+  width: 40rem;
+  max-width: 80%;
+}
+
+
+#ch-vue-app-sidebar {
+  //TODO:remove to FILES
+  .dashboardMK2__main__sideBar {
+    width: 100%;
+    padding: 0;
+  }
+}

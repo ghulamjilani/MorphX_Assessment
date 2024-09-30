@@ -1,0 +1,31 @@
+#resetPasswordPopup.loginOrSignUpModal.modal.fade{'aria-hidden': true, data: {backdrop: "static",}, role: :dialog, tabindex: -1}
+  .modal-dialog
+    .unobtrusive-flash-container
+    .modal-content.restorePasswordForm
+      = render 'become_presenter_steps/close_modal'
+      .modal-body
+        .text-left
+          = image_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/logo_small.png", id: 'logo-modal', alt: Rails.application.credentials.global[:service_name], class: "resetImg img-responsive #{Rails.application.credentials.global[:project_name].to_s.downcase}"
+        .resetPass-message
+          = I18n.t('forgot_password.enter_email')
+          %br
+          = I18n.t('forgot_password.rez_link')
+        = semantic_form_for(resource, as: resource_name, url: password_path(resource_name, format: :json),
+                            method: :post, remote: true, html: {id: :resetPasswordForm, class: 'form_V2'}) do |f|
+          = f.inputs do
+            -# FIXME: for Slava (popover)
+            .borderedInput.required.padding-bottom-5
+              = f.input :email,
+                        input_html: {autofocus: true, placeholder: I18n.t('forgot_password.email'), autocomplete: :off,
+                        'data-container': "#resetPasswordPopup .modal-dialog", 'data-trigger': :manual},
+                        label: false
+              .errorContainerWrapp
+
+          .text-center.padding-bottom-10.additionalPad
+            = f.button I18n.t('forgot_password.send_link'), class: 'resetPasswordBtn btn btn-m fs-16 full-width', disabled: true
+
+            .back-message
+              = link_to 'Back To Login', '#loginPopup', data: { toggle: :modal, target: '#loginPopup' },
+                class: 'already_have_account toggle-modals',
+                onclick: "$('#resetPasswordPopup').modal('hide');$('#loginPopup').modal('show');"
+              -# = link_to 'Already have an account?', '#loginPopup', data: {toggle: :modal, target: '#loginPopup'}, class: 'text-color-Blue already_have_account', onclick: "$('#signupPopup').modal('hide');$('#loginPopup').modal('show')"

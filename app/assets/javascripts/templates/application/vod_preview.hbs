@@ -1,0 +1,120 @@
+<div class="col-md-9 VodSection" style='display:none'>
+    <div class="megavideoiframeWrapper">
+        <iframe src="{{url}}" class="megavideoiframe" seamless allowfullscreen webkitallowfullscreen></iframe>
+        <div class="kastulishe"></div>
+        <div class="VodPurchasePopup" style="display: none; background-image: url('{{posterUrl}}')">
+            <div class="coverVodPurchasePopup"></div>
+            <div class="text-center" id="reload_vod">
+                <i class="icon-ccw closeVodPurchasePopup"></i>
+            </div>
+            <p class="rent-to-continue-watching" style="display:none">
+                To continue watching please Rent this video.
+            </p>
+
+            <p class="login-to-continue-watching" style="display:none">
+                To continue watching please log in.
+            </p>
+            <a class="ensure-link-style mainButton bigBtn vod-purchase-btn">
+        <span class="login-to-proceed" style="display:none">
+          Log In
+        </span>
+        <span class="login-and-rent" style="display:none">
+          Log In and Rent
+        </span>
+        <span class="rent-as-signed-in" style="display:none">
+          Rent
+        </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="right_Vod_bar" class="col-md-3 VodSection" style="display:none">
+    <!--!ALARMA-->
+    <!--FOR DASHA! add .for-rent class to show Rent Video BUTTON-->
+    <!--!ALARMA PIZDETS-->
+    <div class="about-VOD ">
+        <div class="VOD-info-header video_title">
+          {{title}}
+        </div>
+        <!--<div class="VOD-info-header-tileList">-->
+            <!--<div class="row padding-top-10">-->
+                <!--<div class="VOD-duration col-md-6">-->
+                    <!--<i class="VideoClientIcon-clock"></i>-->
+                    <!--<span class="full_video_duration">-->
+                      <!--{{!duration}}-->
+                    <!--</span>-->
+                <!--</div>-->
+                <!--<div class="VOD-type col-md-6">-->
+                    <!--<i class="VideoClientIcon-level"></i>-->
+                    <!--<span class="video_level">-->
+                      <!--{{!@level}}-->
+                    <!--</span>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="right-sidebar">
+            <div class="right-sidebarWrapper RentVideoBTN_wrapp" style="display:none">
+                <a class="mainButton bigBtn full-width rent-video-for-amount-button" href="#" style="visibility: visible">
+                    Rent Video for
+                    <strong>{{obtainableForAmount}}</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="scrollWrapper">
+        <div class="VOD-info-content video_description">
+            {{{description}}}
+        </div>
+        <div class="shop panel-group listsArea clearfix" id="accordion{{id}}" role="tablist"
+             aria-multiselectable="true">
+          {{#each lists}}
+              <div class="list_info panel panel-default" id="listPanel{{id}}">
+                  <div class="panel-heading" role="tab" id="listHeading{{id}}">
+                      <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion{{../id}}"
+                             href="#collapseList{{id}}">
+                                Shop now
+                          </a>
+                      </h4>
+                  </div>
+
+                  <div id="collapseList{{id}}" class="panel-collapse in" role="tabpanel"
+                       aria-labelledby="listHeading{{id}}">
+                      <div class="panel-body">
+                          <div class="redBG">
+                              <div class="description">{{!description}}</div>
+                          </div>
+                          <div class="sectionTitle">
+                              <div class="pt10">{{name}}</div>
+                          </div>
+                          <div class="Products-wrapp">
+                          </div>
+                          <div class="prodctTileList">
+                            {{#each products}}
+                                <div class="productTile">
+                                    <div class="productTile-img"
+                                         style="background-image: url({{image_url}})"></div>
+                                    <a style="cursor: pointer;" target="_blank" href="{{formatUrl url}}">{{title}}</a>
+
+                                    <!--<div class="productTile-long-description">{{!description}}</div>-->
+
+                                    <div class="productTile-short-description clearfix">
+                                        <!--<a href="{{!formatUrl url}}" target="_blank" class="product-link">{{url}}</a>-->
+
+                                      {{#if price_cents}}<div class="price pull-right">{{price}}</div>{{/if}}
+                                    </div>
+                                </div>
+                            {{/each}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          {{/each}}
+        </div>
+    </div>
+</div>
+
+</div>

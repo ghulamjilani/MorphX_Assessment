@@ -1,0 +1,19 @@
+<li data-conversation-id="{{{id}}}" class="clearfix {{#if unread}}NT-new active{{/if}}">
+  <div class="col-md-2 text-center">
+    {{{avatar}}}
+  </div>
+
+  <div class="col-md-10">
+    <strong>
+      {{{sender}}}
+    </strong>
+
+    {{{subject}}}
+    <br/>
+    {{{body}}}
+
+    <div class="NT-time clearfix">
+      <time class="timeago" datetime="{{created_at}}"></time>
+    </div>
+  </div>
+</li>

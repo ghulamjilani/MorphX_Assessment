@@ -1,0 +1,75 @@
+.RTMP {
+  &__settings {
+    position: absolute;
+    background: #404040;
+    padding: 1.9rem 3rem;
+    border-radius: .5rem;
+    right: 3rem;
+    color: #FFF;
+    transform: translateY(4rem);
+    width: 39rem;
+    z-index: 9999999;
+    max-width: 90%;
+    top: 1rem;
+
+    .MK2-modal__close {
+      padding: 0;
+      color: #6F7073;
+    }
+
+    &__icon {
+      color: #6F7073;
+      font-size: 2.4rem;
+      cursor: pointer;
+      margin-right: 2rem;
+      padding: 1rem;
+
+      &__active {
+        color: #FFF;
+      }
+
+      @include media(tablet) {
+        font-size: 1.6rem;
+      }
+    }
+
+    &__row {
+      padding: .5rem 0;
+      @include flex(flex, center, center);
+    }
+
+    &__name {
+      width: 13rem;
+      color: #A6A6A6;
+      font-weight: bold;
+    }
+
+    &__copy {
+      &__wrapper {
+        @include flex(flex, center, flex-end);
+        width: 10rem;
+      }
+
+      font-weight: bold;
+      color: #FFF;
+      border: 1px solid #FFF;
+      border-radius: 1rem;
+      cursor: pointer;
+      min-width: 7rem;
+      min-height: 2rem;
+      transition: .5s;
+      line-height: normal;
+      height: 2rem;
+      background: #404040;
+
+      &:hover {
+        background: #FFF;
+      }
+    }
+
+    &__value {
+      width: 17rem;
+      @include text__ellipsis();
+    }
+  }
+}

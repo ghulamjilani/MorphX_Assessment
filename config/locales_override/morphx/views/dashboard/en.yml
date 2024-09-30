@@ -1,0 +1,10 @@
+en:
+  views:
+    dashboard:
+      coming: "Coming to %{service_name}:"
+      navigationsidebar:
+        community: Community
+    home_page:
+      connent_with_creators: Connect with Creators
+    channelPage:
+      onDemand: On-demand

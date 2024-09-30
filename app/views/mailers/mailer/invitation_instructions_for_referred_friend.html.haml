@@ -1,0 +1,68 @@
+-#%p{style: 'text-align: center'}
+-#  = link_to @invited_by.absolute_path, target: '_blank' do
+-#    = image_tag(@invited_by.avatar_url, width: 28, height: 28, alt: @invited_by.public_display_name, class: 'img-circle')
+-#
+-#%h3
+-#  = "#{@invited_by.public_display_name} invited you to join Unite"
+-#
+-#%p
+-#  Unite is a global online marketplace, designed to help discover a variety of talent and to deliver the best in live instructions and performance experiences.
+-#
+-#%p
+-#  To accept this invitation please
+-#  = "#{link_to 'click here', @accept_url}.".html_safe
+%tr
+  %td{:align => "center"}
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "background-color: #095f73;border-radius: 20px;padding: 25px 10px;min-width: 90%;", :width => "500"}
+      %tr
+        %td{:style => "text-align: center;"}
+          %p{:style => "\r\n            font-style: normal;\r\n                font-weight: 900;\r\n                font-size: 36px;\r\n                line-height: 36px;\r\n                color: #ffffff;"} Hello
+%tr
+  %td{:align => "center"}
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "padding: 15px 0 15px 0"}
+      %tr
+        %td
+%tr
+  %td
+    %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "max-width:100%", :width => "500"}
+      %tr
+        %td
+          %p{:style => "\r\n                           margin: 0;\r\n                                    text-decoration: none;\r\n                                    font-style: normal;\r\n                                    font-weight: 900;\r\n                                    font-size: 28px;\r\n                                    line-height: 18px;\r\n                                    color: #095f73;text-align:center"}
+%tr
+  %td{:align => "center"}
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "padding: 15px 0 15px 0"}
+      %tr
+        %td
+%tr
+  %td
+    %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "max-width:100%", :width => "500"}
+      %tr
+        %td
+          %p{:style => "\r\n                        margin:0;\r\n                            font-style: normal;\r\n                            font-weight: normal;\r\n                            font-size: 15px;\r\n                            color: #000000;\r\n                            line-height: 150%;"}
+            = image_tag(@invited_by.avatar_url, width: 50, height: 50, alt: @invited_by.public_display_name, class: 'img-circle', style:'border-radius:50%;    vertical-align: middle; margin-right:10px')
+            = I18n.t('views.mailer.conf_insruct.invitation_instruction.invited', name: @invited_by.public_display_name, service_name: Rails.application.credentials.global[:service_name])
+      %tr
+        %td{:align => "center"}
+          %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "padding: 15px 0 15px 0"}
+            %tr
+              %td
+      %tr
+        %td
+          %p{:style => " font-weight: normal;\r\n                            font-size: 15px;\r\n                            color: #000000;\r\n                            line-height: 150%;"}
+            = I18n.t('views.mailer.conf_insruct.invitation_instruction.have', service_name: Rails.application.credentials.global[:service_name].upcase)
+%tr
+  %td{:align => "center"}
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "padding: 20px 0 20px 0"}
+      %tr
+        %td
+%tr
+  %td{:align => "center"}
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "padding: 20px 0 20px 0"}
+      %tr
+        %td
+%tr
+  %td{:align => "center"}
+    %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :style => "padding: 10px 0 10px 0;cursor: pointer;background-color: #f23535;border-radius: 25px;", :width => "280"}
+      %tr{:style => ""}
+        %td{:style => "text-align: center;"}
+          = "#{link_to 'accept this invitation please', @accept_url, style:'text-decoration: none;padding:0 10px;margin:0;font-style: normal;font-weight: 600;  font-size: 15px;line-height: 15px; color: #ffffff;'}.".html_safe

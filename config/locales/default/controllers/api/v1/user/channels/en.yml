@@ -1,0 +1,7 @@
+en:
+  controllers:
+    api:
+      v1:
+        channels:
+          business_plan_max_channels_error: You have reached the maximum number of channels for your Business Plan
+          business_plan_limits_error: You can't create channel because of your current Business Plan limits.

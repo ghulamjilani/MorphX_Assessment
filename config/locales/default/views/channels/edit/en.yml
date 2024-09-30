@@ -1,0 +1,32 @@
+en:
+  views:
+    channels:
+      edit:
+        channel_name: Channel Name
+        tagline: Tagline
+        description: Description
+        category: Сategory
+        lists: Product List
+        choose_list: Choose List
+        tags: Tags
+        default_channel: Default Channel
+        show_calendar_for_this_channel: Show calendar for this channel
+        list_publicly_upon_approval: List publicly upon approval
+        comments_reviews: Comments & Reviews
+        show_comments: Show Comments
+        show_reviews: Show Reviews
+        suggest_use_one_option: Suggest to use only one option (so as not to confuse users).
+        channel_cover: Channel Cover
+        channel_icon: Channel icon
+        or_drop_image: or drag-n-drop your image here
+        suggested_size: Suggested size
+        size_px: "%{width}x%{height} px"
+        we_recommend_using_high_resolution_image: We recommend using high resolution image.
+        gallery: Gallery
+        done: Done
+        upload: Upload
+        web_address_url: Web Address (URL)
+        upload_or_drop: Upload or drag-n-drop
+        your_images_here: your images here
+        url_embed_image_or_video_vimeo_and_youtube: Please paste the URL to embed image or video from popular video services, such as Vimeo and Youtube
+        embed: Embed

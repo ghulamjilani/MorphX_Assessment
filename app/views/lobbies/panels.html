@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='UI/core.css' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap' rel='stylesheet'>
+  </head>
+  <body class='VideoClient'>
+    <h1>
+      <a class='mr20 text-color-white' href='index.html'>
+        <i class='VideoClientIcon-exit'></i>
+      </a>
+      demo for panels
+    </h1>
+    <div class='sectionWrapp' style='display:block'>
+      <section class='text-center' id='Profile'>
+        <div class='styledScroll'>
+          <div>
+            <a class='Avatar' href='#' style='background:url(http://lorempixel.com/400/200/)'></a>
+            <a class='pull-right sectionHeader-close' href='#'>
+              x
+            </a>
+          </div>
+          <a class='Name fs16 mb10 d-block' href='#'>Samantha Brandson</a>
+          <div class='social mb10'>
+            <a class='social-f' href='#'>
+              <i class='VideoClientIcon-facebookF'></i>
+            </a>
+            <a class='social-tw' href='#'>
+              <i class='VideoClientIcon-twitter2'></i>
+            </a>
+            <a class='social-g' href='#'>
+              <i class='VideoClientIcon-google'></i>
+            </a>
+          </div>
+          <div class='desc'>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus.
+          </div>
+          <div class='clearfix btnGroup mb10'>
+            <div class='half-width d-inline-block vertical-midle pr5'>
+              <a class='greanBtn full-width' href='#'>Vieew Profile</a>
+            </div>
+            <div class='half-width d-inline-block vertical-midle pl5 pr5'>
+              <a class='mainButton full-width' href='#'>Follow</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id='liveShare'>
+        <div class='sectionHeader'>
+          <a class='pull-right sectionHeader-close' href='#'>
+            x
+          </a>
+          live Share
+        </div>
+        <div class='styledScroll'>
+          <div class='AvailablePlatforms text-left mb10'>
+            <div class='mb10'>
+              Available Platforms
+            </div>
+            <div class='row mb10 clearfix'>
+              <div class='col-md-6'>
+                Facebook
+              </div>
+              <div class='col-md-6 text-right'>
+                <a class='lightGreyBtn w-90 d-inline-block vertical-midle text-center' href='#'>
+                  Start Sharing
+                </a>
+              </div>
+            </div>
+            <div class='row active clearfix'>
+              <div class='col-md-6'>
+                Youtube
+              </div>
+              <div class='col-md-6 text-right'>
+                <a class='mainButton w-90 d-inline-block vertical-midle text-center' href='#'>
+                  Stop Sharing
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class='sectionTitle'>
+            Latest Scene
+          </div>
+          <div class='LatestScene text-left'>
+            <div class='row mb10 clearfix'>
+              <div class='col-md-6'>
+                Twitter
+              </div>
+              <div class='col-md-6 text-right'>
+                <a class='greanBtn w-40 d-inline-block vertical-midle text-center' href='#'>
+                  Sent
+                </a>
+              </div>
+            </div>
+            <div class='row active clearfix mb10'>
+              <div class='col-md-6'>
+                Instagram
+              </div>
+              <div class='col-md-6 text-right'>
+                <a class='mainButton w-40 d-inline-block vertical-midle text-center' href='#'>
+                  Send
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class='sectionTitle'>
+            Social Share
+          </div>
+          <div class='socialIconBox'>
+            <a class='socialIcon circle' href='#'>
+              <i class='VideoClientIcon-facebookF'></i>
+            </a>
+            <a class='socialIcon circle' href='#'>
+              <i class='VideoClientIcon-map-marker'></i>
+            </a>
+            <a class='socialIcon' href='#'>
+              <i class='VideoClientIcon-youtube'></i>
+            </a>
+            <a class='socialIcon circle' href='#'>
+              <i class='VideoClientIcon-snapchat-ghost'></i>
+            </a>
+            <a class='socialIcon' href='#'>
+              <i class='VideoClientIcon-instagram'></i>
+            </a>
+            <a class='socialIcon' href='#'>
+              <i class='VideoClientIcon-linkedin_2'></i>
+            </a>
+            <a class='socialIcon' href='#'>
+              <i class='VideoClientIcon-google3'></i>
+            </a>
+            <a class='socialIcon' href='#'>
+              <i class='VideoClientIcon-twitter_2'></i>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section id='MenuType'>
+        <div class='sectionHeader'>
+          <a class='pull-right sectionHeader-close' href='#'>
+            x
+          </a>
+          Menu Type
+        </div>
+        <div class='styledScroll'>
+          <div class='switcher double mb20'>
+            <div>
+              <input id='MenuTypeBasic' name='MenuType' type='radio'>
+              <label for='MenuTypeBasic'>
+                Basic
+              </label>
+            </div>
+            <div>
+              <input checked='checked' id='MenuTypeAdvanced' name='MenuType' type='radio'>
+              <label for='MenuTypeAdvanced'>
+                Advanced
+              </label>
+            </div>
+          </div>
+          <div class='sectionTitle'>
+            Configuration
+          </div>
+          <div class='switcher double mb20'>
+            <div>
+              <input checked='checked' id='ConfigurationBasic' name='Configuration' type='radio'>
+              <label for='ConfigurationBasic'>
+                Basic
+              </label>
+            </div>
+            <div>
+              <input id='ConfigurationAdvanced' name='Configuration' type='radio'>
+              <label for='ConfigurationAdvanced'>
+                Advanced
+              </label>
+            </div>
+          </div>
+          <div class='selectWrapp'>
+            <label>
+              Camera
+              <select class='d-block full-width'>
+                <option>test 1</option>
+                <option>test 2</option>
+                <option>test 3</option>
+                <option>test 4</option>
+              </select>
+            </label>
+          </div>
+          <div class='selectWrapp'>
+            <label>
+              Speaker
+              <select class='d-block full-width'>
+                <option>test 1</option>
+                <option>test 2</option>
+                <option>test 3</option>
+                <option>test 4</option>
+              </select>
+            </label>
+          </div>
+          <div class='selectWrapp'>
+            <label>
+              Microphone
+              <select class='d-block full-width'>
+                <option>test 1</option>
+                <option>test 2</option>
+                <option>test 3</option>
+                <option>test 4</option>
+              </select>
+            </label>
+          </div>
+          <div class='mb10'></div>
+          <div class='radio-type1'>
+            <label>
+              <input name='name1' type='radio'>
+              <span>
+                Euismod Ornare
+              </span>
+            </label>
+          </div>
+          <div class='radio-type1'>
+            <label>
+              <input name='name1' type='radio'>
+              <span>
+                Euismod Ornare
+              </span>
+            </label>
+          </div>
+        </div>
+      </section>
+      <section id='InviteParticipants'>
+        <div class='sectionHeader'>
+          <a class='pull-right sectionHeader-close' href='#'>
+            x
+          </a>
+          Invite Participants
+        </div>
+        <div class='content-blockWrapp'>
+          <div class='searchUserBlock'>
+            <input class='searchInput full-width mb10' placeholder='Search your contacts' type='text'>
+            <div class='item-wrapp styledScroll'>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name awdawdawdadwaesdfas`fa`df
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    <i class='VideoClientIcon-iPlus'></i>
+                    test name
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class='ParticipantsList'>
+            <div class='inputWidthButton clearfix mb10'>
+              <input placeholder='Invite by Email' type='text'>
+              <a href='#'>
+                <i class='VideoClientIcon-iPlus'></i>
+              </a>
+            </div>
+            <div class='sectionTitle'>
+              Participants
+            </div>
+            <div class='item-wrapp styledScroll'>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name awdawdawdadwaesdfas`fa`df
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name
+                  </div>
+                </div>
+              </a>
+              <a class='d-block text-color-white clearfix item' href='#'>
+                <div class='row'>
+                  <div class='col-md-2 pr0'>
+                    <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                  </div>
+                  <div class='col-md-10 pl0'>
+                    test name
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id='ShareAWindow'>
+        <div class='sectionHeader'>
+          <a class='pull-right sectionHeader-close' href='#'>
+            x
+          </a>
+          Screen Share
+        </div>
+        <div class='styledScroll'>
+          <div class='switcher double mb20'>
+            <div>
+              <input id='ShareAWindowOn' name='ShareAWindow' type='radio'>
+              <label for='ShareAWindowOn'>
+                On
+              </label>
+            </div>
+            <div>
+              <input checked='checked' id='ShareAWindowOff' name='ShareAWindow' type='radio'>
+              <label for='ShareAWindowOff'>
+                Off
+              </label>
+            </div>
+          </div>
+          <div class='radio-type1'>
+            <label>
+              <input name='name2' type='radio'>
+              <span>
+                <div class='pull-right'>(1920 x 1080)</div>
+                Display 1
+              </span>
+            </label>
+          </div>
+          <div class='radio-type1'>
+            <label>
+              <input name='name2' type='radio'>
+              <span>
+                <div class='pull-right'>(1920 x 1080)</div>
+                Display 2
+              </span>
+            </label>
+          </div>
+          <div class='radio-type1'>
+            <label>
+              <input name='name2' type='radio'>
+              <span>
+                <div class='pull-right'>(1440 x 900)</div>
+                Display 3
+              </span>
+            </label>
+          </div>
+          <hr>
+          <div class='radio-type1'>
+            <label>
+              <input name='name2' type='radio'>
+              <span>
+                Test Session for
+                alexwilner - Microsoft Edge
+              </span>
+            </label>
+          </div>
+          <hr>
+          <div class='radio-type1'>
+            <label>
+              <input name='name2' type='radio'>
+              <span>
+                Snagit Editor
+                Dec. 3. 2015. 1:09:16 PM
+              </span>
+            </label>
+          </div>
+          <hr>
+          <div class='radio-type1'>
+            <label>
+              <input name='name2' type='radio'>
+              <span>
+                Fringilla Ligula Porta
+              </span>
+            </label>
+          </div>
+          <hr>
+          <div class='radio-type1'>
+            <label>
+              <input name='name2' type='radio'>
+              <span>
+                Egestas Tortor Mattis Commodo
+              </span>
+            </label>
+          </div>
+        </div>
+      </section>
+      <section id='ManageAllParticipants'>
+        <div class='sectionHeader'>
+          <a class='pull-right sectionHeader-close' href='#'>
+            x
+          </a>
+          Manage all Participants
+        </div>
+        <div class='btnMasivGroup mb10'>
+          <a href='#'>
+            <i class='VideoClientIcon-video'></i>
+          </a>
+          <a href='#'>
+            <i class='VideoClientIcon-sound'></i>
+          </a>
+          <a href='#'>
+            <i class='VideoClientIcon-microphone'></i>
+          </a>
+          <a href='#'>
+            <i class='VideoClientIcon-hand-showing-palm-outline'></i>
+          </a>
+        </div>
+        <div class='sectionTitle'>
+          Manage Participants
+        </div>
+        <div>
+          <div class='userWrapp'>
+            <a class='d-block text-color-white clearfix item' href='#' onclick='ManageAllParticipants_dropDownOpen(this)'>
+              <div class='row'>
+                <div class='col-md-2 pr0'>
+                  <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                </div>
+                <div class='col-md-10 pl0 pr40'>
+                  <i class='VideoClientIcon-navigate-up-arrow'></i>
+                  <i class='VideoClientIcon-navigate-down-arrow'></i>
+                  test name
+                </div>
+              </div>
+            </a>
+            <div class='btnMasivGroup'>
+              <a class='pull-right' href='#'>
+                <i class='VideoClientIcon-q4'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-video'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-sound'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-microphone'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-stanchios'></i>
+              </a>
+            </div>
+          </div>
+          <div class='userWrapp'>
+            <a class='d-bloc text-color-white clearfix item' href='#' onclick='ManageAllParticipants_dropDownOpen(this)'>
+              <div class='row'>
+                <div class='col-md-2 pr0'>
+                  <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                </div>
+                <div class='col-md-10 pl0 pr40'>
+                  <i class='VideoClientIcon-navigate-up-arrow'></i>
+                  <i class='VideoClientIcon-navigate-down-arrow'></i>
+                  test name
+                </div>
+              </div>
+            </a>
+            <div class='btnMasivGroup'>
+              <a class='pull-right' href='#'>
+                <i class='VideoClientIcon-q4'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-video'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-sound'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-microphone'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-stanchios'></i>
+              </a>
+            </div>
+          </div>
+          <div class='userWrapp'>
+            <a class='d-block text-color-white clearfix item' href='#' onclick='ManageAllParticipants_dropDownOpen(this)'>
+              <div class='row'>
+                <div class='col-md-2 pr0'>
+                  <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                </div>
+                <div class='col-md-10 pl0 pr40'>
+                  <i class='VideoClientIcon-navigate-up-arrow'></i>
+                  <i class='VideoClientIcon-navigate-down-arrow'></i>
+                  test name
+                </div>
+              </div>
+            </a>
+            <div class='btnMasivGroup'>
+              <a class='pull-right' href='#'>
+                <i class='VideoClientIcon-q4'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-video'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-sound'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-microphone'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-stanchios'></i>
+              </a>
+            </div>
+          </div>
+          <div class='userWrapp'>
+            <a class='d-block text-color-white clearfix item' href='#' onclick='ManageAllParticipants_dropDownOpen(this)'>
+              <div class='row'>
+                <div class='col-md-2 pr0'>
+                  <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                </div>
+                <div class='col-md-10 pl0 pr40'>
+                  <i class='VideoClientIcon-navigate-up-arrow'></i>
+                  <i class='VideoClientIcon-navigate-down-arrow'></i>
+                  test name
+                </div>
+              </div>
+            </a>
+            <div class='btnMasivGroup'>
+              <a class='pull-right' href='#'>
+                <i class='VideoClientIcon-q4'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-video'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-sound'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-microphone'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-stanchios'></i>
+              </a>
+            </div>
+          </div>
+          <div class='userWrapp'>
+            <a class='d-block text-color-white clearfix item' href='#' onclick='ManageAllParticipants_dropDownOpen(this)'>
+              <div class='row'>
+                <div class='col-md-2 pr0'>
+                  <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                </div>
+                <div class='col-md-10 pl0 pr40'>
+                  <i class='VideoClientIcon-navigate-up-arrow'></i>
+                  <i class='VideoClientIcon-navigate-down-arrow'></i>
+                  test name
+                </div>
+              </div>
+            </a>
+            <div class='btnMasivGroup'>
+              <a class='pull-right' href='#'>
+                <i class='VideoClientIcon-q4'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-video'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-sound'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-microphone'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-stanchios'></i>
+              </a>
+            </div>
+          </div>
+          <div class='userWrapp'>
+            <a class='d-block text-color-white clearfix item' href='#' onclick='ManageAllParticipants_dropDownOpen(this)'>
+              <div class='row'>
+                <div class='col-md-2 pr0'>
+                  <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+                </div>
+                <div class='col-md-10 pl0 pr40'>
+                  <i class='VideoClientIcon-navigate-up-arrow'></i>
+                  <i class='VideoClientIcon-navigate-down-arrow'></i>
+                  test name
+                </div>
+              </div>
+            </a>
+            <div class='btnMasivGroup'>
+              <a class='pull-right' href='#'>
+                <i class='VideoClientIcon-q4'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-video'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-sound'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-microphone'></i>
+              </a>
+              <a href='#'>
+                <i class='VideoClientIcon-stanchios'></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id='chat'>
+        <div class='sectionHeader'>
+          <a class='pull-right sectionHeader-close' href='#'>
+            x
+          </a>
+          chat
+        </div>
+        <div class='switcher double mb20'>
+          <div>
+            <input id='chatComments' name='chat' type='radio'>
+            <label for='chatComments'>
+              Comments
+            </label>
+          </div>
+          <div>
+            <input checked='checked' id='chatQuestions' name='chat' type='radio'>
+            <label for='chatQuestions'>
+              Questions
+            </label>
+          </div>
+        </div>
+        <div class='styledScroll'>
+          <div class='message'>
+            <div class='subject'>
+              <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+              Kelley Moss
+            </div>
+            <div class='message-body'>
+              Donec id elit non mi porta gravida at eget metus. Morbi leo risus,
+              porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.
+              Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+            </div>
+          </div>
+          <div class='message owner'>
+            <div class='subject'>
+              <div class='Avatar small' style='background:url(http://lorempixel.com/400/200/)  '></div>
+              Kelley Moss
+            </div>
+            <div class='message-body'>
+              Donec id elit non mi porta gravida at eget metus. Morbi leo risus,
+              porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.
+              Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+            </div>
+          </div>
+        </div>
+        <div class='newMessage'>
+          <textarea class='full-width' placeholder='Type your comment...'></textarea>
+          <a class='mainButton d-block full-width fs14 uppercase' href='#'>send</a>
+        </div>
+      </section>
+      <section id='shop'>
+        <div class='styledScroll' style='height:100%'>
+          <div class='redBG'>
+            <div class='sectionHeader'>
+              <a class='pull-right sectionHeader-close' href='#'>
+                x
+              </a>
+              shop
+            </div>
+            <div class='shopName'>
+              Disney Store - Halloween Shop
+            </div>
+            <div class='description styledScroll'>
+              Loem ipsum dolor sit amet, consectetur adipiscing elit.
+              Maecenas faucibus mollis interdum. Duis mollis, est non commodo
+              luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+              Vestibulum id ligula porta felis euismod semper.
+            </div>
+            <!--<a class='siteUrl' href='#' target='_blank'>-->
+              <!--www.olololo.com-->
+            <!--</a>-->
+          </div>
+          <div class='sectionTitle'>
+            <div class='text-color-white pt10'>
+              Products
+            </div>
+          </div>
+          <div class='Products-wrapp'>
+            <div class='prodctTileList'>
+              <div class='productTile'>
+                <img class='productTile-img' src='http://lorempixel.com/400/200/'>
+                <div class='productTile-short-description'>
+                  <a href='#' onclick="jQuery(this).parents('.productTile').toggleClass('active')">
+                    Kylo Ren Costume for Kids Star Wars: The Force Awakens
+                  </a>
+                  <div>
+                    <div class='price pull-right'>
+                      $34.12
+                    </div>
+                    <a class='productLink' href='#' target='_blank'>
+                      http://bit.ly/2eiCz66
+                    </a>
+                  </div>
+                </div>
+                <div class='productTile-long-description'>
+                  Cras mattis consectetur purus sit amet fermentum.
+                  Donec sed odio dui. Integer posuere erat a ante venenatis
+                  dapibus posuere velit aliquet. Nullam quis risus eget urna
+                  mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper.
+                </div>
+              </div>
+              <div class='productTile'>
+                <img class='productTile-img' src='http://lorempixel.com/400/200/'>
+                <div class='productTile-short-description'>
+                  <a href='#' onclick="jQuery(this).parents('.productTile').toggleClass('active')">
+                    Kylo Ren Costume for Kids Star Wars: The Force Awakens
+                  </a>
+                  <div>
+                    <div class='price pull-right'>
+                      $34.12
+                    </div>
+                    <a class='productLink' href='#' target='_blank'>
+                      http://bit.ly/2eiCz66
+                    </a>
+                  </div>
+                </div>
+                <div class='productTile-long-description'>
+                  Cras mattis consectetur purus sit amet fermentum.
+                  Donec sed odio dui. Integer posuere erat a ante venenatis
+                  dapibus posuere velit aliquet. Nullam quis risus eget urna
+                  mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper.
+                </div>
+              </div>
+              <div class='productTile'>
+                <img class='productTile-img' src='http://lorempixel.com/400/200/'>
+                <div class='productTile-short-description'>
+                  <a href='#' onclick="jQuery(this).parents('.productTile').toggleClass('active')">
+                    Kylo Ren Costume for Kids Star Wars: The Force Awakens
+                  </a>
+                  <div>
+                    <div class='price pull-right'>
+                      $34.12
+                    </div>
+                    <a class='productLink' href='#' target='_blank'>
+                      http://bit.ly/2eiCz66
+                    </a>
+                  </div>
+                </div>
+                <div class='productTile-long-description'>
+                  Cras mattis consectetur purus sit amet fermentum.
+                  Donec sed odio dui. Integer posuere erat a ante venenatis
+                  dapibus posuere velit aliquet. Nullam quis risus eget urna
+                  mollis ornare vel eu leo. Vestibulum id ligua porta felis euismod semper.
+                </div>
+              </div>
+            </div>
+            <div class='BAG pb20'>
+              <div class='bag-title mb10'>
+                My Bag
+              </div>
+              <div class='productTile'>
+                <img class='productTile-img' src='http://lorempixel.com/400/200/'>
+                <div class='productTile-short-description'>
+                  <a href='#' onclick="jQuery(this).parents('.productTile').toggleClass('active')">
+                    Kylo Ren Costume for Kids Star Wars: The Force Awakens
+                  </a>
+                  <div>
+                    <div class='price pull-right'>
+                      $34.12
+                    </div>
+                    <a class='productLink' href='#' target='_blank'>
+                      http://bit.ly/2eiCz66
+                    </a>
+                  </div>
+                </div>
+                <div class='productTile-long-description'>
+                  Cras mattis consectetur purus sit amet fermentum.
+                  Donec sed odio dui. Integer posuere erat a ante venenatis
+                  dapibus posuere velit aliquet. Nullam quis risus eget urna
+                  mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper.
+                </div>
+              </div>
+              <div class='subtotal mb10'>
+                <div class='pull-right'>
+                  $40.00
+                </div>
+                Subtotal
+              </div>
+              <a class='mainButton d-block full-width fs14 uppercase' href='#'>proceed to checkout</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <style>
+      body{overflow: auto}
+      .VideoClient > h1{border-bottom: 1px solid #fff;padding-bottom: 1rem}
+      .sectionWrapp{padding: 1rem 2rem}
+      .sectionWrapp section{overflow-x:hidden !important;padding-bottom:1rem;display:inline-block;width:24.5rem;margin: 0 2rem 1rem 0;vertical-align: top;position: relative }
+      section
+    </style>
+    <script crossorigin='anonymous' integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src='UI/scripts/plugin/jQuery_UI.js'></script>
+    <script src='UI/scripts/demo.js'></script>
+    <script src='UI/scripts/animation.js'></script>
+    <script src='UI/scripts/header.js'></script>
+    <script src='UI/scripts/rightSideBAr.js'></script>
+    <script src='UI/scripts/sideBarToggle.js'></script>
+    <script src='UI/scripts/plugin/jquery.scrollbar.min.js'></script>
+    <script src='UI/scripts/plugin/jquery.mousewheel.min.js'></script>
+    <script>
+      $('.sectionWrapp section').resizable({
+        handles: 's',
+        distance: 0,
+        minHeight: 41
+      });
+    </script>
+  </body>
+</html>

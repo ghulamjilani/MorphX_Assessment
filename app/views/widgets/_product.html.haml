@@ -1,0 +1,14 @@
+.ProductsList-item
+  %a.product-img-wrapp{"data-id":"data-id", href: product.short_url(current_session.organizer), onclick:"window.open('#{product.short_url(current_session.organizer)}', '#{product.title}', 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;", target:"_blank"}
+    .product-img{style:"background-image: url('#{product.image_url}')"}
+  .product-details-wrapp
+    .product-name{title:"#{product.title}"}
+      = product.title
+    .product-details{title:"#{product.description}"}
+      = product.description
+    .product-details-footer.clearfix
+      %a.text-ellipsis{href:product.short_url(current_session.organizer), onclick:"window.open('#{product.short_url(current_session.organizer)}', '#{product.title}', 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;", target:"_blank"}
+        = product.short_url(current_session.organizer)
+      .pull-right.text-right
+        %a.btn.btn-s.text-center.text-ellipsis{href: product.short_url(current_session.organizer), onclick:"window.open('#{product.short_url(current_session.organizer)}', '#{product.title}' 'Toolbar=0, Location=0, Directories=0, Status=0, Menubar=0, Scrollbars=1, Resizable=0, Copyhistory=1, Width=800, Height=600');return false;", target:"_blank"}
+          = product.price.format

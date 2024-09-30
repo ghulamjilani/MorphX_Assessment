@@ -1,0 +1,398 @@
+
+@import "mixin";
+
+#phoneVerificationViewPlaceholder{
+  .SendCodeToPhoneBTN{
+    margin: 5px 0 10px;
+    white-space: nowrap;
+  }
+}
+.profiles-edit_billing{
+  .main-content{
+    @include media(phone-p-tablet){
+      padding-bottom: 60px;
+    }
+    @include media(phone) {
+      padding-bottom: 60px;
+    }
+  }
+}
+.Billing-settings{
+  @include media(reverso-phone){
+    .payoutText{
+      width: 65%;
+    }
+  }
+  .PayoutsList{
+    .dropdown-list{
+      @include media(phone){
+        min-width: auto;
+      }
+    }
+  }
+  #addNewPayoutMethod{
+    @include media(phone){
+      left: 50%;
+      transform: translate(-50%, 0px);
+      width: 100%;
+    }
+  }
+  .PaymentMethods{
+    @include media(phone){
+      .AddPaymentMethod{
+        width: 100%;
+      }
+    }
+  }
+  .paymentMethod{
+    .cards{
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .visa, .mastercard, .americanExpress, .discover{
+      margin: 0 5px;
+      background-color: $font-colorWhite;
+      border: 1px solid $siteColorMainLightGrey;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 30px;
+      width: 50px;
+      border-radius: 5px;
+    }
+    .visa{
+      background-image: url(asset_path("Visa_logo.png"));
+    }
+    .mastercard{
+      background-image: url(asset_path("Mastercard_logo.png"));
+    }
+    .americanExpress{
+      background-image: url(asset_path("American_Express_logo.png"));
+    }
+    .discover{
+      background-image: url(asset_path("discover_logo.png"));
+    }
+    .payPall{
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      height: 30px;
+      width: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url(asset_path("PayPal_logo.png"));
+    }
+    .choice{
+      margin-bottom: 20px;
+      ul{
+        list-style: none;
+        padding-left: 20px;
+      }
+    }
+  }
+  .text-right{
+    right: 16px;
+    bottom: -60px;
+    position: absolute;
+    display: flex;
+    @include media(tablet){
+      right: 3rem;
+      bottom: -5rem;
+    }
+    @include media(p-tablet){
+      right: 3rem;
+      bottom: -5rem;
+    }
+    a, button{
+      min-width: 12rem;
+      padding: 0 25px;
+    }
+    @include media(phone-p-tablet){
+      right: 30px;
+    }
+    @include media(phone){
+      bottom: -50px;
+      flex-direction: row;
+      width: 100%;
+      justify-content: center;
+      transform: translate(50%, 0);
+      right: 50%!important;
+      #addNewPayoutMethod{
+        width: 100%;
+      }
+      a, button{
+        padding: 0!important;
+        width: 40%;
+        &:last-child{
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  .AddNewCard{
+    .credit-card{
+      padding: 12px 5px;
+      background: var(--bg__label);
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 12px;
+      color: $font-colorWhite;
+    }
+    #add_card_form{
+      #card-errors{
+        font-size: 12px;
+        line-height: 12px;
+        color: $siteColorMainRed;
+      }
+      .text-right{
+        right: -3rem;
+        bottom: -5rem;
+        position: absolute;
+        @include media(reverso-phone){
+          right: -3rem;
+        }
+        @include media(reverso-tablet){
+          right: -1.5rem;
+        }
+        a, button{
+          min-width: 12rem;
+          padding: 0 35px;
+
+        }
+        @include media(phone-p-tablet){
+          right: 30px;
+        }
+      }
+      .countryAndZipp .input-block{
+        @include media(reverso-phone){
+          margin-left: 30px;
+        }
+      }
+      @include media(phone){
+        .input-block{padding-left: 0;}
+        #card-element,.input-block,.country_col, #zip_code_block{
+          width: 100%;
+        }
+        .countryAndZipp{flex-direction: column;}
+      }
+    }
+    .cardWrapper{
+      .StripeElement--invalid {
+        border-color: transparent;
+      }
+      #card-element,.input-block{
+        width: 46%;
+        display: inline-block;
+      }
+    }
+    .countryAndZipp{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .country_col, #zip_code_block{
+        width: 46%;
+        display: inline-block;
+        label{
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+  .payoutMethodsCard{
+    display: flex;
+    flex-direction: column;
+    .choice{
+      border: 1px solid var(--border__separator);
+      border-radius: 20px;
+      padding: 20px;
+      span{
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 19px;
+        padding-bottom: 25px;
+        color: var(--tp__main);
+      }
+      .comingSoon{
+        position: absolute;
+        right: 18px;
+        top: 18px;
+        padding: 5px;
+        background: rgba(242, 53, 53, 0.1);
+        border-radius: 5px;
+        @include media(phone){
+          position: relative;
+          text-align: center;
+          right: 0;
+          top: 0;
+        }
+      }
+      ul{
+        margin-left: 5px;
+        padding-bottom: 0;
+      }
+    }
+    .comingSoonBlock{
+      opacity: 0.7;
+    }
+  }
+  .AddBankPayoutMethod{
+    #bank_account_payouts_form{
+      padding-top: 0;
+    }
+    .ssnInput{
+      @include media(reverso-tablet){
+        margin-bottom: 65px;
+      }
+    }
+    .BankDetails{
+      .holderName{
+        @include media(tablet){
+          padding-right: 30px;
+        }
+        @include media(reverso-tablet){
+          max-width: 270px;
+        }
+      }
+      .bankDetailsWrapper{
+        @include media(reverso-tablet){
+          display: flex;
+        }
+        .input-block, .select-block{
+          padding-right: 30px;
+          min-width: 300px;
+          @include media(phone){
+            min-width: auto;
+          }
+        }
+      }
+    }
+    .text-right{
+      right: -3rem;
+      bottom: -94px;
+      @include media(reverso-phone){
+        right: -1rem;
+        bottom: -8.5rem;
+      }
+      @include media(reverso-p-tablet){
+        right: -3rem;
+      }
+      @include media(reverso-tablet){
+        right: -1.5rem;
+      }
+      button{
+        padding: 0 25px;
+      }
+    }
+  }
+  @include media(phone){
+    .selectCountry{
+      .text-right{
+        bottom: -90px;
+        a, button{
+          width: 50%;
+        }
+      }
+    }
+  }
+  .form_V2{
+    padding-bottom: 0;
+  }
+  .cardLabel{
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 25px;
+  }
+  .cardInfo{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .ExpiresDate{
+    margin-bottom: 0;
+  }
+  .mainButton{
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    vertical-align: top;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px !important;
+    height: auto !important;
+  }
+  td{
+    font-size: 14px;
+    line-height: 47px;
+    ul,li{
+      padding: 0!important;
+      a{
+        padding: 15px 20px!important;
+      }
+    }
+    span{
+      font-weight: bold;
+      color: var(--tp__h1);
+    }
+    img{
+      width: 50px;
+      height: 33px;
+      margin: 5px 0;
+    }
+  }
+  .dropdown-toggle{
+    position: relative;
+    top: 5px;
+    max-width: 100px;
+  }
+  #card-element{
+    box-shadow: none;
+    border-bottom: 1px solid $siteColorMainLightGrey;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0px;
+    height: 36px;
+  }
+  .form_V2 .select-block select{
+    border-bottom: 1px solid $siteColorMainLightGrey;
+  }
+  .checkbox{
+    margin-top: 23px;
+  }
+}
+
+#profile_time_format_input{
+  .form-label {
+    width: 190px;
+    display: inline-block;
+  }
+  .form-wrapper{
+    input{
+      vertical-align: text-top;
+    }
+    @include media(phone){
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      input{
+        vertical-align: text-bottom;
+      }
+    }
+  }
+}
+.cardInfoWrapper{
+  .cardRemovebtn{
+    float: right;
+  }
+  .cardInfo{
+    width: calc(100% - 130px)
+  }
+}
+.golink {
+  opacity: .6;
+  text-align: center;
+  padding: 50px 0 0 0;
+}

@@ -1,0 +1,57 @@
+body .ui-datepicker .ui-widget-header {
+    background: #f7f7f7;
+}
+body .ui-datepicker .ui-state-default {
+    color: var(--tp__active);
+    background: #f7f7f7;
+}
+body .ui-datepicker .ui-state-hover:hover {
+    color: var(--tp__btn__main);
+    background: var(--btn__main);
+}
+body .ui-datepicker .ui-state-highlight {
+    background: var(--bg__main);
+    color: #333
+}
+body .ui-datepicker-prev {
+    background: none !important;
+    cursor: pointer;
+    color: #F23535;
+    position: relative;
+    border-color: transparent !important;
+}
+body .ui-datepicker-prev:after {
+    content: "\f104";
+    font-family:'VideoClientIcon';
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    color: var(--tp__active);
+}
+body .ui-datepicker-prev:hover:after {
+    color: var(--tp__active);
+}
+body .ui-datepicker-prev span {
+    display: none !important;
+}
+body .ui-datepicker-next {
+    background: none !important;
+    cursor: pointer;
+    color: var(--tp__active);
+    position: relative;
+    border-color: transparent !important;
+}
+body .ui-datepicker-next:after {
+    content: "\f105";
+    font-family:'VideoClientIcon';
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    color: var(--tp__active);
+}
+body .ui-datepicker-next:hover:after {
+    color: var(--tp__active);
+}
+body .ui-datepicker-next span {
+    display: none !important;
+}

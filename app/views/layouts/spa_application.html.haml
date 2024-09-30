@@ -1,0 +1,143 @@
+!!!
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: :en, xmlns: 'http://www.w3.org/1999/xhtml', 'xmlns:fb': 'http://ogp.me/ns/fb#', prefix: 'og: http://ogp.me/ns#'}
+  / <![endif]
+  %head
+    = render 'layouts/application/layout_custom_code/head_start'
+    = render 'layouts/application/analytics'
+    = render 'layouts/application/config'
+    = render 'layouts/application/hotjar'
+    = yield(:additional_google_head)
+
+    // ServerTime should be first place
+    :javascript
+      (function(){
+        window.serverTime = new Date(#{(Time.now.to_f*1000).round});
+        window.serverTimeToI = #{Time.now.to_i};
+        // window.environment = '#{ Rails.env }';
+        // window.envHOST = '#{ENV['HOST']}';
+       })();
+
+    :javascript
+      window.entity = "#{@class_name}";
+    //TODO: change string to = page_title
+    %title= Rails.application.credentials.global[:service_name]
+    = csrf_meta_tags
+    = action_cable_meta_tag
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no'}
+    %meta{name:"HandheldFriendly", content:"true"}
+    %meta{name: 'google-site-verification', content: "#{ENV['GOOGLE_SITE_VERIFY']}"}
+
+    - unless action_name == 'user_or_channel_or_session_or_organization' # requested by Adam - because it conflicts with og:description tags on those 3 pages
+      %meta{content: I18n.t("views.layouts.application.meta_modern", service_name: Rails.application.credentials.global[:service_name]), name: 'description'}
+    %meta{content: I18n.t("views.layouts.application.meta_human", service_name: Rails.application.credentials.global[:service_name]), name: 'author'}
+
+    %meta{property: 'og:site_name', content: Rails.application.credentials.global[:service_name]}
+    %meta{property: 'fb:app_id', content: ENV['FACEBOOK_APP_ID']}
+    %meta{ name:"apple-mobile-web-app-capable", content:"yes"}
+
+    %link{href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap',  rel: :stylesheet}
+    %link{href: 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap',  rel: :stylesheet}
+    -# %link{href: "https://cdn.myth.theoplayer.com/#{Rails.application.credentials.frontend[:services][:theo_player][:key]}/ui.css", rel: :stylesheet, type: 'text/css'}
+    %link{href: asset_path('manifest.json'), rel: 'manifest' }
+
+    %script{src: '//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'}
+    -# %script{src: "https://cdn.myth.theoplayer.com/#{Rails.application.credentials.frontend[:services][:theo_player][:key]}/THEOplayer.js?cb=#{Time.now.to_i}"}
+
+    %script{async: "", src: "https://servedbyadbutler.com/app.js", type: "text/javascript"}
+
+    = yield(:additional_meta_tags)
+
+    = stylesheet_link_tag 'spa', media: 'all'
+
+    = favicon_link_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png", rel: 'shortcut icon'
+    = render 'shared/drift'
+    = render 'layouts/application/layout_custom_code/head_end'
+
+  %body{class: "#{enhanced_body_class} #{mobile_Check} #{'customStyle' if customize_css} #{'showDrift' if show_drift?}"}
+    = yield :additional_google_body
+
+    %a{href: 'https://plus.google.com/107097230643114672377', rel: :publisher}
+
+    #vueapp{"data-behavior":"vue"}
+
+    = javascript_include_tag 'spa_application'
+    = javascript_pack_tag 'app', defer: true
+    = stylesheet_pack_tag 'app', media: 'all'
+
+    = render 'layouts/application/layout_custom_code/body_start'
+    = render 'layouts/application/customization'
+    = render 'layouts/application/organization_custom_styles'
+    %script{src: 'https://js.stripe.com/v3/'}
+
+    - if Rails.env.development? || current_user&.can_use_debug_area?
+      = render 'layouts/dev_area', {spa: true}
+
+    - flash.each do |type, msg|
+      :javascript
+        if(!window.flash_messages) window.flash_messages = []
+        window.flash_messages.push({value: "#{raw msg}", type: "#{raw type}" })
+    = render 'layouts/application/layout_custom_code/body_end'
+    -# :javascript
+    -#   console.log("enter")
+    -#   window.flash_messages = #{raw flash || 'null'};
+
+  -#   - if !user_signed_in? && resource_name != :admin
+  -#     - if controller_name == 'home' && action_name.include?('landing')
+  -#       -# Don't render signup, it should be added in landing view
+  -#     - else
+  -#       = render 'layouts/application/sign_in'
+  -#       = render 'layouts/application/sign_up'
+  -#     = render template: 'devise/passwords/new'
+  -#   - if controller_name == 'become_presenter_steps' && action_name == 'info' || user_signed_in? && current_user.try_live_available?
+  -#     = render 'layouts/application/try_now_modal'
+
+
+  -#   /[if lt IE 9]
+  -#     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js'
+  -#     = javascript_include_tag 'respond'
+
+  -#   = include_gon(namespace: 'Immerss', camel_case: true, init: true) # should be included before application.js
+  -#   %script{src: "https://cdn.myth.theoplayer.com/#{Rails.application.credentials.frontend[:services][:theo_player][:key]}/THEOplayer.js"}
+  -#   -# = javascript_include_tag 'application'
+
+  -#   - if params[:autodisplay_remote_ujs_path].present?
+  -#     - content_for(:after_include_javascripts) do
+  -#       :javascript
+  -#         $(function(){
+  -#           $.getScript('#{params[:autodisplay_remote_ujs_path]}');
+  -#           history.pushState({}, null, window.location.pathname);
+  -#         });
+  -#   = yield(:after_include_javascripts)
+  - cookies.permanent[:visitor_id] ||= SecureRandom.uuid
+  -#   :javascript
+  -#     sbjs.init({
+  -#       lifetime: 12,
+  -#       session_length: 60,
+  -#       user_ip: "#{request.remote_ip}",
+  -#       callback: track
+  -#     });
+  -#     function track(sb) {
+  -#       if(!Immerss.currentUserId){
+  -#         $.ajax({
+  -#           type: 'POST',
+  -#           url: '#{visitor_sources_path}',
+  -#           dataType: 'json',
+  -#           contentType: 'application/json'
+  -#         });
+  -#       }
+  -#     }
+  -#   - if Rails.env.development? || current_user&.can_use_debug_area?
+  -#     = render 'layouts/dev_area'
+  -#   .LoadingCover.mainLoadingCover.semitransparent_LoadingCover{style:'display:none'}
+  -#     .spinnerSlider
+  -#       .bounceS1
+  -#       .bounceS2
+  -#       .bounceS3
+  -# = render 'shared/intercom'
+  -# = render 'layouts/application/hotjar'
+
+  -# = yield(:wizard_modals)

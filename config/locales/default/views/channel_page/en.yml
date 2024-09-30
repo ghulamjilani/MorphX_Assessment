@@ -1,0 +1,96 @@
+en:
+  channel_page:
+    subscribe: Subscribe from
+    subscribed: Subscribed
+    owner: Owner
+    follow: Follow
+    unfollow: Unfollow
+    unfollow_owner: Unfollow Owner
+    following: Following
+    follow_owner: Follow Owner
+    following_owner: Following Owner
+    creators: Creators
+    search_by_name: Search by name
+    subscription_plan_from: Subscription plan from
+    edit_channel: Edit Channel
+    message: Message
+    archive_channel: Archive Channel
+    full_link: Full Permalink
+    short_link: Short Permalink
+    referal_link: Referral Permalink
+    copy: copy
+    send_a_mail: Send a mail
+    to: To
+    email: Email
+    send: Send
+    today: Today
+    close: Close
+    no_sessions_for_month: There are no Sessions for this month
+    search_for_sessions: Search for sessions
+    live: Live
+    all_videos: All Videos
+    documents: Documents
+    reviews: Reviews
+    community: Community
+    store: Store
+    about: About
+    back_to_channel: Back to Channel
+    network: Network
+    hide: Hide
+    show_more: Show more
+    create_new_post: Create New Post
+    no_results: There are no Search results
+    community_desc: Start interacting with your fans and let them know what you’re up to.
+    create_post: Create a Post
+    channel_owner: Channel owner
+    no_posts: No posts yet.
+    followers: Followers
+    follow_channel: Follow Channel
+    unfollow_channel: Unfollow Channel
+    following_channel: Following Channel
+    category: Category
+    channel: Channel
+    channels: Channels
+    language: Language
+    since: Since
+    part_of: Channels
+    oneChannel: Channel of
+    all: All
+    channels_by: Channels by
+    discover: Discover
+    live_now: Live now
+    leave_revieww: Did you like this content? Leave your review!
+    leave_review: Leave Review
+    no_reviews: Nobody left a review yet...
+    first_review: Be the first to review!
+    read_less: Read less
+    read_more: Read more
+    no_videos: There are no videos here yet.
+    sessions_by: Sessions by
+    view_all: View all
+    start_interacting: Start interacting with your fans and let them know what you’re up to.
+    subscription_plans: Subscription Plans
+    free_trial: Free trial
+    include_streams: Online Streams
+    include_replays: Replays
+    buy: Buy
+    subscription_plan_info: Subscription Plan Info
+    day: Day
+    week: Week
+    month: Month
+    streams: Streams
+    replays: Replays
+    payment_method: Payment Method
+    credit_card: Credit Card
+    name_on_card: Name on Card
+    gift_subs: Gift subscription for a friend
+    recipient_email: Enter recipient email
+    conf_email: Confirm email
+    trial_desc: '*Trial period is not included with gift subscriptions'
+    country: Country*
+    zip_code: Zip Code*
+    price: Price
+    tax: Tax
+    total_amount: Total amount
+    submit_payment: Submit Payment
+    book_me: Book Me!

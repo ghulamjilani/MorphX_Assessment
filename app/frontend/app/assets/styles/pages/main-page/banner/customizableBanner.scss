@@ -1,0 +1,109 @@
+.customizableBanner {
+  position: relative;
+  padding: 3rem;
+  background-repeat: no-repeat;
+  background-color: rgba(0,0,0,0.4);
+  background-blend-mode: color;
+  background-size: cover;
+  background-position: center center;
+
+  @include flex(flex, center, center);
+  flex-direction: column;
+  width: 100%;
+  min-height: 40rem;
+
+  &__text {
+    // text-align: center;
+    font-size: 4rem;
+    // font-weight: bold;
+    color: white;
+    padding-bottom: 2rem;
+    // margin-top: 7rem;
+    @include media(desktop) {
+      font-size: 3rem;
+      margin-top: 0;
+    }
+    @include media(tablet) {
+      padding-bottom: 0;
+    }
+    @include media(phone) {
+      font-size: 2rem;
+    }
+    h1 {
+      font-size: 7rem;
+      color: white;
+      margin: 0;
+    }
+    h2 {
+      font-size: 6rem;
+      color: white;
+      margin: 0;
+    }
+    h3 {
+      font-size: 5rem;
+      color: white;
+      margin: 0;
+    }
+    h4 {
+      font-size: 4rem;
+      color: white;
+      margin: 0;
+    }
+    h5 {
+      font-size: 3.5rem;
+      color: white;
+      margin: 0;
+    }
+    h6 {
+      font-size: 3rem;
+      color: white;
+      margin: 0;
+    }
+    p {
+      font-size: 1.8rem;
+      color: white;
+      margin: 0;
+    }
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+    .ql-align-center {
+      text-align: center;
+    }
+
+    .ql-align-justify {
+      text-align: justify;
+    }
+
+    .ql-align-right {
+      text-align: right;
+    }
+  }
+
+  &__button {
+    min-height: 4rem;
+    margin-top: 1rem;
+    @include media(phone) {
+      min-height: 3rem;
+    }
+  }
+  .videoBanner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+
+    video {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      margin: 0;
+    }
+  }
+}

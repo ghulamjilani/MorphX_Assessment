@@ -1,0 +1,86 @@
+<div class="chooseSettings_list">
+    {{#if (gt organization.sources.length 5)}}
+        <div class="chooseSettings">
+            <div class="chooseSettings__Title">
+                <input id="studio-filter" placeholder="Search Studio...">
+                <i class="VideoClientIcon-Search"></i>
+            </div>
+            <div class="chooseSettings__Body" id="studio_select">
+                <ul>
+                    <li class="studio_option studio_option_all active" data-id="-1">
+                        All
+                        <i class="VideoClientIcon-angle-rightF"></i>
+                    </li>
+                    {{#each organization.studios}}
+                        <li class="studio_option" 
+                            data-id="{{this.id}}" 
+                            data-name="{{this.data_name}}"
+                            title="{{this.name}}">
+                            {{this.name}}<i class="VideoClientIcon-angle-rightF"></i>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="chooseSettings">
+            <div class="chooseSettings__Title">
+                <input id="studio-room-filter" placeholder="Search Room...">
+                <i class="VideoClientIcon-Search"></i>
+            </div>
+            <div class="chooseSettings__Body">
+                <ul>
+                    <li class="studio_room_option studio_room_option_all active" data-id="-1">
+                        All
+                        <i class="VideoClientIcon-angle-rightF"></i>
+                    </li>
+                    <li class="studio_room_option studio_room_option_unassigned" data-id="0">No Room Assigned <i class="VideoClientIcon-angle-rightF"></i></li>
+                    {{#each organization.studio_rooms}}
+                        <li class="studio_room_option" 
+                            data-id="{{this.id}}" data-name="{{this.data_name}}" 
+                            data-studio-id="{{this.studio_id}}"
+                            title="{{this.name}}">
+                            {{this.name}} <i class="VideoClientIcon-angle-rightF"></i>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    {{/if}}
+    <div id="multiroom-device" class="chooseSettings">
+        <div class="chooseSettings__Title">
+            <input id="ffmpegservice-account-filter" placeholder="Search Source...">
+            <i class="VideoClientIcon-Search"></i>
+        </div>
+        <div class="chooseSettings__Body">
+            <ul>
+                {{#each organization.sources}}
+                    <li class="ffmpegservice_account_option SearchSource"
+                        data-id="{{this.id}}"
+                        data-name="{{this.data_name}}"
+                        data-studio-room-id="{{this.studio_room_id}}"
+                        data-device-type="{{#if (eq this.current_service 'rtmp')}}studio_equipment{{else}}ipcam{{/if}}"
+                        data-service-type="{{this.current_service}}"
+                        title="{{this.name}}">
+                        {{this.name}}
+                        <i class="VideoClientIcon-{{#if (eq this.current_service 'rtmp')}}RTMP{{else}}signal{{/if}} chooseSettings__type"></i>
+                        <a href="#show_video_source_modal" data-toggle="modal" class="show-source-details" title="Show details">
+                            <i class="VideoClientIcon-Vector-3"></i>
+                        </a>
+                    </li>
+                {{/each}}
+                {{#if organization.owned}}
+                    <li class="ffmpegservice_account_option SearchSource add-new-item__wrapp">
+                        <a href="{{new_source_path}}" target="_blank" class="add-new-item" title="Add new device">
+                            Add New
+                            <i class="VideoClientIcon-plus chooseSettings__type"></i>
+                        </a>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="ffmpegservice_account_validation_message fs-12 text-right padding-right-10">
+    <div class="required-message">*Equipment field is required</div>
+    <div class="error-message text-color-red hidden">*Please select equipment</div>
+</div>

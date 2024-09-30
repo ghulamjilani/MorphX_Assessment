@@ -1,0 +1,11 @@
+<p>
+  You have been removed as a co-presenter from <a href="<%= @url %>"><%= @session.always_present_title %></a> by <%= link_to @session.organizer.public_display_name, @session.organizer.absolute_path %>.
+</p>
+
+<p>
+  If you feel there is a mistake please contact the presenter directly.
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format I18n.t('mailer.thank_you_message', service_name: Rails.application.credentials.global[:service_name]) %>
+</p>

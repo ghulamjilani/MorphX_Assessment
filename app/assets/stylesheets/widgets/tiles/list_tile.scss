@@ -1,0 +1,110 @@
+
+@import "../../mixin";
+@import "../../var";
+.tile-list{
+  display: block;
+  height: 60px;
+  margin-bottom: 10px;
+  position: relative;
+  @include clearfix();
+  &.active{
+    &:after{
+      content: '';
+      display: block;
+      position: absolute;
+      border: 5px solid transparent;
+      border-left-color: var(--border__separator);
+      top: 50%;
+      left: -7px;
+      transform: translateY(-50%);
+    }
+  }
+  .t-img{
+    width: 105px;
+    height: 100%;
+    background-color: #ededed;
+    background-position: center center;
+    background-size: cover;
+    float: left;
+    position: relative;
+  }
+  .t-body{
+    @include flex(flex, flex-start, space-between);
+    flex-direction: column;
+    width: calc(100% - 105px);
+    float: left;
+    padding: 0 10px 0 14px;
+    font-size:15px;
+    @media all and (max-width: 360px) {
+      padding: 0 5px 0 7px;
+    }
+  }
+  .t-name{
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: var(--tp__main);
+    position: relative;
+    top: -6px;
+    margin-bottom: -6px;
+  }
+  .t-name, .t-date{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .t-date{
+    line-height: 1.4;
+    color: var(--tp__icons);
+  }
+  .t-info{
+    color: var(--tp__icons);
+    line-height: 1.2;
+    .embed_fontstar, .embed_fontstar-half-alt{
+      color: var(--tp__active);
+    }
+  }
+  .starRating{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1;
+    padding-left: 0;
+    letter-spacing: -1pxd;
+    li{
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+  .starRating_count{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .t-viewCount{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 10px;
+    @media all and (max-width: 360px) {
+      padding-left: 5px;
+    }
+  }
+  .price{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    -webkit-border-radius:100%;
+    -moz-border-radius:100%;
+    border-radius:100%;
+    background: $siteColorMainYellow;
+    color: #000;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 19px;
+  }
+}

@@ -1,0 +1,63 @@
+
+- if browser.platform.ios?
+  %a.iosAppLink{href:'https://itunes.apple.com/app/immerss/id1072900061'}
+    = image_tag('iosApp.png', alt: 'ios app')
+- elsif browser.platform.android?
+  %a.androidAppLink{href:'https://play.google.com/store/apps/details?id=com.immerss.android'}
+    = image_tag('androidApp.png', alt: 'android app')
+
+%footer.footer
+  -# - if current_user_has_unconfirmed_email?
+  -#   #notification-info-block.hideForMobilee.fixedNotification
+  -#     .container.text-center
+  -#       %span Please confirm your email address.
+  -#       - unconfirmed_email = current_user.unconfirmed_email || current_user.email
+  -#       = link_to "Didn't receive email instructions?",
+  -#         Rails.application.class.routes.url_helpers.user_confirmation_path(user: {email: unconfirmed_email}, format: :json),
+  -#         method: :post,
+  -#         class: 'btn btn-s resend_confirm',
+  -#         data: {disable_with: 'Resending instructions…', remote: true}
+  .footer__top
+    - if url = customize_logo_url
+      = image_tag(url)
+    - else
+      = image_tag("services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/footerLogo.png", class: 'footerLogo', alt: 'footer Logo')
+    %div.footer__top__navigation{role: "navigation"}
+      %a{href: '/', class: ('hidden' if request.env['PATH_INFO'] == root_path)} Home
+      - if Rails.application.credentials.global[:pages][:support]
+        %a{href: support_home_path} #{I18n.t('footer.contact_us')}
+      - if Rails.application.credentials.global[:service_subscriptions][:enabled]
+        %a{href: spa_pricing_index_path} Pricing
+      - if Rails.application.credentials.global[:pages][:business]
+        %a{href: business_home_path}
+          #{Rails.application.credentials.global[:service_name]} #{I18n.t('footer.for_business')}
+      - if Rails.application.credentials.global[:pages][:influencers]
+        %a{href: influencers_path}
+          #{Rails.application.credentials.global[:service_name]} #{I18n.t('footer.for_influencers')}
+      - if Rails.application.credentials.global[:pages][:help]
+        %a{href: pages_help_center_path} #{I18n.t('footer.help_center')}
+      - if Rails.application.credentials.global[:project_name].to_s.downcase == 'unite'
+        %a{href: "https://#{Rails.application.credentials.global[:host].to_s}/channels/unite-support-tutorials/unitelivecare"} Support & Tutorials
+  .footer__bottom
+    %div
+      %span
+        © #{Time.now.year} #{Rails.application.credentials.global[:service_name]}.
+        - if Rails.application.credentials.global[:pages][:terms_and_privacy]
+          %div.termsAndPrivacy
+            %a{href: pages_terms_of_use_path, target: '_blank'} Terms Of Use
+            |
+            %a{href: pages_privacy_policy_path, target: '_blank'} Privacy Policy
+        -#|
+        -#  %a{href: 'http://blog.unite.live', target: "_blank"} Blog
+
+    %nav.hidden{role: "navigation"}
+      %a{href: '#', target: '_blank'}
+        %i.GlobalIcon-twitter.fs-20.text-color-ultra-LightGrey
+      %a{href: '#', target: '_blank'}
+        %i.GlobalIcon-facebook.fs-20.text-color-ultra-LightGrey
+      %a{href: '#', target: '_blank'}
+        %i.GlobalIcon-google.fs-20.text-color-ultra-LightGrey
+      %a{href: '#', target: '_blank'}
+        %i.GlobalIcon-linkedin.fs-20.text-color-ultra-LightGrey
+
+= render template: 'layouts/application/_rebind_login_modals_to_signup_if_needed'

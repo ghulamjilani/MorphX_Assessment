@@ -1,0 +1,103 @@
+.social {
+  [class^="social-"], [class*=" social-"]{
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    line-height: 2.3rem;
+    text-align: center;
+    color: #fff;
+    opacity: 0.8;
+    font-size: 1rem;
+    margin:0 0.2rem;
+    i{
+      display: inline-block;
+    }
+    &:hover{
+      opacity: 1;
+    }
+  }
+  .social-f{
+    background-color: #3b5998;
+  }
+  .social-web{
+    background-color:#7ac142;
+  }
+  .social-youtube{
+    background-color: #cd332d;
+    i{
+      font-size: 1.3rem;
+      line-height: 1.9rem !important;
+    }
+  }
+  .social-instagram{
+    background-color: #3f729b;
+  }
+  .social-linkedin{
+    background-color: #007fb1;
+  }
+  .social-g{
+    background-color: #d14836;
+  }
+  .social-tw{
+    background-color: #2c4762;
+  }
+}
+
+
+.socialIconBox{
+  a{
+    display: inline-block;
+    vertical-align: middle;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 2.7rem;
+    text-align: center;
+    opacity: 0.8;
+    font-size: 2rem;
+    margin:0 0.3rem 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    &.circle{
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      background: rgba(0, 255, 0, 0.6);
+      color: #fff;
+      font-size: 1.5rem;
+
+    }
+    &.socialIcon-facebook{
+      background: #3b5998;
+    }
+    &.socialIcon-web{
+      background:#7ac142;
+    }
+    &.socialIcon-youtube{
+      background: #cd332d;
+    }
+    &.socialIcon-instagram{
+      background: #3f729b;
+    }
+    &.socialIcon-linkedin{
+      background: #007fb1;
+    }
+    &.socialIcon-google{
+      background: #d14836;
+    }
+    &.socialIcon-twitter{
+      background: #2c4762;
+    }
+    &.socialIcon-reddit{
+      background: #cb1922;
+    }
+    &.socialIcon-tumblr{
+      background: #375975;
+    }
+    &.socialIcon-pinterest{
+      background: #d14c04;
+    }
+  }
+}

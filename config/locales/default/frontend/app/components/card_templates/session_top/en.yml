@@ -1,0 +1,11 @@
+en:
+  frontend:
+    app:
+      components:
+        card_templates:
+          session_top:
+            in: in
+            private: Private
+            buy: Buy
+            canceled: Canceled
+            completed: Completed

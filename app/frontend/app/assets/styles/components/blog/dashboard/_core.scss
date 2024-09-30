@@ -1,0 +1,320 @@
+.dashboardMK2 {
+  margin-right: auto;
+  margin-left: auto;
+  @include media(reverso-p-tablet) {
+    width: 96%;
+  }
+  @include media(reverso-desktop) {
+    width: 131rem;
+    max-width: 100%;
+  }
+
+  &__title {
+    background: var(--bg__content);
+    min-height: 3.9rem;
+
+    &__content {
+      margin: 0 auto;
+      @include flex(flex, center, space-between);
+      @include media(reverso-p-tablet) {
+        width: 96%;
+      }
+      @include media(reverso-desktop) {
+        width: 131rem;
+        max-width: 100%;
+      }
+      @include media(p-phone) {
+        flex-direction: column;
+      }
+    }
+
+    h2 {
+      color: var(--tp__h1);
+      font-size: 1.8rem;
+      padding: 1.2rem 1.5rem .1rem;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+
+  &__organizations {
+    position: relative;
+    max-width: 20rem;
+    padding: 1.2rem 0 .1rem;
+    width: 20rem;
+    @include flex(flex, center, false);
+
+    &__organization {
+      @include flex(flex, center, space-between);
+      width: 100%;
+      cursor: pointer;
+
+      &__normal {
+        cursor: default;
+        margin: 0 auto;
+      }
+    }
+
+    &__icon {
+      transition: .3s;
+      font-size: 1.2rem;
+
+      &__active {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__link {
+      color: var(--tp__main);
+      width: 100%;
+
+      &:hover {
+        color: var(--tp__main);
+      }
+    }
+
+    &__image {
+      min-width: 2rem;
+      min-height: 2rem;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-right: 1rem;
+    }
+
+    &__list {
+      position: absolute;
+      left: -1rem;
+      top: 4rem;
+      z-index: 1000;
+      padding: 1rem 0;
+      border: 1px solid var(--border__separator);
+      border-radius: 0.6rem;
+      box-shadow: 0 4px 7px 0 var(--sh__main);
+      background-clip: padding-box;
+      display: block;
+      background: var(--bg__content);
+      max-height: 30rem;
+      overflow: auto;
+      width: 20rem;
+
+      &__show {
+        display: block;
+      }
+    }
+
+    &__item {
+      height: 3rem;
+      width: 100%;
+      @include flex(flex, center, space-between);
+      padding: 1rem;
+
+      &:hover {
+        background: var(--border__table);
+        color: var(--tp__main);
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__organizations.monolith {
+    .dashboardMK2__organizations__list {
+      display: none
+    }
+
+    .dashboardMK2__organizations__list__show {
+      display: block
+    }
+  }
+
+  &__main {
+    @include flex(flex, false, space-between);
+    padding: 3rem 0 6rem;
+    @include media(tablet) {
+      flex-direction: column;
+    }
+
+    &__sideBar {
+      width: 25%;
+      position: relative;
+      padding: 0 1.5rem;
+      @include media(tablet) {
+        width: 100%;
+        padding-bottom: 3rem;
+      }
+
+      &__mobile {
+        background: var(--btn__secondary);
+        border: 1px solid var(--btn__secondary);
+        color: var(--tp__main);
+        border-radius: 2rem;
+        font-size: 1.5rem;
+        position: relative;
+        line-height: 3.6rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        display: none;
+        @include media(phone) {
+          display: block;
+        }
+
+        &__icon {
+          position: absolute;
+          right: 1rem;
+          top: 45%;
+          transition: .1s;
+
+          &__show {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      &__followers {
+        display: flex;
+        flex-direction: column;
+        padding: .6rem 1.6rem .7rem 2rem;
+        font-size: 1.6rem;
+        color: var(--tp__main);
+        border-bottom: 1px solid var(--border__separator);
+
+        &__info {
+          @include flex(flex, center, space-between);
+          margin-bottom: 1rem;
+
+          a {
+            color: var(--tp__secondary);
+            font-size: 1.4rem;
+          }
+        }
+
+        &__count {
+          padding-left: 1rem;
+          color: var(--tp__secondary);
+        }
+
+        &__links {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        &__avatar {
+          margin: .5rem;
+          background-size: cover;
+          @include media(tablet) {
+            width: 3rem;
+            height: 3rem;
+            max-height: 3rem;
+            max-width: 3rem;
+          }
+        }
+      }
+
+      &__nav {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg__content);
+        border-radius: 1rem;
+        overflow: hidden;
+        @include boxShadow__main(var(--sh__main));
+      }
+
+      &__wrap_disabled {
+        opacity: 0.7;
+        text-decoration: none;
+        background-color: transparent;
+
+        &:hover, > a:hover {
+          cursor: not-allowed;
+        }
+      }
+
+      &__links {
+        padding: .6rem 1.6rem .7rem 2rem;
+        color: var(--tp__main);
+        border-bottom: 1px solid var(--border__separator);
+        font-size: 1.6rem;
+        display: block;
+
+        &__active {
+          color: var(--tp__active);
+        }
+
+        &:hover {
+          background-color: rgba(127, 127, 136, 0.2); //// change to var!!! /////
+        }
+      }
+    }
+
+    &__content {
+      width: 75%;
+      padding: 0 1.5rem;
+      // overflow: hidden;
+      @include media(tablet) {
+        padding: 0 1.5rem 3rem;
+        width: 100%;
+      }
+
+      &__tabs {
+        @include flex(flex, center, flex-start);
+        margin-bottom: 2rem;
+        border-bottom: .1rem solid var(--border__separator);
+        @include media(tablet) {
+          flex-direction: column;
+          border-bottom: none;
+        }
+
+        &__tab {
+          padding: 0 4rem 1.5rem;
+          color: var(--tp__main);
+          font-size: 1.6rem;
+          font-weight: 500;
+          position: relative;
+          cursor: pointer;
+          @include media(tablet) {
+            width: 100%;
+            border-bottom: .1rem solid var(--border__separator);
+            text-align: center;
+            padding: 1rem 4rem .4rem;
+          }
+
+          &__disable {
+            color: var(--tp__disabled) !important;
+            cursor: not-allowed !important;
+
+            &:hover {
+              &::before {
+                height: .3rem;
+                background-color: var(--border__separator);
+              }
+            }
+          }
+
+          &::before {
+            content: '';
+            width: calc(100% - .1rem);
+            position: absolute;
+            left: 0;
+            bottom: -.1rem;
+            height: 0px;
+            background-color: var(--tp__active);
+          }
+
+          &:hover {
+            &::before {
+              height: .3rem;
+            }
+          }
+
+          &__active {
+            color: var(--tp__active);
+
+            &::before {
+              height: .3rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

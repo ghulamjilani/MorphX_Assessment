@@ -1,0 +1,25 @@
+
+.mobile_device{
+  .ui-tooltip{
+    display: none !important;
+  }
+}
+.mobile_device.vjs-full-window{
+  .mainVideoSection-head{
+    display: none;
+  }
+  .mainVideoSection-body{
+    top: 0;
+  }
+  .header, .mobileHeader{
+    display: none!important;
+  }
+}
+.ios_device{
+
+}
+.android_device{
+
+}
+
+

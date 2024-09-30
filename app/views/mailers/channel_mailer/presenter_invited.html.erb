@@ -1,0 +1,406 @@
+
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" align="center" width="500" style="max-width:100%">
+      <tr>
+        <td>
+          <p
+            style="margin: 0;
+                text-decoration: none;
+                font-style: normal;
+                font-weight: 900;
+                font-size: 18px;
+                line-height: 18px;
+                color: #095f73;">Hello <%= @user.full_name.present? ? @user.full_name : @user.email%>,</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+      <tr><td></td></tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="max-width:100%">
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            <%= I18n.t('mailer.channel.invite_as_creator_body', company_url: (@channel.organization&.absolute_path || @inviter.absolute_path), company_name: (@channel.organization&.name || @inviter.full_name), channel_url: @channel.absolute_path, channel_name: @channel.title).html_safe %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            <%= I18n.t('mailer.channel.invite_as_creator_link', url: @follow_link_url).html_safe %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+      <tr><td></td></tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="max-width:100%">
+      <tr style="display: -webkit-box;">
+        <td style="display: table-cell;" width="65">
+          <img src="<%= @inviter.avatar_url %>" alt="" border="0"
+               width="50"
+               height="50" style="display: block;">
+        </td>
+        <td>
+          <p style="
+
+          font-style: normal;
+              font-weight: 600;
+              font-size: 14px;
+              color: #666666;">
+            <%= @inviter.full_name %>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0">
+      <tr><td></td></tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500"
+           style="border: 1px solid rgba(9,95,115,0.3);border-radius: 20px;max-width: 100%">
+      <tr align="center">
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 10px 0 10px 0;">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table role="presentation"  cellpadding="0" cellspacing="0" align="center">
+            <tbody>
+            <tr>
+              <td>
+                <img src="<%= @channel.image_tile_url %>" alt="" border="0"
+                     width="460"
+                     height="140" style="display: block;border-radius: 20px;max-width: 100%">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 10px 0 10px 0;">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table role="presentation"  border="0" align="center" cellpadding="0" cellspacing="0" width="460">
+            <tr>
+              <td>
+                <p style="
+
+                margin:0;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #333333;">
+                  <%= @channel.title %>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 10px 0 10px 0">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 15px;">
+      <tr>
+        <td>
+          <table role="presentation"  border="0" align="center" cellpadding="0" cellspacing="0" width="500">
+            <tr>
+              <td>
+                <p style="
+                margin:0;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #333333;">
+                  WHAT IS <%=Rails.application.credentials.global[:service_name].upcase%>?
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="padding: 0 0 15px; max-width:100%">
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 15px;
+              padding: 5px 0;
+              color: #000000;
+              line-height: 150%;">
+            It's a virtual marketplace that empowers any talented person to share their skills or expertise with anyone anytime anywhere in the world.
+            It connects skilled individuals with their audience through a live interactive experience.
+
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              padding: 5px 0;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            <%= I18n.t('views.mailer.channel_mailer.presenter_invited.this_new_platform', creators: I18n.t('dictionary.creators')) %>
+            <%= I18n.t('views.mailer.channel_mailer.presenter_invited.you_can_start', creator: I18n.t('dictionary.creator')) %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0;">
+      <tr>
+        <td>
+          <table role="presentation"  border="0" align="center" cellpadding="0" cellspacing="0" width="500">
+            <tr>
+              <td>
+                <p style="
+                margin:0;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #333333;">
+                  GREAT OPPORTUNITIES
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="max-width:100%;">
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              padding: 5px 0;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            However, what is more, <%=Rails.application.credentials.global[:service_name].upcase%> is not only about sharing content.
+            It gives you a unique way to truly connect with outstanding people and experienced teachers. Get the most of it!
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              padding: 5px 0;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            <%= I18n.t('views.mailer.channel_mailer.presenter_invited.the_creators_connect', creators: I18n.t('dictionary.creators')) %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="max-width:100%; padding: 15px 0;">
+      <tr>
+        <td>
+          <ul style="
+          margin:0;
+              font-style: normal;
+              list-style: none;
+              font-weight: normal;
+              padding-inline-start: 0;
+              font-size: 15px;
+              color: #000000;
+              line-height: 200%;">
+            <li>- Two-way conversations in streams</li>
+            <li>- Real-time chatting</li>
+            <li>- Polling</li>
+            <li>- Merchandise sales</li>
+            <li>- And more!</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0;">
+      <tr>
+        <td>
+          <table role="presentation"  border="0" align="center" cellpadding="0" cellspacing="0" width="500">
+            <tr>
+              <td>
+                <p style="
+                margin:0;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #333333;">
+                  CREATING A COMMUNITY
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="max-width:100%; padding: 0 0 15px;">
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              padding: 5px 0;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            The customers just need to discover their favorite channels and videos and interact with other subscribers.
+            There is so much helpful content that gives lots of new knowledge and skills on <%=Rails.application.credentials.global[:service_name].upcase%>.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 15px;
+              padding: 5px 0;
+              color: #000000;
+              line-height: 150%;">
+            As a rich marketplace <%=Rails.application.credentials.global[:service_name].upcase%> offers an opportunity to join a community of your
+            connect with many like-minded people, and learn the best practices.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              padding: 5px 0;
+              font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            <%= I18n.t('views.mailer.channel_mailer.presenter_invited.members_either', service_name: Rails.application.credentials.global[:service_name].upcase, creator: I18n.t('dictionary.creator')) %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              padding: 5px 0;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            If you have questions, please contact us at <%= Rails.application.credentials.global[:support_mail] %>.
+          </p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+</tr>

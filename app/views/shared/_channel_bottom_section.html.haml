@@ -1,0 +1,20 @@
+- if @channel.reviews_with_comment.present?
+  %section.Reviews_wrapp.Reviews
+    .container
+      .row
+        .col-md-12
+          .section-title
+            reviews
+            -if @channel.reviews_with_comment.size > 2
+              %a.pull-right.ReviewsToggle{href: '#'}
+                %Span#R-SA  See all
+                %Span#R-SL{style: 'display:none'} See less
+                %i.VideoClientIcon-navigate-down-arrow
+      .row
+        .col-md-12
+          - @channel.reviews_with_comment.each_slice(3) do |group_reviews|
+            - group_reviews.each do |review|
+              - next unless review
+              = render 'channels/review', combination: review
+
+= render 'shared/you_may_also_like_sessions', sessions: @you_may_also_like_sessions

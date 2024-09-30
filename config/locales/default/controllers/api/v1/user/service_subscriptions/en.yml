@@ -1,0 +1,15 @@
+en:
+  controllers:
+    api:
+      v1:
+        user:
+          service_subscriptions:
+            errors:
+              payment_failed: Payment failed. Please check your payment methods in Settings > Payments & Payouts.
+              plan_not_found: Business Plan was not found.
+              subscription_not_trial: The subscription is already not trial.
+              coupon_not_applicable: Coupon can't be applied to your order.
+              coupon_not_found: Coupon not found.
+              resource_missing: Please configure your Payment Method in menu Settings -> Payments & Payouts.
+              already_used_trial: You have already used trial.
+              plan_not_trial: This plan has no trial.

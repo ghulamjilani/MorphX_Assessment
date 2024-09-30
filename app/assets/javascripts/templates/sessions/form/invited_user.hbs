@@ -1,0 +1,9 @@
+{{#each users}}
+    <a class="avatarImg-SD margin-right-10 {{#if (gt @index 3)}}hide{{/if}}" href="#"
+       style="background-image: url('{{this.avatar_url}}')" title="{{this.display_name}}"></a>
+{{/each}}
+{{#if (gt users_count 4)}}
+    <a class="dottedCircle inlile-block vertical-midle" href="#" title="Show all">
+        <i class="VideoClientIcon-dots-horizontal-triple"></i>
+    </a>
+{{/if}}

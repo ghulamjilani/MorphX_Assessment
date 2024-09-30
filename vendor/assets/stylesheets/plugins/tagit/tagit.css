@@ -1,0 +1,134 @@
+.ui-autocomplete {
+  background-color: #fff;
+  position: absolute;
+  cursor: default;
+  list-style: none;
+  margin: 25px 0 0;
+  padding: 0;
+  border: 1px solid #E5E5E5;
+  border-top: none;
+  -moz-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+  -moz-box-shadow: 0 3px 5px #888;
+  -webkit-box-shadow: 0 3px 5px #888;
+  box-shadow: 0 3px 5px #888;
+  font-size: 12px;
+}
+
+.ui-autocomplete .ui-menu-item {
+  padding: 0;
+  margin: 0;
+}
+
+.ui-autocomplete  .ui-menu-item a {
+  display: block;
+  padding: 4px 6px;
+  margin: 0;
+  text-decoration: none;
+  line-height: 12px;
+  border-bottom: 1px solid #E5E5E5;
+  border-top: 1px solid #fff;
+  color: #78959D;
+
+}
+
+.ui-autocomplete .ui-menu-item a.ui-state-hover,
+.ui-autocomplete .ui-menu-item a.ui-state-active {
+  background-color: #e3e3e3;
+  color: #555;
+  border-color: #f7f7f7;
+}
+
+.ui-autocomplete-loading {
+  background: white url(ui-anim_basic_16x16.gif) right center no-repeat;
+}
+
+ul.tagit {
+  cursor: text;
+  font-size: 14px;
+  width: 97%;
+  padding: 3px;
+  margin: 0 0 10px 0px !important;
+  border: 1px solid #E5E5E5;
+  background: var(--bg__main);
+  color: #555;
+}
+
+ul.tagit li {
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  display: block;
+  float: left;
+  margin: 2px 5px 2px 0;
+  position: relative;
+}
+
+ul.tagit li.tagit-choice {
+  background-color: var(--bg__content);
+  padding: 2px 20px 3px 4px;
+}
+
+ul.tagit li.tagit-choice.selected {
+  background-color: #f5b0b0;
+  border-color: #f76464;
+}
+
+ul.tagit li.tagit-choice:hover {
+  opacity: 0.8;
+}
+
+ul.tagit li.tagit-new {
+  padding: 2px 4px 1px 0;
+}
+
+ul.tagit li.tagit-choice input {
+  display: block;
+  float: left;
+  margin: 0 5px 0 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.tagit-close .text-icon{
+  font-size: 20px;
+}
+ul.tagit li.tagit-choice a.tagit-close {
+  color: var(--tp__main);
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-style: normal;
+  outline: medium none;
+  padding: 0.2rem 0.2rem 0.2rem 0.4rem;
+  text-decoration: none;
+  position: absolute;
+  display: block;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0.5rem;
+}
+.ui-icon.ui-icon-close{
+  display: none;
+}
+ul.tagit li.tagit-choice a.tagit-close:hover {
+  color: #535353;
+}
+
+ul.tagit input[type="text"] {
+  -moz-box-sizing: border-box;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: inherit !important;
+  outline: none;
+}
+
+.tagit-hiddenSelect {
+  display:none;
+}
+.tagit-hidden-field, .ui-helper-hidden-accessible {
+  display:none !important;
+}
+.tagit-close > .text-icon{
+  display: none;
+}
+

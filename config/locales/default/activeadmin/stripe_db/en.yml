@@ -1,0 +1,4 @@
+en:
+  activeadmin:
+    stripe_db:
+      menu: Service Subscriptions

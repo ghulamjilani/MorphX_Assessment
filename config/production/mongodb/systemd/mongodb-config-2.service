@@ -1,0 +1,10 @@
+[Unit]
+Description=config-2 server of the cluster
+Requires=mongodb.service
+
+[Service]
+ExecStart=/opt/bitnami/mongodb/bin/config-2.sh
+Type=forking
+PIDFile=/opt/bitnami/mongodb/tmp/mongodb-config-2.pid
+LimitNOFILE=64000
+LimitNPROC=64000

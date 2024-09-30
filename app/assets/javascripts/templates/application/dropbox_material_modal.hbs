@@ -1,0 +1,35 @@
+<div id="dropbox-material-preview-{{cid}}" class="modal fade dropbox-material-preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{path}}</h3>
+    </div>
+    <div class="modal-body">
+        {{#unless isNotSupported}}
+            <span class="loading">Fetching media file. Please wait.</span>
+        {{/unless}}
+        <div class='dropbox-material-modal-content'>
+            {{#if isImage}}
+                <img src="/dropbox{{path}}" class="preview-tag">
+            {{/if}}
+            {{#if isVideo}}
+                <video width="320" height="240" class="preview-tag" controls autoplay preload="metadata">
+                    <source src="/dropbox{{path}}">
+                    Your browser does not support the video tag.
+                </video>
+            {{/if}}
+            {{#if isAudio}}
+                <audio class="preview-tag" autoplay controls preload="metadata">
+                    <source src="/dropbox{{path}}">
+                    Your browser does not support the audio element.
+                </audio>
+            {{/if}}
+        </div>
+        {{#if isNotSupported}}
+            <span>No preview available for this type of file.</span>
+        {{/if}}
+        <span class="fallback" style="display:none;">Sorry, but the format of a file is not supported by browser. It won't be displayed.</span>
+
+        <a class="mainButton bigBtn pull-right close-modal clearfix" data-dismiss="modal">Close</a>
+
+    </div>
+</div>

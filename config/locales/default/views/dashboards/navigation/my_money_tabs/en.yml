@@ -1,0 +1,10 @@
+en:
+  views:
+    dashboards:
+      navigation:
+        my_money_tabs:
+          earnings_content: Earnings (content)
+          payouts: Payouts
+          earnings_products: Earnings (products)
+          purchases: Purchases
+          my_subscriptions: My Subscriptions

@@ -1,0 +1,33 @@
+en:
+  views:
+    profiles:
+      edit_billing:
+        payments: Payments
+        payouts: Payouts
+        payment_methods: Payment Methods
+        add_and_manage_your_payment_methods: Add and manage your payment methods using our secure payment system.
+        method: Method
+        details: Details
+        expires: Expires %{exp}
+        default: Default
+        options: Options
+        account_card_currency: Account %{number} (USD)
+        make_default: Make default
+        please_wait: Please wait…
+        confirm_delete_this_payment_method: Are you sure you want to delete this payment method?
+        remove: Remove
+        choose_payment_method: Choose payment method
+        credit_debit_card: Credit/Debit Card
+        safe_money_transfer_using_your_bank: Safe money transfer using your bank account,
+        visa_mastercard_american_express_discover: Visa, Mastercard, American Express, Discover.
+        paypal: PayPal
+        safe_payment_online_credit_card_needed: Safe payment online. Credit card needed.
+        credit_card: credit card
+        add_payment_method: Add Payment Method
+        add_credit_card: Add credit card
+        name_on_card: Name on Card
+        country: Country
+        zip_code: Zip Code
+        primary_payment_method: Primary payment method
+        back: Back
+        add_card: Add Card

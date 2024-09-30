@@ -1,0 +1,43 @@
+.cm__pinned {
+  &__pin {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    @include flex(flex, center, center);
+    width: 2rem;
+    height: 2rem;
+    background: white;
+    border-radius: 50%;
+    z-index: 2;
+
+    &__icon {
+      color: $client__tp__icons;
+      font-size: 1.3rem;
+    }
+  }
+
+  &__shared {
+    position: fixed;
+    top: 9rem;
+    height: 12rem;
+    width: 50rem;
+    right: 0;
+    left: auto;
+    overflow: visible;
+
+    .grid {
+      justify-content: flex-start;
+    }
+
+    .cm__h__participants {
+      justify-content: flex-end;
+    }
+  }
+
+  &__h {
+    height: calc(100vh - 28rem);
+    position: absolute;
+    top: 0;
+    overflow: visible;
+  }
+}

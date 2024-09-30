@@ -1,0 +1,7 @@
+en:
+  models:
+    channel:
+      share_title: "'%{title}' channel on %{service_name}"
+      attributes:
+        display_empty_blog: Show Articles section for this channel even if there is no Articles yet
+        show_documents: Show Document Library

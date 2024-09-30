@@ -1,0 +1,33 @@
+<%- if hotjar_id = Rails.application.credentials.backend.dig(:initialize, :hotjar, :id)%>
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:<%= hotjar_id %>,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+
+    function fixHtmlPadding(){
+      if (document.querySelector('body').classList.contains('session_or_replay_or_recording')
+          && document.querySelector('.pomaria-campaign')) {
+        document.querySelector('html').style.paddingTop = 0;
+        if (screen.width < 640) {
+          document.querySelector('.mainVideoSection-body').style.top = document.querySelector('.pomaria-campaign').clientHeight;
+        }
+        else {
+          document.querySelector('.mainVideoSection-body').removeAttribute("style");
+        }
+      }
+    }
+
+    setTimeout(function() {
+      fixHtmlPadding();
+    }, 3000);
+
+    $( window ).resize(function() {
+      fixHtmlPadding();
+    });
+  </script>
+<% end %>

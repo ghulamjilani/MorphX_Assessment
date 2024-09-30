@@ -1,0 +1,7 @@
+en:
+  views:
+    dashboards:
+      navigation:
+        my_money_sub: "%{service_name} Subscriptions"
+        contacts_and_mailing_tabs:
+          only_for_creators: "(only for %{creators})"

@@ -1,0 +1,95 @@
+-#TODO: removeme?
+- live_sessions = get_live_sessions
+.row
+  .col-md-9
+    .info-tabs.bannerCollapsedBlockHide
+      .tab-content
+        #session-Sessions.tab-pane.active.clearfix
+          - if @channel.pending_review?
+            .flash-message.flash-message-blue.text-center
+              = I18n.t('channels.show.channel_is_being_reviewed')
+
+          - if show_no_upcoming_session_message?(live_sessions)
+            .flash-message.flash-message]]]-blue.text-center.margin-top-15
+              This presentation does not have any upcoming live sessions.
+
+          - if @session
+            - if @session.cancelled?
+              .flash-message.flash-message-red.text-center.margin-top-15
+                Session is cancelled.
+            - if @session.status == ::Session::Statuses::REQUESTED_FREE_SESSION_PENDING && !@session.finished?
+              .flash-message.flash-message-blue.text-center.margin-top-15
+                Requested free session is currently under review.
+            - elsif @session.status == ::Session::Statuses::REQUESTED_FREE_SESSION_REJECTED
+              .flash-message.flash-message-red.text-center.margin-top-15
+                Requested free session has been declined.
+                - if @session.requested_free_session_declined_with_message.present? && @session.organizer == current_user
+                  %blockquote{style: 'border-left: 5px solid #eee;padding: 10px 20px;margin: 0 0 20px;'}
+                    = simple_format @session.requested_free_session_declined_with_message
+            - elsif display_warning_about_pending_changed_start_at?
+              .flash-message.flash-message-red.text-center.margin-top-15
+                = I18n.t('shared.session_resheduled_warning')
+
+          - if live_sessions.present?
+            = render 'shared/live_sessions', sessions: live_sessions
+
+          -#.session-about-footer
+          -#  .tagList.tagListMK2
+          -#    .section-title.margin-bottom-10 Tags
+          -#    - @channel.tags.each do |tag|
+          -#      %span= tag.name
+
+        - if @video_records.present? || @recordings.present?
+          #videos.tab-pane
+            .session-VOD-tileGroup.session_tile_slider.SelectedItem
+              - if @video_records.present?
+                = render 'shared/vod_sessions', records: @video_records
+
+        - if @recordings.present?
+          #recordings.tab-pane
+            = render 'shared/recordings', recordings: @recordings
+
+            .container.VOD_TileLIst_video_container.VOD_infoSection_wrapper
+              .row.VOD_infoSection
+                #video-preview-container.clearfix
+
+- if @session
+  #AdditionalInformation.modal.fade{aria: {hidden: true}, role: :dialog, tabindex: -1}
+    .modal-dialog
+      .modal-content
+        = render partial: 'become_presenter_steps/close_modal'
+        .modal-body
+          %h4.groupTitle.clearfix
+            = @session.custom_description_field_label
+          %section
+            = simple_format @session.custom_description_field_value
+
+#calendar_view.modal.fade{aria: {hidden: true}, role: :dialog, tabindex: -1}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        %h4.groupTitle.clearfix
+          Calendar
+        %section
+          - content_for(:after_include_javascripts) do
+            %script{type: 'text/javascript'}
+              :plain
+                $(document).ready(function() {
+                  $('#calendar_view').on('shown.bs.modal', function () {
+                    $('#calendar').fullCalendar({
+                    header: {
+                      left: 'prev,next today',
+                      center: 'title',
+                      right: 'month,basicWeek,basicDay'
+                    },
+                    defaultDate: #{DateTime.now.strftime('%Y-%m-%d').to_json},
+                    editable: false,
+                    eventLimit: true, // allow "more" link when too many events
+                    events: #{full_calendar_events(@channel).to_json}
+                    });
+                  });
+
+                });
+
+          #calendar

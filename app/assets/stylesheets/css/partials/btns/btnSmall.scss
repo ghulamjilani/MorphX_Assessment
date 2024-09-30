@@ -1,0 +1,20 @@
+@import "mixin";
+
+$btn-size-s:20px;
+$custom-font-size-for-small-btn: 12px;
+.btn.btn-s{
+  @include btn-mod($btn-size-s,$custom-font-size-for-small-btn);
+  &.with-icon-left{
+    padding-left: $btn-size-s + 5;
+  }
+  &.with-icon-right{
+    padding-right: $btn-size-s + 5;
+  }
+  &.btn-circle{
+    width: $btn-size-s;
+    height: $btn-size-s;
+  }
+  &.hoverText span.hoverText{
+    border-radius: $btn-size-s * 0.5;
+  }
+}

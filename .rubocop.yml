@@ -1,0 +1,83 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'tmp/*'
+    - 'bin/*'
+    - 'db/**/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - production
+    - qa
+    - test
+
+Rails/RakeEnvironment:
+  Exclude:
+    - 'lib/capistrano/tasks/**/*.rake' # no need to use environment for Capistrano tasks
+    - 'lib/tasks/auto_annotate_models.rake'
+    - 'lib/tasks/ci.rake'
+
+Rails/HttpStatus:
+  EnforcedStyle: numeric
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/SymbolProc:
+  IgnoredMethods: [can]
+
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+
+Layout/LineLength:
+  Exclude:
+    - 'app/admin/**/*' # TODO
+    - 'app/channels/**/*' # TODO
+    - 'app/controllers/**/*' # TODO
+    - 'app/custom_libs/**/*' # TODO
+    - 'app/helpers/**/*' # TODO
+    - 'app/interactors/**/*' # TODO
+    - 'app/jobs/**/*' # TODO
+    - 'app/mailers/**/*' # TODO
+    - 'app/models/**/*' # TODO
+    - 'app/policies/**/*' # TODO
+    - 'app/presenters/**/*' # TODO
+    - 'app/uploaders/**/*' # TODO
+    - 'app/views/**/*' # TODO
+    - 'config/**/*' # TODO
+    - 'db/**/*' # TODO
+    - 'lib/**/*' # TODO
+    - 'spec/channels/**/*' # TODO
+    - 'spec/controllers/**/*' # TODO
+    - 'spec/custom_libs/**/*' # TODO
+    - 'spec/factories/**/*' # TODO
+    - 'spec/fixtures/**/*' # TODO
+    - 'spec/helpers/**/*' # TODO
+    - 'spec/integration/**/*' # TODO
+    - 'spec/interactors/**/*' # TODO
+    - 'spec/jobs/**/*' # TODO
+    - 'spec/lib/**/*' # TODO
+    - 'spec/mailers/**/*' # TODO
+    - 'spec/models/**/*' # TODO
+    - 'spec/policies/**/*' # TODO
+    - 'spec/presenters/**/*' # TODO
+    - 'spec/routing/**/*' # TODO
+    - 'spec/support/**/*' # TODO
+    - 'spec/uploaders/**/*' # TODO
+
+Metrics/ModuleLength:
+  Max: 350
+  CountAsOne: ['array', 'heredoc', 'hash']
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false

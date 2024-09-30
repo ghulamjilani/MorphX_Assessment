@@ -1,0 +1,21 @@
+en:
+  views:
+    dashboard:
+      subscriptions:
+        plan:
+          auto_renewal: Auto-renewal
+          days_number: No. of days
+          free_trial: Free trial
+          im_channel_conversation: Channel Chat
+          im_interactives: Interactive Sessions
+          im_livestreams: Online streams
+          im_replays: Replays
+          im_uploads: Uploads
+          include: Include
+          plan_off: 'Off'
+          plan_on: 'On'
+          period_price: Period & Price
+          price: Price
+          subscribers: Subscribers
+          subscription: Subscription
+          trial_subscription: Trial & Subsciption

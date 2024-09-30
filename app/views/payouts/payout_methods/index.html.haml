@@ -1,0 +1,202 @@
+- content_for(:page_title, 'Payments & Payouts')
+- content_for(:extra_body_classes, 'profiles profiles-edit_billing header-top')
+- content_for(:after_include_javascripts) do
+  :javascript
+    InitPayouts();
+.row#profilePage
+  = render 'profiles/nav'
+  .col-md-9
+    .info-tabs
+      %ul.nav.nav-tabs.nav-justified
+        %li
+          %a{href: edit_billing_profile_path}= I18n.t('views.payouts.index.payments')
+        %li.active
+          %a.active{href: payouts_payout_methods_path}= I18n.t('views.payouts.index.payouts')
+    .technicalPage.account-edit-page-content.main-section-form.Billing-settings
+      .tab-content
+        #payouts.tab-pane.active
+          .PayoutsList
+            .technicalPage__label= I18n.t('views.payouts.index.payout_methods')
+            .technicalPage__desc.payoutText
+              %span.payoutsText= I18n.t('views.payouts.index.description')
+            - if @payout_methods.count.zero?
+              -#%span= I18n.t('settings.billing.no_cards')
+            - else
+              %table.table.table-hover.table-dashed-border.responsiveTable.full-width
+                %thead
+                  %tr
+                    %th= I18n.t('views.payouts.index.method')
+                    %th= I18n.t('views.payouts.index.details')
+                    %th= I18n.t('views.payouts.index.currency')
+                    %th= I18n.t('views.payouts.index.payouts_enabled')
+                    %th= I18n.t('views.payouts.index.status')
+                    %th
+                %tbody
+                  - @payout_methods.each do |pm|
+                    - if pm.provider == 'stripe'
+                      - if pm.pid.blank?
+                        %tr
+                          %td{data: {th: 'Method'}}= pm.payout_method
+                          %td{data: {th: 'Details'}}
+                          %td{data: {th: 'Currency'}}
+                          %td{data: {th: 'Payouts Enabled'}}
+                          %td{data: {th: 'Status'}}= pm.status
+                          %td{data: {th: 'options'}}
+                            .dropdown.dropdown-list
+                              %a.dropdown-toggle.full-width.witch-icon-angle{"data-toggle" => "dropdown", href: "#"}
+                                = I18n.t('views.payouts.index.options')
+                                %i.icon-angle-down
+                                %i.icon-angle-up{style: "display: none"}
+                              %ul.dropdown-menu
+                                %li
+                                  = link_to I18n.t('views.payouts.index.edit'), edit_payouts_payout_method_path(pm), method: :get
+                                %li
+                                  = link_to I18n.t('views.payouts.index.remove'), payouts_payout_method_path(pm), method: :delete, class: 'no-border', data: { confirm: I18n.t('views.payouts.index.confirm_delete_this_payout_method'), disable_with: I18n.t('views.payouts.index.please_wait') }
+                      - else
+                        - sa = Stripe::Account.retrieve(pm.pid)
+                        - sa.external_accounts.each do |ba|
+                          %tr
+                            %td{data: {th: 'Method'}}= pm.payout_method
+                            %td{data: {th: 'Details'}}
+                              = '*****' + ba.last4
+                              - if pm.is_default?
+                                = I18n.t('views.payouts.index.default')
+                            %td{data: {th: 'Currency'}}= ba.currency.upcase
+                            %td{data: {th: 'Payouts Enabled'}}
+                              = sa.payouts_enabled
+                              - if sa.requirements.errors.present? || sa.requirements.currently_due.present?
+                                %i.GlobalIcon-info{data: { toggle: :modal }, href: "#requirements_#{ba.id}", style: 'cursor: pointer;'}
+                                .modal.fade{id: "requirements_#{ba.id}", aria: { hidden: true }, data: { backdrop: :static }, role: :dialog, tabindex: -1}
+                                  .modal-dialog
+                                    .modal-content
+                                      = render 'become_presenter_steps/close_modal'
+                                      .modal-body
+                                        %table.table.table-hover.table-dashed-border.responsiveTable.full-width.margin-top-20
+                                          %thead
+                                            %tr
+                                              %th Error
+                                              %th Reason
+                                          %tbody
+                                            - sa.requirements.errors.uniq{ |e| e.code }.each do |error|
+                                              %tr
+                                                %td= error.code.humanize
+                                                %td= error.reason
+                                            - sa.requirements.currently_due.uniq.each do |error|
+                                              - next if sa.requirements.disabled_reason.blank? && error != 'individual.verification.additional_document'
+                                              %tr
+                                                - if error == 'individual.verification.additional_document'
+                                                  %td= I18n.t('views.payouts.index.verify_home_address')
+                                                  %td= I18n.t('views.payouts.index.verification_needed')
+                                                - else
+                                                  %td= error.gsub('.', ' ').humanize
+                                                  %td= sa.requirements.disabled_reason.gsub('.', ' ').humanize
+
+                            %td{data: {th: 'Status'}}
+                              - if !sa.payouts_enabled && sa.requirements.errors.blank? && sa.requirements.currently_due.blank?
+                                = I18n.t('views.payouts.index.statuses.verification_in_progress')
+                              - elsif sa.payouts_enabled && sa.requirements.errors.present? && sa.requirements.currently_due.present?
+                                = I18n.t('views.payouts.index.statuses.restricted_soon')
+                              - elsif sa.payouts_enabled
+                                = I18n.t('views.payouts.index.statuses.completed')
+                              - elsif !sa.payouts_enabled
+                                = I18n.t('views.payouts.index.statuses.restricted')
+
+                            %td{data: {th: 'options'}}
+                              .dropdown.dropdown-list
+                                %a.dropdown-toggle.full-width.witch-icon-angle{"data-toggle" => "dropdown", href: "#"}
+                                  = I18n.t('views.payouts.index.options')
+                                  %i.icon-angle-down
+                                  %i.icon-angle-up{style: "display: none"}
+                                %ul.dropdown-menu
+                                  %li
+                                    = link_to I18n.t('views.payouts.index.edit'), edit_payouts_payout_method_path(pm), method: :get
+                                  - if sa.requirements.eventually_due.find { |ed| /^tos_acceptance*/ =~ ed }
+                                    %li
+                                      = link_to I18n.t('views.payouts.index.tos_accept'), payouts_payout_method_path(pm, accept_tos: 1), method: :put, data: { disable_with: I18n.t('views.payouts.index.please_wait') }
+                                  - unless pm.is_default?
+                                    %li
+                                      = link_to I18n.t('views.payouts.index.make_default'), payouts_payout_method_path(pm, primary: 1, bank_account_id: ba.id), method: :put, data: { disable_with: I18n.t('views.payouts.index.please_wait') }
+                                  %li
+                                    = link_to I18n.t('views.payouts.index.remove'), payouts_payout_method_path(pm), method: :delete, class: 'no-border', data: { confirm: I18n.t('views.payouts.index.confirm_delete_this_payout_method'), disable_with: I18n.t('views.payouts.index.please_wait') }
+                    - elsif pm.provider != 'stripe'
+                      %tr
+                        %td{data: {th: I18n.t('views.payouts.index.method')}}= pm.payout_method
+                        %td{data: {th: I18n.t('views.payouts.index.details')}}= pm.info
+                        %td{data: {th: I18n.t('views.payouts.index.payouts_enabled')}}
+                        %td{data: {th: I18n.t('views.payouts.index.status')}}= pm.status
+                        %td{data: {th: I18n.t('views.payouts.index.options')}}
+                          .dropdown.dropdown-list
+                            %a.dropdown-toggle.full-width.witch-icon-angle{"data-toggle" => "dropdown", href: "#"}
+                              = I18n.t('views.payouts.index.options')
+                              %i.icon-angle-down
+                              %i.icon-angle-up{style: "display: none"}
+                            %ul.dropdown-menu
+                              %li
+                                = link_to 'Make default', payout_method_path(pm, primary: 1), method: :put, data: {disable_with: I18n.t('views.payouts.index.please_wait')}
+                              - unless pm.is_default?
+                                %li
+                                  = link_to 'Remove', payout_method_path(pm), method: :delete, class: 'no-border', data: {confirm: I18n.t('views.payouts.index.confirm_delete_this_payout_method'), disable_with: I18n.t('views.payouts.index.please_wait')}
+            %a#addNewPayoutMethod.btn.btn-l{href: '#'}= I18n.t('views.payouts.index.add_payout_method')
+          #SelectPayoutType.hide
+            .row
+              .col-md-12
+                .technicalPage__label= I18n.t('views.payouts.index.payout_methods')
+              .col-md-12.payoutMethodsCard
+                %label.col-md-10.choice.radio
+                  %input{type: :radio, name: :payout_method, value: :Bank, checked: :checked}
+                  %span= I18n.t('views.payouts.index.bank_transfer_in_usd')
+                  %ul
+                    %li= I18n.t('views.payouts.index.get_paid_in_business_day')
+                    %li= I18n.t('views.payouts.index.weekends_and_holidays_may_extend_processing_time')
+                    %li= I18n.t('views.payouts.index.may_include_fees')
+                %label.col-md-10.choice.radio.comingSoonBlock
+                  %p.comingSoon= I18n.t('views.payouts.index.coming_soon')
+                  %input{type: :radio, name: :payout_country, value: :Paypal, disabled: true}
+                  %span= I18n.t('views.payouts.index.paypal_in_usd')
+                  %ul
+                    %li= I18n.t('views.payouts.index.get_paid_in_hours')
+                    %li= I18n.t('views.payouts.index.connect_your_existing_paypal_account')
+                    %li= I18n.t('views.payouts.index.may_include_fees')
+                %label.col-md-10.choice.radio.comingSoonBlock
+                  %p.comingSoon= I18n.t('views.payouts.index.coming_soon')
+                  %input{type: :radio, name: :payout_country, value: :Payoneer, disabled: true}
+                  %span= I18n.t('views.payouts.index.payoneer_prepaid_debit_mastercard_in_usd')
+                  %ul
+                    %li= I18n.t('views.payouts.index.get_paid_in_hours')
+                    %li= I18n.t('views.payouts.index.will_be_mailed_you_after_creating_your_account_existing')
+                    %li= I18n.t('views.payouts.index.may_include_fees')
+              .text-right.pus
+                %a.btn.btn-l.btn-borderred-grey.back{href: 'javascript:void(0);'}= I18n.t('views.payouts.index.back')
+                %a.btn.btn-l.margin-left-10.next{href: 'javascript:void(0);'}= I18n.t('views.payouts.index.next')
+          .AddBankPayoutMethod.selectCountry.hide
+            .row
+              #create_account.col-md-12
+                = form_tag payouts_payout_methods_path, method: :post, id: :create_account_payouts_form, class: 'form_V2', data: {remote: true} do
+                  .row
+                    .col-md-12
+                      .technicalPage__label= I18n.t('views.payouts.index.lets_start')
+                    .col-md-12
+                      .col-md-4.padding-left-0
+                        .select-block.required
+                          %label{for: '', title: I18n.t('views.payouts.index.country_info')}
+                            = I18n.t('views.payouts.index.select_country')
+                            %a.VideoClientIcon-q5.text-color-main{data: { toggle: :modal, target: '#country_info' }, href: '#country_info'}
+                            - content_for(:modals) do
+                              .modal.fade{id: "country_info", aria: { hidden: true }, data: { backdrop: :static }, role: :dialog, tabindex: -1}
+                                .modal-dialog
+                                  .modal-content
+                                    = render 'become_presenter_steps/close_modal'
+                                    .modal-body
+                                      %p.padding-top-20= I18n.t('views.payouts.index.country_info')
+
+                          = select_tag 'account[country]', options_for_select(Payouts::Countries::ALL.map{|k,v| [v, k]}, selected: :US)
+                          -# = select_tag 'account[country]', options_for_select([[Payouts::Countries::ALL[:US], :US]], selected: @user&.user_account&.country)
+                          .errorContainerWrapp
+                        %input{type: :hidden, name: 'account[business_type]', value: :individual}
+                        %input{type: :hidden, name: 'account[provider]', value: :stripe}
+
+                    .text-right.pus
+                      %a.btn.btn-l.btn-borderred-grey.back{href:'#'}= I18n.t('views.payouts.index.back')
+                      %button.btn.btn-l.margin-left-10{type: :submit, 'data-disable-with' => "Please wait…"}= I18n.t('views.payouts.index.next')
+              #add_account_info.col-md-12.hide
+              #add_bank_info.col-md-12.hide

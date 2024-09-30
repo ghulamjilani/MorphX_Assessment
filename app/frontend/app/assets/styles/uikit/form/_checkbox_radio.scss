@@ -1,0 +1,184 @@
+.checkboxMK2 {
+  position: relative;
+  padding-left: 2rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &__checkmark {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 0.3rem;
+    border: 1px solid var(--border__toggle__active);
+    background: var(--tgl__off);
+  }
+
+  &__icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-54%, -45%);
+    color: #fff; /* as in monolith */
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked ~ .checkboxMK2__checkmark {
+      background-color: var(--tgl__on);
+      border-color: var(--tgl__on);
+
+      .checkboxMK2__icon {
+        display: block;
+      }
+    }
+  }
+
+  &.disabled {
+    .checkboxMK2__input {
+      &:checked ~ .checkboxMK2__checkmark {
+        background-color: var(--tgl__disabled);
+        border-color: var(--tgl__disabled);
+
+        .checkboxMK2__icon {
+          display: block;
+        }
+      }
+    }
+
+    .checkboxMK2__checkmark {
+      background-color: var(--tgl__disabled);
+      border-color: var(--tgl__disabled);
+    }
+  }
+}
+
+.radioMK2 {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 1.8rem;
+    width: 1.8rem;
+    border: 1px solid var(--border__toggle__active);
+    background: var(--tgl__off);
+    border-radius: 50%;
+  }
+
+  // &:hover input ~ .checkmark {
+  //   background-color: #ccc;
+  // }
+  input:checked ~ .checkmark {
+    background-color: var(--tgl__on);
+    border-color: var(--tgl__on);
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  .checkmark:after {
+    top: 25%;
+    left: 25%;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background: white;
+  }
+}
+
+.toggleMK2 {
+  border-radius: 1.7rem;
+  position: relative;
+  display: inline-block;
+  width: 3rem;
+  height: 1rem;
+  background: var(--tgl__off);
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--tgl__disabled);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    width: 1.7rem;
+    height: 1.7rem;
+    left: 0;
+    bottom: -0.3rem;
+    // background-color: white;
+    // border: 1px solid var(--border__toggle__active);
+    background: var(--tgl__switch__off);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider::before {
+    background-color: var(--tgl__on);
+  }
+
+  input:focus + .slider {
+    // box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(1.4rem);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 1.7rem;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+}

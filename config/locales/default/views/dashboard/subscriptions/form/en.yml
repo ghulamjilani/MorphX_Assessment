@@ -1,0 +1,17 @@
+en:
+  views:
+    dashboard:
+      subscriptions:
+        form:
+          subscription: Subscription
+          channel: Channel
+          additional_subscription_info: Additional subscription info
+          enter_subscription_description: Enter subscription description...
+          plans: Plans
+          active: Active
+          configure_subscription_plan: "* Configure a subscription plan, click “On” and then “Save“ button to make your plan visible on the channel."
+          disabled_plans: Disabled Plans
+          configured_subscription_plan_saved: "Configured subscription plan won’t be saved."
+          in_order_subscription_plan: In order to add a new subscription plan, you should have it configured, enabled and saved.
+          cancel: Cancel
+          save: Save

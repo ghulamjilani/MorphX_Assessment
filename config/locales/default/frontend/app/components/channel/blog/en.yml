@@ -1,0 +1,14 @@
+en:
+  frontend:
+    app:
+      components:
+        channel:
+          blog:
+            community: Community
+            create_new_post: Create New Post
+            view_all: View all
+            posts: Posts
+            start_interacting: Start interacting with your fans and let them know what you’re up to.
+            create_post: Create a Post
+            no_posts: No posts yet.
+            show_more: Show more

@@ -1,0 +1,34 @@
+<div class="<%= @options.include?('product') ? 'full mio_embed' : 'mio_embed' %>" id="unite_embed" style="display: block">
+  <div class="mio_embed unite_embed_videoIframeWrapp active" id="unite_embed_videoWrapp">
+    <div class="mio_embed" id="unite_embed_video" style="display: block;">
+      <iframe allow="encrypted-media" allowfullscreen="" data-role="vplayer" frameborder="0" name="" data-name="<%= @type + @id %>"
+      src="<%= @url %>/widgets/<%= @id + '/'+ @type %>/player<%=
+      (@options.length > 0 ? '?' : '') +
+      (@options.include?('external_playlist') ? 'external_playlist=true&' : '') +
+      (@options.include?('live') ? 'live=true&' : '') +
+      (@options.include?('single_item') ? 'single_item=true' : '') %>"></iframe>
+
+      <link rel="stylesheet" media="screen" href="<%= @assets_url %>/assets/widgets/template_V<%=
+            (@options.include?('product') ? '_P' : '') +
+            (@options.include?('external_playlist') || @options.include?('chat') || @options.include?('single_item')? '_L' : '') %>.css">
+    </div>
+  </div>
+  <% if @options.include?('external_playlist') || @options.include?('chat') || @options.include?('single_item') %>
+    <div class="mio_embed unite_embed_additionsIframeWrapp">
+      <iframe data-role="additions" id="unite_embed_additions" name="" data-name="<%= @type + @id %>"
+        src="<%= @url %>/widgets/<%= @id + '/'+ @type %>/additions<%=
+        (@options.length > 0 ? '?' : '') +
+        (@options.include?('external_playlist') ? 'external_playlist=true&' : '') +
+        (@options.include?('chat') ? 'chat=true' : '') +
+        (@options.include?('single_item') ? 'single_item=true' : '') %>" ></iframe>
+
+    </div>
+  <% end %>
+  <% if @options.include?('product') %>
+    <div class="mio_embed unite_embed_shopIframeWrapp">
+      <iframe allowfullscreen="" data-role="shop" frameborder="0"
+        id="unite_embed_shop" name="" src="<%= @url %>/widgets/<%= @id + '/'+ @type %>/shop" data-name="<%= @type + @id %>"></iframe>
+    </div>
+  <% end %>
+</div>
+<script src="<%= @assets_url %>/assets/embeds/channel.js" defer></script>

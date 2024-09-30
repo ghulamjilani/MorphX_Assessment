@@ -1,0 +1,12 @@
+#conversation-preview-modal.modal.fade.AddReview{'aria-hidden' => 'true', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+
+        %h1.heading
+          = @conversation.subject
+
+        .messages
+          = render partial: 'messages/message', collection: @receipts.map(&:message)

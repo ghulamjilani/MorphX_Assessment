@@ -1,0 +1,12 @@
+en:
+  views:
+    dashboard:
+      money:
+        payouts:
+          page_title: Money
+          date: Date
+          type: Type
+          description: Description
+          amount: Amount
+          status: Status
+          no_payouts: No payouts yet

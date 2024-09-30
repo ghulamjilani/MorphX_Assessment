@@ -1,0 +1,38 @@
+.col-md-12.m-sendbox-pre-h.clearfix.margin-bottom-20
+  .col-md-6
+    %a.btn.btn-m.text-center.NewMessageBTN.ensure-link-style{href: new_message_path, rel: :tipsy, 'data-disable-with': 'Opening...'.html_safe, title: 'New message', 'data-remote': true}
+      %i.VideoClientIcon-plusF
+      %i.VideoClientIcon-Messages
+
+- if Rails.env.development? || Rails.env.test?
+  .col-md-6
+    .col-md-pull-right.clearfix
+      pg 1 of #
+      .paginationBox.btn-group.clearfix.margin-left-10
+        %a.btn.btn-m.btn-borderred-grey.ensure-link-style
+          %i.icon-angle-left
+        %a.btn.btn-m.btn-borderred-grey.ensure-link-style
+          %i.VideoClientIcon-angle-rightF
+.col-md-12.info-tabs.m-sendbox-h
+  %ul.nav.nav-tabs.nav-justified
+    %li{class: ('active' if params[:box] == 'inbox')}
+      = link_to 'Inbox', messages_path(box: :inbox)
+    %li{class: ('active' if params[:box] == 'sentbox')}
+      = link_to 'Sendbox', messages_path(box: :sentbox)
+    %li{class: ('active' if params[:box] == 'trash')}
+      = link_to 'Trash', messages_path(box: :trash)
+
+
+  - if display_messages_management_tools? && @conversations.length > 0
+    %div{class: 'markAllAndDelete'}
+      %label.checkbox.choice
+        %input.mark-all-notification{type: :checkbox}
+        %span
+      %button.delete-selected.btn-grey.btn-blue-hover.mw80.text-center{disabled: :disabled, rel: :tipsy, title: 'Clear selected', type: :submit}
+        %i.VideoClientIcon-trash-emptyF
+      %a.pull-right.ensure-link-style.mt20{'data-method': :delete, rel: :tipsy, title: 'Clear all read messages'}
+
+
+
+
+

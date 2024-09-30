@@ -1,0 +1,7 @@
+en:
+  views:
+    dashboards:
+      navigation:
+        presenter_nav:
+          documents: Document Library
+          community: Articles

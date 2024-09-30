@@ -1,0 +1,110 @@
+- content_for(:page_title, I18n.t('views.dashboard.money.earnings.page_title'))
+- content_for(:extra_body_classes, 'dashboards header-top')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+
+  .col-md-9.main-content-section
+    = render 'dashboards/navigation/my_money_tabs'
+    .row
+      .col-md-12
+        - if @log_transactions.count > 0
+          = form_tag(earnings_dashboard_money_index_path({offset: 0}), remote: true, method: :get) do
+            .filtersMK2
+              .filtersMK2__top
+                .filtersMK2__money__startAt
+                  %label.fs-12.filtersMK2__money__startAt__text__wrapper
+                    .filtersMK2__money__startAt__text
+                      = I18n.t('views.dashboard.money.earnings.from')
+                    = text_field_tag :start_at_from, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                  %label.fs-12.filtersMK2__money__startAt__text__wrapper
+                    .filtersMK2__money__startAt__text
+                      = I18n.t('views.dashboard.money.earnings.to')
+                    = text_field_tag :start_at_to, nil, class: 'datepicker', id: nil, placeholder: 'MM/DD/YYYY', pattern: '(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])\/[0-9]{4}'
+                .filtersMK2__perPage.filtersMK2__money__perPage
+                  %label.filtersMK2__perPage__label
+                    = I18n.t('views.dashboard.money.earnings.sort_by')
+                  = select_tag :order, options_for_select([[I18n.t('views.dashboard.money.earnings.newest'), 'desc'], [I18n.t('views.dashboard.money.earnings.oldest'), 'asc'], [I18n.t('views.dashboard.money.earnings.bigger'), 'big'],[I18n.t('views.dashboard.money.earnings.smaller'), 'small']], [I18n.t('views.dashboard.money.earnings.newest'), 'desc']), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                .filtersMK2__perPage.filtersMK2__money__perPage
+                  %label.filtersMK2__perPage__label
+                    = I18n.t('views.dashboard.money.earnings.status')
+                  = select_tag :status, options_for_select([[I18n.t('views.dashboard.money.earnings.all'), ''], [I18n.t('views.dashboard.money.earnings.paid'), 1], [I18n.t('views.dashboard.money.earnings.pending'), 0], [I18n.t('views.dashboard.money.earnings.declined'), 2]], selected: params[:status] || ''), class: 'styled-select styled-select_withCss filtersMK2__perPage__select', id: 'filtersMK2__perPage__select'
+                .filtersMK2__apply__wrapper.filtersMK2__money__apply__wrapper
+                  = submit_tag I18n.t('views.dashboard.money.earnings.apply'), class: 'btn btn-m filtersMK2__apply'
+          .session-table.fht-table-wrapper#earnings
+            %table.table.table-hover.table-dashed-border.table-striped.responsiveTable.full-width
+              %thead
+                %tr
+                  %th
+                    = I18n.t('views.dashboard.money.earnings.date')
+                  %th
+                    = I18n.t('views.dashboard.money.earnings.type')
+                  %th
+                    = I18n.t('views.dashboard.money.earnings.description')
+                  %th
+                    = I18n.t('views.dashboard.money.earnings.customer_name')
+                  %th{width: '10%'}
+                    = I18n.t('views.dashboard.money.earnings.revenue')
+                  %th{width: '10%'}
+                    = I18n.t('views.dashboard.money.earnings.payout_status')
+              %tbody
+                - @log_transactions.each do |log_transaction|
+                  - immerss_profit_margin_percent = 100 - log_transaction.user.revenue_percent.to_i
+                  - immerss_revenue = (log_transaction.amount * immerss_profit_margin_percent / log_transaction.user.revenue_percent.to_i).round(2)
+                  - revenue = (log_transaction.payment_transaction ? (log_transaction.payment_transaction.amount / 100.0 rescue (immerss_revenue + log_transaction.amount)) : (immerss_revenue + log_transaction.amount)).round(2)
+                  - customer = log_transaction.payment_transaction.try(:user)
+                  %tr
+                    %td{data: {th: I18n.t('views.dashboard.money.earnings.date')}}
+                      = time_with_tz_in_chosen_format(log_transaction.created_at, false)
+                    %td{data: {th: I18n.t('views.dashboard.money.earnings.type')}}
+                      = log_transaction.type.humanize
+                    %td{data: {th: I18n.t('views.dashboard.money.earnings.description')}}
+                      = log_transaction.abstract_session.try(:title)
+                    %td{data: {th: I18n.t('views.dashboard.money.earnings.customer_name')}}
+                      - if customer.present?
+                        %a{href: customer.relative_path}= customer&.public_display_name
+                    %td{data: {th: I18n.t('views.dashboard.money.earnings.revenue')}}
+                      = as_currency(log_transaction.amount)
+                    %td{data: {th: I18n.t('views.dashboard.money.earnings.payout_status')}}
+                      = log_transaction.payment_transaction.payout_status rescue ''
+            .text-center
+              = paginate @log_transactions
+        - else
+          = I18n.t('views.dashboard.money.earnings.no_earnings')
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    var AsDatepicker = function (el) {
+      var dateFormat = "mm/dd/yy",
+      from = $(el).find('[name*=start_at_from]').datepicker({
+        defaultDate: "+0w",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1
+      }).on("change", function () {
+        to.datepicker("option", "minDate", getDate(this));
+      }),
+      to = $(el).find('[name*=start_at_to]').datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1
+      }).on("change", function () {
+        from.datepicker("option", "maxDate", getDate(this));
+      });
+
+      function getDate(element) {
+        var date;
+        try {
+          date = $.datepicker.parseDate(dateFormat, element.value);
+        } catch (error) {
+          date = null;
+        }
+        return date;
+      }
+    }
+    $(document).ready(function() {
+      $('.filtersMK2__money__startAt').each(function (d, el) {
+        AsDatepicker(el);
+      });
+    })

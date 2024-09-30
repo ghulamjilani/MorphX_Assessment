@@ -1,0 +1,20 @@
+en:
+  log_in:
+    welcome_to: Welcome to
+    with_facedook: Log In with Facebook
+    with_google: Log In with Google
+    with_apple: Log In with Apple
+    with_instagram: Log In with Instagram
+    with_twitter: Log In with Twitter
+    with_linkedin: Log In with LinkedIn
+    with_email: Log In with Email
+    guest: Or Enter Like a Guest
+    email: Email
+    password: Password
+    fill_the_form: Fill the form to proceed
+    invalid_email: Invalid Email or Password.
+    log_in: Log In
+    sign_up: Sign Up
+    more_login: More Log In Options
+    no_acc: Don't have an account?
+    forgot_pass: Forgot password?

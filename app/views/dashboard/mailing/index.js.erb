@@ -1,0 +1,2 @@
+$('.custom-paginate').html('<%= escape_javascript(render partial: 'dashboards/contacts_pagination', locals: {scope: @contacts}) %>')
+$('table.contacts-table tbody').html('<%= escape_javascript(render partial: 'dashboards/contacts_body', locals: {contacts: @contacts}) %>')

@@ -1,0 +1,20 @@
+en:
+  models:
+    concerns:
+      model_concerns:
+        settings:
+          notification:
+            names:
+              exclusive_offers: Exclusive offers
+              follow_me: Someone starts to follow me
+              newsletter: Newsletter
+              participant_invited_to_abstract_session: You have been invited to session
+              purchases_summary_for_organizer: User purchased your session
+              session_no_presenter_stop_scheduled: 'Session stop scheduled: Presenter has not connected'
+              session_no_stream_stop_scheduled: 'Session stop scheduled: No video stream'
+              start_reminder: Session start reminder
+              system_announces_new_classes: System announces new classes
+              system_recommends_classes: System recommends new classes
+              system_updates: System updates
+              user_accepted_or_rejected_your_invitation: User accepted or declined your invitation
+              wishlist_session: Someone adds session to wishlist

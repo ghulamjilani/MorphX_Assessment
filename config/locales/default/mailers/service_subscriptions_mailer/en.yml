@@ -1,0 +1,35 @@
+en:
+  mailers:
+    service_subscriptions_mailer:
+      receipt:
+        subject: Thank you for purchasing Business Subscription
+      notify_platform_owner:
+        subject: "New Business Subscription on %{platform_name}"
+        body: "<a href='%{owner_url}'>%{owner_name}</a> just purchased %{interval_type} %{plan_name}"
+      grace_started_payment_failed:
+        subject: "Your %{platform_name} payment failed!"
+        body: |-
+          <p>Hello, %{user_name}.</p>
+          <p>We are worried that you may soon be without access to your Business Plan.</p>
+          <p>Your account is past due. Please make a payment as soon as possible so your account remains active. Please don't worry, we will not limit your functionality for %{grace_days} days to allow time for you to bring your account current.</p>
+          <p>Business Plan: %{plan_name}</p>
+          <p>Payment: %{plan_price}/%{plan_interval}</p>
+          <p>Please review your <a href="%{edit_billing_profile_url}">Payment Method</a> and confirm it is correct and provide updates as necessary. If you have any questions, feel free to contact us at <a href="mailto:%{support_email}">%{support_email}</a>. If you already made or scheduled a payment, thank you.</p>
+          <p>%{platform_name} Support Team</p>
+      suspended_started:
+        subject: FINAL NOTICE BEFORE CANCELLATION
+        body: |-
+          <p>Dear %{user_name},</p>
+          <p>We are worried that you may soon be without access to your business account. Your balance is past due. Please provide payment as soon as possible so your service won’t be cancelled.</p>
+          <p>Your service will be limited beginning %{start_date} (check time zone) for the next %{suspended_days} days while we await your payment. While your account is in delinquent status you will not be able to create new sessions or upload new videos, and new channel subscriptions will not be possible. However, you are still able to stream currently existing sessions.</p>
+          <p>Payments from %{platform_name} to your account will resume once your account is made current. Please ensure payment is processed prior to %{prior_to_date} to avoid deactivation of your account.</p>
+          <p>Business Plan: %{plan_name}</p>
+          <p>Payment: %{plan_price}/%{plan_interval}</p>
+          <p>Please review your <a href="%{edit_billing_profile_url}">Payment Method</a> and confirm it is correct and provide updates as necessary. If you have any questions, feel free to contact us at <a href="mailto:%{support_email}">%{support_email}</a>. If you already made or scheduled a payment, thank you.</p>
+      deactivated:
+        subject: "%{platform_name} Business subscription is deactivated"
+        body: |-
+          <p>We have not received payment and have deactivated your account. We don’t want to see you go and we are here to help you make the most of your business subscription so %{platform_name} can work with you to share your message.</p>
+          <p>Please contact <a href="mailto:%{support_email}">%{support_email}</a> to consider solving your obligations to %{platform_name} platform and %{platform_name} Customers. All customer subscriptions will be cancelled, if we do not hear from you, all content stored on <a href="https://%{platform_url}">%{platform_url}</a> will be removed in 30 days.</p>
+          <p>We look forward to hearing from you soon.</p>
+          <p>%{platform_name} Support Team</p>

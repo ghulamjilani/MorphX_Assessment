@@ -1,0 +1,405 @@
+- @recording_interactor = ObtainAccessToRecording.new(@recording, current_user)
+- content_for(:after_include_javascripts) do
+  = javascript_include_tag 'home'
+  :javascript
+    new window.RecordingView();
+- content_for(:extra_body_classes, ' bannerCollaps session_or_replay_or_recording ')
+- content_for(:page_title) do
+  - if @recording
+    = @recording.title.html_safe
+- content_for(:extra_body_classes, 'sessions resetMainContainer single_page_sessions_and_channels hidePageHeader header-top sp')
+
+- content_for(:additional_meta_tags) do
+  - if @recording
+    %meta{property: 'og:image', content: @recording.share_image_url}
+    %meta{property: 'og:image:url', content: @recording.share_image_url}
+    %meta{property: 'og:image:width', content: @recording.class::SHARE_IMAGE_WIDTH}
+    %meta{property: 'og:image:height', content: @recording.class::SHARE_IMAGE_HEIGHT}
+    %meta{property: 'og:image:type', content: 'image/jpg'}
+    %meta{property: 'og:description', content: strip_tags(@recording.share_description)}
+    %meta{property: 'og:title', content: @recording.share_title}
+    %meta{property: 'og:url', content: @recording.short_url || @recording.absolute_path}
+
+    %meta{name: 'twitter:card', content: 'summary_large_image'}
+    %meta{name: 'twitter:site', content: '@Immerss'}
+    %meta{name: 'twitter:title', content: @recording.share_title}
+    %meta{name: 'twitter:description', content: strip_tags(@recording.share_description)}
+    %meta{name: 'twitter:image', content: @recording.share_image_url}
+  %meta{property: 'og:type', content: :website}
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function () {
+      $('.ShowAboutText').click(function(e) {
+        $(this).toggleClass('active');
+      });
+      checkWindowWidth();
+      $(window).resize(function(e) {
+        checkWindowWidth();
+      });
+    });
+    function checkWindowWidth() {
+      if($(window).width() >= 640){
+        if (!$('.ShowAboutText').hasClass('active')){
+          toggleShowAboutTextBtn();
+        }
+      }
+    }
+    function toggleShowAboutTextBtn(){
+      $('.MVc-About').toggleClass('active');
+    }
+
+%div{class: ('full_covered_video' if @recording_interactor.can_purchase? || @recording.only_subscription)}
+  .session.recordings
+    .container
+      #player-container.player-container-wrapp.MainForm_block_for_AffixSection{style: "width: #{video_container_width(@recording)}"}
+        .videoBlock
+          .mainVideoSection-wrapper
+            #main_panel_head.mainVideoSection-head
+              - if @recording.blocked? && can?(:edit_recording, @recording.channel)
+                .video__blocked
+                  %p
+                    %span
+                      This video is blocked by platform administrator.
+                  %span Block Reason:
+                  = @recording.block_reason
+                  %br
+                  Please
+                  = link_to 'Contact Us', support_home_url
+                  for any questions.
+
+            .mainVideoSection
+              .mainVideoSection-body.scrollerInit
+                .toggleLeft
+                .toggleRight
+                #vue-optin
+                  = content_tag 'comp-wrapper', nil, data: { component: 'MopsShowController', props: {}}.to_json
+                #review_container
+                #moreVideos{style: 'display: none;'}
+                #video_player_container.main-video-container.draggableElement.skrollable.skrollable-before.ui-draggable.ui-draggable-handle{data: {'emit-events':''}}
+                  - if @recording
+                    - video_url = can?(:see_recording, @recording) ? @recording.url : @recording.preview_url
+                    .responsive-video{style: "padding-top: #{aspect_ration_percentage(@recording.height, @recording.width)}%"}
+                      #jwplayer_data_contaioner{data: {url: video_url}}
+
+                .MVc-topLine{class: ('show' if can?(:see_recording, @recording))}
+                  - if @recording.channel.organization
+                    %a.company_logo_wrapp{href: @recording.channel.organization.relative_path, target: '_blank'}
+                      .company_logo{style: "background-image: url('#{@recording.channel.organization.logo_url}')"}
+                      .company_name= @recording.channel.organization.name
+                  .btnsBar
+                    - if @recording.private?
+                      .private
+                        = I18n.t('views.recordings.show.private')
+                  .unmuteButton.hidden
+                    %i.VideoClientIcon-volume_off
+                    %span tap to unmute
+              .mainVideoSection-content_block{class: ('hide' if can?(:see_recording, @recording))}
+                .MVc-topLine
+                  - if @recording
+                    - if @recording.channel.organization
+                      %a.company_logo_wrapp{href: @recording.channel.organization.relative_path, target: '_blank'}
+                        .company_logo{style: "background-image: url('#{@recording.channel.organization.logo_url}')"}
+                        .company_name= @recording.channel.organization.name
+                    .btnsBar
+                      - if @recording.private?
+                        .private
+                          = I18n.t('views.recordings.show.private')
+                    .unmuteButton.hidden
+                      %i.VideoClientIcon-volume_off
+                      %span tap to unmute
+                - if cannot?(:see_recording, @recording)
+                  .MVc-bottomLine
+                    .MVc-bottomLine_item
+                      = I18n.t('sessions.show.player.preview_video')
+                    - if @recording_interactor.can_purchase?
+                      .MVc-bottomLine_item
+                        = I18n.t('sessions.show.player.paid_recording')
+                        - if current_user
+                          - if can?(:monetize_content_by_business_plan, @recording.channel.organization)
+                            %a.btn.btn-m.btn-white.buy_recording_btn{'data-target': 'modal', 'data-disable-with': 'Please wait...', href: preview_purchase_recording_path(@recording, type: (@recording.purchase_price == 0 ? ObtainTypes::FREE_RECORDING : ObtainTypes::PAID_RECORDING)), data: {remote: true}}
+                              Buy for #{number_to_currency(@recording.purchase_price.to_f, precision: 2)}
+                            - if cookies["preview_purchase_recording_#{@recording.id}"]
+                              - content_for(:after_include_javascripts) do
+                                :javascript
+                                  $(document).ready(function() {
+                                    $('.MVc-bottomLine_item .buy_recording_btn').click();
+                                    return false;
+                                  });
+                              - cookies.delete("preview_purchase_recording_#{@recording.id}")
+                          - else
+                            %a.btn.btn-m.btn-white.buy_recording_btn.disabled{disabled: true, href: 'javascript:void(0)'}
+                              Buy for #{number_to_currency(@recording.purchase_price.to_f, precision: 2)}
+                        - else
+                          %a.btn.btn-m.btn-white.authOpenLogin{onclick: "set_preview_purchase_cookie('preview_purchase_recording_#{@recording.id}');", href: '#loginPopup', data: {toggle: :modal}}
+                            Buy for #{number_to_currency(@recording.purchase_price.to_f, precision: 2)}
+                    - if @subscription
+                      - if can?(:subscribe, @subscription) || !current_user
+                        .MVc-bottomLine_item
+                          - if @recording.only_subscription
+                            = I18n.t('sessions.show.player.only_subscription_label')
+                          - else
+                            = I18n.t('sessions.show.player.subscription_label')
+                          - if can?(:monetize_content_by_business_plan, @recording.channel.organization)
+                            %a.btn.btn-m.btn-red.sub_btn{href: preview_plans_stripe_subscription_path(@subscription), data: {remote: true}}
+                              = I18n.t('sessions.show.player.subscription_btn_label', price: number_to_currency(@subscription.plans.active.pluck(:amount).map(&:to_f).sort[0])).html_safe
+                          - else
+                            %a.btn.btn-m.btn-red.sub_btn.disabled{disabled: true, href: 'javascript:void(0)'}
+                              = I18n.t('sessions.show.player.subscription_btn_label', price: number_to_currency(@subscription.plans.active.pluck(:amount).map(&:to_f).sort[0])).html_safe
+                    - elsif !@recording_interactor.can_purchase?
+                      .MVc-bottomLine_item
+                        = I18n.t('sessions.show.player.contact_owner')
+              #flash_container
+                .mainVideoSection-fleshMessage{style: 'display: none;'}
+                  %a.mainVideoSection-fleshMessage-close x
+
+            .mainVideoSection-footer
+              .mainVideoSection-footer-line
+
+                #placement_748914.mainVideoSection-footer-ad
+
+                .mainVideoSection-footer-line-one
+                  %h4.text-ellipsis
+                    %span{title: @recording.always_present_title}
+                      = @recording.always_present_title
+                .mainVideoSection-footer-line-two
+                  .mflt-l
+                    .followingAndSubscribe
+                      = link_to '', spa_user_path(@recording.organizer.slug), target: '_blank', class: 'avatar', style: "background-image: url('#{@recording.organizer.small_avatar_url}')"
+                      = link_to @recording.organizer.public_display_name, spa_user_path(@recording.organizer.slug), class: 'userName', title: @recording.organizer.public_display_name
+                      - if current_user != @recording.organizer
+                        - if current_user
+                          %a.btn.btn-s{class: "followBtn user-subscribe-#{@recording.organizer.id} #{current_user.following?(@recording.organizer) ? 'active' : ''}", data: {remote: true}, href: @recording.organizer.toggle_follow_relative_path}
+                            - if current_user && current_user.following?(@recording.organizer)
+                              Following
+                            - else
+                              Follow
+                        - else
+                          -# todo: authOpenLogin listener for modal open !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                          %a.btn.btn-s.active.authOpenLogin{data: {toggle: :modal}, href: '#loginPopup'}
+                            Follow
+                      - if @recording.organizer.paypal_donations_url.present?
+                        = link_to 'Donate', @recording.organizer.paypal_donations_url, target: :_blank, class: 'margin-left-10 btn__donate btn btn__main btn-m'
+                  .mflt-r
+                    %span.viewsCount{title: 'Views'}
+                      %i.VideoClientIcon-Views
+                      = @recording.views_count
+                    .btn-grey.btn
+                      = render(partial: 'shared/player/rating_dropdown', locals: {model: @recording, content_type: :video})
+                    - if can?(:share, @recording)
+                      %a.btn-grey.btn{title: 'Share', data: {remote: true}, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, href: @recording.preview_share_relative_path, rel: :nofollow}
+                        %i.VideoClientIcon-share-mk4
+                        Share
+                    - else
+                      %a.btn-grey.btn.authOpenLogin{title: 'Share', data: {toggle: :modal}, 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, href: '#loginPopup', rel: :nofollow}
+                        %i.VideoClientIcon-share-mk4
+                        Share
+                    - if current_user && can?(:have_in_wishlist, @recording)
+                      %a.btn-grey.btn{href: toggle_wishlist_items_path(model_id: @recording.id, model_type: 'Recording'), data: {method: :post, remote: true}, class: ["add-to-wish-list-button", wishlist_class(@recording), "recording-wishlist-#{@recording.id}"].join(' ')}
+                        %i.VideoClientIcon-bookmark
+                        Add to Favorite
+                    - elsif !current_user
+                      %a.btn-grey.btn.authOpenLogin{title: 'Save', data: {toggle: :modal}, href: '#loginPopup', rel: :nofollow}
+                        %i.VideoClientIcon-bookmark
+                        Add to Favorite
+                .mainVideoSection-footer-line-three
+                  Published on #{time_with_tz_in_chosen_format(Time.at(@recording.created_at))}
+              - if Nokogiri::HTML.parse(@recording.description).inner_text.present?
+                .mainVideoSection-about.active
+                  .MVc-AboutHead
+                    %a.MVc-AboutBody_toggle.fs-16.active{href:'#', onclick:"$('.mainVideoSection-about, .MVc-AboutBody_toggle, .MVc-AboutBody').toggleClass('active');return false"}
+                      %span.s_more
+                        \...view more
+                      %span.s_less
+                        view less
+                  .MVc-AboutBody
+                    %p.margin-bottom-5= sanitize(simple_format(@recording.description, {}, sanitize: false))
+                    - content_for(:after_include_javascripts) do
+                      :javascript
+                        $('.MVc-AboutBody a').attr('target','_blank');
+
+              .channelInfo
+                = render(partial: 'shared/player/subscription_dropdown', locals: {subscription: @subscription, channel: @recording.channel})
+        .mainVideoSection-rightSidebar
+          .mainVideoSection-wrapperMobile
+          .mainVideoSection-rightSidebar_sectionWrapp.AffixSection
+            = render partial: 'shared/player/right_sidebar_loader'
+            - content_for(:after_include_javascripts) do
+              :javascript
+                window.loadSessions = function() {
+                  var data;
+                  data = $('#MV_Upcoming').data();
+                  return $.ajax({
+                    type: 'GET',
+                    url: Routes.sessions_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#MV_Upcoming').tooltip();
+                  });
+                };
+                window.loadReplays = function() {
+                  var data;
+                  data = $('#PL_Replays').data();
+                  return $.ajax({
+                    type: 'GET',
+                    url: Routes.replays_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#PL_Replays').tooltip();
+                  });
+                };
+                window.loadRecordings = function() {
+                  var data;
+                  data = $('#PL_Recordings').data();
+                  return $.ajax({
+                    type: 'GET',
+                    url: Routes.recordings_list_channel_path(data.channelId, {
+                      limit: data.limit,
+                      offset: data.offset
+                    })
+                  })
+                  .done(function(data) {
+                    $('#PL_Recordings').tooltip();
+                  });
+                };
+                window.loadSessions();
+                window.loadReplays();
+                window.loadRecordings();
+
+            -# %section.MV_Chat_section
+            .smallScrolls
+              #ch-vue-booking
+                = content_tag 'comp-wrapper', nil, data: { component: 'BookingUsersRow', props: {users: [@recording.user], textMode: 'session'}}.to_json
+              %ul.nav.nav-tabs.nav-justified
+                %li#MV_UpcomingToggle.hidden
+                  %a{href: '#MV_Upcoming', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.live')
+                %li#PL_ReplaysToggle.hidden
+                  %a{href: '#PL_Replays', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.replays')
+                %li#PL_RecordingsToggle.active
+                  %a{href: '#PL_Recordings', 'data-toggle': :tab, 'data-remote': true}
+                    = I18n.t('views.videos.show.uploads')
+              %section.tab-content
+                %section#MV_Upcoming.tab-pane.hidden{data: {channel_id: @recording.channel.id, limit: 5, offset: 0}}
+                  .tile-cake-sidebar-wrapp.sessions
+                  %a.hidden.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: sessions_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    Show more
+
+                %section#PL_Replays.tab-pane.hidden{data: {channel_id: @recording.channel.id, limit: 6, offset: 0}}
+                  .tile-cake-sidebar-wrapp.replays
+                  %a.hidden.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: replays_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    Show more
+
+                %section#PL_Recordings.tab-pane.active{data: {channel_id: @recording.channel.id, limit: 6, offset: 0}}
+                  .tile-cake-sidebar-wrapp.recordings
+                  %a.hidden.show_more.btn.btn-s.btn-grey-solid.full-width.btn-square{href: recordings_list_channel_path(@channel.id, {limit: 6, offset: 6}), data: {remote: true, disable_with: 'Loading...'}}
+                    Show more
+
+              #placement_748915.ad-content
+              #placement_748916.ad-content
+
+        #main_container_content
+          .mainVideoSection-sub-wrapper
+            .mainVideoSection-sub
+          -#.row
+          -#  .col-md-12
+          -#    .session-about-footer
+          -#      .tagList.tagListMK2
+          -#        .section-title.margin-bottom-10 Tags
+          -#        - @recording.channel.tags.each do |tag|
+          -#          %span= tag.name
+
+          -# #ch-vue-booking
+          -#   = content_tag 'comp-wrapper', nil, data: { component: 'BookingUsersRow', props: {users: [@recording.user], textMode: 'session'}}.to_json
+          #ch-vue-app
+            = content_tag 'comp-wrapper', nil, data: { component: 'ReviewsCommentsSection', props: {model: {creator_id: @recording.organizer.id, id: @recording.id, type: 'Recording', can_rate: @can_rate, show_comments: @recording.show_comments, show_reviews: @recording.show_reviews}}}.to_json
+          -# - if @reviews_count > 0
+          -#   #reviewsArea.ch-p_C_tiles
+          -#     .fs-l.text-color-Darkgrey.padding-bottom-20 Reviews
+          -#     -# РЕВЬЮ СУВАТЬ СЮДОЙ!!!!
+          -#     .row.reviews
+          -#       = render(partial: 'channels/reviews', locals: {reviews: @reviews, channel: @channel})
+          -#     - if @reviews_count > 6
+          -#       .row.show_more
+          -#         .padding-top-20.text-center
+          -#           %a.btn.btn-m{href: reviews_channel_path(@channel, limit: 6, offset: 6), data: {remote: true}} Show More
+          -# OLD
+          -#= render 'shared/channel_reviews_section', channel: @recording.channel
+          = render 'shared/you_may_also_like_sessions', sessions: @you_may_also_like_sessions
+
+#subscription_modals
+
+.mobileFooterNav.smallScrolls
+  %div.active{data: { target: "about" }} About Video
+  %div{data: { target: "products" }, style: 'display: none;'} Products
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function() {
+      let initialHeight = window.innerHeight;
+
+       window.addEventListener('resize', () => {
+         if (!document.body.classList.contains('mobile_device') || (window.innerWidth > 641)) {
+            return;
+          }
+           let menu = document.querySelector('.mobileFooterNav');
+           if (window.innerHeight < initialHeight) {
+               menu.style.display = 'none';
+               // alert('keyboard opened');
+           } else {
+               menu.style.display = 'flex';
+           }
+       });
+
+       function updateElementSize() {
+            if (!document.body.classList.contains('mobile_device')) {
+              return false;
+            }
+           let fixedElement = document.querySelector('.mainVideoSection-body');
+           let contentElement = document.querySelector('#player-container');
+
+           // let width = fixedElement.offsetWidth;
+           let width = window.innerWidth;
+           let height = (width * 9) / 16;
+
+          console.log("width", width);
+           if( width <= 640 ) {
+             fixedElement.style.height = height + 'px';
+             contentElement.style.paddingTop = height + 'px';
+           }else {
+              fixedElement.style.height = 'auto';
+              contentElement.style.paddingTop = '0px';
+           }
+        }
+
+       window.addEventListener('load', updateElementSize);
+       window.addEventListener('resize', updateElementSize);
+      document.querySelector('.mobileFooterNav').addEventListener('click', function(e) {
+          let target = e.target;
+          let dataTarget = target.getAttribute('data-target');
+          if(dataTarget) {
+            let bodyClasses = [...document.body.classList];
+            bodyClasses = bodyClasses.filter(item => !item.startsWith('mobileNav__'));
+            bodyClasses.push('mobileNav__' + dataTarget);
+            document.body.className = bodyClasses.join(' ');
+
+            document.querySelectorAll('.mobileFooterNav > div').forEach(div => div.classList.remove('active'));
+            target.classList.add('active');
+          }
+        });
+
+        setTimeout(() => {
+          var adb = window.AdButler || {};
+          adb.ads = adb.ads || [];
+
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748914, [1200,800], 'placement_748914', opt); }, opt: { place: 0, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748915, [600,600], 'placement_748915', opt); }, opt: { place: 1, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+          adb.ads.push({handler: function(opt){ adb.register(187571, 748916, [600,600], 'placement_748916', opt); }, opt: { place: 2, keywords: '', domain: 'servedbyadbutler.com', click: 'CLICK_MACRO_PLACEHOLDER' }});
+        }, 100)
+    });

@@ -1,0 +1,10 @@
+- # do not rename/change this because some social apps have already that URL in settings
+- # see config/routes.rb
+.sectionBlock.textPage
+  - content_for(:page_title, 'Privacy Policy')
+  - content_for(:extra_body_classes, 'header-top')
+  .vue-component-manager
+    = content_tag 'comp-wrapper', nil, data: { component: 'components-manager', props: {group: 'privacy-policy'}}.to_json
+
+
+  -# = raw I18n.t('views.pages.privacy_policy', host: Rails.application.credentials.global[:host], service_name: Rails.application.credentials.global[:service_name], support_mail: Rails.application.credentials.global[:support_mail])

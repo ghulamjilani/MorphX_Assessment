@@ -1,0 +1,170 @@
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" class="personName" width="600"
+           style="background-color: #095f73;border-radius: 20px;padding: 25px 0 25px 0;">
+      <tr>
+        <td style="text-align: center;">
+          <p
+            style="
+            font-style: normal;
+                font-weight: 900;
+                font-size: 38px;
+                line-height: 38px;
+                color: #ffffff;"><%= I18n.t('views.mailer.conf_insruct.new_site_email.time', service_name: Rails.application.credentials.global[:service_name]) %></p></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 25px 0 25px 0;">
+      <tr><td></td></tr>
+    </table>
+  </td>
+</tr>
+<% if @user_name.present? %>
+  <tr>
+    <td>
+      <table role="presentation"  border="0" cellpadding="0" cellspacing="0" align="center" width="500">
+        <tr>
+          <td class="personName">
+            <p style="
+            margin: 0;
+                font-style: normal;
+                font-weight: 900;
+                font-size: 18px;
+                line-height: 18px;
+                color: #095f73;"><%= @user_name %>,</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+<% end %>
+<tr>
+  <td align="center">
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+      <tr><td></td></tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center">
+      <tr>
+        <td>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            <%= I18n.t('views.mailer.new_site_email_for_existing_users.your_favorite_creators', creators: I18n.t('dictionary.creators')) %>
+            <a href="https://<%= Rails.application.credentials.global[:host] %>" style="color: #095f73;text-decoration: none;font-weight: bold;"><%= Rails.application.credentials.global[:host].capitalize %>!</a>
+          </p>
+          </br>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">Nothing changes for YOU except the link - you’ll use the same login information and your subscriptions remain exactly as they are now. </p>
+          </br>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;"><%= I18n.t('views.mailer.conf_insruct.new_site_email.focuse', service_name: Rails.application.credentials.global[:service_name]) %>
+          </p>
+          </br>
+          <p style="
+          margin:0;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">All you need to do is click here and
+            <a href="https://<%= Rails.application.credentials.global[:host] %>" style="color: #095f73;text-decoration: none;font-weight: bold;">log in.</a>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+            <tr><td></td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          </br>
+          <p style=" font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            Don’t forget to change your bookmarked link!
+          </p>
+          <p style=" font-weight: normal;
+              font-size: 15px;
+              color: #000000;
+              line-height: 150%;">
+            <%= I18n.t('views.mailer.conf_insruct.new_site_email.welcome', host: Rails.application.credentials.global[:host].capitalize) %>
+          </p>
+        </td>
+      </tr>
+      <% if @from_user.present? && @content.present? %>
+        <tr class="user-content-row">
+          <td align="center">
+            <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="padding: 15px 0 15px 0">
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="user-content-row">
+          <td>
+
+            <table role="presentation"  border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid #095F73; table-layout:fixed;width: 100%">
+              <thead>
+              <tr>
+                <td style="width: 20px; table-layout:fixed">&nbsp;</td>
+                <td style="width: 80px; table-layout:fixed">
+                  <img src="<%= @from_user.avatar_url %>" alt="" width="50" height="50" style="border-radius: 100%">
+                </td>
+                <td>
+                  <%= @from_user.display_name %>
+                </td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td style="width: 20px">&nbsp;</td>
+                <td>
+                  <table role="presentation"  border="0" cellpadding="0" cellspacing="0" width="500" align="center">
+                    <tr>
+                      <td>
+                        <p id="user-content" style="
+                        margin:0;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 15px;
+                            color: #000000;
+                            padding-top: 20px;
+                            line-height: 150%;"><%= @content %>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </td>
+</tr>

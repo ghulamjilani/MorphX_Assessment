@@ -1,0 +1,42 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>The start time for <%= link_to @session.always_present_title, @session.absolute_path(UTM.build_params({utm_content: @user.utm_content_value})) %> has changed by the presenter.</p>
+
+<p>Start time was: <strong><%= @session.former_start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %></strong></p>
+
+<p>New Start time is: <strong><%= @session.start_at.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %></strong></p>
+
+<% if @model.is_a?(Participant) %>
+  <% sp = SessionParticipation.where(session: @session, participant: @model).last %>
+  <% l  = Livestreamer.where(session: @session, participant: @model).last %>
+
+  <% if sp %>
+    <p>
+      Please follow <%= link_to 'this link', accept_changed_start_at_session_participation_url(sp) %> to accept the change.
+      If the new time doesn't work for you <%= link_to 'click here to decline', decline_changed_start_at_session_participation_url(sp) %>.
+    </p>
+  <% elsif l %>
+    <p>
+      Please follow <%= link_to 'this link', accept_changed_start_at_livestreamer_url(l) %> to accept the change.
+      If the new time doesn't work for you <%= link_to 'click here to decline', decline_changed_start_at_livestreamer_url(l) %>.
+    </p>
+  <% else %>
+    <% raise "can not interpet - #{@model.id}, #{@session.id}, #{@user.id}" %>
+  <% end %>
+
+<% elsif @model.is_a?(Presenter) %>
+  <% sc = SessionCoPresentership.where(session: @session, presenter: @model).last! %>
+
+  <p>
+    Please follow <%= link_to 'this link', accept_changed_start_at_session_co_presentership_url(sc) %> to accept the change.
+    If the new time doesn't work for you <%= link_to 'click here to decline', decline_changed_start_at_session_co_presentership_url(sc) %>.
+  </p>
+<% else %>
+  <% raise "can not interpret #{@model.inspect}" %>
+<% end %>
+
+<p class="thank_you_message">
+  <%= simple_format I18n.t('mailer.thank_you_message', service_name: Rails.application.credentials.global[:service_name]) %>
+</p>

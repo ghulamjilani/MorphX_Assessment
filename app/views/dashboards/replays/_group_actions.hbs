@@ -1,0 +1,18 @@
+<div class="groupActionWrapp padding-top-10 padding-bottom-20 {{#if (eq selected_length 0)}}hidden{{/if}}">
+  <div class="clearfix">
+    <span>{{selected_length}} {{#if (eq selected_length 1)}}Replay{{else}}Replays{{/if}} selected</span>
+    <div class="pull-right text-right actionsBtns">
+      {{#if can_transcode_videos}}
+        <a class="btn btn-s btn-borderred-light group_publish" href="javascript: void(0);">Publish</a>
+      {{/if}}
+      {{#if can_edit_videos}}
+        <a class="btn btn-s btn-borderred-light {{#if move_available}}group_move_to{{else}}disabled{{/if}}"
+           href="javascript: void(0);"
+           title="{{#if move_available}}{{i18n 'dashboard.move_to_another_channel.button.title'}}{{else}}{{i18n 'dashboard.move_to_another_channel.button.one_channel_title'}}{{/if}}">{{ i18n 'dashboard.move_to_another_channel.button.label' }}</a>
+      {{/if}}
+      {{#if can_delete_videos}}
+        <a class="btn btn-s btn-borderred-light group_delete" href="javascript: void(0);">Delete</a>
+      {{/if}}
+    </div>
+  </div>
+</div>

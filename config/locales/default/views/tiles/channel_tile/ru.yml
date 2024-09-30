@@ -1,0 +1,10 @@
+ru:
+  channel_tile:
+    owner: Владелец
+    since: Основан в
+    streams: стримов
+    subscribe: Подписка от
+    subscribed: Подписка оформлена
+    follow_channel: Подписаться на канал
+    following_channel: Подписаны
+    unfollow_channel: Отписаться

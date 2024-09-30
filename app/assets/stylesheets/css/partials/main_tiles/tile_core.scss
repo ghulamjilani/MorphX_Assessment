@@ -1,0 +1,364 @@
+/*
+*= require css/partials/main_tiles/Channel_Scheduled_Sessions
+*= require css/partials/main_tiles/Channels
+*= require css/partials/main_tiles/Creators
+*= require css/partials/main_tiles/Live_Sessions_or_You_may_also_like
+*= require css/partials/main_tiles/Video
+*= require css/partials/main_tiles/products
+*= require css/partials/main_tiles/tile-cake-sidebarrr
+*= require css/partials/main_tiles/session
+*= require css/partials/main_tiles/brands
+*/
+
+@import "mixin";
+
+
+
+section.tile-cake{
+  position: relative;
+  .owl-item &{
+    width: calc(100% - 14px);
+    margin-left: 7px;
+  }
+  .tile-img{
+    position: relative;
+    .tile-imgContainer{
+      width: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 0;
+      padding-top: 56%;
+      @include transition200();
+      opacity: 1;
+      border-radius: 5px;
+    }
+    .tile_link{
+      position: absolute;
+      z-index: 19;
+      width: 100%;
+      left: 0;
+      height: 100%;
+      top: 0;
+      i{
+        opacity: 0.6;
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform:translate(-50%, -50%);
+        color: #fff;
+        font-size: 40px;
+        @include transition200();
+      }
+      &:hover{
+        i{
+          opacity: 1;
+        }
+      }
+    }
+    .social-sharing{
+      z-index: 28;
+      right: 10px;
+      color: #000;
+      position: absolute;
+      top: 10px;
+      height: 20px;
+      width: 20px;
+      background: #fff;
+      font-size: 14px;
+      text-align: center;
+      overflow: hidden;
+      visibility: visible;
+      @include transition200();
+      i{
+        vertical-align: top;
+        height: 100%;
+        line-height: 21px;
+      }
+      &:hover{
+        color: var(--tp__active);
+      }
+    }
+    .timeCount, .sessionStatus{
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      color: #000;
+      z-index: 19;
+      font-weight: bold;
+      font-size: 12px;
+      padding: 0 13px;
+      line-height: 21px;
+      height: 20px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .sessionStatus-red{
+      padding-left: 0;
+      padding-right: 0;
+      span{
+        background: #e30000;
+        display: inline-block;
+        vertical-align: top;
+        padding: 0 10px;
+        color: #fff;
+        text-transform: uppercase;
+      }
+    }
+    .liveViewers{
+      padding-right: 10px;
+      display: inline-block;
+      vertical-align: 0.1px;
+      line-height: 18px;
+      height: 100%;
+      i{
+        font-size: 18px;
+        vertical-align: -2px;
+        color: var(--tp__icons);
+      }
+    }
+    .sessionCost{
+      position: absolute;
+      bottom: 6px;
+      right: 11px;
+      z-index: 29;
+      &.active i{
+        background: var(--tp__icons);
+      }
+      i{
+        background: #FFC20A;
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+        height: 20px;
+        border-radius: 100%;
+        line-height: 20px;
+        color: #000000;
+      }
+      .sessionCost-tooltip{
+        visibility: hidden;
+        position: absolute;
+        background: var(--bg__content);
+        left: -120px;
+        width: 160px;
+        top: 50px;
+        opacity:0;
+        line-height:23px;
+        @include transition200();
+        border-radius: 10px;
+        padding: 18px 20px 10px;
+        @include boxShadow__main(var(--sh__main));
+        &:after{
+          content: '';
+          position: absolute;
+          right: 10px;
+          bottom: 100%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          border:10px solid transparent;
+          border-bottom-color: var(--bg__content);
+        }
+        @include media(p-tablet){
+          left: -130px;
+          &:after{
+            left: 87%;
+          }
+        }
+      }
+      &:hover{
+        .sessionCost-tooltip{
+          opacity:1;
+          visibility: visible;
+          top:35px;
+          .row{
+            @include flex(flex, center, space-between);
+            margin: 0;
+            div{
+              padding: 0;
+              width: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .creatorBlur, .dropchannelBlur, .channelBlur{
+    overflow: hidden;
+    &:before{
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(5px);
+      border-radius: 5px;
+    }
+  }
+  .tile-body{
+    padding: 10px 0 10px;
+    font-size: 15px;
+    line-height: 18px;
+    .tile-name{
+      color: var(--tp__h3);
+      font-weight: bold;
+      overflow: hidden;
+      font-size: $font-size-l;
+      height: 1.7em;
+      display: block;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .tile-owner{
+      display: block;
+      font-size: 14px;
+      line-height: 16px;
+      color: var(--tp__secondary);
+    }
+    .Subscription{
+      color: var(--tp__active);
+    }
+    .star_ratingWrapper{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      &__span{
+        padding-bottom: 3px;
+        flex-shrink: 0;
+      }
+      .pull-right{
+        float: none!important;
+      }
+      .v-popover {
+        margin-right: 0.8rem;
+      }
+      &__status {
+        display: none;
+        @include media(reverso-xl-desktop){
+          display: block;
+        }
+      }
+    }
+    .starRating{
+      text-align: left;
+      letter-spacing: 2px;
+      line-height: 15px;
+      padding: 0;
+      min-width: 0;
+      margin: 0;
+      font-size: 10px;
+      margin-left: 0px;
+      margin-right: 5px;
+      i {
+        font-size: 14px;
+        line-height: 13px;
+        display: inline-block;
+        vertical-align: middle;
+        color: var(--tp__icons);
+        &.VideoClientIcon-starF, &.VideoClientIcon-star-half-altF{
+          color: var(--tp__h1);
+        }
+      }
+    }
+    &__status {
+      @include media(reverso-xl-desktop){
+        display: none;
+      }
+    }
+    .participants{
+      i{
+        color: var(--tp__icons);
+        vertical-align: text-top;
+        font-size: 17px;
+      }
+    }
+    .ScheduledDate{
+      display: block;
+      color: var(--tp__secondary);
+    }
+    .btn{
+      margin-top: 10px;
+    }
+    .btn.active{
+      color: var(--tp__main);
+      @include btn-mod-BG-and-borders(#e6e6e6)
+    }
+  }
+  .remind_me{
+    a{
+      vertical-align: bottom;
+      i{
+        margin-right: 10px;
+        font-size: 10px;
+        vertical-align: baseline;
+      }
+    }
+  }
+}
+.tile-cake{
+  &__placeholder:not(&__standalone){
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &__placeholder{
+    svg{
+      position: absolute;
+      left: 0;
+      top: -1px;
+      width: 100%;
+      height: 100%;
+    }
+    .spinnerSlider{
+      top: 35%;
+     &>div{
+       background: rgba(0,0,0,0.2);
+     }
+    }
+  }
+  &__standalone{
+    padding-top: calc(56.25% + 105px);
+    position: relative;
+  }
+}
+.tileStandAlone{
+  @include clearfix();
+  section.tile-cake{
+    max-width: calc(25% - 14px);
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+    &.tile-cake-Creators{
+      max-width: calc(20% - 14px);
+    }
+    @include media(tablet){
+      max-width: calc(33% - 14px);
+      &.tile-cake-Creators{
+        max-width: calc(25% - 14px);
+      }
+    }
+    @include media(p-tablet){
+      max-width: calc(50% - 14px);
+      &.tile-cake-Creators{
+        max-width: calc(33% - 14px);
+      }
+    }
+    @include media(phone){
+      max-width: calc(100% - 14px);
+      &.tile-cake-Creators{
+        max-width: calc(55% - 14px);
+      }
+    }
+  }
+  &.smallTile-cake{
+    .tile-calendar .VideoClientIcon-calendar-icon{
+      margin-left: 0;
+      margin-right: 5px;
+    }
+  }
+}

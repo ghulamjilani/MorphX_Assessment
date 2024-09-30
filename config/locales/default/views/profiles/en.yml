@@ -1,0 +1,33 @@
+en:
+  views:
+    profiles:
+      downloads:
+        not_supportet_yet: We are sorry but our service does not support your operating system yet
+        osx_client: Web client for OS X™
+        windows_client: Web client for Windows™
+      edit_notifications:
+        remind_me_on_coming: 'remind me on coming sessions:'
+        someone_adds_session_to_wishlist: Someone adds session to wishlist
+        someone_starts_to_follow_me: Someone starts to follow me
+        user_accepted_or_rejected_your_invitation: User accepted or declined your invitation
+        session_emergency_stop_scheduled: 'Session stop in %{minutes_to_stop} minutes warning: No video stream'
+        with_15_minutes_upfront_reminder: With 15 minutes upfront reminder
+        with_1_hours_upfront_reminder: With 1 hour upfront reminder
+        with_24_hours_upfront_reminder: With 24 hours upfront reminder
+        with_6_hours_upfront_reminder: With 6 hours upfront reminder
+        with_72_hours_upfront_reminder: With 72 hours upfront reminder
+        you_have_been_invited: You have been invited to session
+      nav:
+        view_public_profile: View Public Profile
+        personal_profile: Personal Profile
+        public_profile: Public Profile
+        account: Account
+        preferences: Preferences
+        payments_payouts: Payments & Payouts
+        payment_method: Payment Method
+        notifications: Notifications
+        donations: Donations
+      replenishment_success_message: Creator balance has been successfully replenished
+      what_is_system_credit_balance: |-
+        Your presenter system credit that you use for paying for co-presenters.
+        Once it is expired you're allowed to replenish with your credit card.

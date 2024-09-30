@@ -1,0 +1,52 @@
+= cache("shared/user/#{user.cache_key}/#{current_user.try(:cache_key)}") do
+  %section.thumbnails.thumbnail-kenburn.kontainer.presenter-tile
+    .presentation-img-Wrapper
+      .social-sharing-block
+        = vanilla_follow_link(user)
+        -#=  degradable_link_to user.toggle_like_relative_path, method: :post, remote: true, class: ["like-block", like_class(user), "user-like-#{user.id}"].join(' '), title: 'Like' do
+        -#  %i.VideoClientIcon-Favorites
+        -#  %span{class: "likes-counter-user-#{user.id}"}
+        -#    = user.likes_count unless user.likes_count.zero?
+        - if can?(:contact, user)
+          - _path = user_signed_in? ? new_message_path(receiver: user) : root_path(autodisplay_remote_ujs_path: new_message_path(receiver: user))
+          = degradable_link_to _path, rel: "tipsy", title:  "Send message", remote: true do
+            %i.VideoClientIcon-email131
+            %span
+              = I18n.t('shared.contact_me')
+        - else
+          %a.disabled{rel: "tipsy", title:  "You cant send message yourself"}
+            %i.VideoClientIcon-email131
+            %span
+              = I18n.t('shared.contact_me')
+        - if can?(:share, user)
+          = link_to user.preview_share_relative_path, method: :get, rel: 'nofollow', remote: true, class: "social-sharing", title: 'Share' do
+            %i.VideoClientIcon-share-mk4
+      %a.sessionBoxImg{href: user.relative_path, style: ''}
+        %div.owl-lazy{'data-src' => "#{user.large_avatar_url}"}
+        .sessionBoxImgOverlay
+
+        .hiddenText
+          .text-center
+            .sessionBox_title.presenter-link
+              = user.always_present_title
+          = sanitize(user.try(:user_account).try(:tagline), tags: %w(strong em a p br), attributes: %w(href))
+      .caption
+        - _channel = user.most_known_because_of_channel
+        - if _channel.present?
+          %h5
+            = _channel.always_present_title
+        %a.presenter-link{href: user.relative_path}
+          %span{title:user.always_present_title}
+            by
+            = user.always_present_title
+
+      .actions
+        %ul.clearfix
+          %li.numberOfViews
+            %a{title:'number of views'}
+              %span.num-s
+                - #this is how we inject actual views counter into cached template
+                = ":views_replacement_placeholder:"
+              %i.VideoClientIcon-Views
+          %li.ratingWrapper
+            = raw star_rating(numeric_rating_for(user))

@@ -1,0 +1,116 @@
+#contactUs.col-md-12.main-content-section.padding-top-20
+  %h4.technicalPage__label.groupTitle.padding-bottom-0.clearfix
+    = I18n.t('views.home.support.form_label')
+  = form_tag lets_talk_path, method: :post, class: 'form_V2', id: :lets_talk, data: {remote: true} do
+    %input{type: :hidden, name: :type, value: 'Customer Support'}
+    .formContainer.lax{'data-lax-opacity_large':'vh 0, (vh*0.6) 0, (vh*0.5) 1', "data-lax-anchor":"self"}
+      .input-block.required{class: ('state-clear' unless current_user)}
+        %label
+          = I18n.t('views.home.support.name')
+        %input#FirstName{type: :text, name: :name, required: true, value: current_user&.public_display_name}
+        .errorContainerWrapp
+          .errorContainer
+      .input-block.required{class: ('state-clear' unless current_user)}
+        %label{for: :email}
+          = I18n.t('views.home.support.email')
+        %input#Email{type: :email, name: :email, required: true, value: current_user&.email}
+        .errorContainerWrapp
+          .errorContainer
+      .input-block.state-clear
+        %label{for: :company}
+          = I18n.t('views.home.support.company_name')
+        %input#Company{type: :text, name: :company}
+      .input-block.state-clear.required
+        %label{for: :about}
+          = I18n.t('views.home.support.request')
+        %textarea#About{name: :about, required: true, 'max-length': 2000, maxlength: 2000}
+        .counter_block 0/2000
+        .errorContainerWrapp
+          .errorContainer
+      -# CAPTCHA
+      - if recaptcha_form_field_enabled?
+        .input-block.state-clear.recapthaWrapp
+          = recaptcha_tags :callback => 'letsTalkValidation', 'data-expired-callback' => 'letsTalkValidation'
+    .text-right.padding-top-20.clearfix.outsideButton
+      %button#supportSendButton.btn.btn-l.btn-red.padding-left-50.padding-right-50{type: :submit, disabled: true}
+        = I18n.t('views.home.support.send')
+
+- content_for(:after_include_javascripts) do
+  :javascript
+    $("#lets_talk").validate({
+      debug: true,
+      onkeyup: true,
+      onfocusout: true,
+      rules: {
+        name: {
+          required: true
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        about: {
+          required: true
+        },
+        'g-recaptcha-response': {
+          required: true
+        },
+      },
+      submitHandler: function(form) {
+        form.submit();
+      }
+    });
+
+    $("#lets_talk").on('ajax:success', (e) => {
+      $.showFlashMessage('Message successfully sent', {type: "success"});
+      document.getElementById('lets_talk').reset();
+      grecaptcha.reset()
+      localStorage.setItem("support_message", "success")
+      location.reload()
+    }).on('ajax:error', (e, response) => {
+      grecaptcha.reset()
+      if (response.status == 429){
+        $.showFlashMessage('Only 3 messages per minute are allowed', {type: "error"});
+      } else {
+        $.showFlashMessage(response.statusText, {type: "error"});
+      }
+    });
+
+    window.addEventListener("load", function(event) {
+      // for reloading page
+      if(localStorage.getItem("support_message") == "success") {
+        localStorage.removeItem("support_message")
+        $.showFlashMessage('Message successfully sent', {type: "success"});
+      }
+    });
+
+    function setSubmitButton(isEnabled) {
+      $('#lets_talk').find('button[type="submit"]').prop('disabled', !isEnabled);
+    }
+
+    function firstNameInputValidation() {
+      return $('#lets_talk input[name=name]').val() != '';
+    }
+
+    function emailInputValidation() {
+      return $('#lets_talk input[name=email]').val().match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/);
+    }
+
+    function requestInputValidation() {
+      return $('#lets_talk textarea[name=about]').val() != '';
+    }
+
+    function recaptchaValidation() {
+      return document.querySelector('#g-recaptcha-response').value != ''
+    }
+
+    function letsTalkValidation() {
+      if (!firstNameInputValidation()) return setSubmitButton(false);
+      if (!emailInputValidation()) return setSubmitButton(false);
+      if (!requestInputValidation()) return setSubmitButton(false);
+      if (#{recaptcha_form_field_enabled?} && !recaptchaValidation()) return setSubmitButton(false);
+
+      setSubmitButton(true)
+    }
+
+    $('#lets_talk').on('change focusout keyup', 'input[name=name],input[name=email],textarea[name=about]', letsTalkValidation)

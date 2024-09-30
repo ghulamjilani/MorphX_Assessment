@@ -1,0 +1,21 @@
+%p Dear #{@user.public_display_name},
+%p Hope you're happy with your Free Trial on #{Rails.application.credentials.global[:service_name]}.
+%p We tried to activate your Business Plan, but, unfortunately, the payment was not successful.
+
+%br/
+
+%p Business Plan: #{@plan_package.name}
+%p Payment: #{@plan.formatted_price}/#{@plan.formatted_interval}
+%br/
+
+%p
+  Please check your
+  = link_to 'Payment Method', edit_billing_profile_url
+
+%p As your free trial period is finished, you can't create new content.
+%p But don't worry, we will keep your content safe for #{pluralize(@suspended_days, 'day')} and it will be available after Business Plan activation.
+
+%p
+  If you have any questions, feel free to
+  = link_to 'contact us', support_home_url
+

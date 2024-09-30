@@ -1,0 +1,17 @@
+en:
+  frontend:
+    app:
+      uikit:
+        components_manager:
+          component_settings_modal:
+            title: Component Settings
+            count: Count
+            tiles: tiles
+            show_more: Show More Button
+            use_promo_weight: Use Promo Weight
+            show_on_homepage: Only "Show on Homepage"
+            hide_on_home: Exclude Hide on Home
+            save: Save
+            is_scrollable: Is Scrollable
+            hints:
+              host: Current host

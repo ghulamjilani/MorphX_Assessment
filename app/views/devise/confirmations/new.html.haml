@@ -1,0 +1,24 @@
+#confirmationModal.modal.fade{'aria-hidden': true, role: :dialog, tabindex: -1}
+  .modal-dialog
+    .modal-content.ResendConfirmationInstructions
+      .modal-body
+        .unobtrusive-flash-container
+        %h4.groupTitle.clearfix
+          Confirmation
+          %a.pull-right.close_modal{data: {dismiss: :modal}}
+
+        .modal-social-block
+          = render 'shared/row_social'
+          %hr/
+          %span   or
+
+        = semantic_form_for(resource, as:  resource_name, url: confirmation_path(resource_name, format: :json),
+                            method: :post, remote: true, html: {id: 'confirmationForm'}) do |f|
+          = f.inputs do
+            = f.input :email,
+                      input_html: {autofocus: true, placeholder: 'user@site.com', autocomplete: :off},
+                      label: 'E-mail',
+                      wrapper_html: {class: 'custom-input'}
+
+          .text-center
+            = f.action :submit, as: :button, label: 'Resend confirmation instructions', button_html: { class: 'mainButton' }

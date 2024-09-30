@@ -1,0 +1,7 @@
+ru:
+  creator_tile:
+    followers_count: 'Подписчики:'
+    following_count: 'Подписки:'
+    follow: Подписаться
+    following: Подписаны
+    unfollow: Отписаться

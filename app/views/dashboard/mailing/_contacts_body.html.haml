@@ -1,0 +1,13 @@
+- contacts ||= @contacts
+- contacts.each do |contact|
+  %tr
+    %td{width:'70px'}
+      %label.checkbox.choice.margin-top-10.margin-left-15
+        %input{type: "checkbox", name: "contacts[]", class: "contact-cb", value: contact.id}
+        %span
+    %td{data: {th: 'name'}}
+      = contact.name
+    %td{data: {th: 'email'}}
+      = contact.email
+    %td{data: {th: 'Subscribe status'}}
+      = contact.status.titleize

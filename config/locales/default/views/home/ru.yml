@@ -1,0 +1,30 @@
+ru:
+  home_page:
+    sticky_panel:
+      live: Live
+      channels: Каналы
+      replays: Реплеи
+      creators: Криэйторы
+      uploads: Аплоады
+      on_demand: On-demand
+    banner:
+      discover: Открой
+      live_experiences: для себя live-трансляции
+      relive: Оживи
+      great_sessions: в памяти выдающиеся сессии
+      explore: Изучи
+      variety_of_original_content: множество оригинального контента
+      find: Найди
+      your_next_favorite_teacher: своего очередного любимого учителя
+    titles:
+      live_experiences: Live-трансляции
+      channels: Каналы
+      replays: Реплеи
+      videos: Видео
+      connectWithCreators: Свяжитесь с Криэйторами
+      uploads: Аплоады
+      see_more: Посмотреть больше
+      trending: В тренде
+      all_videos: Все видео
+      popular: Популярные
+      discover: Все видео

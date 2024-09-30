@@ -1,0 +1,17 @@
+en:
+  activeadmin:
+    stripe_db:
+      coupons:
+        hints:
+          stripe_id: Uniqueness is required! This will identify this coupon. We recommend leaving this blank so we can generate CODE for you.
+          name: This will appear on customers' receipts and invoices. Must be at most 40 characters.
+          target_id: ID of object that you want this coupon can be applied for (eg. Channel Subscription Plan ID, you can find it in admin panel). Leave it blank if you want to apply to all selected target type
+          target_type: Type of purchase this coupon can be applied for. Leave it blank if it can be applied for any purchase
+          amount_off: '*In cents.* Use one of the settings at the same time: Amount Off or Percent Off'
+          percent_off_precise: A positive float larger than 0, and smaller or equal to 100, that represents the discount the coupon will apply (required if Amount Off is not passed).
+          duration: |-
+            *once* — Applies to the first charge from a subscription with this coupon applied.
+            *repeating* — Applies to charges in the first duration_in_months months from a subscription with this coupon applied.
+            *forever* — Applies to all charges from a subscription with this coupon applied.
+          duration_in_months: Required only if duration is *repeating*, in which case it must be a positive integer that specifies the number of months the discount will be in effect.
+          redeem_by: The last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers. Or you can leave it blank.

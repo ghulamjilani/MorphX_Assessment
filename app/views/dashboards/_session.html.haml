@@ -1,0 +1,140 @@
+- session = session&.session unless session&.is_a?(Session)
+- if session
+  .abstract-session-title{"id": "room_id_#{session.room_id}"}
+    .row{'data-type': session.humanize_type, 'data-start-at': session.start_at.to_i}
+      .col-md-9
+        .row
+          .col-md-12
+            %h6
+              = link_to session.title, (session.records&.first&.absolute_path || session.relative_path)
+        .row
+          .col-md-4
+            %div
+              %i.VideoClientIcon-calendarF
+              = time_with_tz_in_chosen_format(session.start_at)
+            %div
+              %i.VideoClientIcon-clockF
+              = session.duration
+              = I18n.t('views.dashboards.session.mins')
+          .col-md-4
+            %div
+              - if session.private?
+                = I18n.t('views.dashboards.session.private')
+              - else
+                = I18n.t('views.dashboards.session.public')
+            %div
+              = session.immersive_type == Session::ImmersiveTypes::ONE_ON_ONE ? I18n.t('views.dashboards.session.one_on_one') : I18n.t('views.dashboards.session.group')
+          .col-md-4
+            - _status = session_status(session)
+            - if _status
+              %div
+                = I18n.t('views.dashboards.session.status')
+                = ": #{_status}"
+            - _visibility = session_visibility(session)
+            - if _visibility
+              %div
+                = I18n.t('views.dashboards.session.visibility')
+                = ": #{_visibility}"
+
+      .col-md-3
+        - # Hide for now - https://lcmsportal.plan.io/issues/2723
+        - if session.booking.blank? && (can?(:edit, session) || can?(:clone, session) || can?(:cancel, session) || current_user == session.channel.organizer)
+          = dropdown_with_icons do
+            - if can?(:edit, session) && can?(:edit_session_by_business_plan, session.channel)
+              %li
+                %i.VideoClientIcon-Edit
+                = link_to I18n.t('views.dashboards.session.edit'), edit_channel_session_path(session.channel.slug, session.slug)
+              %li.id
+                %i.VideoClientIcon-paper-planeF
+                = link_to I18n.t('views.dashboards.session.invite'), modal_session_live_participants_portal_path(session), method: :get, remote: true, class: 'modal_invite', style: 'visibility: visible'
+              - if can?(:end, session) && !can?(:cancel, session)
+                %li.id
+                  %i.GlobalIcon-clear
+                  %a.end_session_dashboard{"data-room_id": session.room_id, "title": "#{I18n.t('views.dashboards.session.end_session_tooltip')}"}
+                    = I18n.t('views.dashboards.session.end_session')
+
+            - if session.can_rate?(current_user)
+              %li
+                %i.icon-ok
+                = link_to review_action_title(session), modal_review_channel_session_path(session.channel.id, session.id), remote: true
+
+            - if can?(:publish, session)
+              %li
+                %i.icon-ok
+                = link_to I18n.t('views.dashboards.session.publish'),
+                          publish_channel_session_path(session.channel.id, session.id),
+                          method: :post,
+                          data: {confirm: I18n.t('views.dashboards.session.publish_confirmation')}
+
+            - if can?(:clone, session) && can?(:clone_session_by_business_plan, session.channel)
+              %li
+                %i.VideoClientIcon-squaresF
+                = clone_link(session)
+
+            -# - if can?(:live_opt_out, session)
+              -# %li
+              -#   - cancel_title = I18n.t('views.dashboards.session.cancel_interactive') if can?(:opt_out_as_immersive_participant, session)
+              -#   - cancel_title = I18n.t('views.dashboards.session.cancel_livestream') if can?(:opt_out_as_livestream_participant, session)
+
+                -# %i.VideoClientIcon-cross
+                -# = link_to cancel_title,
+                -#           sessions_preview_live_opt_out_modal_path(session.id),
+                -#           method: :get,
+                -#           remote: true,
+                -#           style: 'visibility: visible'
+
+            - if can?(:vod_opt_out, session)
+              %li
+                %i.VideoClientIcon-cross
+                = link_to I18n.t('views.dashboards.session.cancel_on_demand'),
+                  sessions_preview_vod_opt_out_modal_path(session.id),
+                  method: :get,
+                  remote: true,
+                  style: 'visibility: visible'
+
+            - if session.has_recurring?
+              %li
+                %i.VideoClientIcon-unlinkF
+                = link_to I18n.t('views.dashboards.session.unchain'),
+                  unchain_session_path(session.id),
+                  style: 'visibility: visible'
+              %li
+                %i.VideoClientIcon-linkF
+                = link_to I18n.t('views.dashboards.session.unchain_all'),
+                  unchain_session_path(session.id, all: true),
+                  style: 'visibility: visible'
+
+            - if can?(:cancel, session)
+              %li
+                %i.VideoClientIcon-cross
+                = link_to I18n.t('views.dashboards.session.cancel'),
+                          sessions_preview_cancel_modal_path(session.id),
+                          method: :get,
+                          remote: true,
+                          style: 'visibility: visible'
+
+        - if session.presenter
+          %p.CRsessionPresenter
+            %strong
+              = I18n.t('dictionary.creator_upper')
+            = link_to session.organizer.public_display_name, spa_user_path(session.organizer.slug)
+
+        .sessiontimerAndJoin
+
+        - presenter = SessionInvitationButtonsPresenter.new(model_invited_to: session, current_user: current_user, ability: current_ability)
+        = raw presenter.to_s_for_dashboard
+
+        - if show_sources_button?(session)
+          %section.hiddenJoinSection.SI-bi-title.clearfix
+            .btn-group.full-width.SourceButton.hiddenJoinButton
+              = raw join_room(abstract_session: session, link_css_classes: 'btn btn-m btn-grey-solid SourceButton-main pull-left', initialization_type: JoinInitializationTypes::DASHBOARD, enforce_title: true).html_link
+              %button.btn-m.btn-grey-solid.dropdown-toggle.SourceButton-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button", rel: "tipsy", title: "Select source"}
+                %span.caret
+                %span.sr-only
+                  = I18n.t('views.dashboards.session.toggle_dropdown')
+              %ul.dropdown-menu
+                - session.session_sources.each do |source|
+                  %li
+                    = link_to source.name, '#', onclick: join_room(abstract_session: session, enforce_title: false, source_id: source.id).onclick_value
+        - else
+          = raw join_room(abstract_session: session, link_css_classes: 'btn btn-m btn-grey-solid full-width display-block tablet-width', initialization_type: JoinInitializationTypes::DASHBOARD).html_link

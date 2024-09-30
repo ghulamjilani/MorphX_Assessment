@@ -1,0 +1,298 @@
+.comment {
+  @include flex(flex, false, false);
+
+  &__left {
+    padding-top: 1.5rem;
+    margin-right: 1.2rem;
+    cursor: pointer;
+    .avatar {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  &__right {
+    width: 100%;
+    padding-top: 1.5rem;
+    word-break: break-word;
+  }
+
+  &__header {
+    @include flex(flex, center, false);
+    margin-bottom: 1.2rem;
+
+    &__avatar {
+      margin-right: 1.2rem;
+    }
+
+    &__data {
+      width: 100%;
+      @include flex(flex, center, space-between);
+
+      &__info {
+        &__name {
+          cursor: pointer;
+        }
+
+        &__time {
+          color: var(--tp__secondary);
+          font-size: 1.2rem;
+          font-weight: normal;
+
+          span {
+            font-weight: normal
+          }
+        }
+
+        @include flex(flex, false, false);
+        flex-direction: column;
+        color: var(--tp__h2);
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      &__options {
+        position: relative;
+
+        &__icon {
+          color: var(--tp__icons);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__body {
+    text-overflow: ellipsis;
+    word-break: break-word;
+    color: var(--tp__secondary);
+    margin-bottom: 1.5rem;
+
+    p:first-child {
+      line-height: 2;
+    }
+
+    .mention {
+      span {
+        color: #FFF !important;
+      }
+    }
+
+    .ql-emojiblot {
+      position: relative;
+      top: -0.4rem;
+    }
+  }
+
+  &__reply {
+    margin-bottom: 0.5rem;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.comments__showMore {
+  margin: 3rem auto 2rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.reviewsCommentsSection__wrapper {
+  padding-top: 4rem;
+  @include media(tablet){
+    padding-bottom: 6rem;
+  }
+  @include media(phone){
+    .pollsTitleTab{
+      display: none;
+    }
+  }
+  .channelFilters__icons {
+    &__options {
+      font-size: 1.3rem;
+      position: absolute;
+      @include boxShadow__main(var(--sh__main));
+      width: 18rem;
+      display: flex;
+      flex-direction: column;
+      top: 4rem;
+      background-color: var(--bg__dropdowns);
+      padding: 1rem 0;
+      border-radius: .6rem;
+      z-index: 99;
+      right: -1rem;
+
+      .btn {
+        font-size: 1.3rem;
+      }
+
+      &__cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 98;
+      }
+
+      a, .btn__reset {
+        padding: 1rem 3rem 1rem 2rem;
+        font-weight: 400;
+        color: var(--tp__secondary);
+        border-radius: 0;
+        text-align: left;
+
+        &:hover {
+          background-color: var(--bg__content__secondary);
+          color: var(--tp__main);
+        }
+
+        &.disabled {
+          opacity: 0.7;
+          text-decoration: none;
+          cursor: not-allowed;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.videoComments {
+  &__notAuthorized {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2.8rem;
+    padding-bottom: 2.8rem;
+    background-color: var(--bg__content__secondary);
+    border-radius: 1rem;
+
+    span {
+      padding: 0.3rem;
+      color: var(--tp__links__hover);
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
+  &__empty {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2.8rem;
+    padding-bottom: 2.8rem;
+  }
+
+  .quill-text .mention {
+    background-color: var(--bg__label);
+    color: var(--tp__labels);
+    cursor: pointer;
+  }
+
+  .quillWrapper {
+    /* customization / fix for text color and background pasted from other sites */
+    .ql-toolbar {
+      .ql-stroke, .ql-picker-label {
+        color: var(--tp__icons);
+        stroke: var(--tp__icons);
+      }
+
+      .ql-fill {
+        fill: var(--tp__icons);
+      }
+
+      button:hover {
+        .ql-stroke, .ql-picker-label {
+          color: var(--tp__active);
+          stroke: var(--tp__active);
+        }
+
+        .ql-fill {
+          fill: var(--tp__active);
+        }
+      }
+
+      .ql-picker-options {
+        border-color: var(--border__separator);
+        background-color: var(--bg__content);
+        color: var(--tp__secondary);
+      }
+    }
+
+    .ql-snow .ql-tooltip {
+      border-color: var(--border__tooltip);
+      background-color: var(--bg__content);
+      color: var(--tp__secondary);
+
+      input {
+        border-color: var(--border__separator);
+        color: var(--tp__secondary);
+        background-color: var(--bg__content);
+      }
+
+      .ql-action {
+        color: var(--tp__active);
+      }
+    }
+
+    .ql-editor {
+      strong, span, em {
+        color: var(--tp__main) !important;
+        background-color: transparent !important;
+      }
+
+      a {
+        background-color: transparent;
+        color: var(--tp__active) !important;
+
+        &:hover {
+          color: var(--tp__active);
+        }
+      }
+
+      img {
+        object-fit: contain;
+      }
+    }
+
+    /* ////////////// */
+  }
+
+  .ql-tooltip {
+    left: 0 !important;
+
+    &.ql-editing {
+      display: block;
+      flex-wrap: nowrap;
+    }
+
+    &:not(.ql-hidden):not(.ql-editing) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &.ql-hidden {
+      display: none !important;
+    }
+
+    @include media(p-phone) {
+      .ql-action, .ql-remove {
+        display: inline-block;
+        width: 50%;
+        text-align: left;
+        color: var(--tp__active);
+
+        &:after {
+          border: none !important;
+        }
+      }
+    }
+  }
+}

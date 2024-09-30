@@ -1,0 +1,14 @@
+en:
+  views:
+    layouts:
+      application:
+        meta_modern: "Modern well-being for the next generation. %{service_name} with your favorite creators to learn and grow with live, interactive experiences from top-tier instructors around the world."
+        meta_human: "%{service_name} - Humanizing e-Commerce"
+        sign_in:
+          welcome: "Welcome to %{service_name}!"
+        sign_up:
+          welcome: "Welcome to %{service_name}!"
+          agree: "I agree to %{service_name}'s"
+        todo:
+          complete: "Thank your for joining %{service_name}. Congratulations on completing your first task."
+          keep: "Don’t keep %{service_name} all to yourself, spread the word by sending an email to five of your friends to join and explore %{service_name} with you."

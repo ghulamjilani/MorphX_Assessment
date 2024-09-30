@@ -1,0 +1,137 @@
+- if current_theme_css
+  %style
+    :plain
+      :root {
+        #{raw current_theme_css}
+      }
+- if current_theme_customs_css
+  %style
+    :plain
+      #{raw current_theme_customs_css}
+
+- if current_user&.can_use_debug_area
+  .customizationNav
+    %h3 customization
+    %hr
+    %h4 Themes
+    %select#theme-select
+    %button#enable-theme.btn.btn-m.full-width.margin-top-10 Enable this theme as default
+    %hr
+    %div
+      %form#customizationForm
+        .form-list
+        %button.btn.btn-m.full-width.margin-top-20{type:'submit'} Save
+
+- if list_of_templates
+  :javascript
+    window.list_of_templates = #{raw list_of_templates || 'null'};
+
+- if current_user&.can_use_debug_area
+  - content_for(:after_include_javascripts) do
+    :javascript
+      window.list_of_themes_raw = #{raw list_of_themes || 'null'};
+      window.list_of_themes = window.list_of_themes_raw.map(theme => JSON.parse(theme))
+      var current_theme = list_of_themes.find(theme => theme.is_default)
+      console.log(list_of_themes)
+
+      $('body').on('ajax:success', '.resend_confirm', function() {
+        $.showFlashMessage('Please check your inbox.', { type: 'success' });
+      });
+
+      setTimeout(() => {
+        generateSelect();
+        generateAccordeons();
+        generateFields(true);
+      }, 1000)
+
+      function generateSelect() {
+        list_of_themes.forEach(theme => {
+          let option = $(`
+            <option
+              id="theme${theme.id}"
+              ${theme.is_default ? "selected":""}
+              value="${theme.id}"
+            >
+              ${theme.name}
+            </option>
+          `);
+          $(`.customizationNav select`).append(option);
+        })
+      }
+
+      function generateAccordeons() {
+        let group_names = ["background", "buttons", "toggless", "typographics", "shadows", "borders"]
+        group_names.forEach(name => {
+          let group = $(`
+          <h4 data-toggle="collapse" href="#collapse${name}">
+            ${name}
+          </h4>
+          <div class="collapse" id="collapse${name}"> </div>
+          <hr />`);
+          $("#customizationForm .form-list").append(group);
+        })
+      }
+
+      function generateFields(firsttime = false) {
+        current_theme.system_theme_variables.forEach(cus => {
+          let form = $(`
+            <label class="display-block clearfix">
+              <span>${cus.name}</span>
+              <input class="pull-right" id="${cus.property}" name="${cus.property}" type="color" value="${cus.value}">
+            </label>`
+          );
+          $(`#customizationForm #collapse${cus.group_name}`).append(form);
+          if(!firsttime) document.documentElement.style.setProperty('--' + cus.property, cus.value);
+          document.querySelector("#" + cus.property).addEventListener("input",(event)=>{
+            cus.value = event.target.value;
+            document.documentElement.style.setProperty('--' + cus.property, event.target.value);
+          });
+        })
+      }
+
+      $("#customizationForm button").on('click', function(e) {
+        e.preventDefault()
+        current_theme.system_theme_variables_attributes = current_theme.system_theme_variables
+        let jwt = $.cookie('_unite_session_jwt')
+        $.ajax({
+          url: location.origin + '/api/v1/user/system_themes/' + current_theme.id,
+          type: 'PUT',
+          data: { theme: current_theme },
+          dataType: 'json',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Bearer " + jwt);
+          },
+          success: (function() {
+            $.showFlashMessage('Saved.', {type: 'success', timeout: 3000})
+          }),
+          error: function(data, error) {
+          }
+        });
+      })
+
+      $("#enable-theme").on('click', function(e) {
+        e.preventDefault()
+        let jwt = $.cookie('_unite_session_jwt')
+        current_theme.is_default = true
+        $.ajax({
+          url: location.origin + '/api/v1/user/system_themes/' + current_theme.id,
+          type: 'PUT',
+          data: { theme: current_theme },
+          dataType: 'json',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Bearer " + jwt);
+          },
+          success: (function() {
+            $.showFlashMessage('Default theme changed', {type: 'success', timeout: 300000})
+          }),
+          error: function(data, error) {
+          }
+        });
+      })
+
+      $("#theme-select").on('change', function(e) {
+        current_theme = list_of_themes.find(theme => theme.id == e.target.value)
+        $("#customizationForm .form-list").html("")
+        generateAccordeons();
+        generateFields();
+      })

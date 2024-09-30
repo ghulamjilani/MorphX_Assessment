@@ -1,0 +1,11 @@
+<p>
+  You have been removed from <a href="<%= @company.absolute_path %>"><%= @company.name %></a>.
+</p>
+
+<p>
+  If you feel there is a mistake please contact the company members directly.
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@company.name) %>
+</p>

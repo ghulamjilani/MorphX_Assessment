@@ -1,0 +1,10 @@
+[Unit]
+Description=config-3 server of the cluster
+Requires=mongodb.service
+
+[Service]
+ExecStart=/opt/bitnami/mongodb/bin/config-3.sh
+Type=forking
+PIDFile=/opt/bitnami/mongodb/tmp/mongodb-config-3.pid
+LimitNOFILE=64000
+LimitNPROC=64000

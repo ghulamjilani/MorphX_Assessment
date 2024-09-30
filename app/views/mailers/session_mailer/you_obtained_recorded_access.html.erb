@@ -1,0 +1,34 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name) %>
+</p>
+
+<p>
+  Thank you for purchasing <a class="notificationLinkText" href="<%= @session.absolute_path(UTM.build_params({utm_content: @user.utm_content_value})) %>"><%= @session.records&.first&.title %>"</a>.
+</p>
+
+<% if @payment_transaction.present? %>
+<pre>
+-- Transaction Information --
+Merchant:           <%= merchant_name %>
+Amount:             <%= number_to_currency(@payment_transaction.amount / 100.0) %>
+<% if @payment_transaction.tax_cents > 0 %>
+Tax:                <%= number_to_currency(@payment_transaction.tax_cents / 100.0) %>
+Total:              <%= number_to_currency((@payment_transaction.amount + @payment_transaction.tax_cents) / 100.0) %>
+<% end %>
+Transaction Date:   <%= Time.zone.now.in_time_zone(@user.timezone).strftime('%d %b %I:%M %p %Z') %>
+Payment method:     <%= @payment_transaction.provider %>
+Payment ID:         <%= @payment_transaction.pid %>
+<% if @payment_transaction.authorization_code %>
+Authorization Code: <%= @payment_transaction.authorization_code %>
+<% end %>
+Status:             <%= @payment_transaction.status.humanize.titleize %>
+
+<% if @payment_transaction.credit_card? %>
+--Payment Information--
+Card Type:          <%= @payment_transaction.card_type %>
+Credit Card Number: <%= '*'*12 + @payment_transaction.credit_card_last_4.to_s %>
+<%# else %>
+  <%# raise ArgumentError, @payment_transaction.inspect %>
+<% end %>
+</pre>
+<% end %>

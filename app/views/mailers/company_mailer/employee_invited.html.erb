@@ -1,0 +1,11 @@
+<p>
+  You have been invited to join the <%= @company.name %> company.
+</p>
+
+<p>
+  To view the company, click <a href="<%= @follow_link_url %>">this link</a>.
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format email_team_thank_you(@company.name) %>
+</p>

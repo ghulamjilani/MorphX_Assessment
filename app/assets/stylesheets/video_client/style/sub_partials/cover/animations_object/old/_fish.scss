@@ -1,0 +1,285 @@
+//body:not(.showVideo) {
+//  $StartDurationForFish: 80s;
+//  [class^="fish"], [class*=" fish"] {
+//    position: absolute;
+//
+//    -webkit-animation-duration: $StartDurationForFish;
+//    -webkit-animation-iteration-count: infinite;
+//    -webkit-animation-direction: ease-in;
+//    -webkit-animation-fill-mode: forwards;
+//
+//    -ms-animation-duration: $StartDurationForFish;
+//    -ms-animation-iteration-count: infinite;
+//    -ms-animation-direction: ease-in;
+//    -ms-animation-fill-mode: forwards;
+//
+//    animation-duration: $StartDurationForFish;
+//    animation-iteration-count: infinite;
+//    animation-direction: ease-in;
+//    animation-fill-mode: forwards;
+//
+//    -webkit-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//    -ms-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//    transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//    transform-style: preserve-3d;
+//
+//    &:after {
+//      content: '';
+//      width: 100%;
+//      height: 100%;
+//      display: block;
+//      background-repeat: no-repeat;
+//      background-position: top left;
+//      background-size: contain;
+//      transform-style: preserve-3d;
+//
+//      -webkit-animation-name: fish-animation-l-flip;
+//      -ms-animation-name: fish-animation-l-flip;
+//      animation-name: fish-animation-l-flip;
+//
+//      -webkit-animation-iteration-count: infinite;
+//      -webkit-animation-direction: ease-in;
+//      -webkit-animation-fill-mode: backwards;
+//
+//      -ms-animation-iteration-count: infinite;
+//      -ms-animation-direction: ease-in;
+//      -ms-animation-fill-mode: backwards;
+//
+//      animation-iteration-count: infinite;
+//      animation-direction: ease-in;
+//      animation-fill-mode: backwards;
+//    }
+//  }
+//
+//  .fish1-l {
+//    width: 4.6rem;
+//    height: 3.6rem;
+//    top: 42.2rem;
+//    right: 12rem;
+//    opacity: 0.5;
+//    -webkit-animation-duration: $StartDurationForFish;
+//    -ms-animation-duration: $StartDurationForFish;
+//    animation-duration: $StartDurationForFish;
+//    -webkit-animation-name: fish-animation-l;
+//    -ms-animation-name: fish-animation-l;
+//    animation-name: fish-animation-l;
+//    &:after {
+//      background-image: url(asset_path("video_client/fish1-l.png"));
+//      -webkit-animation-duration: $StartDurationForFish;
+//      -ms-animation-duration: $StartDurationForFish;
+//      animation-duration: $StartDurationForFish;
+//    }
+//  }
+//  .fish2-l {
+//    width: 2.2rem;
+//    height: 1.7rem;
+//    top: 58.2rem;
+//    right: 4rem;
+//    opacity: 0.9;
+//    -webkit-animation-duration: $StartDurationForFish * 0.5;
+//    -ms-animation-duration: $StartDurationForFish * 0.5;
+//    animation-duration: $StartDurationForFish * 0.5;
+//    -webkit-animation-name: fish-animation-l;
+//    -ms-animation-name: fish-animation-l;
+//    animation-name: fish-animation-l;
+//    &:after {
+//      background-image: url(asset_path("video_client/fish2-l.png"));
+//      -webkit-animation-duration: $StartDurationForFish * 0.5;
+//      -ms-animation-duration: $StartDurationForFish * 0.5;
+//      animation-duration: $StartDurationForFish * 0.5;
+//    }
+//
+//  }
+//  .fish1-r {
+//    width: 2.8rem;
+//    height: 2rem;
+//    top: 50rem;
+//    left: 23rem;
+//    -webkit-animation-name: fish-animation-r;
+//    -ms-animation-name: fish-animation-r;
+//    animation-name: fish-animation-r;
+//    -webkit-animation-duration: $StartDurationForFish * 0.6;
+//    -ms-animation-duration: $StartDurationForFish * 0.6;
+//    animation-duration: $StartDurationForFish * 0.6;
+//    &:after {
+//      background-image: url(asset_path("video_client/fish1-r.png"));
+//      -webkit-animation-duration: $StartDurationForFish * 0.6;
+//      -ms-animation-duration: $StartDurationForFish * 0.6;
+//      animation-duration: $StartDurationForFish * 0.6;
+//    }
+//  }
+//  .fish2-r {
+//    width: 2.4rem;
+//    height: 1.8rem;
+//    top: 68rem;
+//    left: 1rem;
+//    -webkit-animation-name: fish-animation-r;
+//    -ms-animation-name: fish-animation-r;
+//    animation-name: fish-animation-r;
+//    -webkit-animation-delay: 3s;
+//    -ms-animation-delay: 3s;
+//    animation-delay: 3s;
+//    -webkit-animation-duration: $StartDurationForFish * 0.3;
+//    -ms-animation-duration: $StartDurationForFish * 0.3;
+//    animation-duration: $StartDurationForFish * 0.3;
+//    &:after {
+//      background-image: url(asset_path("video_client/fish2-r.png"));
+//      -webkit-animation-delay: 3s;
+//      -ms-animation-delay: 3s;
+//      animation-delay: 3s;
+//      -webkit-animation-duration: $StartDurationForFish * 0.3;
+//      -ms-animation-duration: $StartDurationForFish * 0.3;
+//      animation-duration: $StartDurationForFish * 0.3;
+//    }
+//  }
+//
+//  $animationInit-y: 0.2rem;
+//  $animationInit-x: 6rem;
+//  $animationInit-rotate: 6deg;
+//  $animationInit-scale: 0.9;
+//  $animationInit-scaleCof: 0.05;
+//  $animationInit-opacity: 1;
+//  @include keyframes(fish-animation-l) {
+//    0% {
+//      -webkit-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      -ms-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//
+//    }
+//    10% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2 * -1) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2 * -1) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2 * -1) translateY($animationInit-y *-1);
+//    }
+//    20% {
+//      -webkit-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -1) translateY($animationInit-y);
+//      -ms-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -1) translateY($animationInit-y);
+//      transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -1) translateY($animationInit-y);
+//    }
+//    30% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -2) translateY($animationInit-y *-1);
+//      -o-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -2) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -2) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -2) translateY($animationInit-y *-1);
+//    }
+//    40% {
+//      -webkit-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -2.5) translateY($animationInit-y);
+//      -ms-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -2.5) translateY($animationInit-y);
+//      transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -2.5) translateY($animationInit-y);
+//    }
+//    50% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -4) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -4) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -4) translateY($animationInit-y *-1);
+//    }
+//    60% {
+//      -webkit-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -2.5) translateY($animationInit-y);
+//      -ms-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -2.5) translateY($animationInit-y);
+//      transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -2.5) translateY($animationInit-y);
+//    }
+//    70% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -2) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -2) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -2) translateY($animationInit-y *-1);
+//    }
+//    80% {
+//      -webkit-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -1) translateY($animationInit-y);
+//      -ms-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -1) translateY($animationInit-y);
+//      transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x * -1) translateY($animationInit-y);
+//    }
+//    90% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2 * -1) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2 * -1) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2 * -1) translateY($animationInit-y *-1);
+//    }
+//    99% {
+//      -moz-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      -webkit-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      -o-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      -ms-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      opacity: $animationInit-opacity *0.4;
+//    }
+//
+//  }
+//  @include keyframes(fish-animation-r) {
+//    0% {
+//      -webkit-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      -ms-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//
+//    }
+//    10% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2) translateY($animationInit-y *-1);
+//    }
+//    20% {
+//      -webkit-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *1) translateY($animationInit-y);
+//      -ms-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *1) translateY($animationInit-y);
+//      transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *1) translateY($animationInit-y);
+//    }
+//    30% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x *2) translateY($animationInit-y *-1);
+//      -o-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x * -2) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x *2) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x *2) translateY($animationInit-y *-1);
+//    }
+//    40% {
+//      -webkit-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *2.5) translateY($animationInit-y);
+//      -ms-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *2.5) translateY($animationInit-y);
+//      transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *2.5) translateY($animationInit-y);
+//    }
+//    50% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x *4) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x *4) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x *4) translateY($animationInit-y *-1);
+//    }
+//    60% {
+//      -webkit-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *2.5) translateY($animationInit-y);
+//      -ms-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *2.5) translateY($animationInit-y);
+//      transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *2.5) translateY($animationInit-y);
+//    }
+//    70% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x*2) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x *2) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x *2) translateY($animationInit-y *-1);
+//    }
+//    80% {
+//      -webkit-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *1) translateY($animationInit-y);
+//      -ms-transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *1) translateY($animationInit-y);
+//      transform: scale($animationInit-scale + $animationInit-scaleCof) rotate($animationInit-rotate * -1) translateX($animationInit-x *1) translateY($animationInit-y);
+//    }
+//    90% {
+//      -webkit-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2) translateY($animationInit-y *-1);
+//      -ms-transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2) translateY($animationInit-y *-1);
+//      transform: scale($animationInit-scale - $animationInit-scaleCof) rotate($animationInit-rotate) translateX($animationInit-x / 2) translateY($animationInit-y *-1);
+//    }
+//    99% {
+//      -moz-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      -webkit-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      -o-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      -ms-transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      transform: scale(1) rotate(0deg) translateX(0rem) translateY(0rem);
+//      opacity: $animationInit-opacity *0.4;
+//    }
+//
+//  }
+//  @include keyframes(fish-animation-l-flip) {
+//    0% {
+//      transform: scale(1, 1)
+//    }
+//    49% {
+//      transform: scale(1, 1)
+//    }
+//    50% {
+//      transform: scale(-1, 1)
+//    }
+//    99% {
+//      transform: scale(-1, 1)
+//    }
+//    100% {
+//      transform: scale(1, 1)
+//    }
+//  }
+//}

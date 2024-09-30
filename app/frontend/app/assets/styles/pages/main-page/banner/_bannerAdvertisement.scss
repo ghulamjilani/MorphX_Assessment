@@ -1,0 +1,146 @@
+.bannerAdvertisement {
+  position: relative;
+  padding: 3rem;
+
+  // @include flex(flex, center, center);
+  // flex-direction: column;
+
+  &__title {
+    font-size: 2.2rem;
+    color: var(--tp__main);
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &__full {
+    width: 128rem;
+    margin: 0 auto;
+    .bannerAdvertisement__ads {
+      width: 100%;
+    }
+    .bannerAdvertisement__horScroll {
+      display: none;
+    }
+    @include media(desktop) {
+      width: 100%;
+    }
+  }
+  &__large, &__medium, &__custom {
+    width: 100%;
+    .bannerAdvertisement__horScroll {
+      display: none;
+      @include media(desktop) {
+        @include flex(flex, center, center);
+      }
+    }
+
+    .bannerAdvertisement__ads {
+      width: 100%;
+      display: none;
+
+      @include media(reverso-desktop) {
+        @include flex(flex, center, center);
+      }
+    }
+  }
+
+  &__ad {
+    display: block;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &__full {
+      width: 100%;
+      height: 20rem;
+    }
+    &__large {
+      width: calc(33% - 1rem);
+      height: 30rem;
+      margin-right: 1rem;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    &__medium {
+      width: calc(20% - 1rem);
+      height: 20rem;
+      margin-right: 1rem;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    &__custom {
+      margin-right: 1rem;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.01);
+      transition: 0.3s all;
+    }
+  }
+
+  .dontHide {
+    .bannerAdvertisement__ad {
+      background-color: rgba(0,0,0,0.4);
+      min-height: 10rem;
+      @include flex(flex, center, center);
+    }
+  }
+
+  .vhl-item {
+    .bannerAdvertisement__ad {
+      width: 100%;
+    }
+    .bannerAdvertisement__ad__custom {
+      width: 100% !important;
+    }
+  }
+}
+
+.adbutler {
+  .bannerAdvertisement__ad {
+
+    &__full {
+      width: 100%;
+      height: fit-content;
+    }
+    &__large {
+      width: fit-content;
+      height: fit-content;
+    }
+    &__medium {
+      width: fit-content;
+      height: fit-content;
+    }
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+  a {
+    width: 100%;
+    display: inline-block;
+    // margin: 1rem 0;
+  }
+  a img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .vhl-item {
+    display: flex;
+    align-items: center;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .vhl-item:has(> .hidden) {
+    width: 0 !important;
+  }
+}

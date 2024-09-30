@@ -1,0 +1,17 @@
+<div class="text-center">
+  <a class="role" style="text-transform: capitalize;">{{role}}</a>
+  {{#ifCond role "!=" "owner"}}
+    <a class="remove_user_item pull-right">x</a>
+  {{/ifCond}}
+</div>
+
+<div class="User-listImage others" style='background-image: url("{{logo}}")'>
+</div>
+
+<span class="text-center full-width display-block">
+  {{#if full_name}}
+    {{full_name}}
+  {{else}}
+    {{email}}
+  {{/if}}
+</span>

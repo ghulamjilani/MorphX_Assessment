@@ -1,0 +1,580 @@
+.bookUser {
+  padding: 0 6rem 2rem 6rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  @include media(tablet) {
+    padding: 0 3vw 6rem 3vw;
+  }
+  &__title {
+    border-top: 1px solid var(--border__separator);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 0;
+    color: var(--tp__main);
+    font-size: 1.6rem;
+    font-weight: bold;
+    @include media(tablet) {
+      display: none;
+    }
+  }
+
+  &__slots {
+    padding: 2rem 0rem;
+    &__list{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      .bookUser__slots__list__item{
+        width: 100%;
+        //show full description if slot selected
+        &:not(.selected) {
+          .bookingSlotDescription{
+            @include text__ellipsis(2)
+          }
+          .bookingSlotTags{
+            @include text__ellipsis(1)
+          }
+        }
+      }
+      @include media(reverso-tablet) {
+        .bookUser__slots__list__item{
+          width: calc(33.33% - .7rem);
+          &:nth-child(1):nth-last-child(2),
+          &:nth-child(1):nth-last-child(2) ~ .bookUser__slots__list__item {
+            width: calc(50% - .5rem);
+          }
+          &:nth-child(1):last-child,
+          &:nth-child(1):last-child ~ .bookUser__slots__list__item {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &__slot {
+    padding: 2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    min-height: 100%;
+    border: 1px solid var(--border__content__sections);
+
+    &:hover {
+      background-color: var(--bg__hover);
+    }
+
+    &.selected {
+      background-color: var(--bg__content__secondary);
+      border: 1px solid var(--border__form__active);
+    }
+
+    &__info {
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 2rem;
+      color: var(--tp__main);
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 130%;
+      & > div:not(&__tags){
+        display: flex;
+        flex-direction: column;
+      }
+      &__description{
+        min-height: 6rem;
+      }
+      &__tags{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .chips{
+          display: inline-block;
+        }
+      }
+      span{
+        color: var(--tp__secondary);
+        font-size: 1.2rem;
+        line-height: 150%;
+        width: 100%;
+      }
+    }
+  }
+
+  &__duration {
+    &__select {
+      padding-top: 2rem;
+      &__title{
+        font-size: 1.6rem;
+        font-weight: bold;
+        line-height: 130%;
+        color: var(--tp__main);
+        margin-bottom: 1rem;
+      }
+      &__wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      &__item{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        position: relative;
+        justify-content: space-around;
+        align-items: stretch;
+        width: calc(33.33% - .7rem);
+        cursor: pointer;
+        border: 1px solid var(--border__content__sections);
+        padding: 2rem;
+        border-radius: 1rem;
+        cursor: pointer;
+        min-height: 100%;
+        color: var(--tp__main);
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 130%;
+        @include media(tablet){
+          width: calc(50% - .5rem);
+        }
+        span{
+            color: var(--tp__secondary);
+            font-size: 1.2rem;
+            line-height: 150%;
+            width: 100%;
+        }
+        &.active, &:hover{
+          border: 1px solid var(--border__form__active);
+          background-color: var(--bg__content__secondary);
+        }
+        i{
+          position: absolute;
+          top:1rem;
+          right: 1rem;
+          color: var(--tp__active);
+        }
+      }
+    }
+  }
+
+  &__miniCalendar {
+    display: flex;
+    justify-content: center;
+    &__wrapper{
+      padding-top: 5rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border__separator);
+    }
+    &__title{
+      font-size: 1.6rem;
+      font-weight: bold;
+      line-height: 130%;
+      color: var(--tp__main);
+      margin-bottom: 1rem;
+    }
+  }
+  &__comment{
+    border: 1px solid var(--border__content__sections);
+    background: var(--bg__content__secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+  &__btn{
+    padding-top: 2rem;
+    button{
+      max-width: none;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  &__successMessage {
+    font-size: 1.6rem;
+    a {
+      text-decoration: underline;
+    }
+    &__button {
+      margin-top: 2rem;
+    }
+  }
+
+  .scrollOffset {
+    scroll-margin-top: 5rem;
+  }
+}
+
+.ownerModal .bookUser {
+  .scrollOffset {
+    scroll-margin-top: 20rem;
+  }
+}
+
+.miniCalendar {
+  width: 55rem;
+  padding: 2rem;
+  @include media(tablet) {
+    width: 100%;
+    padding: 0;
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    .btn {
+      width: 3rem;
+      min-width: 3rem;
+      height: 3rem;
+      padding: 0;
+      .btn__slot {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  &__days {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    cursor: pointer;
+    padding: 0 0.5rem 1rem 0.5rem;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: var(--bg__content__secondary);
+    }
+
+    &.active {
+      background-color: var(--bg__secondary);
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &__topLine {
+      width: 100%;
+      height: 0.5rem;
+      background-color: var(--bg__secondary);
+      margin-bottom: 1rem;
+
+      &.active {
+        background-color: #095f73;
+      }
+    }
+  }
+
+  &__times {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-top: 2rem;
+
+    &__empty {
+      width: 100%;
+      height: 15rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+  }
+
+  &__time {
+    margin: 1rem;
+    width: calc(25% - 2rem);
+    min-width: 2rem;
+    position: relative;
+    padding: 0;
+    &.active{
+      &.btn {
+        background: var(--btn__bordered);
+        color: var(--tp__btn__bordered__hover);
+      }
+    }
+    .multiplier {
+      background: var(--bg__secondary);
+      position: absolute;
+      top: -0.7rem;
+      right: -0.5rem;
+      padding: 0.2rem;
+      border-radius: 0.3rem;
+      line-height: 1rem;
+      font-size: 1rem;
+      color: var(--tp__active);
+      border: 1px solid var(--tp__active);
+      @include media(phone){
+        top: -1rem;
+      }
+    }
+  }
+}
+
+.BookingPayment {
+  .MK2-modal__dialog {
+    padding: 2rem 0;
+    max-width: 74rem;
+    min-width: 74rem;
+    @include media(p-tablet) {
+      padding: 2rem;
+      max-width: 94%;
+      min-width: 0;
+      width: 76rem;
+    }
+    @include media(p-phone) {
+      padding: 1rem;
+      max-width: 94%;
+    }
+  }
+
+  .MK2-modal__body {
+    width: 100%;
+    padding: 0;
+  }
+
+  &__wrapper {
+    display: flex;
+    @include media(phone) {
+      display: block;
+    }
+  }
+
+  &__leftPart {
+    @include media(reverso-p-tablet) {
+      padding: 0 1rem 0 2rem;
+    }
+  }
+
+  &__leftPart, &__rightPart {
+    @include media(reverso-phone) {
+      width: 50%;
+    }
+    @include media(phone) {
+      width: 100%;
+    }
+  }
+
+  &__top {
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+    box-shadow: 0 0.4rem 0.7rem 0 var(--sh__main);
+    border-radius: 1rem;
+    background: var(--bg__content);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+
+    &__planName {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    &__info {
+      font-size: 1.4rem;
+      width: 100%;
+      &__label{
+        color: var(--tp__h1);
+        font-weight: bold;
+        padding: 2rem 0;
+        span{
+          color: var(--tp__h2);
+          padding: 1rem 0;
+        }
+      }
+      &__top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border__separator);
+
+        .line {
+          margin-bottom: 2rem;
+          width: 100%;
+          border-bottom: 1px solid var(--border__content__sections);
+        }
+      }
+
+      &__item {
+        display: flex;
+        align-items: baseline;
+        // min-width: 15.5rem;
+        width: 100%;
+        padding: 0 1rem;
+        text-align: left;
+        padding-bottom: 1.3rem;
+        width: 50%;
+        padding-left: 3rem;
+
+        i {
+          color: var(--tp__active);
+          padding-right: 1rem;
+          font-size: 1.8rem;
+        }
+
+        span {
+          font-size: 1.4rem;
+          line-height: 1.4rem;
+          font-weight: bold;
+          padding-right: 0;
+          color: var(--tp__main);
+        }
+
+        &.disabled {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  &__rightPart {
+    padding: 0 2rem 0 1rem;
+
+    .wrapper.CardNameInput {
+      padding-top: 2rem;
+    }
+
+    &__flexInputs {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+
+      > div {
+        width: 50%;
+      }
+
+      > *:not(:last-child) {
+        margin-right: 2rem;
+      }
+    }
+
+    &__label {
+      color: var(--tp__h1);
+      margin-bottom: 1rem;
+    }
+
+    &__table {
+      border-radius: 1rem;
+      background: rgba(9, 95, 115, 0.05);
+      border: 1px solid rgba(9, 95, 115, 0.2);
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      span {
+        color: var(--tp__inputs);
+      }
+
+      &__bottom {
+        font-size: 1.6rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border__separator);
+      }
+    }
+
+    &__table b, &__bottom b {
+      color: var(--tp__secondary);
+    }
+  }
+
+  &__disabledButton {
+    padding: 1.5rem 0;
+    min-width: 8rem;
+    text-align: center;
+    max-width: 8rem;
+    background: var(--bg__label);
+    color: #fff; /*as was in monolith*/
+    margin: 3rem 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    border-radius: 0.5rem;
+  }
+
+  #stripe-card-element {
+    min-height: 20px;
+  }
+
+  &__gift-error {
+    color: var(--tp__inputs__validation);
+  }
+}
+
+.subsPlansModal {
+  &__Title {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    font-weight: bold;
+    color: var(--tp__h1);
+  }
+  &__savedCard {
+    margin-bottom: 3rem;
+  }
+}
+
+.bookingLabel{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 1px solid var(--bg__main);
+  background: var(--btn__main);
+  color: var(--tp__btn__main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  &__l{
+    width: 3.8rem;
+    height: 3.8rem;
+    font-size: 1.9rem;
+  }
+  &__xxl{
+    width: 4.1rem;
+    height: 4.1rem;
+    font-size: 2.2rem;
+  }
+  &__m{
+    width: 3.2rem;
+    height: 3.2rem;
+    font-size: 1.6rem;
+  }
+  &__s{
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.3rem;
+  }
+  &__wrapper{
+    position: relative;
+    overflow: visible;
+  }
+}

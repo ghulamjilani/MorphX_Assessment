@@ -1,0 +1,17 @@
+<% object.differences.try(:each) do |key, value|%>
+  <table class="logs_differences">
+    <thead>
+      <tr>
+        <th><%=key%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="old"><%=value[0]%></td>
+      </tr>
+      <tr>
+        <td class="new"><%=value[1]%></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

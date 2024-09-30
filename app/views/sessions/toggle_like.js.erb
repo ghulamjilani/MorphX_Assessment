@@ -1,0 +1,6 @@
+<% if current_user.voted_as_when_voted_for(@session) %>
+    $('.session-like-<%= @session.id %>').addClass("selected").addClass("active");
+<% else %>
+    $('.session-like-<%= @session.id %>').removeClass("selected").removeClass("active");
+<% end %>
+$(".session-like-<%= @session.id %> .likes_count, .likes-counter-session-<%= @session.id %>").text("<%= @session.likes_count.zero? ? '' : @session.likes_count %>");

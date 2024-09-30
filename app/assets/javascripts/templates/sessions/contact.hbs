@@ -1,0 +1,12 @@
+<div class="item">
+    {{#unless is_current_user}}
+        {{#if toggle_url}}
+            <a href="{{toggle_url}}" data-method="POST" data-remote="true" style="visibility: visible;"
+               class="addContactBtn btn btn-m {{#if added}}added btn-borderred-red{{/if}} pull-right margin-top-5">
+                {{#if added}}Remove from{{else}}Add to{{/if}} Contacts
+            </a>
+        {{/if}}
+    {{/unless}}
+    <a href="{{user_url}}" target="_blank" class="avatarImg-SD inlile-block vertical-midle" style="background-image: url('{{picture}}')"></a>
+    <a href="{{user_url}}" target="_blank" class="userName inlile-block vertical-midle">{{name}}</a>
+</div>

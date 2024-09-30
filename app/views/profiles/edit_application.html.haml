@@ -1,0 +1,248 @@
+- content_for(:page_title, I18n.t("views.profiles.edit_application.page_title"))
+.row#profilePage
+  = render 'profiles/nav'
+  .col-md-9.account-edit-page-content.main-section-form.technicalPage
+
+    = semantic_form_for(@user, as:  :profile, url: update_application_profile_path, method: :put) do |f|
+      .technicalPage__label=I18n.t("views.profiles.edit_application.page_title")
+      .sectionsWrapper
+        - if can? :change_password, current_user
+          .passwordArea
+            .bg__secondary.padding-top-20.padding-right-20.padding-bottom-20.padding-left-20.margin-bottom-50.border-radius-3
+              .bold= I18n.t("views.profiles.edit_application.change_email")
+              .row.padding-top-20
+                .col-md-12.col-sm-12
+                  = f.input :email, required: true, label:false
+                %div.col-sm-3{style: "display: none;"}
+                  private&nbsp
+                  %input.bs-switch{type: "checkbox"}
+              - if f.object.unconfirmed_email.present?
+                .row
+                  .col-md-12.col-sm-12
+
+                    -# = f.input :unconfirmed_email, wrapper_html: {class: 'custom-input'}, input_html: { disabled: "disabled" }
+                    %span.fs-14
+                      = I18n.t("views.profiles.edit_application.to_change_your_email_address_please_confirm_your_email")
+                    %span.fs-14
+                      = I18n.t("views.profiles.edit_application.new_email")
+                      %span.text-color-red.fs-16.bold
+                        = @user.unconfirmed_email
+              .row{style: "display: none;"}
+                .col-md-12.col-sm-12
+                  = f.semantic_fields_for :user_account do |user_account_form|
+                    = user_account_form.input :contact_email, label: I18n.t("views.profiles.edit_application.fields.contact_email")
+
+            .editPasswordArea
+              .bg__secondary.padding-top-20.padding-right-20.padding-bottom-20.padding-left-20.border-radius-3
+                .bold= I18n.t("views.profiles.edit_application.change_password")
+                .row.new-password.padding-top-20
+                  .col-md-12.col-sm-12
+                    .borderedInput.signUpPass.required
+                      = f.input :password,
+                                as: :password,
+                                label: false,
+                                input_html: {id: 'profile_current_password', name: 'profile[current_password]', placeholder: I18n.t("views.profiles.edit_application.fields.current_password"), class: 'form-control inputUp passInput', autocomplete: 'new-password'},
+                                wrapper_html: false
+                      .new-pass-controllers
+                        - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+                          .eye.showEditCurrentMacPassword
+                          .caps.showEditCurrentMacCaps
+                        - else
+                          .eye.showEditCurrentPassword
+                          .caps.showEditCurrentCaps
+                      .errorContainerWrapp
+
+                    .borderedInput.signUpPass.required
+                      = f.input :password,
+                                as: :password,
+                                label: false,
+                                input_html: {id: 'profile_password', name: 'profile[password]', placeholder: I18n.t("views.profiles.edit_application.fields.new_password"), class: 'form-control inputUp passInput strength-password profile_password', autocomplete: 'new-password'},
+                                wrapper_html: false
+                      .password-Strength-2-tooltip
+                        = I18n.t("views.profiles.edit_application.strong_password").html_safe
+                      - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+                        .new-pass-controllers
+                          .eye.showEditMacPassword
+                          .caps.showEditMacCaps
+                        .passStrength-2-Wrap
+                          .passStrength-2-indicator
+                            %div.indicator-item
+                            %div.indicator-item
+                            %div.indicator-item
+                          .passStrength-2-Message= I18n.t("views.profiles.edit_application.weak_password")
+                      - else
+                        .new-pass-controllers
+                          .eye.showEditPassword
+                          .caps.showEditCaps
+                        .passStrength-2-Wrap
+                          .passStrength-2-indicator
+                            %div.indicator-item
+                            %div.indicator-item
+                            %div.indicator-item
+                          .passStrength-2-Message= I18n.t("views.profiles.edit_application.weak_password")
+
+                    .borderedInput.signUpPass.required
+                      = f.input :password,
+                                as: :password,
+                                label: false,
+                                input_html: {id: 'profile_password_confirmation', name: 'profile[password_confirmation]', placeholder: I18n.t("views.profiles.edit_application.fields.confirm_new_password"), class: 'form-control inputUp passInput profile_current_password', autocomplete: 'new-password'},
+                                wrapper_html: false
+                      .new-pass-controllers
+                        - if request.env['HTTP_USER_AGENT'].to_s.downcase.match(/mac/i)
+                          .eye.showEditConfirmMacPassword
+                          .caps.showEditConfirmMacCaps
+                        - else
+                          .eye.showEditConfirmPassword
+                          .caps.showEditConfirmCaps
+                      .errorContainerWrapp
+
+              .margin-top-20.text-right.margin-bottom-20
+                = link_to 'Cancel', edit_application_profile_path, class: 'btn btn-m btn-grey-solid'
+                = f.action :submit, label: I18n.t("views.profiles.edit_application.save_changes"), as:  :button, button_html: { class: 'btn btn-m margin-left-10', data: {disable_with: I18n.t("views.profiles.edit_application.please_wait")}}
+
+      - if omniauth_enabled?
+        .sectionsWrapper
+          .technicalPage__label.margin-top-60= I18n.t("views.profiles.edit_application.title")
+          - if facebook_omniauth_enabled?
+            .p1_5.feed_item
+              .col-md-12.AccountSection
+                .e_col.w1_5.connected_service_name.display-flex
+                  %img{src: asset_path('FaceBookLogo.png')}
+                  %div
+                    %span.bold= I18n.t("views.profiles.edit_application.facebook")
+                    - if @user.facebook_identity.present?
+                      %span.display-block.fs-14.connected-status= I18n.t("views.profiles.edit_application.connected")
+                    - else
+                      %span.display-block.fs-14.connected-status= I18n.t("views.profiles.edit_application.not_connected")
+                .e_col.w3
+                  .connected_account_info
+                    - if @user.facebook_identity.present?
+                      = link_to disconnect_social_account_path(provider: :facebook), method: :post, class: 'btn btn-m btn-borderred-light margin-right-10' do
+                        %span= I18n.t("views.profiles.edit_application.disconnect")
+                      .linked
+                        %span.linkedOnUnite= I18n.t("views.profiles.edit_application.linked_on_profile", service_name: Rails.application.credentials.global[:service_name])
+                        %strong
+                          %a Yes
+                    - else
+                      = link_to user_facebook_omniauth_authorize_path, method: :post, class: 'btn btn-m btn-borderred-light' do
+                        %span= I18n.t("views.profiles.edit_application.connect")
+          .clearfix
+          - if false
+            .p1_5.feed_item
+              .col-md-12
+                .e_col.w1_5.connected_service_name
+                  %i.VideoClientIcon-linkedinF
+                  = I18n.t("views.profiles.edit_application.linkedin")
+                .e_col.w3
+                  .connected_account_info
+                    - if @user.linkedin_identity.present?
+                      = link_to disconnect_social_account_path(provider: :linkedin), method: :post, class: 'btn btn-s margin-right-10' do
+                        %span= I18n.t("views.profiles.edit_application.disconnect")
+                      .linked
+                        %span.linkedOnUnite= I18n.t("views.profiles.edit_application.linked_on_profile", service_name: Rails.application.credentials.global[:service_name])
+                        %strong
+                          %a.ensure-link-style= I18n.t("views.profiles.edit_application.confirm")
+                    - else
+                      = link_to user_linkedin_omniauth_authorize_path, method: :post, class: 'btn btn-s btn-borderred-grey' do
+                        %span= I18n.t("views.profiles.edit_application.connect")
+          .clearfix
+
+          - if false
+            .p1_5.feed_item
+              .col-md-12
+                .e_col.w1_5.connected_service_name
+                  %i.VideoClientIcon-twitter2
+                  = I18n.t("views.profiles.edit_application.twitter")
+                .e_col.w3
+                  .connected_account_info
+                    - if @user.twitter_identity.present?
+                      = link_to disconnect_social_account_path(provider: :twitter), method: :post, class: 'btn btn-s margin-right-10' do
+                        %span= I18n.t("views.profiles.edit_application.disconnect")
+                      .linked
+                        %span.linkedOnUnite= I18n.t("views.profiles.edit_application.linked_on_profile", service_name: Rails.application.credentials.global[:service_name])
+                        %strong
+                          %a.ensure-link-style= I18n.t("views.profiles.edit_application.confirm")
+                    - else
+                      = link_to user_twitter_omniauth_authorize_path, method: :post, class: 'btn btn-s btn-borderred-grey' do
+                        %span= I18n.t("views.profiles.edit_application.connect")
+          .clearfix
+          - if gplus_omniauth_enabled?
+            .p1_5.feed_item
+              .col-md-12.AccountSection.no-border
+                .e_col.w1_5.connected_service_name.display-flex
+                  %img{src: asset_path('GoogleLogo.png')}
+                  %div
+                    %span.bold= I18n.t("views.profiles.edit_application.google")
+                    - if @user.gplus_identity.present?
+                      %span.display-block.fs-14.connected-status= I18n.t("views.profiles.edit_application.connected")
+                    - else
+                      %span.display-block.fs-14.connected-status= I18n.t("views.profiles.edit_application.not_connected")
+                .e_col.w3
+                  .connected_account_info
+                    - if @user.gplus_identity.present?
+                      = link_to disconnect_social_account_path(provider: :gplus), method: :post, class: 'btn btn-m btn-borderred-light margin-right-10' do
+                        %span= I18n.t("views.profiles.edit_application.disconnect")
+                      .linked
+                        %span.linkedOnUnite= I18n.t("views.profiles.edit_application.linked_on_profile", service_name: Rails.application.credentials.global[:service_name])
+                        %strong
+                          %a.ensure-link-style= I18n.t("views.profiles.edit_application.confirm")
+                    - else
+                      = link_to user_gplus_omniauth_authorize_path, method: :post, class: 'btn btn-m btn-borderred-light' do
+                        %span= I18n.t("views.profiles.edit_application.connect")
+          .clearfix
+          - if false
+            .p1_5.feed_item
+              .col-md-12
+                .e_col.w1_5.connected_service_name
+                  %i.VideoClientIcon-instagram
+                  = I18n.t("views.profiles.edit_application.instagram")
+                .e_col.w3
+                  .connected_account_info
+                    - if @user.instagram_identity.present?
+                      = link_to disconnect_social_account_path(provider: :instagram), method: :post, class: 'btn btn-s margin-right-10' do
+                        %span= I18n.t("views.profiles.edit_application.disconnect")
+                      .linked
+                        %span.linkedOnUnite= I18n.t("views.profiles.edit_application.linked_on_profile", service_name: Rails.application.credentials.global[:service_name])
+                        %strong
+                          %a.ensure-link-style= I18n.t("views.profiles.edit_application.confirm")
+                    - else
+                      = link_to user_instagram_omniauth_authorize_path, method: :post, class: 'btn btn-s btn-borderred-grey' do
+                        %span= I18n.t("views.profiles.edit_application.connect")
+
+      .sectionsWrapper
+        - if zoom_omniauth_enabled? && Rails.application.credentials.backend[:initialize][:zoom][:enabled]
+          .technicalPage__label.margin-top-40= I18n.t("views.profiles.edit_application.connected_apps")
+          .p1_5.feed_item
+            .col-md-12.AccountSection.no-border
+              .connected_service_name.display-flex
+                %img{src: asset_path('zoomApp.png')}
+                %div
+                  %span.bold= I18n.t("views.profiles.edit_application.zoom_video_communication")
+                  %span.display-block.fs-14= I18n.t("views.profiles.edit_application.note_zoom_is_supported_only_for")
+                  %span.display-block.fs-14
+                    = link_to I18n.t("views.profiles.edit_application.read_more"), zoom_docs_home_path, target: '_blank', class: 'bold'
+              .e_col.w3
+                .connected_account_info
+                  - if @user.zoom_identity.present?
+                    = link_to disconnect_social_account_path(provider: :zoom), method: :post, class: 'btn btn-m btn-borderred-light margin-right-10' do
+                      %span= I18n.t("views.profiles.edit_application.disconnect")
+                    .linked
+                      %span.linkedOnUnite= I18n.t("views.profiles.edit_application.linked_on_profile", service_name: Rails.application.credentials.global[:service_name])
+                      %strong
+                        %a.ensure-link-style= I18n.t("views.profiles.edit_application.confirm")
+                  - else
+                    = link_to user_zoom_omniauth_authorize_path, method: :post, class: 'btn btn-m btn-borderred-light' do
+                      %span= I18n.t("views.profiles.edit_application.connect")
+        -#.technicalPage__label= I18n.t("views.profiles.edit_application.integrations")
+      .clearfix
+      /
+        .margin-bottom-20
+        %h3.groupTitle Found us method
+        = f.semantic_fields_for :user_account do |user_account_form|
+          = user_account_form.input :found_us_method, as: :select, collection: FoundUsMethod.pluck(:description, :id), wrapper_html: {class: 'custom-input'}
+
+    %div
+      %p.margin-top-60.text-right
+        = I18n.t("views.profiles.edit_application.sorry_to_see_you_go_but_you_can")
+        = link_to I18n.t("views.profiles.edit_application.delete_account"), profile_path, data: {confirm: I18n.t("views.profiles.edit_application.are_you_sure_you_want_to_delete_your_account")}, method: :delete, class:'text-color-main'
+        = I18n.t("views.profiles.edit_application.at_any_time")

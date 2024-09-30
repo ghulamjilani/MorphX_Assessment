@@ -1,0 +1,34 @@
+- content_for(:page_title, 'Downloads')
+.row
+  = render 'profiles/nav'
+
+  -if ffmpegservice_account = current_user.ffmpegservice_account(current_service: 'rtmp', type: 'free', organization_id: current_user.organization.id)
+    .col-md-9
+      %h5
+        For use with professional video equipment or encoding software. (This is not for creating live videos from your computer's webcam or interactive group videos)
+      .link_Share_block
+        %label{} coreserver:
+        %input{type: :text,value: ffmpegservice_account.server, readonly: true, size: 70}
+        %a{href: '#', onclick: 'copyToClipboard(this); return false'} copy
+
+      .link_Share_block
+        %label{} fallbackserver:
+        %input{type: :text,value: ffmpegservice_account.port, readonly: true, size: 70}
+        %a{href: '#', onclick: 'copyToClipboard(this); return false'} copy
+
+      .link_Share_block
+        %label{} streamname:
+        %input{type: :text,value: ffmpegservice_account.stream_name, readonly: true, size: 70}
+        %a{href: '#', onclick: 'copyToClipboard(this); return false'} copy
+
+      .link_Share_block
+        %label{} username:
+        %input{type: :text,value: ffmpegservice_account.username, readonly: true, size: 70}
+        %a{href: '#', onclick: 'copyToClipboard(this); return false'} copy
+
+      .link_Share_block
+        %label{} password:
+        %input{type: :text,value: ffmpegservice_account.password, readonly: true, size: 70}
+        %a{href: '#', onclick: 'copyToClipboard(this); return false'} copy
+
+

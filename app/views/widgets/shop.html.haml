@@ -1,0 +1,30 @@
+!!!
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: 'en'}
+  / <![endif]
+  %head
+    %title
+      = page_title
+    = csrf_meta_tags
+    = action_cable_meta_tag
+
+    %meta{charset: 'utf-8'}/
+    %meta{content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name: 'viewport'}
+    %meta{content: '', name: 'description'}
+    %meta{content: '', name: 'author'}
+    = stylesheet_link_tag 'widgets/core'
+    = javascript_include_tag 'views/widgets/shop'
+    = favicon_link_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/favicon.png", rel: 'shortcut icon'
+
+  %body{class: body_class}
+    .ProductsList
+      .list-item{class: "", id:""}
+
+    - if current_theme_css
+      %style
+        :plain
+          :root {
+            #{raw current_theme_css}
+          }

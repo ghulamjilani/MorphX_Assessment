@@ -1,0 +1,5 @@
+<% if @object.valid? %>
+  jQuery("#RequestNewSessionForm, .RequestNewSessionOverlay").fadeOut();
+<% else %>
+  $.showFlashMessage("<%= @object.errors.full_messages.first %>", {type: 'error', timeout: 3000});
+<% end %>

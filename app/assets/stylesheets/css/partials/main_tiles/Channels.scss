@@ -1,0 +1,70 @@
+@import "mixin";
+
+.tile-cake.tile-cake-Channels{
+  padding-bottom: 41px;
+  position: relative;
+  @include media(phone){
+    padding-bottom: 0;
+  }
+  .tile_link{
+    background:rgba(0,0,0,0.3);
+  }
+  .tile-img{
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .tile-img .tile-imgContainer{
+    padding-top: 28%;
+  }
+  .tile-body{
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @include media(phone){
+      position: static;
+      white-space: normal;
+    }
+  }
+  .tile-body-text{
+    @include media(tablet){
+      padding: 0 15px;
+    }
+  }
+  .channelName{
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 22px;
+    padding: 0 10px;
+    z-index: 29;
+  }
+  .channelTile-presenterName{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    padding: 0 10px;
+    color: #fff;
+    width: max-content;
+    z-index: 199;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .btn.btn-borderred-red{
+    width: 100%;
+    margin-top: 10px;
+  }
+  .col-md-8{
+    max-width: calc(100% - 150px);
+  }
+  .col-md-4{
+    min-width: 150px;
+  }
+}

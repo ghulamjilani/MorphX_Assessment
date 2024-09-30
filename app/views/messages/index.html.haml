@@ -1,0 +1,11 @@
+.sectionBlock
+  - content_for(:page_title, 'Messages')
+  - content_for(:extra_body_classes, 'header-top')
+  %section#conversations.row
+    = render partial: 'messages'
+    .conversations.col-md-12
+      %section.clearfix
+        - if @conversations.length > 0
+          = render partial: 'conversation', collection: @conversations
+        - else 
+          %p There are no messages

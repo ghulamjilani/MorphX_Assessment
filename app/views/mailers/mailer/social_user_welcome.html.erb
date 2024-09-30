@@ -1,0 +1,16 @@
+<p class="greeting">
+  <%= I18n.t('mailer.user_greetings', user: @user.first_name || @user.public_display_name) %>
+</p>
+
+<p></p>
+<p><%= I18n.t('views.mailer.conf_insruct.social_user.welcome', link: (link_to Rails.application.credentials.global[:service_name], root_url)).html_safe %></p>
+
+<p>You can start interacting right now with the best of professional content!</p>
+
+<p>All you have to do is DISCOVER your favorite content and interact!</p>
+
+<p>If you have questions, please follow <%= link_to 'this link', page_url(ContentPages::HELP_CENTER.parameterize(separator: '-')) %> [Q&A] or contact us at <%= mail_to(Rails.application.credentials.global[:support_mail]) %>.</p>
+
+<p><%= I18n.t('views.mailer.conf_insruct.social_user.welcome', link: (link_to Rails.application.credentials.global[:service_name], root_url)) %></p>
+
+<p><%= I18n.t('views.mailer.conf_insruct.social_user.team', service_name: Rails.application.credentials.global[:service_name]) %></p>

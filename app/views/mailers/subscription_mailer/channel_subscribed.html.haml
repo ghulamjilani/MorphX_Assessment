@@ -1,0 +1,5 @@
+%p
+  #{@user.public_display_name} just purchased your #{@plan.nickname} subscription for #{@channel.title}
+
+%p{class: "thank_you_message"}
+  = simple_format email_team_thank_you(@channel.title)

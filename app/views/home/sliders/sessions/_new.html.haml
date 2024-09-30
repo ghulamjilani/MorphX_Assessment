@@ -1,0 +1,11 @@
+- if @brand_new_sessions_or_channels.present?
+  .col-md-12
+    .headline
+      %h2 New
+    .TileSliderWrapp.owlSlider
+      .spinnerSlider
+        .bounceS1
+        .bounceS2
+        .bounceS3
+      .TileSlider.owl-carousel
+        = render(partial: 'shared/tiles/session', collection: @brand_new_sessions_or_channels, locals: {custom_class: 'margin-right-10'})

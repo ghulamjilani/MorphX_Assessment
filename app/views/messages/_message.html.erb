@@ -1,0 +1,23 @@
+<div class="media">
+  <div class="pull-left">
+    <%= link_to message.sender.relative_path do %>
+      <div class="user_thumbnail_image" style="background-image: url(<%=image_path(message.sender.avatar_url) %>)"></div>
+    <% end %>
+  </div>
+
+  <div class="name">
+    <div class="name">
+      <%= link_to message.sender.public_display_name, message.sender.relative_path %>
+
+      [
+      <%= time_ago_in_words(message.updated_at).gsub('about', '') + ' ago' %>
+      ]
+    </div>
+  </div>
+
+  <div class="media-body">
+    <div class="word-break pre-message">
+      <%= formatted_body(message.body) %>
+    </div>
+  </div>
+</div>

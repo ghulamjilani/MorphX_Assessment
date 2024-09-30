@@ -1,0 +1,34 @@
+- if can?(:join_as_participant, session) || can?(:join_as_co_presenter, session)
+  - if session.room_members.find_by(abstract_user: current_user).try(:backstage?)
+    - start_at = session.room.actual_start_at
+  - else
+    - start_at = session.start_at
+- elsif can? :join_as_presenter, session
+  - start_at = session.room.actual_start_at
+- else
+  - start_at = session.start_at
+.tile-cake-sidebarrr.session-tile{data: {id: session.id, room_id: session.room.try(:id), type: :session}}
+  .tile-img
+    = link_to session.relative_path do
+      .img{style: "background-image: url('#{session.small_cover_url}')"}
+    - if session.do_livestream? && !session.livestream_purchase_price.zero? || session.do_immerssive? && !session.immersive_purchase_price.zero?
+      %i.VideoClientIcon-dollar-currency-symbol
+    .tileStatus
+      .tileStatus-status
+      - if session.in_progress?
+        .tileStatus-red= I18n.t('views.channels.playlist.session.live')
+      - else
+        .tileStatus-timer{data: {seconds: start_at.to_i, 'timer-end-at-in-seconds': start_at.to_i}}= time_with_tz_in_chosen_format(start_at)
+        :javascript
+          window.uiTimeLeft($('.tile-cake-sidebarrr.session-tile[data-id=#{session.id}] .tileStatus-timer'), 2)
+      - if session.private?
+        .tileStatus-private= I18n.t('views.channels.playlist.session.private')
+  %a.tile-body.switch_session{href: session.relative_path}
+    .tile-name{title: session.title}= session.title
+    .text-color-ultra-LightGrey
+      .participants{title: 'Watchers'}
+        = session.room&.watchers_count || 0
+        watchers
+        •
+      .time.tileTimeStatus-now{style: ('display: none' unless session.started?)}= I18n.t('views.channels.playlist.session.now')
+      .time.date_text{style: ('display: none' if session.started?)}= time_with_tz_in_chosen_format(session.start_at)

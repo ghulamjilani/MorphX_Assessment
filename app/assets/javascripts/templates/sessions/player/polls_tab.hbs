@@ -1,0 +1,37 @@
+{{#each polls}}
+    <div class='Votes-block {{#unless selected}}hidden{{/unless}}' id="poll_{{id}}" data-poll-id="{{id}}">
+        <div class='Votes-h'>
+            <div class="Votes-h-count text-color-Blue" title="{{totalVotes}} votes">{{totalVotes}} Votes</div>
+            <h6>{{question}}</h6>
+        </div>
+
+        <div class='Votes-b {{#if is_voted}} votedIn {{else}} didNotVote {{/if}}'>
+            <ul>
+                {{#each sides}}
+                    <li id="side_{{id}}">
+                        {{#if ../../current_user_id}}
+                            <a href="{{#if ../is_voted}}#{{else}}/polls/vote.json?side_id={{id}}&poll_id={{../id}}{{/if}}"
+                               class="vote {{#if is_voted}}active{{/if}}" {{#unless ../is_voted}} data-remote="true" data-method="post" {{/unless}} style="visibility: visible;">
+                        {{else}}
+                            <a href="#loginPopup" class="vote" data-toggle="modal" style="visibility: visible;">
+                        {{/if}}
+                                <div class="Votes-results">
+                                    <div class="Votes-percent-line-wrapp">
+                                        <div class="Votes-percent-line" style="width:{{percents}}%;"></div>
+                                    </div>
+                                    <div class="Votes-percent">{{percents}}%</div>
+                                </div>
+                                <div class="Votes-variables">{{answer}}</div>
+                            {{!--
+                            <div class="Votes-percent-line" style="width:{{percents}}%;"></div>
+                            <div class="coloredDots {{#if is_voted}} Voted {{else}} notvoted{{/if}}" style="background-color: {{color}}"></div>
+                            <div class="Votes-variables">{{answer}}</div>
+                            <div class="Votes-percent">{{totalVotes}}({{percents}}%)</div>
+                            --}}
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+{{/each}}

@@ -1,0 +1,5 @@
+en:
+  views:
+    sessions:
+      show:
+        private: Private

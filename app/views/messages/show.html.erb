@@ -1,0 +1,8 @@
+<section id="conversation" class="row">
+  <%= render partial: 'messages' %>
+
+  <div class="conversation_full col-md-10">
+    <%= render partial: 'conversation_full', locals:{conversation: @conversation} %>
+  </div>
+
+</section>

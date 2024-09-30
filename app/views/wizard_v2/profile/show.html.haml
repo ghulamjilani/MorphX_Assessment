@@ -1,0 +1,120 @@
+- content_for(:extra_body_classes, ' wizard ')
+-#Wizard Steps
+.stepLine-wrapper{class: user_signed_in? ? '' : 'hide'}
+  .stepLine.stepCount-3.active-1
+    .stepLine__head
+      %a.step1{href: wizard_v2_business_path}
+        %span
+          = I18n.t('wizard.my_business')
+      %a.step2{href: wizard_v2_channel_path}
+        %span
+          = I18n.t('wizard.first_channel')
+    .stepLine__body
+      .loadingline_wrapp
+        .loadingline
+
+- unless user_signed_in?
+  .WelcomeSection
+    #connect_with_socials{class: @interactor || @user.persisted? || @user.email.present? || @user.first_name.present? ? 'hide' : ''}
+      Welcome to #{Rails.application.credentials.global[:service_name]}!
+      .socialSignUp-signIn.text-center.margin-top-60
+        = link_to user_facebook_omniauth_authorize_path(redirect_path_after_social_signup: wizard_v2_path), class:'socialBtn social_inputs facebookUp ' do
+          %svg{"enable-background" => "new 0 0 291.319 291.319", :viewbox => "0 0 291.319 291.319", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M145.659 0c80.45 0 145.66 65.219 145.66 145.66 0 80.45-65.21 145.659-145.66 145.659S0 226.109 0 145.66C0 65.219 65.21 0 145.659 0z", :fill => "#3B5998"}
+            %path{:d => "M163.394 100.277h18.772v-27.73h-22.067v.1c-26.738.947-32.218 15.977-32.701 31.763h-.055v13.847h-18.207v27.156h18.207v72.793h27.439v-72.793h22.477l4.342-27.156h-26.81v-8.366c0-5.335 3.55-9.614 8.603-9.614z", :fill => "#FFFFFF"}
+          %span
+            Sign Up with Facebook
+        = link_to user_gplus_omniauth_authorize_path(redirect_path_after_social_signup: wizard_v2_path), class:'socialBtn social_inputs otherSocial googleInstUp' do
+          %svg{"enable-background" => "new 0 0 512 512", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M113.47 309.408L95.648 375.94l-65.139 1.378C11.042 341.211 0 299.9 0 256c0-42.451 10.324-82.483 28.624-117.732h.014L86.63 148.9l25.404 57.644c-5.317 15.501-8.215 32.141-8.215 49.456.002 18.792 3.406 36.797 9.651 53.408z", :fill => "#FBBB00"}
+            %path{:d => "M507.527 208.176C510.467 223.662 512 239.655 512 256c0 18.328-1.927 36.206-5.598 53.451-12.462 58.683-45.025 109.925-90.134 146.187l-.014-.014-73.044-3.727-10.338-64.535c29.932-17.554 53.324-45.025 65.646-77.911h-136.89V208.176h245.899z", :fill => "#518EF8"}
+            %path{:d => "M416.253 455.624l.014.014C372.396 490.901 316.666 512 256 512c-97.491 0-182.252-54.491-225.491-134.681l82.961-67.91c21.619 57.698 77.278 98.771 142.53 98.771 28.047 0 54.323-7.582 76.87-20.818l83.383 68.262z", :fill => "#28B446"}
+            %path{:d => "M419.404 58.936l-82.933 67.896C313.136 112.246 285.552 103.82 256 103.82c-66.729 0-123.429 42.957-143.965 102.724l-83.397-68.276h-.014C71.23 56.123 157.06 0 256 0c62.115 0 119.068 22.126 163.404 58.936z", :fill => "#F14336"}
+          %span.goggleText Sign Up with Google
+        = link_to 'Sign Up with Email', '#', class: 'btn btn-m full-width new_user-wrappShow showSignUpFormAgain', onclick: "$('#connect_with_socials').addClass('hide');$('.stepLine-wrapper, .wizard_profile').removeClass('hide');"
+.wizard_profile{class: @interactor || @user.persisted? || @user.email.present? || @user.first_name.present? ? '' : 'hide'}
+  %h2.wizard__title Set Up Your Profile
+  .sectionBlock_wrapp
+    = form_for @user, url: wizard_v2_profile_path, method: :put, html: {id: :wizard_profile,
+        class: 'form_V2 wizard_profile_form', autocomplete: :off} do |f|
+      = f.hidden_field :id
+      .formWrapp
+        .LoadingCover.profile_next_cover{style: 'display:none'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        %section.sectionBlock
+          .input-block{class: ('state-clear' if @user.first_name.blank?)}
+            = f.label :first_name, 'First Name*'
+            = f.text_field :first_name, required: true
+            .errorContainerWrapp
+          .input-block{class: ('state-clear' if @user.last_name.blank?)}
+            = f.label :last_name, 'Last Name*'
+            = f.text_field :last_name, required: true
+            .errorContainerWrapp
+          .input-block{class: ('state-clear' if @user.email.blank?)}
+            = f.label :email, 'Email*'
+            - if @user.persisted?
+              = text_field_tag :email, @user.email, readonly: true, disabled: true
+            - else
+              = f.email_field :email, autocomplete: 'wizard-email', required: true
+            .errorContainerWrapp
+          - if @user.new_record? || @user.encrypted_password.blank?
+            .input-block.state-clear
+              = f.label :password, 'Password*'
+              = f.password_field :password, autocomplete: 'wizard-password', required: true
+              .errorContainerWrapp
+              .eye.showWizardPassword
+              .caps.showWizardCaps
+              .passStrengthWrap.wizardPassStrength
+                .passStrength
+                  .level
+                .passMessage
+                  Weak Password
+          .input-block.margin-bottom-10{class: ('state-clear' if @user.user_account.bio.blank?)}
+            = label_tag 'user[user_account_attributes][bio]', 'About you*'
+            = text_area_tag 'user[user_account_attributes][bio]', @user.user_account.bio, rows: 1, 'max-length': 2000, required: true, data: {autoresize: true}
+            .counter_block{'max-length': 2000} #{@user.user_account.bio.to_s.length}/2000
+            .infoContainerWrapp Minimum 16 characters
+            .errorContainerWrapp
+        %section.sectionBlock
+          .row.select-tag-block.required.margin-top-10
+            .col-md-5.text-color-Darkgrey
+              = f.label :birthdate, 'Birthday*'
+            .col-md-7.text-right.birthdate_Datepicker_wrapp
+              -#TODO:DASHA change input type date to unput type text
+              = f.text_field(:birthdate, required: true, class: 'full-width datepicker', value: @user.birthdate&.strftime('%m/%d/%Y'), placeholder: 'MM/DD/YYYY')
+              %i.birthdate_Datepicker-show.VideoClientIcon-calendar-icon.text-color-main
+              - content_for(:after_include_javascripts) do
+                :javascript
+                  // TODO:remove init from view
+                  jQuery(document).ready(function(){
+                    jQuery('.datepicker').datepicker();
+                  });
+            .col-md-12.clearfix.errorContainerWrapp
+          .row.select-tag-block.required.margin-top-20.margin-bottom-10
+            .col-md-5.text-color-Darkgrey
+              = f.label :gender, 'Gender*'
+            .col-md-7.padding-right-5
+              = f.select(:gender, options_for_select([['Male', 'male'],['Female', 'female'],['Private', 'hidden']], @user.gender), {prompt: true}, {class: 'padding-left-20 pull-right text-right full-width', required: true})
+            .col-md-12.clearfix.errorContainerWrapp.gender-error
+        %section.sectionBlock
+          .row.select-tag-block.required.margin-top-10
+            .col-md-5.text-color-Darkgrey
+              = f.label :manually_set_timezone, 'Timezone*'
+            .col-md-7.padding-right-5
+              = f.select(:manually_set_timezone, options_for_select(User.available_timezones.map{|tz| [tz.to_s, tz.tzinfo.name]}, @user.manually_set_timezone), {prompt: true}, {class: 'padding-left-20 pull-right text-right full-width', required: true})
+            .col-md-12.clearfix.errorContainerWrapp.timezone-error
+
+          .row.select-tag-block.margin-top-10
+            .col-md-5.text-color-Darkgrey
+              = f.label :language, 'Primary language'
+            .col-md-7
+              = f.select(:language, options_for_select(language_list, @user.language), {prompt: 'Please select'}, {class: 'padding-left-20 pull-right text-right full-width styled-select_withCss'})
+            .col-md-12.clearfix.errorContainerWrapp
+        .clearfix.btnarea
+          .col-xs-12.text-center
+            -# = link_to 'Next', '#', id: :profile_next_btn, class: 'btn btn-m pull-right'
+            = f.submit 'Next', id: :profile_next_btn, class: 'btn btn-l padding-left-40 padding-right-40 text-uppercase'
+

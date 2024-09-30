@@ -1,0 +1,31 @@
+%html
+  %head
+    %meta{'http-equiv': "content-type", content: "text/html;charset=UTF-8"}
+    %title Styleguide
+    = stylesheet_link_tag 'immerss_kss'
+    %meta{name: :viewport, content: "width=device-width, initial-scale=1.0"}
+    :javascript
+      (function(){
+        window.serverTime = new Date(#{(Time.now.to_f*1000).round});
+      })();
+  %body.kss-body
+    %header.kss-header Styleguide
+
+    #kss_wrapper
+      %nav.kss-nav{role: :main}
+        %ul
+          %li= link_to 'Home', kss.root_path
+
+          %li
+            %a{href: "#helpersclasses"} helpers classes
+          %li
+            %a{href: "#Buttons"} buttons
+          %li
+            %a{href: "#radioAndCheckbox"} radioButton and check box
+          %li
+            %a{href: "#modal"} Modal
+
+      = yield
+    = include_gon(namespace: 'Immerss', camel_case: true)
+
+    = javascript_include_tag 'application'

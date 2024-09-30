@@ -1,0 +1,19 @@
+[
+  {
+    "channel_id": 20,
+    "client_type": "api",
+    "data": null,
+    "embed_domains": "morphx.io",
+    "event_type": "interactive_time",
+    "event_value": 256,
+    "host_id": 1,
+    "ip": "127.0.0.1",
+    "model_id": 128,
+    "model_type": "Session",
+    "organization_id": 1,
+    "user_agent": "Chrome/103.0.0.0",
+    "user_id": "64",
+    "video_resolution": "1080",
+    "visitor_id": "6b66cb97-820f-4982-947e-ac9089789d9c"
+  }
+]

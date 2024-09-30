@@ -1,0 +1,177 @@
+@import "mixin";
+.read_button{
+  position: absolute;
+  top: 25px;
+  right: 55px;
+  visibility: visible;
+  height: 20px;
+  padding-top: 0;
+  line-height: 18px;
+}
+.notification-item{
+  color:  var(--tp__main);
+  font-size: 17px ;
+  p, abbr{
+    font-size: 17px !important;
+    @include media(p-phone){
+      font-size: 12px!important;
+    }
+  }
+  .col-md-11.col-md-offset-1{
+    padding: 30px 0 10px 0;
+  }
+  i{
+    font-size: 16px;
+    vertical-align: baseline;
+    &.VideoClientIcon-clockF{
+      font-size: 20px;
+    }
+  }
+  .col-md-3{
+    font-size: 17px;
+  }
+  .imri{
+    img {
+      width: 26px;
+      display: inline-block;
+      vertical-align: middle;
+      top: 0;
+    }
+  }
+  @include media(tablet){
+    .responsiveNotifContent{
+      text-align: center;
+      position: inherit;
+      h5{
+        font-size: 17px;
+      }
+    }
+    .sendingTime{
+      justify-content: center;
+    }
+  }
+  @include media(p-phone){
+    .responsiveNotifContent h5 {
+      font-size: 12px;
+    }
+  }
+  @include media(phone){
+    .responsiveNotifContent{
+      text-align: left;
+      h5{
+        @include flex(flex, flex-start, false);
+        flex-direction: column;
+        strong{
+          padding-bottom: 10px;
+        }
+      }
+    }
+    .timeStamp{
+      width: 100%;
+    }
+  }
+}
+
+/*checkboxes for settings page [notifications]*/
+.profiles-edit_notifications{
+  .technicalPage tbody td{
+    line-height: 37px;
+  }
+  .table-responsive{
+    background: var(--bg__main);
+    border: 1px solid var(--border__table);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    table, label{
+      margin-bottom: 0;
+      @include media(p-tablet){
+        thead th.text-center{
+          min-width: 100px;
+        }
+      }
+    }
+    .form-group{
+      margin: 10px 0;
+    }
+    i{
+      color: $font-color-main-ultra-light;
+      padding-right: 5px;
+    }
+    .controls{
+      display: flex;
+      align-items: center;
+    }
+    .checkboxWrapper{
+      display: flex;
+      flex-direction: column;
+    }
+    .ctoto{
+      display: flex;
+    }
+    .sentNotifTimesInput{
+      display: flex;
+      &.disabled{
+        pointer-events: none;
+      }
+      input{
+        margin: 0 30px;
+        width: 90px;
+        height: 30px;
+      }
+      .radio{
+        margin-right: 30px;
+        &:last-child{
+          margin-right: 0;
+        }
+        input{
+          width: 0;
+        }
+      }
+    }
+    .form-wrapper{
+      input[type='checkbox']{
+        font-family: 'VideoClientIcon';
+        font-size: 13px;
+        color: #fff;
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        border: 1px solid #d1d5d9;
+      }
+      input[type='checkbox']:checked{
+        &:before{
+          content: '\ea10';
+        }
+        position: relative;
+        top: -7px;
+        left: 1rem;
+        -moz-appearance:none;
+        -webkit-appearance:none;
+        -o-appearance:none;
+         background-color:var(--tp__active);
+         border-color: var(--tp__active);
+      }
+    }
+  }
+  .overflowTable{
+    .checkbox{
+      input{
+        left: 0;
+      }
+      .combined_notification{
+        left: -50px;
+      }
+      span.form-wrapper{
+        padding: 0;
+        &::after{
+          display: none;
+        }
+      }
+    }
+    @include media(p-tablet){
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+  }
+}

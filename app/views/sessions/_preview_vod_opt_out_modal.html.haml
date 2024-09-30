@@ -1,0 +1,73 @@
+.modal.fade{'aria-hidden' => 'true', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+        %h1.heading
+          On-Demand
+        %div
+          - if can?(:vod_opt_out_and_get_money_refund, @session)
+            = simple_format I18n.t("sessions.preview_vod_opt_out_modal.could_be_money_refund",
+                     abstract_session_link: %(<a target="_blank" href="#{@session.absolute_path}">#{@session.always_present_title}</a>),
+                     cancellation_policy_link: %(<a target="_blank" href="#{page_path(ContentPages::REFUND_AND_CANCELLATION_POLICY.parameterize(separator: '-'))}">Cancellation Policy</a>),
+                     customer_support: mail_to(Rails.application.credentials.global[:support_mail]),
+                     paid_amount: as_currency(@payment_transaction.amount / 100.0))
+
+            %hr
+
+            = link_to 'Opt out and get system credit refund',
+              vod_opt_out_without_money_refund_session_path(@session.id),
+              method: :post,
+              data: {disable_with: 'Please wait…'},
+              class: 'btn btn-default btn-xs'
+
+            = link_to 'Opt out and get money refund',
+              vod_opt_out_and_get_money_refund_session_path(@session.id),
+              method: :post,
+              data: {disable_with: 'Please wait…'},
+              class: 'btn btn-default btn-xs'
+
+            %a{'data-dismiss' => 'modal', href: '', class: 'btn btn-default btn-xs'}
+              No, I changed my mind
+
+          - elsif can?(:vod_opt_out_and_get_full_system_credit_refund, @session)
+            = simple_format I18n.t("sessions.preview_vod_opt_out_modal.could_be_full_sys_credit_refund",
+                     cancellation_policy_link: %(<a target="_blank" href="#{page_path(ContentPages::REFUND_AND_CANCELLATION_POLICY.parameterize(separator: '-'))}">Cancellation Policy</a>),
+                     abstract_session_link: %(<a target="_blank" href="#{@session.absolute_path}">#{@session.always_present_title}</a>),
+                     customer_support: mail_to(Rails.application.credentials.global[:support_mail]),
+                     paid_amount: as_currency(@system_credit_transaction.amount))
+
+            %hr
+
+            = link_to 'Opt out and get system credit refund',
+              vod_opt_out_without_money_refund_session_path(@session.id),
+              method: :post,
+              data: {disable_with: 'Please wait…'},
+              class: 'btn btn-default btn-xs'
+
+            %a{'data-dismiss' => 'modal', href: '', class: 'btn btn-default btn-xs'}
+              No, I changed my mind
+
+          - elsif can?(:vod_opt_out_without_refund_choice, @session)
+            = simple_format I18n.t("sessions.preview_vod_opt_out_modal.no_refund",
+                     cancellation_policy_link: %(<a target="_blank" href="#{page_path(ContentPages::REFUND_AND_CANCELLATION_POLICY.parameterize(separator: '-'))}">Cancellation Policy</a>),
+                     abstract_session_link: %(<a target="_blank" href="#{@session.absolute_path}">#{@session.always_present_title}</a>),
+                     customer_support: mail_to(Rails.application.credentials.global[:support_mail]))
+
+            %hr
+
+            = link_to 'Opt out',
+              vod_opt_out_without_refund_choice_session_path(@session.id),
+              method: :post,
+              data: {disable_with: 'Please wait…'},
+              class: 'btn btn-default btn-xs'
+
+            %a{'data-dismiss' => 'modal', href: '', class: 'btn btn-default btn-xs'}
+              No, I changed my mind
+          - elsif can?(:vod_opt_out_without_refund, @session)
+            - raise 'wat'
+          - elsif can?(:vod_opt_out_with_partial_sys_credit_refund, @session)
+            - raise 'wat'
+          - else
+            - raise "can not interpret opting out - #{current_user.id} #{@session.id}"

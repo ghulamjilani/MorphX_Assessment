@@ -1,0 +1,14 @@
+{{#if (or description custom_description)}}
+    {{#if description}}
+      <h3>Description</h3>
+      <p>
+            {{{description}}}
+        </p>
+    {{/if}}
+    {{#if custom_description}}
+        <h3>Instructions</h3>
+        <p>
+            {{{custom_description}}}
+        </p>
+    {{/if}}
+{{/if}}

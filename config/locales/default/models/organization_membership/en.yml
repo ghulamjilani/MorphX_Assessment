@@ -1,0 +1,8 @@
+en:
+  models:
+    organization_membership:
+      statuses:
+        pending: Invited
+        active: Active
+        cancelled: Cancelled
+        suspended: Suspended

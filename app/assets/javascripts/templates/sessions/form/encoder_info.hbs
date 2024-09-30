@@ -1,0 +1,71 @@
+<div class="">
+    {{#if wa_rtmp.sandbox}}
+        <div class="btn btn-square btn-borderred-red">SANDBOX MODE</div>
+    {{/if}}
+    <div class="input-block">
+        <label for="Encoder_section_url">URL</label>
+        <input readonly type="text" id="Encoder_section_url" value="{{wa_rtmp.server}}">
+    </div>
+    <div class="wrapper">
+      <div class="half-width">
+        <div class="input-block item margin-right-25">
+          <label for="Encoder_section_port">Port</label>
+          <input readonly type="text" id="Encoder_section_port" value="{{wa_rtmp.port}}">
+        </div>
+      </div>
+      <div class="half-width">
+          <div class="input-block item">
+              <label for="Encoder_section_StreamKey">Stream Key</label>
+              <input readonly type="password" id="Encoder_section_StreamKey" value="{{wa_rtmp.stream_name}}">
+              <div class="showPass_wrapp">
+                <a href="#" class="settingsEye showPass Views_btn" data-id="Encoder_section_StreamKey">
+                  <i class="VideoClientIcon-eye"></i>
+                </a>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="half-width">
+        <div class="input-block item margin-right-25">
+          <label for="Encoder_section_Username">Username</label>
+          <input readonly type="text" id="Encoder_section_Username" value="{{wa_rtmp.username}}">
+        </div>
+      </div>
+      <div class="half-width">
+          <div class="input-block item">
+              <label for="Encoder_section_Password">Password</label>
+              <input readonly type="password" id="Encoder_section_Password" value="{{wa_rtmp.password}}">
+              <div class="showPass_wrapp">
+                <a href="#" class="settingsEye showPass Views_btn" data-id="Encoder_section_Password">
+                  <i class="VideoClientIcon-eye"></i>
+                </a>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+<!--<div class="col-md-5 text-center">-->
+    <!--<div class="responsive-video">-->
+        <!--<div class="thoplayer_rtmp_off" style="display: none;">-->
+            <!--<div class="streamSettings">-->
+                <!--<div class="step1">-->
+                    <!--<p>PREVIEW</p>-->
+                <!--</div>-->
+                <!--<div class="step2" style="display: none;">-->
+                    <!--<p>Please wait. it make take up to 30 seconds to start the stream</p>-->
+                <!--</div>-->
+                <!--<div class="notDetected hide">-->
+                    <!--<p>Webcam not detected</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="thoplayer_rtmp_on" style="display: none;">-->
+            <!--<div id="theo_player_rtmp" class="video-js theoplayer-skin theo-seekbar-above-controls" ></div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<a href="#" id="start_encoder_stream" class="btn btn-s thoplayer_rtmp_off" style="display: none;">Test stream</a>-->
+    <!--<a href="#" id="stop_encoder_stream"  class="btn btn-s thoplayer_rtmp_on" style="display: none;">Stop stream</a>-->
+<!--</div>-->

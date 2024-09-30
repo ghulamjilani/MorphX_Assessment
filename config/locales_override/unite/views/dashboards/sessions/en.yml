@@ -1,0 +1,5 @@
+en:
+  views:
+    dashboards:
+      sessions:
+        cancel_interactive: Cancel Conference

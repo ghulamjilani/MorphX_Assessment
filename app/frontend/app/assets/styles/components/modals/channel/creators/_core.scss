@@ -1,0 +1,120 @@
+.creatorsModal {
+
+  .MK2-modal {
+    &__dialog {
+      margin-bottom: 0;
+      padding: 0;
+      width: 74rem;
+      @include media(p-tablet) {
+        width: 90%;
+      }
+    }
+
+    &__body {
+      padding: 0;
+      width: 100%;
+    }
+  }
+
+  &__header {
+    padding: 0rem 6rem .5rem 6rem;
+    width: 100%;
+    @include media(p-tablet) {
+      padding: 0rem 2rem 0rem 2rem;
+    }
+  }
+
+  &__search {
+    @include flex(flex, center, space-between);
+    background: rgba(0, 0, 0, 0.05); // уточнить цвет
+    padding: .8rem 4.6rem 1.2rem 7rem;
+    border-top: 1px solid var(--border__separator);
+    border-bottom: 1px solid var(--border__separator);
+  }
+
+  &__input {
+    @include flex(flex, center, space-between);
+  }
+
+  .GlobalIcon-search {
+    padding: 1rem 0 0.4rem;
+    margin-right: 6rem;
+    color: var(--tp__secondary);
+  }
+
+  &__checkbox {
+    padding: 1rem 0 0 3rem !important;
+    font-size: 1.4rem;
+
+    &::after {
+      top: 1.3rem !important;
+    }
+  }
+
+  &__title {
+    color: var(--tp__h1);
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  &__count {
+    color: var(--tp__secondary);
+    font-size: 1.4rem;
+  }
+
+  &__body {
+    max-height: 42.2rem;
+    overflow: auto;
+    padding: 0 6rem 0 6rem;
+    width: 100%;
+    @include media(p-tablet) {
+      padding: 0 2rem 0 2rem;
+    }
+  }
+
+  &__creators {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border__separator);
+    justify-content: space-between;
+
+    &__title {
+      color: var(--tp__h1);
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    &__displayName {
+      width: 100%;
+      padding-left: 2.5rem;
+      @include media(p-tablet) {
+        padding-left: 1.5rem;
+      }
+
+      a {
+        color: var(--tp__secondary);
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+    }
+
+    &__avatar {
+      background-color: var(--tp__main); // убрать
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      height: 6rem;
+      width: 6rem;
+      border-radius: 50%
+    }
+
+    &__button {
+      position: relative;
+    }
+  }
+}

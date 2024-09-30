@@ -1,0 +1,6 @@
+en:
+  views:
+    dashboard:
+      money:
+        products_earnings:
+          page_title: Product Earnings

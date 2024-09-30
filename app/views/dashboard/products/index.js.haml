@@ -1,0 +1,2 @@
+$('.products-item-list').html("#{escape_javascript(render(partial: 'dashboard/products/tiles', locals: {products: @products, list: @list, order: @order}))}");
+-#$('#productsArea').html("#{escape_javascript(render(partial: 'dashboard/products/tiles', locals: {products: @products, list: @list}))}");

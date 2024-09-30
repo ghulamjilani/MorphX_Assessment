@@ -1,0 +1,60 @@
+@import "../../../../../app/assets/stylesheets/mixin";
+
+body .select2-container .select2-choice {
+  background: transparent;
+  border:none;
+  color: var(--tp__main);
+  font-size: 14px;
+  height: 28px;
+  //line-height: 32px;
+  box-shadow: none !important;
+  .select2-arrow {
+    background: none;
+    border: none;
+    width: 24px;
+    text-align: center;
+    b {
+      background: none !important;
+      &:after {
+        content: "\f107";
+        font-family: "VideoClientIcon";
+        color: var(--tp__icons);
+      }
+    }
+  }
+}
+.select-period .select2-container .select2-choice .select2-arrow b:after {
+    content: "\e895";
+    font-weight: 300;
+    font-size: 22px;
+}
+.select2-drop-active {
+    border: none;
+}
+.select2-results .select2-highlighted {
+    background: var(--bg__tooltip);
+    color: var(--tp__main);
+}
+.select2-search {
+    padding-top: 2px;
+}
+
+.select2-dropdown-open.select2-drop-above {
+  .select2-choice, .select2-choices {
+    background: transparent;
+    border: none;
+  }
+}
+.select2-drop.select2-drop-above.select2-drop-active {
+  border-top: 1px solid #ccc;
+}
+.select2-drop{
+  border-radius: 6px;
+  .select2-results{
+    font-size: 14px;
+    color: var(--tp__main);
+    .select2-highlighted{
+      color: var(--tp__main);
+    }
+  }
+}

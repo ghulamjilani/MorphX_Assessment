@@ -1,0 +1,28 @@
+.row
+  - content_for(:page_title, 'Widgets')
+  %h1
+    LIVE GUIDE
+  %div{style: 'width: 30%; float:left; margin-right: 40px;'}
+    .form-group
+      %label Width
+      %input#widget_live_width.form-control{value: '100%', type: 'text'}/
+    .form-group
+      %label Height
+      %input#widget_live_height.form-control{value: '360px', type: 'text'}/
+    .form-group
+      %label Html code:
+      %textarea#widget_live_code{style: 'width: 100%; height: 100px', onclick: 'select()', data: {link: live_widgets_url}}
+        %iframe{src: live_widgets_url, style: 'width: 780px; height: 360px;', frameborder: '0'}
+  %div{style: 'width: 30%; float: left;'}
+    %label Presenters:
+    - @contacts.each do |user|
+      .checkbox
+        %label
+          %input.widget_live_checkbox_user{type: "checkbox", data: {value: user.id}}/
+          = user.public_display_name
+  .clearfix
+  .panel.panel-default
+    .panel-body
+      PREVIEW
+    .panel-footer#widget_live_iframe_wrapper
+      %iframe#widget_live_iframe{src: live_widgets_url, style: 'width: 100%; height: 360px;', frameborder: '0'}

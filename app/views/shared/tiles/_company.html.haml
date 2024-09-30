@@ -1,0 +1,12 @@
+%section.tile-cake.tile-cake-Brands{id: "company_tile_#{company.id}", data: {type: :company, id: company.id}, class: (defined?(custom_class) ? custom_class : '' )}
+  .tile-img
+    .tile-imgContainer.owl-lazy.display-block{'data-src': company.logo_url}
+    %a.tile_link{href: company.relative_path}
+    %a.CreatorsName.text-ellipsis.display-block{href: company.relative_path}= company.name
+    .text-center.followBtn_wrapp
+      - can_follow = !user_signed_in? || !current_user.fast_following?(company)
+      = degradable_link_to company.toggle_follow_relative_path, method: :post, remote: true, class: "btn btn-s organization-subscribe-#{company.id} #{can_follow ? '' : 'active'}" do
+        - if can_follow
+          Follow
+        - else
+          Following

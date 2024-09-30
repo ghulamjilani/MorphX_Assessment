@@ -1,0 +1,10 @@
+[Unit]
+Description=shard-1 server of the cluster
+Requires=mongodb.service
+
+[Service]
+ExecStart=/opt/bitnami/mongodb/bin/shard-1.sh
+Type=forking
+PIDFile=/opt/bitnami/mongodb/tmp/mongodb-shard-1.pid
+LimitNOFILE=64000
+LimitNPROC=64000

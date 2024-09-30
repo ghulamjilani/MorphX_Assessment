@@ -1,0 +1,22 @@
+%p
+  %button.btn.btn-sm{"data-target" => "#invite-modal", "data-toggle" => "modal"}
+    See All
+
+#invite-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        .unobtrusive-flash-container
+        %h1.heading{style: 'font-size: 31px'}
+          supporting materials
+        %fieldset.inputs
+          .url.input.required.autofocus.stringish.form-group
+            %input.form-control{id: 'links_new_input', autofocus: "autofocus", maxlength: "255", placeholder: "URL", type: "url"}
+
+          = link_to_has_many(:links, 'Add material', f, :span, 'btn btn-success invite_btn')
+        .clearfix
+        %br
+        .links_list.users_list.list-group
+          = f.semantic_fields_for(:links) do |builder|
+            = render 'link_fields', f: builder

@@ -1,0 +1,9 @@
+en:
+  controllers:
+    api:
+      v1:
+        public:
+          marketing_tools:
+            opt_in_modals:
+              errors:
+                model_params_required: Model Type and Model ID should be provided.

@@ -1,0 +1,116 @@
+.ChannelsTile {
+  background: var(--bg__content);
+  box-shadow: 0px 1px 4px var(--sh__main);
+  border-radius: 1rem;
+  padding-bottom: 8.5rem;
+  position: relative;
+  width: 100%;
+  min-height: 30rem;
+
+  &__btns {
+    @include flex(flex, false, center);
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 1.5rem;
+  }
+
+  &__subscribe,
+  &__subscribed {
+    font-weight: bold;
+    padding-bottom: .4rem;
+  }
+
+  &__subscribe {
+    color: var(--tp__links__hover);
+    cursor: pointer;
+  }
+
+  &__subscribed {
+    color: var(--tp__secondary);
+  }
+
+  &__img {
+    display: block;
+    position: relative;
+    margin-bottom: 5rem;
+
+    &__container {
+      padding-top: 28.5%;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+
+    &__organization {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 0.5rem;
+      background-size: cover;
+      background-position: top center;
+      border: 1px solid #FFF;
+      position: absolute;
+      top: auto;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+  }
+
+  &__body {
+    padding: 0 1rem 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &__name {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--tp__h1);
+      @include text__ellipsis(1);
+      word-break: break-word;
+    }
+
+    &__owner {
+      height: 4rem;
+      font-size: 1.4rem;
+      color: var(--tp__secondary);
+      padding-bottom: 1.2rem;
+      text-align: center;
+
+      a {
+        color: var(--tp__secondary);
+      }
+    }
+
+    &__category {
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      color: var(--tp__secondary);
+      min-height: 4.2rem;
+      @include text__ellipsis(2);
+    }
+
+    &__since {
+      font-size: 1.4rem;
+      color: var(--tp__secondary);
+      @include flex(flex, center, center);
+      padding-top: 1rem;
+
+      &__dot {
+        background: var(--bg__label);
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        margin: 0 1.5rem;
+      }
+    }
+
+    button {
+      border-radius: 1.5rem;
+    }
+  }
+}

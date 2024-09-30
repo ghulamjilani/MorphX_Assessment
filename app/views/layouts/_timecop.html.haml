@@ -1,0 +1,9 @@
+= form_tag timecop_console.update_path, style: 'margin: 0' do
+  .control-group
+    %span{style: 'font-weight: bold; margin-right: 20px;'}
+      = Time.zone.now.to_s(MORPHX_TIME_FORMAT)
+    = datetime_select("timecop", "current_time")
+    %span
+      = submit_tag "Time Travel", class: 'btn-u'
+      or
+      = link_to "Reset", timecop_console.reset_path

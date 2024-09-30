@@ -1,0 +1,48 @@
+- if recordings.present?
+
+  .session-VOD-tileGroup.session_tile_slider.SelectedItem
+    - recordings.each do |recording|
+      %section.thumbnails.thumbnail-kenburn.kontainer{style: 'width: 33%;', data: {RecordingID: recording.id, hash: "#{recording.id}"}}
+        .presentation-img-Wrapper
+          .social-sharing-block
+            %a.social-sharing{data: {method: :get, remote: true}, href: recording.preview_share_relative_path, rel: :nofollow, title: 'Share'}
+              %i.VideoClientIcon-share-mk4
+          %a.PlayRecording.ensure-link-style.sessionBoxImg{data: recording_data_attributes(recording), href: "?recording_id=#{recording.id}"}
+            %span.playVidio
+              %i.icon-googleplay
+            .sessionBoxImg_main{style: "background-image:url('#{recording.poster_url}')"}
+            .sessionBoxImgOverlay
+            .hiddenText
+              .sessionBox_title
+                %span= recording.title
+      %section.tile-cake
+        .tile-img
+          .img.owl-lazy{'data-src': recording.poster_url}
+          %i.VideoClientIcon-play-icon1
+          .tile-hovered-block
+            = link_to '', spa_user_path(recording.organizer.slug), class: 'avatarImg-SD', style: "background-image: url('#{recording.organizer.small_avatar_url}')"
+            .tile-hovered-block-body
+              %div
+                .pull-right
+                  = degradable_link_to recording.toggle_like_relative_path, method: :post, remote: true, class: ['like-block', like_class(recording), "recording-like-#{recording.channel.id}"].join(' '), title: 'Like' do
+                    %i.VideoClientIcon-Favorites
+                  - if can?(:share, recording)
+                    = link_to recording.preview_share_relative_path, method: :get, rel: 'nofollow', 'data-disable-with': '<i class="VideoClientIcon-share-mk4"'.html_safe, remote: true, class: 'social-sharing', title: 'Share' do
+                      %i.VideoClientIcon-share-mk4
+                Presented by
+              = link_to recording.organizer.public_display_name, spa_user_path(recording.organizer.slug), class: 'presenter-name text-ellipsis'
+        .tile-body
+          %a.tile-name{href: recording.relative_path}= recording.title
+          .tile-information
+            .participants.text-ellipsis.half-width.display-inline-block.vertical-midle
+              %i.VideoClientIcon-Views>
+              = ':views_replacement_placeholder:'
+            = raw new_star_rating(numeric_rating_for(recording.channel))
+          .tile-btns
+            - recording_interactor = ObtainAccessToRecording.new(recording, current_user)
+            - if can?(:see_recording, recording)
+              = link_to 'Watch', recording.relative_path, class: 'btn btn-s btn-borderred-grey'
+            - elsif recording_interactor.can_purchase?
+              = link_to recording_interactor.obtain_non_free_access_title, preview_purchase_recording_path(recording, type: ObtainTypes::PAID_RECORDING), remote: true, class: 'btn btn-s btn-borderred-grey'
+            - elsif recording_interactor.can_take_for_free?
+              = link_to 'Watch FREE', recording.relative_path, class: 'btn btn-s btn-borderred-grey'

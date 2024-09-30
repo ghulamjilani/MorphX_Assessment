@@ -1,0 +1,28 @@
+- content_for(:page_title, 'Referrals ')
+- content_for(:extra_body_classes, 'header-top')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9.main-content-section.referalSection
+    %h2.section-title-dashboard= I18n.t("dashboards.edit_referral.referral_users")
+
+    - if @referral_users.present?
+      - @referral_users.each do |referral_user|
+        .media
+          %a.pull-left.logo__l.ensure-link-style
+            = image_tag "services/#{Rails.application.credentials.global[:project_name].to_s.downcase}/logo_small.png", id: 'logo-modal', alt: Rails.application.credentials.global[:service_name], class: 'cursorDefault'
+            -# = image_tag('favicon.png', alt: Rails.application.credentials.global[:service_name], )
+          .media-body
+            %h4.media-heading
+              = raw referral_user.public_display_name
+              %span
+                = time_with_tz_in_chosen_format(referral_user.created_at)
+    - else
+      = I18n.t('no_results.no_referral_users')
+    %p
+      = I18n.t("dashboards.edit_referral.your_referral_code")
+      %small
+        = "(#{I18n.t("dashboards.edit_referral.could_be_used_for_sharing_in_social_media")})"
+
+      %strong
+        = @referral_code

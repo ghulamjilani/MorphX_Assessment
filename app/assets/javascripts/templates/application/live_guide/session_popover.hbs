@@ -1,0 +1,45 @@
+<p class='lead'>{{title}}</p>
+
+<dl class='dl-horizontal' style='margin-bottom: 0'>
+    <dt>Presenter:</dt>
+    <dd>{{presenter_name}}</dd>
+
+    <dt>Begins at:</dt>
+    <dd>{{formatted_start_at}}</dd>
+
+    {{#if is_immersive}}
+      <dt>Availability:</dt>
+      <dd>{{availability}}</dd>
+    {{/if}}
+
+    {{#if is_immersive}}
+      {{#if is_livestream}}
+
+        <dt>Immersive</dt>
+        <dd>{{immersive_purchase_price}}</dd>
+
+        <dt>Livestream</dt>
+        <dd>{{livestream_purchase_price}}</dd>
+
+      {{/if}}
+    {{/if}}
+
+    <div style='margin-top: 30px'>
+      <dt>
+        <i class='VideoClientIcon-clockF'> {{duration}} Minutes</i>
+      </dt>
+
+      {{#if is_immersive}}
+
+        {{#if is_livestream}}
+          <!-- display nothing -->
+        {{else}}
+          <dd style='font-size: 18px'>{{immersive_access_cost}}</dd>
+        {{/if}}
+
+      {{else}}
+        <dd style='font-size: 18px'>{{livestream_access_cost}}</dd>
+      {{/if}}
+
+    </div>
+</dl>

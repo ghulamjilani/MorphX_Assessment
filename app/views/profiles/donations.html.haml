@@ -1,0 +1,28 @@
+.row#profilePage
+  - content_for(:page_title, 'Personal Profile')
+
+  = render 'profiles/nav'
+
+  .col-md-9.main-section-form.technicalPage.profiles-edit_general
+    = semantic_form_for(current_user, as: :profile, url: update_donations_profile_path, method: :put, html: { class: 'form_V2 padding-top-0'}) do |f|
+      .profile-section
+        .technicalPage__label= I18n.t("views.profiles.fields.donations_title")
+
+        = f.inputs do
+          = f.input :paypal_donations_url, as: :text, input_html: {rows: 3}, wrapper_html: {class: 'custom-input'}, label: I18n.t("views.profiles.fields.donations")
+        %div
+          %p Steps to create your Donations URL:
+          %ul
+            %li
+              Log In to
+              %a{href: 'https://paypal.com'} https://paypal.com
+            %li
+              Visit
+              %a{href: 'https://www.paypal.com/buttons'} https://www.paypal.com/buttons
+            %li Click on 'Donate' tile
+            %li Click on 'Get a link' tile
+            %li Configure 3 steps of your donation page
+            %li Click on 'Get link' tile, copy it and paste here
+      .padding-bottom-10.text-right
+        = link_to 'Cancel', url_for(:back), class: 'btn btn-l btn-grey-solid'
+        = f.action :submit, label: 'Save Changes', as:  :button, button_html: { class: 'btn btn-l margin-left-10', value: 'Save Changes', data: {disable_with: 'Please wait…'}}

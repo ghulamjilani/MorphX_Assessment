@@ -1,0 +1,10 @@
+<p>
+  <%= @comment.author.public_display_name %> has mentioned you in comment on blog post:
+</p>
+
+<h2>
+  <a href="<%= spa_organization_blog_post_url(id: @comment.post.slug, comment_id: @comment.id, organization_id: @comment.post.organization.slug, options: {}) %>"><%= @comment.post.title %></a>
+</h2>
+<p>
+  <%= @comment.body_text.first(128) %>
+</p>

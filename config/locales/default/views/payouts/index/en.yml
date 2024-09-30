@@ -1,0 +1,44 @@
+en:
+  views:
+    payouts:
+      index:
+        payments: Payments
+        payouts: Payouts
+        payout_methods: Payout Methods
+        description: When you receive a payment for a session, we call that payment to you a “payout”. Our secure payment system supports several payout methods, which can be setup and edited here. Your available payout options and currencies differ by country.
+        method: Method
+        details: Details
+        currency: Currency
+        payouts_enabled: Payouts Enabled
+        status: Status
+        default: (default)
+        options: Options
+        make_default: Make default
+        edit: Edit
+        tos_accept: Accept Terms of Service
+        please_wait: Please wait…
+        remove: Remove
+        confirm_delete_this_payout_method: Are you sure you want to delete this payout method?
+        add_payout_method: Add Payout Method
+        bank_transfer_in_usd: Bank Transfer in USD ($)
+        get_paid_in_business_day: Get paid in 5–7 business day
+        weekends_and_holidays_may_extend_processing_time: Weekends and holidays may extend processing time
+        may_include_fees: May include fees
+        coming_soon: Coming soon
+        paypal_in_usd: PayPal in USD ($)
+        get_paid_in_hours: Get paid in 3–4 hours
+        connect_your_existing_paypal_account: Connect your existing PayPal account
+        payoneer_prepaid_debit_mastercard_in_usd: Payoneer Prepaid Debit MasterCard in USD ($)
+        will_be_mailed_you_after_creating_your_account_existing: A physical card will be mailed to you after creating your Payoneer Prepaid Debit MasterCard account. Existing accounts may also be used
+        back: Back
+        next: Next
+        lets_start: "Let's start"
+        select_country: Select Country
+        country_info: "You can't change country on the next steps. </br> You'll need to start create new Payout Method. </br> If your country is not in the list please contact </br> support."
+        verify_home_address: Verify home address
+        verification_needed: Verification needed
+        statuses:
+          verification_in_progress: Verification in progress
+          restricted_soon: Restricted Soon
+          completed: Completed
+          restricted: Restricted

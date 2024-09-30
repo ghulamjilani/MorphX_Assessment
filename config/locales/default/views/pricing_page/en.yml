@@ -1,0 +1,83 @@
+en:
+  pricing_page:
+    banner:
+      choose_the_best_plan: Choose the best plan for your business
+      discover: Discover everything you need with 14-day Free Trial.
+      monthly: Monthly
+      yearly: Yearly
+    plans:
+      starter: Starter
+      discover_your_potential: Discover your potential
+      pro: Pro
+      start_your_business: Start your business
+      premium: Premium
+      grow_your_business: Grow your business
+      enterprise: Enterprise
+      usage_charges: "+ overage charges"
+      buy: Buy
+      or_purchase_now: or Purchase Now
+      or_start_trial: or Start Free Trial
+      no_trial: No Trial
+      unlimited: Customizable
+      live: Live
+      interactive: Interactive
+      videos: Videos
+      replays: Replays
+      over: Over
+      min: min
+      contact: Contact Sales
+    info:
+      video_creation_content_management: Video Creation & Content Management
+      channel: Channel
+      hours: hours
+      unlimited_channel: Unlimited Channel
+      max_session_duration_up_to: Max Session Duration up to
+      ios_and_android_apps: iOS and Android apps
+      interactive_conference: Video Conferencing (Virtual Meeting)
+      facility_management: Facility management (Multiroom)
+      featured_section: Featured Section
+      storage_space: Storage Space
+      customizable: Customizable
+      monetization_options: Monetization Options
+      sell_in_multiple_currencies: Sell in multiple currencies
+      subscriptions_for_channel: Subscriptions for Channel
+      split_revenue_percent: "%{percents}% revenue share"
+      ppv: PPV
+      gifting: Gifting
+      stream_shopping: In-Stream Shopping
+      online_store: Online Store
+      user_management: User Management
+      user: User
+      add: Add
+      admin: Admin
+      unlimited: Unlimited
+      admins: Admins
+      admins_&_creators: Admins & Creators
+      and: and
+      creator: Creator
+      creators: Creators
+      organization: Organization
+      admins_creators: Creators & Admins
+      organization_members_management: User Management
+      social_features: Social Features
+      integration_constant: Integration Constant contact, Mail Chimp, Zapier
+      audience_chat: Audience Chat
+      personalized_community_blog: Personalized Community Blog
+      other_video_features: Other Video Features
+      free_streaming: Ad-free Streaming
+      support_multiple_languages: Support multiple languages
+      full_uploads: Full 1080 HD Uploads
+      transcoding: Transcoding and Multi-Bitrate Streaming
+      player: Embeddable fully featured responsive HTML5 Player with Live-streaming,
+        Chat, Playlist, E-Commerce Support
+      ip_camera: IP Camera Support
+      encoder: 'Encoder Support'
+      analytics: Analytics
+      real_time: Real-Time Analytics
+      statistics: Statistics Reporting
+      support_level: Support Level
+#      two_hours_chat_support: 24/7 Live Streaming Support.Chat Support responsive within 2 hours during US business hours and overnight hours
+#      four_hours_chat_support: Support responsive within 4 hours during US business hours
+#      twenty_four_hours_chat_support: Support responsive within 24 hours during US business hours
+      unlim_hours_chat_support: 24/7 Live Streaming Support.Chat Support responsive within 2 hours during US business hours and overnight
+      free_trial_period: Free Trial Period

@@ -1,0 +1,3 @@
+<% @content = wrap_content_urls @content %>
+<% @content = perform_replacements(@content, @replacements) if @replacements.present? %>
+<%= @content %>

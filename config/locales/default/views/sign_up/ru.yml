@@ -1,0 +1,39 @@
+ru:
+  sign_up:
+    welcome_to: Добро пожаловать в
+    with_facedook: Зарегистрироваться с помощью Facebook
+    with_google: Зарегистрироваться с помощью Google
+    with_apple: Зарегистрироваться с помощью Apple
+    with_instagram: Зарегистрироваться с помощью Instagram
+    with_twitter: Зарегистрироваться с помощью Twitter
+    with_linkedin: Зарегистрироваться с помощью LinkedIn
+    with_email: Зарегистрироваться с помощью Email
+    agree_to: Я согласен с
+    have_acc: Уже есть учетная запись?
+    guest: Или войдите как гость
+    and: и
+    first_n: Имя
+    last_n: Фамилия
+    birthday: Дата рождения
+    confirm13: Я подтверждаю что мне больше 13-ти лет
+    gender: Пол
+    male: Мужчина
+    female: Женщина
+    private: Не указан
+    email: Email
+    password: Пароль
+    weak: Слабый пароль
+    sign_up: Зарегистрироваться
+    more_sign_up: Другие параметры регистрации
+    skip_for_now: Пропустить
+    log_in: Войти
+    use: Используйте как минимум
+    character: ''
+    characters: 6 символов
+    including: включая 1
+    uppercase: верхнего регистра
+    letter: ''
+    one: один
+    and_one: и одно
+    lowercase: нижнего регистра
+    numeric: число

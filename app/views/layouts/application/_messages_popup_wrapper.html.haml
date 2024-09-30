@@ -1,0 +1,34 @@
+#messagesPopup.smallScrolls.NT-wrapper.infoDR{style: 'display:none'}
+  .NT-header
+    %p
+      = unread_messages_count
+      = pluralize_no_digits unread_messages_count, 'Message', I18n.t('views.layouts.application.messages_popup_wrapper.mess_count')
+
+  .NT-body
+    %ul.BTN-row-1
+      - mailbox = current_user.mailbox
+      - conversations = mailbox.inbox.page(1).per(7)
+      - conversations.each do |conversation|
+        - cache conversation do
+          %li.clearfix{class: (conversation.is_unread?(current_user) ? 'NT-new active' : ''), 'data-conversation-id' => conversation.id}
+            .col-md-2.text-center
+              - sender = conversation.last_message.sender
+              %a{href: sender.relative_path, class: 'avatarImg-MD', style: "background-image: url('#{sender.avatar_url}')"}
+
+            .col-md-10
+              %strong
+                = link_to Rails.application.class.routes.url_helpers.preview_modal_conversation_path(conversation.id), method: :get, remote: true do
+                  %p
+                    = conversation.last_message.sender.public_display_name
+                  = conversation.subject
+              = formatted_body(conversation.last_message.body, 100)
+              .date
+                %time.timeago{datetime: conversation.last_message.created_at}
+      - if conversations.size.zero?
+        %li.clearfix.fallback.text-center
+          = I18n.t('views.layouts.application.messages_popup_wrapper.empty')
+    .doubleBTN.clearfix.lastDb{style: conversations.size.zero? ? 'display: none' : ''}
+      %a.load-more{href: '#'}
+        = I18n.t('views.layouts.application.messages_popup_wrapper.load_more')
+      %a{href: Rails.application.class.routes.url_helpers.messages_path}
+        = I18n.t('views.layouts.application.messages_popup_wrapper.view_all')

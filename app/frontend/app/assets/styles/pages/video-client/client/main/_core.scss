@@ -1,0 +1,268 @@
+
+.cm {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  // &__hl{
+  //   @include media(tablet){
+  //     height: 100%;
+  //     .cs__participants__users{
+  //       padding-left: 5rem;
+  //       padding-top: 0;
+  //       padding-bottom: 0rem;
+  //     }
+  //   }
+  // }
+  &__sharedBy {
+    font-weight: bold;
+    color: $client__tp__main;
+    padding: 1rem;
+    background: $client__bg__content__secondary;
+    border-radius: 1rem;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+
+    span {
+      color: $client__tp__secondary;
+    }
+  }
+
+  &__loader {
+    display: none;
+    background: $client__bg__main;
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__fullScreen {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+
+    video {
+      width: 100%;
+      position: fixed;
+      object-fit: cover;
+    }
+  }
+
+  &__grid {
+    width: 100%;
+    overflow: hidden;
+    -webkit-animation: fadeInAnimation .8s ease-out;
+    -moz-animation: fadeInAnimation .8s ease-out;
+    animation: fadeInAnimation .8s ease-out;
+  }
+
+  &__layout {
+    background: $client__bg__content__secondary;
+    position: relative;
+    max-width: 100%;
+    width: auto;
+    @include media(tablet) {
+      width: 100%;
+      height: 15.6rem;
+    }
+  }
+
+  &__video {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    @include flex(flex, center, center);
+    // @include media(tablet){
+    //   padding:0 ;
+    //   min-height: 100%;
+    // }
+    &__wrapper {
+      height: 100%;
+      @include media(tablet) {
+        height: calc(100% - 7rem);
+      }
+
+      &__grid {
+        overflow: hidden;
+        @include flex(flex, center, center);
+        height: 100%;
+      }
+
+      &__fullScreen {
+        height: 100%;
+        width: 100%;
+      }
+
+      &__sidebar {
+        padding: 0;
+        // @include media(tablet){
+        //   flex-direction: column;
+        // }
+      }
+    }
+
+    &__fullScreen {
+      height: 100%;
+      width: 100%;
+    }
+
+    &__empty {
+      max-width: 80vw;
+      margin: 0 auto;
+      background: #C4C4C4;
+      height: calc(100% - 18rem);
+      padding: 0;
+      margin-top: 5rem;
+    }
+
+    &__text {
+      width: 100%;
+      color: #7C7C7C; // проверить цвет
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &__presenter {
+      @include flex(flex, center, center);
+      flex-direction: column;
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding: 1rem 0;
+
+      span {
+        font-size: 1.4rem;
+        color: $client__tp__secondary;
+      }
+    }
+  }
+
+  &__goLive {
+    min-width: 15rem;
+
+    &__wrapper {
+      padding-top: 3rem;
+      @include flex(flex, center, center);
+      @include media(tablet) {
+        position: fixed;
+        bottom: 3rem;
+        width: 100%;
+      }
+    }
+  }
+
+  .spinnerSlider > div {
+    background-color: var(--tp__active);
+  }
+
+  .mutedMain {
+    transition: .5s;
+    width: 100%;
+    height: 100%;
+    @include media(tablet) {
+      position: absolute;
+      top: 0;
+      min-height: auto !important;
+    }
+  }
+
+  //if chat open in mobile
+  @include media(tablet) {
+    &__sidebar__chat {
+      .cm__video__wrapper__grid {
+        justify-content: end;
+      }
+
+      .cm__video {
+        height: 20rem;
+        min-height: 20rem;
+        max-height: 20rem;
+        position: fixed;
+        top: 4rem;
+        left: 0;
+      }
+    }
+    &__presenter__share .cm__video__share {
+      video {
+        object-fit: contain;
+      }
+    }
+    .channelFilters__icons__options__cover {
+      width: 100vw;
+      height: 100vh;
+      top: -100vh;
+    }
+  }
+
+  &__presenterNotPresent {
+    padding: 0 2rem;
+    &__info {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 2rem;
+
+      i {
+        margin-right: 2rem;
+      }
+    }
+
+    &__counter {
+      font-weight: bold;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 3rem;
+
+      span {
+        color: #F23535;
+      }
+    }
+  }
+}
+
+.mobile.landscape {
+  @include media(tablet) {
+    .chatMK2 {
+      top: 0;
+      height: 100%;
+    }
+  }
+}
+
+.mobile.landscape {
+  .cm__hl .cs__participants__users {
+    padding-left: 0;
+    padding-top: 0;
+    width: 20rem;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .cs {
+    position: fixed;
+    left: 0;
+    top: 3.5rem;
+    bottom: 5rem;
+    height: calc(100% - 4rem);
+    min-width: 100%;
+  }
+
+  .inviteParticipant {
+    overflow: auto;
+  }
+
+  .cm__video__camera.cm__h__video {
+    touch-action: none;
+  }
+}

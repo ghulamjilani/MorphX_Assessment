@@ -1,0 +1,5 @@
+en:
+  controllers:
+    wizard_v2:
+      application_controller:
+        already_creator: "Already %{creator}"

@@ -1,0 +1,25 @@
+- content_for(:page_title, "Update Session")
+- content_for(:custom_title, "Update Session : #{@session.always_present_title}")
+
+.row
+  .col-md-9.sectionBlock.rightShadow.main-content-section
+
+    = semantic_form_for([@channel, @session], url: channel_session_path(@channel.slug, @session.slug_was), html: {class: ''}) do |f|
+      = render 'fields', f: f
+
+      .row-buttons{style: 'display: none'}
+        - unless @session.started?
+          .boolean.input.control-group{style: 'display: none'}
+            %label.checkbox.choice{for: "publish_after_requested_free_session_is_satisfied_by_admin"}
+              - if @session.publish_after_requested_free_session_is_satisfied_by_admin
+                %input#publish_after_requested_free_session_is_satisfied_by_admin{name: "session[publish_after_requested_free_session_is_satisfied_by_admin]", type: "checkbox", value: "1", checked: 'checked'}
+              - else
+                %input#publish_after_requested_free_session_is_satisfied_by_admin{name: "session[publish_after_requested_free_session_is_satisfied_by_admin]", type: "checkbox", value: "1"}
+              %span#publish_after_requested_free_session_is_satisfied_by_admin_legend
+
+  .col-md-4.fakeWrapp.clearfix
+
+    - content_for(:after_include_javascripts) do
+      :javascript
+        $(function() { window.displayUsersInForm() });
+        $(function() { window.displaySessionSourcesInForm() });

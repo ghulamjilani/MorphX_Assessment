@@ -1,0 +1,20 @@
+.m-search {
+  min-width: 100%;
+  max-width: 100%;
+  position: relative;
+  display: inline-block;
+
+  input {
+    padding-right: 6rem !important;
+  }
+
+  .GlobalIcon-clear {
+    @include center(v);
+    right: 2.5rem;
+  }
+
+  > .dropdownMK2__menu {
+    width: 100%;
+    left: 0;
+  }
+}

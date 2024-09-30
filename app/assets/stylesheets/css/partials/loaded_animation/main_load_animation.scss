@@ -1,0 +1,51 @@
+@import "../../../mixin";
+.LoadingCover {
+  position: relative;
+  .spinnerSlider {
+    z-index: 99;
+    display: inline-block !important;
+  }
+  .LoadingText{
+    position: absolute;
+    top: calc(50% - 60px);
+    left: 10%;
+    width: 80%;
+    text-align: center;
+    z-index: 19;
+  }
+  &:after {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    bottom: 0;
+    z-index: 9;
+    right: 0;
+    height: 100%;
+    background: var(--bg__content);
+    width: 100%;
+    opacity: 0.9;
+    content: ''
+
+  }
+
+  &.semitransparent_LoadingCover {
+    &:after {
+      background: rgba(255, 255, 255, 0.8);
+    }
+  }
+  &.transparent_LoadingCover {
+    &:after {
+      background: transparent;
+    }
+  }
+  &.mainLoadingCover{
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 999999999;
+  }
+}

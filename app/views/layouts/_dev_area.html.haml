@@ -1,0 +1,63 @@
+.row-fluid
+  #debug-console{style: "padding: 20px; border: 2px dotted #ccc;display:none;"}
+    - unless Rails.env.production?
+      %div
+        = cache("switch_user_select:#{current_user.try(:id)}:#{User.count}") do
+          = switch_user_select
+
+      = render 'layouts/timecop' if defined?(TimecopConsole)
+      %div.sysparamModal
+        %p
+          %a.btn{"data-toggle" => "modal", 'data-target' => "#sysparamModal", role: "button"} Show system parameters
+
+        #sysparamModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+                %h3#sysparamModalLabel System Parameters
+              .modal-body
+                %table
+                  - cache("sys_params:#{SystemParameter.maximum('updated_at').to_s}") do
+                    - SystemParameter.all.each do |system_parameter|
+                      %tr
+                        %td
+                          %strong
+                            = system_parameter.key.gsub('_', ' ')
+                        %td
+                          %strong
+                            - if system_parameter.key.include?('cost') || system_parameter.key.include?('fee')
+                              = number_to_currency(system_parameter.value, precision: 2)
+                            - else
+                              = system_parameter.value
+                        %td
+                          %small
+                            = simple_format(system_parameter.description)
+              .modal-footer
+            %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+
+      .pull-right
+        %small
+          * dotted area is visible for team and users with "can_use_debug_area" flag.
+  %div
+    %a{href:'javascript:void(0);', onclick:"document.querySelector('#debug-area').classList.toggle('hidden')", style:"padding:0 5px 0 10px;margin:0 0 0 10px"}
+      Toggle debug area
+  #debug-area{style: "margin-top: 10px;"}
+    %div
+      - if current_user && current_user.platform_owner?
+        %a.btn-primary{href:'javascript:void(0);', onclick:"window.eventHub.$emit('componentSettings:toggleEditing')", style:"padding:10px;margin:10px"}
+          Toggle PageBuilder/ComponentManager
+    %div
+      - if spa
+        %a#togle-debug-console.btn-primary{href:'javascript:void(0);', style:"padding:10px;margin:10px"}
+          debug console
+      - else
+        %a#togle-debug-console.btn-primary{href:'javascript:void(0);', onclick:"jQuery('#debug-console').slideToggle();", style:"padding:10px;margin:10px"}
+          debug console
+    %div.devCustomization
+      - if spa
+        %a#togle-customization-console.btn-primary{href:'javascript:void(0);', style:"padding:10px;margin:10px"}
+          Open customization
+      - else
+        %a.btn-primary{href:'javascript:void(0);', onclick:"jQuery('html').addClass('customization-active');", style:"padding:10px;margin:10px"}
+          Open customization

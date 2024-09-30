@@ -1,0 +1,9 @@
+%a.chanelLIst-item{href: channel.relative_path, class: ('active' if channel == @channel)}
+  .img-responsive{style: "background-image: url(#{channel.image_tile_url})"}
+    .chanelLIst_name
+      .chanelLIst_name__title
+        = channel.title
+  - if channel.images.size > 1
+    .gellaryThumbnails{href: '#', title: 'Show gallery', data: {target: '#sessionsModalGallery', toggle: :modal}}
+      - channel.images.each do |image|
+        %span.avatarImg-SD{style: "background-image: url(#{image.image_preview_url})"}

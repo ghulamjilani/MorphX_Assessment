@@ -1,0 +1,438 @@
+@import "../../mixin.scss";
+.mf__landing{
+  color: #fff;
+  background: #05060B;
+  &__sectionWrapp{
+    width: 132rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  &__banner{
+    text-align: center;
+    background-image: url("https://morphx.io/images/landing/bg1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    padding: 20rem 0 1rem;
+    position: relative;
+    @include media(tablet){
+      padding: 8rem 0 1rem;
+    }
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      background: linear-gradient(75.82deg, rgba(0,0,0,0.2) 22.4%, rgba(30, 92, 170, 0.4) 100%);
+    }
+    &__videoBg{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      video{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    &__content{
+      width: 90rem;
+      max-width: 90%;
+      margin: 0 auto 3rem;
+      position: relative;
+      z-index: 19;
+      font-size: 2.2rem;
+    }
+    h1{
+      font-size: 7rem;
+      padding-top: 3rem;
+      padding-bottom: 0rem;
+      margin-bottom: 0;
+      @include media(tablet){
+        font-size: 8vw;
+      }
+    }
+    h2{
+      font-size: 33px;
+      max-width: 85%;
+      margin: .7rem auto 0rem;
+      font-family: 'Chunk';
+      @include media(tablet){
+        font-size: 4vw;
+      }
+    }
+    .btn-red{
+      text-transform: uppercase;
+      font-size: 1.6rem;
+      min-width: 20rem;
+      text-align: center;
+      margin: 11rem 0 0;
+      line-height: 5.8rem;
+    }
+  }
+  &__line-1{
+    background-image: url("https://morphx.io/images/landing/bg2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    padding: 14rem 0 7rem;
+    @include media(tablet){
+      padding: 5rem 0 5rem;
+    }
+    &__label{
+      text-align: center;
+      font-size: 18px;
+      max-width: 99rem;
+      margin: 0 auto;
+      h2{
+        text-transform: uppercase;
+        font-size: 33px;
+        padding: 0 0 1.5rem;
+        margin: 0;
+        font-family: 'Chunk';
+      }
+    }
+    &__content{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: flex-start;
+      padding: 11rem 0;
+      @include media(tablet){
+        flex-direction: column;
+      }
+      @include media(phone){
+        padding: 4rem 0 0;
+      }
+      &>div{
+        width: 20rem;
+        @include media(tablet){
+          width: 100%;
+          padding-bottom: 4rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+        }
+      }
+      span{
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  }
+  &__line-2{
+    &__label{
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 30px;
+      padding-bottom: 7rem;
+      font-family: 'Chunk';
+    }
+    &__content{
+      @include media(reverso-tablet){
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: flex-start;
+      }
+      &>div{
+        background: #282A2C;
+        @include media(reverso-tablet){
+          max-width: 90%;
+          width: 40rem;
+          margin-right: 6rem;
+          &:last-child{
+            margin-right: 0
+          }
+        }
+        @include media(tablet){
+          margin-bottom: 4rem;
+        }
+      }
+    }
+    &__imgBlock{
+      position: relative;
+      font-family: 'Chunk';
+      img{
+        width: 100%;
+      }
+      span{
+        @include center(vh);
+        font-size: 2.6rem;
+      }
+    }
+    &__textBlock{
+      padding: 4rem 2.8rem;
+      p{
+        margin-bottom: 1.8rem;
+        padding-left: 2rem;
+        position: relative;
+        &:before{
+          content: '';
+          width: 1rem;
+          height: 1rem;
+          position: absolute;
+          left: 0;
+          top: .8rem;
+          border-radius: 100%;
+          background: var(--siteColorMain);
+        }
+      }
+      .text-bold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+    &__footer{
+      padding-top: 4.5rem;
+      .btn-red{
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        min-width: 20rem;
+        text-align: center;
+        line-height: 5.8rem;
+      }
+    }
+  }
+  &__line-3 {
+    padding: 6rem 0 16rem;
+    &__label {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 30px;
+      font-family: 'Chunk';
+    }
+    &__content{
+      padding: 6rem 0 6rem;
+    }
+    &__section{
+      display: flex;
+      flex-direction: row;
+      align-content: stretch;
+      margin-bottom: 6rem;
+      background: linear-gradient(90deg, #1A2D3F 0%, #101C27 100%);
+      &__left{
+        width: 40rem;
+        min-width: 40rem;
+        max-width: 40%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+        @include media(tablet){
+          width: 8rem;
+          min-width: 8rem;
+        }
+      }
+      &__right{
+        padding: 6rem 6rem 5rem;
+        @include media(tablet){
+          padding: 1rem 1rem 1rem;
+        }
+      }
+      &__content{
+        div{
+          color: var(--fontColor-main-light);
+          border-bottom: 1px solid rgba(255,255,255,0.2);
+          padding: 1rem 0;
+          font-size: 1.4rem;
+          line-height: 2.1rem;
+        }
+      }
+      h5{
+        font-size: 22px;
+        line-height: 150%;
+        text-transform: uppercase;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        font-family: 'Chunk';
+      }
+      h6{
+        font-size: 16px;
+        line-height: 150%;
+        margin-bottom: 2.5rem;
+        padding-top: 0;
+        margin-top: 0;
+      }
+    }
+    .btn-red{
+      text-transform: uppercase;
+      font-size: 1.6rem;
+      min-width: 20rem;
+      text-align: center;
+      line-height: 5.8rem;
+    }
+  }
+
+
+  &__redBlock{
+    background: rgba(255,22,22, .8);
+    max-width: 99rem;
+    margin: 0 auto 5rem;
+    position: relative;
+    z-index: 19;
+    padding-bottom: 3rem;
+    font-family: 'Chunk';
+  }
+  &__redSmallBlock{
+    width: 20rem;
+    min-width: 20rem;
+    height: 20rem;
+    max-width: 90%;
+    background: rgba(255, 22, 22, 0.8);
+    position: relative;
+    text-align: center;
+    padding-top: 5rem;
+    font-family: 'Chunk';
+    @include media(reverso-tablet){
+      margin-bottom: 6rem;
+    }
+    @include media(tablet){
+      margin-right: 2rem;
+      padding-top: 2rem;
+    }
+    &:before{
+      content: '';
+      width: 20rem;
+      height: 20rem;
+      background: rgba(255, 22, 22, 0.4);
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      z-index:1;
+    }
+    @include media(phone){
+      width: 14rem;
+      min-width: 14rem;
+      height: 14rem;
+      &:before{
+        width: 14rem;
+        height: 14rem;
+        left: .5rem;
+        top: .5rem;
+      }
+    }
+    img{
+      width: 9rem;
+      max-width: 90%;
+      position: relative;
+      z-index: 2;
+      @include media(tablet){
+        max-width: 40%;
+      }
+    }
+    div{
+      position: relative;
+      z-index: 2;
+      padding: 2.3rem 0 0;
+      font-size: 2.6rem;
+      text-transform: uppercase;
+      @include media(tablet){
+        padding: 1.5rem 0 0;
+        font-size: 1.7rem;
+      }
+    }
+  }
+  &__tab{
+    &__nav{
+      border-bottom: 2px solid #434E5A;
+      margin-bottom: 1rem;
+      button{
+        position: relative;
+        bottom: -2px;
+        border-bottom: 2px solid transparent;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 150%;
+        text-transform: uppercase;
+        color: var(--fontColor-main-light);
+        @include media(reverso-phone){
+          margin-right: 3.8rem;
+        }
+        @include media(phone){
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+
+.mf__landing__header{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10rem;
+  padding: 5rem 6rem 0 6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 16;
+  @include media(tablet){
+    display: none;
+  }
+  button{
+    min-width: 10rem;
+    height: 4rem;
+    text-align: center;
+    border-radius: 2px;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 3.8rem;
+    margin-top: .5rem;
+    margin-left: 2rem;
+    @include transition200();
+    &:hover{
+      transform: scale(1.1);
+    }
+    &.mf__landing__btn{
+      &__solid{
+        background: #fff;
+        color: #000;
+      }
+      &__bordered{
+        color: #fff;
+      }
+    }
+  }
+  img{
+    height: 5rem;
+  }
+}
+
+
+.landingPage{
+  .header-search-wrapper{
+    display: none;
+  }
+
+  #container.main-content{
+    padding-bottom: 0;
+  }
+  &.header-top{
+    .navbar.navbar-default.transparent{
+      background: transparent;
+    }
+  }
+}
+@include media(reverso-tablet){
+  .hideDefaultHeader {
+    .navbar-default {
+      display: none;
+    }
+  }
+  .hideDefaultFooter {
+    .footerWrapper {
+      display: none;
+    }
+  }
+}

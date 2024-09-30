@@ -1,0 +1,54 @@
+@import "mixin";
+/* == pageheader.css === */
+
+/* markup template: session.html */
+
+#pageheader-row {
+  font-size: 32px;
+  position: relative;
+  z-index: 2;
+  background: var(--bg__content);
+  min-height: 39px;
+  h1{
+    float: left;
+    font-size: 1.8rem;
+    color: var(--tp__h1);
+    font-weight: bold;
+    padding: 12px 0 1px;
+    margin: 0;
+  }
+  h5 {
+    float: right;
+    color: var(--tp__h1);
+    padding: 12px 0 1px;
+    margin: 0;
+  }
+  .alert {
+    display: flex;
+    position: fixed;
+    right: 2rem;
+    top: 7rem;
+    flex-direction: row-reverse;
+    button {
+      padding-left: 1rem;
+      color: var(--tp__btn__main);
+    }
+    &.alert-success:after {
+      // top: 0;
+      top: -4px;
+    }
+    .bodyFlashMessage {
+      padding-left: 5rem;
+    }
+  }
+}
+@include media(p-tablet) {
+  #pageheader-row {
+    margin-top: 15px;
+    .container {
+      h1 {
+        padding: 8px 0 1px;
+      }
+    }
+  }
+}

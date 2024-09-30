@@ -1,0 +1,149 @@
+- content_for(:extra_body_classes, 'header-top')
+- content_for(:after_include_javascripts) do
+  :javascript
+    jQuery(document).ready(function(){
+      var selectorsList = [
+        '#ChooseTheCategory',
+        '#YourChannelStyle',
+        '#channel_title_input',
+        '#channel_tag_list_input',
+        '#channel_description_input',
+        '#channel_channel_location_input',
+        '#channel_approximate_start_date_input',
+        '#channel-form-footer'
+      ];
+
+      $.each(selectorsList, function(key, val){
+        var currentStep = key + 1;
+        jQuery(val).hover(function(){
+            jQuery('.main-content').removeClass().addClass('main-content');
+            jQuery('.arrowsmk').attr("style", "");
+            jQuery('.main-content').addClass('arrow_sp'+currentStep+' show-sp');
+            jQuery('.arrow'+currentStep+'Img').css("opacity", 1);
+            jQuery('.arrow'+currentStep+'').addClass('active');
+          }, function(){
+            jQuery('.main-content').removeClass('arrow_sp'+currentStep+' show-sp');
+            jQuery('.arrow'+currentStep+'Img').removeAttr("style")
+            jQuery('.arrow'+currentStep+'').removeClass('active');
+        });
+      });
+    });
+
+
+.row.cmk_channel_New
+  .col-md-6.step3_MainForm_block.MainForm_block_for_AffixSection
+    = f.inputs do
+      %div.FormBoxWithTooltip{style: 'font-size: 14px; color: #666'}
+        #ChooseTheCategory
+          %p.inline-block
+            Choose the category that
+            %br
+            best suits your Сhannel  *
+
+          = f.input :category,
+                    label: false,
+                    required: true,
+                    collection: channel_category_collection,
+                    include_blank: true,
+                    wrapper_html: {class: 'custom-input'},
+                    input_html: {required: true, placeholder: 'Choose a category'}
+        %i.VideoClientIcon-q5.text-color-main{rel: "tipsy", title: "Select a category that best describes your Channel."}
+
+        %hr.W500.pull-left.clearfix
+        %p.clearfix
+        #YourChannelStyle
+          %p{style: 'font-size: 14px; color: #666'} Your Channel Style
+          .row
+            .col-md-4{rel: "tipsy", title: ""}
+              %label.choice.radio
+                = instructional_channel_type_input(f.object)
+                %span
+                  Instructional
+
+            .col-md-4{rel: "tipsy", title: ""}
+              %label.choice.radio
+                = social_channel_type_input(f.object)
+                %span
+                  Social
+
+            .col-md-4{rel: "tipsy", title: "Examples:</br>Concerts/Live Music</br>Dance Recitals</br>Fashion Shows</br>Comedy Club</br>Street performing</br>Webinar events"}
+              %label.choice.radio
+                = performance_channel_type_input(f.object)
+                %span
+                  Performance
+
+        %hr.W500.pull-left.clearfix
+      %hr.W500.pull-left.clearfix
+      %div.FormBoxWithTooltip
+        = f.input :title,
+          required: true,
+          label: 'Channel Name',
+          input_html: {class: 'maxlength-tooltip', placeholder: 'e.g. Beginner Yoga or Easy Meals in 20 Minutes'},
+          wrapper_html: {class: 'custom-input'}
+        %i.VideoClientIcon-q5.text-color-main{rel: "tipsy", title: "What are you presenting? Name your channel in a way that clearly establishes what it is about (e.g. How to-, Beginners Yoga 90 Minutes, Live from the World Theater)."}
+
+      %div.FormBoxWithTooltip.tagitWrapper
+        = f.input :tag_list,
+          input_html: {class: 'tag-it', required: (controller_name == 'presenter_steps' ? false : true), value: f.object.tag_list.join(', ')},
+          required: (controller_name == 'presenter_steps' ? false : true),
+          label: 'Channel Tags',
+          wrapper_html: {class: 'custom-input'}
+        %i.VideoClientIcon-q5.text-color-main{rel: "tipsy", title: "Add at least 3 related subject tags to help your audience find your Channel"}
+
+      %div.FormBoxWithTooltip.tolTop
+        = render 'shared/bootsy', {f: f,
+          form_name: :channel,
+          field: :description,
+          label: 'Channel Description',
+          required: (controller_name == 'presenter_steps' ? false : true),
+          maxlength: LONG_TEXTAREA_MAX_LENGTH,
+          alert_unsaved: false}
+        %i.VideoClientIcon-q5.text-color-main{rel: "tipsy", title: "What is your Channel about? Tell your audience with a minimum of 160 characters."}
+
+      %hr.W500.pull-left.clearfix
+
+
+      %div.FormBoxWithTooltip
+        = f.input :channel_location,
+          required: false,
+          label: 'Channel Location',
+          input_html: {class: 'maxlength-tooltip', placeholder:'e.g. My Home, Studio, Office, A Park'},
+          wrapper_html: {class: 'custom-input'}
+        %i.VideoClientIcon-q5.text-color-main{rel: "tipsy", title: "Tell us where your Channel will be based from."}
+      %div.FormBoxWithTooltip
+        = f.input :approximate_start_date,
+          label: 'Channel Launch Date',
+          required: (controller_name == 'presenter_steps' ? false : true),
+          input_html: {class: 'maxlength-tooltip', required: (controller_name == 'presenter_steps' ? false : true), placeholder: ' e.g. July 15th, the Fall, Groundhog Day'},
+          wrapper_html: {class: 'custom-input'}
+        %i.VideoClientIcon-q5.text-color-main{rel: "tipsy", title: "Tell us when your Channel will start airing."}
+
+  .col-md-6.help_step_block.step3_help_step_block
+    .AffixSection
+      = image_tag('BecomeAPresenter/step3/bg_IMG_step3.png', alt: '', class: 'help_step_block_main_img')
+
+      = image_tag('BecomeAPresenter/step3/bg_IMG_step3_mob.png', alt: '', class: 'help_step_block_main_img_full', style:'display:none;width:100%')
+
+      = image_tag('BecomeAPresenter/step3/arrow1Img.png', alt: '', class: 'arrow1Img arrowsmk')
+      .arrow1.arrowsmkWR
+
+      = image_tag('BecomeAPresenter/step3/arrow2Img.png', alt: '', class: 'arrow2Img arrowsmk')
+      .arrow2.arrowsmkWR
+
+      = image_tag('BecomeAPresenter/step3/arrow3Img.png', alt: '', class: 'arrow3Img arrowsmk')
+      .arrow3.arrowsmkWR
+
+      = image_tag('BecomeAPresenter/step3/arrow4Img.png', alt: '', class: 'arrow4Img arrowsmk')
+      .arrow4.arrowsmkWR
+
+      = image_tag('BecomeAPresenter/step3/arrow5Img.png', alt: '', class: 'arrow5Img arrowsmk')
+      .arrow5.arrowsmkWR
+
+      = image_tag('BecomeAPresenter/step3/arrow6Img.png', alt: '', class: 'arrow6Img arrowsmk')
+      .arrow6.arrowsmkWR
+
+      = image_tag('BecomeAPresenter/step3/arrow7Img.png', alt: '', class: 'arrow7Img arrowsmk')
+      .arrow7.arrowsmkWR
+
+      = image_tag('BecomeAPresenter/step3/arrow8Img.png', alt: '', class: 'arrow8Img arrowsmk')
+      .arrow8.arrowsmkWR

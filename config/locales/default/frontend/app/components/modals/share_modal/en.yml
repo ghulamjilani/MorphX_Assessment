@@ -1,0 +1,12 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          share_modal:
+            share: Share
+            full_permalink: Full Permalink
+            short_permalink: Short Permalink
+            referral_permalink: Referral Permalink
+            embed: Embed
+            copy: copy

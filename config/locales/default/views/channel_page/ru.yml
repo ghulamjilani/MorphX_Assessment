@@ -1,0 +1,94 @@
+ru:
+  channel_page:
+    subscribe: Подписка от
+    subscribed: Подписаны
+    owner: Владелец
+    follow: Подписаться
+    unfollow: Отписаться
+    unfollow_owner: Отписаться от владельца
+    following: Подписаны
+    follow_owner: Подписаться на владельца
+    following_owner: Подписаны на владельца
+    creators: Создатели
+    search_by_name: Поиск по имени
+    subscription_plan_from: План подписки от
+    edit_channel: Изменить канал
+    message: Сообщение
+    archive_channel: Архивировать канал
+    full_link: Полная постоянная ссылка
+    short_link: Короткая постоянная ссылка
+    referal_link: Постоянная реферальная ссылка
+    copy: Копировать
+    send_a_mail: Отправить письмо
+    to: Кому
+    email: Email
+    send: Отправить
+    today: Сегодня
+    close: Закрыть
+    no_sessions_for_month: В этом месяце нет сессий
+    search_for_sessions: Search for sessions
+    live: Live
+    all_videos: Все видео
+    documents: Документы
+    reviews: Отзывы
+    community: Сообщество
+    about: О владельце
+    back_to_channel: Вернуться к каналу
+    network: Сеть
+    hide: Спрятать
+    show_more: Показать больше
+    create_new_post: Создать новый Пост
+    no_results: Нет результатов поиска
+    community_desc: Начните общаться со своими поклонниками и расскажите им, чем вы занимаетесь.
+    create_post: Создать пост
+    channel_owner: Владелец канала
+    no_posts: Пока нет публикаций.
+    followers: Подписчики
+    follow_channel: Подписаться на канал
+    unfollow_channel: Отписаться
+    following_channel: Подписаны
+    category: Категория
+    channel: Канал
+    channels: Каналы
+    language: Язык
+    since: Основан в
+    part_of: Часть
+    all: Все
+    channels_by: Каналы
+    discover: узнать больше
+    live_now: Сейчас Live
+    leave_revieww: Вам понравился этот контент? Оставьте свой отзыв!
+    leave_review: Оставить отзыв
+    no_reviews: Отзывов пока нет...
+    first_review: Оставьте отзыв первым!
+    read_less: Свернуть
+    read_more: Прочитать больше
+    no_videos: Здесь пока нет видео.
+    sessions_by: Сессии
+    view_all: Посмотреть все
+    start_interacting: Начните общаться со своими поклонниками и расскажите им, чем вы занимаетесь.
+    subscription_plans: Планы подписки
+    free_trial: Бесплатная пробная версия
+    include_streams: Онлайн-трансляции
+    include_replays: Реплеи
+    buy: Купить
+    subscription_plan_info: Информация о плане подписки
+    day: День
+    week: Неделя
+    month: Месяц
+    streams: Трансляции
+    replays: Реплеи
+    payment_method: Способ оплаты
+    credit_card: Кредитная карта
+    name_on_card: Имя на карте
+    gift_subs: Подарочная подписка другу
+    recipient_email: Введите почту получателя
+    conf_email: Подтвердите почту
+    trial_desc: '* Пробный период не входит в подарочные подписки'
+    country: Страна*
+    zip_code: Почтовый Индекс*
+    price: Стоимость
+    tax: Налог
+    total_amount: Итого
+    submit_payment: Подтвердить платеж
+    book_me: Book Me!

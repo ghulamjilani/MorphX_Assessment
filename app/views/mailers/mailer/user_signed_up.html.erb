@@ -1,0 +1,18 @@
+<p>
+  <%= I18n.t('views.mailer.conf_insruct.social_user.team', service_name: Rails.application.credentials.global[:service_name].capitalize) %>
+</p>
+
+<% title = @user.email || @user.unconfirmed_email %>
+<p>
+  Email:
+  <br>
+  <%= link_to title, service_admin_panel_user_url(@user.id) %>
+</p>
+
+<% if @user.public_display_name %>
+<p>
+  Display Name:
+  <br>
+  <%= @user.public_display_name %>
+</p>
+<% end %>

@@ -1,0 +1,115 @@
+@import "panels/profile";
+@import "panels/Chat";
+@import "panels/Donation";
+@import "panels/InviteParticipants";
+@import "panels/LiveShare";
+@import "panels/ManageAllParticipants";
+@import "panels/MenuType";
+@import "panels/Poll";
+@import "panels/ShareAWindow";
+@import "panels/Shop";
+@import "panels/TwitterFeed";
+
+.V-VideoContainer {
+  //background: #000;
+  position: absolute;
+  top: $header-height + 0.5;
+  right: $header-height  + 0.5;
+  height: calc(100% - #{$header-height});
+  text-align: right;
+  font-size: 0;
+  width: 25.4rem;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  overflow: auto;
+  z-index: 199;
+  section {
+    width: $connectedBarWidth;
+    text-align: left;
+    display: none !important;
+    vertical-align: top;
+    height: calc(33.3% - 0.533rem);
+    background: $panelBackground;
+    padding: 0.5rem;
+    padding-bottom: 1.5rem !important;
+    overflow: auto;
+    direction: ltr;
+    font-size: 13px;
+    margin: 0 0 4px 0px;
+    position: relative;
+    &.visible {
+      display: inline-block !important;
+    }
+  }
+  .scroll-x {
+    display: none !important;
+  }
+}
+
+.LoadingCover {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  &:after {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    bottom: 0;
+    z-index: 9;
+    right: 0;
+    height: 100%;
+    background: #fff;
+    width: 100%;
+    content: ''
+
+  }
+  &.semitransparent_LoadingCover {
+    &:after {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+  .spinnerSlider {
+    z-index: 99;
+    display: inline-block !important;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    top: 50%;
+    margin-top: -10px;
+    width: 70px;
+    text-align: center;
+    @include transition();
+    > div {
+      width: 18px;
+      height: 18px;
+      background-color: $siteColorMain;
+      border-radius: 100%;
+      display: inline-block;
+      -webkit-animation: bouncedelayS 1.4s infinite ease-in-out;
+      animation: bouncedelayS 1.4s infinite ease-in-out;
+      /* Prevent first frame from flickering when animation starts */
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+    .bounceS1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+    .bounceS2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+  }
+}
+
+@include keyframes(bouncedelayS) {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+  }
+}

@@ -1,0 +1,7 @@
+en:
+  custom_libs:
+    auth:
+      jwt:
+        encoder:
+          errors:
+            expired: token expired

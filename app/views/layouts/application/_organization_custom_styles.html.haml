@@ -1,0 +1,12 @@
+- content_for(:extra_body_classes, "customStyle")
+- if css = organization_custom_css
+  %style#organization_custom_css{media: "screen"}
+    :plain
+
+      :root {
+        #{raw css}
+      }
+
+:javascript
+  window.loadedOrganizationLogo = "#{organization_custom_logo_url}";
+  window.isCustomChannelLink = "#{organization_custom_channel_link}";

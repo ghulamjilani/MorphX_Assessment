@@ -1,0 +1,37 @@
+- if channel.reviews_with_comment.present?
+  .Reviews.HideTile
+    .row
+      .col-md-12
+        .section-title
+          Reviews
+          -if channel.reviews_with_comment.size > 2
+            %a.pull-right.ReviewsToggle{href: '#'}
+              %Span#R-SA See all
+              %Span#R-SL{style: 'display:none'} See less
+              %i.VideoClientIcon-navigate-down-arrow
+    .row
+      - channel.reviews_with_comment.each_slice(2) do |group_reviews|
+        .col-md-12.reviews-tile-wrapper
+          - group_reviews.each do |review|
+            .col-md-6.reviews-tile
+              - rate_created_at = review[:rate_created_at]
+              - comment         = review[:comment]
+              - stars_quantity  = review[:stars_quantity]
+              - rater           = review[:rater]
+              .row
+                .col-md-2.text-center
+                  %img.reviews-author-avatar{alt: rater.public_display_name, src: rater.avatar_url}
+                .col-md-10.padding-bottom-15
+                  %div
+                    .inline-block.reviews-author-name
+                      = link_to rater.public_display_name, rater.relative_path
+                    .inline-block.reviews-date= time_ago_in_words(rate_created_at).gsub('about', '') + ' ago'
+                  %div
+                    %ul.starRating.text-left.clearfix{title: "#{stars_quantity.round(2)}/5"}
+                      - 5.times do |index|
+                        %li
+                          %i{class: (stars_quantity >= index + 1) ? 'VideoClientIcon-starF' : (stars_quantity >= index + 0.5) ? 'VideoClientIcon-star-half-altF' : 'VideoClientIcon-star-emptyF'}
+                  - if comment.present?
+                    %div
+                      .reviews-body-text
+                        %span= simple_format(comment, {}, wrapper_tag: 'div')

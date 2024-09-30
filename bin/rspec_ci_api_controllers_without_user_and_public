@@ -1,0 +1,1 @@
+./bin/rspec --pattern "spec/controllers/api/**/*_spec.rb" --exclude-pattern="spec/controllers/api/v1/user/**/*_spec.rb,spec/controllers/api/v1/public/**/*_spec.rb"

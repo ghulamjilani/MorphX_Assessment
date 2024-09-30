@@ -1,0 +1,73 @@
+@import "../../mixin";
+
+.cssTAb{
+  & > input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    &:checked + label + .tab-content {
+      max-height: calc(100% - 96px);
+    }
+    &#tab-two:not(:checked) + label + .tab-content {
+      display: none;
+    }
+    &:checked + label i:before {
+      transform:rotate(180deg);
+    }
+  }
+  label{
+    position: relative;
+    display: block;
+    line-height: 3;
+    width: 100%;
+    padding-left: 40px;
+    cursor: pointer;
+    color: var(--tp__main);
+    @include media(phone){
+      padding-left: 12px;
+    }
+    font-size: 16px;
+    i{
+      float: right;
+      position: relative;
+      display: block;
+      line-height: inherit;
+      color: var(--tp__main);
+      margin-right: 10px;
+      &:before{
+        position: relative;
+        display: block;
+      }
+    }
+  }
+  &:not(.active){
+    #tab-two, #tab-two + label, .additions_tabs_chat{
+      display: none;
+    }
+    .additions_tabs_list{
+      height: calc(100% - 56px);
+      .track-container{
+        //overflow: auto;
+      }
+
+    }
+  }
+}
+.track-container-h{
+  font-size: 16px;
+}
+.tab-content {
+  max-height: 0;
+  padding: 0 12px 0 40px;
+  overflow: auto;
+  height: 100%;
+  @include media(phone){
+    padding: 0 12px 0 12px;
+  }
+}
+
+.show-more-container{
+  a{
+    color: var(--tp__main);
+  }
+}

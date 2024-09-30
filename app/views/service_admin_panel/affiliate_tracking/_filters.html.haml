@@ -1,0 +1,46 @@
+%form#new_q.filter_form{'accept-charset': 'UTF-8', action: '/service_admin_panel/affiliate_tracking', method: :get}
+  %input{name: 'utf8', type: :hidden, value: "✓"}/
+  -##q_refc_user_input.select.input.optional.filter_form_field.filter_select
+  -#  %label.label{for: :q_refc_user} REF USER
+    -#%select#q_refc_user{name: 'q[refc_user]'}
+    -#  %option{value: ''} Any
+    -#  - @refc_users.each do |user|
+    -#    %option{value: user.my_referral_code_text}= user.display_name
+  #q_refc_user_input.numeric.input.optional.numeric.stringish.filter_form_field.filter_numeric.select_and_search
+    %label.label{for: :q_refc_user} REF USER ID
+    %select{id: "", name: ""}
+      %option{selected: true, value: :refc_user_equals} Equals
+      %option{value: :refc_user_greater_than} Greater than
+      %option{value: :refc_user_less_than} Less than
+    %input#q_refc_user{name: 'q[refc_user_equals]', step: :any, type: :text}/
+  #q_campaign_input.numeric.input.optional.numeric.stringish.filter_form_field.filter_string
+    %label.label{for: :q_campaign} Campaign
+    %input#q_campaign{name: 'q[campaign]', step: :any, type: :text}/
+  #q_refc_input.numeric.input.optional.numeric.stringish.filter_form_field.filter_string
+    %label.label{for: :q_refc} Ref Code
+    %input#q_refc{name: 'q[refc]', step: :any, type: :text}/
+  -##q_first_input.string.input.optional.stringish.filter_form_field.filter_string.select_and_search
+  -#  %label.label{for: :q_first} First
+  -#  %select{id: '', name: ''}
+  -#    %option{selected: :selected, value: :first_contains} Contains
+  -#    %option{value: :first_equals} Equals
+  -#    %option{value: :first_starts_with} Starts with
+  -#    %option{value: :first_ends_with} Ends with
+  -#  %input#q_first{name: 'q[first_contains]', type: :text}/
+  #q_registered_input.check_boxes.input.optional.filter_form_field.filter_check_boxes
+    %fieldset.choices
+      %label{for: :q_registered}
+        %input#q_registered{name: 'q[registered]', type: :checkbox, value: :true}/
+        Registered
+  #q_not_registered_input.check_boxes.input.optional.filter_form_field.filter_check_boxes
+    %fieldset.choices
+      %label{for: :q_not_registered}
+        %input#q_not_registered{name: 'q[not_registered]', type: :checkbox, value: :true}/
+        Not Registered
+  #q_created_at_input.date_range.input.optional.stringish.filter_form_field.filter_date_range
+    %label.label Created at
+    %input#q_created_at_gteq_datetime.datepicker{maxlength: '10', name: 'q[created_at_start]', placeholder: :From, size: '12', type: :text, value: ''}/
+    %input#q_created_at_lteq_datetime.datepicker{maxlength: '10', name: 'q[created_at_end]', placeholder: :To, size: '12', type: :text, value: ''}/
+  .buttons
+    %input{name: :commit, type: :submit, value: :Filter}/
+    %a.clear_filters_btn{href: '#'} Clear Filters

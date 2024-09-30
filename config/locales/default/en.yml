@@ -1,0 +1,710 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        email: Email
+      user_account:
+        bg_image: Public Cover image
+    errors:
+      messages:
+        one_role_at_the_same_time: '%{model}: <a href="%{link}" target="_blank">"%{name}"</a> is scheduled for this time period'
+        only_digests: should not contain only digests.
+        time_overlap: '%{model}: <a href="%{link}" target="_blank">"%{name}"</a> is scheduled for this time period. Please adjust the Start time or the duration'
+      models:
+        room:
+          attributes:
+            container:
+              blank: Could not find available presenter time. Please change your session time.
+    models:
+      session: Session
+  braintree:
+    credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code: Credit card number is required.
+    credit_card_type_is_not_accepted_by_this_merchant_account_credit_card_number_is_invalid: Credit card number is invalid.
+    ? credit_card_type_is_not_accepted_by_this_merchant_account_credit_card_number_is_invalid_addresses_must_have_at_least_one_field_filled_in_postal_code_is_required_street_address_is_required
+    : |-
+      Credit card type is not accepted by this merchant account.
+      Credit card number is invalid.
+      Addresses must have at least one field filled in.
+      Postal code is required.
+      Street address is required.
+    credit_card_type_is_not_accepted_by_this_merchant_account_credit_card_number_must_be_12-19_digits: |-
+      Credit card type is not accepted by this merchant account.
+      Credit card number must be 12-19 digits.
+    cvv_is_required: CVV is required.
+    cvv_is_required_credit_card_type_is_not_accepted_by_this_merchant_account_credit_card_number_is_invalid: |-
+      CVV is required.
+      Credit card type is not accepted by this merchant account.
+      Credit card number is invalid
+    ? cvv_is_required_expiration_date_is_invalid_credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code
+    : |-
+      CVV is required.
+      Expiration date is invalid.
+      Credit card number is required.
+    cvv_is_required_expiration_date_is_required: |-
+      CVV is required.
+      Expiration date is required.
+    ? cvv_is_required_expiration_date_is_required_credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code
+    : CVV is required. Expiration date is required. Credit card number is required.
+    ? cvv_is_required_expiration_date_is_required_credit_card_number_is_required_credit_card_must_include_number_payment_method_nonce_or_venmo_sdk_payment_method_code_postal_code_is_required_street_address_is_required
+    : |-
+      CVV is required.
+      Expiration date is required.
+      Credit card number is required.
+      Postal code is required.
+      Street address is required.
+    cvv_must_be_4_digits_for_american_express_and_3_digits_for_other_card_type: CVV must be 4 digits for American Express and 3 digits for other card types.
+    cvv_must_be_4_digits_for_american_express_and_3_digits_for_other_card_types: CVV must be 4 digits for American Express and 3 digits for other card types.
+    cvv_must_be_4_digits_for_american_express_and_3_digits_for_other_card_types_expiration_date_is_invalid: |-
+      CVV must be 4 digits for American Express and 3 digits for other card types.
+      Expiration date is invalid
+    declined: Declined.
+    do_not_honor: A generic bank response which indicates simply that they are not willing to accept the transaction. The transaction may be declined due to a high level of recent activity on a card, a lack of matching AVS information, a card being over its limit, or a range of other reasons which only the bank knows
+    expiration_date_is_invalid: Expiration date is invalid.
+    gateway_rejected_avs: Please check address fields
+    gateway_rejected_avs_and_cvv: Please check address and CVV fields
+    gateway_rejected_cvv: Please check CVV
+    postal_code_is_required_street_address_is_required: |-
+      Postal code is required.
+      Street address is required.
+    ui:
+      detach_cc_to_edit: Please remove existing card first to add another one.
+  cancan:
+    unauthorized:
+      sessions:
+        because_of:
+          adult: This session is private. You must be logged in and over the age of 18 to access this session.
+          free_session_pending_review: This session is currently under review. It will be accessible to participants shortly.
+          private: This session is private. Only invited users are allowed to access it.
+  channels:
+    edit:
+      title: Edit Channel
+    new:
+      title: Create Your Channel
+    show:
+      archive_confirmation: Are you sure you want to archive the channel? This action is nonreversible
+      channel_is_being_reviewed: Your channel application is pending review. Please wait for some time and we will notify you.
+      list_confirmation: Are you sure you want to list the channel?
+      not_archivable_reason: Channel archiving is not possible if it has any upcoming sessions.
+      unlist_confirmation: Are you sure you want to unlist the channel?
+  comdined_notifications:
+    full_descr:
+      purchases_summary_for_organizer: "%{input} <span>time(s) a user purchases your session(<small>comma separated</small>).</span>"
+    labels:
+      purchases_summary_for_organizer: Send notification every
+  companies:
+    form:
+      edit:
+        title: Edit Company
+      members:
+        title: Members
+      new:
+        title: New Company
+  complete_presenter:
+    description: Here, you can produce shoppable videos and monetize on affiliate links while sharing your passion and knowledge.
+    fill_form: Please fill out the form below to introduce yourself.
+    title: Create Your Profile
+    welcome: Welcome to %{service_name}, where video meets commerce.
+  controllers:
+    changed_start_at_has_been_accepted_by_user: You have accepted the new Start Time
+    changed_start_at_has_been_declined_by_user: You have declined changed Start At
+    channels:
+      added_to_notification_list: You will be notified as soon as we have an upcoming session.
+      archived: Channel has been archived
+      create_success: Channel successfully created!
+      just_listed: Channel has been listed
+      just_unlisted: Channel has been unlisted
+      submitted_for_review: Channel has been submitted for review
+      update_success: Channel successfully updated!
+    companies:
+      create_success: Company successfully created!
+      update_success: Company successfully updated!
+    contacts:
+      create_error: This user is already present in your list of contacts
+      create_success: Contact has been successfully added.
+      destroy_success: Contact has been deleted
+    dropbox:
+      link_failed: You have declined authorization from Dropbox
+      linked_succesfully: Your Dropbox account has been successfully connected
+      unlinked_succesfully: Your Dropbox account has been successfully detached
+    mark_invitation_as_accepted_success: Invitation has been accepted.
+    mark_invitation_as_accepted_fail: 'Failed to accept invitation: %{errors_list}'
+    notifications:
+      multi_destroy_success: Notifications have been deleted
+      multi_marked_as_read: Notifications have been marked as read
+      single_destroy_success: Notification has been deleted
+    payment_method_removed: Payment method has been removed
+    pending_refunds:
+      invalid_or_outdated_request_message: This refund claiming request seems to be invalid or outdated. Please check your notifications.
+    profiles:
+      credit_card_added: Credit card has been added.
+      detached_credit_card: Credit card has been removed
+      update_success: Your profile has been successfully updated.
+      updated_notifications: Your notification settings have been updated.
+      updated_reminders: Your reminder settings have been updated.
+      update_passwor_error: 'Current password does not match.'
+    reviews:
+      session_has_been_reviewed: Session has been reviewed.
+    sessions:
+      cancel_error: Something went wrong while cancelling your session.
+      cancel_success: Session has been cancelled.
+      create_success: Session successfully created!
+      overlapped_modal_title: You have a conflict with another session. Please adjust the session by moving it to a different time or changing the duration.
+      published_success: Session has been published
+      rejected_invitation: Invitation has been rejected.
+      reject_invitation_fail: 'Failed to reject invitation: %{errors_list}.'
+      update_success: Session successfully updated!
+  dashboard:
+    mailing:
+      templates:
+        general:
+          title: 'Default template'
+        general2:
+          title: 'Default template 2'
+        general3:
+          title: 'Default template 3'
+        time_to_service:
+          title: 'Welcome to %{service_name} template'
+    channel:
+      dont_have_access: You don't have access to this channel
+    can_not_create_session_until_channel_is_approved: You can't create sessions until your channel is approved
+    cannot_manipulate_video: You cannot manipulate the video "%{video_title}".
+    move_to_another_channel:
+      button:
+        title: Move to another channel
+        one_channel_title: You have no channels available to move videos
+        label: Move to...
+  dashboards:
+    channel:
+      add_new_session: Add new Session
+    edit_contacts:
+      invite_by_email_button_html: Add to contact list
+    edit_referral:
+      could_be_used_for_sharing_in_social_media: could be used for sharing in social media
+      referral_users: Referral users
+      your_referral_code: Your referral code
+    followers:
+      you_currently_have_no_followers: You currently have no followers
+    show:
+      add_new_channel: Add new Channel
+      new_get_together: Add new Get-together
+      you_have_no_upcoming_sessions_at_this_time: You have no upcoming sessions at this time
+    wishlist:
+      no_items: There are no saved sessions/videos
+    replays:
+      no_items: There are no replays yet
+    uploads:
+      no_items: There are no uploads yet
+  errors:
+    messages:
+      rmagick_processing_error: Manipulation of uploaded file failed. Maybe it is not an image?
+  forms:
+    info:
+      description_placeholder: You have %{count} characters for your description
+      drop_image_here: Drag-n-drop photos here or
+      image_upload_tip: Choose high resolution images in order to create an awesome %{type}!
+      min_description_length: Minimum 24 characters
+      min_length: Minimum %{count} characters
+      min_tagline_length: Minimum 8 characters
+      min_tags_count: Minimum 1 tag
+      select_file: Select file to upload
+  formtastic:
+    hints:
+      user:
+        index:
+          email:
+          email_confirmation:
+          first_name:
+          last_name:
+          password:
+    labels:
+      user:
+        index:
+          email:
+    placeholders:
+      user:
+        index:
+          email:
+          email_confirmation:
+          first_name:
+          last_name:
+          password:
+    required: required
+  go_live:
+    section_1:
+      actionBtn: Get Started
+      block1:
+        text: More customers and new revenue through the power of live video
+        title: Monetization
+      block2:
+        text: Seamless injection of trusted influencers into your business
+        title: Influencing
+      block3:
+        text: Automatic distribution of your content to maximize engagement
+        title: Syndication
+    section_3:
+      list: |-
+        <li>Easily merchandise and sell products in-stream</li>
+        <li>Generate revenue via PPV, subscription, or contributions</li>
+        <li>The unified marketplace benefiting both brands and influencers</li>
+      title: Monetize Your Way
+    section_4:
+      list: |-
+        <li>Build your own live interactive multi-channel network</li>
+        <li>Customized and embedded into your business</li>
+        <li>Purpose built for audience engagement and sales conversions</li>
+      title: Your Business Live with Limitless Depth
+    section_5:
+      list: |
+        <li>Seamlessly and transparently collaborate with influencers</li>
+          <li>Bring ambassadors to your channel to maximize reach and revenue</li>
+          <li>Proprietary platform to discover, engage, and execute campaigns</li>
+      title: Power Your Business with Influencers
+    section_6:
+      list: |-
+        <li>Embed your live stream and VOD anywhere with just a few clicks</li>
+          <li>Include integrated product gallery, chat, and playlist into an embeddable frame</li>
+          <li>Simulcast your stream to Facebook, YouTube, and Periscope</li>
+      title: " Distribute and Syndicate"
+    section_7:
+      list: |-
+        <li>Go live in seconds using a pc, phone, or professional equipment</li>
+         <li>Stream one-way or interactive, free or paid, publicly or privately</li>
+         <li>Interactive product merchandising, multi-audience chat, and dynamic polling</li>
+      title: Purpose-Built Proprietary Technology
+    section_8_footer:
+      title: Let’s Talk
+    title: Enable your business with live video
+    title_2: Your all-in-one live content monetization platform
+  helpers:
+    label:
+      user:
+        index:
+          email:
+  home:
+    live_guide_blank: No sessions are currently scheduled.
+    search:
+      placeholder:
+        categories: Search categories…
+        presenters: Search presenters…
+  interactors:
+    invited_copresenter_obtained_immersive_access: You have paid for your invited co-presenter slot.
+    invited_participant_obtained_immersive_access: You have paid for your invited participant slot.
+    obtained_livestream_access: You have obtained livestream access permission to the session.
+    obtained_vod_access: You have purchased access to On-Demand Video.
+    voluntary_participant_obtained_immersive_access: You have purchased Interactive access permission to the session.
+  log_transactions:
+    boo_boo_csr_refund: 'Received system credit refund from %{service_name}'
+    credit_replenishment_with_credit_card: System credit replenishment using %{credit_card_number} credit card.
+    credit_replenishment_with_paypal: System credit replenishment using %{paypal_payer_email} PayPal email.
+    live_opt_out_from_abstract_session_after_paying: Refund for opting out from the %{abstract_session_link}
+    money_csr_refund: 'Received money refund from %{service_name}(original transaction amount was: %{original_transaction_amount}).'
+    money_refund_via_credit_card: 'Refund to credit card %{credit_card_number}. Transaction ID: %{transaction_id}, status: %{status}'
+    money_refund_via_paypal: 'Refund to %{paypal_email} PayPal email. Token ID: %{paypal_token}'
+    net_income: "%{session_link} - net income"
+    paid_for_co_presenter: Paying for co-presenter %{name} from system credit
+    purchased_immersive_abstract_session_with_credit_card: Purchased Interactive access to %{abstract_session_link} with %{credit_card_number}
+    purchased_immersive_abstract_session_with_paypal: Purchased Interactive access to %{abstract_session_link} with %{paypal_payer_email} PayPal email.
+    purchased_immersive_abstract_session_with_system_credit: Purchased Interactive access to %{abstract_session_link} with system credit.
+    purchased_livestream_session_with_credit_card: Purchased livestream access to %{session_link} with %{credit_card_number}
+    purchased_livestream_session_with_paypal: Purchased livestream access to %{session_link} with %{paypal_payer_email} PayPal email.
+    purchased_livestream_session_with_system_credit: Purchased livestream access to %{session_link} with system credit
+    purchased_recorded_session_with_credit_card: Purchased Video On-Demand for %{session_link} with %{credit_card_number}
+    purchased_recorded_session_with_paypal: Purchased Video On-Demand %{session_link} with %{paypal_payer_email} PayPal email.
+    purchased_recorded_session_with_system_credit: Purchased Video On-Demand for %{session_link} with system credit
+    referral_fee: "%{session_link} - referral fee. User's display name: %{display_name}"
+    session_cancellation_penalty: 'Penalty fee for %{session_link} being cancelled. Display names: %{display_names}'
+    session_immersive_fee: "%{session_link} - session fee"
+    system_credit_refund: System Credit Refund - was %{credit_was} became %{credit}
+    todo_completing: Completing all the steps in the to-do list.
+    vod_opt_out_from_session_after_paying: Refund for opting out from the %{abstract_session_link}
+  mailer:
+    abstract_session_cancelled_by_organiser: <a href="%{url}">%{title}</a> has been cancelled by presenter`
+    banned:
+      session:
+        body: |-
+          You have been banned from session %{abstract_session_link}.
+          Reason: %{reason}
+        subject: You have been banned from session %{name}
+    channel:
+      invite_as_creator_body: You've been invited by <a href="%{company_url}" target="_blank">%{company_name}</a> to join the <a href="%{channel_url}" target="_blank">%{channel_name}</a> channel.
+      invite_as_creator_link: To accept this invitation follow <a href="%{url}">this link</a>.
+      invite_as_creator_subject: Welcome to the %{channel_name} on %{service_name}
+      removed_as_creator_body: The channel administrator from <a href="%{brand_url}" target="_blank">%{brand_name}</a> has removed your profile from <a href="%{channel_url}" target="_blank">%{channel_name}</a>.
+      removed_as_creator_hi: Hi %{user_name}
+      removed_as_creator_mistake: If you feel like it this is an error please contact the network administrator directly.
+      removed_as_creator_subject: An update from %{brand_name} on %{service_name}.
+    channel_approved:
+      body: "Your channel %{channel_link} has been approved. \nGet started by scheduling the sessions and creating the best content for your customers!"
+    footer:
+      follow_me:
+        prefer_not_to_receive_description: new follower notifications
+        receiving_mail_because_description: you have enabled new follower notification
+      user_accepted_or_rejected_your_invitation:
+        prefer_not_to_receive_description: notifications about accepted and declined invitations
+        receiving_mail_because_description: you have enabled notifications about users accepting and declining your invitations
+      wishlist_session:
+        prefer_not_to_receive_description: wishlist notifications
+        receiving_mail_because_description: you have enabled wishlist notifications
+      you_invited:
+        prefer_not_to_receive_description: invitation notifications
+        receiving_mail_because_description: you have enabled invitation notifications
+    notify_about_1st_published_session:
+      body: "%{presenter_name} just published %{session_link} for the first time.  \n\nCheck it out!"
+      subject: Someone you follow on ${service_name} just published their first session!
+    opted_out_from_abstract_session: You have opted out from <a href="%{url}">%{title}</a>.
+    published_session_from_user_you_follow:
+      body: 'Check out this <a href="%{session_link} target="_blank">new event</a> %{date} on the %{channel_name} channel you follow. '
+      subject: "%{user_name} just posted a new event"
+    session_cancelled_body_message: 'All money charged against your account will be refunded within 24 hours. Please contact %{presenter_name} directly to reschedule. '
+    session_cancelled_body_prefix: 'We are sorry, but session: <a href="%{url}">%{title}</a> has been cancelled by %{presenter_name} due to (%{cancel_reason}).'
+    thank_you_message: |-
+      Thanks
+      - The %{service_name} Team
+    unbanned:
+      session:
+        body: You have been unbanned from session %{abstract_session_link}.
+        subject: You have been unbanned from session %{name}
+    user_greetings: Hi %{user},
+    vod_became_available_for_organizer:
+      body: |-
+        Your %{session_link} session is over its video just became available.
+
+        You are eligible to list it publicly by following %{list_link}.
+      subject: Your video %{title} just became available!
+    vod_just_became_available_for_purchase:
+      body: |-
+        Thank you for your interest!
+
+        On-demand for %{abstract_session_link} just became available. Follow %{purchase_link} to purchase it.
+      subject: On-Demand for %{abstract_session_title} just became available
+    with_invitation_token:
+      follow_link_message: To accept this invitation and join the %{kind_of_abstract_session}, click <a href="%{url}">this link</a>.
+      you_invited_message: |-
+        %{presenter_link} has invited you to join the %{kind_of_abstract_session} "%{abstract_session_link}" as %{role}.
+
+        Start time: %{start_at}.
+    without_invitation_token:
+      assign_as_presenter: |-
+        Hello. You were assigned as a presenter to the session "%{session_name}" by %{network_owner_name}. The session is starting %{start_at}.
+
+        Please follow this link %{session_link} or alternatively go to your dashboard to manage and start your session.
+      follow_link_message: To accept this invitation and join the %{kind_of_abstract_session}, click <a href="%{url}">this link</a>.
+      you_invited_message: |-
+        %{presenter_link} has invited you to join the %{kind_of_abstract_session} "%{abstract_session_link}" as %{role}.
+
+        Start time: %{start_at}.
+      you_unassigned_message: You has been detached from session "%{abstract_session_link}" as %{role}.
+  modal_windows:
+    add_as_contact: Add this user as contact
+    invite_existing_contact: Invite contact
+  no_results:
+    are_not_a_co_presenter_in_any_sessions_so_far: You are not a co-presenter in any sessions so far.
+    empty_search_results: Sorry, no sessions matched your criteria.
+    have_not_organized_any_get_togethers_so_far: You have not organized any get-togethers so far.
+    have_not_organized_any_sessions_so_far: You have not organized any sessions so far.
+    have_not_participated_in_any_get_togethers_so_far: You have not participated in any get-togethers so far.
+    have_not_participated_in_any_sessions_so_far: You have not participated in any sessions so far.
+    no_contacts: No contacts.
+    no_notifications: No notifications.
+    no_referral_users: No referral users.
+    no_reviews: No reviews.
+  notifications:
+    channel:
+      invite_as_creator_popup: <p class="FlashBox-B__ellipsis">You’ve been invited to the %{channel_name}</p> <p class="FlashBox-B__ellipsis">To represent the %{company_name} brand.</p>
+    organization:
+      invite_as_member: <p class="FlashBox-B__ellipsis">You've been invited to the %{company_name} company.</p>
+  presenter_steps:
+    info: |-
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+      Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
+  reviews:
+    can_not_comment_before_email_confirmation_message: You have to confirm your email address before continuing.
+  sessions:
+    another_one_requested: "%{user_link} has requested another one session of your channel %{channel_link}."
+    another_time_request_success: Creator will be notified about your preferred session time
+    another_time_requested: |-
+      %{user_link} has requested another time for your session %{session_link}.
+
+      Requested time:
+      <strong>%{time}</strong>
+    completed_and_ready_to_replay_message: This %{service_name} stream has ended. Click play to watch a replay.
+    form:
+      device_types:
+        desktop_advanced: Software Encoder
+        desktop_basic: Desktop Basic (Webcam)
+        mobile: Mobile App
+        professional: Hardware Encoder
+        studio_equipment: Studio Equipment (non-rtmp)
+      encoder_info: Connect your Live Stream to Streaming Services using live-streaming software or a hardware encoder.
+      ipcam_info: Connect your Live Stream to Streaming Services using IP camera or another pull-connected rtsp device, specified as a video source for the live stream.
+      mobile_info: Use this tab if you would like to schedule your mobile session here. When ready, please remember to start your Live Stream using Mobile app.
+    free_limit_message: You have exceeded the number of allocated free sessions on your plan, please contact admin for any details. Please make sure that all the payments for your sessions are processed through site.
+    no_participants: No one has joined this session yet
+    opted_out_success:
+      when_co_presenter: You are no longer in the list of co-presenters of this session.
+      when_livestream: You are no longer have livestream access to this session.
+      when_participant: You are no longer in the list of participants of this session.
+      when_recorded_member: You no longer have On-Demand access.
+    preview_cancel_modal_with_non_zero_fee: |-
+      You are about to cancel your session: %{abstract_session_link}, part of channel: %{abstract_channel_link} with %{total_users_count} registered users (of which %{paid_immersive_participants_count} are paid Interactive participants and %{paid_livestream_users_count} are paid livestream users).
+      Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session now, will cause you to incur %{per_immersive_participant_penalty_fee} for each paid Interactive and %{per_livestream_participant_penalty_fee} for each paid livestream participant the total of %{penalty_amount}.
+      For more details please refer to our %{cancellation_policy_link}. If you have additional concerns, please contact our %{customer_support} for assistance.
+    preview_cancel_modal_with_zero_fee: |-
+      You are about to cancel your session: %{abstract_session_link}, part of channel: %{abstract_channel_link} with %{total_users_count} registered users (of which %{paid_immersive_participants_count} are paid Interactive participants and %{paid_livestream_users_count} are paid livestream users).
+      Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session now, will cause you to incur no penalty fee.
+      For more details please refer to our %{cancellation_policy_link}. If you have additional concerns, please contact our %{customer_support} for assistance.
+    preview_live_opt_out_modal:
+      could_be_full_sys_credit_refund: |-
+        You are about to cancel your participation in %{abstract_session_link} session. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session, at this moment, will allow you to get full refund for the %{paid_amount} originally paid for the session. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      could_be_money_refund: |-
+        You are about to cancel your participation in %{abstract_session_link} session. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session, at this moment, will allow you to choose type of refund(system credit or money) for the %{paid_amount} originally paid for the session. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      no_refund: |-
+        You are about to cancel your participation in %{abstract_session_link} session. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session, at this moment, will not cause any refund. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      partial_refund: |-
+        You are about to cancel your participation in %{abstract_session_link} session. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session, at this moment, will cause you to loose %{loose_amount} out of %{paid_amount} originally paid for the session. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+    preview_vod_opt_out_modal:
+      could_be_full_sys_credit_refund: |-
+        You are about to cancel your %{abstract_session_link} Video On-Demand purchase. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session, at this moment, will allow you to get full refund for the %{paid_amount} originally paid for the session. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      could_be_money_refund: |-
+        You are about to cancel your On-Demand in %{abstract_session_link} session. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session, at this moment, will allow you to choose type of refund(system credit or money) for the %{paid_amount} originally paid for the session. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      no_refund: |-
+        You are about to cancel your On-Demand in %{abstract_session_link} session. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session, at this moment, will not cause any refund. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+      partial_refund: |-
+        You are about to cancel your On-Demand in %{abstract_session_link} session. Please be aware that in compliance with our %{cancellation_policy_link} cancelling this session, at this moment, will cause you to loose %{loose_amount} out of %{paid_amount} originally paid for the session. For more details please refer to our %{cancellation_policy_link}.
+        If you have additional concerns, please contact our %{customer_support} for assistance.
+    processing_replay: This Live session had ended. We are currently processing the recording. Please check back later for this cool replay
+    purchased: Purchased
+    ratings:
+      add_feedback_btn_title: Additional feedback
+      feedback_modal_title: Please enter comments here about your experience with the presenter
+      immerss_not_rules: Had issues
+      immerss_rules: All good
+      livestream_experience_title: Overall, how would you rate the live session with
+      not_available: The rating and reviews are not available prior to session start
+      not_loggined: Please login to be able to leave a rating
+      add_review: Leave a rating
+      edit_review: Edit rating
+      score1: rate 1 ;(
+      score2: rate 2 :(
+      score3: rate 3 :|
+      score4: rate 4 :)
+      score5: rate 5!
+      update_feedback_btn_title: Update feedback
+    show:
+      cancel_confirmation: Are you sure you want to cancel the session? This action is nonreversible
+      hints:
+        free_ls_descr: When the livestream starts you will be connected automatically.
+        free_ls_title: Free livestream
+        next: Next
+        reminder_description: Click the bell to get notified when this livestream starts.
+        reminder_title: Set reminder
+      messages:
+        check_replay_later: Please check back later for on-demand replay.
+        error: Something went wrong. We are working on it.
+        ls_ended: Livestream has ended.
+        ls_replay: Your on-demand replay is
+        ls_ready: ready to view
+        paused: |-
+          Please stand by.
+          <br/>
+          The livestream has been paused by the host and will resume shortly.
+        you_will_be_connected: |-
+          You will now be connected to the livestream.
+          <br/>
+          If you are not connected automatically, please reload this page.
+      player:
+        about_title: Description
+        buy_label: Buy for %{price}
+        duration_label: Session Duration %{duration} min
+        immersive:
+          free_label: "Want to be a <b>participant</b>? Reserve your spot now %{purchased}/%{total}\n                              "
+          join_as_participant: <p><a href="#" class="joinAsGuest join_interactive">Click here to join as participant</a></p>
+          paid_label: To be a <b>Participant</b> purchase your spot now %{purchased}/%{total}
+          purchased_label: When livestream starts, click JOIN button to access session as <b>Participant</b>
+        livestream:
+          free_label: This livestream is <b>free</b> to watch
+          paid_label: This livestream is paid
+          purchased_label: When livestream starts you will be connected as <b>viewer</b>
+          watch_button_label: Watch livestream
+        preview_video: This is preview video
+        contact_owner: To see this content please contact channel owner
+        paid_recording: This upload is paid
+        paid_replay: This replay is paid
+        start_at_label: Live on %{date}
+        start_soon: Please wait. Livestream starting soon.
+        subscription_btn_label: Subscribe starting %{price}
+        subscription_label: Subscribe to this channel
+        only_subscription_label: To view this content you need to become a subscriber
+        was_live_at: Was Live on %{date}
+      publish_confirmation: Are you sure you want to publish the session? This action is nonreversible
+      end_session: End Session
+      end_session_tooltip: This will stop current active session
+      wishlist:
+        add_caption: Add to WishList
+        added_caption: Saved to WishList
+    subscribe: Subscribe
+    subscribed: Subscribed
+  settings:
+    billing:
+      no_cards: No cards
+  shared:
+    contact_me: Message
+    immerssed: Purchased
+    select_cancel_reason: 'Please select a reason:'
+  sharing:
+    default_message_text: Hey, check this out!
+    channel_default_message_text: |-
+      Hey, check this out!
+      %{channel_title}
+    organization_default_message_text: |-
+      Hey, check this out!
+
+      %{organization_name}
+    presenter_default_message_text: Hey, check this out!
+    session_default_message_text: |-
+      Hey, check this out!
+      %{session_title}
+    blog_post_default_message_text: |-
+      Hey, check this post!
+      %{blog_post_title}
+  signup:
+    business:
+      profile_edit_missing_info: Please tell us a bit more about yourself and your business. This would help us to take care of you better.
+    personal:
+      profile_edit_missing_info: Please tell us a bit more about yourself. This would help us to find better content for you.
+    birthdate_tooltip: Providing your birthday helps make sure you get the right %{service_name} experience for your age. You can choose to hide this info from your timeline later if you want.
+    email_used_try_reset_password: Email %{email} has been already taken. If you forgot password, please use reset password form.
+  subscriptions:
+    create:
+      complete_message: Please complete and activate the plan you are currently on, before attempting to add a new plan.
+      max_count_reached: |-
+        The maximun number of active plans is %{max_count}.
+        Please disable an active plan before creating a new one.
+    description: Create your channel subscription here and add your plans. Activate your Subscription to make it visible on your channel.
+    plan_info:
+      subscription_plans: "Subscription Plans"
+      billed_after_trial: <div class="total_amount">%{amount}</div> billed %{period} after %{days} days free trial
+      trial_days: "%{days} days FREE TRIAL"
+      trial_days_included: "%{days} days FREE TRIAL"
+      free_trial: "FREE TRIAL"
+      include_channel_conversation: Channel Chat
+      include_interactives: "Interactive Sessions"
+      include_replays: "Replays"
+      include_streams: "Online Streams"
+      include_uploads: "Uploads"
+      add_card: Add Card
+    plans_description: Please create and enable one or more plans to make them available to your users.
+    receive_gift_subject: "%{user_name} sent you a gift!"
+    receive_gift_text: '%{user_name} sent you a gift of %{plan_name} from %{channel_name}. Please login to <a href="%{root_url}">%{host}</a> and follow the link to <a href="%{url}">%{channel_name}</a>. We hope you enjoy your gift.'
+  thank_yous:
+    obtained_session_success_message: Thank you! Your payment is complete.
+  try_live_now:
+    button_text: Try Live Now
+    schedule_success_message: Your trial Get-Together has been successfully scheduled!
+    trial_gt_ended: Your "Live Now" trial has ended. We are very excited to see you. Make a next step and become creator by clicking "START CREATING" and filling out your profile.
+    trial_gt_scheduled: You have already scheduled trial Get-Together.
+  user_roles:
+    current: You are an organizer of this %{model}
+    gt_participant: You are a participant in this get-together
+    gt_presenter: You are an organizer of this get-together
+    s_co_presenter: You are a co-presenter in this session
+    s_participant: You are a participant in this session
+    s_presenter: You are an organizer of this session
+  users:
+    show:
+      newest_reviews: Newest Reviews
+  video:
+    be_right_back: Creator will be right back
+    be_right_back_off: Creator is back
+    cam_disabled: Your web cam was disabled by presenter
+    cam_enabled: Your web cam was enabled by presenter
+    can_not_join_before_email_confirmation_message: You have to confirm your email address before joining.
+    chat_disabled: Chat was disabled by presenter
+    chat_enabled: Chat was enabled by presenter
+    client_not_running_message: Video client is not running, do you want use web plugin?
+    errors:
+      another_instance: Video Plugin error. Another instance is running?
+      fail_to_start: Video Plugin error. Failed to start Video Library
+      network_connection: Network connection error, trying to reconnect.
+    lobby:
+      banned: 'You are banned from this session. Reason: %{reason}.'
+      non_existence: The %{abstract_session_type} you are trying to join has expired.
+      not_started: The %{abstract_session_type} you are trying to join has not started yet.
+    mic_disabled: Your microphone was disabled by presenter
+    mic_enabled: Your microphone was enabled by presenter
+    nonorganizer_leave_conference: Are you sure you want to leave the %{model}?
+    organizer_stop_conference: Are you sure you want to end the %{model}?
+    select_ban_reason: Select ban reason
+    start_streaming_error_message: It could not be started right now.
+    stop_streaming_error_message: It has already ended.
+    view:
+      session:
+        end_message: Session was completed.
+        start_message: Session will start soon
+  wizard:
+    modals:
+      company_info:
+        tagline_tooltip: A tagline is a short phrase to describe your brand with a little marketing flair.
+        title: Let’s build your brand profile.
+      presenter_info:
+        bio_tooltip: Who are you? Tell the world why you're awesome with a minimum of %{count} characters.
+        email: Invite
+        email_placeholder: Invite Creators via email
+        email_tooltip: "(FIX) Tooltip example"
+        got_info: Add Creator
+        search: Search
+        search_placeholder: Search on %{service_name}
+        search_tooltip: "(FIX) Example tooltip"
+        tagline_tooltip: 'Enter a personal tagline here that best describes you or your business.'
+        talent_list_tooltip: Enter keywords that best describe your talents or expertise.
+      upload_image:
+        description: Upload Image Modal
+        title: Upload Image Modal
+      user_info:
+        available_on_demand: Allow your followers to request a private session with you
+        bio_tooltip: Who are you? Tell the world why you're awesome with a minimum of %{count} characters.
+        tagline_tooltip: Enter a personal tagline here that best describes you or your business.
+        talent_list_tooltip: Enter keywords that best describe your talents or expertise.
+        title: My Info
+    navigation:
+      step_1: STEP 1
+      step_2: STEP 2
+      step_3: STEP 3
+    step1:
+      birthday_tooltip: Providing your birthday helps make sure you get the right %{service_name} experience for your age. Your birthday will not be shared. For more details please visit our <a target='_blank' class='text-color-Blue' href='%{path}'>Privacy Policy</a>.
+      company_info: Do you own or represent a brand?
+      content_creator_title: Are you a content creator for this network?
+      description: |-
+        Congratulations on taking the first step in a quick three step process to create your very own live interactive network.
+        %{service_name} is proud to work with influencers like yourself, who want to extend their reach and grow their revenue. An %{service_name} influencer can be an individual or a brand. We provide you with all the tools necessary to create and deliver your live content, as well as engage your audience the way only live video can. Let’s take a few minutes to set up your profile!
+      phone_info: If you'd like to receive SMS notification, please provide your phone number.
+      timezone_tooltip: Providing your time zone helps with scheduling events and situates you in the marketplace for prospective users.
+      title: Welcome to the world of live interactive content - Let's get started!
+    step2:
+      add_image_by_url_info: If your URL is correct, you'll see an image preview here.
+      add_image_by_url_label: Paste in a URL to embed images, video, or other rich media...
+      desc1: Let's create the first channel in your Live Broadcast Network.
+      desc2: After it is approved, feel free to add as many channels as you need.
+      name_tooltip: What are you presenting? Name your channel in a way that clearly establishes what it is about (e.g. How to...).
+      title: Your %{service_name} Channel is your window to the world, make sure it's a good view!
+    step3:
+      channel_listing: Channel Listing
+      confirmation_modal:
+        description: 'You''re a Creator if you''ve got knowledge, skills or information you''re eager to share with the world and an audience who wants to hear from you. Let''s create exciting live content! '
+        title: Congrats for creating your live broadcast network!
+      continue: Continue to the Summary and User instructions.
+      description: Invite as many content creators as you wish to your channels. Join forces with other creatives and build your live content library.
+      list_tooltip: Once your network is approved, your channel will be listed publicly on our home page and on our %{service_name} Live Guide.
+      list_upon_approval: List publicly upon approval
+      presenter_info_error: Please fill presenter info
+      submit_button: Submit for approval
+      title: Grow your Live Network!

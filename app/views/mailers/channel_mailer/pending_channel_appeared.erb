@@ -1,0 +1,8 @@
+<p>
+  <% who = @channel.organizer ? @channel.organizer.public_display_name : @channel.organization.name %>
+  <%= who %> just submitted <%= link_to @channel.title, @channel.absolute_path, {target: "_blank"}%> for your review. Click on <%= link_to 'this link', edit_service_admin_panel_channel_url(@channel.id), {target: "_blank"}%> to process.
+</p>
+
+<p class="thank_you_message">
+  <%= simple_format I18n.t('mailer.thank_you_message', service_name: Rails.application.credentials.global[:service_name]) %>
+</p>

@@ -1,0 +1,48 @@
+:css
+  .form_V2 label.product-image {
+    cursor: pointer;
+    color: #838383;
+    width: 100%;
+  }
+- content_for(:extra_body_classes, 'header-top')
+- content_for(:after_include_javascripts) do
+  %script{type: 'text/javascript'}
+    :plain
+      (function(){
+          $(document).ready(function() {
+            Forms.ProductLists.start();
+          });
+        })();
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  #products_lists.col-md-9.main-content-section
+    - if Rails.env.development? || Rails.env.test? || user_signed_in? && current_user.can_use_debug_area?
+      .margin-bottom-20
+        = form_tag search_by_upc_products_url, method: :get, remote: true, class: 'form_V2 padding-top-0', id: :barcode_form do
+          .input-block.state-clear.required
+            = label_tag :barcode
+            = text_field_tag :barcode, nil, required: true
+            .errorContainerWrapp
+          .select-block
+            = label_tag :list_id, 'List'
+            = select_tag :list_id, options_for_select(current_user.current_organization.lists.map{|l| [l.name, l.id]}), prompt: 'Select List'
+          .select-block
+            = label_tag :session_id, 'Session'
+            = select_tag :session_id, options_for_select(Session.upcoming.where(presenter_id: current_user.presenter.id).map{|s| ["#{s.title} (#{s.in_progress? ? 'in progress' : s.start_at.strftime('%d %b %I:%M %p %Z')})", s.id]}), prompt: 'Select Session'
+          = submit_tag 'Add product', class: 'btn btn-l pull-right'
+      - content_for(:after_include_javascripts) do
+        %script{type: 'text/javascript'}
+          :plain
+            (function(){
+                $(document).ready(function() {
+                  new Forms.ProductLists.Views.BarcodeForm();
+                });
+              })();
+    .claerfix.padding-top-20
+      %h3
+        = link_to 'New List', '#', id: 'new_list', class: 'btn btn-l pull-right'
+        Create and organize your product lists
+      .lists_region.productLists
+        %p.loading Loading...
+        %p.no_lists.hidden No lists yet

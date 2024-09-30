@@ -1,0 +1,32 @@
+{{#if isSyncing}}
+    Loading...
+{{else}}
+    <div class="create_member_wrapp" {{#if isEmbed}}{{#unless isFreeSession}}style="height: 100%;"{{/unless}}{{else}}style="height: 100%;"{{/if}}>
+        {{#if isEmbed}}
+            {{#if isFreeSession}}
+                <div class="error_message" style="color: red;text-align: center;"></div>
+                <form id="create_member" action="/chat_members" data-remote method="post">
+                    <input name="webrtcservice_channel_id" type="hidden" value="{{channelId}}">
+                    <label>
+                        <span>Your Name:</span>
+                        <input type="text" name="chat_member[name]" placeholder="John Doe" required>
+                    </label>
+
+                    <label>
+                        <span>Where are you from:</span>
+                        <input type="text" name="chat_member[location]" placeholder="Dallas">
+                    </label>
+                    <div id="recaptcha"></div>
+                    <button type="submit" class="submit_btn">JOIN</button>
+                </form>
+                <div class="font-bold text-center">Or <a href="/#loginPopup" target="_blank" class="showLoginForm">sign in
+                    </a> before continue.
+                </div>
+            {{else}}
+                <strong style="z-index: 2;">You have to <a href="/#loginPopup" target="_blank" class="showLoginForm">sign in</a> before continue.</strong>
+            {{/if}}
+        {{else}}
+            <strong style="z-index: 2;">You have to <a href="/#loginPopup" target="_blank" class="showLoginForm">sign in</a> before continue.</strong>
+        {{/if}}
+    </div>
+{{/if}}

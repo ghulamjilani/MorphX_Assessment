@@ -1,0 +1,73 @@
+- content_for(:page_title, I18n.t('views.dashboard.money.my_subscriptions.page_title'))
+- content_for(:extra_body_classes, 'dashboards header-top')
+
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+
+  .col-md-9.main-content-section
+    = render 'dashboards/navigation/my_money_tabs'
+    .row
+      .col-md-12
+        - if @subscriptions.count > 0
+          .session-table.fht-table-wrapper
+            %table.table.table-hover.table-dashed-border.table-striped.responsiveTable.full-width
+              %thead
+                %tr
+                  %th
+                    = I18n.t('views.dashboard.money.my_subscriptions.date')
+                  %th
+                    = I18n.t('views.dashboard.money.my_subscriptions.interval')
+                  %th
+                    = I18n.t('views.dashboard.money.my_subscriptions.channel')
+                  %th
+                    = I18n.t('views.dashboard.money.my_subscriptions.plan')
+                  %th
+                    = I18n.t('views.dashboard.money.my_subscriptions.amount')
+                  %th
+                    = I18n.t('views.dashboard.money.my_subscriptions.status')
+                  %th
+                    = I18n.t('views.dashboard.money.my_subscriptions.next_invoice')
+                  %th
+                    = I18n.t('views.dashboard.money.my_subscriptions.actions')
+              %tbody
+                - @subscriptions.each do |ms|
+                  %tr
+                    %td{data: {th: I18n.t('views.dashboard.money.my_subscriptions.date')}}
+                      = time_with_tz_in_chosen_format(ms.created_at, false)
+                    %td{data: {th: I18n.t('views.dashboard.money.my_subscriptions.interval')}}
+                      = pluralize(ms.stripe_plan.interval_count, ms.stripe_plan.interval.capitalize)
+                    %td{data: {th: I18n.t('views.dashboard.money.my_subscriptions.channel')}}
+                      - if ms.stripe_plan&.channel_subscription&.channel
+                        = link_to ms.stripe_plan.channel_subscription.channel.title, ms.stripe_plan.channel_subscription.channel.relative_path
+                      - else
+                        = I18n.t('views.dashboard.money.my_subscriptions.unknown')
+                    %td{data: {th: I18n.t('views.dashboard.money.my_subscriptions.plan')}}
+                      = ms.stripe_plan.nickname
+                    %td{data: {th: I18n.t('views.dashboard.money.my_subscriptions.amount')}}
+                      $#{ms.stripe_plan.amount}
+                    %td{data: {th: I18n.t('views.dashboard.money.my_subscriptions.status')}}
+                      - if ms.status == 'trialing'
+                        = I18n.t('views.dashboard.money.my_subscriptions.trial_until')
+                        = time_with_tz_in_chosen_format(ms.trial_end, false)
+                      - elsif ms.canceled_at.blank? && ms.cancel_at.blank?
+                        = ms.status.humanize.capitalize
+                      - elsif ms.status == 'active'
+                        = I18n.t('views.dashboard.money.my_subscriptions.active_until')
+                        = time_with_tz_in_chosen_format(ms.cancel_at, false)
+                      - else
+                        = I18n.t('views.dashboard.money.my_subscriptions.canceled')
+                        = time_with_tz_in_chosen_format(ms.canceled_at, false)
+                    %td{data: {th: I18n.t('views.dashboard.money.my_subscriptions.next_invoice')}}
+                      - if ms.canceled_at.blank? && ms.cancel_at.blank?
+                        = time_with_tz_in_chosen_format(ms.current_period_end, false)
+                      - else
+                        —
+                    %td{data: {th: I18n.t('views.dashboard.money.my_subscriptions.actions')}}
+                      - if ms.canceled_at.blank?
+                        %a.btn.btn-m.btn-borderred-red.btn-square.full-width{href: unsubscribe_stripe_subscription_path(ms), title: I18n.t('views.dashboard.money.my_subscriptions.cancel_subscription'), data: {method: :delete, confirm: I18n.t('views.dashboard.money.my_subscriptions.you_want_unsubscribe'), disable_with: I18n.t('views.dashboard.money.my_subscriptions.processing')}}
+                          = I18n.t('views.dashboard.money.my_subscriptions.cancel')
+          .text-center
+            = paginate @subscriptions
+        - else
+          = I18n.t('views.dashboard.money.my_subscriptions.no_subscriptions')

@@ -1,0 +1,12 @@
+en:
+  components:
+    business:
+      cancel_modal:
+        cancel_subscription: Cancel Subscription
+        cancel_active_bsiness_plan: 'Сancelling your <b>%{serviceSubscriptionName}</b> business plan will close your organisation account, all the content will get removed. Your current subscription will be active till the end of your currently paid period %{date}. Please confirm the following action.'
+        cancel_bsiness_plan: 'Сancelling your %{serviceSubscriptionServiceStatus} <b>%{serviceSubscriptionName}</b> business plan will close your organisation account, all the content will get removed. Please confirm the following action.'
+        business_plan_will_expire : Business Plan will expire after
+        you_also_can: 'You also can <a href="/pricing">upgrade your subscription plan</a> to get more features for your business.'
+        btns:
+          close: Close
+          cancel_subscription: Cancel Subscription

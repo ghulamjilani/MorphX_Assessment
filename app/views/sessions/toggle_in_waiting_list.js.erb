@@ -1,0 +1,10 @@
+var container = $('.toggle-notification-setting-btn:contains(Slot)');
+<% if @result %>
+  $(container).find('i.icon-bell-alt').hide();
+  $(container).find('i.icon-ok').show();
+  $(container).next().show();
+<% else %>
+  $(container).find('i.icon-bell-alt').show();
+  $(container).find('i.icon-ok').hide();
+  $(container).next().hide();
+<% end %>

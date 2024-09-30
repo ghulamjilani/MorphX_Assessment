@@ -1,0 +1,17 @@
+en:
+  views:
+    layouts:
+      application:
+        meta_modern: "Connecting your gifts to the world"
+        meta_human: "%{service_name} - Worldwide Multi-Media"
+        footer:
+          business: "%{service_name} for Business"
+          influn:  "%{service_name} for Influencers"
+        sign_in:
+          welcome: "Welcome to %{service_name}!"
+        sign_up:
+          welcome: "Welcome to %{service_name}!"
+          agree: "I agree to %{service_name}'s"
+        todo:
+          complete: "Thank your for joining %{service_name}. Congratulations on completing your first task."
+          keep: "Don’t keep %{service_name} all to yourself, spread the word by sending an email to five of your friends to join and explore %{service_name} with you."

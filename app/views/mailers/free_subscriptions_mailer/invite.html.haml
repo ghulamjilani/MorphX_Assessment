@@ -1,0 +1,22 @@
+%a{href: @channel.absolute_path}
+  %img{src: image_url(@channel.image_gallery_url), style: 'width: 100%; border-radius: 10px;'}
+
+%p{style: "text-align: center;"}
+  = I18n.t('mailers.free_subscriptions_mailer.invite.dear_user', invited_user_name: @invited_user_name)
+
+%p{style: "text-align: center;"}
+  %img{src: image_url(@user.avatar_url), style: 'border-radius: 25px; width: 30px; height: 30px; vertical-align: middle;'}
+  %span
+    = I18n.t('mailers.free_subscriptions_mailer.invite.user_has_invited', user_name: @user.public_display_name, channel_url: @channel.absolute_path, channel_title: @channel.title).html_safe
+
+%p{style: "text-align: center; padding-bottom: 30px;"}
+  = I18n.t('mailers.free_subscriptions_mailer.invite.additional_info', subscription: (@free_subscription.duration_in_months.present? ? pluralize(@free_subscription.duration_in_months, 'Month') : ''), host_url: @host_url, host_name: @host_name, channel_url: @channel.absolute_path, channel_title: @channel.title).html_safe
+
+%p{style: "text-align: center; padding-bottom: 30px;"}
+  = "#{link_to 'Welcome', @accept_url, style: "text-decoration: none;padding: 10px; margin:0; font-style: normal; font-weight: 600; background-color: #{@btn_color};border-radius: 25px; font-size: 15px; line-height: 15px; color: #ffffff;"}".html_safe
+
+%p{style: "text-align: center;"}
+  = I18n.t('mailers.free_subscriptions_mailer.invite.can_spam_address')
+
+%p{class: "thank_you_message"}
+  = simple_format email_team_thank_you(@channel.title)

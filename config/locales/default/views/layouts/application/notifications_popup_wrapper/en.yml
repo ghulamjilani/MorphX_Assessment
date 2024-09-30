@@ -1,0 +1,11 @@
+en:
+  views:
+    layouts:
+      application:
+        notifications_popup_wrapper:
+          latest_notifications: "Latest Notifications"
+          mark_all: "Mark all as read"
+          clear_all: "Clear all"
+          load_more: "Load More"
+          view_all: "View all"
+          empty: "No notifications."

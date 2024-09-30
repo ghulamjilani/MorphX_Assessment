@@ -1,0 +1,8 @@
+en:
+  controllers:
+    api:
+      v1:
+        auth:
+          signup_tokens:
+            errors:
+              not_found: Signup token not found

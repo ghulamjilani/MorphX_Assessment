@@ -1,0 +1,13 @@
+- if @on_demand_presenter_users.present?
+  .col-md-12
+    .headline
+      %h2
+        On Demand
+    .TileSliderWrapp.owlSlider
+      .spinnerSlider
+        .bounceS1
+        .bounceS2
+        .bounceS3
+      .TileSlider.owl-carousel
+        - @on_demand_presenter_users.each do |user|
+          = render('shared/tiles/user', user: user)

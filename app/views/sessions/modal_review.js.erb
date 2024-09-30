@@ -1,0 +1,75 @@
+$(document).find('#review-modal').remove();
+window.modalBody = '<%= escape_javascript render("#{action_name}", format: :html) %>';
+$(document).one("shown.bs.modal", "#review-modal" , function(){
+
+  var $stars = $('.modal .star:visible');
+
+  if ($stars.length == 0) {
+    throw new Error("$star container could not be fould");
+  }
+
+  var $reviewTextArea = $('textarea[name*=_comment]:visible');
+  if ($reviewTextArea.length == 0) {
+    throw new Error("$reviewTextArea container could not be fould");
+  }
+
+  $stars.each(function() {
+    var $star = this;
+
+    var $readonly = ($($star).attr('data-readonly') == 'true');
+    var $half     = ($($star).attr('data-enable-half') == 'true');
+    var $halfShow = ($($star).attr('data-half-show') == 'true');
+    var $single   = ($($star).attr('data-single') == 'true');
+    var $cancel   = ($($star).attr('data-cancel') == 'true');
+
+    var onclickFunc = function(score, evt) {
+      var target = this;
+      if (score == null) { score = 0; }
+      var data = {
+        score: score,
+        dimension: $(target).attr('data-dimension'),
+        session_id: $(target).attr('data-id'),
+        klass: $(this).attr('data-classname')
+      };
+
+      var request = $.ajax({url: '<%= Rails.application.class.routes.url_helpers.review_rate_path(@session.id) %>',
+                            method: 'POST',
+                            dataType: 'script',
+                            data: data});
+      request.done(function(resp, status, data) {
+        if ($(target).attr('data-disable-after-rate') == 'true') {
+          $(target).raty('set', { readOnly: true, score: score });
+        }
+      });
+      request.error(function(data, status) {});
+    };
+
+    $($star).raty({
+      score: function() {
+        return $(this).attr('data-rating')
+      },
+      number: function() {
+        return $(this).attr('data-star-count')
+      },
+      half:        $half,
+      halfShow:    $halfShow,
+      single:      $single,
+      path:        $($star).attr('data-star-path'),
+      cancel:      $cancel,
+      cancelPlace: $($star).attr('data-cancel-place'),
+      cancelHint:  $($star).attr('data-cancel-hint'),
+      noRatedMsg:  $($star).attr('data-no-rated-message'),
+      round:       $($star).attr('data-round'),
+      space:       $($star).attr('data-space'),
+      target:      $($star).attr('data-target'),
+      targetText:  $($star).attr('data-target-text'),
+      targetType:  $($star).attr('data-target-type'),
+      targetFormat: $($star).attr('data-target-format'),
+      targetScoret: $($star).attr('data-target-score'),
+      readOnly: $readonly,
+      click: onclickFunc
+    });
+  });
+});
+
+$(modalBody).modal();

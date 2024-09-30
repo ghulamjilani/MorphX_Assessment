@@ -1,0 +1,587 @@
+@import "mixin";
+
+.ribbon .buttons a {
+  //  background: url(asset_path("videoclient/sprite.png")) 7px 14px no-repeat;
+  width: 44px;
+  height: 44px;
+  display: block;
+  margin: 0 auto !important;
+  float: none;
+  border-radius: 3px !important;
+}
+.ribbon #inCallButtonPanel > .btn-group{
+  padding-top: 10px !important;
+}
+.ribbon #inCallButtonPanel .btn{
+  color: #445766;
+  margin-bottom: 15px !important;
+  text-align: center;
+  font-size: 23px;
+  line-height: 50px;
+  padding: 0;
+  border:none !important;
+  @include transition200();
+  &:hover{
+    color: #ffffff;
+  }
+  &:active{
+    color: $video-volor-blue;
+  }
+  .VideoClientIcon-angle-rightF{
+    position: absolute;
+    right: -9px;
+    top: 3px;
+  }
+  .caret{
+    margin-top: -2px;
+    position: absolute;
+    top: 50%;
+    right: -10px;
+  }
+  .icon-glyph-8:before, .icon-glyph:before{
+    font-size: 24px!important;
+  }
+  .icon-glyph-2:before{
+    font-size: 24px!important;
+  }
+  .icon-glyph-1:before{
+    font-size: 27px;
+  }
+  .icon-glyph-5{
+    font-size: 27px;
+  }
+  .VideoClientIcon-exitFullscrean{
+    element.style {
+      display: inline-block;
+      font-size: 29px;
+      padding-top: 5px;
+      vertical-align: top;
+    }
+  }
+}
+
+#inCallButtonMuteVideo, #inCallButtonMuteSpeaker, #inCallButtonMuteMicrophone{
+  &:hover{
+    color: $video-volor-red !important;
+  }
+}
+.videoclient-camera-off, .videoclient-sound-off, .videoclient-mic-off{
+  color: $video-volor-red !important;
+}
+
+.videoclient-camera-off, .videoclient-sound-off, .videoclient-mic-off{
+  position: relative;
+  color: #374a59;
+
+  div{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+
+    &:before{
+      width: 2px;
+      height: 40px;
+      background: $video-volor-red;
+      content: '';
+      display: block;
+      position: absolute;
+    }
+    &:before{
+      left: 20px;
+      top: 1px;
+      -moz-transform: scale(1) rotate(45deg);
+      -webkit-transform: scale(1) rotate(45deg);
+      -o-transform: scale(1) rotate(45deg);
+      -ms-transform: scale(1) rotate(45deg);
+      transform: scale(1) rotate(45deg);
+    }
+  }
+}
+
+.VideoClient .VideoClientIcon-angle-rightF {
+  font-size: 16px;
+  left: 100%;
+  line-height: 20px;
+  position: absolute;
+  top: 23%;
+}
+
+
+.lobby-ping-status{
+  width: 25px;
+  height: 18px;
+  font-size: 0;
+  vertical-align: text-bottom;
+  &.ac1{
+    .l1{
+      background: red;
+    }
+  }
+  &.ac2{
+    .l1, .l2{
+      background: #ffff00;
+    }
+  }
+  &.ac3{
+    .l1, .l2, .l3{
+      background: #ffff00;
+    }
+  }
+  &.ac4{
+    .l1, .l2, .l3, .l4{
+      background: #00f400;
+    }
+  }
+  div{
+    background: #555555;
+    width: 2px;
+    height: 4px;
+    margin-right: 2px;
+    display: inline-block;
+    &.l2{
+      height: 8px;
+    }
+    &.l3{
+      height: 12px;
+    }
+    &.l4{
+      height: 16px;
+    }
+  }
+}
+
+.videoclient{
+  div.modal-body h1.heading{
+    a{
+      color: #60788e;
+      border-color: #60788e;
+    }
+  }
+}
+
+
+$recordIcon-size:10px;
+$recordIcon-color-state: #344653 ;
+$recordIcon-color-active: #c00507 ;
+$recordIcon-duration: 2s ;
+
+
+.recordIcon{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+  background-color: $recordIcon-color-state;
+  width: $recordIcon-size;
+  height: $recordIcon-size;
+  border-radius: $recordIcon-size * 0.5;
+  -webkit-border-radius: $recordIcon-size * 0.5;
+  &.active{
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+    -webkit-animation-duration: $recordIcon-duration;
+    animation-duration: $recordIcon-duration;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+  }
+}
+
+@-webkit-keyframes pulse {
+  0% { background-color:$recordIcon-color-state; }
+  50% {background-color:$recordIcon-color-active;}
+  100% { background-color:$recordIcon-color-state ; }
+}
+@keyframes pulse {
+  0% { background-color:$recordIcon-color-state ; }
+  50% {background-color:$recordIcon-color-active;}
+  100% { background-color:$recordIcon-color-state ; }
+}
+
+$MainVideoButton-size:44px;
+$MainVideoButton-color-grey:#636a6f;
+$MainVideoButton-color-LightGrey:#bbbec1;
+$MainVideoButton-color-DarkGrey:#252f37;
+$MainVideoButton-color-blue: #40d6ff;
+$MainVideoButton-color-DarkBlue: #0f7199;
+
+$circleButtonSPAN_pr1:6px;
+$circleButtonSPAN_pr2:20px;
+$circleButtonSPAN_pr3:32px;
+$circleButtonSPAN_Border-width:2px;
+
+$animation-del:1s;
+$animation-del-int:0.2;
+
+.MainVideoButton{
+  display: block;
+  margin: 0 auto 15px;
+  vertical-align: middle;
+  position: relative;
+  width: $MainVideoButton-size;
+  height: $MainVideoButton-size;
+  border-radius: $MainVideoButton-size * 0.5;
+  -webkit-border-radius: $MainVideoButton-size * 0.5;
+  border: 2px solid transparent;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count:infinite;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-name: pulse-1-light-border;
+  animation-name: pulse-1-light-border;
+  -webkit-animation-delay:$animation-del ;
+  -moz-animation-delay:$animation-del;
+  -o-animation-delay:$animation-del ;
+  animation-delay:$animation-del ;
+
+  .playButton{
+    display: none;
+    z-index: 19;
+    margin: 0 auto 15px;
+    text-align: center;
+    vertical-align: middle;
+    width: $MainVideoButton-size;
+    height: $MainVideoButton-size;
+    border-radius: $MainVideoButton-size * 0.5;
+    -webkit-border-radius: $MainVideoButton-size * 0.5;
+    border: 2px solid $MainVideoButton-color-blue;
+    background-color: $MainVideoButton-color-blue;
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    span{
+      color: #ffffff;
+      font-size: 21px;
+      line-height: $MainVideoButton-size - 4;
+      &.icon-play{
+        margin-left: 6px;
+      }
+    }
+  }
+  .circleButton{
+    padding: $MainVideoButton-size / 6;
+    position: relative;
+    z-index: 9;
+    height: $MainVideoButton-size;
+
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-name: pulse-1-light-border;
+    animation-name: pulse-1-light-border;
+    -webkit-animation-delay:$animation-del ;
+    -moz-animation-delay:$animation-del;
+    -o-animation-delay:$animation-del ;
+    animation-delay:$animation-del ;
+    span{
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+      position: absolute;
+      top: ( $MainVideoButton-size * 0.5 );
+      left: ( $MainVideoButton-size * 0.5 );
+      -webkit-animation-duration: 3s;
+      animation-duration: 3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count:infinite;
+      -webkit-animation-iteration-count:infinite;
+      @include transition200();
+      &:nth-child(1){
+        width: $circleButtonSPAN_pr1;
+        height: $circleButtonSPAN_pr1;
+        border-radius: $circleButtonSPAN_pr1 * 0.5;
+        -webkit-border-radius: $circleButtonSPAN_pr1 * 0.5;
+        background-color: $MainVideoButton-color-grey;
+        margin-top:-(($circleButtonSPAN_pr1 * 0.5) + ($circleButtonSPAN_Border-width ));
+        margin-left:-(($circleButtonSPAN_pr1 * 0.5) + ($circleButtonSPAN_Border-width ));
+        -webkit-animation-name: pulse-2-light;
+        animation-name: pulse-2-light;
+        -webkit-animation-delay:$animation-del ;
+        -moz-animation-delay:$animation-del ;
+        -o-animation-delay:$animation-del ;
+        animation-delay:$animation-del ;
+      }
+      &:nth-child(2){
+        width: $circleButtonSPAN_pr2;
+        height: $circleButtonSPAN_pr2;
+        border-radius: $circleButtonSPAN_pr2 * 0.5;
+        -webkit-border-radius: $circleButtonSPAN_pr2 * 0.5;
+        margin-top:-(($circleButtonSPAN_pr2 * 0.5) + ($circleButtonSPAN_Border-width ));
+        margin-left:-(($circleButtonSPAN_pr2 * 0.5) + ($circleButtonSPAN_Border-width ));
+
+        border-color: transparent $MainVideoButton-color-DarkGrey;
+        border-style: solid;
+        border-width: $circleButtonSPAN_Border-width;
+
+        -webkit-animation-name: pulse-1-light;
+        animation-name: pulse-1-light;
+        -webkit-animation-delay:$animation-del ;
+        -moz-animation-delay:$animation-del ;
+        -o-animation-delay:$animation-del ;
+        animation-delay:$animation-del ;
+      }
+      &:nth-child(3){
+        width: $circleButtonSPAN_pr3;
+        height: $circleButtonSPAN_pr3;
+        border-radius: $circleButtonSPAN_pr3 * 0.5;
+        -webkit-border-radius: $circleButtonSPAN_pr3 * 0.5;
+        margin-top:-(($circleButtonSPAN_pr3 * 0.5) + ($circleButtonSPAN_Border-width ));
+        margin-left:-(($circleButtonSPAN_pr3 * 0.5) + ($circleButtonSPAN_Border-width ));
+
+        border-color: transparent $MainVideoButton-color-DarkGrey;
+        border-style: solid;
+        border-width: $circleButtonSPAN_Border-width;
+
+        -webkit-animation-name: pulse-1-light;
+        animation-name: pulse-1-light;
+        -webkit-animation-delay:$animation-del ;
+        -moz-animation-delay:$animation-del;
+        -o-animation-delay:$animation-del ;
+        animation-delay:$animation-del ;
+      }
+    }
+  }
+  &.INTRdefault{
+    .playButton{
+      -webkit-animation-duration: 3s;
+      animation-duration: 3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count:infinite;
+      -webkit-animation-iteration-count:infinite;
+      -webkit-animation-name: pulse-4-widh-border-background;
+      animation-name:  pulse-4-widh-border-background;
+    }
+  }
+  &.PlayINTR{
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-name: pulse-3;
+    animation-name: pulse-3;
+    -webkit-animation-delay:$animation-del - ($animation-del-int * 1);
+    -moz-animation-delay:$animation-del - ($animation-del-int * 1);
+    -o-animation-delay:$animation-del - ($animation-del-int * 1);
+    animation-delay:$animation-del - ($animation-del-int * 1);
+    .circleButton{
+      span{
+        &:nth-child(1){
+          -webkit-animation-name: pulse-2;
+          animation-name: pulse-2;
+          -webkit-animation-delay:$animation-del - ($animation-del-int * 4);
+          -moz-animation-delay:$animation-del - ($animation-del-int * 4);
+          -o-animation-delay:$animation-del - ($animation-del-int * 4);
+          animation-delay:$animation-del - ($animation-del-int * 4);
+        }
+        &:nth-child(2){
+          -webkit-animation-name: pulse-1;
+          animation-name: pulse-1;
+          -webkit-animation-delay:$animation-del - ($animation-del-int * 3);
+          -moz-animation-delay:$animation-del - ($animation-del-int * 3);
+          -o-animation-delay:$animation-del - ($animation-del-int * 3);
+          animation-delay:$animation-del - ($animation-del-int * 3);
+        }
+        &:nth-child(3){
+          -webkit-animation-name: pulse-1;
+          animation-name: pulse-1;
+          -webkit-animation-delay:$animation-del - ($animation-del-int * 2);
+          -moz-animation-delay:$animation-del - ($animation-del-int * 2);
+          -o-animation-delay:$animation-del - ($animation-del-int * 2);
+          animation-delay:$animation-del - ($animation-del-int * 2);
+        }
+      }
+    }
+  }
+  &:hover, &.INTRdefault{
+    .playButton{
+      display: block;
+      .icon-pause{
+        display: none;
+      }
+    }
+    &.PlayINTR{
+      .playButton{
+        display: block;
+        .icon-pause{
+          display: inline-block;
+        }
+        .icon-play{
+          display: none;
+        }
+      }
+    }
+  }
+  &.waitResponse{
+    border-color: transparent $MainVideoButton-color-blue !important;
+    -webkit-animation-name: spinnerRotate;
+    animation-name: spinnerRotate;
+    -webkit-animation-delay:$animation-del - ($animation-del-int * 1);
+    -moz-animation-delay:$animation-del - ($animation-del-int * 1);
+    -o-animation-delay:$animation-del - ($animation-del-int * 1);
+    animation-delay:$animation-del - ($animation-del-int * 1);
+    span{
+      border-color:transparent $MainVideoButton-color-blue !important;
+      &:nth-child(1){
+        background-color:$MainVideoButton-color-blue !important ;
+      }
+      &:nth-child(2){
+        -webkit-animation-name: spinnerRotate;
+        animation-name: spinnerRotate;
+        -webkit-animation-delay:$animation-del - ($animation-del-int * 4);
+        -moz-animation-delay:$animation-del - ($animation-del-int * 4);
+        -o-animation-delay:$animation-del - ($animation-del-int * 4);
+        animation-delay:$animation-del - ($animation-del-int * 4);
+      }
+      &:nth-child(3){
+        -webkit-animation-name: spinnerRotate;
+        animation-name: spinnerRotate;
+        -webkit-animation-delay:$animation-del - ($animation-del-int * 2);
+        -moz-animation-delay:$animation-del - ($animation-del-int * 2);
+        -o-animation-delay:$animation-del - ($animation-del-int * 2);
+        animation-delay:$animation-del - ($animation-del-int * 2);
+      }
+    }
+  }
+}
+@-webkit-keyframes pulse-1 {
+  0% {border-color: transparent $MainVideoButton-color-blue;}
+  100% { border-color: transparent $MainVideoButton-color-DarkBlue; }
+}
+@keyframes pulse-1 {
+  0% {border-color: transparent $MainVideoButton-color-blue;}
+  100% { border-color: transparent $MainVideoButton-color-DarkBlue; }
+}
+@-webkit-keyframes pulse-2 {
+  0% {background-color:  $MainVideoButton-color-blue;}
+  100% { background-color:  $MainVideoButton-color-DarkBlue; }
+}
+@keyframes pulse-2{
+  0% {background-color:  $MainVideoButton-color-blue;}
+  100% { background-color:  $MainVideoButton-color-DarkBlue; }
+}
+@-webkit-keyframes pulse-3 {
+  0% {border-color:  $MainVideoButton-color-blue;}
+  100% { border-color:  $MainVideoButton-color-DarkBlue; }
+}
+@keyframes pulse-3 {
+  0% {border-color:  $MainVideoButton-color-blue;}
+  100% { border-color:  $MainVideoButton-color-DarkBlue; }
+}
+
+@-webkit-keyframes pulse-2-light {
+  0% {background-color:$MainVideoButton-color-LightGrey;}
+  100% { background-color:$MainVideoButton-color-grey; }
+}
+@keyframes pulse-2-light{
+  0% {background-color:  $MainVideoButton-color-LightGrey;}
+  100% { background-color:  $MainVideoButton-color-grey; }
+}
+@-webkit-keyframes pulse-1-light {
+  0% {border-color:transparent  $MainVideoButton-color-LightGrey;}
+  100% { border-color:transparent  $MainVideoButton-color-grey; }
+}
+@keyframes pulse-1-light {
+  0% {border-color:transparent  $MainVideoButton-color-LightGrey;}
+  100% { border-color:transparent  $MainVideoButton-color-grey; }
+}
+@-webkit-keyframes pulse-4-widh-border-background {
+  0% {background-color:  $MainVideoButton-color-blue;border-color:$MainVideoButton-color-blue }
+  100% { background-color:  $MainVideoButton-color-DarkBlue;border-color:$MainVideoButton-color-DarkBlue; }
+}
+@keyframes pulse-4-widh-border-background{
+  0% {background-color:  $MainVideoButton-color-blue;border-color:$MainVideoButton-color-blue}
+  100% { background-color:  $MainVideoButton-color-DarkBlue;border-color:$MainVideoButton-color-DarkBlue; }
+}
+
+@-webkit-keyframes pulse-1-light-border {
+  0% {border-color:$MainVideoButton-color-LightGrey;}
+  100% { border-color:$MainVideoButton-color-grey; }
+}
+@keyframes pulse-1-light-border {
+  0% {border-color: $MainVideoButton-color-LightGrey;}
+  100% { border-color: $MainVideoButton-color-grey; }
+}
+
+@-webkit-keyframes spinnerRotate{
+  from{-webkit-transform:rotate(0deg);transform: rotate(0deg);}
+  to{-webkit-transform:rotate(360deg);transform: rotate(360deg);}
+}
+@keyframes spinnerRotate{
+  from{-moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);}
+  to{-moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);}
+}
+
+.hiddenButtonsVideo a{
+  position: relative;
+  &#inCallButtonStopStreaming i {
+    font-size: 25px;
+    padding-left: 0;
+  }
+}
+.VideoShowMoreButton{
+  display: inline-block;
+  font-size: 7px !important;
+  letter-spacing: 1px;
+  text-align: center;
+  &:hover{
+    color: $siteColorMain !important;
+  }
+  .inCallButtonStopStreaming{
+    i{
+
+    }
+  }
+}
+#inCallButtonStopStreaming{
+  i{
+    font-size: 28px;
+    padding-left: 5px;
+  }
+}
+.waitResponseCover {
+  background: transparent none repeat scroll 0 0;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.videoclient .member{
+  a{
+    color:#445766 ;
+  }
+}

@@ -1,0 +1,78 @@
+- if followers
+  - user_followers ||= object.user_followers.includes(:image).limit(50)
+  - followers_count ||= object.user_followers.count
+- else
+  - following_users ||= object.follows.unblocked.not_deleted.limit(50)
+  - followings_count ||= object.follows.unblocked.not_deleted.count
+.followersModal.modal.fade{data: {backdrop: :static}, id: "#{id}#{object.id}"}
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+        %h4.followersModal__title
+          - if followers
+            Followers(#{followers_count})
+          - else
+            Following(#{followings_count})
+        .followersModal__body.smallScrolls
+          - if followers
+            - user_followers.each do |follower|
+              .followersModal__follower
+                %div
+                  %a{href: follower.absolute_path}
+                    %span.img-circle.followersModal__avatar{style: "background-image: url(#{follower.medium_avatar_url})"}
+                .followersModal__displayName
+                  %a{href: follower.absolute_path}
+                    = follower.public_display_name
+                .followersModal__button
+                  - if !user_signed_in?
+                    %a{href: '#', onlick: 'return false;', class: "with_tooltip_log btn btn-m btn-borderred-grey"}
+                      Follow
+                  - elsif current_user == follower
+
+                  - else
+                    = link_to (follower.toggle_follow_relative_path), method: :post, remote: true, class: "user-subscribe-#{follower.id} btn btn-m btn-borderred-grey #{current_user.following?(follower) ? 'active' : ''}" do
+                      - if !user_signed_in? || !current_user.fast_following?(follower)
+                        Follow
+                      - else
+                        Following
+                  %span.follow_tooltip_log
+                    You need to log in first
+          - else
+            - following_users.each do |follower|
+              .followersModal__follower
+                %div
+                  %a{href: follower.followable.relative_path}
+                    - if follower.followable_type === "User"
+                      %span.img-circle.followersModal__avatar{style: "background-image: url(#{follower.followable.avatar_url})"}
+                    - else 
+                      %span.img-square.followersModal__avatar{style: "background-image: url(#{follower.followable.logo_url})"}
+                .followersModal__displayName
+                  %a{href: follower.followable.relative_path}
+                    - if follower.followable_type === "User"
+                      = follower.followable.public_display_name
+                    - if follower.followable_type === "Channel"
+                      = follower.followable.title
+                    - if follower.followable_type === "Organization"
+                      = follower.followable.name
+                .followersModal__button
+                  - if !user_signed_in?
+                    %a{href: '#', onlick: 'return false;', class: "with_tooltip_log btn btn-m btn-borderred-grey"}
+                      Follow
+                  - elsif current_user == follower
+
+                  - else
+                
+                    = link_to (follower.followable.toggle_follow_relative_path), method: :post, remote: true, class: "#{follower.followable_type === "Channel" ? "channel-subscribe-#{follower.followable.id}" : ''} #{follower.followable_type === "User" ? "user-subscribe-#{follower.followable.id}" : ''} #{follower.followable_type === "Organization" ? "organization-subscribe-#{follower.followable.id}" : ''} btn btn-m btn-borderred-grey #{current_user.following?(follower.followable) ? 'active' : ''}" do
+                      - if !user_signed_in? || !current_user.fast_following?(follower.followable)
+                        - if follower.followable_type === "Channel"
+                          Follow Channel
+                        - else
+                          Follow
+                      - else
+                        - if follower.followable_type === "Channel"
+                          Following Channel
+                        - else
+                          Following
+                  %span.follow_tooltip_log
+                    You need to log in first

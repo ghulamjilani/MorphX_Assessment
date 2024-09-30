@@ -1,0 +1,20 @@
+ru:
+  log_in:
+    welcome_to: Добро пожаловать в
+    with_facedook: Войти с помощью Facebook
+    with_google: Войти с помощью Google
+    with_apple: Войти с помощью Apple
+    with_instagram: Войти с помощью Instagram
+    with_twitter: Войти с помощью Twitter
+    with_linkedin: Войти с помощью LinkedIn
+    with_email: Войти с помощью email
+    guest: Или войдите как гость
+    email: Email
+    password: Пароль
+    fill_the_form: Заполните форму
+    invalid_email: Неправильная почта или пароль.
+    log_in: Войти
+    sign_up: Зарегистрируйтесь
+    more_login: Другие параметры входа в систему
+    no_acc: Нет учетной записи?
+    forgot_pass: Забыли пароль?

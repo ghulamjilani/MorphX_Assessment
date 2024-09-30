@@ -1,0 +1,12 @@
+- content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function() {
+      $('#signupPopup, #loginPopup, #resetPasswordPopup').modal({backdrop: 'static', keyboard: false, show: false});
+      window.eventHub.$emit("open-modal:auth", "sign-up")
+      // $('#signupPopup').modal('show');
+      $('#signupPopup h4.groupTitle a, #loginPopup h4.groupTitle a').hide();
+      $('#resetPasswordPopup').on('hide.bs.modal', function (e) {
+        window.eventHub.$emit("open-modal:auth", "login")
+        // $('#loginPopup').modal('show');
+      });
+    });

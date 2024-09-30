@@ -1,0 +1,8 @@
+en:
+  views:
+    channels:
+      playlist:
+          session:
+            live: LIVE
+            private: Private
+            now: Now

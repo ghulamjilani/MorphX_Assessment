@@ -1,0 +1,91 @@
+<p>
+ Hi <%= @user.first_name %>, this is Allen from <%= Rails.application.credentials.global[:service_name] %> -- nice to meet you!
+</p>
+
+<p>
+  I noticed that you started to sign up as a presenter and didn’t quite finished the process.
+  I wanted to reach out and see if there were any questions you might have about getting started on <%= Rails.application.credentials.global[:service_name] %>.
+  Please feel free to contact me anytime.
+</p>
+
+<p>
+  In the meantime, here’s a quick walkthrough to help you with the Presenter sign up process.
+</p>
+
+<p>
+  <strong>1. Go to the button "Start Creating / Complete Business" and Set UP Your Business.</strong>
+  <p>To do this, fill in the following fields:</p>
+  <ul>
+    <li>
+      <strong>Business Name</strong> - (the name of your business);
+    </li>
+    <li>
+      <strong>About</strong> - (description of your business);
+    </li>
+    <li>
+      <strong>Business Website URL</strong> - (add the link if a website exists);
+    </li>
+    <li>
+      <strong>Business Social Media</strong> - (the ability to attach links to social networks of your business);
+    </li>
+    <li>
+      <strong>Business Logo</strong> - (adding a photo and the ability to crop it).
+    </li>
+  </ul>
+</p>
+
+<p>
+  <strong>2. Set Up Your First Channel</strong> - Go to the next step and create your first channel on <%= Rails.application.credentials.global[:service_name] %>!
+  <ul>
+    <li>
+      <strong>Channel Name</strong> - (the name of your channel);
+    </li>
+    <li>
+      <strong>Description</strong> - (description of your channel);
+    </li>
+    <li>
+      <strong>Category</strong> - (the ability to choose the most suitable from the list of categories);
+    </li>
+    <li>
+      <strong>Tags</strong> - (add one or more tags);
+    </li>
+    <li>
+      <strong>Upload Channel Cover</strong> - (upload background/picture for the cover of the channel).
+    </li>
+  </ul>
+</p>
+
+<p>
+  <strong>3. Go to the next page</strong>
+  <p>
+  You can select the checkbox "List my channel after approval"
+  (so that the channel becomes automatically visible after approving to all users and search) and click "Submit for approval".
+  </p>
+</p>
+
+<p>
+  Here’s the exciting news...after creating your channel, you will be able to start scheduling your first sessions!
+  If you take a look at the example below, you’ll see that sessions are housed directly within your Channel.
+</p>
+
+<p>
+  Example Channel:
+  <br>
+  “Yoga With Adam”
+  <br>
+   Session 1:
+  <br>
+  “Beginner Yoga” - When: August 18th - Price: $25/Seat
+  <br>
+   Session 2:
+  <br>
+  “Bikram Yoga” - When: September 9th - Price: $30/Seat
+</p>
+
+<p>
+  So what if you want to present multiple topics? No Problem! You can create as many channels as you need.
+</p>
+
+<p>
+  <%= link_to 'Click Here', @complete_presenter_profile_url %> To Complete Your Presenter Profile.
+</p>

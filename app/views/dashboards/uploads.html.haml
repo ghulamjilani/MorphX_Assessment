@@ -1,0 +1,104 @@
+- content_for(:additional_meta_tags) do
+  -#<!-- Core build with no theme, formatting, non-essential modules -->
+  %script{src: "//cdn.quilljs.com/1.3.6/quill.js"}
+  %link{href: "//cdn.quilljs.com/1.3.6/quill.snow.css", rel: "stylesheet"}
+
+- content_for(:extra_body_classes, 'header-top')
+- content_for(:page_title, 'Videos')
+.row
+  %aside.left-side-bar.col-md-3
+    = render "dashboards/navigation/#{current_user.current_role}_nav"
+  .col-md-9
+    = render "dashboards/navigation/video_on_demand_tabs"
+    .tips-vue-app.padding-bottom-15
+      = content_tag 'comp-wrapper', nil, data: { component: 'Tips', props: {type: 'uploads', dashboard: true}}.to_json
+    .main-content-section.MainForm_block_for_AffixSection
+      - if @channels.blank?
+        %p= I18n.t('dashboards.uploads.no_items')
+      - else
+        .technicalPage__label.tips__info__wrapper
+          = I18n.t('views.dashboards.uploads.uploads')
+          .tips-vue-app
+            = content_tag 'comp-wrapper', nil, data: { component: 'InfoIcon', props: {type: 'uploads'}}.to_json
+      #channels
+        :javascript
+          window.channelViews = {}
+        - @channels.each do |channel|
+          - can_monetize_content = can?(:monetize_content_by_business_plan, channel.organization)
+          - can_access_products = can?(:access_products_by_business_plan, channel.organization)
+          - can_upload_videos = can?(:upload_videos_by_business_plan, channel) && can?(:upload_recording, channel)
+          - can_edit_videos = can?(:edit_recording, channel)
+          - can_transcode_videos = can?(:transcode_recording, channel) && can?(:transcode_videos_by_business_plan, channel)
+          - can_delete_videos = can?(:delete_recording, channel)
+          - ppv_enabled = Rails.application.credentials.global[:ppv]
+          = content_for(:after_include_javascripts) do
+            :javascript
+              window.channelViews["#{channel.id}"] = new UploadsChannelView({
+                el: "#channel_#{channel.id}",
+                channel_id: '#{channel.id}',
+                autoshow: #{@channels.length == 1},
+                ppv_enabled: #{ppv_enabled},
+                can_edit_videos: #{can_edit_videos},
+                can_transcode_videos: #{can_transcode_videos},
+                can_delete_videos: #{can_delete_videos},
+                can_upload_videos: #{can_upload_videos},
+                can_monetize_content: #{can_monetize_content},
+                can_access_products: #{can_access_products}});
+              window.moveRecordingModalView = new MoveRecordingModalView({container: "#moveRecordingModalWrapper"});
+
+          .line
+          .channelSection{id: "channel_#{channel.id}", data: {channel_id: channel.id}}
+            .rc-h.rc-h__widthBtn
+              = link_to '', channel.absolute_path, class: 'channelLogo avatarImg-MD', style:"background-image:url(#{channel.image_gallery_url})"
+              .channelTitle
+                = link_to channel.title, channel.absolute_path
+              .channelDateCreate=channel.created_at.strftime('%m.%d.%Y')
+              .pull-right
+                - if can_upload_videos
+                  %a.load_picker.btn.btn-m.hidden{"data-target" => "#upload_video_modal_id_#{channel.id}", "data-toggle" => "modal", href: '#', rel: :tipsy, title: 'Add Videos'}
+                    = I18n.t('views.dashboards.uploads.add_videos')
+                - elsif cannot?(:upload_videos_by_business_plan, channel)
+                  %a.load_picker.btn.btn-m.hidden{title: 'Your need to subscribe to Business plan to use this feature', disabled: true, rel: :tipsy}
+                    = I18n.t('views.dashboards.uploads.add_videos')
+                %a.rc-b-toggle.inline-block.vertical-midle.color-grey.margin-left-15{href: '#'}
+                  .VideoClientIcon-angle-downF
+            .channelSectionBody.hidden
+            = render partial: 'dashboards/uploads/upload_modal', locals: {channel: channel}
+      #moveRecordingModalWrapper
+
+%script(type="application/xhtml+xml" id="uploadsCollectionTmpl")
+  != render 'dashboards/uploads/uploads_collection'
+%script(type="application/xhtml+xml" id="uploadItemTmpl")
+  != render 'dashboards/uploads/uploads_item'
+%script(type="application/xhtml+xml" id="uploadsGroupActionsTmpl")
+  != render 'dashboards/uploads/group_actions'
+%script(type="application/xhtml+xml" id="filterActionsTmpl")
+  != render 'dashboards/uploads/filter_actions'
+%script(type="application/xhtml+xml" id="showMoreTmpl")
+  != render 'dashboards/uploads/show_more'
+%script(type="application/xhtml+xml" id="editModalTmpl")
+  != render 'dashboards/uploads/edit_modal'
+-#%script(type="application/xhtml+xml" id="uploadModalTmpl")
+-#  != render 'dashboards/uploads/upload_modal'
+%script(type="application/xhtml+xml" id="newUploadTmpl")
+  != render 'dashboards/uploads/new'
+%script(type="application/xhtml+xml" id="moveRecordingModalTmpl")
+  != render 'dashboards/shared/move_modal'
+
+:css
+  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+#editVideo.modal.fade.editVideo{aria: {hidden: true}, role: :dialog, tabindex: -1, data: {backdrop: :static}}
+  .unobtrusive-flash-container
+  .modal-dialog
+    .modal-content
+      = render partial: 'become_presenter_steps/close_modal'
+      .modal-body
+
+:javascript
+  window.videoDefaultImg = "#{asset_url('videoDefaultImg.jpg')}";

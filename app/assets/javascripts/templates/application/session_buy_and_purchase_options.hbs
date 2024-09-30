@@ -1,0 +1,178 @@
+[% if (!purchased && !is_organizer && !immersive_sold_out) { %]
+  <a class="rightSideBarMainBtn submit-payment disabled text-center mainButton full-width margin-bottom-10 fs-20 margin-top-10 padding-top-5 padding-bottom-5 text-color-white"
+     href="{{#if obtain_type}}{{{preview_purchase_path_without_get_params}}}?type={{obtain_type}}{{else}}#{{/if}}" rel="nofollow"
+     {{#if user_is_signed_in}} data-remote="true" {{else}} onclick="buyButtonClickedByUnsignedInUser(this); return false" {{/if}}>
+     {{buy_button_label}}
+  </a>
+[% } %]
+
+<div class="right-sidebarWrapper margin-top-0 text-color-white">
+  {{#if purchased}}
+    {{#if view}}
+      {{#if opt_out_as_livestream_participant}}
+          <div class="dropdown greySelect dropdown-list">
+              <a class="dropdown-toggle full-width" data-toggle="dropdown" href="#">
+                  [% if (livestream_purchase_price == 0) { %] Enrolled [% } else { %] Purchased [% } %]
+              </a>
+              <ul class="dropdown-menu full-width">
+                {{#if change_participation_type}}
+                    <li>
+                        <a class="btn-blue-hover" href="#">Change View to Participate</a>
+                    </li>
+                {{/if}}
+                  <li>
+                      <a href="[%= Routes.sessions_preview_live_opt_out_modal_path(session_id) %]"
+                         class="btn-red-hover" data-remote="true">Cancel View</a>
+                  </li>
+              </ul>
+          </div>
+      {{else}}
+          <div class="SI-bi-main-Tittle">
+              <div class="default_title">
+                [% if (livestream_purchase_price == 0) { %] Enrolled [% } else { %] Purchased [% } %]
+              </div>
+          </div>
+      {{/if}}
+    {{else if participate}}
+      {{#if opt_out_as_immersive_participant}}
+          <div class="dropdown greySelect dropdown-list">
+              <a class="dropdown-toggle full-width" data-toggle="dropdown" href="#">
+                  [% if (immersive_purchase_price == 0) { %] Enrolled [% } else { %] Purchased [% } %]
+              </a>
+              <ul class="dropdown-menu full-width">
+                {{#if change_participation_type}}
+                    <li>
+                        <a class="btn-blue-hover" href="#">Change Participate to View</a>
+                    </li>
+                {{/if}}
+                  <li>
+                      <a href="[%= Routes.sessions_preview_live_opt_out_modal_path(session_id) %]"
+                         class="btn-red-hover" data-remote="true" style="visibility: visible;">Cancel Participation</a>
+                  </li>
+              </ul>
+          </div>
+      {{else}}
+          <div class="SI-bi-main-Tittle">
+              <div class="default_title">
+                  [% if (immersive_purchase_price == 0) { %] Enrolled [% } else { %] Purchased [% } %]
+              </div>
+          </div>
+      {{/if}}
+    {{/if}}
+  {{else}}
+      <div class="SI-bi-main-Tittle">
+          <div class="default_title">Purchase Info</div>
+          <div class="availableCounter immersive regular" style="display: none">
+            {{regular_seats_available_message}}
+          </div>
+          <div class="availableCounter immersive free_trial" style="display: none">
+            {{free_trial_seats_immersive_available_message}}
+          </div>
+          <div class="availableCounter livestream free_trial" style="display: none">
+            {{free_trial_seats_livestream_available_message}}
+          </div>
+      </div>
+
+      <div class="SI-bi">
+        {{#if livestream_delivery_method}}
+            <section class="SI-bi-title clearfix SI-bi-Livestream">
+                <label class="radio choice {{#if could_not_be_obtained}}disabled{{/if}}">
+
+                  {{#if livestream_can_have_free_trial}}
+                      <input id="checkbox_session_livestream_free_trial" name="Purchase-variant" data-cost="0"
+                             data-free-trial="1" data-type="free_livestream" type="radio">
+
+                      <div class="labelContent full-width">
+                          View
+                          <span class="pull-right">Free-Trial</span>
+                      </div>
+                  {{else if livestream_could_be_purchased}}
+                      <input id="checkbox_session_livestream_paid" data-cost="{{livestream_purchase_price}}"
+                             name="Purchase-variant" data-type="paid_livestream" type="radio">
+
+                      <div class="labelContent full-width">
+                          View
+                          <span class="pull-right">${{livestream_purchase_price}}</span>
+                      </div>
+                  {{else if livestream_can_take_for_free}}
+                      <input id="checkbox_session_livestream_free" name="Purchase-variant" type="radio" data-cost="0"
+                             data-type="free_livestream">
+
+                      <div class="labelContent full-width">
+                          View
+                          <span class="pull-right">Free</span>
+                      </div>
+                  {{else}}
+                    {{#unless livestream_could_be_purchased}}
+                        <input disabled type="radio">
+
+                        <div class="labelContent full-width">
+                            View
+                            <span class="pull-right">
+                              [% if (livestream_free_slots_available > 0) { %]
+                                  Free-Trial
+                              [% } else if (livestream_purchase_price === '0.0') { %]
+                                  Free
+                              [% } else { %]
+                                  ${{livestream_purchase_price}}
+                              [% } %]
+                            </span>
+                        </div>
+                    {{/unless}}
+                  {{/if}}
+                </label>
+            </section>
+        {{/if}}
+        {{#if immersive_delivery_method}}
+            <section class="SI-bi-title clearfix SI-bi-Immersive">
+                <label class="radio choice {{#if could_not_be_obtained}}disabled{{/if}}">
+                  {{#if immersive_can_have_free_trial}}
+                      <input id="checkbox_session_immersive_free_trial" data-cost="0" data-free-trial="1"
+                             name="Purchase-variant" data-type="free_immersive" type="radio">
+
+                      <div class="labelContent full-width">
+                          Participate
+                          <span class="pull-right">Free-Trial</span>
+                      </div>
+                  {{else if immersive_could_be_purchased}}
+                      <input id="checkbox_session_immersive_paid" data-cost="{{immersive_purchase_price}}"
+                             name="Purchase-variant" data-type="paid_immersive" type="radio">
+
+                      <div class="labelContent full-width">
+                          Participate
+                          <span class="pull-right">${{immersive_purchase_price}}</span>
+                      </div>
+                  {{else if immersive_can_take_for_free}}
+                      <input id="checkbox_session_immersive_free" name="Purchase-variant" type="radio" data-cost="0"
+                             data-type="free_immersive">
+
+                      <div class="labelContent full-width">
+                          Participate
+                          <span class="pull-right">Free</span>
+                      </div>
+                  {{else}}
+                    {{#unless immersive_could_be_purchased}}
+                        <input disabled type="radio">
+
+                        <div class="labelContent full-width">
+                            Participate
+                            <span class="pull-right">
+                              [% if (immersive_sold_out) { %]
+                                  Sold Out
+                              [% } else if (immersive_free_slots_available > 0) { %]
+                                  Free-Trial
+                              [% } else if (immersive_purchase_price === '0.0') { %]
+                                  Free
+                              [% } else { %]
+                                  ${{immersive_purchase_price}}
+                              [% } %]
+                            </span>
+                        </div>
+                    {{/unless}}
+                  {{/if}}
+                </label>
+            </section>
+        {{/if}}
+      </div>
+  {{/if}}
+</div>

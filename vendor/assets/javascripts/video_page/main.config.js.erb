@@ -1,0 +1,388 @@
+/**
+ * Defines configuration for the application
+ * @return {Object} RequireJS define object
+ */
+
+window.vidyoConfig = {
+    /* behavior */
+    enableChat: true,
+    pluginMimeType: ("application/x-vidyoweb-" + Immerss.pluginVersion), // will add version later on
+    activexType: ("VidyoInc.VidyoWeb_" + Immerss.pluginVersion), // will add version later on
+    pluginDetectionTimeout: 1000, //in ms, polling frequency
+    /* Logging */
+    enableAppLogs: <%= !Rails.env.production? %>, // main application
+    envProduction: <%= Rails.env.production? %>, //
+    envDevelopment: <%= Rails.env.development? %>, //
+    enableVidyoPluginLogs: false, // jsclient
+    enableVidyoClientLogs: false, // client
+    applicationLevelsCategories: {
+        // all: true,
+        // none: false,
+        call: "debug",
+        portal: "warning",
+        configuration: "debug",
+        login: "debug",
+        application: "info",
+        soap: "warning",
+        ui: "info",
+        callback: "info",
+        cache: "none"
+    },
+    defaultLogLevelsAndCategories: "fatal error warning info@App info@AppEvents info@AppEmcpClient info@LmiApp info@LmiH264SvcPace",
+    enableStackTrace: false,
+
+    participantRefreshTimeout: 3000, // in ms
+    /* Configuration of lib */
+    defaultPreviewMode: "PIP",
+    selfViewLoopbackPolicy: 0,
+    enableShowConfParticipantName: true,
+
+    /* Notifications */
+    notificationUserStatusTimeout: 10000,
+    enableDesktopNotifications: true, // Currently only Chrome supports it
+    /* SOAP configuration */
+    soapUserServicePath: "<%= ENV['VIDEO_SOAP_USER_SERVICE_PATH']%>",
+    /* Generic classes */
+    btnOnClass: "btn-success",
+    btnPrimaryClass: "btn-primary",
+    btnChangingClass: "btn-warning",
+
+    userWebsocketTemplate: '\
+    <div class="member">\
+        <div class="img-circle status offline_{{id}}" style="display: none;">\
+            offline\
+        </div>\
+        <a class="inCallButtonToggleMember btn" data-has-control="false" data-target="#memberModal" data-tip="{{short_name}}" data-user-id="{{id}}" data-user-role="{{role}}" data-user="{{name}}" >\
+            <img alt="{{name}}" class="img-circle" src="{{image}}">\
+        </a>\
+    </div>\
+    ',
+    inCallContainer: "#pluginWrap",
+    /* Configuration menu */
+    configurationContainer: "#configurationWrap",
+    configurationTemplate: '\
+        <div class="selectWrapp">\
+            <label>\
+                Camera\
+                <select name="Camera" class="d-block full-width" id="configurationCamera">\
+                    {{#each camera}}\
+                        {{#if isSelected}}\
+                            <option value="{{id}}" selected>{{name}}</option>\
+                        {{else}}\
+                            <option value="{{id}}">{{name}}</option>\
+                        {{/if}}\
+                    {{/each}}\
+                </select>\
+            </label>\
+        </div>\
+        <div class="selectWrapp">\
+            <label>\
+                Speaker\
+                <select name="Speaker" class="d-block full-width" id="configurationSpeaker">\
+                    {{#each speaker}}\
+                        {{#if isSelected}}\
+                            <option value="{{id}}" selected>{{name}}</option>\
+                        {{else}}\
+                            <option value="{{id}}">{{name}}</option>\
+                        {{/if}}\
+                    {{/each}}\
+                </select>\
+            </label>\
+        </div>\
+        <div class="selectWrapp">\
+            <label>\
+                Microphone\
+                <select name="Microphone" class="d-block full-width" id="configurationMicrophone">\
+                    {{#each microphone}}\
+                        {{#if isSelected}}\
+                            <option value="{{id}}" selected>{{name}}</option>\
+                        {{else}}\
+                            <option value="{{id}}">{{name}}</option>\
+                        {{/if}}\
+                    {{/each}}\
+                </select>\
+            </label>\
+        </div>\
+        <div class="mb10"></div>\
+        <div class="checkBox-type1">\
+            <label>\
+                {{#if echoCancel}}\
+                    <input type="checkbox" name="EchoCancel" id="configurationEchoCancel" checked>\
+                {{else}}\
+                    <input type="checkbox" name="EchoCancel" id="configurationEchoCancel">\
+                {{/if}}\
+                <span>\
+                    Echo cancellation\
+                </span>\
+            </label>\
+        </div>\
+        <div class="checkBox-type1">\
+            <label>\
+                {{#if autoGain}}\
+                    <input type="checkbox" name="AutoGain" id="configurationAutoGain" checked>\
+                {{else}}\
+                    <input type="checkbox" name="AutoGain" id="configurationAutoGain">\
+                {{/if}}\
+                <span>\
+                    Microphone auto level\
+                </span>\
+            </label>\
+        </div>\
+        <div class="checkBox-type1">\
+            <label>\
+                {{#if hideParticipants}}\
+                    <input type="checkbox" name="HideParticipants" id="configurationHideParticipants" checked>\
+                {{else}}\
+                    <input type="checkbox" name="HideParticipants" id="configurationHideParticipants">\
+                {{/if}}\
+                <span>\
+                    Hide participant names\
+                </span>\
+            </label>\
+        </div>\
+        <div class="selectWrapp">\
+            <label>\
+                Self view from server\
+                <select name="SelfViewLoopbackPolicy" class="d-block full-width" id="configurationSelfViewLoopbackPolicy">\
+                    {{#each selfViewLoopbackPolicy}}\
+                        {{#if isSelected}}\
+                            <option value="{{value}}" selected>{{name}}</option>\
+                        {{else}}\
+                            <option value="{{value}}">{{name}}</option>\
+                        {{/if}}\
+                    {{/each}}\
+                </select>\
+            </label>\
+        </div>\
+        <div class="sectionTitle"> Manage Pin </div>\
+        <div class="switcher double mb20 STATIC_DATA" id="inCallButtonToggleLayout">\
+            <div>\
+                <input checked="checked" id="PinOn" type="radio"></input>\
+                <label class="pinok" for="PinOn">On</label>\
+            </div>\
+            <div>\
+                <input id="PinOff" type="radio"></input>\
+                <label class="pinnotok" for="PinOff">Off</label>\
+            </div>\
+        </div>\
+        ',
+    /* Login menu inputs */
+
+    pingImageUrl: "<%=ENV['VIDEO_PORTAL_PING_IMAGE_URL']%>",
+    /* Plugin object */
+    pluginContainer: "#pluginWrap",
+    pluginAndChatContainer: "#pluginAndChatContainer",
+    pluginIdName: "immerssPlugin",
+    pluginTemplate: "<object id='{{id}}' type='{{mimeType}}'>",
+    pluginWidth: '100%',
+    pluginHeight:'100%',
+    pluginInstallInstructionsTemplate: "\
+{{#if unkOs}}\
+We are sorry but our service does not support your operating system yet\
+{{else}}\
+<h5>Looks like <span>Plugin is not installed!</span> Please follow the steps for a quick fix.</h5>\
+<ol>\
+{{#if mac}}<li class='step1'><div class='step1-img'></div><h5>Download</h5>Download Web Plugin for Apple OSX <div class='text-center'><a class='btn btn-small DWPluginBtn' href='<%= Rails.application.routes.url_helpers.download_client_profile_path(client: :web_mac) %>'>DOWNLOAD</a></div></li>{{/if}}\
+{{#if win}}<li class='step1'><div class='step1-img'></div><h5>Download</h5>Download Web Plugin for Microsoft Windows <div class='text-center'><a class='btn btn-small' href='<%= Rails.application.routes.url_helpers.download_client_profile_path(client: :web_win) %>'>DOWNLOAD</a></div></li>{{/if}}\
+<li class='step2'><div class='step2-img'></div><h5>Install</h5>Please <span>install the plugin</span> by running<br/> the installer after the download.</li>\
+<li class='step3'><div class='step3-img'></div><h5>Allow</h5>Please <span>allow Web Plugin</span> to access this</br> page</br></br> Video client will start automatically</br> when plugin is installed.</li>\
+</ol>\
+<p><small>&copy; 2015 <a href='https://unite.live'>Unite</a>. All rights reserved.</small></p>\
+{{/if}}\
+    ",
+    pluginEnableInstructionsTemplate: "\
+    <p>\
+        <h5><span>Plugin is not enabled in the browser</span><br/><br/>Please allow Web plugin to access this page.</h5>\
+    </p>\
+    ",
+    /* In call UI */
+    inCallChatContainer: "#inCallChatContainer",
+    inCallButtonPanel: "#inCallButtonPanel",
+    inCallButtonMuteVideo: "#inCallButtonMuteVideo",
+    inCallButtonMuteSpeaker: "#inCallButtonMuteSpeaker",
+    inCallButtonMuteMicrophone: "#inCallButtonMuteMicrophone",
+    inCallButtonShare: "#inCallButtonShare",
+    inCallButtonLocalShare: "#inCallButtonLocalShare",
+    inCallButtonToggleLayout: "#inCallButtonToggleLayout",
+    inCallButtonFullpage: "#inCallButtonFullpage",
+    inCallButtonFullscreen: "#inCallButtonFullscreen",
+    inCallButtonChat: "#inCallButtonChat",
+    inCallButtonBan: "#inCallButtonBan",
+    inCallButtonDisconnect: "#inCallButtonDisconnect",
+    inCallButtonStartStreaming: "#inCallButtonStartStreaming",
+    inCallButtonStopStreaming: "#inCallButtonStopStreaming",
+    inCallButtonStartRecord: "#inCallButtonStartRecord",
+    inCallButtonStopRecord: "#inCallButtonStopRecord",
+    inCallButtonTogglePreview: "#inCallButtonTogglePreview",
+    inCallButtonToggleConfig: "#inCallButtonToggleConfig",
+    inCallButtonToggleInvite: "#inCallButtonToggleInvite",
+    inCallButtonToggleMember: ".inCallButtonToggleMember",
+    inCallLocalShareList: "#inCallLocalShareList",
+    inCallShareList: "#inCallShareList",
+    inCallSelectedShareClass: "inCallSelectedShare",
+    inCallSelectedLocalShareClass: "inCallSelectedLocalShare",
+    /* Panels */
+    inCallChatTabs: "#inCallChatTabs",
+    inCallChatPanes: "#inCallChatPanes",
+    inCallChatTextField: "#inCallChatTextField",
+    inCallChatTextSend: "#inCallChatTextSend",
+    inCallChatGroupTabLink: "#inCallChatGroupTabLink",
+    inCallChatGroupPane: "#inCallChatGroupPane",
+    inCallChatGroupTab: "#inCallChatGroupTab",
+    inCallChatForm: "#inCallChatForm",
+    inCallChatMinimizeLink: "#inCallChatMinimizeLink",
+    inCallChatTabTemplate: '<li data-uri="{{uri}}" id="chatTab{{endpointId}}"><a href="#chatPane{{endpointId}}" data-uri="{{uri}}" data-missed="{{numMissed}}">{{name}}&nbsp;<span class="badge badge-info">{{numMissed}}</span>&nbsp;<i style="font-size: 12px" class="close GlobalIcon-clear pull-right"></i></a></li>',
+    inCallChatPaneTemplate: '<div class="tab-pane" data-uri="{{uri}}" id="chatPane{{endpointId}}"><ul></ul></div>',
+    inCallChatPaneMessageTemplate: '<li><div class="chatName{{#if isOutgoing}} chatSelf{{/if}}">[{{name}}]</div><div class="chatTime">{{time}}</div><div class="chatMessage clearfix">{{message}}</div></li>',
+    inCallParticipantTemplate: '\
+    <div class="member-control button-panel-wrapper">\
+        <h1 class="heading">\
+            <a data-dismiss="modal" data-side="menu-right" title="close" data-target="#memberModal" href="#">\
+                <i class="icon-angle-double-right">\
+                </i>\
+            </a>\
+        </h1>\
+        {{#unless isMe}}\
+            {{#if isChatEnabled}}\
+                <a href="#" role="button" class="chaaat" data-type="chat" data-uri="{{uri}}" data-name="{{name}}" title="Chat with {{name}}"><span class="icon-comment"></i></a>\
+            {{/if}}\
+        {{/unless}}\
+        {{#if isCoPresenter}}\
+            {{#if isOwner}}\
+                {{#unless controlStatus}}\
+                    <a href="#" class="btn control allow-control"   data-url="{{urlAllowControl}}"><span class="glyphicon glyphicon-ok"></i></a>\
+                {{/unless}}\
+                {{#if controlStatus}}\
+                    <a href="#" class="btn control disable-control" data-url="{{urlDisableControlUrl}}" data-id="{{userId}}"><span class="glyphicon glyphicon-remove"></i></a>\
+                {{/if}}\
+            {{/if}}\
+        {{/if}}\
+        {{#if isPresenter}}\
+            {{#if isOwner}}\
+                   <a class="btn videoclient-chat" data-mute="videoclient-chat-off" data-tip="Group chat" data-unmute="videoclient-chat" id="inCallButtonChat"><i class="icon-chat-empty"></i></a>\
+                  {{#if MicDisabled}}\
+                       <a href="#" class="btn control microphone-on"  data-url="{{urlUnMuteAllSound}}"  data-dontenable=true ><span class="glyphicon glyphicon-volume-up"></span></a>\
+                  {{else}}\
+                       <a href="#" class="btn control microphone-off" data-url="{{urlMuteAllSound}}" data-dontenable=true ><span class="glyphicon glyphicon-volume-off"></span></a>\
+                  {{/if}}\
+                  \
+                  {{#if VideoDisabled}}\
+                       <a href="#" class="btn control video-on"       data-url="{{urlUnMuteAllVideo}}" data-dontenable=true ><span class="glyphicon glyphicon-eye-open"></span></a>\
+                  {{else}}\
+                       <a href="#" class="btn control video-off"      data-url="{{urlMuteAllVideo}}" data-dontenable=true ><span class="glyphicon glyphicon-eye-close"></span></a>\
+                  {{/if}}\
+                  \
+                  {{#if Backstage}}\
+                       <a href="#" class="btn control backstage-on"       data-url="{{urlEnableAllBackstage}}" data-dontenable=true ><span class="glyphicon glyphicon-eye-open"></span></a>\
+                  {{else}}\
+                       <a href="#" class="btn control backstage-off"      data-url="{{urlDisableAllBackstage}}" data-dontenable=true ><span class="glyphicon glyphicon-eye-close"></span></a>\
+                  {{/if}}\
+            {{/if}}\
+        {{/if}}\
+        {{#unless isPresenter}}\
+           {{#if hasControl}}\
+              {{#if MicDisabled}}\
+                   <a href="#" class="btn control microphone-on"  data-url="{{urlUnMuteSound}}"  data-dontenable=true ><span class="glyphicon glyphicon-volume-up"></span></a>\
+              {{else}}\
+                    <a href="#" class="btn control microphone-off" data-url="{{urlMuteSound}}"  data-dontenable=true ><span class="glyphicon glyphicon-volume-off"></span></a>\
+              {{/if}}\
+              {{#if VideoDisabled}}\
+                   <a href="#" class="btn control video-on"       data-url="{{urlUnMuteVideo}} data-dontenable=true " ><span class="glyphicon glyphicon-eye-open"></span></a>\
+              {{else}}\
+                   <a href="#" class="btn control video-off"      data-url="{{urlMuteVideo}} data-dontenable=true " ><span class="glyphicon glyphicon-eye-close"></spani></a>\
+              {{/if}}\
+              {{#if Backstage}}\
+                   <a href="#" class="btn control video-on"       data-url="{{urlEnableBackstage}} data-dontenable=true " ><span class="glyphicon glyphicon-eye-open"></span></a>\
+              {{else}}\
+                   <a href="#" class="btn control video-off"      data-url="{{urlDisableBackstage}} data-dontenable=true " ><span class="glyphicon glyphicon-eye-close"></spani></a>\
+              {{/if}}\
+               <a href="#" class="btn ban_kick" data-url="{{urlBanKick}}" id="inCallButtonBan"><span class="glyphicon glyphicon-log-out"></span></a>\
+               {{#if hasQuestion}}<a href="#" class="btn control answer-the-question-user" data-url="{{urlAnswerQuestion}}">Answer</a>{{/if}}\
+           {{/if}}\
+        {{/unless}}\
+    </div>\
+    {{#if isMe}}\
+    <dl class="dl-horizontal" style="display:none">\
+        <dt>Local:</dt><dd>&nbsp;</dd>\
+        <dt>Resolution</dt>\
+        <dd>{{encoderInfo.rect.width}}x{{encoderInfo.rect.height}}@{{encoderInfo.sendFrameRate}}</dd>\
+        <dt>FIRs</dt>\
+        <dd>{{encoderInfo.numFirs}}</dd>\
+        <dt>NACKs</dt>\
+        <dd>{{encoderInfo.numNacks}}</dd>\
+        <dt>I-frames</dt>\
+        <dd>{{encoderInfo.numIFrames}}</dd>\
+        <dt>RTT</dt>\
+        <dd>{{encoderInfo.mediaRTT}} ms</dd>\
+        <dt>Remote:</dt><dd>&nbsp;</dd>\
+    {{else}}\
+    <dl class="dl-horizontal" style="display:none">\
+    {{/if}}\
+        <dt>Video bitrate</dt>\
+        <dd>{{videoKBitsPerSecRecv}} kbps</dd>\
+        <dt>Resolution</dt>\
+        <dd>{{videoResolution.width}}x{{videoResolution.height}}@{{videoFrameRate}}</dd>\
+    {{#unless isMe}}\
+        <dt>Audio bitrate</dt>\
+        <dd>{{audioKBitsPerSecRecv}} kbps</dd>\
+        <dt>NACKs</dt>\
+        <dd>{{nacks}}</dd>\
+        <dt>FIRs</dt>\
+        <dd>{{firs}}</dd>\
+    {{/unless}}\
+    </dl>\
+    ',
+    inCallLocalSharesTemplate: '\
+    <div class="switcher double mb20">\
+        <div class="shareskrinnswither">\
+            <input class="enable-share" {{#if isShareScreenActive}}checked{{/if}} id="ShareAWindowOn" name="ShareAWindow" type="radio"></input>\
+            <label for="ShareAWindowOn">\
+                On\
+            </label>\
+        </div>\
+        <div class="shareskrinnswither">\
+            <input role="menuitem" {{#if isShareScreenActive}}checked{{/if}} id="ShareAWindowOff" name="ShareAWindow" type="radio"></input>\
+            <label for="ShareAWindowOff">\
+                Off\
+            </label>\
+        </div>\
+    </div>\
+    {{#each desktops}}\
+        <div class="radio-type1">\
+            <label>\
+                <input role="sharedisplay" name="name2" type="radio" data-id="{{id}}" {{#if highlight}}checked{{/if}}></input>\
+                <span>\
+                    <div class="pull-right">(1920 x 1080)</div>\
+                    {{name}}\
+                </span>\
+            </label>\
+        </div>\
+    {{/each}}\
+    <hr />\
+    {{#each windows}}\
+        <div class="radio-type1">\
+            <label>\
+                <input role="sharedisplay" name="name2" type="radio" data-id="{{id}}" {{#if highlight}}checked{{/if}}></input>\
+                <span>\
+                    {{name}}\
+                </span>\
+            </label>\
+        </div>\
+    {{/each}}\
+    ',
+    inCallSharesTemplate: '\
+    <li class="prsRadio" role="sharedisplay"><a class="inCallShareItem" role="menuitem" data-id="-1" tabindex="-1" href="#">Hide remote share</a></li>\
+    <li class="divider"></li>\
+    {{#each shares}}\
+    {{#if highlight}}\
+    <li class="prsRadio" role="sharedisplay"><a class="inCallShareItem inCallSelectedShare" role="menuitem" data-id="{{id}}" tabindex="-1" href="#">{{name}}</a></li>\
+    {{else}}\
+    <li class="prsRadio" role="sharedisplay"><a class="inCallShareItem" role="menuitem" data-id="{{id}}" tabindex="-1" href="#">{{name}}</a></li>\
+    {{/if}}\
+    {{/each}}\
+    </form>\
+    ',
+    preCallImage: ".session-img .info",
+    askQuestion: "#askQuestion",
+    updateConfigField: '100775'
+};

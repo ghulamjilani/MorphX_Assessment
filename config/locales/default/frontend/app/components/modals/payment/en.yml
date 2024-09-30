@@ -1,0 +1,18 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          payment:
+            subscription_plans: "Subscription Plans"
+            billed_after_trial: <div class="total_amount">%{amount}</div> billed %{period} after %{days} days free trial
+            trial_days: "%{days} days FREE TRIAL"
+            trial_days_included: "%{days} days FREE TRIAL"
+            free_trial: "FREE TRIAL"
+            include_channel_conversation: Channel Chat
+            include_interactives: "Interactive Sessions"
+            include_replays: "Replays"
+            include_streams: "Online Streams"
+            include_uploads: "Uploads"
+            add_card: Add Card
+            saved_card: Choose From Saved Card

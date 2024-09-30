@@ -1,0 +1,24 @@
+<p>
+  User has just reached *<%= @step %>* step in the process of becoming a presenter on <%=Rails.application.credentials.global[:host]%> and stopped.
+</p>
+<p>
+  <small>
+    Note: no action needed from our side. User may have own reasons for not fully completing this process at the moment.
+    You may find this user in "Incomplete presenters" list in admin dashboard or you may received a notification soon about a channel for that user that is pending review.
+  </small>
+</p>
+
+<% title = @user.email || @user.unconfirmed_email %>
+<p>
+  Email:
+  <br>
+  <%= link_to title, service_admin_panel_presenter_url(@user.id) %>
+</p>
+
+<% if @user.public_display_name %>
+<p>
+  Display Name:
+  <br>
+  <%= @user.public_display_name %>
+</p>
+<% end %>

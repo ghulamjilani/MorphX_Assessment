@@ -1,0 +1,110 @@
+//body:not(.showVideo) {
+//  $StartDurationForShip: 4s;
+//  [class^="ship-"], [class*=" ship-"] {
+//    position: absolute;
+//    background-repeat: no-repeat;
+//    background-position: top left;
+//    background-size: contain;
+//
+//    -moz-animation-name: boat-animation;
+//    -webkit-animation-name: boat-animation;
+//    -o-animation-name: boat-animation;
+//    -ms-animation-name: boat-animation;
+//    animation-name: boat-animation;
+//
+//    -moz-animation-duration: $StartDurationForShip;
+//    -moz-animation-iteration-count: infinite;
+//    -moz-animation-direction: ease-in;
+//    -moz-animation-fill-mode: forwards;
+//
+//    -webkit-animation-duration: $StartDurationForShip;
+//    -webkit-animation-iteration-count: infinite;
+//    -webkit-animation-direction: ease-in;
+//    -webkit-animation-fill-mode: forwards;
+//
+//    -o-animation-duration: $StartDurationForShip;
+//    -o-animation-iteration-count: infinite;
+//    -o-animation-direction: ease-in;
+//    -o-animation-fill-mode: forwards;
+//
+//    -ms-animation-duration: $StartDurationForShip;
+//    -ms-animation-iteration-count: infinite;
+//    -ms-animation-direction: ease-in;
+//    -ms-animation-fill-mode: forwards;
+//
+//    animation-duration: $StartDurationForShip;
+//    animation-iteration-count: infinite;
+//    animation-direction: ease-in;
+//    animation-fill-mode: forwards;
+//
+//    -moz-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//    -webkit-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//    -o-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//    -ms-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//    transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//  }
+//
+//  .ship-1 {
+//    width: 5.4rem;
+//    height: 11.2rem;
+//    top: 23.3rem;
+//    left: 83rem;
+//    background-image: url(asset_path("video_client/big_ship.png"));
+//    -moz-animation-delay: $StartDurationForShip * 0.1;
+//    -webkit-animation-delay: $StartDurationForShip * 0.1;
+//    -o-animation-delay: $StartDurationForShip * 0.1;
+//    -ms-animation-delay: $StartDurationForShip * 0.1;
+//    animation-delay: $StartDurationForShip * 0.1;
+//  }
+//  .ship-2 {
+//    width: 3.3rem;
+//    height: 6.8rem;
+//    left: 96rem;
+//    top: 25.3rem;
+//    background-image: url(asset_path("video_client/small_ship.png"));
+//    -moz-animation-delay: $StartDurationForShip * 0.5;
+//    -webkit-animation-delay: $StartDurationForShip * 0.5;
+//    -o-animation-delay: $StartDurationForShip * 0.5;
+//    -ms-animation-delay: $StartDurationForShip * 0.5;
+//    animation-delay: $StartDurationForShip * 0.5;
+//  }
+//  .ship-3 {
+//    width: 1.7rem;
+//    height: 3.4rem;
+//    top: 27.2rem;
+//    left: 37rem;
+//    background-image: url(asset_path("video_client/extra_small_ship.png"));
+//    -moz-animation-delay: $StartDurationForShip * 0.3;
+//    -webkit-animation-delay: $StartDurationForShip * 0.3;
+//    -o-animation-delay: $StartDurationForShip * 0.3;
+//    -ms-animation-delay: $StartDurationForShip * 0.3;
+//    animation-delay: $StartDurationForShip * 0.3;
+//  }
+//
+//  @include keyframes(boat-animation) {
+//    0% {
+//      -moz-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//      -webkit-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//      -o-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//      -ms-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//      transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//
+//    }
+//    50% {
+//      -moz-transform: rotate(2deg) translateX(0rem) translateY(-0.1rem);
+//      -webkit-transform: rotate(2deg) translateX(0rem) translateY(-0.1rem);
+//      -o-transform: rotate(2deg) translateX(0rem) translateY(-0.1rem);
+//      -ms-transform: rotate(2deg) translateX(0rem) translateY(-0.1rem);
+//      transform: rotate(2deg) translateX(0rem) translateY(-0.1rem);
+//
+//    }
+//    100% {
+//      -moz-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//      -webkit-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//      -o-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//      -ms-transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//      transform: rotate(-0.7deg) translateX(-0.1rem) translateY(0.1rem);
+//
+//    }
+//  }
+//}

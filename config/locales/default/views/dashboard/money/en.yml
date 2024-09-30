@@ -1,0 +1,7 @@
+en:
+  views:
+    dashboard:
+      money:
+        page_title: "%{service_name} Fees"
+        purchases:
+          sub: "Purchased %{service_name} Subscription"

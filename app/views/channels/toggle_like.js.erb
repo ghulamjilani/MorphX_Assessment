@@ -1,0 +1,12 @@
+<% unless @channel.presenter == current_user.presenter %>
+  <% if current_user.voted_as_when_voted_for(@channel) %>
+      $('.channel-like-<%= @channel.id %>').addClass("selected").addClass("active");
+
+      $('.likes-counter-channel-<%= @channel.id %>').closest('li').addClass('selected');
+  <% else %>
+      $('.channel-like-<%= @channel.id %>').removeClass("selected").removeClass("active");
+
+      $('.likes-counter-channel-<%= @channel.id %>').closest('li').removeClass('selected');
+  <% end %>
+  $(".likes-counter-channel-<%= @channel.id %>").text("<%= @channel.likes_count.zero? ? '0' : @channel.likes_count %>");
+<% end %>

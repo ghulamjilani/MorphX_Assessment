@@ -1,0 +1,11 @@
+<p>
+  Your video <a href="<%= @video.absolute_path %>"><%= @video.title %></a> from <%= @video.created_at.strftime('%m.%d.%Y') %>  is now added to Session "<%= @session.title %>".
+</p>
+<p>
+  It is not visible to any of your customers, until it is published.
+</p>
+<p>
+  Please visit your video in the dashboard, and publish it when ready.
+</p>
+
+<%= link_to "Go to Replays", replays_dashboard_url , class: 'goToUploadsReplays' %>

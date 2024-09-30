@@ -1,0 +1,97 @@
+- form_action_url = replenishments_path(amount: @charge_amount)
+- cancel_purchase_url = dashboard_path
+
+- content_for(:after_include_javascripts) do
+  %script{type: "text/javascript"}
+    :plain
+      function setupBraintree() {
+        braintree.setup("#{@client_token}", 'dropin', {
+          container: 'braintree_dropin'
+        });
+
+        var iframes = $('iframe[src*=braintree]:first');
+        iframes.load(function() {
+
+          //NOTE: keep this in sync with replanishment/new page
+          setTimeout(function() {
+            // so that "Pay" button is not visible until v.zero SDK is loaded
+            $('form').css('visibility', 'visible').show();
+
+            $('#dropin').show();
+            $('.submit-payment').show();
+
+          }, 2000);
+
+        });
+      }
+      if (window.addEventListener)
+        window.addEventListener("load", setupBraintree, false);
+      else if (window.attachEvent)
+        window.attachEvent("onload", setupBraintree);
+      else window.onload = setupBraintree;
+
+      $(function() {
+        $('.submit-payment').click(function() {
+          if ($('.submit-payment').hasClass('disabled')) {
+            return;
+          }
+
+          var submitted = function() {
+            $('.submit-payment').html('Please wait…').addClass('disabled');
+          }
+
+          // first is braintree
+          $('input[name=payment_method]:first').attr('checked', 'checked');
+
+          $('input[name=payment_method]').hide();
+
+          //triggers drop-in braintree form validation
+          $('form[id*=checkout]:last input[type=submit]').click()
+          submitted();
+        });
+      })
+
+.session.payForm
+  .row
+    .col-md-12
+      %h6.csdn Presenter Credit Replenishment
+      .row.clearfix
+        .col-md-9
+          %hr.margin-top-0
+          .presenterInfo.clearfix
+            .row
+              .col-md-4.col-sm-6
+                = link_to spa_user_path(current_user.slug) do
+                  %img.img-circle{src: current_user.avatar_url}
+                  = current_user.public_display_name
+              .col-md-8.col-sm-6{style: 'padding-top: 10px'}
+                = %(Current Balance: <strong>#{number_to_currency(current_user.presenter_credit_balance, precision: 2)}</strong>).html_safe
+
+          %div
+            %form.initially_hidden#checkout{method: "POST", action: form_action_url}
+              #dropin.clearfix{style:"display: none"}
+                %hr.margin-top-0
+                .formWrapper
+                  %label.choice.radio.pull-left.clearfix
+                    %input{type: "radio", name: "payment_method", value: PaymentMethods::Braintree, checked: 'checked'}
+                    %span.display-block
+                  #braintree_dropin.pull-left
+
+              - #yes, it is always hidden and clicked only via jquery
+              - #otherwise you can not trigger v.zero validation/submitting(via submit-payment clicking or manual form submitting)
+              %input{type: "submit", value: "Purchase", style: 'display: none'}
+
+        .col-md-3
+          %hr.margin-top-0
+          .SI-bi-total
+            %span.sml Total
+            %span.smr.total_sessions_cost= number_to_currency(@charge_amount, precision: 2)
+          %hr
+          %section.SI-buttons-G
+            %a.btn.btn-l.submit-payment.margin-bottom-0.margin-top-0.full-width{style: 'display: none'} Pay
+          %hr
+
+          %section.text-center{style: 'margin-top: 10px'}
+            %a.btn-grey.btn-red-hover.btn-withIcon{href: cancel_purchase_url}
+              %i.icon-cancel-circled
+              Cancel Purchase

@@ -1,0 +1,10 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          template:
+            creator_plan_free_trial_description:
+              tera_bytes: TB
+              giga_bayes: GB
+              amount: "$%{num}"

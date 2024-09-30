@@ -1,0 +1,11 @@
+en:
+  custom_libs:
+    auth:
+      jwt:
+        decoder:
+          errors:
+            expired: token expired
+            payload:
+              missing_key: "%{missing_key} is missing"
+              wrong_type: "wrong type %{type} for %{class}"
+              wrong_platform: "wrong platform: %{platform}"

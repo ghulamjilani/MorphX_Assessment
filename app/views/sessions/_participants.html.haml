@@ -1,0 +1,14 @@
+- if objects.present?
+  %ul
+    - objects.each do |object|
+      - user = object.user
+      %li
+        %div
+          = link_to spa_user_path(user.slug), target: "_blank" do
+            %img.img-circle{width: "28", height: "28", alt: user.public_display_name, src: user.avatar_url}
+            .folInfo
+              %strong
+                = user.public_display_name
+
+              - if user_signed_in? && @session.organizer == current_user && can?(:contact, user)
+                %a.btn{href: new_message_path(receiver: user), target: '_blank', 'data-remote' => true} Contact

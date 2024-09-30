@@ -1,0 +1,56 @@
+<div class="fs-16 text-left padding-top-20">Live Preview</div>
+{{#if (eq device_type 'desktop_basic')}}
+    <div class="responsive-video">
+        <div class="videoSection">
+            <video id="webrtc_data_contaioner" style="width: 100%;height: 100%;"></video>
+            <script>devices();</script>
+            <div id="webrtc_error" class="videoBlock-text bold text-color-white">
+                Webcam is not detected
+            </div>
+
+        </div>
+    </div>
+{{/if}}
+
+{{#if (eq device_type 'studio_equipment')}}
+    <div class="responsive-video">
+        <div class="videoSection">
+            <video id="webrtc_data_contaioner" style="width: 100%;height: 100%;"></video>
+            <script>devices();</script>
+            <div id="webrtc_error" class="videoBlock-text bold text-color-white">
+                Webcam is not detected
+            </div>
+
+        </div>
+    </div>
+{{/if}}
+
+{{#if (eq device_type 'mobile')}}
+    <div class="responsive-video">
+        <div class="videoSection">
+            <div class="videoBlock-text text-color-white">
+                Please start the stream on the mobile App
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+{{#if (eq device_type 'desktop_advanced')}}
+    <div class="responsive-video">
+        <div class="videoSection">
+            <div class="videoBlock-text text-color-white">
+                Select prep-time on the form below to test your encoder equipment
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+{{#if (eq device_type 'professional')}}
+    <div class="responsive-video">
+        <div class="videoSection">
+            <div class="videoBlock-text text-color-white">
+                Select prep-time on the form below to test your encoder equipment
+            </div>
+        </div>
+    </div>
+{{/if}}

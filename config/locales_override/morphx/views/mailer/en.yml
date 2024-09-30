@@ -1,0 +1,64 @@
+en:
+  views:
+    mailer:
+      channel_mailer:
+        presenter_invited:
+          this_new_platform: "This new platform is focused on the needs of the %{creators} and users."
+          you_can_start: "You can start streaming right now and become the %{creator} of the best of professional content!"
+          the_creators_connect: "The %{creators} connect with the customers with a wide range of features:"
+          members_either: "We cannot wait to see you among the %{service_name} members either as a %{creator} or a simple user!"
+      new_site_email_for_existing_users:
+        your_favorite_creators: "Your favorite %{creators} are moving to a new home at"
+      service_subscriptions_mailer:
+        deactivated:
+          payment_was_not_done: "Payment was not done till"
+          so_we_forced: "so we forced to deactivate your %{creator_upper} account."
+      session_mailer:
+        you_as_co_presenter_accepted_session_invitation:
+          you_have_accepted_invitation: "You have accepted an invitation as %{creator}"
+      completed_becoming:
+        new: "New presenter has just completed the process of becoming a presenter on %{host}."
+      conf_insruct:
+        welcome: "Welcome to %{service_name}!"
+        success: |
+                  You have successfully created a %{service_name} account.
+                  Please click on the link below to verify your email address
+                  and complete your registration.
+        create: |
+                Didn't create a %{service_name} account& it's likely someone lust typed in your email address
+                by accident. Fell free to ignore this email.
+        invitation_instruction:
+          invited: "%{name} invited you to join %{service_name}"
+          have: |
+                Have you checked out %{service_name} yet? It's an amazing platform for creators
+                and students to join forces to learn and build a community based on
+                respect and a healthy and creative body, mind, and spirit.
+        new_site_email:
+          time: "It's time to %{service_name}"
+          focuse: "%{service_name} is focused on the needs of our creators and your needs as a user and all things mind, body, and spirit."
+          welcome: "Welcome to %{host}!"
+        pending_refund:
+          would: "If you would like an %{service_name} system credit refund, follow %{link}"
+        social_user:
+          welcome: "Welcome to %{link}, The Interactive Video Platform for Professionals."
+          provide: "%{service_name} provides a rich marketplace for a wide range of professional content – please enjoy and know your feedback is always welcome!"
+          team: "The Worldwide %{service_name} Team!"
+        time_to:
+          time: "It's time to %{service_name}"
+          what: |
+                What is %{service_name}? It’s a virtual marketplace that empowers any talented person to share their skills
+                or expertise with anyone anytime anywhere in the world. %{service_name} connects skilled individuals with
+                their audience through a live interactive experience.
+          invite: "We invite you to check out %{service_name} and see that it is so much more than just watching videos."
+          offers: |
+                  %{service_name}? offers a unique way to choose and join a community of your interest, actively participate
+                  in it and successfully interact with your teacher and other students.
+          this: |
+                This platform is not only about watching content. %{service_name} gives live interactive experiences that
+                truly connect people with talented persons.
+          info: |
+              On %{service_name}, you determine your own sphere of interest and can subscribe to as many
+              channels with unique content as you want to obtain new knowledge and helpful skills.
+          we: "We cannot wait to see you among the participants of %{service_name}!"
+        user_signed_up:
+          new_user: "New user has just registered on %{host}."

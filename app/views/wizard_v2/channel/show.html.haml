@@ -1,0 +1,140 @@
+- content_for(:additional_meta_tags) do
+  -#<!-- Core build with no theme, formatting, non-essential modules -->
+  %script{src: "//cdn.quilljs.com/1.3.6/quill.js"}
+  %link{href: "//cdn.quilljs.com/1.3.6/quill.snow.css", rel: "stylesheet"}
+- content_for(:extra_body_classes, ' wizard ')
+-#Wizard Steps
+.stepLine-wrapper
+  .stepLine.stepCount-3.active-3
+    .stepLine__head
+      %a.step1{href: '#'}
+        %span
+          = I18n.t('wizard.sign_up')
+      %a.step2{href: wizard_v2_business_path}
+        %span
+          = I18n.t('wizard.my_business')
+      %a.step3.active{href: '#'}
+        %span
+          = I18n.t('wizard.first_channel')
+    .stepLine__body
+      .loadingline_wrapp
+        .loadingline
+.wizard_channel
+  %h2.wizard__title
+    = I18n.t('wizard.set_up_first_channel')
+  .sectionBlock_wrapp
+    .channel_avatar_block.avatar_block{data: { title:'Channel icon identifies the channel. It will be automatically generated from the Channel cover or you can select your own.'} }
+      .LoadingCover.profile_next_cover{style:'display:none'}
+    = form_for(@channel, url: wizard_v2_channel_path, method: :put, html: {id: :wizard_channel, class: 'form_V2 wizard_channel_form', enctype: "multipart/form-data"}) do |f|
+      .formWrapp
+        .LoadingCover.profile_next_cover{style:'display:none'}
+          .spinnerSlider
+            .bounceS1
+            .bounceS2
+            .bounceS3
+        = f.hidden_field :id
+        %section.sectionBlock
+          .input-block.required{class: ('state-clear' if @channel.title.blank?)}
+            = f.label :title, I18n.t('wizard.channel_name')
+            = f.text_field :title, required: true
+            .errorContainerWrapp
+          = f.label :description, I18n.t('wizard.desc')
+          .input-block.margin-bottom-10.channelDescription{class: ('state-clear' if @channel.description.blank?)}
+            = f.hidden_field :description
+            #descriptionToolbar
+              %span.ql-formats
+                %button.ql-bold
+                %button.ql-italic
+              %span.ql-formats
+                %button.ql-list{value: :ordered}
+                %button.ql-list{value: :bullet}
+              %span.ql-formats
+                %button.ql-link
+            #descriptionEditor
+              = raw(sanitize(@channel.description.to_s.html_safe))
+          .row.padding-top-20.padding-bottom-10.chooseCategory
+            .col-xs-5.text-color-Darkgrey.chooseCategory__Wrapp
+              = f.label :category_id, I18n.t('wizard.category')
+            .col-xs-7
+              = f.select(:category_id, ChannelCategory.order(featured: :desc, name: :asc).map{|c| [c.name, c.id]}, {prompt: I18n.t('wizard.choose_category')}, {class: 'padding-left-20 pull-right text-right full-width styled-select styled-select_withCss', required: true})
+            .errorContainerWrapp
+
+          .input-block.required{class: (@channel.tag_list.length > 0 ? '' : 'state-clear')}
+            = f.label :tag_list, I18n.t('wizard.tags')
+            = f.text_field :tag_list, value: @channel.tag_list.to_s, class: 'tag-it', required: true
+            .errorContainerWrapp
+          - if Rails.application.credentials.dig(:global, :is_document_management_enabled)
+            .input-block
+              %label.checkbox.checkbox-swith
+                = f.check_box :show_documents, style: 'display:none;', class: 'checkbox checkbox-swith'
+                %span= I18n.t('models.channel.attributes.show_documents')
+          .CR
+            .CR__title Comments & Reviews
+            %label.checkbox.checkbox-swith
+              = f.check_box :show_comments, style: 'display:none;', class: 'checkbox checkbox-swith'
+              %span
+                Show Comments
+            %label.checkbox.checkbox-swith
+              = f.check_box :show_reviews, style: 'display:none;', class: 'checkbox checkbox-swith'
+              %span Show Reviews
+            .CR__icon
+              %i.GlobalIcon-info
+              %div Suggest to use only one option (so as not to confuse users).
+
+        %section.sectionBlock
+          .row
+            .col-xs-12.text-color-Darkgrey.margin-bottom-10
+              = I18n.t('wizard.channel_cover')
+          .row
+            .col-xs-12.ChannelCover_wrapp.padding-bottom-10
+              #channel_cover.ChannelCover{style: "background-image: url(#{@channel.image_gallery_url})", coverID: @channel.cover.try(:id)}
+                = link_to (@channel.cover.try(:id) ? I18n.t('wizard.edit') : I18n.t('wizard.upload')), '#channel_cover_modal', data: {toggle: :modal}, class:'text-uppercase padding-left-20 padding-right-20'
+        #channel_cover_modal.modal.fade{data: {keyboard: false, backdrop: :static}}
+          .modal-dialog
+            .modal-content
+              .unobtrusive-flash-container
+              = render partial: 'become_presenter_steps/close_modal'
+              .modal-body
+                %h4.groupTitle.clearfix
+                  = I18n.t('wizard.channel_cover')
+                %section.crop-wrapp
+                  #cover-upload-area.upload-area
+                    .row
+                      .upload-info{style: @channel.cover.try(:id) ? "background-image: url(#{@channel.image_gallery_url})" : ''}
+                        .dotsWrapp{class: @channel.cover.try(:id) ? 'hidden' : ''}
+                          .dot1
+                          .dot2
+                          .dot3
+                          .dot4
+                          .dot5
+                          .dot6
+                          .dot7
+                          .dot8
+                        = render partial: 'become_presenter_steps/loading_cover'
+
+                        %span
+                          -#%input{name: 'channel[cover_attributes][crop_x]', type: :hidden}
+                          -#%input{name: 'channel[cover_attributes][crop_y]', type: :hidden}
+                          -#%input{name: 'channel[cover_attributes][crop_w]', type: :hidden}
+                          -#%input{name: 'channel[cover_attributes][crop_h]', type: :hidden}
+                          -#%input{name: 'channel[cover_attributes][rotate]', type: :hidden}
+                          %input#channel-cover.inputfile{type: :file}
+                          %label{for: 'channel-cover'}= I18n.t('forms.info.select_file')
+                          %div.fs-12.hideForMobile
+                            = I18n.t('wizard.drag_n_drop')
+                  .crop-container
+                  .fs-13.sugSize
+                    %span
+                      = I18n.t('wizard.size')
+                    970x270 px
+                    %br
+                    = I18n.t('wizard.recomend')
+        .clearfix.row
+          .col-xs-12.text-center
+            = f.submit I18n.t('wizard.next'), id: :channel_next_btn, class: 'btn btn-l padding-left-40 padding-right-40 text-uppercase'
+
+= content_for(:after_include_javascripts) do
+  :javascript
+    $(document).ready(function() {
+      window.Wizard.channel_load()
+    });

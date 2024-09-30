@@ -1,0 +1,17 @@
+$('#PL_Recordings .tile-cake-sidebar-wrapp').append("<%= escape_javascript(render(partial: 'channels/playlist/recording', collection: @recordings, locals: {channel: @channel})) %>");
+$('#PL_Recordings a[data-remote]').css('visibility', 'visible');
+if(Immerss.recording) {
+    $('#PL_Recordings .tile-cake-sidebarrr[data-id='+ Immerss.recording.id +']').addClass('active');
+    console.log('Recording added to playlist');
+}
+<% if @recordings.length > 0 %>
+$('#PL_Recordings').removeClass('hidden');
+$('#PL_RecordingsToggle').removeClass('hidden');
+<% end %>
+<% if @recordings.length == 6 %>
+$('#PL_Recordings .show_more').attr('href', "<%= recordings_list_channel_path(@channel.id, {limit: @limit, offset: @offset + @limit}) %>");
+$('#PL_Recordings .show_more').removeClass('hidden');
+<% else %>
+$('#PL_Recordings .show_more').addClass('hidden');
+<% end %>
+$('.mainVideoSection-rightSidebar_cover').addClass('hidden');

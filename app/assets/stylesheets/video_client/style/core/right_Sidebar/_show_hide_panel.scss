@@ -1,0 +1,23 @@
+body.hidePanels{
+  .V-right-panel-contaiver{
+    transform: translateX($header-height);
+  }
+  .ShowLine {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 0.5rem;
+    height: 100%;
+    position: absolute;
+    display: block !important;
+    z-index: 99;
+    background: #272727;
+  }
+  .V-VideoContainer{
+    display: none;
+  }
+  .videoWrapper{
+    width: calc(100% - 0.5rem) !important;
+    right: 0.5rem !important;
+  }
+}

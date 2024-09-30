@@ -1,0 +1,38 @@
+.CM__Rmodal {
+  .MK2-modal__dialog {
+    padding: 1.3rem 3rem 3rem;
+    width: 50rem;
+    margin: 8rem auto 2rem;
+  }
+
+  &__title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--tp__h1);
+  }
+
+  &__body {
+    background: var(--bg__secondary);
+    border: 1px solid var(--border__content__sections);
+    border-radius: 1rem;
+    padding: 2rem;
+    word-break: break-word;
+  }
+
+  &__buttons {
+    max-width: 94%;
+    width: 50rem;
+    margin: 0 auto;
+    @include flex(flex, center, flex-end);
+
+    button {
+      margin-left: 2rem;
+    }
+
+    &__wrapper {
+      z-index: 2;
+      position: absolute;
+      width: 100%;
+    }
+  }
+}

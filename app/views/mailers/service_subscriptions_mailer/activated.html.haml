@@ -1,0 +1,10 @@
+%p Dear #{@user.public_display_name},
+%p Welcome to the #{Rails.application.credentials.global[:service_name]}!
+%p Your #{@plan_package&.name} Rate Subscription is activated for #{@plan.formatted_price}/#{@plan.interval}!
+%p
+  = link_to 'Start creating', dashboard_url
+  with #{Rails.application.credentials.global[:service_name]}!
+
+%p
+  If you have any questions, feel free to
+  = link_to 'contact us', support_home_url

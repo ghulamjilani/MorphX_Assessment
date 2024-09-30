@@ -1,0 +1,77 @@
+@import "../../../../mixin";
+
+
+.subscriptionPlans{
+  padding: 0;
+}
+.Subscription_item{
+  .sectionBlock{
+    margin-bottom: 2rem;
+    padding: 3rem;
+  }
+  .channelSection{
+    padding: 2rem;
+    margin-top: 2rem;
+    background: var(--bg__content__secondary);
+    border: 1px solid var(--border__content__sections);
+    border-radius: 1rem;
+    &__wrapper{
+      @include flex(flex, center, space-between);
+      padding-bottom: 3rem;
+      @include media(p-phone){
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+      &__description{
+        @include flex(flex);
+        flex-direction: column;
+        label{
+          font-size: 1.4rem;
+          color: var(--tp__labels);
+          margin: 0;
+        }
+        input{
+          font-size: 1.6rem;
+          border-bottom: 1px solid var(--border__form__normal);
+        }
+        .counter_block{
+          text-align: right;
+          font-size: 1.4rem;
+          color: var(--tp__labels);
+        }
+        .errorContainerWrapp{
+          @include flex(flex, center, space-between);
+          flex-direction: row-reverse;
+          span{
+            font-size: 1.4rem;
+            color: var(--tp__inputs__validation);
+          }
+        }
+      }
+    }
+  }
+  input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px var(--bg__content) inset;
+    -webkit-text-fill-color: var(--tp__main);
+    -webkit-background: var(--bg__content) none repeat scroll 0 0;
+  }
+}
+
+.Subscription_item_coumt{
+  &__title{
+    color: var(--tp__h1);
+    font-size: 2.2rem;
+    line-height: 2.2rem;
+    font-weight: bold;
+    padding-bottom: 3rem;
+  }
+  &__count{
+    @include flex(flex, center, space-between);
+    padding-bottom: 3rem;
+  }
+  color: var(--tp__main);
+  .styled-select{
+    min-width: 80px;
+    margin-left: 15px;
+  }
+}

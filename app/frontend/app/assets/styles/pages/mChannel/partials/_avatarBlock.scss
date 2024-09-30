@@ -1,0 +1,149 @@
+.avatarBlock {
+  @include flex();
+  $AVATAR_BLOCK_IMG_HEIGHT: 6rem;
+  $AVATAR_BLOCK_MAX_WIDTH: 23rem;
+  @include media(phone) {
+    display: none;
+  }
+
+  &__item {
+    background: var(--bg__hover);
+    border-radius: 10rem;
+    font-size: 1.6rem;
+    min-height: $AVATAR_BLOCK_IMG_HEIGHT;
+    min-width: $AVATAR_BLOCK_IMG_HEIGHT;
+    width: $AVATAR_BLOCK_IMG_HEIGHT;
+    padding: 1px;
+    @include transition();
+    overflow: hidden;
+    position: relative;
+
+    &:not(:first-child) {
+      margin-left: -1.7rem;
+    }
+
+    //width: 10rem;
+    &__img {
+      border: 1px solid var(--border__separator);
+      width: calc(#{$AVATAR_BLOCK_IMG_HEIGHT} - 2px);
+      height: calc(#{$AVATAR_BLOCK_IMG_HEIGHT} - 2px);
+      border-radius: 100%;
+      background-color: rgba(153, 153, 153, .2);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: var(--tp__main);
+      position: absolute;
+      left: 1px;
+      top: 1px;
+
+      &.openMore {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          display: inline-block;
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    &.placeholder {
+      .avatarBlock__item__content {
+        &__name,
+        &__owner {
+          width: auto;
+          min-height: 1.4rem;
+          background: var(--btn__secondary);
+          border-radius: 4rem;
+          margin: .2rem 0;
+        }
+        &__owner {
+          min-width: 6rem;
+        }
+        &__name {
+          min-width: 10rem;
+        }
+      }
+    }
+
+    &__content {
+      padding: 0 1.5rem 0 #{$AVATAR_BLOCK_IMG_HEIGHT + 1.5rem};
+      min-height: 100%;
+      line-height: 1.4;
+      @include flex(flex, flex-start, center);
+      flex-direction: column;
+
+      &__name {
+        @include text__ellipsis();
+        font-weight: bold;
+        width: 100%;
+      }
+
+      &__owner {
+        color: var(--tp__secondary);
+        font-weight: bold;
+        width: 100%;
+        font-size: 1.2rem;
+      }
+
+      &__follow {
+        font-size: 1.4rem;
+      }
+
+      &__following {
+        min-width: 10rem;
+        min-width: 13rem;
+        font-size: 1.4rem;
+        padding: 0 1rem;
+        color: var(--tp__btn__secondary);
+        background: var(--btn__secondary);
+        border: 1px solid var(--btn__secondary);
+
+        &__channel {
+          min-width: 14.2rem;
+        }
+
+        &__owner {
+          padding: 0 1rem;
+          min-width: 11.5rem;
+        }
+      }
+    }
+
+    &__more {
+      cursor: pointer;
+    }
+
+    i:not(.bookingLabel) {
+      color: var(--tp__icons);
+      // @include center(vh);
+
+      &:before {
+        font-size: 2rem;
+        transform: rotate(90deg);
+        display: block;
+        position: relative;
+      }
+    }
+
+    &:hover {
+      i {
+        // color: var(--tp__active);
+      }
+    }
+
+    span {
+      color: var(--tp__secondary);
+      font-size: 1.2rem;
+    }
+
+    &.active {
+      z-index: 19;
+
+      &:not(.avatarBlock__item__more) {
+        width: $AVATAR_BLOCK_MAX_WIDTH;
+      }
+    }
+  }
+}

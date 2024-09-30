@@ -1,0 +1,44 @@
+.row#profilePage
+  - content_for(:page_title, I18n.t("views.profiles.edit_preferences.page_title"))
+
+  = render 'profiles/nav'
+  .col-md-9.main-section-form.technicalPage
+    = semantic_form_for(current_user, as:  :profile, url: update_settings_profile_path, method: :put) do |f|
+      .technicalPage__label=I18n.t("views.profiles.edit_preferences.page_title")
+      = f.input :manually_set_timezone,
+        as: :select,
+        label: I18n.t("views.profiles.edit_preferences.fields.time_zone"),
+        collection: User.available_timezones.map{|tz| [tz.to_s, tz.tzinfo.name]},
+        required: true,
+        wrapper_html: { class: 'custom-input'},
+        input_html: {style: 'width: 435px', class: 'styled-select styled-select-large'},
+        include_blank: true
+
+      = f.input :time_format,
+        as: :radio,
+        label: I18n.t("views.profiles.edit_preferences.fields.time_notation"),
+        wrapper_html: {class: 'clearfix'},
+        collection: {content_tag(:span, I18n.t("views.profiles.edit_preferences.fields.am_pm")) => User::TimeFormats::HOUR_12, content_tag(:span, I18n.t("views.profiles.edit_preferences.fields.24_hour")) => User::TimeFormats::HOUR_24},
+        include_blank: false
+
+      = f.input :language,
+        as: :select,
+        label: I18n.t("views.profiles.edit_preferences.fields.language"),
+        collection: language_list,
+        required: false,
+        wrapper_html: { class: 'custom-input'},
+        input_html: {style: 'width: 435px', class: 'styled-select styled-select-large'},
+        include_blank: true
+
+      = f.input :currency,
+        as: :select,
+        label: I18n.t("views.profiles.edit_preferences.fields.currency"),
+        collection: openexchange_currencies.dup.inject({}) { |h, (k, v)| h["#{k} - #{v}"] = k ; h },
+        required: true,
+        wrapper_html: { class: 'custom-input'},
+        input_html: {style: 'width: 435px', class: 'styled-select styled-select-large'},
+        include_blank: false
+
+      .padding-bottom-10.text-right
+        = link_to I18n.t("views.profiles.edit_preferences.cancel"), url_for(:back), class: 'btn btn-l btn-grey-solid'
+        = f.action :submit, label: I18n.t("views.profiles.edit_preferences.save_changes"), as: :button, button_html: { class: 'btn btn-l margin-left-10', data: {disable_with: 'Please wait…'}}

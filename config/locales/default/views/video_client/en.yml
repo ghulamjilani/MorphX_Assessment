@@ -1,0 +1,7 @@
+en:
+  video_client:
+    question_to_unmute:
+      ask_unmute_microphone: The presenter would like you to unmute your microphone
+      ask_start_video: The presenter would like you to start your video
+      unmute: Unmute
+      enable: Enable

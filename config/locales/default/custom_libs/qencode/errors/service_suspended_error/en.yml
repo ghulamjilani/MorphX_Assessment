@@ -1,0 +1,6 @@
+en:
+  custom_libs:
+    qencode:
+      errors:
+        service_suspended_error:
+          message: 'Qencode: Service is suspended. Please log into your account and clear any billing issues associated with your account.'

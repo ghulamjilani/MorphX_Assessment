@@ -1,0 +1,118 @@
+#shop{
+  padding: 0;
+  overflow: hidden;
+  .styledScroll{
+    height: calc(100% - 34px);
+  }
+  //& > .scroll-wrapper.styledScroll{
+  //  height: calc(100% - 34px);
+  //}
+  .sectionHeader{
+    color: #FFFFFF;
+    margin-bottom: 0;
+    padding: 0.5rem;
+  }
+  .redBG{
+    background: #94323e;
+    color: #fff;
+  }
+  .list_info {
+    .redBG {
+      padding: 0.5rem 0.5rem 0 0.5rem;
+    }
+  }
+  .siteUrl{
+    color: #fff;
+    display: block;
+    background: rgba(0,0,0,0.3);
+    margin: 1rem -0.5rem 0 -0.5rem;
+    padding: 0.5rem 0.5rem 0.6rem;
+  }
+  .description{
+    opacity: 0.6;
+    padding-bottom: 1rem;
+  }
+  .sectionTitle, .Products-wrapp{
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .Products-wrapp{
+    //max-height: 300px;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+}
+.productTile{
+  .productTile-img{
+    width: 3.7rem;
+    height: 3.7rem;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+    vertical-align: top;
+    @include transition200();
+    &:hover{
+      -moz-transform:scale(3.5) translateX(13px) translateY(2px);
+      -webkit-transform:scale(3.5) translateX(13px) translateY(2px);
+      -o-transform: scale(3.5) translateX(13px) translateY(2px);
+      -ms-transform: scale(3.5) translateX(13px) translateY(2px);
+      transform: scale(3.5) translateX(13px) translateY(2px);
+    }
+  }
+  .productTile-short-description{
+    width: calc(100% - 4rem);
+    display: inline-block;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    vertical-align: top;
+    margin-bottom: 1rem;
+    &>a{
+      cursor: default;
+      color: $siteColorMain;
+    }
+  }
+  .price{
+    color: #17d381;
+  }
+  .productTile-long-description{
+    display: none;
+  }
+  &.active{
+    .productTile-long-description{
+      display: block;
+      margin: 1rem -0.5rem 1rem -0.5rem;
+      padding: 1rem 0.5rem;
+      background: #404040;
+    }
+  }
+}
+.BAG{
+  .bag-title{
+    margin: -0.5rem -0.5rem 1rem -0.5rem;
+    padding: 0 0.5rem 0 0.5rem;
+    background: #17d381;
+    line-height: 2;
+  }
+  .subtotal{
+    background: #272727;
+    color: #6d6d6d;
+    line-height: 1.5rem;
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+  }
+  .mainButton{
+    margin-left: 0 !important;
+  }
+}
+#chooseListArea{
+  background: #94323e;
+  padding: 1rem 0.3rem;
+  select {
+    padding: 1rem 2.5rem 1rem 0.5rem;
+    height: auto;
+    background-color: #702733;
+  }
+  #closeLists {
+    display: block;
+    float: right;
+  }
+}

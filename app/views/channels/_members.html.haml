@@ -1,0 +1,5 @@
+- members.each do |member|
+  .row.margin-bottom-10
+    .col-md-12
+      %a.avatarImg-SD.no-border{href: member.absolute_path, target: '_blank', style: "background-image: url(#{member.avatar_url})"}
+      %a.margin-left-10.no-border.fs-l.fc-main-dark{href: member.absolute_path, target: '_blank'}= member.public_display_name

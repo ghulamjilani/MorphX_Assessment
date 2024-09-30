@@ -1,0 +1,42 @@
+.MK-notification {
+  width: 80%;
+
+  a {
+    color: var(--tp__secondary);
+    font-weight: bold;
+    font-size: 1.4rem;
+    display: inline-block;
+  }
+
+  .MK-notification__body, p {
+    font-size: 1.2rem;
+    line-height: 1.3;
+    margin: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  &__wrapper {
+    background: var(--bg__main);
+    border-bottom: 1px solid var(--border__separator);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    transition: .2s ease;
+    /* fix emails size and text color for project themes */
+    table {
+      width: 100%;
+
+      p {
+        color: var(--tp__main) !important;
+      }
+    }
+
+    /* ///// */
+  }
+
+  &__wrapper:hover {
+    background: var(--bg__content);
+    border-left: 0.5rem solid var(--bg__label);
+    transition: .2s ease;
+  }
+}

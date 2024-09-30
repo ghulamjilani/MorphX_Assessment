@@ -1,0 +1,38 @@
+.m-phone-number {
+  display: flex;
+  align-items: flex-end;
+
+  &__select {
+    flex: 1;
+
+    .dropdownMK2 {
+      padding: 0;
+    }
+
+    .dropdownMK2__title {
+      white-space: nowrap;
+    }
+
+    .dropdownMK2__menu {
+      left: 0;
+    }
+  }
+
+  &__input {
+    flex: 5;
+
+    input {
+      padding-left: 2rem !important;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        margin: 0;
+        -webkit-appearance: none;
+      }
+
+      &[type=number] {
+        -moz-appearance: textfield;
+      }
+    }
+  }
+}

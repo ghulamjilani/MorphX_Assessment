@@ -1,0 +1,218 @@
+.participantsTile {
+  position: relative;
+
+  &__loader {
+    background: $client__bg__content__secondary;
+    position: absolute;
+    z-index: 97;
+    width: calc(100% + 1.5px);
+    height: calc(100% + 1.5px);
+    border-radius: 1rem;
+    top: -0.75px;
+    left: -0.75px;
+  }
+
+  .mp__participant__tools__icon {
+    font-size: 1.3rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    @include flex(flex, center, center);
+    color: white;
+    @include media(reverso-tablet) {
+      &:hover {
+        -webkit-animation: bouncedelayDot .3s ease-in-out;
+        animation: bouncedelayDot .3s ease-in-out;
+        color: $client__tp__icons;
+        background: white;
+      }
+    }
+
+    &__active {
+      color: $client__tp__icons;
+      background: white;
+    }
+  }
+
+  &.vertical__tile {
+    .mp {
+      right: 2.5rem;
+      top: 2rem;
+    }
+  }
+
+  &__dominantSpeaker {
+    border-color: red;
+  }
+
+  &__two {
+    width: 50%;
+
+    &.vertical__tile__presenter {
+      width: 100%;
+    }
+  }
+
+  &__three {
+    width: 33%;
+
+    &.vertical__tile__presenter {
+      width: 100%;
+    }
+  }
+
+  &__four {
+    width: 25%;
+
+    &.vertical__tile__presenter {
+      width: 100%;
+    }
+  }
+
+  &__five {
+    width: 20%;
+
+    &.vertical__tile__presenter {
+      width: 100%;
+    }
+  }
+
+  video {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+  }
+
+  &__avatar {
+    @include center(vh);
+    height: auto;
+    width: 50%;
+    border-radius: 50%;
+  }
+
+  &__video {
+    z-index: 0;
+    @include flex(flex, center, center);
+    padding-top: 75%;
+    height: 0;
+    width: 100%;
+    position: relative;
+    background: $client__bg__content;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    svg {
+      position: absolute;
+      top: 30%;
+    }
+
+    &__wrapper {
+      position: relative;
+      padding: .3rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__speakerPresenter {
+      &::before {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0.4rem;
+        border-radius: 1rem;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: source-out;
+        mask-composite: exclude;
+        background: linear-gradient(180deg, #095F73 15%, rgba(176, 224, 235, .6) 25%, rgba(0, 0, 0, 0) 98%);
+        height: calc(100% - 3px);
+      }
+
+      &__layout {
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+    &__speaker {
+      &::before {
+        display: block;
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, #f03737 15%, rgba(175, 129, 125, .5) 25%, rgba(0, 0, 0, 0) 98%);
+        padding: 0.4rem;
+        border-radius: 1rem;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: source-out;
+        mask-composite: exclude;
+        height: calc(100% - 3px);
+      }
+    }
+
+    &__muted {
+      filter: grayscale(1);
+    }
+
+    &__disconected {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__tools {
+    position: absolute;
+    bottom: 0.4rem;
+    left: 0.3rem;
+    padding: 0 .5rem 0 1rem;
+    font-size: 1.2rem;
+    color: $client__tp__icons;
+    background: $client__bg__content;
+    color: $client__tp__main;
+    border-radius: 0.5rem;
+    @include flex(flex, center, false);
+    max-width: calc(100% - .8rem);
+
+    &__icon {
+      min-width: 1.3rem;
+      text-align: center;
+    }
+
+    &__presenter {
+      background: $client__btn__bgLabel;
+    }
+  }
+
+  &__invisible {
+    display: none;
+  }
+
+  &__name {
+    user-select: none;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    @include text__ellipsis();
+    padding-left: 1rem;
+    color: $client__tp__main;
+  }
+
+  &__disconected {
+    @include text__ellipsis();
+    padding-left: 1rem;
+    color: var(--tp__inputs__validation);
+  }
+}

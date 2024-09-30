@@ -1,0 +1,7 @@
+<% email_direct_message_context(@direct_from_name) %>
+
+<p>
+  <%= raw @notification.body %>
+</p>
+
+<% raise "@user is blank, #{@notification.inspect}" if @user.blank? %>

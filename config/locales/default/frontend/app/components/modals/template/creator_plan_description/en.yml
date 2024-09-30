@@ -1,0 +1,19 @@
+en:
+  frontend:
+    app:
+      components:
+        modals:
+          template:
+            creator_plan_description:
+              business_plan_info: Business Plan Info
+              plus_overcharge: + overage charges
+              tera_bytes: TB
+              giga_bayes: GB
+              unlimited: Unlimited
+              over: Over
+              live: Live
+              min: min
+              interactive: Interactive
+              videos: Videos
+              video_playback: Video Playback
+              amount: "$%{num}"

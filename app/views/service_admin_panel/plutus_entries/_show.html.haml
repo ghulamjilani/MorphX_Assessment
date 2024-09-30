@@ -1,0 +1,42 @@
+.plutus_container
+  %h1
+    = h @plutus_entry.description
+    Entry
+  %table{cellspacing: "0"}
+    %thead
+      %tr
+        %th.nobg ID
+        %th Description
+        %th Debits
+        %th Credits
+        %th Date
+        %th
+    %tbody
+      %tr{class: "#{cycle("even", "odd")}"}
+        %td= link_to(@plutus_entry.id, service_admin_panel_plutus_entry_path(@plutus_entry))
+        %td= h @plutus_entry.description
+        %td
+        %td
+        %td= h @plutus_entry.created_at
+        %td
+      - @plutus_entry.debit_amounts.each do |debit_amount|
+        %tr{class: "#{cycle("odd", "odd")}"}
+          %td
+          %td
+            #{h "#{debit_amount.account.name}"}
+          %td= h debit_amount.amount
+          %td
+          %td
+          %td
+            = link_to 'Edit', edit_service_admin_panel_plutus_debit_amount_path(debit_amount)
+      - @plutus_entry.credit_amounts.each do |credit_amount|
+        %tr{class: "#{cycle("odd", "odd")}"}
+          %td
+          %td
+            #{h "#{credit_amount.account.name}"}
+          %td
+          %td= h credit_amount.amount
+          %td
+          %td
+            = link_to 'Edit', edit_service_admin_panel_plutus_credit_amount_path(credit_amount)
+  %br/

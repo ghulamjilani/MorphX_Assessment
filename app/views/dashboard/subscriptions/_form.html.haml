@@ -1,0 +1,67 @@
+.Subscription_item
+  .Subscription_item__title
+    .sectionBlock
+      %span.tp__h1.bold.fs-22= I18n.t('views.dashboard.subscriptions.form.subscription')
+      .padding-top-30.padding-bottom-20.fs-14= I18n.t('subscriptions.description')
+      %a.enable_subscription{href: '#'}
+        = f.object.enabled ? 'Disable Subscription' : 'Enable Subscription'
+      = f.check_box :enabled, style: 'display:none;', class: 'enable_subscription_checkbox'
+      .channelSection
+        %div.channelSection__wrapper
+          %span.tp__h2.bold.fs-18= I18n.t('views.dashboard.subscriptions.form.channel')
+          - if @subscription.new_record?
+            = f.select(:channel_id, @channels.map{ |c| [ select_channel_option_text(c), c.id, select_channel_option_attributes(c)]}, {}, {class: 'styled-select styled-select_withCss padding-left-20 pull-right text-right select-rightAlign full-width'})
+          - else
+            %div
+              = @subscription.channel.title
+        %div
+          .channelSection__wrapper__description.input-block.required{class: (@subscription.description.to_s.length > 0 ? '' : 'state-clear')}
+            = f.label :Additional_subscription_info, I18n.t('views.dashboard.subscriptions.form.additional_subscription_info')
+            = f.text_field :description, 'max-length': 2000, rows: 1, placeholder:I18n.t('views.dashboard.subscriptions.form.enter_subscription_description'), data: {autoresize: true}
+            .errorContainerWrapp
+              .counter_block #{@subscription.description.to_s.length}/2000
+  .sectionBlock
+    .Subscription_item_coumt
+      .Subscription_item_coumt__title
+        = 'Active ' if @subscription.id
+        = I18n.t('views.dashboard.subscriptions.form.plans')
+      .Subscription_item_coumt__count
+        .fs-15= I18n.t('subscriptions.plans_description')
+        .fs-15
+          = I18n.t('views.dashboard.subscriptions.form.active')
+          %span.plans_length
+            #{f.object.plans.active.count}/12
+
+    #plans_tab
+
+    .Subscription_item_add.clearfix
+      .Subscription_item_add__item
+        = I18n.t('views.dashboard.subscriptions.form.configure_subscription_plan')
+      .Subscription_item_add__item.display-flex
+        = link_to 'Cancel', url_for(:back), class: 'btn btn-m btn-borderred-light margin-left-10'
+        = link_to 'Add New Plan', '#', id: :add_new_plan, class: 'btn btn-m btn-borderred-light margin-left-10'
+        = f.submit 'Save', class: 'btn btn-m margin-left-10'
+
+    - if @subscription.id
+      .Subscription_item_coumt
+        .Subscription_item_coumt__title= I18n.t('views.dashboard.subscriptions.form.disabled_plans')
+      #disabled_plans_tab
+
+#submit-warn-modal.modal.fade{aria: {hidden: true}, role: :dialog, tabindex: -1}
+  .modal-dialog
+    .modal-content
+      .modal-body.clearfix
+        %h1
+          = I18n.t('views.dashboard.subscriptions.form.configured_subscription_plan_saved')
+        %p
+          = I18n.t('views.dashboard.subscriptions.form.in_order_subscription_plan')
+        .text-right.cancelAndSaveButtons
+          %button.btn.btn-l.btn-borderred-light{'data-dismiss': "modal"}
+            = I18n.t('views.dashboard.subscriptions.form.cancel')
+          %button.submitButton.btn.btn-l{onclick: "$('form.subscription_form').submit()"}
+            = I18n.t('views.dashboard.subscriptions.form.save')
+
+:javascript
+  window.revenue_percent = #{current_user.current_organization.revenue_percent};
+%script(type="application/xhtml+xml" id="planFieldsTmpl")
+  != render 'dashboard/subscriptions/plan_template', current_user: current_user

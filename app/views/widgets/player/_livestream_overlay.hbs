@@ -1,0 +1,71 @@
+
+<div class="banerImg" style="background-image:url('{{player_cover_url}}')"></div>
+<div class="banerContent">
+    <div class="status">OFF AIR</div>
+    {{#if compamy_title}}
+        <a href="{{compamy_url}}" target="_blank" class="presenter">
+            <div class="presenter_avatar" style="background-image:url('{{compamy_logo}}')"></div>
+            {{compamy_title}}
+        </a>
+    {{/if}}
+    <div class="aboutStream">
+        <div class="aboutStream_f">
+            Live on
+            {{formattedStartAt}}
+            - Duration {{duration}} min
+        </div>
+    </div>
+
+    {{#if isStarted}}
+        <div class="LiveIn">
+            <div class="LiveIn_title">
+                Stream will start soon
+            </div>
+            <div class="date">{{formattedStartAt}}</div>
+        </div>
+    {{else}}
+        <div class="LiveIn">
+            <div class="countWrapp">
+                <div class="count">
+                    <span class="days-left">0</span>
+                    <span class="hours-left">0</span>
+                    <span class="minutes-left">0</span>
+                    <span class="seconds-left">0</span>
+                </div>
+                <div class="countI">
+                    <span class="days-left">days</span>
+                    <span class="hours-left">hrs</span>
+                    <span class="minutes-left">min</span>
+                    <span class="seconds-left">sec</span>
+                </div>
+            </div>
+
+        </div>
+    {{/if}}
+    {{#unless is_purchased}}
+    <div class="MVc-bottomLine">
+        {{#if is_livestream}}
+            {{#if livestream_free}}
+                <p>This livestream is <b>free</b> to watch</p>
+            {{else}}
+                <p>This livestream is paid <a target="_blank" href="{{absolute_path}}" class="btn btn-m btn-white {{#unless userId}}showLoginForm{{/unless}}">Buy for ${{livestream_purchase_price}}</a></p>
+            {{/if}}
+        {{/if}}
+        {{#if is_immersive}}
+            {{#if immersive_free}}
+                <p>Want to be a <b>Participant</b>? Reserve your spot now {{immersive_spots_left}}/{{immersive_spots_total}}<a target="_blank" href="{{absolute_path}}" class="btn btn-m btn-white {{#unless userId}}showLoginForm{{/unless}}">Reserve</a></p>
+            {{else}}
+                <p>To be a <b>Participant</b> purchase your spot now {{immersive_spots_left}}/{{immersive_spots_total}}<a target="_blank" href="{{absolute_path}}" class="btn btn-m btn-white {{#unless userId}}showLoginForm{{/unless}}">Buy for ${{immersive_purchase_price}}</a></p>
+            {{/if}}
+        {{/if}}
+        {{#if subscription_price}}
+            {{#if only_subscription}}
+                <p>To view this content you need to become a subscriber <a target="_blank" href="{{absolute_path}}" class="btn btn-m btn-red {{#unless userId}}showLoginForm{{/unless}}">Subscribe starting ${{subscription_price}}</a></p>
+            {{else}}
+                <p>Subscribe to this channel <a target="_blank" href="{{absolute_path}}" class="btn btn-m btn-red {{#unless userId}}showLoginForm{{/unless}}">Subscribe starting ${{subscription_price}}</a></p>
+            {{/if}}
+        {{/if}}
+    </div>
+    {{/unless}}
+    <a class="viewPlaylistBtn" href="javascript:void(0);">VIEW PLAYLIST</a>
+</div>

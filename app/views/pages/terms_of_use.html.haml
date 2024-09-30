@@ -1,0 +1,116 @@
+
+-# - # do not rename/change this because some social apps have already that URL in settings
+-# - # see config/routes.rb
+- content_for(:page_title, 'Terms of Use')
+- content_for(:extra_body_classes, 'header-top')
+.sectionBlock.textPage.TermsConditions
+  .vue-component-manager
+    = content_tag 'comp-wrapper', nil, data: { component: 'components-manager', props: {group: 'terms-of-use'}}.to_json
+-#   %ol
+-#     %li
+-#       %strong Introduction
+-#       %p This Terms of Use Agreement binds You or any company, agency or institution you represent (“You”, or “Your”) to the terms and conditions set forth herein in connection with Your use of #{Rails.application.credentials.global[:service_name]}’s (“Our”, “We”, or “#{Rails.application.credentials.global[:service_name]}”) software, platform, services or any other offerings on our site and any affiliate(s) sites (collectively, our “Services” which are wholly owned and operated by #{Rails.application.credentials.global[:host]}, LLC (the “Company”)).
+-#       %p
+-#         %strong BY USING ANY OF THE COMPANY SERVICES OR CLICKING ON THE "SIGN UP" BUTTON, YOU AGREE TO BE BOUND BY THIS AGREEMENT. IF YOU DO NOT AGREE TO ALL THE TERMS AND CONDITIONS OF THIS AGREEMENT, CLICK ON THE "X" BUTTON AND DO NOT USE THE COMPANY SERVICES. COMPANY’S ACCEPTANCE IS EXPRESSLY CONDITIONED UPON YOUR ASSENT TO ALL THE TERMS AND CONDITIONS OF THIS AGREEMENT, TO THE EXCLUSION OF ALL OTHER TERMS.
+-#     %li
+-#       %strong Scope
+-#       %p The Services enable Users to connect with Presenters (the "Presenter(s)") who provide live and recorded instruction, performance, tutoring, and learning services in Our proprietary online videos (the "Sessions"). The Services include, without limitation, facilitating and hosting Sessions, the Sessions and supporting materials, and taking feedback from Users.
+-#     %li
+-#       %strong Revision Rights
+-#       %p Company reserves the right to revise these Terms in its sole discretion at any time by posting the changes on the Site. Your continued use of Services after change become effective shall mean that You accept those changes. You should visit the Site regularly to ensure You are aware of the latest version of the Terms. Further, the Company may modify the Services or discontinue their availability at any time.
+-#     %li
+-#       %strong Fees and Equipment
+-#       %p You are solely responsible for all service, video, virtual, telephony, data charges and/or other fees and costs associated with Your access to and use of the Services, in addition to obtaining and maintaining all telephone, computer hardware, and other equipment required for such access and use.
+-#       %p If You elect to access or use Services that involve payment of a fee, then You agree to pay, and will be responsible for payment of, that fee and all taxes associated with such access or use. If You provide credit card information to pay for such fees then You hereby represent and warrant that You are authorized to supply such information and hereby authorize the Company to charge Your credit card on a regular basis to pay the fees as they are due. Unless otherwise stated, all fees are quoted in U.S. Dollars. If Your payment method fails or Your account is past due, then We may collect fees owed using other collection mechanisms. This may include charging other payment methods on file with us and/or retaining collection agencies and legal counsel. We may also block Your access to any Services pending resolution of any amounts due by You to Company.
+-#     %li
+-#       %strong Legal Compliance
+-#       %p All of Your use, access and other activities relating to the Site and the Services must be in compliance with all applicable laws and regulations, including, without limitations, laws relating to copyright and other intellectual property use, and to privacy and personal identity. In connection with Your use of the Services and Site, You must not provide incorrect or knowingly false information; copy, distribute, modify, reverse engineer, deface, tarnish, mutilate, hack, or interfere with the Services or operation of the Site; frame or embed the Site or Services; impersonate another person or gain unauthorized access to another person’s Account; introduce any virus, worm, spyware or any other computer code, file or program that may or is intended to damage or hijack the operation of any hardware, software or telecommunications equipment, or any other aspect of the Services or operation of the Site; scrape, spider, use a robot or other automated means of any kind to access the Services.
+-#     %li
+-#       %strong  General Disclaimer
+-#       %p The Site is a third-party, web-based service platform that enables, through its technology, Presenters and Users to transact. We do not hire or employ Presenters nor are We responsible or liable for any interactions involved between the Presenters and Users who register and/or attend their Sessions. In no way shall We be responsible or liable for any disputes, claims, losses, injuries, or damage of any kind that might arise out of or relate to the conduct of Presenters or Users, including, but not limited to, any User's reliance upon any information provided by a Presenter.
+-#       %p We do not control Submitted Content (as defined below) posted on the Site and, as such, do not guarantee in any manner the reliability, validity, accuracy or truthfulness of such Submitted Content. You also understand that by using the Services You may be exposed to Submitted Content that You consider offensive, indecent, or objectionable. The Company has no responsibility to keep such content from You and no liability for Your access or use of any Submitted Content.
+-#       %p The Site and Services may give You access to links to third-party Websites ("Third Party Sites"), either directly or through Sessions or Presenters. The Company does not endorse any of these Third Party Sites and does not control them in any manner. Accordingly, the Company does not assume any liability associated with Third Party Sites. You need to take appropriate steps to determine whether accessing a Third Party Site is appropriate, and to protect Your personal information and privacy on such Third Party Site.
+-#     %li
+-#       %strong Conduct
+-#       %p You may only access the Services for lawful purposes. You are solely responsible for the knowledge of and adherence to any and all laws and regulations pertaining to Your use of the Services arising under Your jurisdiction. You agree not to use the Services or the Company Content (as defined below) to recruit, solicit, or contact in any form Presenters or potential users for employment or contracting for a business not affiliated with us without Our advance written permission, which may be withheld in Our sole discretion. You assume any and all risks from any meetings or contact between You and any Presenters or other Users of the Services.
+-#     %li
+-#       %strong Specific Obligations of Users using the Site
+-#       %p If You are in search of, or engaging, Presenters, You represent, warrant and covenant that:
+-#       %ul
+-#         %li
+-#           %p You have read, understood, and agree to be bound by the pricing information before using the Site or registering for a Session;
+-#         %li
+-#           %p You will not upload, post or otherwise transmit any unsolicited or unauthorized advertising, promotional materials, junk mail, spam, chain letters, pyramid or financial schemes, or any other form of solicitation (commercial or otherwise) through the Site or the Services;
+-#         %li
+-#           %p You will not post any inappropriate, offensive, racist, hateful, sexist, pornographic, false, misleading, infringing, defamatory or libelous content;
+-#         %li
+-#           %p You will not reproduce, distribute, publicly display, publicly perform, communicate to the public, create derivative works from or otherwise use and exploit any Company Content, the Services or Sessions or Submitted Content except as permitted by these Terms or the relevant Presenter as applicable;
+-#         %li
+-#           %p You will not disclose any personal information to an Presenter, and otherwise will assume responsibility for controlling how Your personal information is disclosed or used, including, without limitation, taking appropriate steps to protect such information; and
+-#         %li
+-#           %p You will not solicit personal information from any Presenter or any other User.
+-#     %li
+-#       %strong Registration
+-#       %p To use certain Services, You will need to register and obtain an account, username and password. When You register, the information You provide to us during the registration process will help us in offering content, customer service, and network management. You are solely responsible for maintaining the confidentiality of Your account, username, and password (collectively, Your "Account") and for all activities associated with or occurring under Your Account. You represent and warrant that Your Account information will be accurate at all times. You must notify us (a) immediately of any unauthorized use of Your Account and any other breach of security, and (b) ensure that You exit from Your Account at the end of each use of the Services. We cannot and will not be responsible for any loss or damage arising from Your failure to comply with the foregoing requirements or as a result of use of Your Account, either with or without Your knowledge, prior to Your notifying us of unauthorized access to Your Account.
+-#       %p You may not transfer Your Account to any other person and You may not use anyone else's Account at any time without the permission of the account holder. In cases where You have authorized or registered another individual, including a minor, to use Your Account, You are fully responsible for (i) the online conduct of such User; (ii) controlling the User's access to and use of the Services; and (iii) the consequences of any misuse.
+-#     %li
+-#       %strong Content, Licenses & Permissions
+-#       %p All software, technology, designs, materials, information, communications, text, graphics, links, electronic art, animations, illustrations, artwork, audio clips, video clips, photos, images, reviews, ideas, and other data or copyrightable materials or content, including the selection and arrangements thereof is “Content.” Where the Company provides Content to You in connection with the Services, including, without limitation, the software and the services and the Site, it is “Company Content.” Content uploaded, transmitted or posted to the Site or through the Services by a User is “Submitted Content.” Content remains the proprietary property of the person or entity supplying it (or their affiliated and/or third party providers and suppliers) and is protected, without limitation, pursuant to U.S. and foreign copyright and other intellectual property laws.
+-#       %p You hereby represent and warrant that You have all licenses, rights, consents, and permissions necessary to grant the rights set forth in these Terms to Company with respect to any Submitted Content and that Company shall not need to obtain any licenses, rights, consents, or permissions from, or make any payments to, any third party for any use or exploitation of the foregoing as authorized in these Terms or have any liability to You or any other party as a result of any use or exploitation of any Submitted Content as authorized in these Terms.
+-#       %p You hereby grant the Company a non-exclusive right and license to reproduce, distribute, publicly perform, offer, market and otherwise use and exploit the Submitted Content on the Site and through the Services, and sublicense it to Presenters and Users for these purposes directly or through third parties. Notwithstanding the foregoing, You have the right to remove all or any portion of your own Submitted Content from the Site at any time. Removal of your own Submitted Content will terminate the foregoing license and rights sixty (60) days after such removal as to new uses, provided, however, that any rights given to Users or Presenters prior to that time will continue in accordance with the terms granted to such Users.
+-#       %p The Company hereby grants You a limited, non-exclusive, non-transferable license to access and use Submitted Content and Company Content, for which You have paid all required fees, solely for Your personal, non-commercial, educational purposes through the Site and the Services, in accordance with these Terms and any conditions or restrictions associated with particular Sessions or Services. All other uses are expressly prohibited absent Our express written consent. You may not reproduce, redistribute, transmit, assign, sell, broadcast, rent, share, lend, modify, adapt, edit, create derivative works of, license, or otherwise transfer or use any Submitted Content or Company Content unless We give You explicit permission to do so. Submitted Content and Company Content is licensed, and not sold, to You. You are prohibited from receiving any grant of license rights to Submitted Content that You access or acquire through the Services and any such direct license shall be null and void and a violation of these Terms.
+-#       %p You agree that We may record all or any part of any Sessions (including voice chat communications) for quality control and delivering, marketing, promoting, demonstrating or operating the Site and the Services. You hereby grant the Company a permission and release to use Your name, likeness, image or voice in connection with offering, delivering, marketing, promoting, demonstrating, and selling the Site, Services, Sessions, Company Content and Submitted Content and waive any and all rights of privacy, publicity, or any other rights of a similar nature in connection therewith.
+-#       %p
+-#         %strong THE COMPANY RESPECTS ALL COPYRIGHT, PRIVACY, DEFAMATION AND OTHER LAWS RELATING TO CONTENT AND INFORMATION AND WILL NOT TOLERATE VIOLATION OF SUCH LAWS. NOTWITHSTANDING THE FOREGOING, THE COMPANY DOES NOT SCREEN THE SUBMITTED CONTENT AND ALL USE OF THE SUBMITTED CONTENT BY YOU IS AT YOUR OWN RISK AND THE COMPANY SHALL HAVE NO LIABILITY FOR SUCH USE. IN PARTICULAR, NO REVIEW OR POSTING OR APPEARANCE OF THE SUBMITTED CONTENT ON THE SITE OR THROUGH THE SERVICES IS INTENDED TO ACT AS AN ENDORSEMENT OR RECHANNEL THAT ANY SUBMITTED CONTENT IS FREE OF VIOLATION OF ANY COPYRIGHT, PRIVACY OR OTHER LAWS OR WILL SUIT A PARTICULAR PURPOSE OR BE ACCURATE OR USEFUL.
+-#       %p= raw "If You believe that Submitted Content of Yours violates any law or regulation or is inaccurate or poses any risk whatsoever to a third party it is Your responsibility to take such steps You deem necessary to correct the situation. If You believe that Submitted Content of a third party or any Company Content violates any laws or regulations, including, without limitation, any copyright laws, You should report it to the Company by contacting Us at #{mail_to(Rails.application.credentials.global[:support_mail])}."
+-#       %p All rights not expressly granted in these Terms are retained by the Content owners and these Terms do not grant any implied licenses.
+-#     %li
+-#       %strong Pricing for Paid Sessions
+-#       %p Unless a Session is made available through the #{Rails.application.credentials.global[:service_name]} Deals Program, a Session Presenter will be solely responsible for determining the fees to be charged for such Session, in accordance with the #{Rails.application.credentials.global[:service_name]} Presenter Network Agreement.  If You are a User, You agree to pay the fees for Sessions that You take, and hereby authorize Us to charge Your credit card for these amounts. We will charge Your credit card for all amounts owed. If Your credit card is declined, You agree to pay Us the fees within ten (10) days of notification from Us, and pay, at Our discretion, a late payment charge at 1.5% per month, or the maximum permitted by law, whichever is greater.
+-#     %li
+-#       %strong Refund and Cancellation Policy
+-#       %p
+-#         Please refer to our
+-#         %strong
+-#           - href = page_path(ContentPages::REFUND_AND_CANCELLATION_POLICY.parameterize(separator: '-'))
+-#           = link_to href do
+-#             Refund and Cancellation Policy
+-#     %li
+-#       %strong Trademarks
+-#       %p The trademarks, service marks, and logos (the "Trademarks") used and displayed on the Site, in the Services or in any Company Content are Our registered or unregistered Trademarks or of Our suppliers or third parties and are protected pursuant to U.S. and foreign trademark laws. All rights are reserved and You may not alter or obscure the Trademarks, or link to them without Our prior approval.
+-#     %li
+-#       %strong Warranty Disclaimer
+-#       %p
+-#         %strong THE SERVICES, SITE, COMPANY CONTENT, SUBMITTED CONTENT, SESSIONS, AND ANY OTHER MATERIALS MADE AVAILABLE ON OR THROUGH THE SITE OR THE SERVICES ARE PROVIDED "AS IS," WITHOUT ANY WARRANTIES OF ANY KIND AND THE COMPANY HEREBY DISCLAIMS ALL SUCH WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ACCURACY, FREEDOM FROM ERRORS, SUITABILITY OF CONTENT, OR AVAILABILITY.
+-#     %li
+-#       %strong Limitation of Liability
+-#       %p
+-#         %strong NEITHER PARTY SHALL BE LIABLE HEREUNDER UNDER ANY THEORY OF LIABLITY, INCLUDING, WITHOUT LIMITATION, CONTRACT, TORT OR NEGLIGENCE, FOR ANY INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS. THE COMPANY’S TOTAL LIABILITY HEREUNDER SHALL BE LIMITED TO THE AMOUNTS PAID IN CONNECTION WITH THE SESSIONS OR SERVICES UNDER WHICH SUCH LIABILITY AROSE.
+-#     %li
+-#       %strong Indemnification
+-#       %p You hereby indemnify, defend and hold harmless the Company, #{Rails.application.credentials.global[:service_name]}, and its affiliates, officers, directors, agents, partners, employees, licensors, representatives and third party providers from and against all losses, expenses, damages, costs, claims and demands, including reasonable attorneys' fees and related costs and expenses, due to or arising out of Your breach of any rechannel or warranty hereunder. We reserve the right, at Our own expense, to assume the exclusive defense and control of any matter otherwise subject to indemnification by You, and in such case, You agree to fully cooperate with such defense and in asserting any available defenses.
+-#     %li
+-#       %strong Termination
+-#       %p We may terminate Your use of the Services or Site immediately without notice for any breach by You of these Terms or any of Our applicable policies, as posted on the Site from time to time. We may discontinue offering any product, session, or content at any time (which will terminate Your right to engage or participate in these Sessions). You may terminate Your use of the Site or the Services at any time, either by ceasing to access them, or by contacting us at #{Rails.application.credentials.global[:support_mail]}.  We have no obligation to retain any of Your Account or Submitted Content for any period of time beyond what may be required by applicable law. Upon termination, You must cease all use of the Site, Services, Sessions, and Content. Any accrued rights to payment and all rechannels and warranties shall survive termination.
+-#     %li
+-#       %strong Privacy
+-#       %p
+-#         Any personal information submitted in connection with Your use of the Services or the Site is subject to Our Privacy Policy, located at
+-#         %strong
+-#           - href = page_path(ContentPages::PRIVACY_POLICY.parameterize(separator: '-'))
+-#           = link_to href, href
+-#     %li
+-#       %strong Miscellaneous
+-#       %ul.lower-alpha-list
+-#         %li
+-#           %p Entire Agreement. These Terms, the Privacy Policy, the #{Rails.application.credentials.global[:service_name]} Presenter Network Agreement, and any policies applicable to You posted on the Site constitute the entire agreement between the parties with respect to the subject matter hereof, and supersede all previous written or oral agreements between the parties with respect to such subject matter.
+-#         %li
+-#           %p Severability. If any provision of these Terms is found to be illegal, void or unenforceable, then that provision shall be deemed severable from these Terms and shall not affect the validity and enforceability of any remaining provisions of these Terms.
+-#         %li
+-#           %p Waiver. A provision of these Terms may be waived only by a written instrument executed by the party entitled to the benefit of such provision. The failure of Company to exercise or enforce any right or provision of these Terms will not constitute a waiver of such right or provision.
+-#         %li
+-#           %p Notice. Any notice or other communication to be given hereunder will be in writing and given by facsimile, postpaid registered or certified mail return receipt requested, or electronic mail.
+-#         %li
+-#           %p No Agency. Nothing in these Terms shall be construed as making either party the partner, joint venture, agent, legal representative, employer, contractor or employee of the other. Neither the Company nor any other party to this Agreement shall have, or hold itself out to any third party as having, any authority to make any statements, rechannels or commitments of any kind, or to take any action that shall be binding on the other except as provided for herein or authorized in writing by the party to be bound.
+-#         %li
+-#           %p Governing Law. These Terms and Your use of the Site and the Services shall be governed by the substantive laws of the State of Texas without reference to its choice or conflicts of law principles.

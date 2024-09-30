@@ -1,0 +1,38 @@
+@import "mixin";
+.tile-cake.tile-cake-Brands{
+  .tile-img .tile-imgContainer{
+    padding-top: 100%;
+  }
+  .tile_link{
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, rgba(0,0,0,0.9) 100%);
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 40%,rgba(0,0,0,0.9) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 40%,rgba(0,0,0,0.9) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#4d000000',GradientType=0 );
+    z-index: 19;
+  }
+  .followBtn_wrapp{
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    width: 100%;
+    z-index: 29;
+  }
+  .CreatorsName{
+    position: absolute;
+    left: 0;
+    bottom: 47px;
+    width: 100%;
+    text-align: center;
+    padding: 0 5px;
+    color: #fff;
+    z-index: 29;
+  }
+}
+
+.BrandsTileSlider{
+  .owl-item section.tile-cake{
+    width: calc(100% - 30px);
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}

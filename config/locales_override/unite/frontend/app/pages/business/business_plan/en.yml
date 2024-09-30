@@ -1,0 +1,7 @@
+en:
+  frontend:
+    app:
+      pages:
+        business:
+          business_plan:
+            min_interactive: min (Conference)
